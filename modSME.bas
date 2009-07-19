@@ -48,6 +48,10 @@ Public Const BUTTON_UP = 0
 Public Const BUTTON_MOVE = 1
 Public Const BUTTON_DOWN = 2
 
+'PolyWorks DLL
+Public Declare Function GifToBmp Lib "pwlib" Alias "PwGifToBmp" _
+        (ByVal src As String, ByVal dest As String) As Long
+
 'bitblt
 Public Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, _
         ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, _
@@ -59,17 +63,17 @@ Public Declare Function StretchBlt Lib "gdi32" (ByVal hDC As Long, ByVal X As Lo
         ByVal dwRop As Long) As Long
 
 'mouse over
-Public Declare Function SetCapture Lib "user32" (ByVal hwnd As Long) As Long
+Public Declare Function SetCapture Lib "user32" (ByVal hWnd As Long) As Long
 Public Declare Function GetCapture Lib "user32" () As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
 'dragging window
 Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
-        (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+        (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Public Const WM_NCLBUTTONDOWN = &HA1
 
 'taskbar
-Public Declare Function SetWindowPos Lib "user32" (ByVal hwnd As Long, ByVal hWndInsertAfter As Long, _
+Public Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, _
         ByVal X As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 Public Declare Function FindWindow Lib "user32" Alias "FindWindowA" _
         (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
@@ -211,7 +215,7 @@ Private Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePr
         ByVal sString As String, ByVal sFileName As String) As Long
         
 'ShellExecute
-Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, _
+Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, _
         ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, _
         ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
@@ -276,7 +280,7 @@ Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Lon
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 
 ' GDI+ functions
-Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As Long, GpImage As Long) As Long
+Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
 Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
 'Private Declare Function GdipSetInterpolationMode Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal InterMode As Long) As Long
@@ -308,8 +312,8 @@ Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
         pic.Refresh
         mouseEvent = True
-    ElseIf GetCapture() <> pic.hwnd Then 'the MOUSEENTER pseudo-event
-        SetCapture pic.hwnd
+    ElseIf GetCapture() <> pic.hWnd Then 'the MOUSEENTER pseudo-event
+        SetCapture pic.hWnd
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc + Width, ySrc, vbSrcCopy
         pic.Refresh
         mouseEvent = True
@@ -339,7 +343,7 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
         Width = MENU_WIDTH
         Height = MENU_HEIGHT
         xSrc = MENU_X
-        ySrc = MENU_Y + Int(pic.Index) * Height
+        ySrc = MENU_Y + Int(pic.index) * Height
     End If
     
     active = active / 255
@@ -357,8 +361,8 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
         ReleaseCapture
         mouseEvent2 = True
         action = BUTTON_UP
-    ElseIf GetCapture() <> pic.hwnd Then 'the MOUSEENTER pseudo-event
-        SetCapture pic.hwnd
+    ElseIf GetCapture() <> pic.hWnd Then 'the MOUSEENTER pseudo-event
+        SetCapture pic.hWnd
         mouseEvent2 = True
         action = BUTTON_MOVE
     End If
@@ -386,7 +390,7 @@ Public Function SelectFolder(ownerForm As Form) As String
     Dim pos As Long
     
     With bi
-        .hOwner = ownerForm.hwnd
+        .hOwner = ownerForm.hWnd
         .pidlRoot = 0&
         '.lpszTitle = "Select folder"
         .ulFlags = BIF_RETURNONLYFSDIRS
@@ -521,7 +525,7 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 End Function
 
 
-Public Function getFileDate(FileName As String) As Long
+Public Function getFileDate(fileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -537,7 +541,7 @@ Public Function getFileDate(FileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
     
@@ -559,33 +563,33 @@ ErrorHandler:
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional FileName As String)
+Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
 
     Dim lReturn  As Long
     
-    If FileName = "" Then
-        FileName = App.path & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = App.path & "\polyworks.ini"
     End If
     
-    lReturn = WritePrivateProfileSection(sectionName, sectionData, FileName)
+    lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
+Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
     
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
     
-    If FileName = "" Then
-        FileName = App.path & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = App.path & "\polyworks.ini"
     End If
     
     If length = 0 Then length = 10
 
     sString = String$(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
+    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
     
     loadString = left(sString, lReturn)
 
@@ -601,31 +605,31 @@ End Function
 '    loadDir = left(sString, lReturn)
 'End Function
 
-Public Function loadInt(section As String, Entry As String, Optional FileName As String) As Long
+Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
     
     Dim lReturn As Long
     
-    If FileName = "" Then
-        FileName = App.path & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = App.path & "\polyworks.ini"
     End If
     
-    lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
+    lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
     
     loadInt = lReturn
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String
+Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
 
     'Dim lReturn As String * 200
     
-    If FileName = "" Then
-        FileName = App.path & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = App.path & "\polyworks.ini"
     End If
     
     'lReturn = GetPrivateProfileSection(section, Entry, -1, fileName)
     'MsgBox GetPrivateProfileSection(section, lReturn, 200, FileName)
-    GetPrivateProfileSection section, lReturn, length, FileName
+    GetPrivateProfileSection section, lReturn, length, fileName
     'MsgBox (mid$(lReturn, 16, 1) = vbNullChar)
     
     loadSection = lReturn
@@ -676,20 +680,20 @@ Public Function RunHelp()
 
     Dim iReturn As Long
     
-    iReturn = ShellExecute(frmSoldatMapEditor.hwnd, "Open", App.path & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
+    iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", App.path & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
 End Function
 
-Public Function SetGameMode(FileName As String)
+Public Function SetGameMode(fileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
     
-    If LCase(left(FileName, 4)) = "ctf_" Then
+    If LCase(left(fileName, 4)) = "ctf_" Then
         gameMode = 3
-    ElseIf LCase(left(FileName, 4)) = "inf_" Then
+    ElseIf LCase(left(fileName, 4)) = "inf_" Then
         gameMode = 5
-    ElseIf LCase(left(FileName, 4)) = "htf_" Then
+    ElseIf LCase(left(fileName, 4)) = "htf_" Then
         gameMode = 6
     Else
         gameMode = 0

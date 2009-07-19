@@ -413,13 +413,33 @@ Public Sub listScenery()
         file = Dir$
     Loop
     
+    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
+    Do While Len(file)
+        Dim cFilePath As String
+        cFilePath = frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & file
+        Call GifToBmp(cFilePath, cFilePath & ".tga")
+        file = Dir$
+    Loop
+    
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
+    Do While Len(file)
+        If Len(file) >= 8 Then
+            If Not right$(file, 8) = ".gif.tga" Then
+                frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+            End If
+        Else
+            frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        End If
+        file = Dir$
+    Loop
+    
+    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.jpg", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
     
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.jpg", vbDirectory)
+    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
@@ -465,11 +485,11 @@ ErrorHandler:
 
 End Sub
 
-Private Function FileExists(FileName As String) As Boolean
+Private Function FileExists(fileName As String) As Boolean
 
     On Error GoTo ErrorHandler
 
-    FileExists = FileLen(FileName) > 0
+    FileExists = FileLen(fileName) > 0
     'FileExists = (GetAttr(sceneryName) And vbDirectory) = 0
     'FileExists = Len(Dir$(fileName)) <> 0
     
@@ -550,6 +570,7 @@ Private Sub mnuRefresh_Click()
 
     If lstScenery.ListIndex > -1 Then
         frmSoldatMapEditor.RefreshSceneryTextures lstScenery.ListIndex + 1
+        frmSoldatMapEditor.Render
     End If
 
 End Sub
