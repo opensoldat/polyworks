@@ -151,6 +151,7 @@ Section "MainSection" SEC01
   File "palettes\palette.txt"
   CreateDirectory "$INSTDIR\Prefabs"
   CreateDirectory "$INSTDIR\undo"
+  CreateDirectory "$INSTDIR\Temp"
   SetOutPath "$INSTDIR\Workspace"
   File "Workspace\current.ini"
   
@@ -288,6 +289,7 @@ Section Uninstall
   RMDir /REBOOTOK "$INSTDIR\palettes"
   RMDir /REBOOTOK "$INSTDIR\Prefabs"
   RMDir /REBOOTOK "$INSTDIR\undo"
+  RMDir /REBOOTOK "$INSTDIR\Temp"
   
   Delete /REBOOTOK "$INSTDIR\Workspace\current.ini"
   RMDir /REBOOTOK "$INSTDIR\Workspace"
