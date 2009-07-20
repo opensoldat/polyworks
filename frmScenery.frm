@@ -413,23 +413,23 @@ Public Sub listScenery()
         file = Dir$
     Loop
     
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
-    Do While Len(file)
-        Dim cFilePath As String
-        cFilePath = frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & file
-        Call GifToBmp(cFilePath, cFilePath & ".tga")
-        file = Dir$
-    Loop
+    'file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
+    'Do While Len(file)
+    '    Dim cFilePath As String
+    '    cFilePath = frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & file
+    '    Call GifToBmp(cFilePath, cFilePath & ".tga")
+    '    file = Dir$
+    'Loop
     
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
     Do While Len(file)
-        If Len(file) >= 8 Then
-            If Not right$(file, 8) = ".gif.tga" Then
-                frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-            End If
-        Else
+        'If Len(file) >= 8 Then
+        '    If Not right$(file, 8) = ".gif.tga" Then
+        '        frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        '    End If
+        'Else
             frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        End If
+        'End If
         file = Dir$
     Loop
     
@@ -613,7 +613,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints

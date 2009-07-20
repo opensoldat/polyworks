@@ -2318,12 +2318,14 @@ Public Sub LoadFile(fileName As String)
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 ElseIf checkLoaded(tempString) > -1 Then
                 
-                    loadName = tempString
+                    loadName = soldatDir & "Scenery-gfx\" & tempString
                     If right$(loadName, 4) = ".gif" Then
-                        loadName = loadName & ".tga"
+                        'loadName = loadName & ".tga"
+                        Call GifToBmp(loadName, "Temp\gif.tga")
+                        loadName = "Temp\gif.tga"
                     End If
                     
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     
@@ -2340,12 +2342,14 @@ Public Sub LoadFile(fileName As String)
                     tvwScenery.Nodes.Add "In Use", tvwChild, , tempString
                 ElseIf confirmExists(tempString) Then 'if scenery texture is in master list
                 
-                    loadName = tempString
+                    loadName = soldatDir & "Scenery-gfx\" & tempString
                     If right$(loadName, 4) = ".gif" Then
-                        loadName = loadName & ".tga"
+                        'loadName = loadName & ".tga"
+                        Call GifToBmp(loadName, "Temp\gif.tga")
+                        loadName = "Temp\gif.tga"
                     End If
                     
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
@@ -2689,12 +2693,14 @@ Public Sub setCurrentTexture(sceneryName As String)
     On Error GoTo ErrorHandler
     
     Dim loadName As String
-    loadName = sceneryName
+    loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
-        loadName = loadName & ".tga"
+        'loadName = loadName & ".tga"
+        Call GifToBmp(loadName, "Temp\gif.tga")
+        loadName = "Temp\gif.tga"
     End If
 
-    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     
@@ -2736,12 +2742,14 @@ Public Sub CreateSceneryTexture(sceneryName As String)
     ReDim Preserve SceneryTextures(sceneryElements)
     
     Dim loadName As String
-    loadName = sceneryName
+    loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
-        loadName = loadName & ".tga"
+        'loadName = loadName & ".tga"
+        Call GifToBmp(loadName, "Temp\gif.tga")
+        loadName = "Temp\gif.tga"
     End If
 
-    Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     'Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & sceneryName, D3DX_DEFAULT, D3DX_DEFAULT, _
@@ -2792,14 +2800,16 @@ Public Sub RefreshSceneryTextures(Index As Integer)
     'MsgBox "Name: " & sceneryName
     
     Dim loadName As String
-    loadName = sceneryName
+    loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
-        loadName = loadName & ".tga"
+        'loadName = loadName & ".tga"
+        Call GifToBmp(loadName, "Temp\gif.tga")
+        loadName = "Temp\gif.tga"
     End If
     
     'MsgBox "Load path: " & soldatDir & "Scenery-gfx\" & loadName
     
-    Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, soldatDir & "Scenery-gfx\" & loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     
