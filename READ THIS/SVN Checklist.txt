@@ -9,7 +9,7 @@ Commit
 * Test everything new/changed/fixed
 * Compile installer
 * Test installer, polyworks and uninstaller
-* Remove all generated files from the installer directory
+* Remove all files generated in the above steps
 * Commit files and changelog
 * Done!
 
