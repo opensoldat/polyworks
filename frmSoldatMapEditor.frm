@@ -1315,6 +1315,7 @@ Dim leftMouseDown As Boolean
 
 Dim initialized As Boolean, initialized2 As Boolean
 Dim acquired As Boolean
+Dim selectionChanged As Boolean
 
 Dim clrPolys As Boolean, clrWireframe As Boolean
 Public backClr As Long, pointClr As Long, selectionClr As Long, gridClr As Long, gridClr2 As Long
@@ -1719,6 +1720,7 @@ Public Sub Init()
     
     initialized = False
     noRedraw = False
+    selectionChanged = False
 
     Dim DispMode As D3DDISPLAYMODE
     Dim D3DWindow As D3DPRESENT_PARAMETERS
@@ -3363,6 +3365,8 @@ Private Sub SaveUndo()
     Dim Polygon As TPolygon
     Dim fileName As String
     
+    selectionChanged = False
+    
     numRedo = 0
     numUndo = numUndo + 1
     If numUndo > max_undo Then
@@ -3448,6 +3452,11 @@ Private Sub loadUndo(redo As Boolean)
     Dim errorVal As String
     
     On Error GoTo ErrorHandler
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     If toolAction = True And numVerts > 0 Then
         toolAction = False
@@ -5527,6 +5536,10 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 n = zoomFactor
             End If
             If currentTool = TOOL_TEXTURE And numSelectedPolys > 0 Then
+                If selectionChanged Then
+                    SaveUndo
+                    selectionChanged = False
+                End If
                 If DIState.Key(DIK_LEFT) = 128 Then 'left
                     StretchingTexture -n, 0
                 ElseIf DIState.Key(DIK_UP) = 128 Then 'up
@@ -5538,6 +5551,10 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 End If
                 SaveUndo
             Else 'If numSelectedPolys > 0 Or numSelectedScenery > 0 Then
+                If selectionChanged Then
+                    SaveUndo
+                    selectionChanged = False
+                End If
                 If DIState.Key(DIK_LEFT) = 128 Then 'left
                     Moving -n, 0
                 ElseIf DIState.Key(DIK_UP) = 128 Then 'up
@@ -5828,11 +5845,21 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         scrollCoords(1).Y = Y
         
     ElseIf currentFunction = TOOL_MOVE Then 'move
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         toolAction = True
         MouseDownMove X, Y
         
     ElseIf currentFunction = TOOL_ROTATE Or currentFunction = TOOL_SCALE Then 'scaling/rotation
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
 
         moveCoords(1).X = X
         moveCoords(1).Y = Y
@@ -5842,6 +5869,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         findDragPoint2 X, Y
     
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then 'poly creation
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         If Shift = 0 Then
             If Not (showPolys Or showWireframe Or showPoints) Then
@@ -5869,6 +5901,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         polySelection X, Y
         
     ElseIf currentFunction = TOOL_VCOLOUR Then 'vertex colour
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         toolAction = True
         If colourMode > 0 Then
@@ -5879,9 +5916,19 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         
     ElseIf currentFunction = TOOL_PCOLOUR Then 'poly colour
     
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
+    
         ColourFill X, Y
         
     ElseIf currentFunction = TOOL_TEXTURE Then 'texture
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         If Shift = 0 Then
             toolAction = True
@@ -5895,6 +5942,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         End If
         
     ElseIf currentFunction = TOOL_SCENERY Then
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         If Not showScenery Then
             showScenery = True
@@ -5930,6 +5982,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         lightPicker X, Y
         
     ElseIf currentFunction = TOOL_OBJECTS Then 'objects
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
     
         If Not showObjects And Not mnuGostek.Checked Then
             showObjects = True
@@ -5967,6 +6024,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         toolAction = True
     
     ElseIf currentFunction = TOOL_WAYPOINT Then 'waypoints
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         If Not showWaypoints Then
             showWaypoints = True
@@ -6008,10 +6070,20 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         toolAction = True
     
     ElseIf currentFunction = TOOL_CONNECT Then
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
         
         toolAction = True
         
     ElseIf currentFunction = TOOL_DEPTHMAP Then
+    
+        If selectionChanged Then
+            SaveUndo
+            selectionChanged = False
+        End If
     
         EditDepthMap X, Y
         
@@ -6060,6 +6132,11 @@ ErrorHandler:
 End Sub
 
 Private Sub CreateLight(X As Single, Y As Single)
+
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     showLights = True
     frmDisplay.setLayer 9, showLights
@@ -6406,7 +6483,10 @@ Private Sub AverageVertices()
     
     On Error GoTo ErrorHandler
     
-    SaveUndo
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     Me.MousePointer = 11
     
@@ -7340,6 +7420,11 @@ Private Sub ApplyTransform(Rotating As Boolean)
     Dim R As Single
     Dim tempClr As TColour
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     For i = 1 To numSelectedPolys
         pNum = selectedPolys(i)
         For j = 1 To 3
@@ -7449,6 +7534,11 @@ Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
     Dim xVal As Single, yVal As Single
     Dim R As Single, angle As Single
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     scaleDiff.X = tehXvalue
     scaleDiff.Y = tehYvalue
     
@@ -7526,6 +7616,11 @@ Public Sub applyRotate(tehValue As Single)
     Dim xDiff As Single, yDiff As Single
     Dim i As Integer, j As Integer
     Dim PolyNum As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     rDiff = tehValue
     
@@ -8255,11 +8350,16 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             selectedCoords(2).X = X
             selectedCoords(2).Y = Y
             eraseLines = False
+            noRedraw = True
             If selectedCoords(2).X = selectedCoords(1).X And selectedCoords(2).Y = selectedCoords(1).Y Then
                 regionSelection X, Y
             Else
                 VertexSelection X, Y
             End If
+            noRedraw = False
+            selectedCoords(1).X = X
+            selectedCoords(1).Y = Y
+            Render
         End If
         
     ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection
@@ -8400,6 +8500,10 @@ Private Sub CreateConnection(X As Single, Y As Single)
     Next
     If notSel > 0 And currentWaypoint <> notSel Then
         If currentWaypoint > 0 Then 'connecting waypoints
+            If selectionChanged Then
+                SaveUndo
+                selectionChanged = False
+            End If
             conCount = conCount + 1
             ReDim Preserve Connections(conCount)
             Connections(conCount).point1 = currentWaypoint
@@ -9005,7 +9109,7 @@ Private Sub regionSelection(X As Single, Y As Single)
     
     getRCenter
     getInfo
-        
+    selectionChanged = True
     Render
         
 End Sub
@@ -9394,7 +9498,7 @@ Private Sub VertexSelection(X As Single, Y As Single)
         
     getRCenter
     getInfo
-        
+    selectionChanged = True
     Render
     
     Exit Sub
@@ -9924,7 +10028,7 @@ Private Sub polySelection(X As Single, Y As Single)
     
     getRCenter
     getInfo
-    
+    selectionChanged = True
     Render
 
 End Sub
@@ -9986,6 +10090,10 @@ Private Sub ColourFill(X As Single, Y As Single)
                 PolyNum = selectedPolys(i)
                 For j = 1 To 3
                     If vertexList(PolyNum).vertex(j) = 1 Then
+                        If selectionChanged Then
+                            SaveUndo
+                            selectionChanged = False
+                        End If
                         destClr = getRGB(Polys(PolyNum).vertex(j).Color)
                         destClr = applyBlend(destClr)
                         Polys(PolyNum).vertex(j).Color = ARGB(getAlpha(Polys(PolyNum).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
@@ -10002,6 +10110,10 @@ Private Sub ColourFill(X As Single, Y As Single)
         If showScenery Then
             For i = 1 To sceneryCount
                 If Scenery(i).selected = 1 Then
+                    If selectionChanged Then
+                        SaveUndo
+                        selectionChanged = False
+                    End If
                     destClr = getRGB(Scenery(i).Color)
                     destClr = applyBlend(destClr)
                     Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
@@ -10020,6 +10132,10 @@ Private Sub ColourFill(X As Single, Y As Single)
             For i = 1 To polyCount
                 If (pointInPoly(X, Y, i)) Then
                     For j = 1 To 3
+                        If selectionChanged Then
+                            SaveUndo
+                            selectionChanged = False
+                        End If
                         destClr = getRGB(Polys(i).vertex(j).Color) 'get clr of poly
                         destClr = applyBlend(destClr)
                         Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
@@ -10036,6 +10152,10 @@ Private Sub ColourFill(X As Single, Y As Single)
         If Not polyColoured And showScenery Then
             For i = 1 To sceneryCount
                 If PointInProp(X, Y, i) Then
+                    If selectionChanged Then
+                        SaveUndo
+                        selectionChanged = False
+                    End If
                     destClr = getRGB(Scenery(i).Color)
                     destClr = applyBlend(destClr)
                     Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
@@ -10152,6 +10272,11 @@ Private Sub deletePolys()
     Dim offset As Integer
     
     On Error GoTo ErrorHandler
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     prompt = True
     
@@ -10341,6 +10466,11 @@ Private Sub mnuFlip_Click(Index As Integer)
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
     Dim tempClr As TColour
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If Index = 0 Then
         scaleDiff.X = -1
@@ -10489,6 +10619,11 @@ Private Sub mnuRotate_Click(Index As Integer)
     Dim xDiff As Single, yDiff As Single
     Dim i As Integer, j As Integer
     Dim PolyNum As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     If Index = 0 Then
         rDiff = pi
@@ -12794,6 +12929,11 @@ Private Sub mnuDuplicate_Click()
     
     On Error GoTo ErrorHandler
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     If numSelectedPolys > 0 Then
         polyCount = polyCount + numSelectedPolys
         ReDim Preserve Polys(polyCount)
@@ -13054,6 +13194,11 @@ Private Sub mnuBringToFront_Click()
     Dim tempScenery As TScenery
     Dim tempVertex As TVertexData
     Dim offset As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         offset = polyCount
@@ -13107,6 +13252,11 @@ Private Sub mnuSendToBack_Click()
     Dim tempVertex As TVertexData
     Dim offset As Integer
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     If numSelectedPolys > 0 Then
         offset = 1
         For i = 1 To polyCount
@@ -13159,6 +13309,11 @@ Private Sub mnuBringForward_Click()
     Dim tempScenery As TScenery
     Dim tempVertex As TVertexData
     Dim offset As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     If numSelectedPolys > 0 Then
         offset = polyCount
@@ -13219,6 +13374,11 @@ Private Sub mnuSendBackward_Click()
     Dim offset As Integer
     Dim tempScenery As TScenery
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     If numSelectedPolys > 0 Then
         offset = 1
         For i = 2 To polyCount
@@ -13273,6 +13433,11 @@ Private Sub mnuFixTexture_Click()
 
     Dim PolyNum As Integer
     Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
@@ -13296,6 +13461,11 @@ End Sub
 Private Sub mnuUntexture_Click()
 
     Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
@@ -13320,6 +13490,11 @@ Private Sub mnuVisible_Click()
     Dim i As Integer, j As Integer
 
     On Error GoTo ErrorHandler
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     For i = 1 To numSelectedPolys
         For j = 1 To 3
@@ -13406,6 +13581,11 @@ Private Sub mnuSplit_Click()
     Dim alpha2 As Byte
     Dim newPolys As Integer
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
@@ -13489,6 +13669,11 @@ Private Sub mnuJoinVertices_Click()
 
     Dim firstVertex As Integer
     Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For j = 1 To 3
@@ -13526,6 +13711,11 @@ Private Sub mnuCreate_Click()
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
     Dim tempClr As TColour
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     ReDim Preserve Polys(polyCount + 1)
     ReDim Preserve PolyCoords(polyCount + 1)
@@ -13578,6 +13768,11 @@ Private Sub mnuSever_Click()
     Dim offset As Integer
     Dim numConnections As Integer
     
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
     numConnections = conCount
     
     If numSelWaypoints > 1 Then
@@ -13609,6 +13804,7 @@ Private Sub mnuSever_Click()
     conCount = numConnections
     ReDim Preserve Connections(conCount)
     
+    SaveUndo
     Render
 
 End Sub
@@ -14239,6 +14435,11 @@ End Sub
 Public Sub applyPolyType(ByVal Index As Integer)
 
     Dim i As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
@@ -14253,6 +14454,11 @@ End Sub
 Public Sub applyTextureCoords(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
@@ -14275,6 +14481,11 @@ End Sub
 Public Sub applyVertexAlpha(tehValue As Single)
 
     Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
 
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
@@ -14294,6 +14505,11 @@ Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
     Dim tempClr As TColour
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     For i = 1 To sceneryCount
         If Scenery(i).selected = 1 Then
@@ -14323,6 +14539,11 @@ End Sub
 Public Sub applyLightProp(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
     
     For i = 1 To lightCount
         If Lights(i).selected = 1 Then
