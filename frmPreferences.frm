@@ -15,6 +15,41 @@ Begin VB.Form frmPreferences
    ScaleWidth      =   456
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.PictureBox picTopmost 
+      Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H004A3C31&
+      BorderStyle     =   0  'None
+      ForeColor       =   &H80000008&
+      Height          =   240
+      Left            =   4800
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   78
+      TabStop         =   0   'False
+      Tag             =   "4"
+      Top             =   7440
+      Width           =   240
+      Visible         =   0   'False
+   End
+   Begin VB.PictureBox picScenery 
+      Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H004A3C31&
+      BorderStyle     =   0  'None
+      ForeColor       =   &H80000008&
+      Height          =   240
+      Left            =   4800
+      ScaleHeight     =   16
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   16
+      TabIndex        =   77
+      TabStop         =   0   'False
+      Tag             =   "4"
+      Top             =   6960
+      Width           =   240
+   End
    Begin VB.ComboBox cboSkin 
       Appearance      =   0  'Flat
       BeginProperty Font 
@@ -81,17 +116,29 @@ Begin VB.Form frmPreferences
    End
    Begin VB.PictureBox picSekrit 
       Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
-      ForeColor       =   &H80000008&
-      Height          =   255
+      BeginProperty Font 
+         Name            =   "BankGothic Lt BT"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   360
       Left            =   120
-      ScaleHeight     =   255
-      ScaleWidth      =   255
+      ScaleHeight     =   24
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   64
       TabIndex        =   74
       TabStop         =   0   'False
+      Tag             =   "3"
       Top             =   6120
-      Width           =   255
+      Width           =   960
    End
    Begin VB.TextBox txtWayptKey 
       Alignment       =   2  'Center
@@ -979,6 +1026,76 @@ Begin VB.Form frmPreferences
       End
    End
    Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Fullscreen always on top"
+      BeginProperty Font 
+         Name            =   "BankGothic Lt BT"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   375
+      Index           =   24
+      Left            =   5040
+      TabIndex        =   80
+      Tag             =   "font2"
+      Top             =   7440
+      Width           =   1575
+      Visible         =   0   'False
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Use 4 verts for scenery"
+      BeginProperty Font 
+         Name            =   "BankGothic Lt BT"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   375
+      Index           =   23
+      Left            =   5040
+      TabIndex        =   79
+      Tag             =   "font2"
+      Top             =   6960
+      Width           =   1575
+   End
+   Begin VB.Label lblOther 
+      BackColor       =   &H004A3C31&
+      Caption         =   "Other"
+      BeginProperty Font 
+         Name            =   "BankGothic Lt BT"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Left            =   4800
+      TabIndex        =   76
+      Top             =   6600
+      Width           =   735
+   End
+   Begin VB.Shape fraPref 
+      BorderColor     =   &H000B3C0D&
+      Height          =   1215
+      Index           =   5
+      Left            =   4560
+      Top             =   6720
+      Width           =   2175
+   End
+   Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
       BackStyle       =   0  'Transparent
       Caption         =   "Skin"
@@ -1635,6 +1752,7 @@ Dim gridClr2 As TColour
 Dim spacing As Integer, divisions As Integer
 Dim formWidth As Integer, formHeight As Integer
 Dim opacity1 As Integer, opacity2 As Integer
+Dim sceneryVerts As Boolean, topmost As Boolean
 
 Private Sub picHide_Click()
     
@@ -1659,7 +1777,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
 End Sub
 
@@ -1692,6 +1810,7 @@ Private Function applyPreferences() As Boolean
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     
@@ -1765,6 +1884,9 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
     frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
     
+    frmSoldatMapEditor.sceneryVerts = sceneryVerts
+    frmSoldatMapEditor.topmost = topmost
+    
     For i = 0 To 13
         frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
@@ -1827,6 +1949,9 @@ Private Sub Form_Load()
     Dim i As Integer
     
     On Error GoTo ErrorHandler
+    
+    sceneryVerts = frmSoldatMapEditor.sceneryVerts
+    topmost = frmSoldatMapEditor.topmost
     
     Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour, frameColour
     
@@ -1903,11 +2028,11 @@ ErrorHandler:
 
 End Sub
 
-Private Function FileExists(FileName As String) As Boolean
+Private Function FileExists(fileName As String) As Boolean
 
     On Error GoTo ErrorHandler
 
-    FileExists = FileLen(FileName) > 0
+    FileExists = FileLen(fileName) > 0
     
 ErrorHandler:
 
@@ -2265,6 +2390,18 @@ Private Function getRGB(DecValue As Long) As TColour
 
 End Function
 
+Private Sub picSekrit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+
+End Sub
+
+Private Sub picSekrit_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+
+End Sub
+
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
@@ -2373,6 +2510,44 @@ Private Sub picPrefabs_MouseUp(Button As Integer, Shift As Integer, X As Single,
 
 End Sub
 
+Private Sub picScenery_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_DOWN
+
+End Sub
+
+Private Sub picScenery_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_MOVE
+
+End Sub
+
+Private Sub picScenery_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    sceneryVerts = Not sceneryVerts
+    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+
+End Sub
+
+Private Sub picTopmost_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_DOWN
+
+End Sub
+
+Private Sub picTopmost_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_MOVE
+
+End Sub
+
+Private Sub picTopmost_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    topmost = Not topmost
+    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_UP
+
+End Sub
+
 Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long, frameClr As Long)
 
     On Error Resume Next
@@ -2388,10 +2563,13 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    mouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    mouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
 
     '--------
 
@@ -2455,7 +2633,7 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     cboSkin.BackColor = txtBackClr
     cboSkin.ForeColor = txtTextClr
     
-    picSekrit.BackColor = bgClr
+    'picSekrit.BackColor = bgClr
     
     For Each c In Me.Controls
         If c.Tag = "font1" Then

@@ -541,7 +541,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.setColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
     
     formHeight = Me.ScaleHeight
     
@@ -613,7 +613,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
@@ -663,7 +663,7 @@ Public Sub refreshButtons()
 
 End Sub
 
-Public Sub setColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
 
     On Error Resume Next
 

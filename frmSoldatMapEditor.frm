@@ -1325,6 +1325,8 @@ Public gridSpacing As Integer, gridDivisions As Integer
 Public gridOp1 As Byte, gridOp2 As Byte
 Dim noRedraw As Boolean
 
+Public sceneryVerts As Boolean, topmost As Boolean
+
 Public formHeight As Integer, formWidth As Integer, formLeft As Integer, formTop As Integer
 
 Dim polyClr As TColour
@@ -4749,7 +4751,11 @@ Public Sub Render()
             End If
             
             If showPoints Or Scenery(i).selected = 1 Or Scenery(i).selected = 3 Then
-                D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 1, sceneryCoords(0), Len(sceneryCoords(0))
+                If sceneryVerts Then
+                    D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 4, sceneryCoords(0), Len(sceneryCoords(0))
+                Else
+                    D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 1, sceneryCoords(0), Len(sceneryCoords(0))
+                End If
             End If
         
         Next
@@ -9585,18 +9591,42 @@ End Sub
 
 Private Sub VertexSelScenery()
 
-    Dim i As Integer
-    Dim xCoord As Long, yCoord As Long
+    Dim i As Integer, sVal As Integer
+    'Dim xCoord As Long, yCoord As Long
+    Dim sceneryCoords(3) As TCustomVertex
+    Dim selected(3) As Boolean
 
     For i = 1 To sceneryCount
-        xCoord = (Scenery(i).Translation.X - scrollCoords(2).X) * zoomFactor
-        yCoord = (Scenery(i).Translation.Y - scrollCoords(2).Y) * zoomFactor
-            
+        'xCoord = (Scenery(i).Translation.X - scrollCoords(2).X) * zoomFactor
+        'yCoord = (Scenery(i).Translation.Y - scrollCoords(2).Y) * zoomFactor
+        sVal = Scenery(i).Style
+        
+        sceneryCoords(0).X = (Scenery(i).Translation.X - scrollCoords(2).X) * zoomFactor
+        sceneryCoords(0).Y = (Scenery(i).Translation.Y - scrollCoords(2).Y) * zoomFactor
+        sceneryCoords(1).X = sceneryCoords(0).X + Cos(Scenery(i).rotation) * (SceneryTextures(sVal).Width) * Scenery(i).Scaling.X * zoomFactor
+        sceneryCoords(1).Y = sceneryCoords(0).Y - Sin(Scenery(i).rotation) * (SceneryTextures(sVal).Width) * Scenery(i).Scaling.X * zoomFactor
+        sceneryCoords(3).X = sceneryCoords(0).X + Sin(Scenery(i).rotation) * (SceneryTextures(sVal).Height) * Scenery(i).Scaling.Y * zoomFactor
+        sceneryCoords(3).Y = sceneryCoords(0).Y + Cos(Scenery(i).rotation) * (SceneryTextures(sVal).Height) * Scenery(i).Scaling.Y * zoomFactor
+        sceneryCoords(2).X = sceneryCoords(3).X + sceneryCoords(1).X - sceneryCoords(0).X
+        sceneryCoords(2).Y = sceneryCoords(3).Y + sceneryCoords(1).Y - sceneryCoords(0).Y
+        
+        selected(0) = inSelRect(sceneryCoords(0).X, sceneryCoords(0).Y)
+        If sceneryVerts Then
+            selected(1) = inSelRect(sceneryCoords(1).X, sceneryCoords(1).Y)
+            selected(2) = inSelRect(sceneryCoords(2).X, sceneryCoords(2).Y)
+            selected(3) = inSelRect(sceneryCoords(3).X, sceneryCoords(3).Y)
+        Else
+            selected(1) = False
+            selected(2) = False
+            selected(3) = False
+        End If
+        
         If currentFunction = TOOL_VSELECT Then
             Scenery(i).selected = 0
         End If
         
-        If inSelRect(xCoord, yCoord) Then
+        'If inSelRect(xCoord, yCoord) Then
+        If selected(0) Or selected(1) Or selected(2) Or selected(3) Then
             If currentFunction = TOOL_VSELECT Then
                 Scenery(i).selected = 1
                 numSelectedScenery = numSelectedScenery + 1
@@ -11809,7 +11839,8 @@ Private Sub saveSettings()
             & "PolySrc=" & polyBlendSrc & sNull & "PolyDest=" & polyBlendDest & sNull _
             & "WireSrc=" & wireBlendSrc & sNull & "WireDest=" & wireBlendDest & sNull _
             & "PointClr=" & RGBtoHex(pointClr) & sNull & "SelectionClr=" & RGBtoHex(selectionClr) & sNull _
-            & "BackClr=" & RGBtoHex(backClr) & sNull & "MaxUndo=" & max_undo & sNull & sNull
+            & "BackClr=" & RGBtoHex(backClr) & sNull & "MaxUndo=" & max_undo & sNull _
+            & "SceneryVerts=" & sceneryVerts & sNull & "Topmost=" & topmost & sNull & sNull
     saveSection "Preferences", iniString
     
     'display
@@ -11944,6 +11975,8 @@ Private Sub loadINI()
     selectionClr = HexToLong(loadString("Preferences", "SelectionClr"))
     backClr = HexToLong(loadString("Preferences", "BackClr"))
     max_undo = loadInt("Preferences", "MaxUndo") '+ 1
+    sceneryVerts = loadString("Preferences", "SceneryVerts")
+    topmost = loadString("Preferences", "Topmost")
     
     errVal = "2"
     

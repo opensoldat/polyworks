@@ -62,6 +62,8 @@ Section "MainSection" SEC01
   File "PolyWorks Help.html"
   File "ReadMe.txt"
   File "pwlib.dll"
+  File "PMS.ico"
+  File "PFB.ico"
   SetOutPath "$SYSDIR"
   File "dx8vb.dll"
   File "MBMouse.ocx"
@@ -165,8 +167,11 @@ Section "MainSection" SEC01
   WriteRegStr HKCR ".pms" "" "Soldat PolyWorks Map"
   WriteRegStr HKCR "Soldat PolyWorks Map" "" "Soldat PolyWorks Map"
   WriteRegStr HKCR "Soldat PolyWorks Map\shell" "" "open"
-  ; WriteRegStr HKCR "Soldat PolyWorks Map\DefaultIcon" "" "$INSTDIR\Soldat PolyWorks.exe,0"
+  WriteRegStr HKCR "Soldat PolyWorks Map\DefaultIcon" "" "$INSTDIR\PMS.ico"
   WriteRegStr HKCR "Soldat PolyWorks Map\shell\open\command" "" '"$INSTDIR\Soldat PolyWorks.exe" "%1"'
+  WriteRegStr HKCR ".pfb" "" "Soldat PolyWorks Prefab"
+  WriteRegStr HKCR "Soldat PolyWorks Prefab" "" "Soldat PolyWorks Prefab"
+  WriteRegStr HKCR "Soldat PolyWorks Prefab\DefaultIcon" "" "$INSTDIR\PFB.ico"
   System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
 SectionEnd
 
@@ -210,6 +215,8 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\ReadMe.txt"
   Delete /REBOOTOK "$INSTDIR\dx8vb.dll"
   Delete /REBOOTOK "$INSTDIR\pwlib.dll"
+  Delete /REBOOTOK "$INSTDIR\PMS.ico"
+  Delete /REBOOTOK "$INSTDIR\PFB.ico"
   
   Delete /REBOOTOK "$INSTDIR\BMPtoCUR\BMP to CUR.exe"
   Delete /REBOOTOK "$INSTDIR\BMPtoCUR\ReadMe.txt"
@@ -311,6 +318,8 @@ Section Uninstall
 
   DeleteRegKey HKCR ".pms"
   DeleteRegKey HKCR "Soldat PolyWorks Map"
+  DeleteRegKey HKCR ".pfb"
+  DeleteRegKey HKCR "Soldat PolyWorks Prefab"
   System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"

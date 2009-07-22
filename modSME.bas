@@ -343,7 +343,7 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
         Width = MENU_WIDTH
         Height = MENU_HEIGHT
         xSrc = MENU_X
-        ySrc = MENU_Y + Int(pic.index) * Height
+        ySrc = MENU_Y + Int(pic.Index) * Height
     End If
     
     active = active / 255
