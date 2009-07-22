@@ -39,6 +39,9 @@
 
 ; MUI end ------
 
+!define SHCNE_ASSOCCHANGED 0x8000000
+!define SHCNF_IDLIST 0
+
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "PWSetup.exe"
 InstallDir "$PROGRAMFILES\Soldat Polyworks"
@@ -158,6 +161,13 @@ Section "MainSection" SEC01
   CreateDirectory "$SMPROGRAMS\Soldat Polyworks"
   CreateShortCut "$SMPROGRAMS\Soldat Polyworks\Soldat Polyworks.lnk" "$INSTDIR\Soldat Polyworks.exe"
   CreateShortCut "$SMPROGRAMS\Soldat Polyworks\Uninstall Soldat Polyworks.lnk" "$INSTDIR\uninst.exe" 
+
+  WriteRegStr HKCR ".pms" "" "Soldat PolyWorks Map"
+  WriteRegStr HKCR "Soldat PolyWorks Map" "" "Soldat PolyWorks Map"
+  WriteRegStr HKCR "Soldat PolyWorks Map\shell" "" "open"
+  ; WriteRegStr HKCR "Soldat PolyWorks Map\DefaultIcon" "" "$INSTDIR\Soldat PolyWorks.exe,0"
+  WriteRegStr HKCR "Soldat PolyWorks Map\shell\open\command" "" '"$INSTDIR\Soldat PolyWorks.exe" "%1"'
+  System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
 SectionEnd
 
 Section -Post
@@ -298,6 +308,10 @@ Section Uninstall
   Delete /REBOOTOK "$SMPROGRAMS\Soldat Polyworks\Soldat Polyworks.lnk"
   Delete /REBOOTOK "$SMPROGRAMS\Soldat Polyworks\Uninstall Soldat Polyworks.lnk"
   RMDir /REBOOTOK "$SMPROGRAMS\Soldat Polyworks"
+
+  DeleteRegKey HKCR ".pms"
+  DeleteRegKey HKCR "Soldat PolyWorks Map"
+  System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"

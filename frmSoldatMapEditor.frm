@@ -1556,18 +1556,21 @@ Private Sub Form_Load()
     
     err = "Error parsing command line args"
     
-    If right(Command$, 4) = ".pms" Or right(Command$, 4) = ".PMS" Then
-        If Dir$(Command$) <> "" Then
-            LoadFile Command$
-        ElseIf Dir$(App.path & "\Maps\" & Command$) <> "" Then
-            LoadFile App.path & "\Maps\" & Command$
-        ElseIf Dir$(soldatDir & "Maps\" & Command$) <> "" Then
-            LoadFile soldatDir & "Maps\" & Command$
-        Else
-            newMap
+    temp = Command$
+    If right(temp, 1) = """" Then
+        temp = left(temp, Len(temp) - 1)
+        temp = right(temp, Len(temp) - 1)
+    End If
+    
+    newMap
+    If LCase$(right(temp, 4)) = ".pms" Then
+        If Dir$(temp) <> "" Then
+            LoadFile temp
+        ElseIf Dir$(App.path & "\Maps\" & temp) <> "" Then
+            LoadFile App.path & "\Maps\" & temp
+        ElseIf Dir$(soldatDir & "Maps\" & temp) <> "" Then
+            LoadFile soldatDir & "Maps\" & temp
         End If
-    Else
-        newMap
     End If
     
     err = "Error acquiring input device"
