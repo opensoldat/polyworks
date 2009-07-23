@@ -1949,6 +1949,11 @@ Public Sub resetDevice()
     D3DWindow.BackBufferFormat = D3DFMT_A8R8G8B8
     
     noRedraw = True
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    SaveUndo
     mnuSelectAll_Click
     deletePolys
     
@@ -1988,7 +1993,8 @@ Public Sub resetDevice()
     
     initialized = True
     
-    loadUndo (False)
+    loadUndo False
+    loadUndo False
     
     noRedraw = False
     
@@ -2328,8 +2334,9 @@ Public Sub LoadFile(fileName As String)
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     If right$(loadName, 4) = ".gif" Then
                         'loadName = loadName & ".tga"
-                        Call GifToBmp(loadName, "Temp\gif.tga")
-                        loadName = "Temp\gif.tga"
+                        Call GifToBmp(loadName, App.path & "\Temp\gif.tga")
+                        loadName = App.path & "\Temp\gif.tga"
+                        'loadName = App.path & "\" & gfxDir & "\notfound.bmp"
                     End If
                     
                     Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
@@ -2352,8 +2359,9 @@ Public Sub LoadFile(fileName As String)
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     If right$(loadName, 4) = ".gif" Then
                         'loadName = loadName & ".tga"
-                        Call GifToBmp(loadName, "Temp\gif.tga")
-                        loadName = "Temp\gif.tga"
+                        Call GifToBmp(loadName, App.path & "\Temp\gif.tga")
+                        loadName = App.path & "\Temp\gif.tga"
+                        'loadName = App.path & "\" & gfxDir & "\notfound.bmp"
                     End If
                     
                     Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
@@ -2488,6 +2496,18 @@ Public Sub LoadFile(fileName As String)
         
     Close #1
     
+    errorVal = "Error reloading scenery"
+    
+    'noRedraw = True
+    'SaveUndo
+    'mnuSelectAll_Click
+    'deletePolys
+    'For i = 1 To frmScenery.lstScenery.ListCount
+    '    RefreshSceneryTextures i
+    'Next
+    'loadUndo False
+    'noRedraw = False
+    
     fileOpen = False
     
     errorVal = "Error setting map data"
@@ -2581,6 +2601,7 @@ ErrorHandler:
     'initialized = False
     MsgBox "error loading map" & vbNewLine & Error$ & vbNewLine & errorVal
     If fileOpen Then Close #1
+    noRedraw = False
 
 End Sub
 
@@ -2703,8 +2724,8 @@ Public Sub setCurrentTexture(sceneryName As String)
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
         'loadName = loadName & ".tga"
-        Call GifToBmp(loadName, "Temp\gif.tga")
-        loadName = "Temp\gif.tga"
+        Call GifToBmp(loadName, App.path & "\Temp\gif.tga")
+        loadName = App.path & "\Temp\gif.tga"
     End If
 
     Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
@@ -2752,8 +2773,8 @@ Public Sub CreateSceneryTexture(sceneryName As String)
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
         'loadName = loadName & ".tga"
-        Call GifToBmp(loadName, "Temp\gif.tga")
-        loadName = "Temp\gif.tga"
+        Call GifToBmp(loadName, App.path & "\Temp\gif.tga")
+        loadName = App.path & "\Temp\gif.tga"
     End If
 
     Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
@@ -2810,11 +2831,11 @@ Public Sub RefreshSceneryTextures(Index As Integer)
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     If right$(loadName, 4) = ".gif" Then
         'loadName = loadName & ".tga"
-        Call GifToBmp(loadName, "Temp\gif.tga")
-        loadName = "Temp\gif.tga"
+        Call GifToBmp(loadName, App.path & "\Temp\gif.tga")
+        loadName = App.path & "\Temp\gif.tga"
     End If
     
-    'MsgBox "Load path: " & soldatDir & "Scenery-gfx\" & loadName
+    'MsgBox "Load path: " & loadName
     
     Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
@@ -7524,6 +7545,8 @@ Private Sub ApplyTransform(Rotating As Boolean)
     scaleDiff.Y = 1
     
     rDiff = 0
+    
+    getRCenter
     
     SaveUndo
     
@@ -14702,7 +14725,7 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
         Me.WindowState = 2
     End If
     
-    'mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
     
     resetDevice
     

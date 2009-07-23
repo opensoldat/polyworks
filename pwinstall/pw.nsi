@@ -222,6 +222,7 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\BMPtoCUR\ReadMe.txt"
   RMDir /REBOOTOK "$INSTDIR\BMPtoCUR"
   
+  Delete /REBOOTOK "$INSTDIR\gfx\Thumbs.db"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_palette.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\tool_gfx.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_texture.bmp"
@@ -280,6 +281,7 @@ Section Uninstall
   RMDir /REBOOTOK "$INSTDIR\gfx\cursors"
   RMDir /REBOOTOK "$INSTDIR\gfx"
   
+  Delete /REBOOTOK "$INSTDIR\Help\Thumbs.db"
   Delete /REBOOTOK "$INSTDIR\Help\tool_sketch.gif"
   Delete /REBOOTOK "$INSTDIR\Help\tool_pcolour.gif"
   Delete /REBOOTOK "$INSTDIR\Help\tool_vselect.gif"
@@ -305,7 +307,10 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\palettes\palette.txt"
   RMDir /REBOOTOK "$INSTDIR\palettes"
   RMDir /REBOOTOK "$INSTDIR\Prefabs"
+  Delete /REBOOTOK "$INSTDIR\undo\*.pwn"
   RMDir /REBOOTOK "$INSTDIR\undo"
+  Delete /REBOOTOK "$INSTDIR\Temp\Thumbs.db"
+  Delete /REBOOTOK "$INSTDIR\Temp\gif.tga"
   RMDir /REBOOTOK "$INSTDIR\Temp"
   
   Delete /REBOOTOK "$INSTDIR\Workspace\current.ini"
