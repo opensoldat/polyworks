@@ -5,7 +5,7 @@
 Soldat Polyworks 1.5.0.4
 
 
-updated 14/07/09
+updated 23/07/09
 
 
 
@@ -63,7 +63,16 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 Changes in v1.5.0.4
+- change how gif files are loaded
+- fixed undo selection
 - fixed saving of light and sketch display options
+- fixed selection rectangle bug
+- fixed command line argument bugs
+- associate pms files with polyworks on installation
+- icons for pms and pfb files (Created by VirtualTT)
+- more settings in preferences
+- selection for all corners of scenery
+- fixed transform tool
 
 Changes in v1.5.0.3
 - fixed window state errors
