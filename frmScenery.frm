@@ -433,11 +433,11 @@ Public Sub listScenery()
         file = Dir$
     Loop
     
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.jpg", vbDirectory)
-    Do While Len(file)
-        frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        file = Dir$
-    Loop
+    'file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.jpg", vbDirectory)
+    'Do While Len(file)
+    '    frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+    '    file = Dir$
+    'Loop
     
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
@@ -475,6 +475,13 @@ Public Sub listScenery()
         file = Dir$
         
     Loop
+    
+    'For i = 1 To frmSoldatMapEditor.tvwScenery.Nodes.Count
+    '    If LCase$(right(frmSoldatMapEditor.tvwScenery.Nodes.Item(i).Text, 4)) = ".jpg" Then
+    '        frmSoldatMapEditor.tvwScenery.Nodes.Item(i).BackColor = &HDDDDFF
+    '        frmSoldatMapEditor.tvwScenery.Nodes.Item(i).ForeColor = &HFF
+    '    End If
+    'Next
     
     Exit Sub
     

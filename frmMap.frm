@@ -682,11 +682,11 @@ Public Sub loadTextures2()
         file = Dir$
     Loop
     
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpg", vbDirectory)
-    Do While Len(file)
-        cboTexture.AddItem file
-        file = Dir$
-    Loop
+    'file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpg", vbDirectory)
+    'Do While Len(file)
+    '    cboTexture.AddItem file
+    '    file = Dir$
+    'Loop
     
     Exit Sub
     
@@ -771,7 +771,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     'snapForm Me, frmPalette
     'snapForm Me, frmDisplay
