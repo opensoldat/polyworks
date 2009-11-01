@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{DDA53BD0-2CD0-11D4-8ED4-00E07D815373}#1.0#0"; "MBMouse.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
 Begin VB.Form frmSoldatMapEditor 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
@@ -175,6 +175,33 @@ Begin VB.Form frmSoldatMapEditor
       TabStop         =   0   'False
       Top             =   375
       Width           =   12000
+      Begin VB.PictureBox picMenu 
+         Appearance      =   0  'Flat
+         AutoRedraw      =   -1  'True
+         BackColor       =   &H004A3C31&
+         BorderStyle     =   0  'None
+         FillColor       =   &H00FFFFFF&
+         BeginProperty Font 
+            Name            =   "BankGothic Lt BT"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Index           =   4
+         Left            =   3840
+         ScaleHeight     =   17
+         ScaleMode       =   3  'Pixel
+         ScaleWidth      =   64
+         TabIndex        =   19
+         TabStop         =   0   'False
+         Top             =   0
+         Width           =   960
+      End
       Begin VB.PictureBox picProgress 
          Appearance      =   0  'Flat
          AutoRedraw      =   -1  'True
@@ -608,24 +635,6 @@ Begin VB.Form frmSoldatMapEditor
       Begin VB.Menu mnuSep12 
          Caption         =   "-"
       End
-      Begin VB.Menu mnuFixTexture 
-         Caption         =   "Fix Texture"
-         Shortcut        =   ^F
-      End
-      Begin VB.Menu mnuUntexture 
-         Caption         =   "Untexture"
-         Shortcut        =   ^U
-      End
-      Begin VB.Menu mnuAverage 
-         Caption         =   "Average Vertex Colours"
-         Shortcut        =   ^G
-      End
-      Begin VB.Menu mnuApplyLight 
-         Caption         =   "Apply Light to Vertices"
-      End
-      Begin VB.Menu mnuSep9 
-         Caption         =   "-"
-      End
       Begin VB.Menu mnuSplit 
          Caption         =   "Split at Vertex"
          Shortcut        =   ^L
@@ -695,8 +704,69 @@ Begin VB.Form frmSoldatMapEditor
       End
    End
    Begin VB.Menu mnuMenu 
-      Caption         =   "View"
+      Caption         =   "Texture"
       Index           =   2
+      Visible         =   0   'False
+      Begin VB.Menu mnuFixTexture 
+         Caption         =   "Fix Texture"
+         Shortcut        =   ^F
+      End
+      Begin VB.Menu mnuUntexture 
+         Caption         =   "Untexture"
+         Shortcut        =   ^U
+      End
+      Begin VB.Menu mnuTransformTexture 
+         Caption         =   "Transform Texture"
+         Begin VB.Menu mnuRotateTexture 
+            Caption         =   "Rotate 180°"
+            Index           =   0
+         End
+         Begin VB.Menu mnuRotateTexture 
+            Caption         =   "Rotate 90° CW"
+            Index           =   1
+         End
+         Begin VB.Menu mnuRotateTexture 
+            Caption         =   "Rotate 90° CCW"
+            Index           =   2
+         End
+         Begin VB.Menu mnuSep31 
+            Caption         =   "-"
+         End
+         Begin VB.Menu mnuFlipTexture 
+            Caption         =   "Flip Horizontal"
+            Index           =   0
+         End
+         Begin VB.Menu mnuFlipTexture 
+            Caption         =   "Flip Vertical"
+            Index           =   1
+         End
+      End
+      Begin VB.Menu mnuSep9 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuAverage 
+         Caption         =   "Average Vertex Colours"
+         Shortcut        =   ^G
+      End
+      Begin VB.Menu mnuApplyLight 
+         Caption         =   "Apply Light to Vertices"
+      End
+      Begin VB.Menu mnuSep17 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuFixedTexture 
+         Caption         =   "Fixed Texture"
+      End
+      Begin VB.Menu mnuCustomX 
+         Caption         =   "User Defined X"
+      End
+      Begin VB.Menu mnuCustomY 
+         Caption         =   "User Defined Y"
+      End
+   End
+   Begin VB.Menu mnuMenu 
+      Caption         =   "View"
+      Index           =   3
       Visible         =   0   'False
       Begin VB.Menu mnuZoomIn 
          Caption         =   "Zoom In"
@@ -709,6 +779,10 @@ Begin VB.Form frmSoldatMapEditor
       End
       Begin VB.Menu mnuActualPixels 
          Caption         =   "Actual Size"
+      End
+      Begin VB.Menu mnuResetView 
+         Caption         =   "Reset View"
+         Enabled         =   0   'False
       End
       Begin VB.Menu mnuSep11 
          Caption         =   "-"
@@ -724,18 +798,6 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Snap to Vertices"
          Checked         =   -1  'True
       End
-      Begin VB.Menu mnuSep17 
-         Caption         =   "-"
-      End
-      Begin VB.Menu mnuFixedTexture 
-         Caption         =   "Fixed Texture"
-      End
-      Begin VB.Menu mnuCustomX 
-         Caption         =   "User Defined X"
-      End
-      Begin VB.Menu mnuCustomY 
-         Caption         =   "User Defined Y"
-      End
       Begin VB.Menu mnuSep13 
          Caption         =   "-"
       End
@@ -744,7 +806,27 @@ Begin VB.Form frmSoldatMapEditor
       End
       Begin VB.Menu mnuBlendPolys 
          Caption         =   "Blend Polys"
-         Visible         =   0   'False
+      End
+      Begin VB.Menu mnuShowSceneryLayers 
+         Caption         =   "Show Scenery Layers"
+         Begin VB.Menu mnuShowSceneryLayer 
+            Caption         =   "Back"
+            Checked         =   -1  'True
+            Enabled         =   0   'False
+            Index           =   0
+         End
+         Begin VB.Menu mnuShowSceneryLayer 
+            Caption         =   "Middle"
+            Checked         =   -1  'True
+            Enabled         =   0   'False
+            Index           =   1
+         End
+         Begin VB.Menu mnuShowSceneryLayer 
+            Caption         =   "Front"
+            Checked         =   -1  'True
+            Enabled         =   0   'False
+            Index           =   2
+         End
       End
       Begin VB.Menu mnuSep14 
          Caption         =   "-"
@@ -756,7 +838,7 @@ Begin VB.Form frmSoldatMapEditor
    End
    Begin VB.Menu mnuMenu 
       Caption         =   "Window"
-      Index           =   3
+      Index           =   4
       Visible         =   0   'False
       Begin VB.Menu mnuWorkspace 
          Caption         =   "Workspace"
@@ -1691,7 +1773,7 @@ Public Sub initGfx()
     mouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     
     'draw menu buttons
-    For i = 0 To 3
+    For i = 0 To 4
         mouseEvent2 picMenu(i), 0, 0, BUTTON_MENU, 0, BUTTON_UP
     Next
 
@@ -4310,8 +4392,8 @@ Public Sub Render()
         'D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, ARGB(0, RGB(64, 32, 32)), 1#, 0 '&H0
         'If numPolys > 1 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, Polys(1).vertex(1), Len(Polys(1).vertex(1))
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ZERO 'DESTcolor 'polyBlendSrc
-        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_SRCCOLOR 'ZERO 'polyBlendDest
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA 'DESTcolor 'polyBlendSrc
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA 'ZERO 'polyBlendDest
         D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
         'If numPolys > 0 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, Polys(1).vertex(1), Len(Polys(1).vertex(1))
         D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA Or D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
@@ -4359,8 +4441,10 @@ Public Sub Render()
         'D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
         'D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
         
-        D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc 'DESTcolor 'polyBlendSrc
-        D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest 'ZERO 'polyBlendDest
+        If clrPolys Then
+            D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc 'DESTcolor 'polyBlendSrc
+            D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest 'ZERO 'polyBlendDest
+        End If
         
         'If numPolys > 5 Then
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, numPolys, Polys(1).vertex(1), Len(Polys(1).vertex(1))
@@ -10617,6 +10701,61 @@ Private Sub mnuFlip_Click(Index As Integer)
 
 End Sub
 
+Private Sub mnuFlipTexture_Click(Index As Integer)
+
+    Dim i As Integer, j As Integer
+    Dim PolyNum As Integer
+    Dim avgMul As Single
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+
+    If Index = 0 Then
+        scaleDiff.X = -1
+    ElseIf Index = 1 Then
+        scaleDiff.Y = -1
+    End If
+    
+    rCenter.X = 0
+    rCenter.Y = 0
+    
+    avgMul = 1
+    If numSelectedPolys > 0 Then
+        For i = 1 To numSelectedPolys
+            PolyNum = selectedPolys(i)
+            For j = 1 To 3
+                If vertexList(PolyNum).vertex(j) = 1 Then
+                    rCenter.X = rCenter.X * (1 - 1 / avgMul) + Polys(PolyNum).vertex(j).tu / avgMul
+                    rCenter.Y = rCenter.Y * (1 - 1 / avgMul) + Polys(PolyNum).vertex(j).tv / avgMul
+                    avgMul = avgMul + 1
+                End If
+            Next
+        Next
+    End If
+    
+    If numSelectedPolys > 0 Then
+        For i = 1 To numSelectedPolys
+            PolyNum = selectedPolys(i)
+            For j = 1 To 3
+                If vertexList(PolyNum).vertex(j) = 1 Then
+                    Polys(PolyNum).vertex(j).tu = (rCenter.X + (Polys(PolyNum).vertex(j).tu - rCenter.X) * scaleDiff.X)
+                    Polys(PolyNum).vertex(j).tv = (rCenter.Y + (Polys(PolyNum).vertex(j).tv - rCenter.Y) * scaleDiff.Y)
+                End If
+            Next
+        Next
+    End If
+
+    scaleDiff.X = 1
+    scaleDiff.Y = 1
+    
+    SaveUndo
+    Render
+    getInfo
+
+End Sub
+
 Private Sub mnuRecent_Click(Index As Integer)
 
     Dim i As Integer
@@ -10756,6 +10895,88 @@ Private Sub mnuRotate_Click(Index As Integer)
                     Scenery(i).rotation = (Scenery(i).rotation - rDiff)
                 End If
             End If
+        Next
+    End If
+
+    rCenter.X = selRect(0).X
+    rCenter.Y = selRect(0).Y
+    rDiff = 0
+    
+    getRCenter
+    getInfo
+    
+    SaveUndo
+    Render
+
+End Sub
+
+Private Sub mnuRotateTexture_Click(Index As Integer)
+
+    Dim R As Single, theta As Single
+    Dim xDiff As Single, yDiff As Single
+    Dim i As Integer, j As Integer
+    Dim PolyNum As Integer
+    Dim avgMul As Single
+    Dim shoozza As Single 'this will change when i get a better name for it, k? -Fryer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+    
+    If Index = 0 Then
+        rDiff = pi
+    ElseIf Index = 2 Then
+        rDiff = pi / 2
+    ElseIf Index = 1 Then
+        rDiff = 3 * pi / 2
+    End If
+    
+    shoozza = CSng(xTexture) / CSng(yTexture)
+    
+    rCenter.X = 0
+    rCenter.Y = 0
+    
+    avgMul = 1
+    If numSelectedPolys > 0 Then
+        For i = 1 To numSelectedPolys
+            PolyNum = selectedPolys(i)
+            For j = 1 To 3
+                If vertexList(PolyNum).vertex(j) = 1 Then
+                    rCenter.X = rCenter.X * (1 - 1 / avgMul) + Polys(PolyNum).vertex(j).tu * shoozza / avgMul
+                    rCenter.Y = rCenter.Y * (1 - 1 / avgMul) + Polys(PolyNum).vertex(j).tv / avgMul
+                    avgMul = avgMul + 1
+                End If
+            Next
+        Next
+    End If
+    
+    If numSelectedPolys > 0 Then
+        For i = 1 To numSelectedPolys
+            PolyNum = selectedPolys(i)
+            For j = 1 To 3
+                If vertexList(PolyNum).vertex(j) = 1 Then
+                    xDiff = (Polys(PolyNum).vertex(j).tu * shoozza - rCenter.X)
+                    yDiff = (Polys(PolyNum).vertex(j).tv - rCenter.Y)
+                    
+                    R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
+                    If xDiff = 0 Then
+                        If yDiff > 0 Then
+                            theta = pi / 2
+                        Else
+                            theta = 3 * pi / 2
+                        End If
+                    ElseIf xDiff > 0 Then
+                        theta = Atn(yDiff / xDiff)
+                    ElseIf xDiff < 0 Then
+                        theta = pi + Atn(yDiff / xDiff)
+                    End If
+                    theta = theta + rDiff
+                    
+                    Polys(PolyNum).vertex(j).tu = (rCenter.X + R * Cos(theta)) / shoozza
+                    Polys(PolyNum).vertex(j).tv = rCenter.Y + R * Sin(theta)
+                End If
+            Next
         Next
     End If
 
