@@ -782,7 +782,6 @@ Begin VB.Form frmSoldatMapEditor
       End
       Begin VB.Menu mnuResetView 
          Caption         =   "Reset View"
-         Enabled         =   0   'False
       End
       Begin VB.Menu mnuSep11 
          Caption         =   "-"
@@ -812,19 +811,16 @@ Begin VB.Form frmSoldatMapEditor
          Begin VB.Menu mnuShowSceneryLayer 
             Caption         =   "Back"
             Checked         =   -1  'True
-            Enabled         =   0   'False
             Index           =   0
          End
          Begin VB.Menu mnuShowSceneryLayer 
             Caption         =   "Middle"
             Checked         =   -1  'True
-            Enabled         =   0   'False
             Index           =   1
          End
          Begin VB.Menu mnuShowSceneryLayer 
             Caption         =   "Front"
             Checked         =   -1  'True
-            Enabled         =   0   'False
             Index           =   2
          End
       End
@@ -1400,6 +1396,7 @@ Dim acquired As Boolean
 Dim selectionChanged As Boolean
 
 Dim clrPolys As Boolean, clrWireframe As Boolean
+Dim sslBack As Boolean, sslMid As Boolean, sslFront As Boolean
 Public backClr As Long, pointClr As Long, selectionClr As Long, gridClr As Long, gridClr2 As Long
 Public polyBlendSrc As Long, polyBlendDest As Long, wireBlendSrc As Long, wireBlendDest As Long
 Public soldatDir As String, uncompDir As String, prefabDir As String
@@ -1552,6 +1549,9 @@ Private Sub Form_Load()
     scaleDiff.X = 1
     scaleDiff.Y = 1
     'snapRadius = 8
+    sslBack = True
+    sslMid = True
+    sslFront = True
     
     PolyTypeClrs(0) = selectionClr
     
@@ -4297,7 +4297,7 @@ Public Sub Render()
     'D3DDevice.SetVertexShader FVF
     
     scenerySprite.Begin
-    If sceneryCount > 0 And showScenery Then
+    If sceneryCount > 0 And showScenery And sslBack Then
         For i = 1 To sceneryCount
             If Scenery(i).level = 0 Then
                 sVal = Scenery(i).Style
@@ -4333,7 +4333,7 @@ Public Sub Render()
         Next
     End If
     
-    If sceneryCount > 0 And showScenery Then
+    If sceneryCount > 0 And showScenery And sslMid Then
         For i = 1 To sceneryCount
             If Scenery(i).level = 1 Then
                 sVal = Scenery(i).Style
@@ -4561,7 +4561,7 @@ Public Sub Render()
     
     'draw scenery
     scenerySprite.Begin
-    If sceneryCount > 0 And showScenery Then
+    If sceneryCount > 0 And showScenery And sslFront Then
         For i = 1 To sceneryCount
             If Scenery(i).level = 2 Then
                 sVal = Scenery(i).Style
@@ -10808,6 +10808,17 @@ Private Sub updateRecent(fileName As String)
     
 End Sub
 
+Private Sub mnuResetView_Click()
+
+    zoomFactor = 1
+    scrollCoords(2).X = -ScaleWidth / 2
+    scrollCoords(2).Y = -ScaleHeight / 2
+    Zoom 1
+    
+    Render
+
+End Sub
+
 Private Sub mnuRotate_Click(Index As Integer)
 
     Dim R As Single, theta As Single
@@ -11019,6 +11030,20 @@ Private Sub mnuCenterRCenter_Click()
     mnuCenterRCenter.Checked = True
     rCenter.X = Midpoint(selRect(0).X, selRect(2).X)
     rCenter.Y = Midpoint(selRect(0).Y, selRect(2).Y)
+
+End Sub
+
+Private Sub mnuShowSceneryLayer_Click(Index As Integer)
+
+    mnuShowSceneryLayer(Index).Checked = Not mnuShowSceneryLayer(Index).Checked
+
+    If Index = 0 Then
+        sslBack = mnuShowSceneryLayer(0).Checked
+    ElseIf Index = 1 Then
+        sslMid = mnuShowSceneryLayer(1).Checked
+    ElseIf Index = 2 Then
+        sslFront = mnuShowSceneryLayer(2).Checked
+    End If
 
 End Sub
 
