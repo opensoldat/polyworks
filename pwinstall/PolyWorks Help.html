@@ -166,14 +166,6 @@ Hold ctrl to move the current selection.
 <i>SEND BACKWARD</i> [page down] - Sends selected polys and scenery backward.<br>
 <i>SEND TO BACK</i> [end] - Sends selected polys and scenery behind the rest.</p>
 
-<p>&nbsp;&nbsp;&nbsp;<b>FIX TEXTURE</b> [ctrl+f]<br>Sets the texture coordinates of all selected vertices depending on the position of each vertex.</p>
-
-<p>&nbsp;&nbsp;&nbsp;<b>UNTEXTURE</b> [ctrl+u]<br>Sets the texture coordinates of all selected vertices to the same value.</p>
-
-<p>&nbsp;&nbsp;&nbsp;<b>AVERAGE VERTEX COLOURS</b> [ctrl+g]<br>Averages the colours of vertices that have the same position.</p>
-
-<p>&nbsp;&nbsp;&nbsp;<b>APPLY LIGHT TO VERTICES</b> <br>Applies lights to vertex colours and hides the light sources.</p>
-
 <p>&nbsp;&nbsp;&nbsp;<b>SPLIT AT VERTEX</b> [ctrl+l]<br>Splits polys in half from the selected vertex to the midpoint of the opposite edge.</p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>JOIN VERTICES</b> [ctrl+j]<br>Brings all selected vertices to the coordinates of the first vertex selected.</p>
@@ -197,6 +189,31 @@ Hold ctrl to move the current selection.
 
 <hr>
 
+<p><u><font size="3"><b>TEXTURE MENU</b></font></u></p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>FIX TEXTURE</b> [ctrl+f]<br>Sets the texture coordinates of all selected vertices depending on the position of each vertex.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>UNTEXTURE</b> [ctrl+u]<br>Sets the texture coordinates of all selected vertices to the same value.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>TRANSFORM TEXTURE</b><br>
+<i>ROTATE 180°</i> - Rotates the selected vertices' texture by a half-turn.<br>
+<i>ROTATE 90° CW</i> - Rotates the selected vertices' texture clockwise by a half-turn.<br>
+<i>ROTATE 90° CCW</i> - Rotates the selected vertices' texture counterclockwise by a half turn.<br>
+<i>FLIP HORIZONTAL</i> - Flips the selected vertices' texture horizontally, along the vertical axis.<br>
+<i>FLIP VERTICAL</i> - Flips the selected vertices' texture vertically, along the horizontal axis.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>AVERAGE VERTEX COLOURS</b> [ctrl+g]<br>Averages the colours of vertices that have the same position.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>APPLY LIGHT TO VERTICES</b> <br>Applies lights to vertex colours and hides the light sources.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>FIXED TEXTURE</b> <br> Turns fixed texture on and off. When fixed texture is on vertices do not keep their texture coordinates when moved.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>USER DEFINED X</b> <br> For use with quad function. Quads are created/manipulated with the horizontal texture coordinates specified in the Texture panel in the Properties window. </p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>USER DEFINED Y</b> <br> For use with quad function. Quads are created/manipulated with the vertical texture coordinates specified in the Texture panel in the Properties window. </p>
+
+<hr>
+
 <p><u><font size="3"><b>VIEW MENU</b></font></u></p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>ZOOM IN</b> [ctrl+plus, numpad +] <br> Zooms in to twice the current zoom level.</p>
@@ -207,21 +224,22 @@ Hold ctrl to move the current selection.
 
 <p>&nbsp;&nbsp;&nbsp;<b>ACTUAL SIZE</b> <br> Changes the zoom level to show the same screen area that would be visible in Soldat, depending on the width of the PolyWorks window.</p>
 
+<p>&nbsp;&nbsp;&nbsp;<b>RESET VIEW</b> <br> Resets the zoom level and screen coordinates to the starting point.</p>
+
 <p>&nbsp;&nbsp;&nbsp;<b>SHOW GRID</b> [ctrl+'] <br> Turns the grid on and off.</p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>SNAP TO GRID</b> <br> Turns snapping to grid on and off. When snap to grid is on, vertices and scenery snap to the grid when created or moved.</p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>SNAP TO VERTICES</b> <br> Turns snapping to vertices on and off. When snap to vertices is on vertices snap to nearby vertices when created or moved.</p>
 
-<p>&nbsp;&nbsp;&nbsp;<b>FIXED TEXTURE</b> <br> Turns fixed texture on and off. When fixed texture is on vertices do not keep their texture coordinates when moved.</p>
-
-<p>&nbsp;&nbsp;&nbsp;<b>USER DEFINED X</b> <br> For use with quad function. Quads are created/manipulated with the horizontal texture coordinates specified in the Texture panel in the Properties window. </p>
-
-<p>&nbsp;&nbsp;&nbsp;<b>USER DEFINED Y</b> <br> For use with quad function. Quads are created/manipulated with the vertical texture coordinates specified in the Texture panel in the Properties window. </p>
-
 <p>&nbsp;&nbsp;&nbsp;<b>BLEND WIREFRAME</b> <br> Turns wireframe blending on and off.</p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>BLEND POLYS</b> <br> Turns poly blending on and off.</p>
+
+<p>&nbsp;&nbsp;&nbsp;<b>SHOW SCENERY LAYERS</b><br>
+<i>BACK</i> - Show sceneries in the back layer.<br>
+<i>MIDDLE</i> - Show sceneries in the middle layer.<br>
+<i>FRONT</i> - Show sceneries in the front layer..</p>
 
 <p>&nbsp;&nbsp;&nbsp;<b>REFRESH</b> [F5] <br> Resizes the background to fit the map.</p>
 

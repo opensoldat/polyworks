@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.4
+Soldat Polyworks 1.5.0.5
 
 
-updated 23/07/09
+updated 01/11/09
 
 
 
@@ -61,6 +61,15 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.5
+- jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
+- fixed problems with drag and drop
+- fixed polygon blend enable/disable
+- new arrangement of the main menu
+- added basic texture transformation functions
+- added menu item to reset the view
+- possibility to show and hide individual scenery layers
 
 Changes in v1.5.0.4
 - change how gif files are loaded
