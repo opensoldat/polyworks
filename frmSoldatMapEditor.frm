@@ -596,11 +596,21 @@ Begin VB.Form frmSoldatMapEditor
       End
       Begin VB.Menu mnuDuplicate 
          Caption         =   "Duplicate"
+      End
+      Begin VB.Menu mnuCopy 
+         Caption         =   "Copy"
+         Shortcut        =   ^C
+      End
+      Begin VB.Menu mnuPaste 
+         Caption         =   "Paste"
          Shortcut        =   ^V
       End
       Begin VB.Menu mnuClear 
          Caption         =   "Clear"
          Shortcut        =   {DEL}
+      End
+      Begin VB.Menu mnuSep32 
+         Caption         =   "-"
       End
       Begin VB.Menu mnuSelectAll 
          Caption         =   "Select All"
@@ -5570,16 +5580,18 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             mnuNew_Click
         ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 Then 'ctrl+o
             mnuOpen_Click
-        ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 Then 'ctrl+s
-            mnuSave_Click
         ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 And shiftDown Then 'ctrl+shift+s
             mnuSaveAs_Click
-        'ElseIf DIState.Key(MapVirtualKey(65, 0)) = 128 Then 'ctrl+x
-            
+        ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 Then 'ctrl+s
+            mnuSave_Click
         ElseIf DIState.Key(MapVirtualKey(69, 0)) = 128 Then 'ctrl+e
             mnuCreate_Click
-        ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then 'ctrl+v
+        ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 And shiftDown Then 'ctrl+shift+v
             mnuDuplicate_Click
+        ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then 'ctrl+v
+            mnuPaste_Click
+        ElseIf DIState.Key(MapVirtualKey(67, 0)) = 128 Then 'ctrl+c
+            mnuCopy_Click
         ElseIf DIState.Key(MapVirtualKey(90, 0)) = 128 Then 'ctrl+z
             loadUndo False
         ElseIf DIState.Key(MapVirtualKey(89, 0)) = 128 Then 'ctrl+y
@@ -10780,6 +10792,12 @@ Private Sub mnuClrSketch_Click()
 
 End Sub
 
+Private Sub mnuCopy_Click()
+
+    savePrefab App.path & "\Temp\copy.PFB"
+
+End Sub
+
 Private Sub mnuFlip_Click(Index As Integer)
 
     Dim i As Integer, j As Integer
@@ -10935,6 +10953,18 @@ Private Sub mnuFlipTexture_Click(Index As Integer)
     SaveUndo
     Render
     getInfo
+
+End Sub
+
+Private Sub mnuPaste_Click()
+
+    On Error GoTo ErrorHandler
+
+    If (GetAttr(App.path & "\Temp\copy.PFB") And vbDirectory) = 0 Then
+        loadPrefab App.path & "\Temp\copy.PFB"
+    End If
+
+ErrorHandler:
 
 End Sub
 
@@ -12142,8 +12172,19 @@ End Sub
 
 Public Sub setRadius(R As Integer)
 
+    Dim i As Integer
+
     clrRadius = R
     Colliders(0).radius = R
+    
+    If numSelColliders > 0 Then
+        For i = 1 To colliderCount
+            If Colliders(i).active Then
+                Colliders(i).radius = R
+            End If
+        Next
+        Render
+    End If
 
 End Sub
 
