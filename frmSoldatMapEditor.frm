@@ -1007,6 +1007,50 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Lava"
          Index           =   9
       End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Red Bullets Collides"
+         Index           =   10
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Red Players Collide"
+         Index           =   11
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Blue Bullets Collides"
+         Index           =   12
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Blue Players Collide"
+         Index           =   13
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Yellow Bullets Collides"
+         Index           =   14
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Yellow Players Collide"
+         Index           =   15
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Green Bullets Collides"
+         Index           =   16
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Green Players Collide"
+         Index           =   17
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Bouncy"
+         Index           =   18
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Explosive"
+         Index           =   19
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Hurts Flaggers"
+         Index           =   20
+      End
       Begin VB.Menu mnuSep19 
          Caption         =   "-"
       End
@@ -1455,7 +1499,7 @@ Dim colourMode As Byte
 Dim eraseCircle As Boolean, eraseLines As Boolean
 
 Dim polyType As Byte
-Dim PolyTypeClrs(0 To 9) As Long
+Dim PolyTypeClrs(0 To 20) As Long
 
 Public shiftDown As Boolean, ctrlDown As Boolean, altDown As Boolean
 
@@ -7715,6 +7759,43 @@ Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
             End If
         Next
     End If
+    
+    'MESS!
+    If numSelSpawns > 0 Then
+        For i = 1 To spawnPoints
+            If Spawns(i).active = 1 Then
+                Spawns(i).X = rCenter.X + (Spawns(i).X - rCenter.X) * scaleDiff.X
+                Spawns(i).Y = rCenter.Y + (Spawns(i).Y - rCenter.Y) * scaleDiff.Y
+            End If
+        Next
+    End If
+    
+    If numSelColliders > 0 Then
+        For i = 1 To colliderCount
+            If Colliders(i).active = 1 Then
+                Colliders(i).X = rCenter.X + (Colliders(i).X - rCenter.X) * scaleDiff.X
+                Colliders(i).Y = rCenter.Y + (Colliders(i).Y - rCenter.Y) * scaleDiff.Y
+            End If
+        Next
+    End If
+    
+    If numSelLights > 0 Then
+        For i = 1 To lightCount
+            If Lights(i).selected = 1 Then
+                Lights(i).X = rCenter.X + (Lights(i).X - rCenter.X) * scaleDiff.X
+                Lights(i).Y = rCenter.Y + (Lights(i).Y - rCenter.Y) * scaleDiff.Y
+            End If
+        Next
+    End If
+    
+    If numSelWaypoints > 0 Then
+        For i = 1 To waypointCount
+            If Waypoints(i).selected = True Then
+                Waypoints(i).X = rCenter.X + (Waypoints(i).X - rCenter.X) * scaleDiff.X
+                Waypoints(i).Y = rCenter.Y + (Waypoints(i).Y - rCenter.Y) * scaleDiff.Y
+            End If
+        Next
+    End If
 
     scaleDiff.X = 1
     scaleDiff.Y = 1
@@ -7814,6 +7895,55 @@ Public Sub applyRotate(tehValue As Single)
                 Else
                     Scenery(i).rotation = (Scenery(i).rotation - rDiff)
                 End If
+            End If
+        Next
+    End If
+    
+    'MESS!
+    If numSelSpawns > 0 Then
+        For i = 1 To spawnPoints
+            If Spawns(i).active = 1 Then
+                xDiff = (Spawns(i).X - rCenter.X)
+                yDiff = (Spawns(i).Y - rCenter.Y)
+                theta = rDiff
+                Spawns(i).X = (Cos(theta) * xDiff - Sin(theta) * yDiff) + rCenter.X
+                Spawns(i).Y = (Sin(theta) * xDiff + Cos(theta) * yDiff) + rCenter.Y
+            End If
+        Next
+    End If
+    
+    If numSelColliders > 0 Then
+        For i = 1 To colliderCount
+            If Colliders(i).active = 1 Then
+                xDiff = (Colliders(i).X - rCenter.X)
+                yDiff = (Colliders(i).Y - rCenter.Y)
+                theta = rDiff
+                Colliders(i).X = (Cos(theta) * xDiff - Sin(theta) * yDiff) + rCenter.X
+                Colliders(i).Y = (Sin(theta) * xDiff + Cos(theta) * yDiff) + rCenter.Y
+            End If
+        Next
+    End If
+    
+    If numSelLights > 0 Then
+        For i = 1 To lightCount
+            If Lights(i).selected = 1 Then
+                xDiff = (Lights(i).X - rCenter.X)
+                yDiff = (Lights(i).Y - rCenter.Y)
+                theta = rDiff
+                Lights(i).X = (Cos(theta) * xDiff - Sin(theta) * yDiff) + rCenter.X
+                Lights(i).Y = (Sin(theta) * xDiff + Cos(theta) * yDiff) + rCenter.Y
+            End If
+        Next
+    End If
+    
+    If numSelWaypoints > 0 Then
+        For i = 1 To waypointCount
+            If Waypoints(i).selected = True Then
+                xDiff = (Waypoints(i).X - rCenter.X)
+                yDiff = (Waypoints(i).Y - rCenter.Y)
+                theta = rDiff
+                Waypoints(i).X = (Cos(theta) * xDiff - Sin(theta) * yDiff) + rCenter.X
+                Waypoints(i).Y = (Sin(theta) * xDiff + Cos(theta) * yDiff) + rCenter.Y
             End If
         Next
     End If
@@ -9732,21 +9862,23 @@ Private Sub VertexSelScenery()
             Scenery(i).selected = 0
         End If
         
-        'If inSelRect(xCoord, yCoord) Then
-        If selected(0) Or selected(1) Or selected(2) Or selected(3) Then
-            If currentFunction = TOOL_VSELECT Then
-                Scenery(i).selected = 1
-                numSelectedScenery = numSelectedScenery + 1
-            ElseIf currentFunction = TOOL_VSELADD Then
-                If Scenery(i).selected = 0 Then
+        If showWireframe Or ((Scenery(i).level = 0 And sslBack) Or (Scenery(i).level = 1 And sslMid) Or (Scenery(i).level = 2 And sslFront)) Then
+            'If inSelRect(xCoord, yCoord) Then
+            If selected(0) Or selected(1) Or selected(2) Or selected(3) Then
+                If currentFunction = TOOL_VSELECT Then
+                    Scenery(i).selected = 1
                     numSelectedScenery = numSelectedScenery + 1
+                ElseIf currentFunction = TOOL_VSELADD Then
+                    If Scenery(i).selected = 0 Then
+                        numSelectedScenery = numSelectedScenery + 1
+                    End If
+                    Scenery(i).selected = 1
+                ElseIf currentFunction = TOOL_VSELSUB Then
+                    If Scenery(i).selected = 1 Then
+                        numSelectedScenery = numSelectedScenery - 1
+                    End If
+                    Scenery(i).selected = 0
                 End If
-                Scenery(i).selected = 1
-            ElseIf currentFunction = TOOL_VSELSUB Then
-                If Scenery(i).selected = 1 Then
-                    numSelectedScenery = numSelectedScenery - 1
-                End If
-                Scenery(i).selected = 0
             End If
         End If
     Next
@@ -9924,6 +10056,54 @@ Private Sub getRCenter()
         Next
     End If
     
+    If numSelColliders > 0 Then
+        setCoords = False
+        For i = 1 To colliderCount
+            If Colliders(i).active Then
+                If Not setCoords And numSelectedPolys = 0 And numSelectedScenery = 0 Then
+                    setCoords = True
+                    selRect(0).X = Colliders(i).X
+                    selRect(0).Y = Colliders(i).Y
+                    selRect(2).X = Colliders(i).X
+                    selRect(2).Y = Colliders(i).Y
+                End If
+                compareRect Colliders(i).X, Colliders(i).Y
+            End If
+        Next
+    End If
+    
+    If numSelSpawns > 0 Then
+        setCoords = False
+        For i = 1 To spawnPoints
+            If Spawns(i).active Then
+                If Not setCoords And numSelectedPolys = 0 And numSelectedScenery = 0 Then
+                    setCoords = True
+                    selRect(0).X = Spawns(i).X
+                    selRect(0).Y = Spawns(i).Y
+                    selRect(2).X = Spawns(i).X
+                    selRect(2).Y = Spawns(i).Y
+                End If
+                compareRect Spawns(i).X, Spawns(i).Y
+            End If
+        Next
+    End If
+    
+    If numSelLights > 0 Then
+        setCoords = False
+        For i = 1 To lightCount
+            If Lights(i).selected Then
+                If Not setCoords And numSelectedPolys = 0 And numSelectedScenery = 0 Then
+                    setCoords = True
+                    selRect(0).X = Lights(i).X
+                    selRect(0).Y = Lights(i).Y
+                    selRect(2).X = Lights(i).X
+                    selRect(2).Y = Lights(i).Y
+                End If
+                compareRect Lights(i).X, Lights(i).Y
+            End If
+        Next
+    End If
+    
     selRect(1).X = selRect(2).X
     selRect(1).Y = selRect(0).Y
     selRect(3).X = selRect(0).X
@@ -10056,10 +10236,12 @@ Private Sub polySelection(X As Single, Y As Single)
         If showScenery And addpoly = 0 Then
             For i = 1 To sceneryCount
                 Scenery(i).selected = 0
-                If PointInProp(X, Y, i) And addpoly = 0 Then
-                    Scenery(i).selected = 1
-                    numSelectedScenery = numSelectedScenery + 1
-                    addpoly = 1
+                If showWireframe Or ((Scenery(i).level = 0 And sslBack) Or (Scenery(i).level = 1 And sslMid) Or (Scenery(i).level = 2 And sslFront)) Then
+                    If PointInProp(X, Y, i) And addpoly = 0 Then
+                        Scenery(i).selected = 1
+                        numSelectedScenery = numSelectedScenery + 1
+                        addpoly = 1
+                    End If
                 End If
             Next
         Else
@@ -12412,6 +12594,17 @@ Private Sub loadINI()
     PolyTypeClrs(7) = CLng("&H" + (loadString("PolyTypeColours", "Hurts")))
     PolyTypeClrs(8) = CLng("&H" + (loadString("PolyTypeColours", "Regenerates")))
     PolyTypeClrs(9) = CLng("&H" + (loadString("PolyTypeColours", "Lava")))
+    PolyTypeClrs(10) = CLng("&H" + (loadString("PolyTypeColours", "TeamBullets")))
+    PolyTypeClrs(11) = CLng("&H" + (loadString("PolyTypeColours", "TeamPlayers")))
+    PolyTypeClrs(12) = PolyTypeClrs(10)
+    PolyTypeClrs(13) = PolyTypeClrs(11)
+    PolyTypeClrs(14) = PolyTypeClrs(10)
+    PolyTypeClrs(15) = PolyTypeClrs(11)
+    PolyTypeClrs(16) = PolyTypeClrs(10)
+    PolyTypeClrs(17) = PolyTypeClrs(11)
+    PolyTypeClrs(18) = CLng("&H" + (loadString("PolyTypeColours", "Bouncy")))
+    PolyTypeClrs(19) = CLng("&H" + (loadString("PolyTypeColours", "Explosive")))
+    PolyTypeClrs(20) = CLng("&H" + (loadString("PolyTypeColours", "HurtFlaggers")))
     
     'section = ""
     'equalsIndex = 1
