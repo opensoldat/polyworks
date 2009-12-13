@@ -11018,13 +11018,15 @@ Private Sub mnuInvertSel_Click()
     If showScenery Or showWireframe Or showPoints Then
         numSelectedScenery = 0
         For i = 1 To sceneryCount
-            If Scenery(i).selected = 0 Then
-                Scenery(i).selected = 1
-            Else
-                Scenery(i).selected = 0
-            End If
-            If Scenery(i).selected = 1 Then
-                numSelectedScenery = numSelectedScenery + 1
+            If (Scenery(i).level = 0 And sslBack) Or (Scenery(i).level = 1 And sslMid) Or (Scenery(i).level = 2 And sslFront) Then
+                If Scenery(i).selected = 0 Then
+                    Scenery(i).selected = 1
+                Else
+                    Scenery(i).selected = 0
+                End If
+                If Scenery(i).selected = 1 Then
+                    numSelectedScenery = numSelectedScenery + 1
+                End If
             End If
         Next
     End If
@@ -13759,10 +13761,13 @@ Private Sub mnuSelectAll_Click()
     End If
     
     If showScenery Or showWireframe Or showPoints Then
+        numSelectedScenery = 0
         For i = 1 To sceneryCount
-            Scenery(i).selected = 1
+            If (Scenery(i).level = 0 And sslBack) Or (Scenery(i).level = 1 And sslMid) Or (Scenery(i).level = 2 And sslFront) Then
+                Scenery(i).selected = 1
+                numSelectedScenery = numSelectedScenery + 1
+            End If
         Next
-        numSelectedScenery = sceneryCount
     End If
     
     If showObjects Then

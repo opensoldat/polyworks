@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.5
+Soldat Polyworks 1.5.0.6
 
 
-updated 01/11/09
+updated 13/12/09
 
 
 
@@ -61,6 +61,16 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.6
+- copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)
+- invert selection (ctrl+i)
+- new polygon types for Soldat 1.5.1
+- manual type in transform works on everything
+- collider radius can be changed after it's placed
+- fixed a crash when loading corrupt scenery
+- fixed selection bug with hidden scenery layers
+- fixed keyboard shortcut for save as (ctrl+shift+s)
 
 Changes in v1.5.0.5
 - jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
