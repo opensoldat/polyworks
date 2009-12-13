@@ -616,6 +616,10 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Select All"
          Shortcut        =   ^A
       End
+      Begin VB.Menu mnuInvertSel 
+         Caption         =   "Invert Selection"
+         Shortcut        =   ^I
+      End
       Begin VB.Menu mnuDeselect 
          Caption         =   "Deselect"
          Shortcut        =   ^D
@@ -5625,6 +5629,8 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             mnuSelectAll_Click
         ElseIf DIState.Key(MapVirtualKey(68, 0)) = 128 Then 'ctrl+d
             mnuDeselect_Click
+        ElseIf DIState.Key(MapVirtualKey(73, 0)) = 128 Then 'ctrl+i
+            mnuInvertSel_Click
         ElseIf DIState.Key(MapVirtualKey(66, 0)) = 128 Then 'ctrl+b
             mnuSelColour_Click
         ElseIf DIState.Key(MapVirtualKey(74, 0)) = 128 Then 'ctrl+j
@@ -6849,35 +6855,35 @@ End Sub
 Private Sub SelNearest(X As Single, Y As Single)
 
     Dim i As Integer, j As Integer
-    Dim addpoly As Integer, addVert As Integer, notSel As Integer
+    Dim addPoly As Integer, addVert As Integer, notSel As Integer
     Dim currentDist As Long, shortestDist As Long
     Dim xVal As Single, yVal As Single
         
     xVal = X / zoomFactor + scrollCoords(2).X
     yVal = Y / zoomFactor + scrollCoords(2).Y
             
-    addpoly = 0
+    addPoly = 0
     shortestDist = 64 ^ 2 + 1
     If showPolys Then
     For i = 1 To polyCount
         For j = 1 To 3
             If nearCoord(X, Polys(i).vertex(j).X, 8) And nearCoord(Y, Polys(i).vertex(j).Y, 8) Then 'move by vertex
-                If addpoly <> i Then
+                If addPoly <> i Then
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
                     selectedPolys(numSelectedPolys) = i
                 End If
                 vertexList(i).vertex(j) = 1
-                addpoly = i
+                addPoly = i
             End If
         Next
-        If (pointInPoly(X, Y, i)) And addpoly = 0 Then
+        If (pointInPoly(X, Y, i)) And addPoly = 0 Then
             For j = 1 To 3
                 If nearCoord(X, Polys(i).vertex(j).X, 64) And nearCoord(Y, Polys(i).vertex(j).Y, 64) Then 'move by region
                     currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                     If currentDist < shortestDist Then
                         shortestDist = currentDist
-                        addpoly = i
+                        addPoly = i
                         addVert = j
                     End If
                 End If
@@ -6886,24 +6892,24 @@ Private Sub SelNearest(X As Single, Y As Single)
     Next
     End If
         
-    If numSelectedPolys = 0 And addpoly > 0 Then
+    If numSelectedPolys = 0 And addPoly > 0 Then
         numSelectedPolys = numSelectedPolys + 1
         ReDim Preserve selectedPolys(numSelectedPolys)
-        selectedPolys(numSelectedPolys) = addpoly
-        vertexList(addpoly).vertex(addVert) = 1
+        selectedPolys(numSelectedPolys) = addPoly
+        vertexList(addPoly).vertex(addVert) = 1
     End If
     
-    If numSelectedPolys = 0 And addpoly = 0 And showScenery Then 'select scenery
+    If numSelectedPolys = 0 And addPoly = 0 And showScenery Then 'select scenery
         For i = 1 To sceneryCount
-            If PointInProp(X, Y, i) And addpoly = 0 Then
+            If PointInProp(X, Y, i) And addPoly = 0 Then
                 Scenery(i).selected = 1
                 numSelectedScenery = numSelectedScenery + 1
-                addpoly = 1
+                addPoly = 1
             End If
         Next
     End If
     
-    If addpoly = 0 And showObjects Then
+    If addPoly = 0 And showObjects Then
         notSel = 0
         shortestDist = (8 ^ 2 + 1)
         For i = 1 To spawnPoints
@@ -6919,11 +6925,11 @@ Private Sub SelNearest(X As Single, Y As Single)
         If notSel > 0 Then
             Spawns(notSel).active = 1
             numSelSpawns = numSelSpawns + 1
-            addpoly = notSel
+            addPoly = notSel
         End If
     End If
         
-    If addpoly = 0 And showObjects Then
+    If addPoly = 0 And showObjects Then
         notSel = 0
         shortestDist = 64 ^ 2 + 1
         For i = 1 To colliderCount
@@ -6939,12 +6945,12 @@ Private Sub SelNearest(X As Single, Y As Single)
         If notSel > 0 Then
             Colliders(notSel).active = 1
             numSelColliders = numSelColliders + 1
-            addpoly = notSel
+            addPoly = notSel
         End If
             
     End If
             
-    If addpoly = 0 And showWaypoints Then
+    If addPoly = 0 And showWaypoints Then
             
         notSel = 0
         shortestDist = (8 ^ 2 + 1) '* zoomFactor
@@ -9795,7 +9801,7 @@ End Sub
 Private Sub VertexSelPolys()
 
     Dim i As Integer, j As Integer
-    Dim addpoly As Integer, notSel As Integer
+    Dim addPoly As Integer, notSel As Integer
     
     If currentFunction = TOOL_VSELECT Then
     
@@ -9803,16 +9809,16 @@ Private Sub VertexSelPolys()
             For j = 1 To 3
                 vertexList(i).vertex(j) = 0
                 If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
-                    addpoly = 1
+                    addPoly = 1
                     vertexList(i).vertex(j) = 1
                 End If
             Next
-            If addpoly = 1 Then
+            If addPoly = 1 Then
                 numSelectedPolys = numSelectedPolys + 1
                 ReDim Preserve selectedPolys(numSelectedPolys)
                 selectedPolys(numSelectedPolys) = i
             End If
-            addpoly = 0
+            addPoly = 0
             notSel = 0
         Next
             
@@ -9823,17 +9829,17 @@ Private Sub VertexSelPolys()
                 If vertexList(i).vertex(j) = 0 Then
                     notSel = notSel + 1
                     If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
-                        addpoly = 1
+                        addPoly = 1
                         vertexList(i).vertex(j) = 1
                     End If
                 End If
             Next
-            If addpoly = 1 And notSel = 3 Then
+            If addPoly = 1 And notSel = 3 Then
                 numSelectedPolys = numSelectedPolys + 1
                 ReDim Preserve selectedPolys(numSelectedPolys)
                 selectedPolys(numSelectedPolys) = i
             End If
-            addpoly = 0
+            addPoly = 0
             notSel = 0
         Next
             
@@ -9846,16 +9852,16 @@ Private Sub VertexSelPolys()
                         notSel = notSel + 1
                         vertexList(i).vertex(j) = 0
                     Else 'if already selected but not in range
-                        addpoly = 1
+                        addPoly = 1
                     End If
                 End If
             Next
-            If addpoly = 1 Then
+            If addPoly = 1 Then
                 numSelectedPolys = numSelectedPolys + 1
                 ReDim Preserve selectedPolys(numSelectedPolys)
                 selectedPolys(numSelectedPolys) = i
             End If
-            addpoly = 0
+            addPoly = 0
             notSel = 0
         Next
             
@@ -10171,7 +10177,7 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
     Dim i As Integer, j As Integer
     Dim xDist As Integer, yDist As Integer
     Dim xCenter As Integer, yCenter As Integer
-    Dim addpoly As Integer, notSel As Integer
+    Dim addPoly As Integer, notSel As Integer
         
     xDist = (X - selectedCoords(1).X) / 2 'x distance from coord
     yDist = (Y - selectedCoords(1).Y) / 2 'y distance from coord
@@ -10188,20 +10194,20 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
             If nearCoord(xCenter, Polys(i).vertex(j).X, Abs(xDist)) And nearCoord(yCenter, Polys(i).vertex(j).Y, Abs(yDist)) Then
                 If vertexList(i).vertex(j) = 0 Then
                     vertexList(i).vertex(j) = 1
-                    addpoly = 1
+                    addPoly = 1
                 Else
                     vertexList(i).vertex(j) = 0
                 End If
             ElseIf vertexList(i).vertex(j) = 1 Then
-                addpoly = 1
+                addPoly = 1
             End If
         Next
-        If addpoly = 1 Then
+        If addPoly = 1 Then
             numSelectedPolys = numSelectedPolys + 1
             ReDim Preserve selectedPolys(numSelectedPolys)
             selectedPolys(numSelectedPolys) = i
         End If
-        addpoly = 0
+        addPoly = 0
     Next
     
     selectedCoords(1).X = X
@@ -10216,12 +10222,12 @@ End Sub
 Private Sub polySelection(X As Single, Y As Single)
 
     Dim i As Integer, j As Integer
-    Dim addpoly As Integer
+    Dim addPoly As Integer
     Dim shortestDist As Integer
     Dim firstClicked As Integer
     Dim foundSelected As Integer
 
-    addpoly = 0
+    addPoly = 0
     If currentFunction = TOOL_PSELECT Then 'select polys (destroy and remake)
         
         ReDim selectedPolys(0)
@@ -10231,7 +10237,7 @@ Private Sub polySelection(X As Single, Y As Single)
         If showPolys Or showWireframe Or showPoints Then
             shortestDist = 16 ^ 2 + 1
             For i = 1 To polyCount
-                If (pointInPoly(X, Y, i)) And addpoly = 0 Then 'if in poly and no other poly selected
+                If (pointInPoly(X, Y, i)) And addPoly = 0 Then 'if in poly and no other poly selected
                     If firstClicked = 0 Then
                         firstClicked = i
                     End If
@@ -10243,7 +10249,7 @@ Private Sub polySelection(X As Single, Y As Single)
                         numSelectedPolys = numSelectedPolys + 1
                         ReDim Preserve selectedPolys(numSelectedPolys)
                         selectedPolys(numSelectedPolys) = i
-                        addpoly = 1
+                        addPoly = 1
                     'not selected, not found
                     ElseIf (vertexList(i).vertex(1) + vertexList(i).vertex(1) + vertexList(i).vertex(1) < 3) Then
                     Else 'poly is selected
@@ -10260,24 +10266,24 @@ Private Sub polySelection(X As Single, Y As Single)
             Next
         End If
 
-        If addpoly = 0 And firstClicked > 0 Then
+        If addPoly = 0 And firstClicked > 0 Then
             vertexList(firstClicked).vertex(1) = 1
             vertexList(firstClicked).vertex(2) = 1
             vertexList(firstClicked).vertex(3) = 1
             numSelectedPolys = numSelectedPolys + 1
             ReDim Preserve selectedPolys(numSelectedPolys)
             selectedPolys(numSelectedPolys) = firstClicked
-            addpoly = 1
+            addPoly = 1
         End If
         
-        If showScenery And addpoly = 0 Then
+        If showScenery And addPoly = 0 Then
             For i = 1 To sceneryCount
                 Scenery(i).selected = 0
                 If showWireframe Or ((Scenery(i).level = 0 And sslBack) Or (Scenery(i).level = 1 And sslMid) Or (Scenery(i).level = 2 And sslFront)) Then
-                    If PointInProp(X, Y, i) And addpoly = 0 Then
+                    If PointInProp(X, Y, i) And addPoly = 0 Then
                         Scenery(i).selected = 1
                         numSelectedScenery = numSelectedScenery + 1
-                        addpoly = 1
+                        addPoly = 1
                     End If
                 End If
             Next
@@ -10314,28 +10320,28 @@ Private Sub polySelection(X As Single, Y As Single)
     
     ElseIf currentFunction = TOOL_PSELADD Then 'add polys
         
-        addpoly = 0
+        addPoly = 0
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To polyCount
-                If pointInPoly(X, Y, i) And vertexList(i).vertex(1) = 0 And addpoly = 0 Then 'if in poly and not already selected
+                If pointInPoly(X, Y, i) And vertexList(i).vertex(1) = 0 And addPoly = 0 Then 'if in poly and not already selected
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
                     selectedPolys(numSelectedPolys) = i
                     vertexList(i).vertex(1) = 1
                     vertexList(i).vertex(2) = 1
                     vertexList(i).vertex(3) = 1
-                    addpoly = 1
+                    addPoly = 1
                 End If
             Next
         End If
         
-        If showScenery And addpoly = 0 Then
+        If showScenery And addPoly = 0 Then
             For i = 1 To sceneryCount
-                If Scenery(i).selected = 0 And addpoly = 0 Then
+                If Scenery(i).selected = 0 And addPoly = 0 Then
                     If PointInProp(X, Y, i) Then
                         Scenery(i).selected = 1
                         numSelectedScenery = numSelectedScenery + 1
-                        addpoly = 1
+                        addPoly = 1
                     End If
                 End If
             Next
@@ -10349,11 +10355,11 @@ Private Sub polySelection(X As Single, Y As Single)
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To polyCount
                 If vertexList(i).vertex(1) = 1 Then 'if poly already selected
-                    If (pointInPoly(X, Y, i)) And addpoly = 0 Then 'if poly clicked
+                    If (pointInPoly(X, Y, i)) And addPoly = 0 Then 'if poly clicked
                         vertexList(i).vertex(1) = 0
                         vertexList(i).vertex(2) = 0
                         vertexList(i).vertex(3) = 0
-                        addpoly = 1
+                        addPoly = 1
                     Else
                         numSelectedPolys = numSelectedPolys + 1
                         ReDim Preserve selectedPolys(numSelectedPolys)
@@ -10363,13 +10369,13 @@ Private Sub polySelection(X As Single, Y As Single)
             Next
         End If
         
-        If showScenery And addpoly = 0 Then
+        If showScenery And addPoly = 0 Then
             For i = 1 To sceneryCount
-                If Scenery(i).selected = 1 And addpoly = 0 Then
+                If Scenery(i).selected = 1 And addPoly = 0 Then
                     If PointInProp(X, Y, i) Then
                         Scenery(i).selected = 0
                         numSelectedScenery = numSelectedScenery - 1
-                        addpoly = 1
+                        addPoly = 1
                     End If
                 End If
             Next
@@ -10978,6 +10984,104 @@ Private Sub mnuFlipTexture_Click(Index As Integer)
     SaveUndo
     Render
     getInfo
+
+End Sub
+
+Private Sub mnuInvertSel_Click()
+
+    Dim i As Integer, j As Integer
+    Dim addPoly As Boolean
+    
+    If showPolys Or showWireframe Or showPoints Then
+        numSelectedPolys = 0
+        ReDim selectedPolys(polyCount)
+        For i = 1 To polyCount
+            addPoly = False
+            For j = 1 To 3
+                If vertexList(i).vertex(j) = 0 Then
+                    vertexList(i).vertex(j) = 1
+                Else
+                    vertexList(i).vertex(j) = 0
+                End If
+                If vertexList(i).vertex(j) = 1 Then
+                    addPoly = True
+                End If
+            Next
+            If addPoly Then
+                numSelectedPolys = numSelectedPolys + 1
+                selectedPolys(numSelectedPolys) = i
+            End If
+        Next
+        ReDim Preserve selectedPolys(numSelectedPolys)
+    End If
+    
+    If showScenery Or showWireframe Or showPoints Then
+        numSelectedScenery = 0
+        For i = 1 To sceneryCount
+            If Scenery(i).selected = 0 Then
+                Scenery(i).selected = 1
+            Else
+                Scenery(i).selected = 0
+            End If
+            If Scenery(i).selected = 1 Then
+                numSelectedScenery = numSelectedScenery + 1
+            End If
+        Next
+    End If
+    
+    If showObjects Then
+        numSelSpawns = 0
+        For i = 1 To spawnPoints
+            If Spawns(i).active = 0 Then
+                Spawns(i).active = 1
+            Else
+                Spawns(i).active = 0
+            End If
+            If Spawns(i).active = 1 Then
+                numSelSpawns = numSelSpawns + 1
+            End If
+        Next
+        numSelColliders = 0
+        For i = 1 To colliderCount
+            If Colliders(i).active = 0 Then
+                Colliders(i).active = 1
+            Else
+                Colliders(i).active = 0
+            End If
+            If Colliders(i).active Then
+                numSelColliders = numSelColliders + 1
+            End If
+        Next
+    End If
+    
+    If showLights Then
+        numSelLights = 0
+        For i = 1 To lightCount
+            If Lights(i).selected = 0 Then
+                Lights(i).selected = 1
+            Else
+                Lights(i).selected = 0
+            End If
+            If Lights(i).selected Then
+                numSelLights = numSelLights + 1
+            End If
+        Next
+    End If
+    
+    If showWaypoints Then
+        numSelWaypoints = 0
+        For i = 1 To waypointCount
+            Waypoints(i).selected = Not Waypoints(i).selected
+            If Waypoints(i).selected Then
+                numSelWaypoints = numSelWaypoints + 1
+            End If
+        Next
+    End If
+    
+    getRCenter
+    getInfo
+    
+    Render
 
 End Sub
 
@@ -13730,7 +13834,7 @@ End Sub
 Private Sub mnuSelColour_Click()
 
     Dim i As Integer, j As Integer
-    Dim addpoly As Byte
+    Dim addPoly As Byte
     Dim clrVal As TColour
     
     numSelectedPolys = 0
@@ -13741,16 +13845,16 @@ Private Sub mnuSelColour_Click()
             vertexList(i).vertex(j) = 0
             clrVal = getRGB(Polys(i).vertex(j).Color)
             If clrVal.red = polyClr.red And clrVal.green = polyClr.green And clrVal.blue = polyClr.blue Then
-                addpoly = 1
+                addPoly = 1
                 vertexList(i).vertex(j) = 1
             End If
         Next
-        If addpoly = 1 Then
+        If addPoly = 1 Then
             numSelectedPolys = numSelectedPolys + 1
             ReDim Preserve selectedPolys(numSelectedPolys)
             selectedPolys(numSelectedPolys) = i
         End If
-        addpoly = 0
+        addPoly = 0
     Next
     
     Render
