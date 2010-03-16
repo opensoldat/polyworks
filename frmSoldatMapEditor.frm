@@ -2404,7 +2404,7 @@ Public Sub LoadFile(fileName As String)
                     offset = offset + 1
                 ElseIf Prop.ScaleX < -10000 Or Prop.ScaleX > 10000 Or Prop.ScaleY < -10000 Or Prop.ScaleY > 10000 Then
                     offset = offset + 1
-                    Exit For
+                    'Exit For
                 ElseIf Prop.Style < 1 Then
                     offset = offset + 1
                 Else
