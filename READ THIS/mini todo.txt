@@ -1,0 +1,12 @@
+more scenery errors
+x,y on status bar
+copy/paste waypoint error (?)
+paste: check if there is anything to be pasted
+extra menus on right click with transform tool (arrange, transform)
+recent files length issue
+texture movement direction issue (while rotated)
+esc for deselect, ctrl+d for duplicate
+get collider size
+collider radius in properties window (kinda same as previous)
+fixed texture option is useless (user defined x/y can be used)
+render polygon edges as an option

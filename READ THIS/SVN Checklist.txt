@@ -2,14 +2,9 @@ Commit
 ------
 
 * Save vb6 project
-* Make "Soldat PolyWorks.exe"
-* Move "Soldat PolyWorks.exe" and any other needed files to the installer directory
-* Build "pwlib.dll"
-* Move "pwlib.dll" to the installer directory
+* Build and move any needed files to the installer directory
+* Compile installer and test it
 * Test everything new/changed/fixed
-* Compile installer
-* Test installer, polyworks and uninstaller
-* Remove all files generated in the above steps
 * Commit files and changelog
 * Done!
 
@@ -19,20 +14,17 @@ Release
 
 * Set version number in vb6 project
 * Save vb6 project
-* Make "Soldat PolyWorks.exe"
-* Move "Soldat PolyWorks.exe" and any other needed files to the installer directory
+* Build and move any needed files to the installer directory
 * Open "Soldat PolyWorks.exe" in resource editor and replace the icon with "pwnew.ico"
-* Build "pwlib.dll"
-* Move "pwlib.dll" to the installer directory
 * Set version number in readme
 * Set update date in readme
 * Add changes to readme
 * Update help file
 * Set version number in installer script
-* Compile installer
-* Install
+* Compile installer and install
 * Compress installed files to zip file
 * Uninstall
+* Commit files and changelog
 * Enter modify in Soldat PolyWorks topic
 * Change version number in topic title
 * Change version number in topic heading and installer and zip file link texts
@@ -40,5 +32,4 @@ Release
 * Upload new installer and zip file to original locations
 * Save modification to PolyWorks topic
 * Post update reply with version number and changes
-* Remove all generated files from the installer directory
 * Done!
