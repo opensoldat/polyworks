@@ -1,7 +1,3 @@
-more scenery errors
-x,y on status bar
-copy/paste waypoint error (?)
-paste: check if there is anything to be pasted
 extra menus on right click with transform tool (arrange, transform)
 recent files length issue
 texture movement direction issue (while rotated)

@@ -97,6 +97,26 @@ Begin VB.Form frmSoldatMapEditor
          Top             =   45
          Width           =   735
       End
+      Begin VB.Label lblMousePosition 
+         BackStyle       =   0  'Transparent
+         Caption         =   "Position:"
+         BeginProperty Font 
+            Name            =   "BankGothic Lt BT"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Left            =   8160
+         TabIndex        =   20
+         Tag             =   "font2"
+         Top             =   45
+         Width           =   3735
+      End
       Begin VB.Label lblFileName 
          BackColor       =   &H004A3C31&
          BackStyle       =   0  'Transparent
@@ -7070,6 +7090,8 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
     mouseCoords.X = X
     mouseCoords.Y = Y
     
+    lblMousePosition.Caption = "Position: " & Round(X / zoomFactor + scrollCoords(2).X) & ", " & Round(Y / zoomFactor + scrollCoords(2).Y)
+    
     'If (currentfunction = TOOL_VCOLOUR Or currentfunction = TOOL_DEPTHMAP) Then 'And Not spaceDown Then
     'draw circle
     If circleOn Then
@@ -13530,31 +13552,31 @@ Private Sub loadPrefab(fileName As String)
         
         frmDisplay.setLayer 6, showObjects
         
-        Get #1, , newWaypoints
-        If newWaypoints > 0 Then
-            If Not showWaypoints Then
-                showWaypoints = True
-                frmDisplay.setLayer 7, showWaypoints
-            End If
-            numSelWaypoints = newWaypoints
-            ReDim Preserve Waypoints(waypointCount + newWaypoints)
-            For i = 1 To newWaypoints
-                Get #1, , Waypoints(waypointCount + i)
-                Waypoints(waypointCount + i).tempIndex = waypointCount + i
-            Next
-        End If
+        'Get #1, , newWaypoints
+        'If newWaypoints > 0 Then
+        '    If Not showWaypoints Then
+        '        showWaypoints = True
+        '        frmDisplay.setLayer 7, showWaypoints
+        '    End If
+        '    numSelWaypoints = newWaypoints
+        '    ReDim Preserve Waypoints(waypointCount + newWaypoints)
+        '    For i = 1 To newWaypoints
+        '        Get #1, , Waypoints(waypointCount + i)
+        '        Waypoints(waypointCount + i).tempIndex = waypointCount + i
+        '    Next
+        'End If
         
-        Get #1, , newConnections
-        If newConnections > 0 Then
-            ReDim Preserve Connections(conCount + newConnections)
-            For i = 1 To newConnections
-                Get #1, , Connections(conCount + i)
-                Connections(conCount + i).point1 = Connections(conCount + i).point1 + waypointCount
-                Connections(conCount + i).point2 = Connections(conCount + i).point2 + waypointCount
-            Next
-            waypointCount = waypointCount + newWaypoints
-            conCount = conCount + newConnections
-        End If
+        'Get #1, , newConnections
+        'If newConnections > 0 Then
+        '    ReDim Preserve Connections(conCount + newConnections)
+        '    For i = 1 To newConnections
+        '        Get #1, , Connections(conCount + i)
+        '        Connections(conCount + i).point1 = Connections(conCount + i).point1 + waypointCount
+        '        Connections(conCount + i).point2 = Connections(conCount + i).point2 + waypointCount
+        '    Next
+        '    waypointCount = waypointCount + newWaypoints
+        '    conCount = conCount + newConnections
+        'End If
         
     Close #1
     
