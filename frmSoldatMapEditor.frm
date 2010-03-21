@@ -5695,8 +5695,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             mnuSave_Click
         ElseIf DIState.Key(MapVirtualKey(69, 0)) = 128 Then 'ctrl+e
             mnuCreate_Click
-        ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 And shiftDown Then 'ctrl+shift+v
-            mnuDuplicate_Click
         ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then 'ctrl+v
             mnuPaste_Click
         ElseIf DIState.Key(MapVirtualKey(67, 0)) = 128 Then 'ctrl+c
@@ -5708,7 +5706,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
         ElseIf DIState.Key(MapVirtualKey(65, 0)) = 128 Then 'ctrl+a
             mnuSelectAll_Click
         ElseIf DIState.Key(MapVirtualKey(68, 0)) = 128 Then 'ctrl+d
-            mnuDeselect_Click
+            mnuDuplicate_Click
         ElseIf DIState.Key(MapVirtualKey(73, 0)) = 128 Then 'ctrl+i
             mnuInvertSel_Click
         ElseIf DIState.Key(MapVirtualKey(66, 0)) = 128 Then 'ctrl+b
@@ -5770,6 +5768,8 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 currentWaypoint = 0
                 toolAction = False
                 Render
+            Else
+                mnuDeselect_Click
             End If
         ElseIf (DIState.Key(DIK_BACKSPACE) = 128) Then 'backspace
             mnuSever_Click
@@ -12731,9 +12731,9 @@ Private Sub loadINI()
 
     errVal = "1"
 
-    soldatDir = loadString("Preferences", "Dir", , 260)
-    uncompDir = loadString("Preferences", "Uncompiled", , 260)
-    prefabDir = loadString("Preferences", "Prefabs", , 260)
+    soldatDir = loadString("Preferences", "Dir", , 1024)
+    uncompDir = loadString("Preferences", "Uncompiled", , 1024)
+    prefabDir = loadString("Preferences", "Prefabs", , 1024)
     
     gridSpacing = loadInt("Preferences", "GridSpacing")
     gridDivisions = loadInt("Preferences", "GridDiv")
@@ -12795,7 +12795,7 @@ Private Sub loadINI()
     frmScenery.scaleScenery = loadString("ToolSettings", "ScaleScenery")
     xTexture = loadInt("ToolSettings", "TextureWidth")
     yTexture = loadInt("ToolSettings", "TextureHeight")
-    textureFile = loadString("ToolSettings", "Texture", , 64)
+    textureFile = loadString("ToolSettings", "Texture", , 1024)
     
     'section = ""
     'equalsIndex = 1
@@ -12888,16 +12888,16 @@ Private Sub loadINI()
     
     errVal = "7"
     
-    mnuRecent(0).Caption = loadString("RecentFiles", "01", , 80)
-    mnuRecent(1).Caption = loadString("RecentFiles", "02", , 80)
-    mnuRecent(2).Caption = loadString("RecentFiles", "03", , 80)
-    mnuRecent(3).Caption = loadString("RecentFiles", "04", , 80)
-    mnuRecent(4).Caption = loadString("RecentFiles", "05", , 80)
-    mnuRecent(5).Caption = loadString("RecentFiles", "06", , 80)
-    mnuRecent(6).Caption = loadString("RecentFiles", "07", , 80)
-    mnuRecent(7).Caption = loadString("RecentFiles", "08", , 80)
-    mnuRecent(8).Caption = loadString("RecentFiles", "09", , 80)
-    mnuRecent(9).Caption = loadString("RecentFiles", "10", , 80)
+    mnuRecent(0).Caption = loadString("RecentFiles", "01", , 1024)
+    mnuRecent(1).Caption = loadString("RecentFiles", "02", , 1024)
+    mnuRecent(2).Caption = loadString("RecentFiles", "03", , 1024)
+    mnuRecent(3).Caption = loadString("RecentFiles", "04", , 1024)
+    mnuRecent(4).Caption = loadString("RecentFiles", "05", , 1024)
+    mnuRecent(5).Caption = loadString("RecentFiles", "06", , 1024)
+    mnuRecent(6).Caption = loadString("RecentFiles", "07", , 1024)
+    mnuRecent(7).Caption = loadString("RecentFiles", "08", , 1024)
+    mnuRecent(8).Caption = loadString("RecentFiles", "09", , 1024)
+    mnuRecent(9).Caption = loadString("RecentFiles", "10", , 1024)
     
     errVal = "8"
     
@@ -12938,7 +12938,7 @@ Private Sub loadINI()
     
     errVal = "9"
     
-    gfxDir = loadString("gfx", "Dir", , 80)
+    gfxDir = loadString("gfx", "Dir", , 1024)
     
     If gfxDir = "" Then gfxDir = "gfx"
     
