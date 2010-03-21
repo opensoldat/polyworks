@@ -1168,6 +1168,66 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Remove from List"
       End
    End
+   Begin VB.Menu mnuVertexSelect 
+      Caption         =   "VertexSelect"
+      Visible         =   0   'False
+      Begin VB.Menu mnuVSelDuplicate 
+         Caption         =   "Duplicate"
+      End
+      Begin VB.Menu mnuVSelCopy 
+         Caption         =   "Copy"
+      End
+      Begin VB.Menu mnuVSelPaste 
+         Caption         =   "Paste"
+      End
+      Begin VB.Menu mnuVSelClear 
+         Caption         =   "Clear"
+      End
+      Begin VB.Menu mnuVSel0 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnuVSelArrange 
+         Caption         =   "Arrange"
+         Begin VB.Menu mnuVSelBringToFront 
+            Caption         =   "Bring To Front"
+         End
+         Begin VB.Menu mnuVSelBringForward 
+            Caption         =   "Bring Forward"
+         End
+         Begin VB.Menu mnuVSelSendBackward 
+            Caption         =   "Send Backward"
+         End
+         Begin VB.Menu mnuVSelSendToBack 
+            Caption         =   "Send To Back"
+         End
+      End
+      Begin VB.Menu mnuVSelTransform 
+         Caption         =   "Transform"
+         Begin VB.Menu mnuVSelRotate 
+            Caption         =   "Rotate 180°"
+            Index           =   0
+         End
+         Begin VB.Menu mnuVSelRotate 
+            Caption         =   "Rotate 90° CW"
+            Index           =   1
+         End
+         Begin VB.Menu mnuVSelRotate 
+            Caption         =   "Rotate 90° CCW"
+            Index           =   2
+         End
+         Begin VB.Menu mnuVSelSep1 
+            Caption         =   "-"
+         End
+         Begin VB.Menu mnuVSelFlip 
+            Caption         =   "Flip Horizontal"
+            Index           =   0
+         End
+         Begin VB.Menu mnuVSelFlip 
+            Caption         =   "Flip Vertical"
+            Index           =   1
+         End
+      End
+   End
 End
 Attribute VB_Name = "frmSoldatMapEditor"
 Attribute VB_GlobalNameSpace = False
@@ -6022,6 +6082,8 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             mouseCoords.X = X
             mouseCoords.Y = Y
             Me.PopupMenu mnuMove
+        ElseIf currentTool = TOOL_PSELECT Or currentTool = TOOL_VSELECT Then
+            Me.PopupMenu mnuVertexSelect
         ElseIf currentFunction = TOOL_SCENERY Then
             If tvwScenery.Visible = False Then
                 If Me.WindowState = vbMaximized Then
@@ -10851,6 +10913,30 @@ Private Sub mnuCopy_Click()
 
 End Sub
 
+Private Sub mnuVSelBringForward_Click()
+
+    mnuBringForward_Click
+
+End Sub
+
+Private Sub mnuVSelBringToFront_Click()
+
+    mnuBringToFront_Click
+
+End Sub
+
+Private Sub mnuVSelClear_Click()
+
+    mnuClear_Click
+
+End Sub
+
+Private Sub mnuVSelCopy_Click()
+
+    mnuCopy_Click
+
+End Sub
+
 Private Sub mnuFlip_Click(Index As Integer)
 
     Dim i As Integer, j As Integer
@@ -11415,6 +11501,42 @@ End Sub
 Private Sub mnuSnapSelected_Click()
 
     SnapSelection
+
+End Sub
+
+Private Sub mnuVSelDuplicate_Click()
+
+    mnuDuplicate_Click
+
+End Sub
+
+Private Sub mnuVSelFlip_Click(Index As Integer)
+
+    mnuFlip_Click Index
+
+End Sub
+
+Private Sub mnuVSelPaste_Click()
+
+    mnuPaste_Click
+
+End Sub
+
+Private Sub mnuVSelRotate_Click(Index As Integer)
+
+    mnuRotate_Click Index
+
+End Sub
+
+Private Sub mnuVSelSendBackward_Click()
+
+    mnuSendBackward_Click
+
+End Sub
+
+Private Sub mnuVSelSendToBack_Click()
+
+    mnuSendToBack_Click
 
 End Sub
 
