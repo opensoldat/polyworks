@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.6
+Soldat Polyworks 1.5.0.7
 
 
-updated 13/12/09
+updated 2010-03-21
 
 
 
@@ -61,6 +61,14 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.6
+- added mouse position label in status bar
+- fixed a small copy/paste bug
+- added right click menu on selection tools
+- changed keyboard shortcuts deselect (escape) and duplicate (ctrl+d)
+- fixed the cutting of file names in recent files menu
+- selecting a single collider now gets its radius
 
 Changes in v1.5.0.6
 - copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)

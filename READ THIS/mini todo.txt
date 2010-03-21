@@ -1,5 +1,3 @@
 texture movement direction issue (while rotated)
-get collider size
-collider radius in properties window (kinda same as previous)
-fixed texture option is useless (user defined x/y can be used)
+collider radius in properties window
 render polygon edges as an option

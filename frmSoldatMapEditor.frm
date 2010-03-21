@@ -8733,6 +8733,14 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             selectedCoords(1).X = X
             selectedCoords(1).Y = Y
             Render
+            If numSelectedPolys = 0 And numSelectedScenery = 0 And numSelLights = 0 And numSelSpawns = 0 And numSelWaypoints = 0 And numSelColliders = 1 Then
+                For i = 1 To colliderCount
+                    If Colliders(i).active = 1 Then
+                        frmPalette.txtRadius.Text = LTrim$(Str$(Colliders(i).radius))
+                        setRadius CInt(Colliders(i).radius)
+                    End If
+                Next
+            End If
         End If
         
     ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection
