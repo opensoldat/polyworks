@@ -62,7 +62,7 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
-Changes in v1.5.0.6
+Changes in v1.5.0.7
 - added mouse position label in status bar
 - fixed a small copy/paste bug
 - added right click menu on selection tools
