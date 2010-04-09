@@ -7549,20 +7549,20 @@ Private Sub Moving(ByVal X As Single, ByVal Y As Single)
                 Polys(PolyNum).vertex(j).X = (PolyCoords(PolyNum).vertex(j).X - scrollCoords(2).X) * zoomFactor
                 Polys(PolyNum).vertex(j).Y = (PolyCoords(PolyNum).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
                 
-                If fixedTexture Then
+                'If fixedTexture Then
                     'Polys(polyNum).vertex(j).tu = PolyCoords(polyNum).vertex(j).x / 128
                     'Polys(polyNum).vertex(j).tv = PolyCoords(polyNum).vertex(j).Y / 128
                     'Polys(polyNum).vertex(j).tu = Polys(polyNum).vertex(j).tu + ((X - moveCoords(1).X) / 128)
                     'Polys(polyNum).vertex(j).tv = Polys(polyNum).vertex(j).tv + ((Y - moveCoords(1).Y) / 128)
                     'Polys(polyNum).vertex(j).tu = PolyCoords(polyNum).vertex(j).X / 128 + xDiff
                     'Polys(polyNum).vertex(j).tv = PolyCoords(polyNum).vertex(j).Y / 128 + yDiff
-                    If Not mnuCustomX.Checked Then
-                        Polys(PolyNum).vertex(j).tu = (Polys(PolyNum).vertex(j).X / zoomFactor + scrollCoords(2).X) / xTexture + xDiff
-                    End If
-                    If Not mnuCustomY.Checked Then
-                        Polys(PolyNum).vertex(j).tv = (Polys(PolyNum).vertex(j).Y / zoomFactor + scrollCoords(2).Y) / yTexture + yDiff
-                    End If
-                End If
+                    'If Not mnuCustomX.Checked Then
+                    '    Polys(PolyNum).vertex(j).tu = (Polys(PolyNum).vertex(j).X / zoomFactor + scrollCoords(2).X) / xTexture + xDiff
+                    'End If
+                    'If Not mnuCustomY.Checked Then
+                    '    Polys(PolyNum).vertex(j).tv = (Polys(PolyNum).vertex(j).Y / zoomFactor + scrollCoords(2).Y) / yTexture + yDiff
+                    'End If
+                'End If
             End If
         Next
     Next
@@ -12177,19 +12177,19 @@ Public Sub setMapTexture(texturePath As String)
     frmInfo.txtQuadX(1).Text = xTexture
     frmInfo.txtQuadY(1).Text = yTexture
     
-    If xTexture = 128 And yTexture > 128 Then
-        mnuCustomX.Checked = False
-        mnuCustomY.Checked = True
-    ElseIf xTexture > 128 And yTexture = 128 Then
-        mnuCustomX.Checked = True
-        mnuCustomY.Checked = False
-    ElseIf xTexture > 128 And yTexture > 128 Then
-        mnuCustomX.Checked = True
-        mnuCustomY.Checked = True
-    ElseIf xTexture = 128 And yTexture = 128 Then
-        mnuCustomX.Checked = False
-        mnuCustomY.Checked = False
-    End If
+    'If xTexture = 128 And yTexture > 128 Then
+    '    mnuCustomX.Checked = False
+    '    mnuCustomY.Checked = True
+    'ElseIf xTexture > 128 And yTexture = 128 Then
+    '    mnuCustomX.Checked = True
+    '    mnuCustomY.Checked = False
+    'ElseIf xTexture > 128 And yTexture > 128 Then
+    '    mnuCustomX.Checked = True
+    '    mnuCustomY.Checked = True
+    'ElseIf xTexture = 128 And yTexture = 128 Then
+    '    mnuCustomX.Checked = False
+    '    mnuCustomY.Checked = False
+    'End If
     
     Render
 
@@ -12643,7 +12643,9 @@ Private Sub saveSettings()
             & "BlendMode=" & blendMode & sNull & "SnapRadius=" & snapRadius & sNull _
             & "RotateScenery=" & frmScenery.rotateScenery & sNull & "ScaleScenery=" & frmScenery.scaleScenery & sNull _
             & "TextureWidth=" & xTexture & sNull & "TextureHeight=" & yTexture & sNull _
-            & "Texture=" & textureFile & sNull & sNull
+            & "Texture=" & textureFile & sNull _
+            & "CustomX=" & mnuCustomX.Checked & sNull _
+            & "CustomY=" & mnuCustomY.Checked & sNull & sNull
     saveSection "ToolSettings", iniString
     
     'hotkeys
@@ -12804,6 +12806,8 @@ Private Sub loadINI()
     xTexture = loadInt("ToolSettings", "TextureWidth")
     yTexture = loadInt("ToolSettings", "TextureHeight")
     textureFile = loadString("ToolSettings", "Texture", , 1024)
+    mnuCustomX.Checked = loadString("ToolSettings", "CustomX")
+    mnuCustomY.Checked = loadString("ToolSettings", "CustomY")
     
     'section = ""
     'equalsIndex = 1

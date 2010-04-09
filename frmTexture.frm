@@ -273,7 +273,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmTools
     snapForm Me, frmPalette
@@ -291,7 +291,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    'frmSoldatMapEditor.mnuTexture.Checked = False
+    frmSoldatMapEditor.mnuTexture.Checked = False
 
 End Sub
 
