@@ -1374,6 +1374,13 @@ End Type
 
 Private Type TSpawnPoint
     active  As Long 'Boolean
+    X       As Single
+    Y       As Single
+    Team    As Long
+End Type
+
+Private Type TSaveSpawnPoint
+    active  As Long 'Boolean
     X       As Long
     Y       As Long
     Team    As Long
@@ -2385,6 +2392,7 @@ Public Sub LoadFile(fileName As String)
     Dim Scenery_New As TMapFile_Scenery
     Dim newWaypoint As TNewWaypoint
     Dim Prop As TProp
+    Dim spawn As TSaveSpawnPoint
     
     Dim Perps As TPolyHit
     
@@ -2662,7 +2670,10 @@ Public Sub LoadFile(fileName As String)
         ReDim Spawns(spawnPoints)
         
         For i = 1 To spawnPoints
-            Get #1, , Spawns(i)
+            Get #1, , spawn
+            Spawns(i).X = spawn.X
+            Spawns(i).Y = spawn.Y
+            Spawns(i).Team = spawn.Team
             If Spawns(i).Team > 31 Then Spawns(i).Team = 31
             Spawns(i).active = 0
         Next
@@ -2905,7 +2916,7 @@ End Function
 Public Sub setMapData()
 
     frmInfo.lblCount(0).Caption = polyCount
-    frmInfo.lblCount(1).Caption = sceneryCount & "/500"
+    frmInfo.lblCount(1).Caption = sceneryCount & "/500 (" & sceneryElements & ")"
     frmInfo.lblCount(2).Caption = spawnPoints & "/128"
     frmInfo.lblCount(3).Caption = colliderCount & "/128"
     frmInfo.lblCount(4).Caption = waypointCount & "/500"
@@ -3126,6 +3137,7 @@ Private Sub SaveFile(fileName As String)
     Dim newWaypoint As TNewWaypoint
     Dim sceneryName As String
     Dim Prop As TProp
+    Dim spawn As TSaveSpawnPoint
     Dim tempClr As TColour
     Dim connectedNum As Integer
     
@@ -3258,8 +3270,11 @@ Private Sub SaveFile(fileName As String)
         Put #1, , spawnPoints
         
         For i = 1 To spawnPoints
-            Spawns(i).active = 1
-            Put #1, , Spawns(i)
+            spawn.active = 1
+            spawn.X = Spawns(i).X
+            spawn.Y = Spawns(i).Y
+            spawn.Team = Spawns(i).Team
+            Put #1, , spawn
             Spawns(i).active = 0
         Next
 
@@ -3357,7 +3372,7 @@ Public Sub SaveAndCompile(fileName As String)
     Dim tempClr As TColour
     Dim connectedNum As Integer
     
-    Dim newSpawnPoint As TSpawnPoint
+    Dim newSpawnPoint As TSaveSpawnPoint
     Dim newCollider As TCollider
     
     Dim zero As Integer
@@ -9202,7 +9217,7 @@ Private Sub CreateScenery(X As Single, Y As Single)
         End If
         
         setCurrentScenery
-        frmInfo.lblCount(1).Caption = sceneryCount & "/500"
+        frmInfo.lblCount(1).Caption = sceneryCount & "/500 (" & sceneryElements & ")"
         numCorners = 0
         
         prompt = True

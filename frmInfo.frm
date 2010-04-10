@@ -401,7 +401,7 @@ Begin VB.Form frmInfo
       Begin VB.Label lblCount 
          Alignment       =   1  'Right Justify
          BackStyle       =   0  'Transparent
-         Caption         =   "500/500"
+         Caption         =   "500/500 (500)"
          BeginProperty Font 
             Name            =   "Lucida Console"
             Size            =   8.25
@@ -414,11 +414,11 @@ Begin VB.Form frmInfo
          ForeColor       =   &H00FFFFFF&
          Height          =   255
          Index           =   1
-         Left            =   1680
+         Left            =   1380
          TabIndex        =   57
          Tag             =   "font1"
          Top             =   360
-         Width           =   1095
+         Width           =   1395
       End
       Begin VB.Label lblCount 
          Alignment       =   1  'Right Justify
