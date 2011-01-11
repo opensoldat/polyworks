@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{DDA53BD0-2CD0-11D4-8ED4-00E07D815373}#1.0#0"; "MBMouse.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmSoldatMapEditor 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
@@ -1326,16 +1326,6 @@ End Type
 Private Type TSketchLine
     vertex(1 To 2) As TSketchVertex
 End Type
-Private Type TPolygon
-    vertex(1 To 3) As TCustomVertex
-End Type
-Private Type TLine
-    vertex(1 To 2) As TCustomVertex
-End Type
-'Private Type TBox
-'    vertex(1 To 8) As TCustomVertex
-'End Type
-
 Private Type TVertexHit
     X As Single 'sin of angle
     Y As Single 'cos of angle
@@ -1343,6 +1333,13 @@ Private Type TVertexHit
 End Type
 Private Type TPolyHit
     vertex(1 To 3) As TVertexHit
+End Type
+Private Type TPolygon
+    vertex(1 To 3) As TCustomVertex
+    Perp           As TPolyHit
+End Type
+Private Type TLine
+    vertex(1 To 2) As TCustomVertex
 End Type
 
 Private Type TProp
@@ -1408,7 +1405,7 @@ End Type
 
 Private Type TMapFile_Polygon
    Poly     As TPolygon
-   Perp     As TPolyHit
+   'Perp     As TPolyHit
    polyType As Byte
 End Type
 
@@ -2394,7 +2391,7 @@ Public Sub LoadFile(fileName As String)
     Dim Prop As TProp
     Dim spawn As TSaveSpawnPoint
     
-    Dim Perps As TPolyHit
+    'Dim Perps As TPolyHit
     
     Dim toTGARes As Long
     
@@ -2446,7 +2443,6 @@ Public Sub LoadFile(fileName As String)
         
         For i = 1 To polyCount
             Get #1, , Polys(i)
-            Get #1, , Perps
             Get #1, , vertexList(i).polyType
             
             For j = 1 To 3
@@ -2457,6 +2453,7 @@ Public Sub LoadFile(fileName As String)
                 If PolyCoords(i).vertex(j).X < minX Then minX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).Y > maxY Then maxY = PolyCoords(i).vertex(j).Y
                 If PolyCoords(i).vertex(j).Y < minY Then minY = PolyCoords(i).vertex(j).Y
+                Polys(i).Perp.vertex(j).z = Sqr(Polys(i).Perp.vertex(j).X ^ 2 + Polys(i).Perp.vertex(j).Y ^ 2)
             Next
         Next
         
@@ -3206,9 +3203,9 @@ Private Sub SaveFile(fileName As String)
                 Else
                     length = Sqr(xDiff ^ 2 + yDiff ^ 2)
                 End If
-                Polygon.Perp.vertex(j).X = (yDiff / length)
-                Polygon.Perp.vertex(j).Y = (xDiff / length)
-                Polygon.Perp.vertex(j).z = 1
+                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
+                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
+                Polygon.Poly.Perp.vertex(j).z = 1
                 
             Next
             
@@ -3452,21 +3449,11 @@ Public Sub SaveAndCompile(fileName As String)
             Polygon.Poly.vertex(3).X = PolyCoords(i).vertex(3).X - xOffset
             Polygon.Poly.vertex(3).Y = PolyCoords(i).vertex(3).Y - yOffset
             
-            '// temp
-            'Polygon.Poly.vertex(1).Z = 255 - Polys(i).vertex(1).Z
-            'Polygon.Poly.vertex(2).Z = 255 - Polys(i).vertex(2).Z
-            'Polygon.Poly.vertex(3).Z = 255 - Polys(i).vertex(3).Z
-                
             For j = 1 To 3
-            
-                'Polygon.Poly.vertex(j).X = PolyCoords(i).vertex(j).X - xOffset
-                'Polygon.Poly.vertex(j).Y = PolyCoords(i).vertex(j).Y - yOffset
                 
                 VertNum = j + 1
                 If VertNum > 3 Then VertNum = 1
             
-                'xDiff = Polys(i).vertex(vertNum).X - Polys(i).vertex(j).X
-                'yDiff = Polys(i).vertex(j).Y - Polys(i).vertex(vertNum).Y
                 xDiff = Polygon.Poly.vertex(VertNum).X - Polygon.Poly.vertex(j).X
                 yDiff = Polygon.Poly.vertex(j).Y - Polygon.Poly.vertex(VertNum).Y
                 If xDiff = 0 And yDiff = 0 Then
@@ -3474,19 +3461,12 @@ Public Sub SaveAndCompile(fileName As String)
                 Else
                     length = Sqr(xDiff ^ 2 + yDiff ^ 2)
                 End If
-                'If Polygon.Poly.vertex(j).tu = 0 And Polygon.Poly.vertex(j).tv = 0 Then
-                '    Polygon.Perp.vertex(j).X = 1 '-(yDiff / length)
-                '    Polygon.Perp.vertex(j).Y = 0 '(xDiff / length)
-                'ElseIf Polygon.Poly.vertex(j).tu = 1 And Polygon.Poly.vertex(j).tv = 1 Then
-                '    Polygon.Perp.vertex(j).X = 0 '(yDiff / length)
-                '    Polygon.Perp.vertex(j).Y = 0 '-(xDiff / length)
-                'Else
-                    Polygon.Perp.vertex(j).X = (yDiff / length)
-                    Polygon.Perp.vertex(j).Y = (xDiff / length)
-                'End If
-                Polygon.Perp.vertex(j).z = 0
-                
-                '// uncomment this
+                If Polygon.Poly.Perp.vertex(j).z < 1 Then
+                    Polygon.Poly.Perp.vertex(j).z = 1
+                End If
+                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
+                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
+                Polygon.Poly.Perp.vertex(j).z = 1
                 Polygon.Poly.vertex(j).z = 1
                 
             Next
@@ -4547,8 +4527,8 @@ Public Sub Render()
         Next
     End If
     
-    If currentFunction = TOOL_SCENERY And Not (ctrlDown Or altDown) Then 'And sceneryElements > 0 Then
-        If Scenery(0).level < 2 Then 'And Scenery(0).Style > 0 Then
+    If currentFunction = TOOL_SCENERY And Not (ctrlDown Or altDown) Then
+        If Scenery(0).level < 2 Then
             sVal = Scenery(0).Style
             sc.X = SceneryTextures(sVal).reScale.X * Scenery(0).Scaling.X * zoomFactor
             sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(0).Scaling.Y * zoomFactor
@@ -4566,98 +4546,33 @@ Public Sub Render()
             D3DDevice.setTexture 0, mapTexture
         End If
 
-        'D3DDevice.SetRenderTarget renderSurface, Nothing, 0 'renderSurface, Nothing, 0
-        'D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, ARGB(0, RGB(64, 32, 32)), 1#, 0 '&H0
-        'If numPolys > 1 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, Polys(1).vertex(1), Len(Polys(1).vertex(1))
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA 'DESTcolor 'polyBlendSrc
-        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA 'ZERO 'polyBlendDest
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
         D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-        'If numPolys > 0 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, Polys(1).vertex(1), Len(Polys(1).vertex(1))
         D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA Or D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-        'D3DDevice.SetRenderTarget backBuffer, Nothing, 0
-            
-        'If clrPolys Then
-        'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-            'D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
-            'D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
-            'D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA 'Or D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-            'D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-            
-            'D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA Or D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-            
-            'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 0
-            'D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA
-            'clear alpha
-            'If numPolys > 4 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(5).vertex(1), Len(Polys(1).vertex(1))
-            'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-            'set alpha in buffer to geometry alpha
-            'D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-            'D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_DESTCOLOR
-            
-            'If numPolys > 3 Then D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, Polys(1).vertex(1), Len(Polys(1).vertex(1))
-            
-            'render from buffer onto sky in back buffer
-            
-            'D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
-            'D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE
-            'D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE
-            
-            ''D3DDevice.SetTextureStageState 0, D3DTSS_COLOROP, D3DTOP_SUBTRACT
-            ''D3DDevice.SetTextureStageState 0, D3DTSS_COLORARG1, D3DTA_TEXTURE
-            ''D3DDevice.SetTextureStageState 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE
-             
-            ''D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA Or D3DCOLORWRITEENABLE_BLUE 'Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
-            
-            'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
-            'D3DDevice.SetRenderState D3DRS_ALPHAFUNC, D3DCMP_NOTEQUAL
-            'D3DDevice.SetRenderState D3DRS_ALPHAREF, Int(252)
-            'D3DDevice.SetRenderState D3DRS_ALPHATESTENABLE, True
-        'End If
         
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-        'D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-        'D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
         
         If clrPolys Then
-            D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc 'DESTcolor 'polyBlendSrc
-            D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest 'ZERO 'polyBlendDest
+            D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
+            D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
         End If
-        
-        'If numPolys > 5 Then
-            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, numPolys, Polys(1).vertex(1), Len(Polys(1).vertex(1))
-            'D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, numPolys - 3, Polys(6).vertex(1), Len(Polys(1).vertex(1))
-        'End If
-        
-        'Dim quad(1 To 6) As TCustomVertex
-        
-        'quad(1) = CreateCustomVertex(0, 0, 0, 1, ARGB(255, RGB(255, 255, 255)), 0, 0)
-        'quad(2) = CreateCustomVertex(256, 0, 0, 1, ARGB(255, RGB(255, 255, 255)), 1, 0)
-        'quad(3) = CreateCustomVertex(256, 256, 0, 1, ARGB(255, RGB(255, 255, 255)), 1, 1)
-        'quad(4) = quad(1)
-        'quad(5) = quad(3)
-        'quad(6) = CreateCustomVertex(0, 256, 0, 1, ARGB(255, RGB(255, 255, 255)), 0, 1)
-        
-        'D3DDevice.setTexture 0, renderTarget
-        
-        'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-        'D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-        'D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
-        
-        'D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 2, quad(1), Len(quad(1))
-        
-        'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
-        D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc 'DESTcolor 'polyBlendSrc
-        D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest 'ZERO 'polyBlendDest
-        'D3DDevice.setTexture 0, mapTexture
 
-        'D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 0
-        'D3DDevice.SetRenderState D3DRS_ALPHATESTENABLE, False
+        For i = 1 To numPolys
+            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+        Next
+        
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
+
     ElseIf showPolys = False And numPolys > 0 Then
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ZERO
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_ONE
-        D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, numPolys, Polys(1).vertex(1), Len(Polys(1).vertex(1))
+        For i = 1 To numPolys
+            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+        Next
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 0
     End If
 
@@ -4666,8 +4581,6 @@ Public Sub Render()
         D3DDevice.setTexture 0, patternTexture
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ONE
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_ONE
-        'D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
-        'D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
         
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         For i = 1 To numSelectedPolys
@@ -4970,7 +4883,9 @@ Public Sub Render()
     'draw wireframe
     If showWireframe And polyCount > 0 Then
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_WIREFRAME
-        D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, polyCount, Polys(1).vertex(1), Len(Polys(1).vertex(1))
+        For i = 1 To polyCount
+            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+        Next
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_SOLID
     End If
     
@@ -9027,6 +8942,10 @@ Private Sub CreatePolys(X As Single, Y As Single)
         applyLightsToVert CInt(polyCount), 1
         applyLightsToVert CInt(polyCount), 2
         applyLightsToVert CInt(polyCount), 3
+        
+        Polys(polyCount).Perp.vertex(1).z = 2
+        Polys(polyCount).Perp.vertex(2).z = 2
+        Polys(polyCount).Perp.vertex(3).z = 2
         
         SaveUndo
         If mnuQuad.Checked And Not creatingQuad Then
@@ -14471,6 +14390,9 @@ Private Sub mnuSplit_Click()
                                                                 
                 Polys(polyCount).vertex(j) = Polys(selectedPolys(i)).vertex(j)
                 Polys(polyCount).vertex(left) = Polys(selectedPolys(i)).vertex(left)
+                Polys(polyCount).Perp.vertex(1).z = 2
+                Polys(polyCount).Perp.vertex(2).z = 2
+                Polys(polyCount).Perp.vertex(3).z = 2
                 
                 'coords
                 Polys(polyCount).vertex(right) = Polys(selectedPolys(i)).vertex(right)
@@ -14604,6 +14526,9 @@ Private Sub mnuCreate_Click()
         vertexList(polyCount).colour(2) = tempClr
     End If
 
+    Polys(polyCount).Perp.vertex(1).z = 2
+    Polys(polyCount).Perp.vertex(2).z = 2
+    Polys(polyCount).Perp.vertex(3).z = 2
     
     frmInfo.lblCount(0).Caption = polyCount
     frmInfo.lblCount(6).Caption = getMapDimensions
@@ -15193,8 +15118,16 @@ Public Sub getInfo()
     If numSelectedPolys > 0 Then
 
         frmInfo.cboPolyType.ListIndex = vertexList(selectedPolys(1)).polyType
+        frmInfo.txtBounciness.Enabled = False
         For j = 1 To 3
             If vertexList(selectedPolys(1)).vertex(j) = 1 Then
+                frmInfo.txtBounciness.Text = Int((Polys(selectedPolys(1)).Perp.vertex(j).z - 1) * 100)
+                If frmInfo.txtBounciness.Text < 0 Then
+                    frmInfo.txtBounciness.Text = 0
+                End If
+                If frmInfo.cboPolyType.ListIndex = 18 Then
+                    frmInfo.txtBounciness.Enabled = True
+                End If
                 frmInfo.txtTexture(0).Text = Int(Polys(selectedPolys(1)).vertex(j).tu * 10000 + 0.5) / 10000
                 frmInfo.txtTexture(1).Text = Int(Polys(selectedPolys(1)).vertex(j).tv * 10000 + 0.5) / 10000
                 frmInfo.txtVertexAlpha.Text = Int((getAlpha(Polys(selectedPolys(1)).vertex(j).Color) / 255 * 100) * 100 + 0.5) / 100
@@ -15349,6 +15282,26 @@ Public Sub applyVertexAlpha(tehValue As Single)
     End If
     SaveUndo
     Render
+
+End Sub
+
+Public Sub applyBounciness(tehValue As Single)
+
+    Dim i As Integer, j As Integer
+    
+    If selectionChanged Then
+        SaveUndo
+        selectionChanged = False
+    End If
+
+    If numSelectedPolys > 0 Then
+        For i = 1 To numSelectedPolys
+            For j = 1 To 3
+                Polys(selectedPolys(i)).Perp.vertex(j).z = tehValue
+            Next
+        Next
+    End If
+    SaveUndo
 
 End Sub
 

@@ -1309,6 +1309,25 @@ Begin VB.Form frmInfo
       Top             =   360
       Width           =   2895
       Visible         =   0   'False
+      Begin VB.TextBox txtBounciness 
+         Appearance      =   0  'Flat
+         BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Lucida Console"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   1560
+         TabIndex        =   78
+         Tag             =   "font1"
+         Top             =   1680
+         Width           =   615
+      End
       Begin VB.TextBox txtVertexAlpha 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
@@ -1325,7 +1344,7 @@ Begin VB.Form frmInfo
          Left            =   1560
          TabIndex        =   3
          Tag             =   "font1"
-         Top             =   1440
+         Top             =   1320
          Width           =   615
       End
       Begin VB.TextBox txtTexture 
@@ -1403,11 +1422,54 @@ Begin VB.Form frmInfo
          EndProperty
          ForeColor       =   &H00FFFFFF&
          Height          =   255
+         Index           =   35
+         Left            =   2160
+         TabIndex        =   79
+         Tag             =   "font2"
+         Top             =   1680
+         Width           =   255
+      End
+      Begin VB.Label lblInfo 
+         BackColor       =   &H00614B3D&
+         Caption         =   "Bounciness:"
+         BeginProperty Font 
+            Name            =   "BankGothic Lt BT"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
+         Index           =   34
+         Left            =   120
+         TabIndex        =   77
+         Tag             =   "font2"
+         Top             =   1680
+         Width           =   1335
+      End
+      Begin VB.Label lblInfo 
+         Alignment       =   2  'Center
+         BackStyle       =   0  'Transparent
+         Caption         =   "%"
+         BeginProperty Font 
+            Name            =   "BankGothic Lt BT"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00FFFFFF&
+         Height          =   255
          Index           =   33
          Left            =   2160
          TabIndex        =   76
          Tag             =   "font2"
-         Top             =   1440
+         Top             =   1320
          Width           =   255
       End
       Begin VB.Label lblInfo 
@@ -1428,7 +1490,7 @@ Begin VB.Form frmInfo
          Left            =   120
          TabIndex        =   75
          Tag             =   "font2"
-         Top             =   1440
+         Top             =   1320
          Width           =   975
       End
       Begin VB.Label lblInfo 
@@ -1684,6 +1746,12 @@ Private Sub cboPolyType_Click()
         frmSoldatMapEditor.applyPolyType cboPolyType.ListIndex
     End If
     
+    If cboPolyType.ListIndex = 18 Then
+        txtBounciness.Enabled = True
+    Else
+        txtBounciness.Enabled = False
+    End If
+    
 End Sub
 
 Private Sub txtLightProp_GotFocus(Index As Integer)
@@ -1913,6 +1981,29 @@ Private Sub txtVertexAlpha_LostFocus()
         txtVertexAlpha.Text = tempVal
     ElseIf applyChange Then
         frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
+    End If
+    tempVal = 0
+    
+    applyChange = False
+
+End Sub
+
+Private Sub txtBounciness_GotFocus()
+
+    If IsNumeric(txtBounciness.Text) Then
+        tempVal = txtBounciness.Text
+    End If
+
+End Sub
+
+Private Sub txtBounciness_LostFocus()
+
+    If Not IsNumeric(txtBounciness.Text) Then
+        txtBounciness.Text = tempVal
+    ElseIf txtBounciness.Text < 0 Then
+        txtBounciness.Text = tempVal
+    ElseIf applyChange Then
+        frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
     End If
     tempVal = 0
     
