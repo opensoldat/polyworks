@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.7
+Soldat Polyworks 1.5.0.8
 
 
-updated 2010-03-21
+updated 2011-03-09
 
 
 
@@ -61,6 +61,14 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.8
+- added polygon bounciness option for the bouncy polygon type
+- added counter for the amount of *different* sceneries in the map
+- fixed movement of spawns/objects while zoomed
+- fixed texture window now closes properly
+- fixed user defined x/y modifying the behavior of fixed texture
+- fixed saving of user defined x/y
 
 Changes in v1.5.0.7
 - added mouse position label in status bar
@@ -259,7 +267,8 @@ changes in v1.0
 
 Credits:
 
-programmed by Anna Zajaczkowski in Visual Basic 6 (updated by Jacob L. (Fryer))
+programmed by Anna Zajaczkowski in Visual Basic 6
+updated version by Jacob Lindberg (Fryer)
 original PolyWorks concept and ideas by Michal Zajaczkowski
 graphics by Michal Zajaczkowski and Anna Zajaczkowski, based on Soldat style
 new icon by VirtualTT
