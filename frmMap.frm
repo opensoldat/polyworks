@@ -517,11 +517,6 @@ Private Type TColour
     blue As Byte
 End Type
 
-'Dim formHeight As Integer
-'Public collapsed As Boolean
-
-'Public xPos As Integer, yPos  As Integer
-
 Private Sub cboJet_Click()
 
     Select Case cboJet.ListIndex
@@ -577,13 +572,12 @@ Private Sub getJets()
     End Select
 
 End Sub
-'Public fromList As Boolean
 
 Public Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour, frameColour
+    Me.SetColours
         
     loadTextures2
     
@@ -602,19 +596,13 @@ Private Sub cboTexture_Click()
     On Error GoTo ErrorHandler
     
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-        'picTexture.Picture = LoadPicture(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex))
-        'If right(cboTexture.List(cboTexture.ListIndex), 3) <> "png" Then
-        '    imgTexture.Picture = LoadPicture(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex))
-        'Else
-        '    imgTexture.Picture = Nothing
-        'End If
         
         frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
         
         Dim Token As Long
         Token = InitGDIPlus
-        picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128) 'frmSoldatMapEditor.xTexture, frmSoldatMapEditor.yTexture)
+        picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
         FreeGDIPlus Token
     End If
     
@@ -681,12 +669,6 @@ Public Sub loadTextures2()
         cboTexture.AddItem file
         file = Dir$
     Loop
-    
-    'file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpg", vbDirectory)
-    'Do While Len(file)
-    '    cboTexture.AddItem file
-    '    file = Dir$
-    'Loop
     
     Exit Sub
     
@@ -757,29 +739,11 @@ Private Sub picOK_Click()
 
 End Sub
 
-Private Sub picTitle_DblClick()
-
-    'collapsed = Not collapsed
-    'If collapsed Then
-    '    Me.height = 19 * Screen.TwipsPerPixelY
-    'Else
-    '    Me.height = formHeight * Screen.TwipsPerPixelY
-    'End If
-
-End Sub
-
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
-    'snapForm Me, frmPalette
-    'snapForm Me, frmDisplay
-    'snapForm Me, frmTools
-    'snapForm Me, frmScenery
-    'snapForm Me, frmInfo
-    'snapForm Me, frmSoldatMapEditor
-
 End Sub
 
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -808,7 +772,6 @@ End Sub
 
 Private Sub picHide_Click()
     
-    'Me.Hide
     frmSoldatMapEditor.setOptions
     frmSoldatMapEditor.mnuMap.Checked = False
     Unload Me
@@ -842,7 +805,7 @@ Private Sub txtJet_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long, frameClr As Long)
+Public Sub SetColours()
 
     On Error Resume Next
 

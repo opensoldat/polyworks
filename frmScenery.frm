@@ -347,7 +347,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     formHeight = Me.ScaleHeight
     
@@ -383,7 +383,6 @@ Public Sub listScenery()
     Dim sceneryName As String
     Dim fileOpen As Boolean
     Dim tempNode As Node
-    'Dim ext As String
     
     frmSoldatMapEditor.tvwScenery.Nodes.Clear
     
@@ -391,15 +390,6 @@ Public Sub listScenery()
     
     'load all scenery
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
-    
-    'file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.*", vbDirectory)
-    'Do While Len(file)
-    '    ext = right$(file, 4)
-    '    If ext = ".bmp" Or ext = ".png" Or ext = ".tga" Or ext = ".jpg" Then
-    '        frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-    '    End If
-    '    file = Dir$
-    'Loop
     
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
     Do While Len(file)
@@ -413,31 +403,11 @@ Public Sub listScenery()
         file = Dir$
     Loop
     
-    'file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
-    'Do While Len(file)
-    '    Dim cFilePath As String
-    '    cFilePath = frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & file
-    '    Call GifToBmp(cFilePath, cFilePath & ".tga")
-    '    file = Dir$
-    'Loop
-    
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
     Do While Len(file)
-        'If Len(file) >= 8 Then
-        '    If Not right$(file, 8) = ".gif.tga" Then
-        '        frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        '    End If
-        'Else
-            frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        'End If
+        frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
-    
-    'file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.jpg", vbDirectory)
-    'Do While Len(file)
-    '    frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-    '    file = Dir$
-    'Loop
     
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
@@ -448,7 +418,6 @@ Public Sub listScenery()
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = False
     
-    'frmSoldatMapEditor.setCurrentScenery , frmSoldatMapEditor.tvwScenery.Nodes("Master List").Child.Text
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
     frmSoldatMapEditor.tvwScenery_NodeClick frmSoldatMapEditor.tvwScenery.SelectedItem
     
@@ -464,9 +433,7 @@ Public Sub listScenery()
         
             Do Until EOF(1)
                 Input #1, sceneryName
-                'If FileExists(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & sceneryName) Then
-                    frmSoldatMapEditor.tvwScenery.Nodes.Add file, tvwChild, , sceneryName
-                'End If
+                frmSoldatMapEditor.tvwScenery.Nodes.Add file, tvwChild, , sceneryName
             Loop
         
         Close #1
@@ -475,13 +442,6 @@ Public Sub listScenery()
         file = Dir$
         
     Loop
-    
-    'For i = 1 To frmSoldatMapEditor.tvwScenery.Nodes.Count
-    '    If LCase$(right(frmSoldatMapEditor.tvwScenery.Nodes.Item(i).Text, 4)) = ".jpg" Then
-    '        frmSoldatMapEditor.tvwScenery.Nodes.Item(i).BackColor = &HDDDDFF
-    '        frmSoldatMapEditor.tvwScenery.Nodes.Item(i).ForeColor = &HFF
-    '    End If
-    'Next
     
     Exit Sub
     
@@ -497,8 +457,6 @@ Private Function FileExists(fileName As String) As Boolean
     On Error GoTo ErrorHandler
 
     FileExists = FileLen(fileName) > 0
-    'FileExists = (GetAttr(sceneryName) And vbDirectory) = 0
-    'FileExists = Len(Dir$(fileName)) <> 0
     
 ErrorHandler:
 
@@ -721,11 +679,11 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
     Next
     
     frmSoldatMapEditor.setSceneryLevel level
-    frmSoldatMapEditor.RegainFocus 'SetFocus
+    frmSoldatMapEditor.RegainFocus
 
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours()
     
     On Error Resume Next
     
@@ -761,8 +719,6 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     lblScale.ForeColor = lblTextClr
     lstScenery.BackColor = txtBackClr
     lstScenery.ForeColor = txtTextClr
-    'lstSceneryList.BackColor = txtBackClr
-    'lstSceneryList.ForeColor = txtTextClr
     picScenery.BackColor = bgClr
     
     For Each c In Me.Controls

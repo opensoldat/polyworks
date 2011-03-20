@@ -1759,13 +1759,11 @@ Private Sub picHide_Click()
     Me.ScaleHeight = 408
     Unload Me
     frmSoldatMapEditor.RegainFocus
-    'Me.Hide
     
 End Sub
 
 Private Sub picSekrit_Click()
 
-    'Me.ScaleHeight = 512
     If Me.ScaleHeight < 460 Then
         Me.Height = 544 * Screen.TwipsPerPixelY
     Else
@@ -1783,9 +1781,7 @@ End Sub
 
 Private Sub picApply_Click()
 
-    'Me.Hide
     applyPreferences
-    'Me.Show 1
 
 End Sub
 
@@ -1800,13 +1796,9 @@ End Sub
 Private Function applyPreferences() As Boolean
     
     Dim i As Integer
-    'Dim layout As Long
     
     On Error GoTo ErrorHandler
     
-    'layout = GetKeyboardLayout(0)
-    
-    'refresh buttons
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
@@ -1831,8 +1823,6 @@ Private Function applyPreferences() As Boolean
         End If
         
         frmSoldatMapEditor.soldatDir = txtDir.Text
-        'frmScenery.loadSceneryList
-        'frmScenery.lstSceneryList_Click
     ElseIf Len(Dir(txtDir.Text, vbDirectory)) = 0 Then
         MsgBox "Soldat directory does not exist."
         Exit Function
@@ -1867,8 +1857,8 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.gridClr = RGB(gridClr.blue, gridClr.green, gridClr.red)
     frmSoldatMapEditor.gridClr2 = RGB(gridClr2.blue, gridClr2.green, gridClr2.red)
     
-    frmSoldatMapEditor.formWidth = formWidth '* Screen.TwipsPerPixelX
-    frmSoldatMapEditor.formHeight = formHeight '* Screen.TwipsPerPixelY
+    frmSoldatMapEditor.formWidth = formWidth
+    frmSoldatMapEditor.formHeight = formHeight
     If frmSoldatMapEditor.WindowState = vbNormal Then
         frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
         frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
@@ -1919,8 +1909,6 @@ Private Function applyPreferences() As Boolean
     
     frmSoldatMapEditor.setPreferences
     
-    'frmMap.mnuRefresh_Click
-    
     applyPreferences = True
     
     Exit Function
@@ -1953,7 +1941,7 @@ Private Sub Form_Load()
     sceneryVerts = frmSoldatMapEditor.sceneryVerts
     topmost = frmSoldatMapEditor.topmost
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour, frameColour
+    Me.SetColours
     
     blendModes(0) = 1
     blendModes(1) = 2
@@ -1983,8 +1971,8 @@ Private Sub Form_Load()
     Me.picGridClr.BackColor = RGB(gridClr.red, gridClr.green, gridClr.blue)
     Me.picGridClr2.BackColor = RGB(gridClr2.red, gridClr2.green, gridClr2.blue)
     
-    txtWidth.Text = frmSoldatMapEditor.formWidth 'ScaleWidth + 2
-    txtHeight.Text = frmSoldatMapEditor.formHeight 'ScaleHeight + 2
+    txtWidth.Text = frmSoldatMapEditor.formWidth
+    txtHeight.Text = frmSoldatMapEditor.formHeight
     formWidth = txtWidth.Text
     formHeight = txtHeight.Text
     
@@ -2140,10 +2128,6 @@ Private Sub picPrefabs_Click()
     
     mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-End Sub
-
-Private Sub txtHotkey_Change(Index As Integer)
-    'gflfl
 End Sub
 
 Private Sub txtHotkey_GotFocus(Index As Integer)
@@ -2468,12 +2452,6 @@ Private Sub picfolder_MouseMove(Button As Integer, Shift As Integer, X As Single
 
 End Sub
 
-Private Sub picfolder_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    'mouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
 Private Sub picUncomp_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
@@ -2486,12 +2464,6 @@ Private Sub picUncomp_MouseMove(Button As Integer, Shift As Integer, X As Single
 
 End Sub
 
-Private Sub picUncomp_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    'mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
 Private Sub picPrefabs_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
@@ -2501,12 +2473,6 @@ End Sub
 Private Sub picPrefabs_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-
-End Sub
-
-Private Sub picPrefabs_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    'mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2548,7 +2514,7 @@ Private Sub picTopmost_MouseUp(Button As Integer, Shift As Integer, X As Single,
 
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long, frameClr As Long)
+Public Sub SetColours()
 
     On Error Resume Next
 
@@ -2632,8 +2598,6 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     
     cboSkin.BackColor = txtBackClr
     cboSkin.ForeColor = txtTextClr
-    
-    'picSekrit.BackColor = bgClr
     
     For Each c In Me.Controls
         If c.Tag = "font1" Then

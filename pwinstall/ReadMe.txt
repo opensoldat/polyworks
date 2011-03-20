@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.8
+Soldat Polyworks 1.5.0.9
 
 
-updated 2011-03-09
+updated 2011-03-19
 
 
 
@@ -61,6 +61,11 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.9
+- fixed styling of bounciness label
+- fixed buggy polygon points
+- fixed fixed texture
 
 Changes in v1.5.0.8
 - added polygon bounciness option for the bouncy polygon type

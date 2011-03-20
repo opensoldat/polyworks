@@ -317,13 +317,7 @@ Dim hotKeys(0 To 13) As Byte
 
 Public Function getHotKey(ByVal Index As Byte) As Byte
 
-'    On Error GoTo ErrorHandler
-
     getHotKey = hotKeys(Index)
-    
-'    Exit Function
-'ErrorHandler:
-'    MsgBox Error$
 
 End Function
 
@@ -351,7 +345,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
 
-    setColours
+    SetColours
     
     setForm
 
@@ -365,18 +359,13 @@ Public Sub setForm()
 
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
-    'If collapsed Then
-    '    Me.Height = 19 * Screen.TwipsPerPixelY
-    'Else
-    '    Me.Height = formHeight * Screen.TwipsPerPixelY
-    'End If
 
 End Sub
 
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
@@ -417,9 +406,9 @@ End Sub
 
 Private Sub picTools_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    frmSoldatMapEditor.setCurrentTool curTool 'Index
+    frmSoldatMapEditor.setCurrentTool curTool
     frmSoldatMapEditor.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(curTool + 1).Picture
-    frmSoldatMapEditor.RegainFocus 'SetFocus
+    frmSoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -448,7 +437,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub setColours()
+Public Sub SetColours()
 
     On Error Resume Next
 

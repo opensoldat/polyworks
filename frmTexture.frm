@@ -84,7 +84,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     formHeight = Me.ScaleHeight
 
@@ -126,7 +126,6 @@ End Sub
 
 Private Sub picTexture_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    'picTexture.ForeColor = RGB(255, 0, 0)
     If Button <> 0 Then
         picTexture.DrawMode = 6
         picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
@@ -192,7 +191,6 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
         frmInfo.txtQuadX(1).Text = x2tex * 2
         frmInfo.txtQuadY(1).Text = y2tex * 2
         
-        'MsgBox x1tex & ", " & y1tex & " : " & x2tex & ", " & y2tex
     End If
 
 End Sub
@@ -207,18 +205,14 @@ Public Sub setTexture(texturePath As String)
     texWidth = frmSoldatMapEditor.xTexture
     texHeight = frmSoldatMapEditor.yTexture
 
-    'picTexture.ForeColor = RGB(0, 0, 255)
     picTexture.DrawMode = 13
 
     picTexture.Width = texWidth / 2
     picTexture.Height = texHeight / 2
-    'formWidth =
     frmTexture.Width = (texWidth / 2 + 2 + 16) * Screen.TwipsPerPixelX
     formHeight = texHeight / 2 + 18 + 16
     frmTexture.Height = formHeight * Screen.TwipsPerPixelY
     picHide.left = frmTexture.Width / Screen.TwipsPerPixelX - 17
-    'picTexture.Picture = LoadPicture(frmSoldatMapEditor.soldatDir & "textures\" & texturePath)
-    'picTexture.PaintPicture picTexture.Picture, 0, 0, texWidth / 2, texHeight / 2, 0, 0, texWidth, texHeight, vbSrcCopy
     
     Dim Token As Long
     Token = InitGDIPlus

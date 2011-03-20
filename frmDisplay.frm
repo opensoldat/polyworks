@@ -541,7 +541,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     formHeight = Me.ScaleHeight
     
@@ -663,7 +663,7 @@ Public Sub refreshButtons()
 
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours()
 
     On Error Resume Next
 
@@ -683,10 +683,8 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1
-            'c.Font.Size = 8
         ElseIf c.Tag = "font2" Then
             c.Font.Name = font2
-            'c.Font.Size = 8
         End If
     Next
 

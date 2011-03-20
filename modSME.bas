@@ -5,13 +5,6 @@ Global Const pi As Single = 3.14159265358979    'mmm... pi
 
 Global gfxDir As String
 
-'Global bgColour As Long
-'Global lblBackColour As Long
-'Global lblTextColour As Long
-'Global txtBackColour As Long
-'Global txtTextColour As Long
-'Global frameColour As Long
-
 Global bgClr As Long
 Global lblBackClr As Long
 Global lblTextClr As Long
@@ -20,12 +13,6 @@ Global txtTextClr As Long
 Global frameClr As Long
 
 Global font1 As String, font2 As String
-
-'Public Type TColour
-'    red As Byte
-'    green As Byte
-'    blue As Byte
-'End Type
 
 Public Const BUTTON_WIDTH = 64
 Public Const BUTTON_HEIGHT = 24
@@ -85,10 +72,6 @@ Public Const SWP_NOMOVE = &H2
 
 Public Const HWND_TOPMOST = -1
 Public Const HWND_NOTOPMOST = -2
-
-'taskbar
-'Public Declare Function SetForegroundWindow Lib "user32" (ByVal hwnd As Long) As Long
-'Public Declare Function BringWindowToTop Lib "user32" (ByVal hwnd As Long) As Long
 
 'get pixel
 Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
@@ -219,30 +202,9 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (B
         ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, _
         ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
-
-'subclassing
-'Private Declare Function CallWindowProc Lib "user32" Alias "CallWindowProcA" (ByVal lpPrevWndFunc As Long, ByVal hwnd As Long, ByVal Msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
-'Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-
-'Private Const WM_ACTIVATEAPP = &H1C
-'Private Const GWL_WNDPROC = -4
-
-'Private glPrevWndProc As Long
-'Private glHWND As Long
-
-
 'key mapping
-'Public Declare Function MapVirtualKeyEx Lib "user32" Alias "MapVirtualKeyExA" _
-        (ByVal uCode As Long, ByVal uMapType As Long, ByVal dwhkl As Long) As Long
-
 Public Declare Function MapVirtualKey Lib "user32" Alias "MapVirtualKeyA" _
         (ByVal wCode As Long, ByVal wMapType As Long) As Long
-        
-'Public Declare Function GetKeyboardLayout Lib "user32" (ByVal dwLayout As Long) As Long
-
-'timer
-'Public Declare Function GetTickCount Lib "kernel32" () As Long
-
 
 'gdi+
 Private Type GUID
@@ -283,7 +245,6 @@ Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
 Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
-'Private Declare Function GdipSetInterpolationMode Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal InterMode As Long) As Long
 Private Declare Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal Img As Long, ByVal X As Long, ByVal Y As Long, ByVal Width As Long, ByVal Height As Long) As Long
 Private Declare Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As Long) As Long
 Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal Image As Long) As Long
@@ -348,16 +309,11 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
     
     active = active / 255
     
-    'tempval = tempval + 1
-    'frmSoldatMapEditor.Text1.Text = tempval
-    'MsgBox "poop"
-    
     If exWidth = 0 Then exWidth = Width
     
     If action = BUTTON_UP Or action = BUTTON_DOWN Then
         mouseEvent2 = True
     ElseIf (xVal < 0) Or (xVal > exWidth) Or (yVal < 0) Or (yVal > Height) Then 'the MOUSELEAVE pseudo-event
-    'ElseIf (xVal < 0) Or (xVal > pic.ScaleWidth) Or (yVal < 0) Or (yVal > pic.ScaleHeight) Then 'the MOUSELEAVE pseudo-event
         ReleaseCapture
         mouseEvent2 = True
         action = BUTTON_UP
@@ -392,7 +348,6 @@ Public Function SelectFolder(ownerForm As Form) As String
     With bi
         .hOwner = ownerForm.hWnd
         .pidlRoot = 0&
-        '.lpszTitle = "Select folder"
         .ulFlags = BIF_RETURNONLYFSDIRS
     End With
     
@@ -513,10 +468,8 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
       
         'find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-                               
-            'GetRegValue = TrimNull(lpValue)
+            
             GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
-            'GetRegValue = lpValue
          
         End If
 
@@ -595,16 +548,6 @@ Public Function loadString(section As String, Entry As String, Optional fileName
 
 End Function
 
-'Public Function loadDir(section As String, Entry As String) As String
-'    Dim sString  As String
-'    Dim lSize    As Long
-'    Dim lReturn  As Long
-'    sString = String$(64, "*")
-'    lSize = Len(sString)
-'    lReturn = GetPrivateProfileString("Preferences", "Dir", "", sString, lSize, App.path & "\polyworks.ini")
-'    loadDir = left(sString, lReturn)
-'End Function
-
 Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
     
     Dim lReturn As Long
@@ -621,16 +564,11 @@ End Function
 
 Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
 
-    'Dim lReturn As String * 200
-    
     If fileName = "" Then
         fileName = App.path & "\polyworks.ini"
     End If
     
-    'lReturn = GetPrivateProfileSection(section, Entry, -1, fileName)
-    'MsgBox GetPrivateProfileSection(section, lReturn, 200, FileName)
     GetPrivateProfileSection section, lReturn, length, fileName
-    'MsgBox (mid$(lReturn, 16, 1) = vbNullChar)
     
     loadSection = lReturn
 
@@ -703,7 +641,7 @@ Public Function SetGameMode(fileName As String)
 
 End Function
 
-Public Function SetColours() 'bgClr As Long, labelClr As Long, textClr As Long)
+Public Function SetColours()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
@@ -718,20 +656,6 @@ Public Function SetColours() 'bgClr As Long, labelClr As Long, textClr As Long)
     frmWaypoints.BackColor = bgClr
 
 End Function
-
-'Private Sub Form_Load()
-'    Dim Token    As Long
-'    ' Initialise GDI+
-'    Token = InitGDIPlus
-'    pctResizedPNG = LoadPictureGDIPlus(AppPath & PNG_FILE, pctResizedPNG.ScaleWidth / Screen.TwipsPerPixelX, pctResizedPNG.ScaleHeight / Screen.TwipsPerPixelY)
-'    ' Resize already loaded picture (vbPicTypeIcon is not supported yet)
-'    pctResize = Resize(imgOriginal.Picture.Handle, imgOriginal.Picture.Type, pctResize.Width / Screen.TwipsPerPixelX, pctResize.Height / Screen.TwipsPerPixelY, vbBlack, True)
-'    ' Free GDI+
-'    FreeGDIPlus Token
-'End Sub
-'    Dim Token    As Long
-'    Token = InitGDIPlus
-'    FreeGDIPlus Token
 
 ' Initialises GDI Plus
 Public Function InitGDIPlus() As Long
@@ -764,7 +688,6 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     Dim IPic          As IPicture
         
     '' Load the image
-    'If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
     If Len(Dir$(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
             Exit Function
@@ -812,33 +735,3 @@ ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading picture"
     
 End Function
-
-
-'Public Sub Hook()
-'    glHWND = frmSoldatMapEditor.hwnd
-'    glPrevWndProc = SetWindowLong(glHWND, GWL_WNDPROC, AddressOf WindowProc)
-'End Sub
-'Public Sub Unhook()
-'    Dim lR As Long
-'    lR = SetWindowLong(glHWND, GWL_WNDPROC, glPrevWndProc)
-'End Sub
-'Public Function WindowProc(ByVal hw As Long, ByVal uMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
-'    If uMsg = WM_ACTIVATEAPP Then
-'        If wParam <> 0 Then 'Received Focus
-'            inFocus = True
-'            frmSoldatMapEditor.altDown = False
-'            frmSoldatMapEditor.shiftDown = False
-'            frmSoldatMapEditor.ctrlDown = False
-'            frmSoldatMapEditor.Form_Paint
-'        Else 'Lost Focus
-'            inFocus = False
-'        End If
-'    End If
-'    WindowProc = CallWindowProc(glPrevWndProc, hw, uMsg, wParam, lParam)
-'End Function
-
-'Public Function ConvertCode(uCode As Long, mapType As Long)
-'    Dim layout As Long
-'    layout = GetKeyboardLayout(0)
-'    ConvertCode = MapVirtualKeyEx(uCode, mapType, layout)
-'End Function

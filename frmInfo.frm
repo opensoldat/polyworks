@@ -1707,7 +1707,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     formHeight = Me.ScaleHeight
     
@@ -1767,12 +1767,10 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtLightProp(Index).Text) And applyChange Then
         If Index = 0 Then
-            'frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 100, Index
             frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
-        ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then 'And txtLightProp(Index).Text <= 100 Then
+        ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then
             frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 And txtLightProp(Index).Text <= 100 Then
-            'frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 180 * pi, Index
         Else
             txtLightProp(Index).Text = tempVal
         End If
@@ -1878,33 +1876,6 @@ Private Sub txtScale_LostFocus(Index As Integer)
     applyChange = False
 
 End Sub
-
-'Private Sub txtWidth_GotFocus()
-'    If IsNumeric(txtWidth.Text) Then
-'        tempVal = txtWidth.Text
-'    End If
-'    SendKeys "{Home}+{END}"
-'End Sub
-'Private Sub txtWidth_LostFocus()
-'    If Not IsNumeric(txtWidth.Text) Then
-'        txtWidth.Text = tempVal
-'    End If
-'    frmSoldatMapEditor.xTexture = txtWidth.Text
-'    tempVal = 0
-'End Sub
-'Private Sub txtHeight_GotFocus()
-'    If IsNumeric(txtHeight.Text) Then
-'        tempVal = txtHeight.Text
-'    End If
-'    SendKeys "{Home}+{END}"
-'End Sub
-'Private Sub txtHeight_LostFocus()
-'    If Not IsNumeric(txtHeight.Text) Then
-'        txtHeight.Text = tempVal
-'    End If
-'    frmSoldatMapEditor.yTexture = txtHeight.Text
-'    tempVal = 0
-'End Sub
 
 Private Sub cboLevel_Click()
     
@@ -2104,7 +2075,7 @@ Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Sing
     
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours()
     
     On Error Resume Next
     
@@ -2116,7 +2087,7 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     mouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgClr
-    For i = 0 To 33
+    For i = 0 To 35
         lblInfo(i).BackColor = lblBackClr
         lblInfo(i).ForeColor = lblTextClr
     Next
@@ -2168,20 +2139,3 @@ Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, 
     Next
         
 End Sub
-
-'Private Sub Text13_LostFocus()
-'    If IsNumeric(Text13.Text) Then
-'        frmSoldatMapEditor.setZVal Text13.Text
-'    End If
-'End Sub
-'Private Sub Text14_LostFocus()
-'    If IsNumeric(Text14.Text) Then
-'        frmSoldatMapEditor.setRHWVal Text14.Text
-'    End If
-'End Sub
-
-'Private Sub Text15_LostFocus()
-'    If IsNumeric(Text15.Text) Then
-'        frmSoldatMapEditor.setAlphaVal Text15.Text
-'    End If
-'End Sub

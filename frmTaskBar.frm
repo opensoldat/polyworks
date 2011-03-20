@@ -25,10 +25,8 @@ Dim minimized As Boolean
 Private Sub Form_GotFocus()
     
     If frmSoldatMapEditor.Visible Then
-        frmSoldatMapEditor.RegainFocus 'SetFocus
+        frmSoldatMapEditor.RegainFocus
     End If
-    
-    'Beep
 
 End Sub
 
@@ -56,16 +54,14 @@ Private Sub Form_Resize()
             frmSoldatMapEditor.ScaleWidth = frmSoldatMapEditor.formWidth
             frmSoldatMapEditor.ScaleHeight = frmSoldatMapEditor.formHeight
         End If
-        frmSoldatMapEditor.RegainFocus 'SetFocus
+        frmSoldatMapEditor.RegainFocus
     ElseIf Not frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
 
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then
-        frmSoldatMapEditor.RegainFocus 'SetFocus
+        frmSoldatMapEditor.RegainFocus
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
-        frmSoldatMapEditor.RegainFocus 'SetFocus
+        frmSoldatMapEditor.RegainFocus
     End If
-
-    'Beep
 
 End Sub
 

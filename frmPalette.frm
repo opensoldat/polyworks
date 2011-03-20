@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmPalette 
    Appearance      =   0  'Flat
    BackColor       =   &H004A3C31&
@@ -551,7 +551,7 @@ Dim formHeight As Integer
 Public collapsed As Boolean
 Public xPos As Integer, yPos  As Integer
 
-Dim radius As Integer ', op As Integer
+Dim radius As Integer
 Dim clrMode As Byte
 
 Dim xVal As Integer, yVal As Integer
@@ -636,18 +636,10 @@ Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
         Next
     Next
     
-    'If Not foundClr Then
-    '    shpSel1.left = picPalette.ScaleWidth + 2
-    '    shpSel1.Top = picPalette.ScaleHeight + 2
-    '    shpSel2.left = picPalette.ScaleWidth + 2
-    '    shpSel2.Top = picPalette.ScaleHeight + 2
-    'End If
-
 End Sub
 
 Private Sub cmdDefault_Click()
 
-    'frmSoldatMapEditor.SetFocus
     cmdDefault.SetFocus
 
 End Sub
@@ -664,7 +656,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
 
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     frmPalette.loadPalette App.path & "\palettes\current.txt"
     
@@ -697,7 +689,7 @@ Public Sub setForm()
 
 End Sub
 
-Public Sub loadPalette(FileName As String)
+Public Sub loadPalette(fileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -706,7 +698,7 @@ Public Sub loadPalette(FileName As String)
     
     fileOpen = False
 
-    Open FileName For Input As #1
+    Open fileName For Input As #1
     fileOpen = True
     
         For Y = 0 To 5
@@ -715,7 +707,6 @@ Public Sub loadPalette(FileName As String)
                 Input #1, clrPalette(X, Y).green
                 Input #1, clrPalette(X, Y).blue
                 frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
-                'frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(13, 60, 11), B
             Next
         Next
     
@@ -758,8 +749,8 @@ Private Sub mnuLoadPalette_Click()
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowOpen
     
-    If commonDialog.FileName <> "" Then
-        loadPalette commonDialog.FileName
+    If commonDialog.fileName <> "" Then
+        loadPalette commonDialog.fileName
     End If
     
     Exit Sub
@@ -768,7 +759,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub savePalette(FileName As String)
+Public Sub savePalette(fileName As String)
     
     Dim X As Integer, Y As Integer
     Dim fileOpen As Boolean
@@ -777,7 +768,7 @@ Public Sub savePalette(FileName As String)
     
     fileOpen = False
 
-    Open FileName For Output As #1
+    Open fileName For Output As #1
     fileOpen = True
     
         For Y = 0 To 5
@@ -805,8 +796,8 @@ Private Sub mnuSavePalette_Click()
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowSave
     
-    If commonDialog.FileName <> "" Then
-        savePalette commonDialog.FileName
+    If commonDialog.fileName <> "" Then
+        savePalette commonDialog.fileName
     End If
     
     Exit Sub
@@ -844,8 +835,6 @@ End Sub
 
 Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    'Dim xVal As Integer, yVal As Integer
-
     If Button = 1 Then 'select colour
     
         xVal = Int(X / 16)
@@ -857,10 +846,6 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
         txtRGB(2).Text = clrPalette(xVal, yVal).blue
         picColour.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
         
-        'picPalette.DrawMode = 6
-        'picPalette.Line (Int(X / 16) * 16, Int(Y / 16) * 16)-(Int(X / 16) * 16 + 16, Int(Y / 16) * 16 + 16), RGB(255, 255, 255), B
-        'picPalette.DrawMode = 13
-        
         shpSel1.left = Int(X / 16) * 16 + 1
         shpSel1.Top = Int(Y / 16) * 16 + 1
         shpSel2.left = Int(X / 16) * 16
@@ -871,7 +856,6 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         Me.PopupMenu mnuNewColour
-        'newPaletteColour Int(X / 16), Int(Y / 16)
         
     End If
     
@@ -879,9 +863,8 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
     
 End Sub
 
-Public Sub newPaletteColour() 'xVal As Integer, yVal As Integer)
+Public Sub newPaletteColour()
     
-    'If MsgBox("Add the current colour to the palette?", vbOKCancel, "Add Colour") = vbOK Then
     clrPalette(xVal, yVal).red = txtRGB(0).Text
     clrPalette(xVal, yVal).green = txtRGB(1).Text
     clrPalette(xVal, yVal).blue = txtRGB(2).Text
@@ -890,7 +873,6 @@ Public Sub newPaletteColour() 'xVal As Integer, yVal As Integer)
     shpSel1.Top = yVal * 16 + 1
     shpSel2.left = xVal * 16
     shpSel2.Top = yVal * 16
-    'End If
     
 End Sub
 
@@ -903,16 +885,6 @@ End Sub
 Private Sub picColour_Click()
 
     frmColour.InitClr txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
-    'frmColour.Show 1
-    'If frmColour.ok Then
-    '    frmSoldatMapEditor.setPaletteColour frmColour.red, frmColour.green, frmColour.blue
-    '    setValues frmColour.red, frmColour.green, frmColour.blue
-    '    shpSel1.left = picPalette.ScaleWidth + 2
-    '    shpSel1.Top = picPalette.ScaleHeight + 2
-    '    shpSel2.left = picPalette.ScaleWidth + 2
-    '    shpSel2.Top = picPalette.ScaleHeight + 2
-    'End If
-    'cmdDefault.SetFocus
     
     frmColour.ChangeColour picColour, txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text, 0
 
@@ -954,7 +926,6 @@ End Sub
 Private Sub txtRGB_Change(Index As Integer)
 
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
-        'txtRGB(Index).Text = tempVal
     ElseIf txtRGB(Index).Text = "" Then
         
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
@@ -1014,13 +985,10 @@ Private Sub txtOpacity_LostFocus()
     If txtOpacity.Text = "" Then
         txtOpacity.Text = 0
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
-        'frmSoldatMapEditor.setPolyColour 3, txtOpacity.Text
     Else
         txtOpacity.Text = 0
     End If
     
-    'picColour.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
-
 End Sub
 
 Private Sub cboBlendMode_Click()
@@ -1086,10 +1054,8 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
         End If
     Next
     
-    'mouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode) + 1, BUTTON_DOWN
-    
     frmSoldatMapEditor.setColourMode clrMode
-    frmSoldatMapEditor.RegainFocus 'SetFocus
+    frmSoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -1107,7 +1073,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmDisplay
     snapForm Me, frmWaypoints
@@ -1156,7 +1122,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours()
     
     On Error Resume Next
     

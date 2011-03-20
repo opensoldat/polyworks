@@ -680,11 +680,7 @@ Public Sub ChangeColour(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal 
     lastTool = frmSoldatMapEditor.setTempTool(10)
     frmSoldatMapEditor.setCurrentTool 10
     
-    'frmSoldatMapEditor.setCurrentTool 10
-    
     frmSoldatMapEditor.picMenuBar.Enabled = False
-    'frmSoldatMapEditor.picTitle.Enabled = False
-    'frmSoldatMapEditor.picStatus.Enabled = False
     frmTools.Enabled = False
     frmPalette.Enabled = False
     frmScenery.Enabled = False
@@ -693,7 +689,6 @@ Public Sub ChangeColour(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal 
     frmDisplay.picTitle.Enabled = False
     
     Me.Show , frmSoldatMapEditor
-    'Call SetWindowPos(Me.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE)
 
 End Sub
 
@@ -718,7 +713,6 @@ Private Sub HideColour(apply As Boolean)
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
         
-        'frmSoldatMapEditor.setTempTool lastTool
         frmSoldatMapEditor.setCurrentTool lastTool
         lastTool = 0
         
@@ -734,11 +728,6 @@ ErrorHandler:
     MsgBox Error$
 
 End Sub
-
-'Public Sub showColour()
-    'Me.Show , frmSoldatMapEditor
-    'Call BringWindowToTop(Me.hwnd)
-'End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
 
@@ -756,7 +745,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     oldX = -16
     oldY = -16
@@ -770,8 +759,6 @@ Private Sub Form_Load()
     pureClr(0) = 255
     pureClr(1) = 255
     pureClr(2) = 255
-    
-    'InitClr 255, 255, 255
     
     Exit Sub
 ErrorHandler:
@@ -1218,12 +1205,6 @@ Private Sub Render()
 
 End Sub
 
-Private Sub txtHexCode_GotFocus()
-
-    'tempHexVal = txtHexCode.Text
-
-End Sub
-
 Private Sub txtHexCode_Change()
 
     Dim tempHexVal As String
@@ -1254,7 +1235,7 @@ End Sub
 Private Sub txtHexCode_LostFocus()
 
     If HexToLong(txtHexCode.Text) = -1 Then
-        txtHexCode.Text = hexValue 'tempHexVal
+        txtHexCode.Text = hexValue
         clr(B) = CLng("&H" + right(hexValue, 2))
         hexValue = left(hexValue, Len(hexValue) - 2)
         clr(G) = CLng("&H" + right(hexValue, 2))
@@ -1269,12 +1250,8 @@ Private Sub txtHexCode_LostFocus()
             txtHexCode.Text = right(txtHexCode.Text, 6)
         ElseIf Len(txtHexCode.Text) < 6 Then
             txtHexCode = String(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
-        'Else
-            'hexValue = txtHexCode.Text
         End If
-        'txtHexCode.Text = RGBtoHex(HexToLong(txtHexCode.Text))
         hexValue = txtHexCode.Text
-        'txtHexCode.Text = hexValue
         
     End If
 
@@ -1426,14 +1403,13 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
 End Sub
 
 Private Sub picHide_Click()
 
     HideColour False
-    'Me.Hide
 
 End Sub
 
@@ -1452,8 +1428,6 @@ End Sub
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-    
-    'picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
 
 End Sub
 
@@ -1461,7 +1435,6 @@ Private Sub picCancel_Click()
 
     ok = False
     HideColour False
-    'Me.Hide
 
 End Sub
 
@@ -1481,8 +1454,6 @@ Private Sub picCancel_MouseUp(Button As Integer, Shift As Integer, X As Single, 
 
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     
-    'picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-
 End Sub
 
 Private Sub picOK_Click()
@@ -1493,7 +1464,6 @@ Private Sub picOK_Click()
     blue = clr(B)
 
     HideColour True
-    'Me.Hide
 
 End Sub
 
@@ -1513,11 +1483,9 @@ Private Sub picOK_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As
 
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     
-    'picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-
 End Sub
 
-Public Sub SetColours() 'bgClr As Long, lblBackClr As Long, lblTextClr As Long, txtBackClr As Long, txtTextClr As Long)
+Public Sub SetColours()
 
     On Error Resume Next
 

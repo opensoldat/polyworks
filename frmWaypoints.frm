@@ -530,7 +530,7 @@ Private Sub Form_Load()
     
     On Error GoTo ErrorHandler
     
-    Me.SetColours 'bgColour, lblBackColour, lblTextColour, txtBackColour, txtTextColour
+    Me.SetColours
     
     formHeight = Me.ScaleHeight
     
@@ -626,7 +626,7 @@ End Sub
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
-    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, 2, 0&
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     
     snapForm Me, frmPalette
     snapForm Me, frmInfo
@@ -706,8 +706,6 @@ Private Sub picType_MouseMove(Index As Integer, Button As Integer, Shift As Inte
 
 End Sub
 
-
-'Public Sub picType_Click(Index As Integer)
 Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     If Not frmSoldatMapEditor.setWayType(Index, Not wayptType(Index)) Then Exit Sub
