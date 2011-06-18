@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.9
+Soldat Polyworks 1.5.0.10
 
 
-updated 2011-03-19
+updated 2011-05-18
 
 
 
@@ -61,6 +61,9 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.10
+- fixed maps being buggy in soldat 1.5.0
 
 Changes in v1.5.0.9
 - fixed styling of bounciness label

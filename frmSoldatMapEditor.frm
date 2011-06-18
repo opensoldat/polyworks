@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{DDA53BD0-2CD0-11D4-8ED4-00E07D815373}#1.0#0"; "MBMouse.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.ocx"
 Begin VB.Form frmSoldatMapEditor 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
@@ -3327,7 +3327,11 @@ Public Sub SaveAndCompile(fileName As String)
                 Else
                     length = Sqr(xDiff ^ 2 + yDiff ^ 2)
                 End If
-                If Polygon.Poly.Perp.vertex(j).z < 1 Then
+                If Polygon.polyType = 18 Then
+                    If Polygon.Poly.Perp.vertex(j).z < 1 Then
+                        Polygon.Poly.Perp.vertex(j).z = 1
+                    End If
+                Else
                     Polygon.Poly.Perp.vertex(j).z = 1
                 End If
                 Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
