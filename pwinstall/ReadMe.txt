@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.11
+Soldat Polyworks 1.5.0.12
 
 
-updated 2011-09-13
+updated 2012-12-21
 
 
 
@@ -61,6 +61,10 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.12
+- added flagger collides and non-flagger collides polygon types
+- changed extension for saving from uppercase to lowercase
 
 Changes in v1.5.0.11
 - fixed bouncy polygons not being compiled correctly

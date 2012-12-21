@@ -1085,6 +1085,14 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Hurts Flaggers"
          Index           =   20
       End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Flagger Collides"
+         Index           =   21
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Non-Flagger Collides"
+         Index           =   22
+      End
       Begin VB.Menu mnuSep19 
          Caption         =   "-"
       End
@@ -1590,7 +1598,7 @@ Dim colourMode As Byte
 Dim eraseCircle As Boolean, eraseLines As Boolean
 
 Dim polyType As Byte
-Dim PolyTypeClrs(0 To 20) As Long
+Dim PolyTypeClrs(0 To 22) As Long
 
 Public shiftDown As Boolean, ctrlDown As Boolean, altDown As Boolean
 
@@ -12173,6 +12181,8 @@ Private Sub loadINI()
     PolyTypeClrs(18) = CLng("&H" + (loadString("PolyTypeColours", "Bouncy")))
     PolyTypeClrs(19) = CLng("&H" + (loadString("PolyTypeColours", "Explosive")))
     PolyTypeClrs(20) = CLng("&H" + (loadString("PolyTypeColours", "HurtFlaggers")))
+	PolyTypeClrs(21) = PolyTypeClrs(10)
+    PolyTypeClrs(22) = PolyTypeClrs(11)
     
     errVal = "9"
     
@@ -12338,7 +12348,7 @@ Private Sub mnuOpen_Click()
     End If
     DoEvents
     
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = uncompDir
     commonDialog.fileName = uncompDir & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
@@ -12390,7 +12400,7 @@ Private Sub mnuOpenCompiled_Click()
     End If
     DoEvents
     
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = soldatDir & "Maps\"
     commonDialog.fileName = soldatDir & "Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
@@ -12430,12 +12440,12 @@ Private Sub mnuSave_Click()
     
     On Error GoTo ErrorHandler
     
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
     commonDialog.fileName = uncompDir & currentFileName
     commonDialog.InitDir = uncompDir
     
-    If lblFileName.Caption = "Untitled.PMS" Then
+    If lblFileName.Caption = "Untitled.pms" Then
     
         commonDialog.ShowSave
         
@@ -12472,7 +12482,7 @@ Private Sub mnuSaveAs_Click()
 
     On Error GoTo ErrorHandler
     
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = App.path & "\Maps\"
     commonDialog.fileName = App.path & "\Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
@@ -12621,9 +12631,9 @@ Private Sub mnuExport_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Prefab (*.PFB)|*.PFB"
+    frmSoldatMapEditor.commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
     commonDialog.InitDir = prefabDir
-    commonDialog.fileName = ""
+    commonDialog.fileName = "Untitled.pfb"
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Prefab"
     commonDialog.ShowSave
     
@@ -12650,7 +12660,7 @@ Private Sub mnuImport_Click()
 
     On Error GoTo ErrorHandler
 
-    commonDialog.Filter = "Prefab (*.PFB)|*.PFB"
+    commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
     commonDialog.InitDir = prefabDir
     commonDialog.fileName = ""
     commonDialog.DialogTitle = "Import"
