@@ -12734,24 +12734,26 @@ Private Sub savePrefab(fileName As String)
             End If
         Next
 
+        offset = 0
         Put #1, , numSelWaypoints
         For i = 1 To waypointCount
             If Waypoints(i).selected Then
                 offset = offset + 1
-                Put #1, , Waypoints(i)
                 Waypoints(i).tempIndex = offset
+                Put #1, , Waypoints(i)
             End If
         Next
         
+        numSelCon = 0
         For i = 1 To conCount
-            If Waypoints(Connections(i).point1).selected Or Waypoints(Connections(i).point2).selected Then
+            If Waypoints(Connections(i).point1).selected And Waypoints(Connections(i).point2).selected Then
                 numSelCon = numSelCon + 1
             End If
         Next
         
         Put #1, , numSelCon
         For i = 1 To conCount
-            If Waypoints(Connections(i).point1).selected Or Waypoints(Connections(i).point2).selected Then
+            If Waypoints(Connections(i).point1).selected And Waypoints(Connections(i).point2).selected Then
                 tempConnection.point1 = Waypoints(Connections(i).point1).tempIndex
                 tempConnection.point2 = Waypoints(Connections(i).point2).tempIndex
                 Put #1, , tempConnection
@@ -12877,6 +12879,30 @@ Private Sub loadPrefab(fileName As String)
                 Get #1, , Spawns(spawnPoints + i)
             Next
             spawnPoints = spawnPoints + newSpawnPoints
+        End If
+        
+        Get #1, , newWaypoints
+        If newWaypoints > 0 Then
+            showWaypoints = True
+            numSelWaypoints = newWaypoints
+            ReDim Preserve Waypoints(waypointCount + newWaypoints)
+            For i = 1 To newWaypoints
+                Get #1, , Waypoints(waypointCount + i)
+            Next
+            Get #1, , newConnections
+            If newConnections > 0 Then
+                ReDim Preserve Connections(conCount + newConnections)
+                For i = 1 To newConnections
+                    Get #1, , Connections(conCount + i)
+                    Connections(conCount + i).point1 = Connections(conCount + i).point1 + waypointCount
+                    Connections(conCount + i).point2 = Connections(conCount + i).point2 + waypointCount
+                Next
+                conCount = conCount + newConnections
+            End If
+            waypointCount = waypointCount + newWaypoints
+            For i = 1 To waypointCount
+                Waypoints(i).tempIndex = i
+            Next
         End If
         
         frmDisplay.setLayer 6, showObjects

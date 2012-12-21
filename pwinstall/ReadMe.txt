@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.10
+Soldat Polyworks 1.5.0.11
 
 
-updated 2011-05-18
+updated 2011-09-13
 
 
 
@@ -61,6 +61,10 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.11
+- fixed bouncy polygons not being compiled correctly
+- fixed saving of waypoints to prefabs not working
 
 Changes in v1.5.0.10
 - fixed maps being buggy in soldat 1.5.0
