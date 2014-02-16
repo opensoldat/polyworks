@@ -1400,7 +1400,7 @@ Begin VB.Form frmInfo
          Height          =   285
          ItemData        =   "frmInfo.frx":0026
          Left            =   840
-         List            =   "frmInfo.frx":006F
+         List            =   "frmInfo.frx":0078
          Style           =   2  'Dropdown List
          TabIndex        =   0
          Tag             =   "font1"

@@ -1,7 +1,7 @@
 Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\system32\stdole2.tlb#OLE Automation
-Reference=*\G{E1211242-8E94-11D1-8808-00C04FC2C603}#1.0#0#C:\Windows\system32\dx8vb.dll#DirectX 8 for Visual Basic Type Library
-Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#C:\Windows\system32\scrrun.dll#Microsoft Scripting Runtime
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{E1211242-8E94-11D1-8808-00C04FC2C603}#1.0#0#C:\Windows\SysWow64\dx8vb.dll#DirectX 8 for Visual Basic Type Library
+Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#C:\Windows\SysWOW64\scrrun.dll#Microsoft Scripting Runtime
 Object={DDA53BD0-2CD0-11D4-8ED4-00E07D815373}#1.0#0; MBMouse.ocx
 Object={F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0; COMDLG32.OCX
 Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; mscomctl.ocx

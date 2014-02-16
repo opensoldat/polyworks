@@ -1093,6 +1093,18 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "Non-Flagger Collides"
          Index           =   22
       End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Flag Collides"
+         Index           =   23
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Background"
+         Index           =   24
+      End
+      Begin VB.Menu mnuPolyType 
+         Caption         =   "Background Transition"
+         Index           =   25
+      End
       Begin VB.Menu mnuSep19 
          Caption         =   "-"
       End
@@ -1598,7 +1610,7 @@ Dim colourMode As Byte
 Dim eraseCircle As Boolean, eraseLines As Boolean
 
 Dim polyType As Byte
-Dim PolyTypeClrs(0 To 22) As Long
+Dim PolyTypeClrs(0 To 25) As Long
 
 Public shiftDown As Boolean, ctrlDown As Boolean, altDown As Boolean
 
@@ -4141,6 +4153,7 @@ Public Sub Render()
     Dim circleCoords(0 To 32) As TCustomVertex
     Dim numPolys As Integer
     Dim scenR As Single
+    Dim backtypePolys() As TPolygon
     
     Dim xVal As Single, yVal As Single
     Dim theta As Single
@@ -4213,6 +4226,46 @@ Public Sub Render()
     'draw background
     If showBG Then
         D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLESTRIP, 2, bgPolys(1), Len(bgPolys(1))
+    End If
+    
+    'Draw Polys
+    If showPolys And numPolys > 0 Then
+        If showTexture Then 'set texture
+            D3DDevice.setTexture 0, mapTexture
+        End If
+
+        D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
+        D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
+        D3DDevice.SetRenderState D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA Or D3DCOLORWRITEENABLE_BLUE Or D3DCOLORWRITEENABLE_GREEN Or D3DCOLORWRITEENABLE_RED
+        
+        D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
+        
+        If clrPolys Then
+            D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
+            D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
+        End If
+
+        For i = 1 To numPolys
+            If vertexList(i).polyType = 24 Or vertexList(i).polyType = 25 Then
+                D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            End If
+        Next
+        
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
+
+    ElseIf showPolys = False And numPolys > 0 Then
+        D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
+        D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ZERO
+        D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_ONE
+        For i = 1 To numPolys
+            If vertexList(i).polyType = 24 Or vertexList(i).polyType = 25 Then
+                D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            End If
+        Next
+        D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 0
     End If
     
     scenerySprite.Begin
@@ -4321,7 +4374,9 @@ Public Sub Render()
         End If
 
         For i = 1 To numPolys
-            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            If Not (vertexList(i).polyType = 24 Or vertexList(i).polyType = 25) Then
+                D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            End If
         Next
         
         D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
@@ -4332,7 +4387,9 @@ Public Sub Render()
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ZERO
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_ONE
         For i = 1 To numPolys
-            D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            If Not (vertexList(i).polyType = 24 Or vertexList(i).polyType = 25) Then
+                D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
+            End If
         Next
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 0
     End If
@@ -12181,8 +12238,11 @@ Private Sub loadINI()
     PolyTypeClrs(18) = CLng("&H" + (loadString("PolyTypeColours", "Bouncy")))
     PolyTypeClrs(19) = CLng("&H" + (loadString("PolyTypeColours", "Explosive")))
     PolyTypeClrs(20) = CLng("&H" + (loadString("PolyTypeColours", "HurtFlaggers")))
-	PolyTypeClrs(21) = PolyTypeClrs(10)
-    PolyTypeClrs(22) = PolyTypeClrs(11)
+    PolyTypeClrs(21) = CLng("&H" + (loadString("PolyTypeColours", "OnlyFlagger")))
+    PolyTypeClrs(22) = CLng("&H" + (loadString("PolyTypeColours", "NonFlagger")))
+    PolyTypeClrs(23) = CLng("&H" + (loadString("PolyTypeColours", "FlagCollides")))
+    PolyTypeClrs(24) = CLng("&H" + (loadString("PolyTypeColours", "Back")))
+    PolyTypeClrs(25) = CLng("&H" + (loadString("PolyTypeColours", "BackTransition")))
     
     errVal = "9"
     
