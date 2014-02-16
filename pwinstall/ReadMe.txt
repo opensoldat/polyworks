@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.12
+Soldat Polyworks 1.5.0.13
 
 
-updated 2012-12-21
+updated 2014-02-16
 
 
 
@@ -61,6 +61,9 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+
+Changes in v1.5.0.13
+- added flag collides, background, and background transition polygon types
 
 Changes in v1.5.0.12
 - added flagger collides and non-flagger collides polygon types
