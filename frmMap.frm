@@ -537,9 +537,9 @@ Private Sub cboJet_Click()
         Case 7 'infinite
             txtJet.Text = "32766"
         Case 8 'custom
-            
+
     End Select
-    
+
     If cboJet.ListIndex <> 8 Then
         txtJet.Enabled = False
     Else
@@ -574,17 +574,17 @@ Private Sub getJets()
 End Sub
 
 Public Sub Form_Load()
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-        
+
     loadTextures2
-    
+
     frmSoldatMapEditor.getOptions
 
     getJets
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading Map form"
@@ -594,20 +594,20 @@ End Sub
 Private Sub cboTexture_Click()
 
     On Error GoTo ErrorHandler
-    
+
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-        
+
         frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
-        
+
         Dim Token As Long
         Token = InitGDIPlus
         picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
         FreeGDIPlus Token
     End If
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "Error showing texture" & vbNewLine & Error$
@@ -615,16 +615,16 @@ ErrorHandler:
 End Sub
 
 Public Sub loadTextures()
-    
+
     On Error GoTo ErrorHandler
-    
+
     Dim strParent As String
     Dim strPath As String
 
     Dim objFSO As FileSystemObject
     Dim objFiles As Files
     Dim objFile As file
-    
+
     cboTexture.Clear
 
     strParent = frmSoldatMapEditor.soldatDir
@@ -633,21 +633,21 @@ Public Sub loadTextures()
     Set objFSO = New FileSystemObject
 
     If Not objFSO.FolderExists(strPath) Then Exit Sub
-    
+
     Set objFiles = objFSO.GetFolder(strPath).Files
-    
+
     For Each objFile In objFiles
         If right(objFile.Name, 3) = "bmp" Then
             cboTexture.AddItem objFile.Name
         End If
     Next
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "loading textures failed" & vbNewLine & Error$
-  
+
 End Sub
 
 Public Sub loadTextures2()
@@ -655,23 +655,23 @@ Public Sub loadTextures2()
     On Error GoTo ErrorHandler
 
     Dim file As Variant
-    
+
     cboTexture.Clear
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
         file = Dir$
     Loop
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
         file = Dir$
     Loop
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "loading textures failed" & vbNewLine & Error$
@@ -681,24 +681,24 @@ End Sub
 Public Sub loadFromList()
 
     On Error GoTo ErrorHandler
-    
+
     Dim textureName As String
-    
+
     cboTexture.Clear
-    
+
     Open App.path & "\texture_list.txt" For Input As #1
-    
+
         Do While Not EOF(1)
-        
+
             Input #1, textureName
             cboTexture.AddItem textureName
-        
+
         Loop
-    
+
     Close #1
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox Error$
@@ -710,7 +710,7 @@ Public Sub mnuRefresh_Click()
     Dim i As Integer
 
     loadTextures2
-    
+
     For i = 0 To cboTexture.ListCount - 1
         If cboTexture.List(i) = frmSoldatMapEditor.textureFile And cboTexture.List(i) <> "" Then
             cboTexture.ListIndex = i
@@ -743,7 +743,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
 End Sub
 
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -767,15 +767,15 @@ End Sub
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Private Sub picHide_Click()
-    
+
     frmSoldatMapEditor.setOptions
     frmSoldatMapEditor.mnuMap.Checked = False
     Unload Me
-    
+
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -813,23 +813,23 @@ Public Sub SetColours()
     Dim c As Control
 
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_map.bmp")
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
     Me.BackColor = bgClr
-    
+
     For i = 0 To 7
         lblMap(i).BackColor = lblBackClr
         lblMap(i).ForeColor = lblTextClr
     Next
-    
+
     txtDesc.BackColor = txtBackClr
     txtDesc.ForeColor = txtTextClr
     txtJet.BackColor = txtBackClr
     txtJet.ForeColor = txtTextClr
-    
+
     cboWeather.BackColor = txtBackClr
     cboWeather.ForeColor = txtTextClr
     cboSteps.BackColor = txtBackClr
@@ -842,10 +842,10 @@ Public Sub SetColours()
     cboMedikits.ForeColor = txtTextClr
     cboTexture.BackColor = txtBackClr
     cboTexture.ForeColor = txtTextClr
-    
+
     fraMap(0).BorderColor = frameClr
     fraMap(1).BorderColor = frameClr
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1
@@ -853,5 +853,5 @@ Public Sub SetColours()
             c.Font.Name = font2
         End If
     Next
-    
+
 End Sub

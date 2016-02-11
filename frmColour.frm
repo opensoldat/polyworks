@@ -652,34 +652,34 @@ Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
     red = clr(R)
     green = clr(G)
     blue = clr(B)
-    
+
     changeRGB
-    
+
     picClr.Cls
     oldX = (hue / 360 * 256)
     oldY = 255 - (sat * 255)
     picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
 
     picColour.BackColor = RGB(clr(R), clr(B), clr(G))
-    
+
     updateAll
     updateRGB
     updateHSB
     updateHex
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox "Error initializing colour picker" & vbNewLine & Error$
-    
+
 End Sub
 
 Public Sub ChangeColour(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal As Byte, ByRef bVal As Byte, ByVal cTool As Byte)
 
     nonModal = True
-    
+
     lastTool = frmSoldatMapEditor.setTempTool(10)
     frmSoldatMapEditor.setCurrentTool 10
-    
+
     frmSoldatMapEditor.picMenuBar.Enabled = False
     frmTools.Enabled = False
     frmPalette.Enabled = False
@@ -687,7 +687,7 @@ Public Sub ChangeColour(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal 
     frmInfo.Enabled = False
     frmWaypoints.Enabled = False
     frmDisplay.picTitle.Enabled = False
-    
+
     Me.Show , frmSoldatMapEditor
 
 End Sub
@@ -701,9 +701,9 @@ Private Sub HideColour(apply As Boolean)
             frmPalette.setValues red, green, blue
             frmPalette.checkPalette red, green, blue
         End If
-        
+
         nonModal = False
-        
+
         frmSoldatMapEditor.picMenuBar.Enabled = True
 
         frmTools.Enabled = True
@@ -712,17 +712,17 @@ Private Sub HideColour(apply As Boolean)
         frmInfo.Enabled = True
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
-        
+
         frmSoldatMapEditor.setCurrentTool lastTool
         lastTool = 0
-        
+
     End If
 
     Me.Hide
     frmSoldatMapEditor.RegainFocus
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox Error$
@@ -742,11 +742,11 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Load()
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     oldX = -16
     oldY = -16
     ok = False
@@ -759,7 +759,7 @@ Private Sub Form_Load()
     pureClr(0) = 255
     pureClr(1) = 255
     pureClr(2) = 255
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading Colour Picker form"
@@ -791,7 +791,7 @@ Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         ElseIf Y < 0 Then
             Y = 0
         End If
-        
+
         sat = (255 - Y) / 255
         hue = X / 255 * 359
         calculateHue
@@ -801,13 +801,13 @@ Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateAll
         updateRGB
         updateHex
-        
+
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
         oldX = X
         oldY = Y
         picClr.Circle (X, Y), 5.5, RGB(0, 0, 0)
     End If
-    
+
 End Sub
 
 Private Sub picRGB_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -837,7 +837,7 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
         updateAll
         updateHSB
         updateHex
-        
+
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
         oldX = hue / 360 * 255
         oldY = 255 - sat * 255
@@ -847,13 +847,13 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
 End Sub
 
 Private Sub picHue_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     picHue_MouseMove Button, Shift, X, Y
 
 End Sub
 
 Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     If X > 255 Then
         X = 255
     ElseIf X < 0 Then
@@ -864,20 +864,20 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
     ElseIf Y < 0 Then
         Y = 0
     End If
-    
+
     X = 255 - Y
-    
+
     If Button = 1 Then
         hue = X / 255 * 359
-    
+
         calculateHue
         changeHue
-        
+
         txtHue.Text = Int(hue + 0.5)
         updateAll
         updateRGB
         updateHex
-        
+
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
         oldX = X
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
@@ -914,9 +914,9 @@ Private Sub calculateHue()
         clr(G) = 255 * (1 - sat) * bright
         clr(B) = ((255 - ((360 - hue) / 60 * 255)) * (1 - sat) + ((360 - hue) / 60 * 255)) * bright
     End If
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox Error$
@@ -956,7 +956,7 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         txtSat.Text = Int(sat * 100 + 0.5)
         updateRGB
         updateHex
-        
+
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
         oldY = 255 - X
         picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
@@ -1050,9 +1050,9 @@ Private Sub changeRGB() 'when rgb modified by user
             hue = 240 - (clr(G) - clr(R)) / (clr(B) - clr(R)) * 60
         End If
     End If
-    
+
     changeHue
-    
+
     sat = 1 - (clr(low) / clr(high))
     bright = clr(high) / 255
 
@@ -1107,17 +1107,17 @@ Private Sub changeHue()
 End Sub
 
 Private Sub updateAll()
-    
+
     picColour.BackColor = RGB(clr(R), clr(G), clr(B))
-    
+
     imgRGB(0).Top = picRGB(0).Top + 255 - clr(0) - 7
     imgRGB(1).Top = picRGB(1).Top + 255 - clr(1) - 7
     imgRGB(2).Top = picRGB(2).Top + 255 - clr(2) - 7
-    
+
     imgHue.Top = picHue.Top + 255 - Int(hue * 256 / 360) - 7
     imgSat.Top = picSat.Top + 255 - Int(sat * 255) - 7
     imgBright.Top = picBright.Top + 255 - Int(bright * 255) - 7
-    
+
     Render
 
 End Sub
@@ -1149,23 +1149,23 @@ Private Sub Render()
 
     Dim i As Integer
     Dim redVal As Byte, greenVal As Byte, blueVal As Byte
-    
+
     For i = 0 To 255
-        
+
         picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, clr(G), clr(B))
         picRGB(G).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), i, clr(B))
         picRGB(B).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), clr(G), i)
-        
+
         redVal = ((255 - pureClr(R)) * (1 - i / 255) + pureClr(R)) * bright
         greenVal = ((255 - pureClr(G)) * (1 - i / 255) + pureClr(G)) * bright
         blueVal = ((255 - pureClr(B)) * (1 - i / 255) + pureClr(B)) * bright
         picSat.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
-        
+
         redVal = ((255 - pureClr(R)) * (1 - sat) + pureClr(R)) * (i / 255)
         greenVal = ((255 - pureClr(G)) * (1 - sat) + pureClr(G)) * (i / 255)
         blueVal = ((255 - pureClr(B)) * (1 - sat) + pureClr(B)) * (i / 255)
         picBright.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
-        
+
         If i <= (255 / 6) Then
             redVal = bright * 255
             greenVal = ((255 - (i * 6)) * (1 - sat) + (i * 6)) * bright
@@ -1191,11 +1191,11 @@ Private Sub Render()
             greenVal = 255 * (1 - sat) * bright
             blueVal = ((255 - ((255 - i) * 6)) * (1 - sat) + ((255 - i) * 6)) * bright
         End If
-        
+
         picHue.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
-    
+
     Next
-    
+
     picRGB(R).Refresh
     picRGB(G).Refresh
     picRGB(B).Refresh
@@ -1210,7 +1210,7 @@ Private Sub txtHexCode_Change()
     Dim tempHexVal As String
 
     If HexToLong(txtHexCode.Text) = -1 Then
-        
+
     ElseIf hexValue <> txtHexCode.Text Then
         If Len(txtHexCode.Text) < 6 Then
             tempHexVal = String(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
@@ -1252,7 +1252,7 @@ Private Sub txtHexCode_LostFocus()
             txtHexCode = String(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If
         hexValue = txtHexCode.Text
-        
+
     End If
 
 End Sub
@@ -1262,7 +1262,7 @@ Private Sub txtRGB_Change(Index As Integer)
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
         txtRGB(Index).Text = clr(Index)
     ElseIf txtRGB(Index).Text = "" Then
-        
+
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         If clr(Index) <> txtRGB(Index).Text Then
             clr(Index) = txtRGB(Index).Text
@@ -1292,20 +1292,20 @@ Private Sub txtHue_Change()
     If IsNumeric(txtHue.Text) = False And txtHue.Text <> "" Then
         txtHue.Text = Int(hue + 0.5)
     ElseIf txtHue.Text = "" Then
-        
+
     ElseIf txtHue.Text >= 0 And txtHue.Text <= 359 Then
         If Int(hue + 0.5) <> txtHue.Text Then
             hue = txtHue.Text
             If Not (clr(R) = clr(G) And clr(R) = clr(B)) Then
                 calculateHue
             Else
-                
+
             End If
             changeHue
             updateAll
             updateRGB
             updateHex
-            
+
             picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
             oldX = hue / 360 * 256
             picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
@@ -1331,7 +1331,7 @@ Private Sub txtSat_Change()
     If IsNumeric(txtSat.Text) = False And txtSat.Text <> "" Then
         txtSat.Text = Int(sat * 100 + 0.5)
     ElseIf txtSat.Text = "" Then
-        
+
     ElseIf txtSat.Text >= 0 And txtSat.Text <= 100 Then
         If Int(sat * 100 + 0.5) <> txtSat.Text Then
             sat = txtSat.Text / 100
@@ -1341,7 +1341,7 @@ Private Sub txtSat_Change()
             updateAll
             updateRGB
             updateHex
-            
+
             picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
             oldY = 255 - sat * 255
             picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
@@ -1367,7 +1367,7 @@ Private Sub txtBright_Change()
     If IsNumeric(txtBright.Text) = False And txtBright.Text <> "" Then
         txtBright.Text = Int(bright * 100 + 0.5)
     ElseIf txtBright.Text = "" Then
-        
+
     ElseIf txtBright.Text >= 0 And txtBright.Text <= 100 Then
         If Int(bright * 100 + 0.5) <> txtBright.Text Then
             bright = txtBright.Text / 100
@@ -1453,7 +1453,7 @@ End Sub
 Private Sub picCancel_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    
+
 End Sub
 
 Private Sub picOK_Click()
@@ -1476,13 +1476,13 @@ End Sub
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Private Sub picOK_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    
+
 End Sub
 
 Public Sub SetColours()
@@ -1491,16 +1491,16 @@ Public Sub SetColours()
 
     Dim i As Integer
     Dim c As Control
-    
+
     '--------
-    
+
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_colourpicker.bmp")
     picClr.Picture = LoadPicture(App.path & "\" & gfxDir & "\colour_picker.bmp")
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    
+
     imgRGB(0).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
     imgRGB(1).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
     imgRGB(2).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
@@ -1508,21 +1508,21 @@ Public Sub SetColours()
     imgBright.Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
     imgSat.Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
     picClr.MouseIcon = LoadPicture(App.path & "\" & gfxDir & "\cursors\colour_picker.cur")
-    
+
     '--------
 
     Me.BackColor = bgClr
-    
+
     For i = 0 To 8
         lblClr(i).BackColor = lblBackClr
         lblClr(i).ForeColor = lblTextClr
     Next
-    
+
     For i = 0 To 2
         txtRGB(i).BackColor = txtBackClr
         txtRGB(i).ForeColor = txtTextClr
     Next
-    
+
     txtHue.BackColor = txtBackClr
     txtHue.ForeColor = txtTextClr
     txtSat.BackColor = txtBackClr
@@ -1532,7 +1532,7 @@ Public Sub SetColours()
 
     txtHexCode.BackColor = bgClr
     txtHexCode.ForeColor = lblTextClr
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1

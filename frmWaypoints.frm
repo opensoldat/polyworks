@@ -525,21 +525,21 @@ Public Function setWayptKey(Index As Integer, ByVal value As Byte)
 End Function
 
 Private Sub Form_Load()
-    
+
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     formHeight = Me.ScaleHeight
-    
+
     setForm
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading Waypoints form"
-    
+
 End Sub
 
 Public Sub setForm()
@@ -605,7 +605,7 @@ Public Sub ClearWaypt()
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
         wayptType(i) = False
     Next
-    
+
     cboSpecial.ListIndex = -1
     lblNumCon.Caption = ""
 
@@ -627,7 +627,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmPalette
     snapForm Me, frmInfo
     snapForm Me, frmTools
@@ -661,7 +661,7 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -683,15 +683,15 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
     Dim i As Integer
 
     wayptPath = Index
-    
+
     For i = 0 To 1
         If i <> Index Then
             mouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
         End If
     Next
-    
+
     frmSoldatMapEditor.setPathNum Index + 1
-    
+
 End Sub
 
 Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -701,15 +701,15 @@ Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integ
 End Sub
 
 Private Sub picType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_MOVE, lblType(Index).Width + 16
 
 End Sub
 
 Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     If Not frmSoldatMapEditor.setWayType(Index, Not wayptType(Index)) Then Exit Sub
-    
+
     wayptType(Index) = Not wayptType(Index)
     mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
     If Index = 0 Then
@@ -745,13 +745,13 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
     Dim i As Integer
 
     showPaths = Index
-    
+
     For i = 0 To 2
         If i <> Index Then
             mouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
         End If
     Next
-    
+
     frmSoldatMapEditor.setShowPaths
 
 End Sub
@@ -759,7 +759,7 @@ End Sub
 Public Sub SetColours()
 
     On Error Resume Next
-    
+
     Dim i As Integer
     Dim c As Control
 
@@ -767,43 +767,43 @@ Public Sub SetColours()
 
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_waypoints.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    
+
     mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
     mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
-    
+
     For i = 0 To 4
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     Next
-    
+
     For i = 0 To 2
         mouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
     Next
-    
+
     '--------
 
     Me.BackColor = bgClr
-    
+
     For i = 0 To 4
         lblType(i).BackColor = lblBackClr
         lblType(i).ForeColor = lblTextClr
     Next
-    
+
     For i = 0 To 1
         lblPath(i).BackColor = lblBackClr
         lblPath(i).ForeColor = lblTextClr
     Next
-    
+
     For i = 0 To 2
         lblShow(i).BackColor = lblBackClr
         lblShow(i).ForeColor = lblTextClr
     Next
-    
+
     lblWaypoints.BackColor = lblBackClr
     lblWaypoints.ForeColor = lblTextClr
-    
+
     cboSpecial.BackColor = txtBackClr
     cboSpecial.ForeColor = txtTextClr
-    
+
     lblNumCon.BackColor = lblBackClr
     lblNumCon.ForeColor = lblTextClr
 

@@ -579,13 +579,13 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
             frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
         Next
     Next
-    
+
     radius = R
     txtRadius.Text = R
     txtOpacity.Text = op * 100
     cboBlendMode.ListIndex = blend
     clrMode = mode
-    
+
     For i = 0 To 2
         If i = clrMode Then
             BitBlt picClrMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
@@ -594,7 +594,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
         End If
         picClrMode(i).Refresh
     Next
-    
+
     For i = 0 To 2
         mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
@@ -610,7 +610,7 @@ Private Function getRGB(DecValue As Long) As TColour
     If Len(hexValue) < 6 Then
         hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
-    
+
     getRGB.blue = CLng("&H" + right(hexValue, 2))
     hexValue = left(hexValue, Len(hexValue) - 2)
     getRGB.green = CLng("&H" + right(hexValue, 2))
@@ -635,7 +635,7 @@ Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
             End If
         Next
     Next
-    
+
 End Sub
 
 Private Sub cmdDefault_Click()
@@ -653,22 +653,22 @@ End Sub
 Private Sub Form_Load()
 
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
 
     Me.SetColours
-    
+
     frmPalette.loadPalette App.path & "\palettes\current.txt"
-    
+
     setValues frmColour.red, frmColour.green, frmColour.blue
-    
+
     shpSel1.left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
     shpSel2.left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
-    
+
     formHeight = Me.ScaleHeight
-    
+
     setForm
 
     Exit Sub
@@ -695,12 +695,12 @@ Public Sub loadPalette(fileName As String)
 
     Dim X As Integer, Y As Integer
     Dim fileOpen As Boolean
-    
+
     fileOpen = False
 
     Open fileName For Input As #1
     fileOpen = True
-    
+
         For Y = 0 To 5
             For X = 0 To 11
                 Input #1, clrPalette(X, Y).red
@@ -709,23 +709,23 @@ Public Sub loadPalette(fileName As String)
                 frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
             Next
         Next
-    
+
     Close #1
     fileOpen = False
-    
+
     shpSel1.left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
     shpSel2.left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
-    
+
     picPalette.Refresh
-    
+
     Exit Sub
 ErrorHandler:
     mnuClearPalette_Click
     If fileOpen Then Close #1
     MsgBox "Error loading palette" & vbNewLine & Error$
-    
+
 End Sub
 
 Private Sub Form_LostFocus()
@@ -743,43 +743,43 @@ End Sub
 Private Sub mnuLoadPalette_Click()
 
     On Error GoTo ErrorHandler
-    
+
     commonDialog.InitDir = App.path & "\palettes\"
     commonDialog.DialogTitle = "Load Palette"
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowOpen
-    
+
     If commonDialog.fileName <> "" Then
         loadPalette commonDialog.fileName
     End If
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
 End Sub
 
 Public Sub savePalette(fileName As String)
-    
+
     Dim X As Integer, Y As Integer
     Dim fileOpen As Boolean
-    
+
     On Error GoTo ErrorHandler
-    
+
     fileOpen = False
 
     Open fileName For Output As #1
     fileOpen = True
-    
+
         For Y = 0 To 5
             For X = 0 To 11
                 Print #1, clrPalette(X, Y).red & ", " & clrPalette(X, Y).green & ", " & clrPalette(X, Y).blue
             Next
         Next
-    
+
     Close #1
     fileOpen = False
-    
+
     Exit Sub
 ErrorHandler:
     If fileOpen Then Close #1
@@ -795,13 +795,13 @@ Private Sub mnuSavePalette_Click()
     commonDialog.DialogTitle = "Save Palette"
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowSave
-    
+
     If commonDialog.fileName <> "" Then
         savePalette commonDialog.fileName
     End If
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
 End Sub
@@ -809,7 +809,7 @@ End Sub
 Private Sub mnuClearPalette_Click()
 
     Dim X As Integer, Y As Integer
-    
+
     For Y = 0 To 5
         For X = 0 To 11
             clrPalette(X, Y).red = 0
@@ -818,7 +818,7 @@ Private Sub mnuClearPalette_Click()
             frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), 0, BF
         Next
     Next
-    
+
     shpSel1.left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
     shpSel2.left = picPalette.ScaleWidth + 2
@@ -836,35 +836,35 @@ End Sub
 Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then 'select colour
-    
+
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         frmSoldatMapEditor.setPaletteColour clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
-        
+
         txtRGB(0).Text = clrPalette(xVal, yVal).red
         txtRGB(1).Text = clrPalette(xVal, yVal).green
         txtRGB(2).Text = clrPalette(xVal, yVal).blue
         picColour.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
-        
+
         shpSel1.left = Int(X / 16) * 16 + 1
         shpSel1.Top = Int(Y / 16) * 16 + 1
         shpSel2.left = Int(X / 16) * 16
         shpSel2.Top = Int(Y / 16) * 16
-        
+
     ElseIf Button = 2 Then 'new colour
-    
+
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         Me.PopupMenu mnuNewColour
-        
+
     End If
-    
+
     cmdDefault.SetFocus
-    
+
 End Sub
 
 Public Sub newPaletteColour()
-    
+
     clrPalette(xVal, yVal).red = txtRGB(0).Text
     clrPalette(xVal, yVal).green = txtRGB(1).Text
     clrPalette(xVal, yVal).blue = txtRGB(2).Text
@@ -873,7 +873,7 @@ Public Sub newPaletteColour()
     shpSel1.Top = yVal * 16 + 1
     shpSel2.left = xVal * 16
     shpSel2.Top = yVal * 16
-    
+
 End Sub
 
 Private Sub mnuAddToPalette_Click()
@@ -885,7 +885,7 @@ End Sub
 Private Sub picColour_Click()
 
     frmColour.InitClr txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
-    
+
     frmColour.ChangeColour picColour, txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text, 0
 
 End Sub
@@ -927,7 +927,7 @@ Private Sub txtRGB_Change(Index As Integer)
 
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
     ElseIf txtRGB(Index).Text = "" Then
-        
+
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         picColour.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
         frmSoldatMapEditor.setPolyColour Index, txtRGB(Index).Text
@@ -957,7 +957,7 @@ Private Sub txtRGB_LostFocus(Index As Integer)
     Else
         txtRGB(Index).Text = tempVal
     End If
-    
+
     picColour.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
 
 End Sub
@@ -967,7 +967,7 @@ Private Sub txtOpacity_Change()
     If IsNumeric(txtOpacity.Text) = False And txtOpacity.Text <> "" Then
         txtOpacity.Text = 100
     ElseIf txtOpacity.Text = "" Then
-        
+
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
         frmSoldatMapEditor.setPolyColour 3, txtOpacity.Text
     End If
@@ -988,7 +988,7 @@ Private Sub txtOpacity_LostFocus()
     Else
         txtOpacity.Text = 0
     End If
-    
+
 End Sub
 
 Private Sub cboBlendMode_Click()
@@ -1053,7 +1053,7 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
             mouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = clrMode), BUTTON_UP
         End If
     Next
-    
+
     frmSoldatMapEditor.setColourMode clrMode
     frmSoldatMapEditor.RegainFocus
 
@@ -1074,7 +1074,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmDisplay
     snapForm Me, frmWaypoints
     snapForm Me, frmTools
@@ -1091,17 +1091,17 @@ End Sub
 Private Sub picPaletteMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
-    
+
     PopupMenu mnuPalette, , picPaletteMenu.left + 32, picPaletteMenu.Top + 16
-    
+
     mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPaletteMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -1117,23 +1117,23 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Public Sub SetColours()
-    
+
     On Error Resume Next
-    
+
     Dim i As Integer
     Dim c As Control
 
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_palette.bmp")
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    
+
     For i = 0 To 2
         mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
@@ -1149,14 +1149,14 @@ Public Sub SetColours()
         txtRGB(i).BackColor = txtBackClr
         txtRGB(i).ForeColor = txtTextClr
     Next
-    
+
     txtOpacity.BackColor = txtBackClr
     txtOpacity.ForeColor = txtTextClr
     txtRadius.BackColor = txtBackClr
     txtRadius.ForeColor = txtTextClr
     cboBlendMode.BackColor = txtBackClr
     cboBlendMode.ForeColor = txtTextClr
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1
@@ -1164,5 +1164,5 @@ Public Sub SetColours()
             c.Font.Name = font2
         End If
     Next
-    
+
 End Sub

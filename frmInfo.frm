@@ -1704,17 +1704,17 @@ Public noChange As Boolean
 Private applyChange As Boolean
 
 Private Sub Form_Load()
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     formHeight = Me.ScaleHeight
-    
+
     setForm
-    
+
     '----
-    
+
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
     txtQuadX(0).Text = 0
@@ -1745,13 +1745,13 @@ Private Sub cboPolyType_Click()
     If Not noChange Then
         frmSoldatMapEditor.applyPolyType cboPolyType.ListIndex
     End If
-    
+
     If cboPolyType.ListIndex = 18 Then
         txtBounciness.Enabled = True
     Else
         txtBounciness.Enabled = False
     End If
-    
+
 End Sub
 
 Private Sub txtLightProp_GotFocus(Index As Integer)
@@ -1778,7 +1778,7 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
         txtLightProp(Index).Text = tempVal
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
@@ -1872,13 +1872,13 @@ Private Sub txtScale_LostFocus(Index As Integer)
         txtScale(Index).Text = tempVal
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
 
 Private Sub cboLevel_Click()
-    
+
     If Not noChange Then
         frmSoldatMapEditor.applySceneryProp cboLevel.ListIndex, 4
     End If
@@ -1910,7 +1910,7 @@ Private Sub txtScenProp_LostFocus(Index As Integer)
         txtScenProp(Index).Text = tempVal
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
@@ -1931,7 +1931,7 @@ Private Sub txtTexture_LostFocus(Index As Integer)
         txtTexture(Index).Text = tempVal
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
@@ -1954,7 +1954,7 @@ Private Sub txtVertexAlpha_LostFocus()
         frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
@@ -1977,7 +1977,7 @@ Private Sub txtBounciness_LostFocus()
         frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
     End If
     tempVal = 0
-    
+
     applyChange = False
 
 End Sub
@@ -1993,14 +1993,14 @@ End Sub
 Public Sub mnuProp_Click(Index As Integer)
 
     Dim i As Integer
-    
+
     For i = 0 To 5
         mnuProp(i).Checked = False
         picProp(i).Visible = False
     Next
 
     mnuProp(Index).Checked = True
-    
+
     picProp(Index).Visible = True
 
 End Sub
@@ -2020,7 +2020,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
     snapForm Me, frmTools
@@ -2054,7 +2054,7 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -2062,23 +2062,23 @@ End Sub
 Private Sub picPropMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
-    
+
     PopupMenu mnuProperties, , picPropMenu.left + 32, picPropMenu.Top + 16
-    
+
     mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Public Sub SetColours()
-    
+
     On Error Resume Next
-    
+
     Dim i As Integer
     Dim c As Control
 
@@ -2094,7 +2094,7 @@ Public Sub SetColours()
     For i = 0 To 5
         picProp(i).BackColor = bgClr
     Next
-    
+
     For i = 0 To 1
         txtScenProp(i).BackColor = txtBackClr
         txtScenProp(i).ForeColor = txtTextClr
@@ -2113,23 +2113,23 @@ Public Sub SetColours()
         lblCount(i).BackColor = lblBackClr
         lblCount(i).ForeColor = lblTextClr
     Next
-    
+
     lblDimensions.BackColor = lblBackClr
     lblDimensions.ForeColor = lblTextClr
-    
+
     txtRotate.BackColor = txtBackClr
     txtRotate.ForeColor = txtTextClr
     cboLevel.BackColor = txtBackClr
     cboLevel.ForeColor = txtTextClr
     cboPolyType.BackColor = txtBackClr
     cboPolyType.ForeColor = txtTextClr
-    
+
     txtLightProp(0).BackColor = txtBackClr
     txtLightProp(0).ForeColor = txtTextClr
-    
+
     square.BorderColor = lblTextClr
     diagonal.BorderColor = lblTextClr
-        
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1
@@ -2137,5 +2137,5 @@ Public Sub SetColours()
             c.Font.Name = font2
         End If
     Next
-        
+
 End Sub

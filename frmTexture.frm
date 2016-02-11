@@ -83,13 +83,13 @@ Public x1tex As Single, x2tex As Single, y1tex As Single, y2tex As Single
 Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     formHeight = Me.ScaleHeight
 
     setForm
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading texture form"
@@ -185,12 +185,12 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
 
         x2tex = Int((X + 16) / 16) * 16
         y2tex = Int((Y + 16) / 16) * 16
-        
+
         frmInfo.txtQuadX(0).Text = x1tex * 2
         frmInfo.txtQuadY(0).Text = y1tex * 2
         frmInfo.txtQuadX(1).Text = x2tex * 2
         frmInfo.txtQuadY(1).Text = y2tex * 2
-        
+
     End If
 
 End Sub
@@ -201,7 +201,7 @@ Public Sub setTexture(texturePath As String)
 
     Dim texWidth As Integer, texHeight As Integer
     Dim X As Integer, Y As Integer
-    
+
     texWidth = frmSoldatMapEditor.xTexture
     texHeight = frmSoldatMapEditor.yTexture
 
@@ -213,7 +213,7 @@ Public Sub setTexture(texturePath As String)
     formHeight = texHeight / 2 + 18 + 16
     frmTexture.Height = formHeight * Screen.TwipsPerPixelY
     picHide.left = frmTexture.Width / Screen.TwipsPerPixelX - 17
-    
+
     Dim Token As Long
     Token = InitGDIPlus
     picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
@@ -227,7 +227,7 @@ Public Sub setTexture(texturePath As String)
         End If
         picTexture.Line (0, Y * 16)-(texWidth / 2, Y * 16), RGB(0, 0, 0)
     Next
-    
+
     For X = 0 To (texWidth / 32)
         If X Mod 4 = 0 Then
             picTexture.DrawWidth = 2
@@ -236,16 +236,16 @@ Public Sub setTexture(texturePath As String)
         End If
         picTexture.Line (X * 16, 0)-(X * 16, texHeight), RGB(0, 0, 0)
     Next
-    
+
     x1tex = 0
     y1tex = 0
     x2tex = texWidth / 2
     y2tex = texHeight / 2
     picTexture.DrawMode = 6
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "Error setting texture" & vbNewLine & Error$
@@ -268,7 +268,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmTools
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
@@ -276,7 +276,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmScenery
     snapForm Me, frmInfo
     snapForm Me, frmSoldatMapEditor
-    
+
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
@@ -302,7 +302,7 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -315,5 +315,5 @@ Public Sub SetColours()
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgClr
-    
+
 End Sub

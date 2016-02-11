@@ -49,11 +49,11 @@ InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 Section "MainSection" SEC01
-  
+
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "Soldat PolyWorks.exe"
-  File "bgothl.ttf" 	
+  File "bgothl.ttf"
   File "COMDLG32.OCX"
   File "lucon.ttf"
   File "MBMouse.ocx"
@@ -73,7 +73,7 @@ Section "MainSection" SEC01
   RegDLL "$SYSDIR\MBMouse.ocx"
   RegDLL "$SYSDIR\mscomctl.ocx"
   RegDLL "$SYSDIR\COMDLG32.OCX"
-  
+
   SetOutPath "$INSTDIR\BMPtoCUR"
   File "BMPtoCUR\BMP to CUR.exe"
   File "BMPtoCUR\ReadMe.txt"
@@ -104,7 +104,7 @@ Section "MainSection" SEC01
   File "gfx\titlebar_waypoints.bmp"
   File "gfx\titlebar_scenery.bmp"
   SetOutPath "$INSTDIR\gfx\cursors"
-  File "gfx\cursors\pselect.cur"  
+  File "gfx\cursors\pselect.cur"
   File "gfx\cursors\waypoint.cur"
   File "gfx\cursors\create.cur"
   File "gfx\cursors\pselsub.cur"
@@ -159,10 +159,10 @@ Section "MainSection" SEC01
   CreateDirectory "$INSTDIR\Temp"
   SetOutPath "$INSTDIR\Workspace"
   File "Workspace\current.ini"
-  
+
   CreateDirectory "$SMPROGRAMS\Soldat PolyWorks"
   CreateShortCut "$SMPROGRAMS\Soldat PolyWorks\Soldat PolyWorks.lnk" "$INSTDIR\Soldat PolyWorks.exe"
-  CreateShortCut "$SMPROGRAMS\Soldat PolyWorks\Uninstall Soldat PolyWorks.lnk" "$INSTDIR\uninst.exe" 
+  CreateShortCut "$SMPROGRAMS\Soldat PolyWorks\Uninstall Soldat PolyWorks.lnk" "$INSTDIR\uninst.exe"
 
   WriteRegStr HKCR ".pms" "" "Soldat PolyWorks Map"
   WriteRegStr HKCR "Soldat PolyWorks Map" "" "Soldat PolyWorks Map"
@@ -184,7 +184,7 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-  
+
 SectionEnd
 
 
@@ -201,11 +201,11 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-   
+
 
   Delete /REBOOTOK "$INSTDIR\uninst.exe"
   Delete /REBOOTOK "$INSTDIR\Soldat PolyWorks.exe"
-  Delete /REBOOTOK "$INSTDIR\bgothl.ttf" 	
+  Delete /REBOOTOK "$INSTDIR\bgothl.ttf"
   Delete /REBOOTOK "$INSTDIR\COMDLG32.OCX"
   Delete /REBOOTOK "$INSTDIR\lucon.ttf"
   Delete /REBOOTOK "$INSTDIR\MBMouse.ocx"
@@ -217,11 +217,11 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\pwlib.dll"
   Delete /REBOOTOK "$INSTDIR\PMS.ico"
   Delete /REBOOTOK "$INSTDIR\PFB.ico"
-  
+
   Delete /REBOOTOK "$INSTDIR\BMPtoCUR\BMP to CUR.exe"
   Delete /REBOOTOK "$INSTDIR\BMPtoCUR\ReadMe.txt"
   RMDir /REBOOTOK "$INSTDIR\BMPtoCUR"
-  
+
   Delete /REBOOTOK "$INSTDIR\gfx\Thumbs.db"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_palette.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\tool_gfx.bmp"
@@ -248,9 +248,9 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\gfx\rcenter.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_waypoints.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_scenery.bmp"
-  
-  
-  Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselect.cur"  
+
+
+  Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselect.cur"
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\waypoint.cur"
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\create.cur"
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselsub.cur"
@@ -280,7 +280,7 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\litpicker.cur"
   RMDir /REBOOTOK "$INSTDIR\gfx\cursors"
   RMDir /REBOOTOK "$INSTDIR\gfx"
-  
+
   Delete /REBOOTOK "$INSTDIR\Help\Thumbs.db"
   Delete /REBOOTOK "$INSTDIR\Help\tool_sketch.gif"
   Delete /REBOOTOK "$INSTDIR\Help\tool_pcolour.gif"
@@ -297,11 +297,11 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\Help\tool_pselect.gif"
   Delete /REBOOTOK "$INSTDIR\Help\tool_waypoint.gif"
   RMDir /REBOOTOK "$INSTDIR\Help"
-  
+
   Delete /REBOOTOK "$INSTDIR\lists\defaults.txt"
   RMDir /REBOOTOK "$INSTDIR\lists"
   RMDir /REBOOTOK "$INSTDIR\Maps"
-  
+
   Delete /REBOOTOK "$INSTDIR\palettes\current.txt"
   Delete /REBOOTOK "$INSTDIR\palettes\MZpalette.txt"
   Delete /REBOOTOK "$INSTDIR\palettes\palette.txt"
@@ -313,11 +313,11 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\Temp\gif.tga"
   Delete /REBOOTOK "$INSTDIR\Temp\copy.PFB"
   RMDir /REBOOTOK "$INSTDIR\Temp"
-  
+
   Delete /REBOOTOK "$INSTDIR\Workspace\current.ini"
   RMDir /REBOOTOK "$INSTDIR\Workspace"
   RMDir /REBOOTOK "$INSTDIR"
-  
+
   Delete /REBOOTOK "$SMPROGRAMS\Soldat Polyworks\Soldat PolyWorks.lnk"
   Delete /REBOOTOK "$SMPROGRAMS\Soldat Polyworks\Uninstall Soldat PolyWorks.lnk"
   RMDir /REBOOTOK "$SMPROGRAMS\Soldat Polyworks"

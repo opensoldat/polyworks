@@ -538,15 +538,15 @@ End Sub
 Private Sub Form_Load()
 
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     formHeight = Me.ScaleHeight
-    
+
     setForm
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading Display form"
@@ -585,7 +585,7 @@ Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Inte
 End Sub
 
 Private Sub picLayer_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
 
 End Sub
@@ -614,7 +614,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
     snapForm Me, frmTools
@@ -648,7 +648,7 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -656,7 +656,7 @@ End Sub
 Public Sub refreshButtons()
 
     Dim i As Integer
-    
+
     For i = 0 To 10
         mouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
     Next
@@ -674,12 +674,12 @@ Public Sub SetColours()
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgClr
-    
+
     For i = 0 To 10
         lblLayer(i).BackColor = lblBackClr
         lblLayer(i).ForeColor = lblTextClr
     Next
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1

@@ -342,11 +342,11 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 End Sub
 
 Private Sub Form_Load()
-    
+
     On Error GoTo ErrorHandler
 
     SetColours
-    
+
     setForm
 
     Exit Sub
@@ -366,7 +366,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
     snapForm Me, frmDisplay
@@ -374,7 +374,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmInfo
     snapForm Me, frmTexture
     snapForm Me, frmSoldatMapEditor
-    
+
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
@@ -444,9 +444,9 @@ Public Sub SetColours()
     Dim i As Integer
 
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_tools.bmp")
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    
+
     For i = 0 To 13
         BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
         picTools(i).Refresh

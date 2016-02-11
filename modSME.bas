@@ -120,11 +120,11 @@ Private Const KEY_READ As Long = ((STANDARD_RIGHTS_READ Or KEY_QUERY_VALUE Or _
 Private Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" _
         (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, _
         ByVal samDesired As Long, phkResult As Long) As Long
-   
+
 Private Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" _
         (ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, _
         lpType As Long, lpData As Any, lpcbData As Long) As Long
-   
+
 Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
 
 Private Declare Function lstrlenW Lib "kernel32" (ByVal lpString As Long) As Long
@@ -166,12 +166,12 @@ Public Declare Function GetFileTime Lib "kernel32" (ByVal hFile As Long, lpCreat
 
 Public Declare Function OpenFile Lib "kernel32" (ByVal lpFileName As String, _
         lpReOpenBuff As OFSTRUCT, ByVal wStyle As Long) As Long
-    
+
 Public Declare Function CloseHandle Lib "kernel32" (ByVal hFile As Long) As Long
 
 Public Declare Function FileTimeToDosDateTime Lib "kernel32" (lpFileTime As FILETIME, _
         ByVal lpFatDate As Long, ByVal lpFatTime As Long) As Long
-        
+
 Public Declare Function FileTimeToLocalFileTime Lib "kernel32" (lpFileTime As FILETIME, _
         lpLocalFileTime As FILETIME) As Long
 
@@ -196,7 +196,7 @@ Private Declare Function WritePrivateProfileSection Lib "kernel32" Alias "WriteP
 Private Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" _
         (ByVal sSectionName As String, ByVal sKeyName As String, _
         ByVal sString As String, ByVal sFileName As String) As Long
-        
+
 'ShellExecute
 Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, _
         ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, _
@@ -267,7 +267,7 @@ Private Const UnitPixel = 2
 
 'mouse event
 Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
-    
+
     If (xVal < 0) Or (xVal > Width) Or (yVal < 0) Or (yVal > Height) Then 'the MOUSELEAVE pseudo-event
         ReleaseCapture
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
@@ -279,17 +279,17 @@ Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal
         pic.Refresh
         mouseEvent = True
     End If
-    
+
 End Function
 
 'mouse event
 Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
-    
+
     Dim xSrc As Integer, ySrc As Integer
     Dim Width As Integer, Height As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     If buttonType = BUTTON_SMALL Then
         Width = 16
         Height = 16
@@ -306,11 +306,11 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
         xSrc = MENU_X
         ySrc = MENU_Y + Int(pic.Index) * Height
     End If
-    
+
     active = active / 255
-    
+
     If exWidth = 0 Then exWidth = Width
-    
+
     If action = BUTTON_UP Or action = BUTTON_DOWN Then
         mouseEvent2 = True
     ElseIf (xVal < 0) Or (xVal > exWidth) Or (yVal < 0) Or (yVal > Height) Then 'the MOUSELEAVE pseudo-event
@@ -322,18 +322,18 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
         mouseEvent2 = True
         action = BUTTON_MOVE
     End If
-    
+
     If mouseEvent2 = True Then
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picButtonGfx.hDC, xSrc + Width * action, ySrc + active * Height, vbSrcCopy
         pic.Refresh
     End If
-    
+
     Exit Function
-    
+
 ErrorHandler:
 
     MsgBox Error$
-    
+
 End Function
 
 
@@ -344,23 +344,23 @@ Public Function SelectFolder(ownerForm As Form) As String
     Dim pidl As Long
     Dim path As String
     Dim pos As Long
-    
+
     With bi
         .hOwner = ownerForm.hWnd
         .pidlRoot = 0&
         .ulFlags = BIF_RETURNONLYFSDIRS
     End With
-    
+
     pidl = SHBrowseForFolder(bi)
     path = Space$(MAX_PATH)
-    
+
     If SHGetPathFromIDList(ByVal pidl, ByVal path) Then
         pos = InStr(path, Chr$(0))
         SelectFolder = LCase$(left(path, pos - 1))
     End If
-    
+
     Call CoTaskMemFree(pidl)
-    
+
 End Function
 
 
@@ -389,7 +389,7 @@ Public Sub snapForm(currentForm As Form, otherForm As Form)
             currentForm.left = otherForm.left - currentForm.Width + Screen.TwipsPerPixelX
         End If
     End If
-    
+
 
     'snap top to top
     If Abs(currentForm.Top - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
@@ -425,7 +425,7 @@ Public Function GetSoldatDir() As String
 
     Dim hKey As Long
     Dim sKey As String
-   
+
     sKey = "Soldat\DefaultIcon"
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
@@ -433,13 +433,13 @@ Public Function GetSoldatDir() As String
 
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
-   
+
     End If
-    
+
     Exit Function
 ErrorHandler:
     MsgBox "Error getting soldat directory from registry" & vbNewLine & Error$
-    
+
 End Function
 
 Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Long
@@ -462,15 +462,15 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
     'if valid
     If hSubKey <> 0 Then
-   
+
         lpValue = Space$(260)
         lpcbData = Len(lpValue)
-      
+
         'find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-            
+
             GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
-         
+
         End If
 
     End If
@@ -483,12 +483,12 @@ Public Function getFileDate(fileName As String) As Long
     On Error GoTo ErrorHandler
 
     Dim hFile As Long
-   
+
     Dim OFS As OFSTRUCT
     Dim FT_CREATE As FILETIME
     Dim FT_ACCESS As FILETIME
     Dim FT_WRITE As FILETIME
-    
+
     Dim dosDate As Integer, dosTime As Integer
     Dim timeString As String
     Dim localFT As FILETIME
@@ -497,7 +497,7 @@ Public Function getFileDate(fileName As String) As Long
     hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
-    
+
     Call FileTimeToLocalFileTime(FT_WRITE, localFT)
     FT_WRITE = localFT
     Call FileTimeToDosDateTime(FT_WRITE, VarPtr(dosDate), VarPtr(dosTime))
@@ -505,11 +505,11 @@ Public Function getFileDate(fileName As String) As Long
     If Len(timeString) < 4 Then
         timeString = String$(4 - Len(timeString), "0") & timeString
     End If
-    
+
     getFileDate = CLng("&H" & Hex$(dosDate) & timeString)
-    
+
     Exit Function
-    
+
 ErrorHandler:
 
     MsgBox "get file date" & vbNewLine & Error$
@@ -519,45 +519,45 @@ End Function
 Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
 
     Dim lReturn  As Long
-    
+
     If fileName = "" Then
         fileName = App.path & "\polyworks.ini"
     End If
-    
+
     lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
 
 End Sub
 
 Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
-    
+
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
-    
+
     If fileName = "" Then
         fileName = App.path & "\polyworks.ini"
     End If
-    
+
     If length = 0 Then length = 10
 
     sString = String$(length, "*")
     lSize = Len(sString)
     lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
-    
+
     loadString = left(sString, lReturn)
 
 End Function
 
 Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
-    
+
     Dim lReturn As Long
-    
+
     If fileName = "" Then
         fileName = App.path & "\polyworks.ini"
     End If
-    
+
     lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
-    
+
     loadInt = lReturn
 
 End Function
@@ -567,9 +567,9 @@ Public Function loadSection(section As String, ByRef lReturn As String, length A
     If fileName = "" Then
         fileName = App.path & "\polyworks.ini"
     End If
-    
+
     GetPrivateProfileSection section, lReturn, length, fileName
-    
+
     loadSection = lReturn
 
 End Function
@@ -583,7 +583,7 @@ Public Function RGBtoHex(DecValue As Long) As String
     If Len(hexValue) < 6 Then
         hexValue = String$(6 - Len(hexValue), "0") + hexValue
     End If
-    
+
     RGBtoHex = hexValue
 
 End Function
@@ -599,7 +599,7 @@ Public Function HexToLong(hexValue As String) As Long
     HexToLong = CLng("&H" & hexValue)
 
     Exit Function
-    
+
 ErrorHandler:
 
     HexToLong = -1
@@ -617,7 +617,7 @@ End Function
 Public Function RunHelp()
 
     Dim iReturn As Long
-    
+
     iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", App.path & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
 End Function
@@ -626,7 +626,7 @@ Public Function SetGameMode(fileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
-    
+
     If LCase(left(fileName, 4)) = "ctf_" Then
         gameMode = 3
     ElseIf LCase(left(fileName, 4)) = "inf_" Then
@@ -650,7 +650,7 @@ Public Function SetColours()
     frmDisplay.BackColor = bgClr
     frmInfo.BackColor = bgClr
     frmMap.BackColor = bgClr
-    
+
     frmScenery.BackColor = bgClr
     frmTools.BackColor = bgClr
     frmWaypoints.BackColor = bgClr
@@ -661,7 +661,7 @@ End Function
 Public Function InitGDIPlus() As Long
     Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
-    
+
     gdipInit.GdiplusVersion = 1
     GdiplusStartup Token, gdipInit, ByVal 0&
     InitGDIPlus = Token
@@ -676,17 +676,17 @@ End Sub
 Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -1, Optional Height As Long = -1, Optional ByVal BackColor As Long = vbWhite) As IPicture
 
     On Error GoTo ErrorHandler
-    
+
     Dim hDC     As Long
     Dim hBitmap As Long
     Dim Img     As Long
     Dim hBrush As Long
     Dim Graphics   As Long      ' Graphics Object Pointer
-    
+
     Dim IID_IDispatch As GUID
     Dim pic           As PICTDESC
     Dim IPic          As IPicture
-        
+
     '' Load the image
     If Len(Dir$(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
@@ -727,11 +727,11 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     ' Create the picture
     OleCreatePictureIndirect pic, IID_IDispatch, True, IPic
     Set LoadPictureGDIPlus = IPic
-    
+
     Exit Function
-    
+
 ErrorHandler:
 
     MsgBox Error$ & vbNewLine & "Error loading picture"
-    
+
 End Function

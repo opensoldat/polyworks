@@ -344,15 +344,15 @@ Dim selNode As Node
 Private Sub Form_Load()
 
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     Me.SetColours
-    
+
     formHeight = Me.ScaleHeight
-    
+
     setForm
-    
+
     listScenery
 
     Exit Sub
@@ -383,68 +383,68 @@ Public Sub listScenery()
     Dim sceneryName As String
     Dim fileOpen As Boolean
     Dim tempNode As Node
-    
+
     frmSoldatMapEditor.tvwScenery.Nodes.Clear
-    
+
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "In Use", "In Use"
-    
+
     'load all scenery
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.png", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
-    
+
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir$
     Loop
-    
+
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = False
-    
+
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
     frmSoldatMapEditor.tvwScenery_NodeClick frmSoldatMapEditor.tvwScenery.SelectedItem
-    
+
     'load lists
-    
+
     file = Dir$(App.path & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file) 'for every txt file in lists
-    
+
         file = left(file, Len(file) - 4)
         frmSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
         fileOpen = True
         Open App.path & "\lists\" & file & ".txt" For Input As #1
-        
+
             Do Until EOF(1)
                 Input #1, sceneryName
                 frmSoldatMapEditor.tvwScenery.Nodes.Add file, tvwChild, , sceneryName
             Loop
-        
+
         Close #1
-        
+
         fileOpen = False
         file = Dir$
-        
+
     Loop
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "loading scenery tree failed" & vbNewLine & Error$ & vbNewLine & sceneryName
@@ -457,7 +457,7 @@ Private Function FileExists(fileName As String) As Boolean
     On Error GoTo ErrorHandler
 
     FileExists = FileLen(fileName) > 0
-    
+
 ErrorHandler:
 
 End Function
@@ -490,7 +490,7 @@ Public Sub lstScenery_Click()
         lstScenery.ListIndex = -1
         Exit Sub
     End If
-    
+
     If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
         Token = InitGDIPlus
         picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
@@ -501,16 +501,16 @@ Public Sub lstScenery_Click()
         picScenery.Picture = LoadPicture(App.path & "\" & gfxDir & "\notfound.bmp")
         frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
     End If
-    
+
     lstScenery.ToolTipText = lstScenery.List(lstScenery.ListIndex)
     frmSoldatMapEditor.tvwScenery.Nodes(lstScenery.List(lstScenery.ListIndex)).selected = True
-    
+
     Exit Sub
-    
+
 ErrorHandler:
 
     MsgBox "Error clicking scenery" & vbNewLine & Error$
-    
+
 End Sub
 
 Private Sub mnuClearUnused_Click()
@@ -520,11 +520,11 @@ Private Sub mnuClearUnused_Click()
 End Sub
 
 Private Sub mnuReload_Click()
-    
+
     Dim i As Integer
-    
+
     listScenery
-    
+
     For i = 0 To lstScenery.ListCount - 1
         frmSoldatMapEditor.tvwScenery.Nodes.Add "In Use", tvwChild, lstScenery.List(i), lstScenery.List(i)
     Next
@@ -559,7 +559,7 @@ Private Sub picSceneryMenu_MouseMove(Button As Integer, Shift As Integer, X As S
 End Sub
 
 Private Sub picSceneryMenu_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -579,7 +579,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    
+
     snapForm Me, frmPalette
     snapForm Me, frmWaypoints
     snapForm Me, frmDisplay
@@ -613,7 +613,7 @@ Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -625,7 +625,7 @@ Private Sub picRotate_MouseDown(Button As Integer, Shift As Integer, X As Single
 End Sub
 
 Private Sub picRotate_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picRotate, X, Y, BUTTON_SMALL, rotateScenery, BUTTON_MOVE, lblRotate.Width + 16
 
 End Sub
@@ -643,7 +643,7 @@ Private Sub picScale_MouseDown(Button As Integer, Shift As Integer, X As Single,
 End Sub
 
 Private Sub picScale_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     mouseEvent2 picScale, X, Y, BUTTON_SMALL, scaleScenery, BUTTON_MOVE, lblScale.Width + 16
 
 End Sub
@@ -677,33 +677,33 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
             mouseEvent2 picLevel(i), X, Y, BUTTON_SMALL, (i = level), BUTTON_UP
         End If
     Next
-    
+
     frmSoldatMapEditor.setSceneryLevel level
     frmSoldatMapEditor.RegainFocus
 
 End Sub
 
 Public Sub SetColours()
-    
+
     On Error Resume Next
-    
+
     Dim i As Integer
     Dim c As Control
 
     '--------
 
     picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_scenery.bmp")
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    
+
     For i = 0 To 2
         mouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
     Next
-    
+
     mouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
     mouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
-    
+
     '--------
 
     Me.BackColor = bgClr
@@ -720,7 +720,7 @@ Public Sub SetColours()
     lstScenery.BackColor = txtBackClr
     lstScenery.ForeColor = txtTextClr
     picScenery.BackColor = bgClr
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1

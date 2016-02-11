@@ -23,7 +23,7 @@ Option Explicit
 Dim minimized As Boolean
 
 Private Sub Form_GotFocus()
-    
+
     If frmSoldatMapEditor.Visible Then
         frmSoldatMapEditor.RegainFocus
     End If

@@ -1755,11 +1755,11 @@ Dim opacity1 As Integer, opacity2 As Integer
 Dim sceneryVerts As Boolean, topmost As Boolean
 
 Private Sub picHide_Click()
-    
+
     Me.ScaleHeight = 408
     Unload Me
     frmSoldatMapEditor.RegainFocus
-    
+
 End Sub
 
 Private Sub picSekrit_Click()
@@ -1794,20 +1794,20 @@ Private Sub picCancel_Click()
 End Sub
 
 Private Function applyPreferences() As Boolean
-    
+
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    
+
     If right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
-    
+
     If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmSoldatMapEditor.soldatDir <> txtDir.Text Then
         If Not Len(Dir(txtDir.Text & "Maps\", vbDirectory)) <> 0 Then
             MsgBox "'Maps' folder does not exist in Soldat directory."
@@ -1821,42 +1821,42 @@ Private Function applyPreferences() As Boolean
             MsgBox "'Scenery-gfx' folder does not exist in Soldat directory."
             Exit Function
         End If
-        
+
         frmSoldatMapEditor.soldatDir = txtDir.Text
     ElseIf Len(Dir(txtDir.Text, vbDirectory)) = 0 Then
         MsgBox "Soldat directory does not exist."
         Exit Function
     End If
-    
+
     If right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
-    
+
     If Len(Dir(txtUncomp.Text, vbDirectory)) <> 0 Then
         frmSoldatMapEditor.uncompDir = txtUncomp.Text
     Else
         MsgBox "Uncompiled Maps directory does not exist."
         Exit Function
     End If
-    
+
     If right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
-    
+
     If Len(Dir(txtPrefabs.Text, vbDirectory)) <> 0 Then
         frmSoldatMapEditor.prefabDir = txtPrefabs.Text
     Else
         MsgBox "Prefabs Maps directory does not exist."
         Exit Function
     End If
-    
+
     frmSoldatMapEditor.wireBlendSrc = blendModes(cboWireSrc.ListIndex)
     frmSoldatMapEditor.wireBlendDest = blendModes(cboWireDest.ListIndex)
     frmSoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
     frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
-    
+
     frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
     frmSoldatMapEditor.pointClr = RGB(pointClr.blue, pointClr.green, pointClr.red)
     frmSoldatMapEditor.selectionClr = RGB(selClr.blue, selClr.green, selClr.red)
     frmSoldatMapEditor.gridClr = RGB(gridClr.blue, gridClr.green, gridClr.red)
     frmSoldatMapEditor.gridClr2 = RGB(gridClr2.blue, gridClr2.green, gridClr2.red)
-    
+
     frmSoldatMapEditor.formWidth = formWidth
     frmSoldatMapEditor.formHeight = formHeight
     If frmSoldatMapEditor.WindowState = vbNormal Then
@@ -1868,26 +1868,26 @@ Private Function applyPreferences() As Boolean
         frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
         frmSoldatMapEditor.WindowState = vbMaximized
     End If
-    
+
     frmSoldatMapEditor.gridSpacing = spacing
     frmSoldatMapEditor.gridDivisions = divisions
     frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
     frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
-    
+
     frmSoldatMapEditor.sceneryVerts = sceneryVerts
     frmSoldatMapEditor.topmost = topmost
-    
+
     For i = 0 To 13
         frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
     Next
-    
+
     For i = 0 To 4
         frmWaypoints.setWayptKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
         frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
         frmWaypoints.lblType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
     Next
-    
+
     If cboSkin.List(cboSkin.ListIndex) <> gfxDir Then
         gfxDir = cboSkin.List(cboSkin.ListIndex)
         frmSoldatMapEditor.loadColours
@@ -1906,15 +1906,15 @@ Private Function applyPreferences() As Boolean
         frmWaypoints.SetColours
         frmDisplay.refreshButtons
     End If
-    
+
     frmSoldatMapEditor.setPreferences
-    
+
     applyPreferences = True
-    
+
     Exit Function
-    
+
 ErrorHandler:
-    
+
     MsgBox "Error applying preferences" & vbNewLine & Error$
 
 End Function
@@ -1935,14 +1935,14 @@ End Sub
 Private Sub Form_Load()
 
     Dim i As Integer
-    
+
     On Error GoTo ErrorHandler
-    
+
     sceneryVerts = frmSoldatMapEditor.sceneryVerts
     topmost = frmSoldatMapEditor.topmost
-    
+
     Me.SetColours
-    
+
     blendModes(0) = 1
     blendModes(1) = 2
     blendModes(2) = 3
@@ -1951,31 +1951,31 @@ Private Sub Form_Load()
     blendModes(5) = 10
     blendModes(6) = 5
     blendModes(7) = 6
-    
+
     backClr = getRGB(frmSoldatMapEditor.backClr)
     pointClr = getRGB(frmSoldatMapEditor.pointClr)
     selClr = getRGB(frmSoldatMapEditor.selectionClr)
     gridClr = getRGB(frmSoldatMapEditor.gridClr)
     gridClr2 = getRGB(frmSoldatMapEditor.gridClr2)
-    
+
     For i = 0 To 7
         If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
         If frmSoldatMapEditor.wireBlendDest = blendModes(i) Then cboWireDest.ListIndex = i
         If frmSoldatMapEditor.polyBlendSrc = blendModes(i) Then cboPolySrc.ListIndex = i
         If frmSoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
     Next
-    
+
     Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
     Me.picPointClr.BackColor = RGB(pointClr.red, pointClr.green, pointClr.blue)
     Me.picSelectionClr.BackColor = RGB(selClr.red, selClr.green, selClr.blue)
     Me.picGridClr.BackColor = RGB(gridClr.red, gridClr.green, gridClr.blue)
     Me.picGridClr2.BackColor = RGB(gridClr2.red, gridClr2.green, gridClr2.blue)
-    
+
     txtWidth.Text = frmSoldatMapEditor.formWidth
     txtHeight.Text = frmSoldatMapEditor.formHeight
     formWidth = txtWidth.Text
     formHeight = txtHeight.Text
-    
+
     txtSpacing.Text = frmSoldatMapEditor.gridSpacing
     txtDivisions.Text = frmSoldatMapEditor.gridDivisions
     spacing = txtSpacing.Text
@@ -1984,19 +1984,19 @@ Private Sub Form_Load()
     txtOpacity1.Text = opacity1
     opacity2 = frmSoldatMapEditor.gridOp2 / 255 * 100
     txtOpacity2.Text = opacity2
-    
+
     For i = 0 To 13
         txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.getHotKey(i), 1))
         txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
     Next
-    
+
     For i = 0 To 4
         txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.getWayptKey(i), 1))
         txtWayptKey(i).Tag = Asc(txtWayptKey(i).Text)
     Next
-    
+
     Dim file As Variant
-    
+
     file = Dir$(App.path & "\*.*", vbDirectory)
     Do While Len(file)
         If FileExists(App.path & "\" & file & "\colours.ini") Then
@@ -2005,11 +2005,11 @@ Private Sub Form_Load()
         End If
         file = Dir$
     Loop
-    
+
     txtDir.Text = frmSoldatMapEditor.soldatDir
     txtUncomp.Text = frmSoldatMapEditor.uncompDir
     txtPrefabs.Text = frmSoldatMapEditor.prefabDir
-    
+
     Exit Sub
 ErrorHandler:
     MsgBox Error$ & vbNewLine & "Error loading Preferences form"
@@ -2021,14 +2021,14 @@ Private Function FileExists(fileName As String) As Boolean
     On Error GoTo ErrorHandler
 
     FileExists = FileLen(fileName) > 0
-    
+
 ErrorHandler:
 
 End Function
 
 
 Private Sub picPointClr_Click()
-    
+
     frmColour.InitClr pointClr.red, pointClr.green, pointClr.blue
     frmColour.Show 1
     picPointClr.BackColor = RGB(frmColour.red, frmColour.green, frmColour.blue)
@@ -2039,7 +2039,7 @@ Private Sub picPointClr_Click()
 End Sub
 
 Private Sub picSelectionClr_Click()
-    
+
     frmColour.InitClr selClr.red, selClr.green, selClr.blue
     frmColour.Show 1
     picSelectionClr.BackColor = RGB(frmColour.red, frmColour.green, frmColour.blue)
@@ -2050,14 +2050,14 @@ Private Sub picSelectionClr_Click()
 End Sub
 
 Private Sub picBackClr_Click()
-    
+
     frmColour.InitClr backClr.red, backClr.green, backClr.blue
     frmColour.Show 1
     picBackClr.BackColor = RGB(frmColour.red, frmColour.green, frmColour.blue)
     backClr.red = frmColour.red
     backClr.green = frmColour.green
     backClr.blue = frmColour.blue
-    
+
 End Sub
 
 Private Sub picGridClr_Click()
@@ -2085,15 +2085,15 @@ End Sub
 Private Sub picFolder_Click()
 
     Dim folder As String
-    
+
     folder = SelectFolder(Me)
-    
+
     If right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtDir.Text = folder
     End If
-    
+
     mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -2101,15 +2101,15 @@ End Sub
 Private Sub picUncomp_Click()
 
     Dim folder As String
-    
+
     folder = SelectFolder(Me)
-    
+
     If right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtUncomp.Text = folder
     End If
-    
+
     mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -2117,15 +2117,15 @@ End Sub
 Private Sub picPrefabs_Click()
 
     Dim folder As String
-    
+
     folder = SelectFolder(Me)
-    
+
     If right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtPrefabs.Text = folder
     End If
-    
+
     mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
@@ -2144,10 +2144,10 @@ Private Sub txtHotkey_KeyDown(Index As Integer, KeyCode As Integer, Shift As Int
 End Sub
 
 Private Sub txtHotkey_KeyPress(Index As Integer, KeyAscii As Integer)
-    
+
     txtHotkey(Index).Text = UCase$(Chr$(KeyAscii))
     KeyAscii = 0
-    
+
 End Sub
 
 Private Sub txtWayptKey_GotFocus(Index As Integer)
@@ -2164,10 +2164,10 @@ Private Sub txtWayptKey_KeyDown(Index As Integer, KeyCode As Integer, Shift As I
 End Sub
 
 Private Sub txtWayptKey_KeyPress(Index As Integer, KeyAscii As Integer)
-    
+
     txtWayptKey(Index).Text = UCase$(Chr$(KeyAscii))
     KeyAscii = 0
-    
+
 End Sub
 
 Private Sub txtSpacing_Change()
@@ -2407,7 +2407,7 @@ End Sub
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Private Sub picApply_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -2419,7 +2419,7 @@ End Sub
 Private Sub picApply_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
-    
+
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -2540,12 +2540,12 @@ Public Sub SetColours()
     '--------
 
     Me.BackColor = bgClr
-    
+
     For i = 0 To 22
         lblPref(i).BackColor = lblBackClr
         lblPref(i).ForeColor = lblTextClr
     Next
-    
+
     lblDisplay.BackColor = bgClr
     lblDisplay.ForeColor = lblTextClr
     lblHotkeys.BackColor = bgClr
@@ -2556,18 +2556,18 @@ Public Sub SetColours()
     lblWayKeys.ForeColor = lblTextClr
     lblBlending.BackColor = bgClr
     lblBlending.ForeColor = lblTextClr
-    
+
     For i = 0 To 13
         txtHotkey(i).BackColor = bgClr
         txtHotkey(i).ForeColor = lblTextClr
     Next
-    
+
     For i = 0 To 4
         txtWayptKey(i).BackColor = bgClr
         txtWayptKey(i).ForeColor = lblTextClr
         fraPref(i).BorderColor = frameClr
     Next
-    
+
     txtWidth.BackColor = txtBackClr
     txtWidth.ForeColor = txtTextClr
     txtHeight.BackColor = txtBackClr
@@ -2586,7 +2586,7 @@ Public Sub SetColours()
     txtUncomp.ForeColor = txtTextClr
     txtPrefabs.BackColor = txtBackClr
     txtPrefabs.ForeColor = txtTextClr
-    
+
     cboWireSrc.BackColor = txtBackClr
     cboWireSrc.ForeColor = txtTextClr
     cboWireDest.BackColor = txtBackClr
@@ -2595,10 +2595,10 @@ Public Sub SetColours()
     cboPolySrc.ForeColor = txtTextClr
     cboPolyDest.BackColor = txtBackClr
     cboPolyDest.ForeColor = txtTextClr
-    
+
     cboSkin.BackColor = txtBackClr
     cboSkin.ForeColor = txtTextClr
-    
+
     For Each c In Me.Controls
         If c.Tag = "font1" Then
             c.Font.Name = font1
