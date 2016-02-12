@@ -36,10 +36,6 @@ Public Const BUTTON_UP = 0
 Public Const BUTTON_MOVE = 1
 Public Const BUTTON_DOWN = 2
 
-'PolyWorks DLL
-Public Declare Function GifToBmp Lib "pwlib" Alias "PwGifToBmp" _
-        (ByVal src As String, ByVal dest As String) As Long
-
 'bitblt
 Public Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, _
         ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, _
@@ -229,7 +225,23 @@ Private Type GdiplusStartupInput
     SuppressExternalCodecs   As Long
 End Type
 
-' GDI Functions
+Private Type ImageCodecInfo
+    Clsid As GUID
+    FormatID As GUID
+    CodecNamePtr As Long
+    DllNamePtr As Long
+    FormatDescriptionPtr As Long
+    FilenameExtensionPtr As Long
+    MimeTypePtr As Long
+    Flags As Long
+    Version As Long
+    SigCount As Long
+    SigSize As Long
+    SigPatternPtr As Long
+    SigMaskPtr As Long
+End Type
+
+'GDI Functions
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
 Private Declare Function CreateCompatibleBitmap Lib "gdi32" (ByVal hDC As Long, ByVal nWidth As Long, ByVal nHeight As Long) As Long
@@ -241,27 +253,116 @@ Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 
-' GDI+ functions
-Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
-Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
+'GDI+ functions
+Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As Long, GpImage As Long) As Long
+Private Declare Function GdiplusStartup Lib "gdiplus.dll" (token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
 Private Declare Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal Img As Long, ByVal X As Long, ByVal Y As Long, ByVal Width As Long, ByVal Height As Long) As Long
 Private Declare Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As Long) As Long
-Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal Image As Long) As Long
-Private Declare Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As Long, ByVal hPal As Long, GpBitmap As Long) As Long
-Private Declare Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal Image As Long, Width As Long) As Long
-Private Declare Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal Image As Long, Height As Long) As Long
-Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As Long)
+Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal image As Long) As Long
+Private Declare Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As Long, ByVal hpal As Long, GpBitmap As Long) As Long
+Private Declare Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal image As Long, Width As Long) As Long
+Private Declare Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal image As Long, Height As Long) As Long
+Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal token As Long)
 
-' GDI and GDI+ constants
-Private Const PLANES = 14            '  Number of planes
-Private Const BITSPIXEL = 12         '  Number of bits per pixel
-Private Const PATCOPY = &HF00021     ' (DWORD) dest = pattern
-Private Const PICTYPE_BITMAP = 1     ' Bitmap type
+'functions for gif loading
+Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal FileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
+Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal FileName As Long, ByRef Bitmap As Long) As Long
+Private Declare Function GdipCreateHBITMAPFromBitmap Lib "gdiplus.dll" (ByVal Bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
+Private Declare Function GdipGetImageEncodersSize Lib "gdiplus.dll" (ByRef numEncoders As Long, ByRef Size As Long) As Long
+Private Declare Function GdipGetImageEncoders Lib "gdiplus.dll" (ByVal numEncoders As Long, ByVal Size As Long, ByRef Encoders As Any) As Long
+Private Declare Function lstrcpyW Lib "kernel32" (lpString1 As Any, lpString2 As Any) As Long
+
+
+'GDI and GDI+ constants
+Private Const PLANES = 14            'Number of planes
+Private Const BITSPIXEL = 12         'Number of bits per pixel
+Private Const PATCOPY = &HF00021     '(DWORD) dest = pattern
+Private Const PICTYPE_BITMAP = 1     'Bitmap type
 Private Const InterpolationModeHighQualityBicubic = 7
 Private Const GDIP_WMF_PLACEABLEKEY = &H9AC6CDD7
 Private Const UnitPixel = 2
 
+Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
+
+    Dim num As Long
+    Dim Size As Long
+    Dim pImageCodecInfo() As ImageCodecInfo
+    Dim j As Long
+    Dim buffer As String
+
+    Call GdipGetImageEncodersSize(num, Size)
+    If (Size = 0) Then
+        GetEncoderClsid = False
+        Exit Function
+    End If
+
+    ReDim pImageCodecInfo(0 To Size \ Len(pImageCodecInfo(0)) - 1)
+
+    Call GdipGetImageEncoders(num, Size, pImageCodecInfo(0))
+
+    For j = 0 To num - 1
+
+        buffer = Space$(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
+
+        Call lstrcpyW(ByVal StrPtr(buffer), _
+        ByVal pImageCodecInfo(j).MimeTypePtr)
+
+        If (StrComp(buffer, mimeType, vbTextCompare) = 0) Then
+            pClsid = pImageCodecInfo(j).Clsid
+            Erase pImageCodecInfo
+
+            GetEncoderClsid = True
+            Exit Function
+        End If
+    Next j
+
+    Erase pImageCodecInfo
+
+    GetEncoderClsid = False
+End Function
+
+Private Function SaveImageAsPNG(ByVal sFileName, ByVal sDestFileName As String) As Boolean
+
+    Dim lBitmap As Long
+    Dim hBitmap As Long
+    Dim Results As Long
+    Dim tPicEncoder As GUID
+
+    If GdipCreateBitmapFromFile(StrPtr(sFileName), lBitmap) = 0 Then
+        If GdipCreateHBITMAPFromBitmap(lBitmap, hBitmap, 0) = 0 Then
+            If GetEncoderClsid("image/png", tPicEncoder) Then
+                SaveImageAsPNG = (GdipSaveImageToFile(lBitmap, StrPtr(sDestFileName), tPicEncoder, ByVal 0) = 0)
+            Else
+                SaveImageAsPNG = False
+            End If
+            GdipDisposeImage lBitmap
+        End If
+    End If
+
+End Function
+
+Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
+
+    Dim token As Long
+
+    token = InitGDIPlus
+
+    If SaveImageAsPNG(src, dest) Then
+      GifToPng = -1
+    Else
+      GifToPng = 5
+    End If
+
+    FreeGDIPlus token
+
+End Function
+
+Public Function GifToBmp(ByVal src As String, ByVal dest As String) As Long
+
+    GifToBmp = GifToPng(src, dest)
+
+End Function
 
 'mouse event
 Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
