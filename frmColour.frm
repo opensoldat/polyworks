@@ -1494,20 +1494,20 @@ Public Sub SetColours()
 
     '--------
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_colourpicker.bmp")
-    picClr.Picture = LoadPicture(App.path & "\" & gfxDir & "\colour_picker.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colourpicker.bmp")
+    picClr.Picture = LoadPicture(appPath & "\" & gfxDir & "\colour_picker.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
-    imgRGB(0).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(1).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(2).Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    imgHue.Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    imgBright.Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    imgSat.Picture = LoadPicture(App.path & "\" & gfxDir & "\slider_arrow.bmp")
-    picClr.MouseIcon = LoadPicture(App.path & "\" & gfxDir & "\cursors\colour_picker.cur")
+    imgRGB(0).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgRGB(1).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgRGB(2).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgHue.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgBright.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    picClr.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\colour_picker.cur")
 
     '--------
 

@@ -5,6 +5,7 @@ Global Const pi As Single = 3.14159265358979    'mmm... pi
 
 Global gfxDir As String
 
+Global appPath As String
 Global bgClr As Long
 Global lblBackClr As Long
 Global lblTextClr As Long
@@ -521,7 +522,7 @@ Public Sub saveSection(sectionName As String, sectionData As String, Optional fi
     Dim lReturn  As Long
 
     If fileName = "" Then
-        fileName = App.path & "\polyworks.ini"
+        FileName = appPath & "\polyworks.ini"
     End If
 
     lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
@@ -535,7 +536,7 @@ Public Function loadString(section As String, Entry As String, Optional fileName
     Dim lReturn  As Long
 
     If fileName = "" Then
-        fileName = App.path & "\polyworks.ini"
+        fileName = appPath & "\polyworks.ini"
     End If
 
     If length = 0 Then length = 10
@@ -553,7 +554,7 @@ Public Function loadInt(section As String, Entry As String, Optional fileName As
     Dim lReturn As Long
 
     If fileName = "" Then
-        fileName = App.path & "\polyworks.ini"
+        fileName = appPath & "\polyworks.ini"
     End If
 
     lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
@@ -565,7 +566,7 @@ End Function
 Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
 
     If fileName = "" Then
-        fileName = App.path & "\polyworks.ini"
+        fileName = appPath & "\polyworks.ini"
     End If
 
     GetPrivateProfileSection section, lReturn, length, fileName
@@ -618,7 +619,7 @@ Public Function RunHelp()
 
     Dim iReturn As Long
 
-    iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", App.path & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
+    iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", appPath & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
 End Function
 

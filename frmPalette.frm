@@ -658,7 +658,7 @@ Private Sub Form_Load()
 
     Me.SetColours
 
-    frmPalette.loadPalette App.path & "\palettes\current.txt"
+    frmPalette.loadPalette appPath & "\palettes\current.txt"
 
     setValues frmColour.red, frmColour.green, frmColour.blue
 
@@ -744,7 +744,7 @@ Private Sub mnuLoadPalette_Click()
 
     On Error GoTo ErrorHandler
 
-    commonDialog.InitDir = App.path & "\palettes\"
+    commonDialog.InitDir = appPath & "\palettes\"
     commonDialog.DialogTitle = "Load Palette"
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowOpen
@@ -791,7 +791,7 @@ Private Sub mnuSavePalette_Click()
 
     On Error GoTo ErrorHandler
 
-    commonDialog.InitDir = App.path & "\palettes\"
+    commonDialog.InitDir = appPath & "\palettes\"
     commonDialog.DialogTitle = "Save Palette"
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowSave
@@ -1129,7 +1129,7 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_palette.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_palette.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP

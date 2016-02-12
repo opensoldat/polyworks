@@ -670,7 +670,7 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_display.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_display.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgClr

@@ -765,7 +765,7 @@ Public Sub SetColours()
 
     '--------
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_waypoints.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_waypoints.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP

@@ -1659,11 +1659,11 @@ Private Sub Form_Load()
 
     err = "Error setting directories"
     If Len(Dir$(uncompDir)) = 0 Or uncompDir = "" Then
-        uncompDir = App.path & "\Maps\"
+        uncompDir = appPath & "\Maps\"
     End If
 
     If Len(Dir$(prefabDir)) = 0 Or prefabDir = "" Then
-        prefabDir = App.path & "\Prefabs\"
+        prefabDir = appPath & "\Prefabs\"
     End If
 
     'if given directory doesn't exist, change to default
@@ -1785,8 +1785,8 @@ Private Sub Form_Load()
     If LCase$(right(temp, 4)) = ".pms" Then
         If Dir$(temp) <> "" Then
             LoadFile temp
-        ElseIf Dir$(App.path & "\Maps\" & temp) <> "" Then
-            LoadFile App.path & "\Maps\" & temp
+        ElseIf Dir$(appPath & "\Maps\" & temp) <> "" Then
+            LoadFile appPath & "\Maps\" & temp
         ElseIf Dir$(soldatDir & "Maps\" & temp) <> "" Then
             LoadFile soldatDir & "Maps\" & temp
         End If
@@ -1824,34 +1824,34 @@ Public Sub loadCursors()
     ImageList.ListImages.Clear
 
     'load cursors
-    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(App.path & "\" & gfxDir & "\cursors\move.cur")
-    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(App.path & "\" & gfxDir & "\cursors\create.cur")
-    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(App.path & "\" & gfxDir & "\cursors\vselect.cur")
-    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(App.path & "\" & gfxDir & "\cursors\pselect.cur")
-    ImageList.ListImages.Add TOOL_VCOLOUR + 1, "vcolour", LoadPicture(App.path & "\" & gfxDir & "\cursors\vcolour.cur")
-    ImageList.ListImages.Add TOOL_PCOLOUR + 1, "pcolour", LoadPicture(App.path & "\" & gfxDir & "\cursors\pcolour.cur")
-    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(App.path & "\" & gfxDir & "\cursors\texture.cur")
-    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(App.path & "\" & gfxDir & "\cursors\scenery.cur")
-    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(App.path & "\" & gfxDir & "\cursors\waypoint.cur")
-    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(App.path & "\" & gfxDir & "\cursors\objects.cur")
-    ImageList.ListImages.Add TOOL_CLRPICKER + 1, "clrpicker", LoadPicture(App.path & "\" & gfxDir & "\cursors\clrpicker.cur")
-    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(App.path & "\" & gfxDir & "\cursors\sketch.cur")
-    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(App.path & "\" & gfxDir & "\cursors\light.cur")
-    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(App.path & "\" & gfxDir & "\cursors\depthmap.cur")
+    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(appPath & "\" & gfxDir & "\cursors\move.cur")
+    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(appPath & "\" & gfxDir & "\cursors\create.cur")
+    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(appPath & "\" & gfxDir & "\cursors\vselect.cur")
+    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(appPath & "\" & gfxDir & "\cursors\pselect.cur")
+    ImageList.ListImages.Add TOOL_VCOLOUR + 1, "vcolour", LoadPicture(appPath & "\" & gfxDir & "\cursors\vcolour.cur")
+    ImageList.ListImages.Add TOOL_PCOLOUR + 1, "pcolour", LoadPicture(appPath & "\" & gfxDir & "\cursors\pcolour.cur")
+    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(appPath & "\" & gfxDir & "\cursors\texture.cur")
+    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(appPath & "\" & gfxDir & "\cursors\scenery.cur")
+    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(appPath & "\" & gfxDir & "\cursors\waypoint.cur")
+    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(appPath & "\" & gfxDir & "\cursors\objects.cur")
+    ImageList.ListImages.Add TOOL_CLRPICKER + 1, "clrpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\clrpicker.cur")
+    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(appPath & "\" & gfxDir & "\cursors\sketch.cur")
+    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(appPath & "\" & gfxDir & "\cursors\light.cur")
+    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(appPath & "\" & gfxDir & "\cursors\depthmap.cur")
 
-    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(App.path & "\" & gfxDir & "\cursors\hand.cur")
-    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(App.path & "\" & gfxDir & "\cursors\vseladd.cur")
-    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(App.path & "\" & gfxDir & "\cursors\vselsub.cur")
-    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(App.path & "\" & gfxDir & "\cursors\pseladd.cur")
-    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(App.path & "\" & gfxDir & "\cursors\pselsub.cur")
-    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(App.path & "\" & gfxDir & "\cursors\scale.cur")
-    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(App.path & "\" & gfxDir & "\cursors\rotate.cur")
-    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(App.path & "\" & gfxDir & "\cursors\connect.cur")
-    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(App.path & "\" & gfxDir & "\cursors\quad.cur")
-    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(App.path & "\" & gfxDir & "\cursors\pixpicker.cur")
-    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(App.path & "\" & gfxDir & "\cursors\litpicker.cur")
-    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(App.path & "\" & gfxDir & "\cursors\eraser.cur")
-    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(App.path & "\" & gfxDir & "\cursors\smudge.cur")
+    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(appPath & "\" & gfxDir & "\cursors\hand.cur")
+    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(appPath & "\" & gfxDir & "\cursors\vseladd.cur")
+    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(appPath & "\" & gfxDir & "\cursors\vselsub.cur")
+    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(appPath & "\" & gfxDir & "\cursors\pseladd.cur")
+    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(appPath & "\" & gfxDir & "\cursors\pselsub.cur")
+    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(appPath & "\" & gfxDir & "\cursors\scale.cur")
+    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(appPath & "\" & gfxDir & "\cursors\rotate.cur")
+    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(appPath & "\" & gfxDir & "\cursors\connect.cur")
+    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(appPath & "\" & gfxDir & "\cursors\quad.cur")
+    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\pixpicker.cur")
+    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\litpicker.cur")
+    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(appPath & "\" & gfxDir & "\cursors\eraser.cur")
+    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(appPath & "\" & gfxDir & "\cursors\smudge.cur")
 
     ImageList.ListImages.Item(TOOL_MOVE + 1).Tag = "Move Selection"
     ImageList.ListImages.Item(TOOL_CREATE + 1).Tag = "Create Polygons"
@@ -1892,10 +1892,10 @@ Public Sub initGfx()
 
     Dim i As Integer
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_main.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_main.bmp")
 
-    picGfx.Picture = LoadPicture(App.path & "\" & gfxDir & "\tool_gfx.bmp")
-    picButtonGfx.Picture = LoadPicture(App.path & "\" & gfxDir & "\button_gfx.bmp")
+    picGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\tool_gfx.bmp")
+    picButtonGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\button_gfx.bmp")
 
     'draw control box buttons
     mouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
@@ -1985,12 +1985,12 @@ Public Sub Init()
 
     debugVal = "Error creating pattern texture"
 
-    Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, App.path & "\" & gfxDir & "\pattern.bmp")
+    Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, appPath & "\" & gfxDir & "\pattern.bmp")
 
     debugVal = "Error creating objects texture"
 
     '----
-    Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
@@ -2003,7 +2003,7 @@ Public Sub Init()
 
     debugVal = "Error creating scenery not found texture"
 
-    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
@@ -2022,25 +2022,25 @@ Public Sub Init()
 
     debugVal = "Error creating line texture"
 
-    Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
     debugVal = "Error creating path texture"
 
-    Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
     debugVal = "Error creating rotation center texture"
 
-    Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
     debugVal = "Error creating sketch texture"
 
-    Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
@@ -2050,7 +2050,7 @@ Public Sub Init()
 
     debugVal = "Error creating particle texture"
 
-    Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
+    Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, ColourKey, ByVal 0, ByVal 0)
 
@@ -2496,7 +2496,7 @@ Public Sub LoadFile(fileName As String)
                 Dim loadName As String
 
                 If tempString = "" Then
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
@@ -2504,9 +2504,9 @@ Public Sub LoadFile(fileName As String)
                 ElseIf checkLoaded(tempString) > -1 Then
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
-                    toTGARes = GifToBmp(loadName, App.path & "\Temp\gif.tga")
+                    toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
                     If right$(loadName, 4) = ".gif" Then
-                        loadName = App.path & "\Temp\gif.tga"
+                        loadName = appPath & "\Temp\gif.tga"
                     End If
 
                     If toTGARes = -1 Then
@@ -2514,7 +2514,7 @@ Public Sub LoadFile(fileName As String)
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     Else
-                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     End If
@@ -2524,9 +2524,9 @@ Public Sub LoadFile(fileName As String)
                 ElseIf confirmExists(tempString) Then 'if scenery texture is in master list
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
-                    toTGARes = GifToBmp(loadName, App.path & "\Temp\gif.tga")
+                    toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
                     If right$(loadName, 4) = ".gif" Then
-                        loadName = App.path & "\Temp\gif.tga"
+                        loadName = appPath & "\Temp\gif.tga"
                     End If
 
                     If toTGARes = -1 Then
@@ -2534,14 +2534,14 @@ Public Sub LoadFile(fileName As String)
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     Else
-                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     End If
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 Else
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
@@ -2862,9 +2862,9 @@ Public Sub setCurrentTexture(sceneryName As String)
     Dim toTGARes As Long
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
-    toTGARes = GifToBmp(loadName, App.path & "\Temp\gif.tga")
+    toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If right$(loadName, 4) = ".gif" Then
-        loadName = App.path & "\Temp\gif.tga"
+        loadName = appPath & "\Temp\gif.tga"
     End If
 
     If toTGARes = -1 Then
@@ -2872,7 +2872,7 @@ Public Sub setCurrentTexture(sceneryName As String)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     End If
@@ -2918,9 +2918,9 @@ Public Sub CreateSceneryTexture(sceneryName As String)
     Dim toTGARes As Long
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
-    toTGARes = GifToBmp(loadName, App.path & "\Temp\gif.tga")
+    toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If right$(loadName, 4) = ".gif" Then
-        loadName = App.path & "\Temp\gif.tga"
+        loadName = appPath & "\Temp\gif.tga"
     End If
 
     If toTGARes = -1 Then
@@ -2928,7 +2928,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     End If
@@ -2971,9 +2971,9 @@ Public Sub RefreshSceneryTextures(Index As Integer)
     Dim toTGARes As Long
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
-    toTGARes = GifToBmp(loadName, App.path & "\Temp\gif.tga")
+    toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If right$(loadName, 4) = ".gif" Then
-        loadName = App.path & "\Temp\gif.tga"
+        loadName = appPath & "\Temp\gif.tga"
     End If
 
     If toTGARes = -1 Then
@@ -2981,7 +2981,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, App.path & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, ColourKey, imageInfo, ByVal 0)
     End If
@@ -3532,7 +3532,7 @@ Private Sub SaveUndo()
         currentUndo = 0
     End If
 
-    fileName = App.path & "\undo\undo" & currentUndo & ".pwn"
+    fileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     Open fileName For Binary Access Write Lock Write As #1
 
@@ -3642,7 +3642,7 @@ Private Sub loadUndo(redo As Boolean)
     numSelectedPolys = 0
     ReDim selectedPolys(0)
 
-    fileName = App.path & "\undo\undo" & currentUndo & ".pwn"
+    fileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     errorVal = "Error opening file"
 
@@ -10373,7 +10373,7 @@ End Sub
 
 Private Sub mnuCopy_Click()
 
-    savePrefab App.path & "\Temp\copy.PFB"
+    savePrefab appPath & "\Temp\copy.PFB"
 
 End Sub
 
@@ -10663,8 +10663,8 @@ Private Sub mnuPaste_Click()
 
     On Error GoTo ErrorHandler
 
-    If (GetAttr(App.path & "\Temp\copy.PFB") And vbDirectory) = 0 Then
-        loadPrefab App.path & "\Temp\copy.PFB"
+    If (GetAttr(appPath & "\Temp\copy.PFB") And vbDirectory) = 0 Then
+        loadPrefab appPath & "\Temp\copy.PFB"
     End If
 
 ErrorHandler:
@@ -11067,7 +11067,7 @@ Private Sub mnuScenList_Click()
 
     tvwScenery.Nodes.Add mnuScenList.Tag, tvwChild, , tvwScenery.SelectedItem.Text
 
-    Open App.path & "\lists\" & mnuScenList.Tag & ".txt" For Output As #1
+    Open appPath & "\lists\" & mnuScenList.Tag & ".txt" For Output As #1
 
         Set tempNode = tvwScenery.Nodes.Item(mnuScenList.Tag).Child
         For i = 1 To tvwScenery.Nodes(mnuScenList.Tag).Children
@@ -11086,7 +11086,7 @@ Private Sub mnuScenRemove_Click()
 
     tvwScenery.Nodes.Remove (tvwScenery.SelectedItem.Index)
 
-    Open App.path & "\lists\" & mnuScenList.Tag & ".txt" For Output As #1
+    Open appPath & "\lists\" & mnuScenList.Tag & ".txt" For Output As #1
 
         Set tempNode = tvwScenery.Nodes.Item(mnuScenList.Tag).Child
         For i = 1 To tvwScenery.Nodes(mnuScenList.Tag).Children
@@ -11111,7 +11111,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
     If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
 
     If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
-        frmScenery.picScenery.Picture = LoadPicture(App.path & "\" & gfxDir & "\notfound.bmp")
+        frmScenery.picScenery.Picture = LoadPicture(appPath & "\" & gfxDir & "\notfound.bmp")
         Exit Sub
     End If
 
@@ -12055,13 +12055,13 @@ Private Sub saveSettings()
     saveSection "LayerKeys", iniString
 
     'palette
-    frmPalette.savePalette App.path & "\palettes\current.txt"
+    frmPalette.savePalette appPath & "\palettes\current.txt"
 
     'workspace
     iniString = "WindowState=" & Me.WindowState & sNull _
         & "Width=" & formWidth & sNull & "Height=" & formHeight & sNull _
         & "Left=" & formLeft & sNull & "Top=" & formTop & sNull & sNull
-    saveSection "Main", iniString, App.path & "\workspace\current.ini"
+    saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
     saveWindow "Tools", frmTools, False
     saveWindow "Display", frmDisplay, frmDisplay.collapsed
@@ -12098,13 +12098,24 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     iniString = "Visible=" & window.Visible & sNull & "Left=" & leftVal & sNull & "Top=" & topVal & sNull _
             & "Collapsed=" & collapsed & sNull & sNull
 
-    saveSection sectionName, iniString, App.path & "\workspace\" & fileName
+    saveSection sectionName, iniString, appPath & "\workspace\" & FileName
 
 End Sub
+
+Private Function SetIdePath()
+
+  appPath = appPath & "\pwinstall"
+  SetIdePath = True
+
+End Function
 
 Private Sub loadINI()
 
     On Error GoTo ErrorHandler
+
+    appPath = App.path
+
+    Debug.Assert SetIdePath 'workaround for debugging with ide
 
     Dim i As Integer
     Dim numRecent As Integer
@@ -12286,11 +12297,11 @@ Private Sub loadWorkspace(Optional fileName As String = "current.ini")
 
     On Error GoTo ErrorHandler
 
-    Me.WindowState = loadInt("Main", "WindowState", App.path & "\workspace\" & fileName)
-    Me.formWidth = loadInt("Main", "Width", App.path & "\workspace\" & fileName)
-    Me.formHeight = loadInt("Main", "Height", App.path & "\workspace\" & fileName)
-    Me.formLeft = loadInt("Main", "Left", App.path & "\workspace\" & fileName)
-    Me.formTop = loadInt("Main", "Top", App.path & "\workspace\" & fileName)
+    Me.WindowState = loadInt("Main", "WindowState", appPath & "\workspace\" & FileName)
+    Me.formWidth = loadInt("Main", "Width", appPath & "\workspace\" & FileName)
+    Me.formHeight = loadInt("Main", "Height", appPath & "\workspace\" & FileName)
+    Me.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & FileName)
+    Me.formTop = loadInt("Main", "Top", appPath & "\workspace\" & FileName)
 
     If Me.WindowState = vbNormal Then
         Me.Width = formWidth * Screen.TwipsPerPixelX
@@ -12301,40 +12312,40 @@ Private Sub loadWorkspace(Optional fileName As String = "current.ini")
 
     tvwScenery.Height = formHeight - 41 - 20
 
-    mnuTools.Checked = loadString("Tools", "Visible", App.path & "\workspace\" & fileName)
-    frmTools.xPos = loadInt("Tools", "Left", App.path & "\workspace\" & fileName)
-    frmTools.yPos = loadInt("Tools", "Top", App.path & "\workspace\" & fileName)
-    frmTools.collapsed = loadString("Tools", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuTools.Checked = loadString("Tools", "Visible", appPath & "\workspace\" & FileName)
+    frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & FileName)
+    frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & FileName)
+    frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuDisplay.Checked = loadString("Display", "Visible", App.path & "\workspace\" & fileName)
-    frmDisplay.xPos = loadInt("Display", "Left", App.path & "\workspace\" & fileName)
-    frmDisplay.yPos = loadInt("Display", "Top", App.path & "\workspace\" & fileName)
-    frmDisplay.collapsed = loadString("Display", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & FileName)
+    frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & FileName)
+    frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & FileName)
+    frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuInfo.Checked = loadString("Properties", "Visible", App.path & "\workspace\" & fileName)
-    frmInfo.xPos = loadInt("Properties", "Left", App.path & "\workspace\" & fileName)
-    frmInfo.yPos = loadInt("Properties", "Top", App.path & "\workspace\" & fileName)
-    frmInfo.collapsed = loadString("Properties", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & FileName)
+    frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & FileName)
+    frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & FileName)
+    frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuPalette.Checked = loadString("Palette", "Visible", App.path & "\workspace\" & fileName)
-    frmPalette.xPos = loadInt("Palette", "Left", App.path & "\workspace\" & fileName)
-    frmPalette.yPos = loadInt("Palette", "Top", App.path & "\workspace\" & fileName)
-    frmPalette.collapsed = loadString("Palette", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & FileName)
+    frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & FileName)
+    frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & FileName)
+    frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuScenery.Checked = loadString("Scenery", "Visible", App.path & "\workspace\" & fileName)
-    frmScenery.xPos = loadInt("Scenery", "Left", App.path & "\workspace\" & fileName)
-    frmScenery.yPos = loadInt("Scenery", "Top", App.path & "\workspace\" & fileName)
-    frmScenery.collapsed = loadString("Scenery", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & FileName)
+    frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & FileName)
+    frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
+    frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuWaypoints.Checked = loadString("Waypoints", "Visible", App.path & "\workspace\" & fileName)
-    frmWaypoints.xPos = loadInt("Waypoints", "Left", App.path & "\workspace\" & fileName)
-    frmWaypoints.yPos = loadInt("Waypoints", "Top", App.path & "\workspace\" & fileName)
-    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
+    frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
+    frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & FileName)
+    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & FileName)
 
-    mnuTexture.Checked = loadString("Texture", "Visible", App.path & "\workspace\" & fileName)
-    frmTexture.xPos = loadInt("Texture", "Left", App.path & "\workspace\" & fileName)
-    frmTexture.yPos = loadInt("Texture", "Top", App.path & "\workspace\" & fileName)
-    frmTexture.collapsed = loadString("Texture", "Collapsed", App.path & "\workspace\" & fileName)
+    mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & FileName)
+    frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & FileName)
+    frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & FileName)
+    frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & FileName)
 
     Exit Sub
 
@@ -12348,17 +12359,17 @@ Public Sub loadColours()
 
     On Error GoTo ErrorHandler
 
-    bgClr = CLng("&H" + loadString("GUIColours", "Background", App.path & "\" & gfxDir & "\colours.ini"))
-    lblBackClr = CLng("&H" + loadString("GUIColours", "LabelBack", App.path & "\" & gfxDir & "\colours.ini"))
-    lblTextClr = CLng("&H" + loadString("GUIColours", "LabelText", App.path & "\" & gfxDir & "\colours.ini"))
-    txtBackClr = CLng("&H" + loadString("GUIColours", "TextBoxBack", App.path & "\" & gfxDir & "\colours.ini"))
-    txtTextClr = CLng("&H" + loadString("GUIColours", "TextBoxText", App.path & "\" & gfxDir & "\colours.ini"))
-    frameClr = CLng("&H" + loadString("GUIColours", "Frame", App.path & "\" & gfxDir & "\colours.ini"))
-    font1 = loadString("GUIColours", "font1", App.path & "\" & gfxDir & "\colours.ini", 40)
-    font2 = loadString("GUIColours", "font2", App.path & "\" & gfxDir & "\colours.ini", 40)
+    bgClr = CLng("&H" + loadString("GUIColours", "Background", appPath & "\" & gfxDir & "\colours.ini"))
+    lblBackClr = CLng("&H" + loadString("GUIColours", "LabelBack", appPath & "\" & gfxDir & "\colours.ini"))
+    lblTextClr = CLng("&H" + loadString("GUIColours", "LabelText", appPath & "\" & gfxDir & "\colours.ini"))
+    txtBackClr = CLng("&H" + loadString("GUIColours", "TextBoxBack", appPath & "\" & gfxDir & "\colours.ini"))
+    txtTextClr = CLng("&H" + loadString("GUIColours", "TextBoxText", appPath & "\" & gfxDir & "\colours.ini"))
+    frameClr = CLng("&H" + loadString("GUIColours", "Frame", appPath & "\" & gfxDir & "\colours.ini"))
+    font1 = loadString("GUIColours", "font1", appPath & "\" & gfxDir & "\colours.ini", 40)
+    font2 = loadString("GUIColours", "font2", appPath & "\" & gfxDir & "\colours.ini", 40)
 
-    If font1 = "" Then font1 = App.path & "\Lucida Console"
-    If font2 = "" Then font2 = App.path & "\Bank Gothic Light BT"
+    If font1 = "" Then font1 = appPath & "\Lucida Console"
+    If font2 = "" Then font2 = appPath & "\Bank Gothic Light BT"
 
     Exit Sub
 ErrorHandler:
@@ -12543,8 +12554,8 @@ Private Sub mnuSaveAs_Click()
     On Error GoTo ErrorHandler
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
-    commonDialog.InitDir = App.path & "\Maps\"
-    commonDialog.fileName = App.path & "\Maps\" & currentFileName
+    commonDialog.InitDir = appPath & "\Maps\"
+    commonDialog.fileName = appPath & "\Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
     commonDialog.ShowSave
 
@@ -14096,13 +14107,13 @@ Private Sub mnuLoadSpace_Click()
     On Error GoTo ErrorHandler
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
-    commonDialog.InitDir = App.path & "\Workspace\"
+    commonDialog.InitDir = appPath & "\Workspace\"
     commonDialog.fileName = ""
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Workspace"
     commonDialog.ShowOpen
 
     If commonDialog.fileName <> "" Then
-        If Len(Dir$(App.path & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
+        If Len(Dir$(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
             loadWorkspace commonDialog.FileTitle
             frmTools.setForm
             frmDisplay.setForm
@@ -14133,7 +14144,7 @@ Private Sub mnuSaveSpace_Click()
     sNull = Chr$(0)
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
-    commonDialog.InitDir = App.path & "\Workspace\"
+    commonDialog.InitDir = appPath & "\Workspace\"
     commonDialog.fileName = ""
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Workspace"
     commonDialog.ShowSave
@@ -14143,7 +14154,7 @@ Private Sub mnuSaveSpace_Click()
         iniString = "WindowState=" & Me.WindowState & sNull _
             & "Width=" & formWidth & sNull & "Height=" & formHeight & sNull _
             & "Left=" & formLeft & sNull & "Top=" & formTop & sNull & sNull
-        saveSection "Main", iniString, App.path & "\workspace\" & commonDialog.FileTitle
+        saveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
         saveWindow "Tools", frmTools, False, commonDialog.FileTitle
         saveWindow "Display", frmDisplay, frmDisplay.collapsed, commonDialog.FileTitle

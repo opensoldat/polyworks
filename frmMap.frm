@@ -686,7 +686,7 @@ Public Sub loadFromList()
 
     cboTexture.Clear
 
-    Open App.path & "\texture_list.txt" For Input As #1
+    Open appPath & "\texture_list.txt" For Input As #1
 
         Do While Not EOF(1)
 
@@ -812,7 +812,7 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_map.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_map.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP

@@ -423,13 +423,13 @@ Public Sub listScenery()
 
     'load lists
 
-    file = Dir$(App.path & "\lists\" & "*.txt", vbDirectory)
+    file = Dir$(appPath & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file) 'for every txt file in lists
 
         file = left(file, Len(file) - 4)
         frmSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
         fileOpen = True
-        Open App.path & "\lists\" & file & ".txt" For Input As #1
+        Open appPath & "\lists\" & file & ".txt" For Input As #1
 
             Do Until EOF(1)
                 Input #1, sceneryName
@@ -498,7 +498,7 @@ Public Sub lstScenery_Click()
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
     Else
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
-        picScenery.Picture = LoadPicture(App.path & "\" & gfxDir & "\notfound.bmp")
+        picScenery.Picture = LoadPicture(appPath & "\" & gfxDir & "\notfound.bmp")
         frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
     End If
 
@@ -692,7 +692,7 @@ Public Sub SetColours()
 
     '--------
 
-    picTitle.Picture = LoadPicture(App.path & "\" & gfxDir & "\titlebar_scenery.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_scenery.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
