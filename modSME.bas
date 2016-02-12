@@ -132,7 +132,6 @@ Private Declare Function lstrlenW Lib "kernel32" (ByVal lpString As Long) As Lon
 
 
 'file time
-
 Public Const OFS_MAXPATHNAME = 128
 Public Const OF_READWRITE = &H2
 
@@ -216,10 +215,10 @@ Private Type GUID
 End Type
 
 Private Type PICTDESC
-   size     As Long
+   Size     As Long
    Type     As Long
    hBmp     As Long
-   hPal     As Long
+   hpal     As Long
    Reserved As Long
 End Type
 
@@ -263,8 +262,6 @@ Private Const InterpolationModeHighQualityBicubic = 7
 Private Const GDIP_WMF_PLACEABLEKEY = &H9AC6CDD7
 Private Const UnitPixel = 2
 
-
-'Dim tempval As Integer
 
 'mouse event
 Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
@@ -459,7 +456,7 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
     Dim lpValue As String   'name of the value to retrieve
     Dim lpcbData As Long    'length of the retrieved value
-    Dim result As Long
+    Dim Result As Long
 
     'if valid
     If hSubKey <> 0 Then
@@ -479,7 +476,7 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 End Function
 
 
-Public Function getFileDate(fileName As String) As Long
+Public Function getFileDate(FileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -495,7 +492,7 @@ Public Function getFileDate(fileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
 
@@ -517,59 +514,59 @@ ErrorHandler:
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
+Public Sub saveSection(sectionName As String, sectionData As String, Optional FileName As String)
 
     Dim lReturn  As Long
 
-    If fileName = "" Then
+    If FileName = "" Then
         FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
+    lReturn = WritePrivateProfileSection(sectionName, sectionData, FileName)
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
+Public Function loadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
 
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
     If length = 0 Then length = 10
 
     sString = String$(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
+    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
 
     loadString = left(sString, lReturn)
 
 End Function
 
-Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
+Public Function loadInt(section As String, Entry As String, Optional FileName As String) As Long
 
     Dim lReturn As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
+    lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
 
     loadInt = lReturn
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
+Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    GetPrivateProfileSection section, lReturn, length, fileName
+    GetPrivateProfileSection section, lReturn, length, FileName
 
     loadSection = lReturn
 
@@ -623,16 +620,16 @@ Public Function RunHelp()
 
 End Function
 
-Public Function SetGameMode(fileName As String)
+Public Function SetGameMode(FileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
 
-    If LCase(left(fileName, 4)) = "ctf_" Then
+    If LCase(left(FileName, 4)) = "ctf_" Then
         gameMode = 3
-    ElseIf LCase(left(fileName, 4)) = "inf_" Then
+    ElseIf LCase(left(FileName, 4)) = "inf_" Then
         gameMode = 5
-    ElseIf LCase(left(fileName, 4)) = "htf_" Then
+    ElseIf LCase(left(FileName, 4)) = "htf_" Then
         gameMode = 6
     Else
         gameMode = 0
@@ -660,17 +657,17 @@ End Function
 
 ' Initialises GDI Plus
 Public Function InitGDIPlus() As Long
-    Dim Token    As Long
+    Dim token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
-    GdiplusStartup Token, gdipInit, ByVal 0&
-    InitGDIPlus = Token
+    GdiplusStartup token, gdipInit, ByVal 0&
+    InitGDIPlus = token
 End Function
 
 ' Frees GDI Plus
-Public Sub FreeGDIPlus(Token As Long)
-    GdiplusShutdown Token
+Public Sub FreeGDIPlus(token As Long)
+    GdiplusShutdown token
 End Sub
 
 ' Loads the picture (optionally resized)
@@ -722,7 +719,7 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     IID_IDispatch.Data4(0) = &HC0
     IID_IDispatch.Data4(7) = &H46
     ' Fill Pic with necessary parts
-    pic.size = Len(pic)        ' Length of structure
+    pic.Size = Len(pic)        ' Length of structure
     pic.Type = PICTYPE_BITMAP  ' Type of Picture (bitmap)
     pic.hBmp = hBitmap         ' Handle to bitmap
     ' Create the picture

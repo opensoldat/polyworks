@@ -1472,7 +1472,7 @@ End Type
 
 '--------
 
-Dim version As Long
+Dim Version As Long
 Dim Polys() As TPolygon
 Dim PolyCoords() As TTriangle
 
@@ -1771,7 +1771,7 @@ Private Sub Form_Load()
     lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
-    commonDialog.flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist Or cdlOFNFileMustExist
+    commonDialog.Flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist Or cdlOFNFileMustExist
 
     err = "Error parsing command line args"
 
@@ -2209,9 +2209,9 @@ Public Sub newMap()
 
     prompt = False
 
-    version = 11
+    Version = 11
 
-    commonDialog.fileName = ""
+    commonDialog.FileName = ""
 
     numVerts = 0
     toolAction = False
@@ -2319,7 +2319,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub LoadFile(fileName As String)
+Public Sub LoadFile(FileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -2360,9 +2360,9 @@ Public Sub LoadFile(fileName As String)
     ReDim selectedPolys(numSelectedPolys)
 
     currentFileName = ""
-    For i = 0 To Len(fileName) - 1
-        If mid(fileName, Len(fileName) - i, 1) <> "\" Then
-            currentFileName = mid(fileName, Len(fileName) - i, 1) + currentFileName
+    For i = 0 To Len(FileName) - 1
+        If mid(FileName, Len(FileName) - i, 1) <> "\" Then
+            currentFileName = mid(FileName, Len(FileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -2370,7 +2370,7 @@ Public Sub LoadFile(fileName As String)
 
     lblFileName.Caption = currentFileName
 
-    Open fileName For Binary Access Read Lock Read As #1
+    Open FileName For Binary Access Read Lock Read As #1
 
         fileOpen = True
         errorVal = "Error loading polys"
@@ -2380,7 +2380,7 @@ Public Sub LoadFile(fileName As String)
         minX = 0
         minY = 0
 
-        Get #1, , version
+        Get #1, , Version
         Get #1, , Options
         Get #1, , polyCount
         ReDim Polys(0 To polyCount)
@@ -2792,7 +2792,7 @@ Private Function getMapArea() As Long
 
     Dim i As Integer
     Dim area As Double
-    Dim a As Single, B As Single
+    Dim a As Single, b As Single
     Dim c As Single
     Dim x1 As Single, y1 As Single, x2 As Single, y2 As Single
 
@@ -2803,9 +2803,9 @@ Private Function getMapArea() As Long
             x2 = (PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(3).X)
             y2 = (PolyCoords(i).vertex(1).Y - PolyCoords(i).vertex(3).Y)
             a = Sqr(x1 ^ 2 + y1 ^ 2)
-            B = Sqr(x2 ^ 2 + y2 ^ 2)
+            b = Sqr(x2 ^ 2 + y2 ^ 2)
             c = GetAngle(x1, y1) - GetAngle(x2, y2)
-            area = area + (a * B * Sin(c) / 2)
+            area = area + (a * b * Sin(c) / 2)
         End If
     Next
 
@@ -3001,7 +3001,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
 
 End Sub
 
-Private Sub SaveFile(fileName As String)
+Private Sub SaveFile(FileName As String)
 
     Dim i As Integer, j As Integer, k As Integer
     Dim X As Integer, Y As Integer
@@ -3060,11 +3060,11 @@ Private Sub SaveFile(fileName As String)
         sectorsDivision = Int((mapHeight + 100) / 25)
     End If
 
-    Open fileName For Binary Access Write Lock Write As #1
+    Open FileName For Binary Access Write Lock Write As #1
 
         fileOpen = True
 
-        Put #1, , version
+        Put #1, , Version
         Put #1, , Options
 
         'save polys
@@ -3206,9 +3206,9 @@ Private Sub SaveFile(fileName As String)
     fileOpen = False
 
     currentFileName = ""
-    For i = 0 To Len(fileName) - 1
-        If mid(fileName, Len(fileName) - i, 1) <> "\" Then
-            currentFileName = mid(fileName, Len(fileName) - i, 1) + currentFileName
+    For i = 0 To Len(FileName) - 1
+        If mid(FileName, Len(FileName) - i, 1) <> "\" Then
+            currentFileName = mid(FileName, Len(FileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -3229,7 +3229,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub SaveAndCompile(fileName As String)
+Public Sub SaveAndCompile(FileName As String)
 
     Dim i As Integer, j As Integer, k As Integer
     Dim X As Integer, Y As Integer
@@ -3315,11 +3315,11 @@ Public Sub SaveAndCompile(fileName As String)
         xSecNum = (mapWidth + 100) / sectorsDivision
     End If
 
-    Open fileName For Binary Access Write Lock Write As #1
+    Open FileName For Binary Access Write Lock Write As #1
 
         fileOpen = True
 
-        Put #1, , version
+        Put #1, , Version
         Put #1, , Options
 
         'save polys
@@ -3518,7 +3518,7 @@ Private Sub SaveUndo()
 
     Dim i As Integer, j As Integer
     Dim Polygon As TPolygon
-    Dim fileName As String
+    Dim FileName As String
 
     selectionChanged = False
 
@@ -3532,9 +3532,9 @@ Private Sub SaveUndo()
         currentUndo = 0
     End If
 
-    fileName = appPath & "\undo\undo" & currentUndo & ".pwn"
+    FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
-    Open fileName For Binary Access Write Lock Write As #1
+    Open FileName For Binary Access Write Lock Write As #1
 
         'save polys
         Put #1, , polyCount
@@ -3603,7 +3603,7 @@ End Sub
 Private Sub loadUndo(redo As Boolean)
 
     Dim i As Integer, j As Integer
-    Dim fileName As String
+    Dim FileName As String
     Dim errorVal As String
 
     On Error GoTo ErrorHandler
@@ -3642,11 +3642,11 @@ Private Sub loadUndo(redo As Boolean)
     numSelectedPolys = 0
     ReDim selectedPolys(0)
 
-    fileName = appPath & "\undo\undo" & currentUndo & ".pwn"
+    FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     errorVal = "Error opening file"
 
-    Open fileName For Binary Access Read Lock Read As #1
+    Open FileName For Binary Access Read Lock Read As #1
 
         errorVal = "Error loading polygons"
 
@@ -3917,14 +3917,14 @@ Private Function SegXHorizSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
     End If
 
     Dim W As D3DVECTOR2
-    Dim S As Single
+    Dim s As Single
     Dim T As Single
 
     W.X = A1.X - A2.X
     W.Y = A1.Y - A2.Y
 
-    S = (length * W.Y) / D
-    If (S <= 0 Or S >= 1) Then
+    s = (length * W.Y) / D
+    If (s <= 0 Or s >= 1) Then
         Exit Function
     End If
 
@@ -3954,14 +3954,14 @@ Private Function SegXVertSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
     End If
 
     Dim W As D3DVECTOR2
-    Dim S As Single
+    Dim s As Single
     Dim T As Single
 
     W.X = A1.X - A2.X
     W.Y = A1.Y - A2.Y
 
-    S = (-length * W.X) / D
-    If (S <= 0 Or S >= 1) Then
+    s = (-length * W.X) / D
+    If (s <= 0 Or s >= 1) Then
         Exit Function
     End If
 
@@ -3984,7 +3984,7 @@ Private Function segmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
     Dim da As Long
     Dim db As Long
     Dim T As Single
-    Dim S As Single
+    Dim s As Single
 
     DX = x2 - x1
     dy = y2 - y1
@@ -3997,9 +3997,9 @@ Private Function segmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
         Exit Function
     End If
 
-    S = (DX * (B1 - y1) + dy * (x1 - A1)) / (da * dy - db * DX)
+    s = (DX * (B1 - y1) + dy * (x1 - A1)) / (da * dy - db * DX)
     T = (da * (y1 - B1) + db * (A1 - x1)) / (db * DX - da * dy)
-    segmentsIntersect = (S >= 0 And S <= 1 And T >= 0 And T <= 1)
+    segmentsIntersect = (s >= 0 And s <= 1 And T >= 0 And T <= 1)
 
     Exit Function
 ErrorHandler:
@@ -4027,14 +4027,14 @@ Private Function SegXSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
     End If
 
     Dim W As D3DVECTOR2
-    Dim S As Single
+    Dim s As Single
     Dim T As Single
 
     W.X = A1.X - A2.X
     W.Y = A1.Y - A2.Y
 
-    S = (V.X * W.Y - V.Y * W.X) / D
-    If (S <= 0# Or S >= 1#) Then
+    s = (V.X * W.Y - V.Y * W.X) / D
+    If (s <= 0# Or s >= 1#) Then
         Exit Function
     End If
 
@@ -10674,38 +10674,38 @@ End Sub
 Private Sub mnuRecent_Click(Index As Integer)
 
     Dim i As Integer
-    Dim result As VbMsgBoxResult
-    Dim fileName As String
+    Dim Result As VbMsgBoxResult
+    Dim FileName As String
 
-    fileName = mnuRecent(Index).Caption
+    FileName = mnuRecent(Index).Caption
 
-    If Len(Dir$(fileName)) <> 0 And fileName <> "" Then
+    If Len(Dir$(FileName)) <> 0 And FileName <> "" Then
 
         If prompt Then
-            result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+            Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
-            If result = vbCancel Then
+            If Result = vbCancel Then
                 Exit Sub
-            ElseIf result = vbYes Then
+            ElseIf Result = vbYes Then
                 mnuSave_Click
                 If prompt Then Exit Sub
             End If
         End If
         DoEvents
 
-        LoadFile fileName
+        LoadFile FileName
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
-        mnuRecent(0).Caption = fileName
-    ElseIf Len(Dir$(fileName)) = 0 Then
-        MsgBox "File not found: " & fileName
+        mnuRecent(0).Caption = FileName
+    ElseIf Len(Dir$(FileName)) = 0 Then
+        MsgBox "File not found: " & FileName
     End If
 
 End Sub
 
 'put in recent files if it isn't already
-Private Sub updateRecent(fileName As String)
+Private Sub updateRecent(FileName As String)
 
     Dim i As Integer
 
@@ -10719,7 +10719,7 @@ Private Sub updateRecent(fileName As String)
             mnuRecent(i).Visible = True
         End If
     Next
-    mnuRecent(0).Caption = fileName
+    mnuRecent(0).Caption = FileName
 
 End Sub
 
@@ -11102,7 +11102,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
 
     Dim i As Integer
     Dim isInList As Boolean
-    Dim Token As Long
+    Dim token As Long
     Dim tempNode As Node
 
     On Error GoTo ErrorHandler
@@ -11119,9 +11119,9 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
 
         currentScenery = tvwScenery.SelectedItem.Text
 
-        Token = InitGDIPlus
+        token = InitGDIPlus
         frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
-        FreeGDIPlus Token
+        FreeGDIPlus token
 
         Set tempNode = tvwScenery.Nodes.Item("In Use").Child
 
@@ -11139,9 +11139,9 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
 
             currentScenery = tvwScenery.SelectedItem.Text
 
-            Token = InitGDIPlus
+            token = InitGDIPlus
             frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
-            FreeGDIPlus Token
+            FreeGDIPlus token
 
             'check if already in list
             Set tempNode = tvwScenery.Nodes.Item("In Use").Child
@@ -11172,7 +11172,7 @@ ErrorHandler:
 
 End Sub
 
-Private Function confirmExists(fileName As String) As Boolean
+Private Function confirmExists(FileName As String) As Boolean
 
     Dim tempNode As Node
     Dim i As Integer
@@ -11180,7 +11180,7 @@ Private Function confirmExists(fileName As String) As Boolean
     Set tempNode = tvwScenery.Nodes.Item("Master List").Child
 
     For i = 1 To (tvwScenery.Nodes.Item("Master List").Children)
-        If LCase(fileName) = LCase(tempNode.Text) Then
+        If LCase(FileName) = LCase(tempNode.Text) Then
             confirmExists = True
         End If
         Set tempNode = tempNode.Next
@@ -11667,7 +11667,7 @@ End Sub
 
 Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim result As VbMsgBoxResult
+    Dim Result As VbMsgBoxResult
     Dim temp As String
 
     temp = Data.Files.Item(1)
@@ -11679,11 +11679,11 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
     If LCase$(right(temp, 4)) = ".pms" Then
 
         If prompt Then
-            result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+            Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
-            If result = vbCancel Then
+            If Result = vbCancel Then
                 Exit Sub
-            ElseIf result = vbYes Then
+            ElseIf Result = vbYes Then
                 mnuSave_Click
                 If prompt Then Exit Sub
             End If
@@ -11706,16 +11706,16 @@ End Sub
 
 Public Sub Terminate() 'You are on the way to destruction.
 
-    Dim result As VbMsgBoxResult
+    Dim Result As VbMsgBoxResult
 
     On Error GoTo ErrorHandler
 
     If prompt Then
-        result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+        Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
         DoEvents
-        If result = vbCancel Then
+        If Result = vbCancel Then
             Exit Sub
-        ElseIf result = vbYes Then
+        ElseIf Result = vbYes Then
             mnuSave_Click
             If prompt Then Exit Sub
         End If
@@ -12085,7 +12085,7 @@ Private Sub saveSettings()
 
 End Sub
 
-Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, Optional fileName As String = "current.ini")
+Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, Optional FileName As String = "current.ini")
 
     Dim leftVal As Integer, topVal As Integer
     Dim iniString As String
@@ -12293,7 +12293,7 @@ Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) 
 
 End Function
 
-Private Sub loadWorkspace(Optional fileName As String = "current.ini")
+Private Sub loadWorkspace(Optional FileName As String = "current.ini")
 
     On Error GoTo ErrorHandler
 
@@ -12385,14 +12385,14 @@ End Sub
 
 Private Sub mnuNew_Click()
 
-    Dim result As VbMsgBoxResult
+    Dim Result As VbMsgBoxResult
 
     If prompt Then
-        result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+        Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
         DoEvents
-        If result = vbCancel Then
+        If Result = vbCancel Then
             Exit Sub
-        ElseIf result = vbYes Then
+        ElseIf Result = vbYes Then
             mnuSave_Click
             If prompt Then Exit Sub
         End If
@@ -12405,14 +12405,14 @@ Private Sub mnuOpen_Click()
 
     On Error GoTo ErrorHandler
 
-    Dim result As VbMsgBoxResult
+    Dim Result As VbMsgBoxResult
 
     If prompt Then
-        result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+        Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
         DoEvents
-        If result = vbCancel Then
+        If Result = vbCancel Then
             Exit Sub
-        ElseIf result = vbYes Then
+        ElseIf Result = vbYes Then
             mnuSave_Click
             If prompt Then Exit Sub
         End If
@@ -12421,13 +12421,13 @@ Private Sub mnuOpen_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = uncompDir
-    commonDialog.fileName = uncompDir & currentFileName
+    commonDialog.FileName = uncompDir & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
     commonDialog.ShowOpen
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
         prompt = False
-        recentFiles commonDialog.fileName
+        recentFiles commonDialog.FileName
         polyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
@@ -12437,7 +12437,7 @@ Private Sub mnuOpen_Click()
         selectedCoords(1).Y = 0
         selectedCoords(2).X = 0
         selectedCoords(2).Y = 0
-        LoadFile commonDialog.fileName
+        LoadFile commonDialog.FileName
     End If
 
     RegainFocus
@@ -12457,14 +12457,14 @@ Private Sub mnuOpenCompiled_Click()
 
     On Error GoTo ErrorHandler
 
-    Dim result As VbMsgBoxResult
+    Dim Result As VbMsgBoxResult
 
     If prompt Then
-        result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
+        Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
         DoEvents
-        If result = vbCancel Then
+        If Result = vbCancel Then
             Exit Sub
-        ElseIf result = vbYes Then
+        ElseIf Result = vbYes Then
             mnuSave_Click
             If prompt Then Exit Sub
         End If
@@ -12473,13 +12473,13 @@ Private Sub mnuOpenCompiled_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = soldatDir & "Maps\"
-    commonDialog.fileName = soldatDir & "Maps\" & currentFileName
+    commonDialog.FileName = soldatDir & "Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
     commonDialog.ShowOpen
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
         prompt = False
-        recentFiles commonDialog.fileName
+        recentFiles commonDialog.FileName
         polyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
@@ -12489,7 +12489,7 @@ Private Sub mnuOpenCompiled_Click()
         selectedCoords(1).Y = 0
         selectedCoords(2).X = 0
         selectedCoords(2).Y = 0
-        LoadFile commonDialog.fileName
+        LoadFile commonDialog.FileName
     End If
 
     RegainFocus
@@ -12513,24 +12513,24 @@ Private Sub mnuSave_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
-    commonDialog.fileName = uncompDir & currentFileName
+    commonDialog.FileName = uncompDir & currentFileName
     commonDialog.InitDir = uncompDir
 
     If lblFileName.Caption = "Untitled.pms" Then
 
         commonDialog.ShowSave
 
-        If commonDialog.fileName <> "" Then
+        If commonDialog.FileName <> "" Then
 
-            recentFiles commonDialog.fileName
+            recentFiles commonDialog.FileName
 
             DoEvents
-            SaveFile commonDialog.fileName
+            SaveFile commonDialog.FileName
             prompt = False
         End If
 
     Else
-        SaveFile commonDialog.fileName
+        SaveFile commonDialog.FileName
         prompt = False
     End If
 
@@ -12555,16 +12555,16 @@ Private Sub mnuSaveAs_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = appPath & "\Maps\"
-    commonDialog.fileName = appPath & "\Maps\" & currentFileName
+    commonDialog.FileName = appPath & "\Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
     commonDialog.ShowSave
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
 
-        recentFiles commonDialog.fileName
+        recentFiles commonDialog.FileName
 
         DoEvents
-        SaveFile commonDialog.fileName
+        SaveFile commonDialog.FileName
         prompt = False
     End If
 
@@ -12590,7 +12590,7 @@ Private Sub mnuCompile_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
     commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
-    commonDialog.fileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
+    commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to PMS"
 
     If lblFileName.Caption = "Untitled.PMS" Then
@@ -12598,28 +12598,28 @@ Private Sub mnuCompile_Click()
         commonDialog.ShowSave
         DoEvents
 
-        If commonDialog.fileName <> "" Then
+        If commonDialog.FileName <> "" Then
 
-            SaveAndCompile commonDialog.fileName
+            SaveAndCompile commonDialog.FileName
             prompt = False
 
-            For i = 1 To Len(commonDialog.fileName)
-                If mid(commonDialog.fileName, i, 1) = "\" Then
+            For i = 1 To Len(commonDialog.FileName)
+                If mid(commonDialog.FileName, i, 1) = "\" Then
                     length = i + 1
                 End If
             Next
-            lastCompiled = mid(commonDialog.fileName, length, Len(commonDialog.fileName) - length - 3)
+            lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
         End If
     Else
-        SaveAndCompile commonDialog.fileName
+        SaveAndCompile commonDialog.FileName
         prompt = False
 
-        For i = 1 To Len(commonDialog.fileName)
-            If mid(commonDialog.fileName, i, 1) = "\" Then
+        For i = 1 To Len(commonDialog.FileName)
+            If mid(commonDialog.FileName, i, 1) = "\" Then
                 length = i + 1
             End If
         Next
-        lastCompiled = mid(commonDialog.fileName, length, Len(commonDialog.fileName) - length - 3)
+        lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
 
     End If
 
@@ -12645,21 +12645,21 @@ Private Sub mnuCompileAs_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
     commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
-    commonDialog.fileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
+    commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to PMS"
     commonDialog.ShowSave
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
         DoEvents
-        SaveAndCompile commonDialog.fileName
+        SaveAndCompile commonDialog.FileName
         prompt = False
 
-        For i = 1 To Len(commonDialog.fileName)
-            If mid(commonDialog.fileName, i, 1) = "\" Then
+        For i = 1 To Len(commonDialog.FileName)
+            If mid(commonDialog.FileName, i, 1) = "\" Then
                 length = i + 1
             End If
         Next
-        lastCompiled = mid(commonDialog.fileName, length, Len(commonDialog.fileName) - length - 3)
+        lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
     End If
 
     RegainFocus
@@ -12675,25 +12675,25 @@ ErrorHandler:
 
 End Sub
 
-Private Function recentFiles(fileName As String) As Boolean
+Private Function recentFiles(FileName As String) As Boolean
 
     Dim i As Integer
     Dim inRecent As Boolean
     Dim Index As Integer
 
     For i = 0 To 9
-        If mnuRecent(i).Caption = fileName Then
+        If mnuRecent(i).Caption = FileName Then
             inRecent = True
             Index = i
         End If
     Next
     If Not inRecent Then
-        updateRecent fileName
+        updateRecent FileName
     Else
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
-        mnuRecent(0).Caption = fileName
+        mnuRecent(0).Caption = FileName
     End If
 
 End Function
@@ -12704,13 +12704,13 @@ Private Sub mnuExport_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
     commonDialog.InitDir = prefabDir
-    commonDialog.fileName = "Untitled.pfb"
+    commonDialog.FileName = "Untitled.pfb"
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Prefab"
     commonDialog.ShowSave
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
 
-        savePrefab commonDialog.fileName
+        savePrefab commonDialog.FileName
 
     End If
 
@@ -12733,13 +12733,13 @@ Private Sub mnuImport_Click()
 
     commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
     commonDialog.InitDir = prefabDir
-    commonDialog.fileName = ""
+    commonDialog.FileName = ""
     commonDialog.DialogTitle = "Import"
     commonDialog.ShowOpen
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
 
-        loadPrefab commonDialog.fileName
+        loadPrefab commonDialog.FileName
 
     End If
 
@@ -12756,7 +12756,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub savePrefab(fileName As String)
+Private Sub savePrefab(FileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -12769,7 +12769,7 @@ Private Sub savePrefab(fileName As String)
     Dim tempConnection As TConnection
     Dim alpha As Byte
 
-    Open fileName For Binary Access Write Lock Write As #1
+    Open FileName For Binary Access Write Lock Write As #1
 
         Put #1, , numSelectedPolys
         For i = 1 To numSelectedPolys
@@ -12855,7 +12855,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub loadPrefab(fileName As String)
+Private Sub loadPrefab(FileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -12870,7 +12870,7 @@ Private Sub loadPrefab(fileName As String)
 
     mnuDeselect_Click
 
-    Open fileName For Binary Access Read Lock Read As #1
+    Open FileName For Binary Access Read Lock Read As #1
 
         Get #1, , newPolys
         If newPolys > 0 Then
@@ -13011,10 +13011,10 @@ Private Sub mnuRunSoldat_Click()
 
 End Sub
 
-Private Sub SetMapList(fileName As String)
+Private Sub SetMapList(FileName As String)
 
     Open soldatDir & "mapslist.txt" For Output As #1
-        Print #1, fileName
+        Print #1, FileName
     Close #1
 
 End Sub
@@ -14108,11 +14108,11 @@ Private Sub mnuLoadSpace_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
     commonDialog.InitDir = appPath & "\Workspace\"
-    commonDialog.fileName = ""
+    commonDialog.FileName = ""
     frmSoldatMapEditor.commonDialog.DialogTitle = "Load Workspace"
     commonDialog.ShowOpen
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
         If Len(Dir$(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
             loadWorkspace commonDialog.FileTitle
             frmTools.setForm
@@ -14145,11 +14145,11 @@ Private Sub mnuSaveSpace_Click()
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
     commonDialog.InitDir = appPath & "\Workspace\"
-    commonDialog.fileName = ""
+    commonDialog.FileName = ""
     frmSoldatMapEditor.commonDialog.DialogTitle = "Save Workspace"
     commonDialog.ShowSave
 
-    If commonDialog.fileName <> "" Then
+    If commonDialog.FileName <> "" Then
 
         iniString = "WindowState=" & Me.WindowState & sNull _
             & "Width=" & formWidth & sNull & "Height=" & formHeight & sNull _
