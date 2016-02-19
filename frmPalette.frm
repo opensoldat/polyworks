@@ -900,7 +900,7 @@ End Sub
 
 Private Sub txtradius_GotFocus()
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtRadius
 
 End Sub
 
@@ -942,7 +942,7 @@ Private Sub txtRGB_GotFocus(Index As Integer)
     Else
         tempVal = 0
     End If
-    SendKeys "{Home}+{END}"
+    SelectAllText txtRGB(Index)
 
 End Sub
 
@@ -976,7 +976,7 @@ End Sub
 
 Private Sub txtOpacity_GotFocus()
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtOpacity
 
 End Sub
 

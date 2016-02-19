@@ -1759,7 +1759,7 @@ Private Sub txtLightProp_GotFocus(Index As Integer)
     If IsNumeric(txtLightProp(Index).Text) Then
         tempVal = txtLightProp(Index).Text
     End If
-    SendKeys "{Home}+{END}"
+    SelectAllText txtLightProp(Index)
 
 End Sub
 
@@ -1794,7 +1794,7 @@ Private Sub txtQuadX_GotFocus(Index As Integer)
     If IsNumeric(txtQuadX(Index).Text) Then
         tempVal = txtQuadX(Index).Text
     End If
-    SendKeys "{Home}+{END}"
+    SelectAllText txtQuadX(Index)
 
 End Sub
 
@@ -1816,7 +1816,7 @@ Private Sub txtQuadY_GotFocus(Index As Integer)
     If IsNumeric(txtQuadY(Index).Text) Then
         tempVal = txtQuadY(Index).Text
     End If
-    SendKeys "{Home}+{END}"
+    SelectAllText txtQuadY(Index)
 
 End Sub
 
@@ -1890,7 +1890,7 @@ Private Sub txtScenProp_GotFocus(Index As Integer)
     If IsNumeric(txtScenProp(Index).Text) Then
         tempVal = txtScenProp(Index).Text
     End If
-    SendKeys "{Home}+{END}"
+    SelectAllText txtScenProp(Index)
 
 End Sub
 

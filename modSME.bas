@@ -283,6 +283,13 @@ Private Const InterpolationModeHighQualityBicubic = 7
 Private Const GDIP_WMF_PLACEABLEKEY = &H9AC6CDD7
 Private Const UnitPixel = 2
 
+Public Sub SelectAllText(tb As TextBox)
+
+    tb.SelStart = 0
+    tb.SelLength = Len(tb.Text)
+
+End Sub
+
 Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
 
     Dim num As Long

@@ -1277,7 +1277,7 @@ End Sub
 
 Private Sub txtRGB_GotFocus(Index As Integer)
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtRGB(Index)
 
 End Sub
 
@@ -1316,7 +1316,7 @@ End Sub
 
 Private Sub txtHue_GotFocus()
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtHue
 
 End Sub
 
@@ -1358,7 +1358,7 @@ End Sub
 
 Private Sub txtSat_GotFocus()
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtSat
 
 End Sub
 
@@ -1390,7 +1390,7 @@ End Sub
 
 Private Sub txtBright_GotFocus()
 
-    SendKeys "{Home}+{END}"
+    SelectAllText txtBright
 
 End Sub
 
