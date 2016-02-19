@@ -321,7 +321,7 @@ Begin VB.Form frmScenery
          Caption         =   "Reload Scenery List"
       End
       Begin VB.Menu mnuRefresh 
-         Caption         =   "Refresh Current Scenery"
+         Caption         =   "Refresh Scenery"
       End
    End
 End
@@ -533,10 +533,12 @@ End Sub
 
 Private Sub mnuRefresh_Click()
 
-    If lstScenery.ListIndex > -1 Then
-        frmSoldatMapEditor.RefreshSceneryTextures lstScenery.ListIndex + 1
-        frmSoldatMapEditor.Render
-    End If
+    Dim Index As Integer
+
+    For Index = 1 To lstScenery.ListCount
+        frmSoldatMapEditor.RefreshSceneryTextures Index
+    Next
+    frmSoldatMapEditor.Render
 
 End Sub
 
