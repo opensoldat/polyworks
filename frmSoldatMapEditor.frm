@@ -570,10 +570,10 @@ Begin VB.Form frmSoldatMapEditor
          Caption         =   "-"
       End
       Begin VB.Menu mnuCompile 
-         Caption         =   "&Compile to PMS"
+         Caption         =   "&Compile to pms"
       End
       Begin VB.Menu mnuCompileAs 
-         Caption         =   "Compile to &PMS As..."
+         Caption         =   "Compile to &pms As..."
          Shortcut        =   {F9}
       End
       Begin VB.Menu mnuSep10 
@@ -1770,7 +1770,7 @@ Private Sub Form_Load()
 
     lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.Flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist Or cdlOFNFileMustExist
 
     err = "Error parsing command line args"
@@ -2299,8 +2299,8 @@ Public Sub newMap()
         Set mapTexture = Nothing
     End If
 
-    currentFileName = "Untitled.PMS"
-    lblFileName.Caption = "Untitled.PMS"
+    currentFileName = "Untitled.pms"
+    lblFileName.Caption = "Untitled.pms"
 
     centerView
 
@@ -12588,12 +12588,12 @@ Private Sub mnuCompile_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
     commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to PMS"
+    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
 
-    If lblFileName.Caption = "Untitled.PMS" Then
+    If lblFileName.Caption = "Untitled.pms" Then
 
         commonDialog.ShowSave
         DoEvents
@@ -12643,10 +12643,10 @@ Private Sub mnuCompileAs_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.PMS)|*.PMS"
+    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
     commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to PMS"
+    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
