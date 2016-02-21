@@ -176,6 +176,7 @@ Begin VB.Form frmScenery
       EndProperty
       Height          =   1350
       Left            =   1320
+      Sorted          =   -1  'True
       TabIndex        =   0
       Tag             =   "font1"
       Top             =   360
