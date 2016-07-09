@@ -254,8 +254,8 @@ Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Lon
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 
 'GDI+ functions
-Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As Long, GpImage As Long) As Long
-Private Declare Function GdiplusStartup Lib "gdiplus.dll" (token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
+Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
+Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
 Private Declare Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal Img As Long, ByVal X As Long, ByVal Y As Long, ByVal Width As Long, ByVal Height As Long) As Long
 Private Declare Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As Long) As Long
@@ -263,11 +263,11 @@ Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal image As Long
 Private Declare Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As Long, ByVal hpal As Long, GpBitmap As Long) As Long
 Private Declare Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal image As Long, Width As Long) As Long
 Private Declare Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal image As Long, Height As Long) As Long
-Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal token As Long)
+Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As Long)
 
 'functions for gif loading
-Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal FileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
-Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal FileName As Long, ByRef Bitmap As Long) As Long
+Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal fileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
+Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal fileName As Long, ByRef Bitmap As Long) As Long
 Private Declare Function GdipCreateHBITMAPFromBitmap Lib "gdiplus.dll" (ByVal Bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
 Private Declare Function GdipGetImageEncodersSize Lib "gdiplus.dll" (ByRef numEncoders As Long, ByRef Size As Long) As Long
 Private Declare Function GdipGetImageEncoders Lib "gdiplus.dll" (ByVal numEncoders As Long, ByVal Size As Long, ByRef Encoders As Any) As Long
@@ -351,9 +351,9 @@ End Function
 
 Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
 
-    Dim token As Long
+    Dim Token As Long
 
-    token = InitGDIPlus
+    Token = InitGDIPlus
 
     If SaveImageAsPNG(src, dest) Then
       GifToPng = -1
@@ -361,7 +361,7 @@ Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
       GifToPng = 5
     End If
 
-    FreeGDIPlus token
+    FreeGDIPlus Token
 
 End Function
 
@@ -539,6 +539,26 @@ Public Function GetSoldatDir() As String
 
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
+        
+    Else
+        'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
+
+        sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path"
+        hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
+        
+        If hKey <> 0 Then
+        
+            GetSoldatDir = GetRegValue(hKey, "")
+            RegCloseKey hKey
+            
+        Else
+            If Dir("C:\Soldat", vbDirectory) = "" Then
+                MsgBox "Could not locate the Soldat directory." & vbNewLine & " Polyworks will not work properly, until you configured the Soldat folder in PolyWorks." & vbNewLine & "See: Edit -> Preferences"
+            Else
+                GetSoldatDir = "C:\Soldat"
+            End If
+            
+        End If
 
     End If
 
@@ -584,7 +604,7 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 End Function
 
 
-Public Function getFileDate(FileName As String) As Long
+Public Function getFileDate(fileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -600,7 +620,7 @@ Public Function getFileDate(FileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
 
@@ -622,59 +642,59 @@ ErrorHandler:
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional FileName As String)
+Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
 
     Dim lReturn  As Long
 
-    If FileName = "" Then
-        FileName = appPath & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = WritePrivateProfileSection(sectionName, sectionData, FileName)
+    lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
+Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
 
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
 
-    If FileName = "" Then
-        FileName = appPath & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = appPath & "\polyworks.ini"
     End If
 
     If length = 0 Then length = 10
 
     sString = String$(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
+    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
 
     loadString = left(sString, lReturn)
 
 End Function
 
-Public Function loadInt(section As String, Entry As String, Optional FileName As String) As Long
+Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
 
     Dim lReturn As Long
 
-    If FileName = "" Then
-        FileName = appPath & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
+    lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
 
     loadInt = lReturn
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String
+Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
 
-    If FileName = "" Then
-        FileName = appPath & "\polyworks.ini"
+    If fileName = "" Then
+        fileName = appPath & "\polyworks.ini"
     End If
 
-    GetPrivateProfileSection section, lReturn, length, FileName
+    GetPrivateProfileSection section, lReturn, length, fileName
 
     loadSection = lReturn
 
@@ -728,16 +748,16 @@ Public Function RunHelp()
 
 End Function
 
-Public Function SetGameMode(FileName As String)
+Public Function SetGameMode(fileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
 
-    If LCase(left(FileName, 4)) = "ctf_" Then
+    If LCase(left(fileName, 4)) = "ctf_" Then
         gameMode = 3
-    ElseIf LCase(left(FileName, 4)) = "inf_" Then
+    ElseIf LCase(left(fileName, 4)) = "inf_" Then
         gameMode = 5
-    ElseIf LCase(left(FileName, 4)) = "htf_" Then
+    ElseIf LCase(left(fileName, 4)) = "htf_" Then
         gameMode = 6
     Else
         gameMode = 0
@@ -765,17 +785,17 @@ End Function
 
 ' Initialises GDI Plus
 Public Function InitGDIPlus() As Long
-    Dim token    As Long
+    Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
-    GdiplusStartup token, gdipInit, ByVal 0&
-    InitGDIPlus = token
+    GdiplusStartup Token, gdipInit, ByVal 0&
+    InitGDIPlus = Token
 End Function
 
 ' Frees GDI Plus
-Public Sub FreeGDIPlus(token As Long)
-    GdiplusShutdown token
+Public Sub FreeGDIPlus(Token As Long)
+    GdiplusShutdown Token
 End Sub
 
 ' Loads the picture (optionally resized)
