@@ -104,6 +104,7 @@ Private Declare Sub CoTaskMemFree Lib "ole32" (ByVal pv As Long)
 
 'registry
 Private Const HKEY_CLASSES_ROOT = &H80000000
+Private Const HKEY_LOCAL_MACHINE = &H80000002
 
 Private Const STANDARD_RIGHTS_READ As Long = &H20000
 Private Const KEY_QUERY_VALUE As Long = &H1
@@ -543,17 +544,17 @@ Public Function GetSoldatDir() As String
     Else
         'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
 
-        sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path"
+        sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
         
         If hKey <> 0 Then
         
-            GetSoldatDir = GetRegValue(hKey, "")
+            GetSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
             
         Else
             If Dir("C:\Soldat", vbDirectory) = "" Then
-                MsgBox "Could not locate the Soldat directory." & vbNewLine & " Polyworks will not work properly, until you configured the Soldat folder in PolyWorks." & vbNewLine & "See: Edit -> Preferences"
+                MsgBox "Could not locate the Soldat directory." & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
             Else
                 GetSoldatDir = "C:\Soldat"
             End If
