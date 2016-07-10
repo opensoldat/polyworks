@@ -1670,8 +1670,7 @@ Private Sub Form_Load()
     If Len(Dir$(soldatDir & "Textures\")) = 0 Or soldatDir = "" Then
         temp = GetSoldatDir
         If temp <> "" Then
-            soldatDir = GetSoldatDir
-            soldatDir = mid(soldatDir, 2, InStrRev(soldatDir, "\") - 1)
+            soldatDir = temp
             temp = ""
         End If
     End If
