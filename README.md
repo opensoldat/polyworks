@@ -6,6 +6,7 @@ Soldat map editor
 Requirements
 ------------
 * Visual Basic 6 SP6
+* NSIS (optional - for generating the Installer)
 
 Notes
 -----
