@@ -3533,6 +3533,10 @@ Private Sub SaveUndo()
 
     FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
+    If Len(Dir(appPath & "\undo\")) = 0 Then
+         MkDir (appPath & "\undo\")
+    End If
+
     Open FileName For Binary Access Write Lock Write As #1
 
         'save polys
