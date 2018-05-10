@@ -61,7 +61,6 @@ Section "MainSection" SEC01
   File "polyworks.ini"
   File "PolyWorks Help.html"
   File "ReadMe.txt"
-  File "pwlib.dll"
   File "PMS.ico"
   File "PFB.ico"
   SetOutPath "$SYSDIR"
@@ -214,7 +213,6 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\PolyWorks Help.html"
   Delete /REBOOTOK "$INSTDIR\ReadMe.txt"
   Delete /REBOOTOK "$INSTDIR\dx8vb.dll"
-  Delete /REBOOTOK "$INSTDIR\pwlib.dll"
   Delete /REBOOTOK "$INSTDIR\PMS.ico"
   Delete /REBOOTOK "$INSTDIR\PFB.ico"
 
