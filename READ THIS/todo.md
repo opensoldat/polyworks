@@ -1,5 +1,5 @@
 Todo
-----
+====
 
 * fix smooth movement while zoomed
 * texture movement direction issue (while rotated)
