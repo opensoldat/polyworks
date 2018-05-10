@@ -1,9 +1,9 @@
 Soldat PolyWorks
 ================
 
-![Screenshot of the Polyworks GUI](/img/screenshot.jpg?raw=true "Soldat Polyworks")
+Map editor for the game [Soldat](https://soldat.pl)
 
-Map editor for the [Soldat game](https://soldat.pl)
+![Screenshot of the Polyworks GUI](/img/screenshot.jpg?raw=true "Soldat Polyworks")
 
 Requirements
 ------------
