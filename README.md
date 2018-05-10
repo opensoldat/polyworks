@@ -1,7 +1,7 @@
 Soldat PolyWorks
 ================
 
-Soldat map editor
+Map editor for the [Soldat game](https://soldat.pl)
 
 Requirements
 ------------
