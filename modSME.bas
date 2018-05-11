@@ -472,28 +472,34 @@ End Function
 
 
 
-Public Sub snapForm(currentForm As Form, otherForm As Form)
+Public Function snapForm(currentForm As Form, otherForm As Form) As String
+
+    snapForm = ""
 
     'snap bottom to bottom
     If Abs(currentForm.Top + currentForm.Height - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - currentForm.Height
+            snapForm = "snap"
         End If
     'snap bottom to top
     ElseIf Abs(currentForm.Top + currentForm.Height - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top - currentForm.Height + Screen.TwipsPerPixelY
+            snapForm = "snap"
         End If
     End If
     'snap right to right
     If Abs(currentForm.left + currentForm.Width - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left + otherForm.Width - currentForm.Width
+            snapForm = "snap"
         End If
     'snap right to left
     ElseIf Abs(currentForm.left + currentForm.Width - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left - currentForm.Width + Screen.TwipsPerPixelX
+            snapForm = "snap"
         End If
     End If
 
@@ -502,26 +508,30 @@ Public Sub snapForm(currentForm As Form, otherForm As Form)
     If Abs(currentForm.Top - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top
+            snapForm = "snap"
         End If
     'snap top to bottom
     ElseIf Abs(currentForm.Top - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - Screen.TwipsPerPixelY
+            snapForm = "snap"
         End If
     End If
     'snap left to left
     If Abs(currentForm.left - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left
+           snapForm = "snap"
         End If
     'snap left to right
     ElseIf Abs(currentForm.left - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left + otherForm.Width - Screen.TwipsPerPixelX
+            snapForm = "snap"
         End If
     End If
 
-End Sub
+End Function
 
 
 Public Function GetSoldatDir() As String
