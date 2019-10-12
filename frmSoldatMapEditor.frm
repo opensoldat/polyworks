@@ -12105,7 +12105,7 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
 
 End Sub
 
-Private Function SetIdePath()
+Private Function SetIdePath() As Boolean
 
   appPath = appPath & "\pwinstall"
   SetIdePath = True

@@ -330,7 +330,7 @@ Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
     GetEncoderClsid = False
 End Function
 
-Private Function SaveImageAsPNG(ByVal sFileName, ByVal sDestFileName As String) As Boolean
+Private Function SaveImageAsPNG(ByVal sFileName As String, ByVal sDestFileName As String) As Boolean
 
     Dim lBitmap As Long
     Dim hBitmap As Long

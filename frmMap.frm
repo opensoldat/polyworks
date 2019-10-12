@@ -654,7 +654,7 @@ Public Sub loadTextures2()
 
     On Error GoTo ErrorHandler
 
-    Dim file As Variant
+    Dim file As String
 
     cboTexture.Clear
 
