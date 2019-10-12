@@ -5141,7 +5141,7 @@ Private Function ARGB(ByVal alphaVal As Byte, clrVal As Long) As Long
     End If
     If Len(Hex$(alphaVal)) = 1 Then
         clrString = "0" + Hex$(alphaVal) & clrString
-    ElseIf Len(Hex(alphaVal)) = 2 Then
+    ElseIf Len(Hex$(alphaVal)) = 2 Then
         clrString = Hex$(alphaVal) & clrString
     End If
     ARGB = CLng("&H" & clrString)
@@ -11183,7 +11183,7 @@ Private Function confirmExists(FileName As String) As Boolean
     Set tempNode = tvwScenery.Nodes.Item("Master List").Child
 
     For i = 1 To (tvwScenery.Nodes.Item("Master List").Children)
-        If LCase(FileName) = LCase(tempNode.Text) Then
+        If LCase$(FileName) = LCase$(tempNode.Text) Then
             confirmExists = True
         End If
         Set tempNode = tempNode.Next

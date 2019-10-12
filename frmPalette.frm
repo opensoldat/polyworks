@@ -605,10 +605,10 @@ Private Function getRGB(DecValue As Long) As TColour
 
     Dim hexValue As String
 
-    hexValue = Hex(Val(DecValue))
+    hexValue = Hex$(Val(DecValue))
 
     If Len(hexValue) < 6 Then
-        hexValue = String(6 - Len(hexValue), "0") + hexValue
+        hexValue = String$(6 - Len(hexValue), "0") + hexValue
     End If
 
     getRGB.blue = CLng("&H" + right(hexValue, 2))
