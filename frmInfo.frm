@@ -89,8 +89,8 @@ Begin VB.Form frmInfo
       TabIndex        =   66
       TabStop         =   0   'False
       Top             =   360
-      Width           =   2895
       Visible         =   0   'False
+      Width           =   2895
       Begin VB.TextBox txtLightProp 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
@@ -149,8 +149,8 @@ Begin VB.Form frmInfo
          TabIndex        =   68
          Tag             =   "font1"
          Top             =   840
-         Width           =   615
          Visible         =   0   'False
+         Width           =   615
       End
       Begin VB.PictureBox picLight 
          Appearance      =   0  'Flat
@@ -225,8 +225,8 @@ Begin VB.Form frmInfo
          TabIndex        =   70
          Tag             =   "font2"
          Top             =   840
-         Width           =   1095
          Visible         =   0   'False
+         Width           =   1095
       End
       Begin VB.Label lblInfo 
          Alignment       =   2  'Center
@@ -248,8 +248,8 @@ Begin VB.Form frmInfo
          TabIndex        =   69
          Tag             =   "font2"
          Top             =   840
-         Width           =   255
          Visible         =   0   'False
+         Width           =   255
       End
    End
    Begin VB.PictureBox picProp 
@@ -583,8 +583,8 @@ Begin VB.Form frmInfo
       TabIndex        =   23
       TabStop         =   0   'False
       Top             =   360
-      Width           =   2895
       Visible         =   0   'False
+      Width           =   2895
       Begin VB.TextBox txtScenProp 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
@@ -917,8 +917,8 @@ Begin VB.Form frmInfo
       TabIndex        =   22
       TabStop         =   0   'False
       Top             =   360
-      Width           =   2895
       Visible         =   0   'False
+      Width           =   2895
       Begin VB.TextBox txtQuadX 
          Appearance      =   0  'Flat
          BackColor       =   &H004A3C31&
@@ -1079,8 +1079,8 @@ Begin VB.Form frmInfo
       TabIndex        =   34
       TabStop         =   0   'False
       Top             =   360
-      Width           =   2895
       Visible         =   0   'False
+      Width           =   2895
       Begin VB.TextBox txtRotate 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
@@ -1307,8 +1307,8 @@ Begin VB.Form frmInfo
       TabIndex        =   32
       TabStop         =   0   'False
       Top             =   360
-      Width           =   2895
       Visible         =   0   'False
+      Width           =   2895
       Begin VB.TextBox txtBounciness 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None

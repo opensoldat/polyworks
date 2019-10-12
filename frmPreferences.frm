@@ -30,8 +30,8 @@ Begin VB.Form frmPreferences
       TabStop         =   0   'False
       Tag             =   "4"
       Top             =   7440
-      Width           =   240
       Visible         =   0   'False
+      Width           =   240
    End
    Begin VB.PictureBox picScenery 
       Appearance      =   0  'Flat
@@ -1044,8 +1044,8 @@ Begin VB.Form frmPreferences
       TabIndex        =   80
       Tag             =   "font2"
       Top             =   7440
-      Width           =   1575
       Visible         =   0   'False
+      Width           =   1575
    End
    Begin VB.Label lblPref 
       BackStyle       =   0  'Transparent
