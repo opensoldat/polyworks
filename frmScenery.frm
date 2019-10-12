@@ -166,7 +166,7 @@ Begin VB.Form frmScenery
    Begin VB.ListBox lstScenery 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -186,7 +186,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Level:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -206,7 +206,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Rotate"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -226,7 +226,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Scale"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -246,7 +246,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Front"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -267,7 +267,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Middle"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -288,7 +288,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Back"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400

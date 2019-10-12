@@ -53,9 +53,7 @@ Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "Soldat PolyWorks.exe"
-  File "bgothl.ttf"
   File "COMDLG32.OCX"
-  File "lucon.ttf"
   File "MBMouse.ocx"
   File "mscomctl.ocx"
   File "polyworks.ini"

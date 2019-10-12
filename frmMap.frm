@@ -23,7 +23,7 @@ Begin VB.Form frmMap
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -46,7 +46,7 @@ Begin VB.Form frmMap
    Begin VB.TextBox txtJet 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -77,7 +77,7 @@ Begin VB.Form frmMap
    End
    Begin VB.ComboBox cboTexture 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -100,7 +100,7 @@ Begin VB.Form frmMap
    Begin VB.TextBox txtDesc 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -153,7 +153,7 @@ Begin VB.Form frmMap
    Begin VB.ComboBox cboWeather 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -175,7 +175,7 @@ Begin VB.Form frmMap
    Begin VB.ComboBox cboJet 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -197,7 +197,7 @@ Begin VB.Form frmMap
    Begin VB.ComboBox cboGrenades 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -219,7 +219,7 @@ Begin VB.Form frmMap
    Begin VB.ComboBox cboMedikits 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -241,7 +241,7 @@ Begin VB.Form frmMap
    Begin VB.ComboBox cboSteps 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -299,7 +299,7 @@ Begin VB.Form frmMap
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -339,7 +339,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Texture:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -360,7 +360,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Background:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -381,7 +381,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Description:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -402,7 +402,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Medikits:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -423,7 +423,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Grenades:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -444,7 +444,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Jet Fuel:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -465,7 +465,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Steps:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -486,7 +486,7 @@ Begin VB.Form frmMap
       BackColor       =   &H00614B3D&
       Caption         =   "Weather:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400

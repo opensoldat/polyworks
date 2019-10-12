@@ -53,7 +53,7 @@ Begin VB.Form frmPreferences
    Begin VB.ComboBox cboSkin 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   238
          Weight          =   400
@@ -74,7 +74,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -97,7 +97,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -120,7 +120,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -146,7 +146,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -171,7 +171,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -196,7 +196,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -221,7 +221,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -246,7 +246,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -286,7 +286,7 @@ Begin VB.Form frmPreferences
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFFF&
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -306,7 +306,7 @@ Begin VB.Form frmPreferences
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFFF&
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -344,7 +344,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -367,7 +367,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -389,7 +389,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -412,7 +412,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -434,7 +434,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -457,7 +457,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -479,7 +479,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -502,7 +502,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -524,7 +524,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -547,7 +547,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -569,7 +569,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -592,7 +592,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -627,7 +627,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtOpacity2 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -645,7 +645,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtOpacity1 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -693,7 +693,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtHeight 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -711,7 +711,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtWidth 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -730,7 +730,7 @@ Begin VB.Form frmPreferences
       Appearance      =   0  'Flat
       BackColor       =   &H00FFFFFF&
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -749,7 +749,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtDivisions 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -767,7 +767,7 @@ Begin VB.Form frmPreferences
    Begin VB.TextBox txtSpacing 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -801,7 +801,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -827,7 +827,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -853,7 +853,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -914,7 +914,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.ComboBox cboWireSrc 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -934,7 +934,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.ComboBox cboWireDest 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -954,7 +954,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.ComboBox cboPolyDest 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -974,7 +974,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.ComboBox cboPolySrc 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1029,7 +1029,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Fullscreen always on top"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1051,7 +1051,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Use 4 verts for scenery"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1072,7 +1072,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       Caption         =   "Other"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1100,7 +1100,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Skin"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1122,7 +1122,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       Caption         =   "Waypoint Keys"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1151,7 +1151,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Prefabs"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1173,7 +1173,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Uncompiled"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1195,7 +1195,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Soldat"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1217,7 +1217,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004F3D31&
       Caption         =   "HotKeys"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1245,7 +1245,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "px"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1266,7 +1266,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "px"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1287,7 +1287,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "%"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1308,7 +1308,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "%"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1331,7 +1331,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Colours"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1353,7 +1353,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Window"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1374,7 +1374,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Height:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1395,7 +1395,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Width:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1416,7 +1416,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "px"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1437,7 +1437,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Divisions:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1458,7 +1458,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Spacing:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1480,7 +1480,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Grid"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1502,7 +1502,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Wireframe"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1523,7 +1523,7 @@ Begin VB.Form frmPreferences
       BackStyle       =   0  'Transparent
       Caption         =   "Polygon"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1544,7 +1544,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       Caption         =   "Directories"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1573,7 +1573,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004F3D31&
       Caption         =   "Display"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1593,7 +1593,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Pattern:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1614,7 +1614,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "SRC:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1634,7 +1634,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "DEST:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1654,7 +1654,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Back:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1675,7 +1675,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00614B3D&
       Caption         =   "Point:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -1696,7 +1696,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H004A3C31&
       Caption         =   "Blending"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400

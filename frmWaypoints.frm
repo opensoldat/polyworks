@@ -69,7 +69,7 @@ Begin VB.Form frmWaypoints
    End
    Begin VB.ComboBox cboSpecial 
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   238
          Weight          =   400
@@ -244,7 +244,7 @@ Begin VB.Form frmWaypoints
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   238
          Weight          =   400
@@ -263,7 +263,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   "Show:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -283,7 +283,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Path2"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -304,7 +304,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Path1"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -325,7 +325,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " All"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -346,7 +346,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Path 2"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -367,7 +367,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Path 1"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -388,7 +388,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Fly"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -409,7 +409,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Left"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -430,7 +430,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Down"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -451,7 +451,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Right"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -472,7 +472,7 @@ Begin VB.Form frmWaypoints
       BackStyle       =   0  'Transparent
       Caption         =   " Up"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400

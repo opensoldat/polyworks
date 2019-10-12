@@ -12,7 +12,7 @@ Begin VB.Form frmSoldatMapEditor
    ControlBox      =   0   'False
    DrawMode        =   6  'Mask Pen Not
    BeginProperty Font 
-      Name            =   "BankGothic Lt BT"
+      Name            =   "Arial"
       Size            =   9.75
       Charset         =   0
       Weight          =   400
@@ -80,7 +80,7 @@ Begin VB.Form frmSoldatMapEditor
          BackColor       =   &H004A3C31&
          BorderStyle     =   0  'None
          BeginProperty Font 
-            Name            =   "Lucida Console"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -101,7 +101,7 @@ Begin VB.Form frmSoldatMapEditor
          BackStyle       =   0  'Transparent
          Caption         =   "Position:"
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -122,7 +122,7 @@ Begin VB.Form frmSoldatMapEditor
          BackStyle       =   0  'Transparent
          Caption         =   "Untitled.pms"
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -142,7 +142,7 @@ Begin VB.Form frmSoldatMapEditor
          BackStyle       =   0  'Transparent
          Caption         =   "Zoom:"
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -162,7 +162,7 @@ Begin VB.Form frmSoldatMapEditor
          BackStyle       =   0  'Transparent
          Caption         =   "Current Tool:"
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -202,7 +202,7 @@ Begin VB.Form frmSoldatMapEditor
          BorderStyle     =   0  'None
          FillColor       =   &H00FFFFFF&
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -246,7 +246,7 @@ Begin VB.Form frmSoldatMapEditor
          BorderStyle     =   0  'None
          FillColor       =   &H00FFFFFF&
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -273,7 +273,7 @@ Begin VB.Form frmSoldatMapEditor
          BorderStyle     =   0  'None
          FillColor       =   &H00FFFFFF&
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -300,7 +300,7 @@ Begin VB.Form frmSoldatMapEditor
          BorderStyle     =   0  'None
          FillColor       =   &H00FFFFFF&
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -327,7 +327,7 @@ Begin VB.Form frmSoldatMapEditor
          BorderStyle     =   0  'None
          FillColor       =   &H00FFFFFF&
          BeginProperty Font 
-            Name            =   "BankGothic Lt BT"
+            Name            =   "Arial"
             Size            =   8.25
             Charset         =   0
             Weight          =   400
@@ -468,6 +468,7 @@ Begin VB.Form frmSoldatMapEditor
       Height          =   8085
       Left            =   0
       TabIndex        =   18
+      Tag             =   "font1"
       Top             =   600
       Width           =   5730
       Visible         =   0   'False
@@ -482,7 +483,7 @@ Begin VB.Form frmSoldatMapEditor
       Appearance      =   0
       MousePointer    =   1
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -12371,8 +12372,8 @@ Public Sub loadColours()
     font1 = loadString("GUIColours", "font1", appPath & "\" & gfxDir & "\colours.ini", 40)
     font2 = loadString("GUIColours", "font2", appPath & "\" & gfxDir & "\colours.ini", 40)
 
-    If font1 = "" Then font1 = appPath & "\Lucida Console"
-    If font2 = "" Then font2 = appPath & "\Bank Gothic Light BT"
+    If font1 = "" Then font1 = "Arial"
+    If font2 = "" Then font2 = "Arial"
 
     Exit Sub
 ErrorHandler:
