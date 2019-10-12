@@ -521,13 +521,13 @@ Public Function getLayerKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Function setLayerKey(Index As Integer, ByVal value As Byte)
+Public Sub setLayerKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         layerKeys(Index) = value
     End If
 
-End Function
+End Sub
 
 Private Sub Form_GotFocus()
 

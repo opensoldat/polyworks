@@ -321,13 +321,13 @@ Public Function getHotKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Function setHotKey(Index As Integer, ByVal value As Byte)
+Public Sub setHotKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         hotKeys(Index) = value
     End If
 
-End Function
+End Sub
 
 Public Sub initTool(value As Byte)
 

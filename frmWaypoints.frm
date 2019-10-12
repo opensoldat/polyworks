@@ -516,13 +516,13 @@ Public Function getWayptKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Function setWayptKey(Index As Integer, ByVal value As Byte)
+Public Sub setWayptKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         wayptKeys(Index) = value
     End If
 
-End Function
+End Sub
 
 Private Sub Form_Load()
 

@@ -743,23 +743,23 @@ ErrorHandler:
 
 End Function
 
-Public Function RunSoldat()
+Public Sub RunSoldat()
 
     frmSoldatMapEditor.picMinimize_MouseUp 1, 0, 0, 0
 
     ShellExecute 0&, vbNullString, frmSoldatMapEditor.soldatDir & "Soldat.exe", "-start", vbNullString, vbNormalFocus
 
-End Function
+End Sub
 
-Public Function RunHelp()
+Public Sub RunHelp()
 
     Dim iReturn As Long
 
     iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", appPath & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
-End Function
+End Sub
 
-Public Function SetGameMode(fileName As String)
+Public Sub SetGameMode(fileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
@@ -776,9 +776,9 @@ Public Function SetGameMode(fileName As String)
 
     lReturn = WritePrivateProfileString("GAME", "GameStyle", gameMode, frmSoldatMapEditor.soldatDir & "soldat.ini")
 
-End Function
+End Sub
 
-Public Function SetColours()
+Public Sub SetColours()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
@@ -792,7 +792,7 @@ Public Function SetColours()
     frmTools.BackColor = bgClr
     frmWaypoints.BackColor = bgClr
 
-End Function
+End Sub
 
 ' Initialises GDI Plus
 Public Function InitGDIPlus() As Long
