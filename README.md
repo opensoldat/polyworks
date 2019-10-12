@@ -22,4 +22,9 @@ https://visualstudiogallery.msdn.microsoft.com/00cc8ff8-beb3-4f08-8aa6-59eefba3b
 
 License
 -------
-Unkown
+MIT
+
+### Note:
+Soldat PolyWorks v1.4.0.17 with source code was originally released by Anna Zajaczkowski as:  
+["Feel free to do whatever you want with it."](https://web.archive.org/web/20191012125637/https://forums.soldat.pl/index.php?topic=174.msg214342)  
+It was subsequently relicensed under the MIT License by [the PolyWorks contributors](https://web.archive.org/web/20191012125244/https://github.com/Soldat/polyworks/issues/8).  
