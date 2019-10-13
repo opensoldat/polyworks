@@ -11569,6 +11569,8 @@ End Function
 
 Public Sub setMapTexture(texturePath As String)
 
+    On Error GoTo ErrorHandler
+    
     Set mapTexture = D3DX.CreateTextureFromFileEx(D3DDevice, frmSoldatMapEditor.soldatDir & "textures\" & texturePath, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE, _
             D3DX_FILTER_TRIANGLE, ColourKey, imageInfo, ByVal 0)
@@ -11585,6 +11587,8 @@ Public Sub setMapTexture(texturePath As String)
     frmInfo.txtQuadY(1).Text = yTexture
 
     Render
+
+ErrorHandler:
 
 End Sub
 
