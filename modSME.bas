@@ -1,7 +1,7 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
-Global Const pi As Single = 3.14159265358979    'mmm... pi
+Global Const pi As Single = 3.14159265358979  'mmm... pi
 
 Global gfxDir As String
 
@@ -593,8 +593,8 @@ End Function
 
 Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
-    Dim lpValue As String   'name of the value to retrieve
-    Dim lpcbData As Long    'length of the retrieved value
+    Dim lpValue As String 'name of the value to retrieve
+    Dim lpcbData As Long  'length of the retrieved value
     Dim Result As Long
 
     'if valid
@@ -794,7 +794,7 @@ Public Sub SetColours()
 
 End Sub
 
-' Initialises GDI Plus
+'Initialises GDI Plus
 Public Function InitGDIPlus() As Long
     Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
@@ -804,12 +804,12 @@ Public Function InitGDIPlus() As Long
     InitGDIPlus = Token
 End Function
 
-' Frees GDI Plus
+'Frees GDI Plus
 Public Sub FreeGDIPlus(Token As Long)
     GdiplusShutdown Token
 End Sub
 
-' Loads the picture (optionally resized)
+'Loads the picture (optionally resized)
 Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -1, Optional Height As Long = -1, Optional ByVal BackColor As Long = vbWhite) As IPicture
 
     On Error GoTo ErrorHandler
@@ -818,25 +818,25 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     Dim hBitmap As Long
     Dim Img     As Long
     Dim hBrush As Long
-    Dim Graphics   As Long      ' Graphics Object Pointer
+    Dim Graphics   As Long      'Graphics Object Pointer
 
     Dim IID_IDispatch As GUID
     Dim pic           As PICTDESC
     Dim IPic          As IPicture
 
-    '' Load the image
+    'Load the image
     If Len(Dir$(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
             Exit Function
         End If
     End If
-    ' Calculate picture's width and height if not specified
+    'Calculate picture's width and height if not specified
     If Width = -1 Or Height = -1 Then
         GdipGetImageWidth Img, Width
         GdipGetImageHeight Img, Height
     End If
-    ' Initialise the hDC
-    ' Create a memory DC and select a bitmap into it, fill it in with the backcolor
+    'Initialise the hDC
+    'Create a memory DC and select a bitmap into it, fill it in with the backcolor
     hDC = CreateCompatibleDC(ByVal 0&)
     hBitmap = CreateBitmap(Width, Height, GetDeviceCaps(hDC, PLANES), GetDeviceCaps(hDC, BITSPIXEL), ByVal 0&)
     hBitmap = SelectObject(hDC, hBitmap)
@@ -844,24 +844,24 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     hBrush = SelectObject(hDC, hBrush)
     PatBlt hDC, 0, 0, Width, Height, PATCOPY
     DeleteObject SelectObject(hDC, hBrush)
-    ' Resize the picture
+    'Resize the picture
     GdipCreateFromHDC hDC, Graphics
     GdipDrawImageRectI Graphics, Img, 0, 0, Width, Height
     GdipDeleteGraphics Graphics
     GdipDisposeImage Img
-    ' Get the bitmap back
+    'Get the bitmap back
     hBitmap = SelectObject(hDC, hBitmap)
     DeleteDC hDC
-    ' Create the picture
-    ' Fill in OLE IDispatch Interface ID
+    'Create the picture
+    'Fill in OLE IDispatch Interface ID
     IID_IDispatch.Data1 = &H20400
     IID_IDispatch.Data4(0) = &HC0
     IID_IDispatch.Data4(7) = &H46
-    ' Fill Pic with necessary parts
-    pic.Size = Len(pic)        ' Length of structure
-    pic.Type = PICTYPE_BITMAP  ' Type of Picture (bitmap)
-    pic.hBmp = hBitmap         ' Handle to bitmap
-    ' Create the picture
+    'Fill Pic with necessary parts
+    pic.Size = Len(pic)       'Length of structure
+    pic.Type = PICTYPE_BITMAP 'Type of Picture (bitmap)
+    pic.hBmp = hBitmap        'Handle to bitmap
+    'Create the picture
     OleCreatePictureIndirect pic, IID_IDispatch, True, IPic
     Set LoadPictureGDIPlus = IPic
 

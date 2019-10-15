@@ -693,7 +693,6 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    '--------
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_scenery.bmp")
 
@@ -707,7 +706,6 @@ Public Sub SetColours()
     mouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
     mouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
 
-    '--------
 
     Me.BackColor = bgClr
     lblLvl.BackColor = lblBackClr

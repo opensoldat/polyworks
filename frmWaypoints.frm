@@ -763,7 +763,6 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    '--------
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_waypoints.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
@@ -779,7 +778,6 @@ Public Sub SetColours()
         mouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
     Next
 
-    '--------
 
     Me.BackColor = bgClr
 

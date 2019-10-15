@@ -1394,12 +1394,6 @@ Private Sub txtBright_GotFocus()
 
 End Sub
 
-'
-'
-'
-'
-'--------
-
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     ReleaseCapture
@@ -1492,7 +1486,6 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    '--------
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colourpicker.bmp")
     picClr.Picture = LoadPicture(appPath & "\" & gfxDir & "\colour_picker.bmp")
@@ -1509,7 +1502,6 @@ Public Sub SetColours()
     imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     picClr.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\colour_picker.cur")
 
-    '--------
 
     Me.BackColor = bgClr
 
@@ -1542,4 +1534,3 @@ Public Sub SetColours()
     Next
 
 End Sub
-

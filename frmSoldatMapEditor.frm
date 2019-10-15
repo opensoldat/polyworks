@@ -1290,7 +1290,8 @@ Const ColourKey As Long = &HFF00FF00
 Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
 Const FVF2 As Long = D3DFVF_XYZ
 
-'-------- TYPES --------
+
+'types
 
 Private Type TImageInfo
     Width       As Integer
@@ -1325,7 +1326,8 @@ Private Type TLightSource
     z           As Single
 End Type
 
-'-------- MAP TYPES --------
+
+'map types
 
 Private Type TCustomVertex
     X       As Single
@@ -1471,7 +1473,6 @@ Private Type TConnection
     point2 As Integer
 End Type
 
-'--------
 
 Dim Version As Long
 Dim Polys() As TPolygon
@@ -1540,7 +1541,6 @@ Const KEY_SHIFT As Byte = 1
 Const KEY_CTRL As Byte = 2
 Const KEY_ALT As Byte = 4
 
-'--------
 
 Dim sketch() As TSketchLine
 Dim sketchLines As Integer
@@ -1570,17 +1570,17 @@ Dim polyClr As TColour
 Dim opacity As Single
 Dim blendMode As Integer
 
-Dim scrollCoords(1 To 2) As D3DVECTOR2              'coordinates for scrolling
-Dim mouseCoords As D3DVECTOR2                       'coordinates of mouse
-Dim moveCoords(1 To 2) As D3DVECTOR2                'coordinates for moving vertices
-Dim selectedCoords(1 To 2) As D3DVECTOR2            'coordinates of selected area
-Dim selectedPolys() As Integer          'list of selected polys and verts
-Dim vertexList() As TVertexData         'list of polys with selected verts
-Dim numVerts As Integer                 'number of current vertex being created
-Dim numCorners As Integer               'number of corner of scenery being created
+Dim scrollCoords(1 To 2) As D3DVECTOR2   'coordinates for scrolling
+Dim mouseCoords As D3DVECTOR2            'coordinates of mouse
+Dim moveCoords(1 To 2) As D3DVECTOR2     'coordinates for moving vertices
+Dim selectedCoords(1 To 2) As D3DVECTOR2 'coordinates of selected area
+Dim selectedPolys() As Integer           'list of selected polys and verts
+Dim vertexList() As TVertexData          'list of polys with selected verts
+Dim numVerts As Integer                  'number of current vertex being created
+Dim numCorners As Integer                'number of corner of scenery being created
 
 Dim numSelectedPolys As Integer
-Dim numSelectedScenery As Integer       'number of currently selected scenery
+Dim numSelectedScenery As Integer        'number of currently selected scenery
 Dim numSelColliders As Integer
 Dim numSelSpawns As Integer
 Dim numSelWaypoints As Integer
@@ -1616,7 +1616,7 @@ Dim PolyTypeClrs(0 To 25) As Long
 Public shiftDown As Boolean, ctrlDown As Boolean, altDown As Boolean
 
 Dim rCenter As D3DVECTOR2
-Dim selRect(3) As D3DVECTOR2 'RECT
+Dim selRect(3) As D3DVECTOR2  'RECT
 
 Dim xGridLines() As TLine
 Dim yGridLines() As TLine
@@ -1818,7 +1818,6 @@ End Sub
 
 Public Sub loadCursors()
 
-    'On Error Resume Next
     On Error GoTo ErrorHandler
 
     ImageList.ListImages.Clear
@@ -2408,9 +2407,9 @@ Public Sub LoadFile(FileName As String)
 
         For i = -SECTOR_NUM To SECTOR_NUM
             For j = -SECTOR_NUM To SECTOR_NUM
-                Get #1, , polysInSector         'number of polys in sector
-                For k = 1 To polysInSector      'for each poly in sector
-                    Get #1, , polyIndex         'load and discard poly index
+                Get #1, , polysInSector    'number of polys in sector
+                For k = 1 To polysInSector 'for each poly in sector
+                    Get #1, , polyIndex    'load and discard poly index
                 Next
             Next
         Next
@@ -4170,7 +4169,6 @@ Public Sub Render()
     Dim sVal As Integer
     Dim objClr As Long
 
-    '----
 
     Dim matView As D3DMATRIX
     Dim viewVector As D3DVECTOR
@@ -4193,7 +4191,6 @@ Public Sub Render()
     D3DXMatrixPerspectiveLH matProj, Me.ScaleWidth / zoomFactor, -Me.ScaleHeight / zoomFactor, -1, 0
     D3DDevice.SetTransform D3DTS_PROJECTION, matProj
 
-    '----
 
     rc.X = 0
     rc.Y = 0
@@ -5056,7 +5053,7 @@ Public Sub Render()
         D3DDevice.DrawPrimitiveUP D3DPT_LINESTRIP, 32, circleCoords(0), Len(circleCoords(0))
     End If
 
-     'vertex selection --------
+    'vertex selection --------
     If currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then
         If toolAction Then
             circleCoords(0).Color = ARGB(255, RGB(255, 255, 255))
@@ -5080,7 +5077,7 @@ Public Sub Render()
 
     D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, False
 
-    '----
+
     D3DDevice.EndScene
 
     D3DDevice.Present ByVal 0, ByVal 0, 0, ByVal 0
@@ -6792,7 +6789,6 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
     If Button <> 1 Then Exit Sub
 
-    '----
 
     If spaceDown Then 'scrolling
 
@@ -6816,7 +6812,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             moveCoords(1).Y = Y
         End If
 
-    ElseIf currentFunction = TOOL_MOVE And toolAction Then  'moving --------
+    ElseIf currentFunction = TOOL_MOVE And toolAction Then  'moving
 
         If Shift = KEY_SHIFT Then 'constrained
             If Abs(X - moveCoords(2).X) > Abs(Y - moveCoords(2).Y) Then
@@ -6853,7 +6849,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             selectedCoords(2).Y = Y
         End If
 
-    ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection --------
+    ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection
 
     ElseIf currentFunction = TOOL_VCOLOUR And toolAction Then ' vertex colouring
 
@@ -6861,9 +6857,9 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             VertexColouring X, Y
         End If
 
-    ElseIf currentFunction = TOOL_PCOLOUR Then 'poly colouring --------
+    ElseIf currentFunction = TOOL_PCOLOUR Then 'poly colouring
 
-    ElseIf currentFunction = TOOL_TEXTURE And toolAction Then 'texture --------
+    ElseIf currentFunction = TOOL_TEXTURE And toolAction Then 'texture
 
         If Shift = 0 Then
             StretchingTexture X, Y
@@ -6876,9 +6872,9 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             StretchingTexture X, Y
         End If
 
-    ElseIf currentFunction = TOOL_SCENERY Then 'scenery --------
+    ElseIf currentFunction = TOOL_SCENERY Then 'scenery
 
-    ElseIf currentFunction = TOOL_CLRPICKER Then 'colour picker --------
+    ElseIf currentFunction = TOOL_CLRPICKER Then 'colour picker
 
         If currentTool = TOOL_DEPTHMAP Then
             depthPicker X, Y
@@ -6906,7 +6902,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
     ElseIf currentFunction = TOOL_LITPICKER Then 'light picker
 
-    ElseIf currentFunction = TOOL_OBJECTS Then 'objects --------
+    ElseIf currentFunction = TOOL_OBJECTS Then 'objects
 
         Spawns(0).X = X
         Spawns(0).Y = Y
@@ -6916,13 +6912,13 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             Render
         End If
 
-    ElseIf currentFunction = TOOL_WAYPOINT And toolAction Then 'waypoints --------
+    ElseIf currentFunction = TOOL_WAYPOINT And toolAction Then 'waypoints
 
-    ElseIf currentFunction = TOOL_DEPTHMAP And toolAction Then 'depthmap --------
+    ElseIf currentFunction = TOOL_DEPTHMAP And toolAction Then 'depthmap
 
         EditDepthMap X, Y
 
-    ElseIf currentFunction = TOOL_SKETCH And toolAction Then 'sketch --------
+    ElseIf currentFunction = TOOL_SKETCH And toolAction Then 'sketch
 
         If Shift = 0 Then 'freeform
             linkSketch X, Y
@@ -14542,7 +14538,7 @@ ErrorHandler:
 
 End Sub
 
-'--------- apply scale/rotate
+'apply scale/rotate
 
 Public Sub applyPolyType(ByVal Index As Integer)
 
@@ -15002,17 +14998,15 @@ Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single
                 End If
             End If
         Next
-
-            'next
-        'end if
     Next
-    ' loop through all vertices to find vertices at this point, put into array
-    ' set their coords
-    ' set vertex list value to mark
 
-    ' for each vertex at this point, find adjacent verts
-    ' calc new coords, call this and set new coords?
-    ' send new coords to this routine?
-    ' call this routine on them
+    'loop through all vertices to find vertices at this point, put into array
+    'set their coords
+    'set vertex list value to mark
+
+    'for each vertex at this point, find adjacent verts
+    'calc new coords, call this and set new coords?
+    'send new coords to this routine?
+    'call this routine on them
 
 End Sub

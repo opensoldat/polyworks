@@ -2521,7 +2521,6 @@ Public Sub SetColours()
     Dim i As Integer
     Dim c As Control
 
-    '--------
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_preferences.bmp")
     picHotkeys.Picture = LoadPicture(appPath & "\" & gfxDir & "\tools.bmp")
@@ -2537,7 +2536,6 @@ Public Sub SetColours()
     mouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
     mouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
 
-    '--------
 
     Me.BackColor = bgClr
 

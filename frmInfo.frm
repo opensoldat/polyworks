@@ -1713,7 +1713,6 @@ Private Sub Form_Load()
 
     setForm
 
-    '----
 
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
