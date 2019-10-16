@@ -242,7 +242,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Sketch"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -265,7 +265,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Lights"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -288,7 +288,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Waypoints"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -311,7 +311,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Scenery"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -334,7 +334,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Objects"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -357,7 +357,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Grid"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -380,7 +380,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Background"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -403,7 +403,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Polygons"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -426,7 +426,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Texture"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -449,7 +449,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Wireframe"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -472,7 +472,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Points"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
