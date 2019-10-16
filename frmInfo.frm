@@ -1722,7 +1722,9 @@ Private Sub Form_Load()
     txtQuadY(1).Text = frmSoldatMapEditor.yTexture
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Properties form"
 
 End Sub

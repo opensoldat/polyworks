@@ -2011,7 +2011,9 @@ Private Sub Form_Load()
     txtPrefabs.Text = frmSoldatMapEditor.prefabDir
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Preferences form"
 
 End Sub

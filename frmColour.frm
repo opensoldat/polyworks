@@ -668,7 +668,9 @@ Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
     updateHex
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error initializing colour picker" & vbNewLine & Error$
 
 End Sub
@@ -761,7 +763,9 @@ Private Sub Form_Load()
     pureClr(2) = 255
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Colour Picker form"
 
 End Sub

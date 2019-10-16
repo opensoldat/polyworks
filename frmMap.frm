@@ -586,7 +586,9 @@ Public Sub Form_Load()
     getJets
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Map form"
 
 End Sub

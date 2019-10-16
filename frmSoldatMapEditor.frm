@@ -1799,7 +1799,9 @@ Private Sub Form_Load()
     acquired = True
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error loading" & vbNewLine & err & vbNewLine & Error$
 
 End Sub
@@ -1811,7 +1813,9 @@ Private Sub SetCursor(Index As Integer)
     Me.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(Index).Picture
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error setting cursor" & vbNewLine & Error$
 
 End Sub
@@ -1882,7 +1886,9 @@ Public Sub loadCursors()
     ImageList.ListImages.Item(TOOL_SMUDGE + 1).Tag = "Move Lines"
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error loading cursors" & vbNewLine & Error$
 
 End Sub
@@ -2056,7 +2062,9 @@ Public Sub Init()
     initialized = True
 
     Exit Sub
+
 ErrorHandler:
+
     If D3DX Is Nothing Then
         MsgBox "Direct3D initialization failed" & vbNewLine & debugVal & vbNewLine & Error$
     Else
@@ -3598,7 +3606,9 @@ Private Sub SaveUndo()
     Close #1
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error saving undo" & vbNewLine & Error$
 
 End Sub
@@ -3897,6 +3907,7 @@ Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div A
     Exit Function
 
 ErrorHandler:
+
     MsgBox Error$
 
 End Function
@@ -4005,7 +4016,9 @@ Private Function segmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
     segmentsIntersect = (s >= 0 And s <= 1 And T >= 0 And T <= 1)
 
     Exit Function
+
 ErrorHandler:
+
     MsgBox Error$
 
 End Function
@@ -4091,7 +4104,9 @@ Private Sub initGrid()
     inc = (gridSpacing / gridDivisions)
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error initializing grid"
 
 End Sub
@@ -6293,6 +6308,7 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
     Exit Sub
 
 ErrorHandler:
+
     MsgBox Error$
 
 End Sub
@@ -8585,7 +8601,9 @@ Private Sub startSketch(X As Single, Y As Single)
     Render
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error starting sketch" & vbNewLine & Error$
 
 End Sub
@@ -8606,7 +8624,9 @@ Private Sub lineSketch(X As Single, Y As Single)
     sketch(sketchLines).vertex(2).z = 1
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error sketching line" & vbNewLine & Error$
 
 End Sub
@@ -8639,7 +8659,9 @@ Private Sub linkSketch(X As Single, Y As Single)
     End If
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error linking sketch" & vbNewLine & Error$
 
 End Sub
@@ -8717,7 +8739,9 @@ Private Sub CreateScenery(X As Single, Y As Single)
     End If
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error creating scenery" & vbNewLine & Error$
 
 End Sub
@@ -9235,7 +9259,9 @@ Private Function eraseSketch(X As Single, Y As Single) As Byte
     End If
 
     Exit Function
+
 ErrorHandler:
+
     MsgBox "Error erasing sketch" & vbNewLine & Error$
 
 End Function
@@ -9264,7 +9290,9 @@ Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
     Next
 
     Exit Function
+
 ErrorHandler:
+
     MsgBox "Error moving sketch lines" & vbNewLine & Error$
 
 End Function
@@ -9287,7 +9315,9 @@ Private Sub deleteSmallLines()
     Render
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error deleting small sketch lines" & vbNewLine & Error$
 
 End Sub
@@ -9723,7 +9753,9 @@ Private Sub getRCenter()
     End If
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$
 
 End Sub
@@ -10341,7 +10373,9 @@ Private Sub deletePolys()
     getInfo
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error deleting" & vbNewLine & Error$
 
 End Sub
@@ -11985,7 +12019,9 @@ Public Sub ClearUnused()
     numUndo = 0
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error clearing unused scenery" & vbNewLine & Error$
 
 End Sub
@@ -12376,7 +12412,9 @@ Public Sub loadColours()
     If font2 = "" Then font2 = "Arial"
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "Error loading colours" & vbNewLine & Error$
 
 End Sub
@@ -14533,7 +14571,9 @@ Public Sub getInfo()
     frmWaypoints.noChange = False
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox "getInfo() error" & vbNewLine & Error$
 
 End Sub

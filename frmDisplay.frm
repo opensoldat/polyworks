@@ -548,7 +548,9 @@ Private Sub Form_Load()
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Display form"
 
 End Sub

@@ -357,7 +357,9 @@ Private Sub Form_Load()
     listScenery
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Scenery form"
 
 End Sub

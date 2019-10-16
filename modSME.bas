@@ -574,7 +574,9 @@ Public Function GetSoldatDir() As String
     End If
 
     Exit Function
+
 ErrorHandler:
+
     MsgBox "Error getting soldat directory from registry" & vbNewLine & Error$
 
 End Function

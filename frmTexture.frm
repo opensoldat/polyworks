@@ -91,7 +91,9 @@ Private Sub Form_Load()
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading texture form"
 
 End Sub

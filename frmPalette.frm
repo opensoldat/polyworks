@@ -672,7 +672,9 @@ Private Sub Form_Load()
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Palette form"
 
 End Sub
@@ -721,7 +723,9 @@ Public Sub loadPalette(fileName As String)
     picPalette.Refresh
 
     Exit Sub
+
 ErrorHandler:
+
     mnuClearPalette_Click
     If fileOpen Then Close #1
     MsgBox "Error loading palette" & vbNewLine & Error$
@@ -781,7 +785,9 @@ Public Sub savePalette(fileName As String)
     fileOpen = False
 
     Exit Sub
+
 ErrorHandler:
+
     If fileOpen Then Close #1
     MsgBox "Error saving palette" & vbNewLine & Error$
 
