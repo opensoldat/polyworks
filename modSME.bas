@@ -780,12 +780,12 @@ Public Sub SetGameMode(fileName As String)
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
     frmPreferences.BackColor = bgClr
-    frmColour.BackColor = bgClr
+    frmColor.BackColor = bgClr
     frmDisplay.BackColor = bgClr
     frmInfo.BackColor = bgClr
     frmMap.BackColor = bgClr

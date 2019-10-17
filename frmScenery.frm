@@ -348,7 +348,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     formHeight = Me.ScaleHeight
 
@@ -688,7 +688,7 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

@@ -1,5 +1,5 @@
 Converts a 32x32 bitmap into a monochrome cursor.
-Colours consist of black and white, transparency, and invert.
+Colors consist of black and white, transparency, and invert.
 
 1. Load a bitmap (or other image file)
 2. Set the hot spot (15,15 for default PolyWorks cursors)

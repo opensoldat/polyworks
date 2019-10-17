@@ -165,7 +165,7 @@ Begin VB.Form frmPalette
       Top             =   2160
       Width           =   960
    End
-   Begin VB.PictureBox picColour 
+   Begin VB.PictureBox picColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
@@ -176,7 +176,7 @@ Begin VB.Form frmPalette
       ScaleWidth      =   63
       TabIndex        =   7
       TabStop         =   0   'False
-      ToolTipText     =   "Current Colour"
+      ToolTipText     =   "Current Color"
       Top             =   360
       Width           =   975
    End
@@ -300,7 +300,7 @@ Begin VB.Form frmPalette
    End
    Begin VB.Label lblPal 
       BackStyle       =   0  'Transparent
-      Caption         =   "Vertex Colour:"
+      Caption         =   "Vertex Color:"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -524,8 +524,8 @@ Begin VB.Form frmPalette
          Caption         =   "Clear"
       End
    End
-   Begin VB.Menu mnuNewColour 
-      Caption         =   "NewColour"
+   Begin VB.Menu mnuNewColor 
+      Caption         =   "NewColor"
       Visible         =   0   'False
       Begin VB.Menu mnuAddToPalette 
          Caption         =   "Add to Palette"
@@ -539,13 +539,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Type TColour
+Private Type TColor
     red As Byte
     green As Byte
     blue As Byte
 End Type
 
-Dim clrPalette(0 To 11, 0 To 5) As TColour
+Dim clrPalette(0 To 11, 0 To 5) As TColor
 
 Dim formHeight As Integer
 Public collapsed As Boolean
@@ -601,7 +601,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
 End Sub
 
-Private Function getRGB(DecValue As Long) As TColour
+Private Function getRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
@@ -656,11 +656,11 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     frmPalette.loadPalette appPath & "\palettes\current.txt"
 
-    setValues frmColour.red, frmColour.green, frmColour.blue
+    setValues frmColor.red, frmColor.green, frmColor.blue
 
     shpSel1.left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
@@ -841,27 +841,27 @@ End Sub
 
 Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Button = 1 Then 'select colour
+    If Button = 1 Then 'select color
 
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
-        frmSoldatMapEditor.setPaletteColour clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
+        frmSoldatMapEditor.setPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
 
         txtRGB(0).Text = clrPalette(xVal, yVal).red
         txtRGB(1).Text = clrPalette(xVal, yVal).green
         txtRGB(2).Text = clrPalette(xVal, yVal).blue
-        picColour.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
+        picColor.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
 
         shpSel1.left = Int(X / 16) * 16 + 1
         shpSel1.Top = Int(Y / 16) * 16 + 1
         shpSel2.left = Int(X / 16) * 16
         shpSel2.Top = Int(Y / 16) * 16
 
-    ElseIf Button = 2 Then 'new colour
+    ElseIf Button = 2 Then 'new color
 
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
-        Me.PopupMenu mnuNewColour
+        Me.PopupMenu mnuNewColor
 
     End If
 
@@ -869,7 +869,7 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
 
 End Sub
 
-Public Sub newPaletteColour()
+Public Sub newPaletteColor()
 
     clrPalette(xVal, yVal).red = txtRGB(0).Text
     clrPalette(xVal, yVal).green = txtRGB(1).Text
@@ -884,15 +884,15 @@ End Sub
 
 Private Sub mnuAddToPalette_Click()
 
-    newPaletteColour
+    newPaletteColor
 
 End Sub
 
-Private Sub picColour_Click()
+Private Sub picColor_Click()
 
-    frmColour.InitClr txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
+    frmColor.InitClr txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
 
-    frmColour.ChangeColour picColour, txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text, 0
+    frmColor.ChangeColor picColor, txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text, 0
 
 End Sub
 
@@ -935,8 +935,8 @@ Private Sub txtRGB_Change(Index As Integer)
     ElseIf txtRGB(Index).Text = "" Then
 
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
-        picColour.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
-        frmSoldatMapEditor.setPolyColour Index, txtRGB(Index).Text
+        picColor.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
+        frmSoldatMapEditor.setPolyColor Index, txtRGB(Index).Text
     End If
 
 End Sub
@@ -959,12 +959,12 @@ Private Sub txtRGB_LostFocus(Index As Integer)
     ElseIf txtRGB(Index).Text = "" Then
         txtRGB(Index).Text = tempVal
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
-        frmSoldatMapEditor.setPolyColour Index, txtRGB(Index).Text
+        frmSoldatMapEditor.setPolyColor Index, txtRGB(Index).Text
     Else
         txtRGB(Index).Text = tempVal
     End If
 
-    picColour.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
+    picColor.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
 
 End Sub
 
@@ -975,7 +975,7 @@ Private Sub txtOpacity_Change()
     ElseIf txtOpacity.Text = "" Then
 
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
-        frmSoldatMapEditor.setPolyColour 3, txtOpacity.Text
+        frmSoldatMapEditor.setPolyColor 3, txtOpacity.Text
     End If
 
 End Sub
@@ -1008,7 +1008,7 @@ Public Sub setValues(R As Byte, G As Byte, B As Byte)
     txtRGB(0).Text = R
     txtRGB(1).Text = G
     txtRGB(2).Text = B
-    picColour.BackColor = RGB(R, G, B)
+    picColor.BackColor = RGB(R, G, B)
     shpSel1.left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
     shpSel2.left = picPalette.ScaleWidth + 2
@@ -1060,7 +1060,7 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
         End If
     Next
 
-    frmSoldatMapEditor.setColourMode clrMode
+    frmSoldatMapEditor.setColorMode clrMode
     frmSoldatMapEditor.RegainFocus
 
 End Sub
@@ -1128,7 +1128,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

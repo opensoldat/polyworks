@@ -130,7 +130,7 @@ Begin VB.Form frmMap
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   31
       TabIndex        =   9
-      ToolTipText     =   "Top Background Colour"
+      ToolTipText     =   "Top Background Color"
       Top             =   3240
       Width           =   495
    End
@@ -146,7 +146,7 @@ Begin VB.Form frmMap
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   31
       TabIndex        =   8
-      ToolTipText     =   "Bottom Background Colour"
+      ToolTipText     =   "Bottom Background Color"
       Top             =   3840
       Width           =   495
    End
@@ -511,7 +511,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Type TColour
+Private Type TColor
     red As Byte
     green As Byte
     blue As Byte
@@ -577,7 +577,7 @@ Public Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     loadTextures2
 
@@ -723,7 +723,7 @@ End Sub
 
 Private Sub picBackClr_Click(Index As Integer)
 
-    picBackClr(Index).BackColor = frmSoldatMapEditor.setBGColour(Index + 1)
+    picBackClr(Index).BackColor = frmSoldatMapEditor.setBGColor(Index + 1)
 
 End Sub
 
@@ -807,7 +807,7 @@ Private Sub txtJet_KeyPress(KeyAscii As Integer)
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

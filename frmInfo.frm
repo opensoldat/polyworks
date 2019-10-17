@@ -1707,7 +1707,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     formHeight = Me.ScaleHeight
 
@@ -1786,7 +1786,7 @@ End Sub
 
 Private Sub picLight_Click()
 
-    frmSoldatMapEditor.setLightColour
+    frmSoldatMapEditor.setLightColor
 
 End Sub
 
@@ -2076,7 +2076,7 @@ Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Sing
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

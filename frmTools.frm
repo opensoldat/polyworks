@@ -83,8 +83,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   12
-      Tag             =   "Colour Picker"
-      ToolTipText     =   "Colour Picker (,)"
+      Tag             =   "Color Picker"
+      ToolTipText     =   "Color Picker (,)"
       Top             =   2640
       Width           =   480
    End
@@ -227,8 +227,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   4
-      Tag             =   "Vertex Colour"
-      ToolTipText     =   "Vertex Colour (E)"
+      Tag             =   "Vertex Color"
+      ToolTipText     =   "Vertex Color (E)"
       Top             =   1200
       Width           =   480
    End
@@ -245,8 +245,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   3
-      Tag             =   "Poly Colour"
-      ToolTipText     =   "Poly Colour (R)"
+      Tag             =   "Poly Color"
+      ToolTipText     =   "Poly Color (R)"
       Top             =   1200
       Width           =   480
    End
@@ -345,7 +345,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    SetColours
+    SetColors
 
     setForm
 
@@ -439,7 +439,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 
