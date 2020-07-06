@@ -56,7 +56,7 @@ Begin VB.Form frmTexture
          BorderStyle     =   0  'None
          ForeColor       =   &H80000008&
          Height          =   240
-         Left            =   720
+         Left            =   960
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
