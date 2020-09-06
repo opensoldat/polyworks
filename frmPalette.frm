@@ -1081,9 +1081,10 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
-    snapForm Me, frmDisplay
-    snapForm Me, frmWaypoints
     snapForm Me, frmTools
+    ' snapForm Me, frmPalette
+    snapForm Me, frmWaypoints
+    snapForm Me, frmDisplay
     snapForm Me, frmScenery
     snapForm Me, frmInfo
     snapForm Me, frmTexture
