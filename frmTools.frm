@@ -312,6 +312,7 @@ Option Explicit
 Dim curTool As Byte
 Dim curButton As Byte
 Public xPos As Integer, yPos  As Integer
+Dim formHeight As Integer
 Public collapsed As Boolean
 Dim hotKeys(0 To 13) As Byte
 
@@ -346,6 +347,8 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     SetColors
+    
+    formHeight = Me.ScaleHeight
 
     setForm
 
@@ -361,6 +364,22 @@ Public Sub setForm()
 
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Private Sub picTitle_DblClick()
+
+    collapsed = Not collapsed
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
 
 End Sub
 
