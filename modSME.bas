@@ -550,26 +550,29 @@ Public Function GetSoldatDir() As String
 
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
-        
+
     Else
         'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
 
         sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
-        
+
         If hKey <> 0 Then
-        
+
             GetSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
-            
+
         Else
-            If Dir("C:\Soldat", vbDirectory) = "" Then
-                MsgBox "Could not locate the Soldat directory." & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
-            Else
-                GetSoldatDir = "C:\Soldat"
-            End If
-            
+
+            GetSoldatDir = "C:\Soldat"
+
         End If
+
+    End If
+
+    If Not DirExists(GetSoldatDir) Then
+
+        MsgBox "Could not locate the Soldat directory. (" & GetSoldatDir & ")" & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
 
     End If
 
@@ -580,6 +583,17 @@ ErrorHandler:
     MsgBox "Error getting soldat directory from registry" & vbNewLine & Error$
 
 End Function
+
+
+Private Function DirExists(DirName As String) As Boolean
+
+    On Error GoTo ErrorHandler
+    DirExists = GetAttr(DirName) And vbDirectory
+
+ErrorHandler:
+
+End Function
+
 
 Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Long
 
