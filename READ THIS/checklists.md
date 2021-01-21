@@ -4,9 +4,10 @@ Checklists
 Commit
 ------
 
-* Save vb6 project
-* Build and move any needed files to the installer directory
-* Compile installer and test it
+* Save vb6 project (Menu->File->Save Project)
+* Build project (Menu->File->Make Soldat PolyWorks.exe)
+* Move any needed files to the installer directory (/Soldat PolyWorks.exe into /pwinstall)
+* Compile installer and test it (open /pwinstall/pw.nsi with makensisw.exe)
 * Test everything new/changed/fixed
 * Commit files and changelog
 * Done!
