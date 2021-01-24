@@ -1339,7 +1339,7 @@ Private Type TCustomVertex
     Y       As Single
     z       As Single
     rhw     As Single
-    Color   As Long
+    color   As Long
     tu      As Single
     tv      As Single
 End Type
@@ -1378,7 +1378,7 @@ Private Type TProp
     ScaleX      As Single
     ScaleY      As Single
     alpha       As Long
-    Color       As Long
+    color       As Long
     level       As Long
 End Type
 
@@ -1388,7 +1388,7 @@ Private Type TScenery
     rotation    As Single
     Scaling     As D3DVECTOR2
     alpha       As Byte
-    Color       As Long
+    color       As Long
     level       As Byte
     selected    As Byte
     screenTr    As D3DVECTOR2
@@ -2406,7 +2406,7 @@ Public Sub LoadFile(FileName As String)
             For j = 1 To 3
                 PolyCoords(i).vertex(j).X = Polys(i).vertex(j).X
                 PolyCoords(i).vertex(j).Y = Polys(i).vertex(j).Y
-                vertexList(i).color(j) = getRGB(Polys(i).vertex(j).Color)
+                vertexList(i).color(j) = getRGB(Polys(i).vertex(j).color)
                 If PolyCoords(i).vertex(j).X > maxX Then maxX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).X < minX Then minX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).Y > maxY Then maxY = PolyCoords(i).vertex(j).Y
@@ -2465,13 +2465,13 @@ Public Sub LoadFile(FileName As String)
                     Else
                         Scenery(i - offset).alpha = 255
                     End If
-                    Scenery(i - offset).Color = Prop.Color
+                    Scenery(i - offset).color = Prop.color
                     If Prop.level <= 255 And Prop.level >= 0 Then
                         Scenery(i - offset).level = Prop.level
                     Else
                         Scenery(i - offset).level = 0
                     End If
-                    Scenery(i - offset).Color = ARGB(Scenery(i - offset).alpha, Scenery(i - offset).Color)
+                    Scenery(i - offset).color = ARGB(Scenery(i - offset).alpha, Scenery(i - offset).color)
                 End If
 
             Next
@@ -2850,7 +2850,7 @@ Public Sub setCurrentScenery(Optional styleVal As Integer = -1, Optional scenery
     End If
 
     Scenery(0).alpha = opacity * 255
-    Scenery(0).Color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
     Scenery(0).level = frmScenery.level
     Scenery(0).Scaling.X = 1
     Scenery(0).Scaling.Y = 1
@@ -3090,7 +3090,7 @@ Private Sub SaveFile(FileName As String)
                 Polygon.Poly.vertex(j).X = PolyCoords(i).vertex(j).X
                 Polygon.Poly.vertex(j).Y = PolyCoords(i).vertex(j).Y
 
-                Polygon.Poly.vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                Polygon.Poly.vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
 
                 VertNum = j + 1
                 If VertNum > 3 Then VertNum = 1
@@ -3128,8 +3128,8 @@ Private Sub SaveFile(FileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = getRGB(Scenery(i).Color)
-            Prop.Color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
+            tempClr = getRGB(Scenery(i).color)
+            Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
             Prop.level = Scenery(i).level
@@ -3427,8 +3427,8 @@ Public Sub SaveAndCompile(FileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = getRGB(Scenery(i).Color)
-            Prop.Color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
+            tempClr = getRGB(Scenery(i).color)
+            Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
             Prop.level = Scenery(i).level
@@ -4139,14 +4139,14 @@ Private Sub setGrid()
 
 End Sub
 
-Private Function CreateCustomVertex(ByVal X As Single, ByVal Y As Single, z As Single, rhw As Single, Color As Long, _
+Private Function CreateCustomVertex(ByVal X As Single, ByVal Y As Single, z As Single, rhw As Single, color As Long, _
                                             tu As Single, tv As Single) As TCustomVertex
 
     CreateCustomVertex.X = X
     CreateCustomVertex.Y = Y
     CreateCustomVertex.z = z
     CreateCustomVertex.rhw = rhw
-    CreateCustomVertex.Color = Color
+    CreateCustomVertex.color = color
     CreateCustomVertex.tu = tu
     CreateCustomVertex.tv = tv
 
@@ -4321,7 +4321,7 @@ Public Sub Render()
                 End If
                 srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
-                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).Color
+                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
         Next
     End If
@@ -4357,7 +4357,7 @@ Public Sub Render()
                 End If
                 srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
-                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).Color
+                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
         Next
     End If
@@ -4369,7 +4369,7 @@ Public Sub Render()
             sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(0).Scaling.Y * zoomFactor
             srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
             srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
-            scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).Color
+            scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).color
         End If
     End If
 
@@ -4435,9 +4435,9 @@ Public Sub Render()
             lineCoords(3).tu = Polys(selectedPolys(i)).vertex(3).X / 128
             lineCoords(3).tv = Polys(selectedPolys(i)).vertex(3).Y / 128
 
-            lineCoords(1).Color = 0
-            lineCoords(2).Color = 0
-            lineCoords(3).Color = 0
+            lineCoords(1).color = 0
+            lineCoords(2).color = 0
+            lineCoords(3).color = 0
 
             lineCoords(1).z = 1
             lineCoords(2).z = 1
@@ -4445,9 +4445,9 @@ Public Sub Render()
             lineCoords(1).rhw = 1
             lineCoords(2).rhw = 1
             lineCoords(3).rhw = 1
-            If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).Color = objClr
-            If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).Color = objClr
-            If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).Color = objClr
+            If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = objClr
+            If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = objClr
+            If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = objClr
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
         Next
@@ -4479,9 +4479,9 @@ Public Sub Render()
             lineCoords(3) = Polys(i).vertex(3)
 
             If Polys(i).vertex(1).z >= 0 And Polys(i).vertex(2).z >= 0 And Polys(i).vertex(3).z >= 0 Then
-                lineCoords(1).Color = ARGB(255, RGB(Polys(i).vertex(1).z, Polys(i).vertex(1).z, Polys(i).vertex(1).z))
-                lineCoords(2).Color = ARGB(255, RGB(Polys(i).vertex(2).z, Polys(i).vertex(2).z, Polys(i).vertex(2).z))
-                lineCoords(3).Color = ARGB(255, RGB(Polys(i).vertex(3).z, Polys(i).vertex(3).z, Polys(i).vertex(3).z))
+                lineCoords(1).color = ARGB(255, RGB(Polys(i).vertex(1).z, Polys(i).vertex(1).z, Polys(i).vertex(1).z))
+                lineCoords(2).color = ARGB(255, RGB(Polys(i).vertex(2).z, Polys(i).vertex(2).z, Polys(i).vertex(2).z))
+                lineCoords(3).color = ARGB(255, RGB(Polys(i).vertex(3).z, Polys(i).vertex(3).z, Polys(i).vertex(3).z))
             End If
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
@@ -4522,7 +4522,7 @@ Public Sub Render()
                 End If
                 srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
-                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).Color
+                scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
         Next
     End If
@@ -4535,7 +4535,7 @@ Public Sub Render()
             sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(0).Scaling.Y * zoomFactor
             srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X + 0
             srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y + 0
-            scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).Color
+            scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).color
         End If
     End If
 
@@ -4717,9 +4717,9 @@ Public Sub Render()
 
             sVal = Scenery(i).Style
 
-            sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, ARGB(255, Scenery(i).Color), 0, 0)
+            sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, ARGB(255, Scenery(i).color), 0, 0)
             If Scenery(i).selected = 1 Or Scenery(i).selected = 3 Then
-                sceneryCoords(0).Color = ARGB(255, pointClr)
+                sceneryCoords(0).color = ARGB(255, pointClr)
             End If
             sceneryCoords(1) = sceneryCoords(0)
             sceneryCoords(2) = sceneryCoords(0)
@@ -4776,10 +4776,10 @@ Public Sub Render()
         Next
         If currentTool = TOOL_SCENERY And Scenery(0).Style > 0 And Not (ctrlDown Or altDown) Then
             sVal = Scenery(0).Style
-            sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).Color, 0, 0)
-            sceneryCoords(1) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).Color, 0, 0)
-            sceneryCoords(2) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).Color, 0, 0)
-            sceneryCoords(3) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).Color, 0, 0)
+            sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).color, 0, 0)
+            sceneryCoords(1) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).color, 0, 0)
+            sceneryCoords(2) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).color, 0, 0)
+            sceneryCoords(3) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).color, 0, 0)
             sceneryCoords(0).X = Scenery(0).screenTr.X
             sceneryCoords(0).Y = Scenery(0).screenTr.Y
             sceneryCoords(1).X = sceneryCoords(0).X + Cos(Scenery(0).rotation) * (SceneryTextures(sVal).Width + 0) * Scenery(0).Scaling.X * zoomFactor
@@ -4826,14 +4826,14 @@ Public Sub Render()
     End If
 
     If showPoints And showObjects And colliderCount > 0 Then
-        sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).Color, 0, 0)
+        sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, Scenery(0).color, 0, 0)
         For i = 1 To colliderCount
             sceneryCoords(0).X = (Colliders(i).X - scrollCoords(2).X) * zoomFactor
             sceneryCoords(0).Y = (Colliders(i).Y - scrollCoords(2).Y) * zoomFactor
             If Colliders(i).active = 1 Then
-                sceneryCoords(0).Color = selectionClr
+                sceneryCoords(0).color = selectionClr
             Else
-                sceneryCoords(0).Color = ARGB(255, RGB(255, 255, 255))
+                sceneryCoords(0).color = ARGB(255, RGB(255, 255, 255))
             End If
             D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 1, sceneryCoords(0), Len(sceneryCoords(0))
         Next
@@ -4853,21 +4853,21 @@ Public Sub Render()
             lineCoords(3).z = 1: lineCoords(3).rhw = 1
 
             If vertexList(selectedPolys(i)).vertex(1) = 1 Or vertexList(selectedPolys(i)).vertex(1) = 3 Then
-                lineCoords(1).Color = pointClr
+                lineCoords(1).color = pointClr
             End If
             If vertexList(selectedPolys(i)).vertex(2) = 1 Or vertexList(selectedPolys(i)).vertex(2) = 3 Then
-                lineCoords(2).Color = pointClr
+                lineCoords(2).color = pointClr
             End If
             If vertexList(selectedPolys(i)).vertex(3) = 1 Or vertexList(selectedPolys(i)).vertex(3) = 3 Then
-                lineCoords(3).Color = pointClr
+                lineCoords(3).color = pointClr
             End If
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
 
             If showPoints Then
-                If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).Color = pointClr
-                If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).Color = pointClr
-                If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).Color = pointClr
+                If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = pointClr
+                If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = pointClr
+                If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = pointClr
                 D3DDevice.setTexture 0, particleTexture
                 D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 3, lineCoords(1), Len(lineCoords(1))
                 D3DDevice.setTexture 0, Nothing
@@ -4984,23 +4984,23 @@ Public Sub Render()
                 lineCoords(2).X = (Waypoints(Connections(i).point2).X - scrollCoords(2).X) * zoomFactor
                 lineCoords(2).Y = (Waypoints(Connections(i).point2).Y - scrollCoords(2).Y) * zoomFactor
                 If Waypoints(Connections(i).point2).wayType(2) Then
-                    lineCoords(1).Color = &HFFFFFF22
-                    lineCoords(2).Color = &HFFFFFF22
+                    lineCoords(1).color = &HFFFFFF22
+                    lineCoords(2).color = &HFFFFFF22
                 ElseIf Waypoints(Connections(i).point2).wayType(3) Then
-                    lineCoords(1).Color = &HFF22FFFF
-                    lineCoords(2).Color = &HFF22FFFF
+                    lineCoords(1).color = &HFF22FFFF
+                    lineCoords(2).color = &HFF22FFFF
                 ElseIf Waypoints(Connections(i).point2).wayType(0) Then
-                    lineCoords(1).Color = &HFF22FF22
-                    lineCoords(2).Color = &HFF22FF22
+                    lineCoords(1).color = &HFF22FF22
+                    lineCoords(2).color = &HFF22FF22
                 ElseIf Waypoints(Connections(i).point2).wayType(1) Then
-                    lineCoords(1).Color = &HFFFF2222
-                    lineCoords(2).Color = &HFFFF2222
+                    lineCoords(1).color = &HFFFF2222
+                    lineCoords(2).color = &HFFFF2222
                 ElseIf Waypoints(Connections(i).point2).wayType(4) Then
-                    lineCoords(1).Color = &HFFFFFFFF
-                    lineCoords(2).Color = &HFFFFFFFF
+                    lineCoords(1).color = &HFFFFFFFF
+                    lineCoords(2).color = &HFFFFFFFF
                 Else
-                    lineCoords(1).Color = &HFF000000
-                    lineCoords(2).Color = &HFF000000
+                    lineCoords(1).color = &HFF000000
+                    lineCoords(2).color = &HFF000000
                 End If
                 lineCoords(1).tu = 0
                 lineCoords(1).tv = 0
@@ -5017,23 +5017,23 @@ Public Sub Render()
             lineCoords(2).X = mouseCoords.X
             lineCoords(2).Y = mouseCoords.Y
             If mnuWayType(2).Checked Then
-                lineCoords(1).Color = &HFFFFFF22
-                lineCoords(2).Color = &HFFFFFF22
+                lineCoords(1).color = &HFFFFFF22
+                lineCoords(2).color = &HFFFFFF22
             ElseIf mnuWayType(3).Checked Then
-                lineCoords(1).Color = &HFF22FFFF
-                lineCoords(2).Color = &HFF22FFFF
+                lineCoords(1).color = &HFF22FFFF
+                lineCoords(2).color = &HFF22FFFF
             ElseIf mnuWayType(0).Checked Then
-                lineCoords(1).Color = &HFF22FF22
-                lineCoords(2).Color = &HFF22FF22
+                lineCoords(1).color = &HFF22FF22
+                lineCoords(2).color = &HFF22FF22
             ElseIf mnuWayType(1).Checked Then
-                lineCoords(1).Color = &HFFFF2222
-                lineCoords(2).Color = &HFFFF2222
+                lineCoords(1).color = &HFFFF2222
+                lineCoords(2).color = &HFFFF2222
             ElseIf mnuWayType(4).Checked Then
-                lineCoords(1).Color = &HFFFFFFFF
-                lineCoords(2).Color = &HFFFFFFFF
+                lineCoords(1).color = &HFFFFFFFF
+                lineCoords(2).color = &HFFFFFFFF
             Else
-                lineCoords(1).Color = &HFF000000
-                lineCoords(2).Color = &HFF000000
+                lineCoords(1).color = &HFF000000
+                lineCoords(2).color = &HFF000000
             End If
             lineCoords(1).tu = 0
             lineCoords(1).tv = 0
@@ -5066,7 +5066,7 @@ Public Sub Render()
     'draw circle
     If circleOn Then
         For i = 0 To 32
-            circleCoords(i).Color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(i).color = ARGB(255, RGB(255, 255, 255))
             circleCoords(i).X = mouseCoords.X + zoomFactor * clrRadius * Math.Cos(pi * i / 16)
             circleCoords(i).Y = mouseCoords.Y + zoomFactor * clrRadius * Math.Sin(pi * i / 16)
         Next
@@ -5076,11 +5076,11 @@ Public Sub Render()
     'vertex selection --------
     If currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then
         If toolAction Then
-            circleCoords(0).Color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(1).Color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(2).Color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(3).Color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(4).Color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(0).color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(1).color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(2).color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(3).color = ARGB(255, RGB(255, 255, 255))
+            circleCoords(4).color = ARGB(255, RGB(255, 255, 255))
             circleCoords(0).X = selectedCoords(1).X
             circleCoords(1).X = mouseCoords.X
             circleCoords(2).X = mouseCoords.X
@@ -5930,7 +5930,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             polyClr.red = tempClr.blue
             polyClr.green = tempClr.green
             polyClr.blue = tempClr.red
-            Scenery(0).Color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
         End If
 
@@ -6211,7 +6211,7 @@ Private Sub applyLights(Optional toSel As Boolean = False)
             If gVal > 255 Then gVal = 255
             If bVal > 255 Then bVal = 255
 
-            Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(Int(bVal), Int(gVal), Int(rVal)))
+            Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
 
             rVal = 0
             gVal = 0
@@ -6303,7 +6303,7 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
     If gVal > 255 Then gVal = 255
     If bVal > 255 Then bVal = 255
 
-    Polys(pIndex).vertex(vIndex).Color = ARGB(getAlpha(Polys(pIndex).vertex(vIndex).Color), RGB(Int(bVal), Int(gVal), Int(rVal)))
+    Polys(pIndex).vertex(vIndex).color = ARGB(getAlpha(Polys(pIndex).vertex(vIndex).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
 
     rVal = 0
     gVal = 0
@@ -6390,7 +6390,7 @@ Private Sub AverageVerts()
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).Color)
+                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).color)
                 finalR = finalR + tehClr.red
                 finalG = finalG + tehClr.green
                 finalB = finalB + tehClr.blue
@@ -6405,7 +6405,7 @@ Private Sub AverageVerts()
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                Polys(selectedPolys(i)).vertex(j).Color = ARGB(getAlpha(Polys(selectedPolys(i)).vertex(j).Color), RGB(finalR, finalG, finalB))
+                Polys(selectedPolys(i)).vertex(j).color = ARGB(getAlpha(Polys(selectedPolys(i)).vertex(j).color), RGB(finalR, finalG, finalB))
             End If
         Next
     Next
@@ -6469,7 +6469,7 @@ Private Sub AverageVertices()
                                 vertexList(connectedPolys(P)).color(V).red = finalR
                                 vertexList(connectedPolys(P)).color(V).green = finalG
                                 vertexList(connectedPolys(P)).color(V).blue = finalB
-                                Polys(connectedPolys(P)).vertex(V).Color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).Color), RGB(finalB, finalG, finalR))
+                                Polys(connectedPolys(P)).vertex(V).color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
                             End If
                         Next
                     Next
@@ -6525,7 +6525,7 @@ Private Sub AverageVertices()
                                 vertexList(connectedPolys(P)).color(V).red = finalR
                                 vertexList(connectedPolys(P)).color(V).green = finalG
                                 vertexList(connectedPolys(P)).color(V).blue = finalB
-                                Polys(connectedPolys(P)).vertex(V).Color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).Color), RGB(finalB, finalG, finalR))
+                                Polys(connectedPolys(P)).vertex(V).color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
                             End If
                         Next
                     Next
@@ -6757,7 +6757,7 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
         Polys(polyCount + 1).vertex(numVerts + 1).tv = (yVal / zoomFactor + scrollCoords(2).Y) / yTexture
     End If
 
-    Polys(polyCount + 1).vertex(numVerts + 1).Color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
 
     Render
 
@@ -6915,7 +6915,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             polyClr.red = tempClr.blue
             polyClr.green = tempClr.green
             polyClr.blue = tempClr.red
-            Scenery(0).Color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
         End If
 
@@ -7836,9 +7836,9 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = getRGB(Polys(closestPoly).vertex(closestVert).Color)
+            destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = applyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).Color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).Color), RGB(destClr.blue, destClr.green, destClr.red))
+            Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
@@ -7862,9 +7862,9 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = getRGB(Polys(closestPoly).vertex(closestVert).Color)
+            destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = applyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).Color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).Color), RGB(destClr.blue, destClr.green, destClr.red))
+            Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
@@ -7896,9 +7896,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = getRGB(Polys(pNum).vertex(j).Color)
+                            destClr = getRGB(Polys(pNum).vertex(j).color)
                             destClr = applyBlend(destClr)
-                            Polys(pNum).vertex(j).Color = ARGB(getAlpha(Polys(pNum).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
+                            Polys(pNum).vertex(j).color = ARGB(getAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(pNum).color(j).red = destClr.red
                             vertexList(pNum).color(j).green = destClr.green
                             vertexList(pNum).color(j).blue = destClr.blue
@@ -7918,9 +7918,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = getRGB(Polys(i).vertex(j).Color)
+                            destClr = getRGB(Polys(i).vertex(j).color)
                             destClr = applyBlend(destClr)
-                            Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
+                            Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(i).color(j).red = destClr.red
                             vertexList(i).color(j).green = destClr.green
                             vertexList(i).color(j).blue = destClr.blue
@@ -7941,9 +7941,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 1 Then
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = getRGB(Scenery(i).Color)
+                        destClr = getRGB(Scenery(i).color)
                         destClr = applyBlend(destClr)
-                        Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 3
                         colored = True
                     End If
@@ -7957,9 +7957,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 0 Then
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = getRGB(Scenery(i).Color)
+                        destClr = getRGB(Scenery(i).color)
                         destClr = applyBlend(destClr)
-                        Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 2
                         colored = True
                     End If
@@ -8063,7 +8063,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
         Else
             polyClr = tempClr
-            Scenery(0).Color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).Color)
+            Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
             frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
         End If
@@ -8074,14 +8074,14 @@ Private Sub ColorPicker(X As Single, Y As Single)
             End If
         Next
         If vNum > 0 Then
-            tempClr = getRGB(Scenery(vNum).Color)
+            tempClr = getRGB(Scenery(vNum).color)
             If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
 
             ElseIf frmPalette.Enabled = False Then 'non modal
                 frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
             Else
                 polyClr = tempClr
-                Scenery(0).Color = ARGB(Scenery(0).alpha, Scenery(vNum).Color)
+                Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
                 frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
                 frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
             End If
@@ -8126,7 +8126,7 @@ Private Sub depthPicker(X As Single, Y As Single)
         End If
         polyClr.green = polyClr.red
         polyClr.blue = polyClr.red
-        Scenery(0).Color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).Color)
+        Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
         frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
         frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
     End If
@@ -8162,14 +8162,14 @@ Private Sub lightPicker(X As Single, Y As Single)
 
     If vNum > 0 Then 'poly color absorbed
 
-        tempClr = getRGB(Polys(pNum).vertex(vNum).Color)
+        tempClr = getRGB(Polys(pNum).vertex(vNum).color)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
 
         ElseIf frmPalette.Enabled = False Then 'non modal
             frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
         Else
             polyClr = tempClr
-            Scenery(0).Color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).Color)
+            Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
             frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
         End If
@@ -10053,9 +10053,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = getRGB(Polys(PolyNum).vertex(j).Color)
+                        destClr = getRGB(Polys(PolyNum).vertex(j).color)
                         destClr = applyBlend(destClr)
-                        Polys(PolyNum).vertex(j).Color = ARGB(getAlpha(Polys(PolyNum).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
+                        Polys(PolyNum).vertex(j).color = ARGB(getAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(PolyNum).color(j).red = destClr.red
                         vertexList(PolyNum).color(j).green = destClr.green
                         vertexList(PolyNum).color(j).blue = destClr.blue
@@ -10073,9 +10073,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = getRGB(Scenery(i).Color)
+                    destClr = getRGB(Scenery(i).color)
                     destClr = applyBlend(destClr)
-                    Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
                 End If
             Next
@@ -10095,9 +10095,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = getRGB(Polys(i).vertex(j).Color) 'get clr of poly
+                        destClr = getRGB(Polys(i).vertex(j).color) 'get clr of poly
                         destClr = applyBlend(destClr)
-                        Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(destClr.blue, destClr.green, destClr.red))
+                        Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
                         vertexList(i).color(j).green = destClr.green
                         vertexList(i).color(j).blue = destClr.blue
@@ -10115,9 +10115,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = getRGB(Scenery(i).Color)
+                    destClr = getRGB(Scenery(i).color)
                     destClr = applyBlend(destClr)
-                    Scenery(i).Color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
                 End If
             Next
@@ -10324,7 +10324,7 @@ Private Sub deletePolys()
         ElseIf lightCount = 0 Then
             For i = 1 To polyCount
                 For j = 1 To 3
-                    Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                    Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
                 Next
             Next
         End If
@@ -11519,7 +11519,7 @@ Private Sub setLightsMode(lightsOn As Boolean)
     If Not lightsOn Then
         For i = 1 To polyCount
             For j = 1 To 3
-                Polys(i).vertex(j).Color = ARGB(getAlpha(Polys(i).vertex(j).Color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
             Next
         Next
     Else
@@ -11640,10 +11640,10 @@ Public Sub setPolyColor(Index As Integer, value As Byte)
         opacity = value / 100
     End If
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(polyCount + 1).vertex(numVerts + 1).Color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).Color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
 
 End Sub
 
@@ -11654,10 +11654,10 @@ Public Sub setPaletteColor(red As Byte, green As Byte, blue As Byte)
     polyClr.green = green
     polyClr.blue = blue
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(polyCount + 1).vertex(numVerts + 1).Color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).Color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
 
 End Sub
 
@@ -11840,10 +11840,10 @@ Public Function setBGColor(Index As Integer) As Long
     bgColors(Index).green = frmColor.green
     bgColors(Index).blue = frmColor.blue
 
-    bgPolys(1).Color = RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red)
-    bgPolys(2).Color = RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red)
-    bgPolys(3).Color = RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red)
-    bgPolys(4).Color = RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red)
+    bgPolys(1).color = RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red)
+    bgPolys(2).color = RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red)
+    bgPolys(3).color = RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red)
+    bgPolys(4).color = RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red)
 
     setBGColor = RGB(bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue)
 
@@ -12825,8 +12825,8 @@ Private Sub savePrefab(FileName As String)
                 Polygon.vertex(j).X = PolyCoords(selectedPolys(i)).vertex(j).X
                 Polygon.vertex(j).Y = PolyCoords(selectedPolys(i)).vertex(j).Y
                 vertexList(selectedPolys(i)).vertex(j) = 1
-                alpha = getAlpha(Polys(selectedPolys(i)).vertex(j).Color)
-                Polygon.vertex(j).Color = ARGB(alpha, RGB(vertexList(selectedPolys(i)).color(j).blue, vertexList(selectedPolys(i)).color(j).green, vertexList(selectedPolys(i)).color(j).red))
+                alpha = getAlpha(Polys(selectedPolys(i)).vertex(j).color)
+                Polygon.vertex(j).color = ARGB(alpha, RGB(vertexList(selectedPolys(i)).color(j).blue, vertexList(selectedPolys(i)).color(j).green, vertexList(selectedPolys(i)).color(j).red))
             Next
             Put #1, , Polygon
             Put #1, , vertexList(selectedPolys(i)).vertex(1)
@@ -12939,7 +12939,7 @@ Private Sub loadPrefab(FileName As String)
                     PolyCoords(tehValue).vertex(j).Y = Polys(tehValue).vertex(j).Y
                     Polys(tehValue).vertex(j).X = (PolyCoords(tehValue).vertex(j).X - scrollCoords(2).X) * zoomFactor
                     Polys(tehValue).vertex(j).Y = (PolyCoords(tehValue).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
-                    tempClr = getRGB(Polys(tehValue).vertex(j).Color)
+                    tempClr = getRGB(Polys(tehValue).vertex(j).color)
                     vertexList(tehValue).color(j).red = tempClr.red
                     vertexList(tehValue).color(j).green = tempClr.green
                     vertexList(tehValue).color(j).blue = tempClr.blue
@@ -13327,7 +13327,7 @@ Private Sub mnuSelColor_Click()
     For i = 1 To polyCount
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
-            clrVal = getRGB(Polys(i).vertex(j).Color)
+            clrVal = getRGB(Polys(i).vertex(j).color)
             If clrVal.red = polyClr.red And clrVal.green = polyClr.green And clrVal.blue = polyClr.blue Then
                 addPoly = 1
                 vertexList(i).vertex(j) = 1
@@ -13697,7 +13697,7 @@ Private Sub mnuApplyLight_Click()
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 'apply poly color to base color
-                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).Color)
+                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).color)
                 vertexList(selectedPolys(i)).color(j).red = tehClr.red
                 vertexList(selectedPolys(i)).color(j).green = tehClr.green
                 vertexList(selectedPolys(i)).color(j).blue = tehClr.blue
@@ -13709,7 +13709,7 @@ Private Sub mnuApplyLight_Click()
         For i = 1 To polyCount
             For j = 1 To 3
                 'apply poly color to base color
-                tehClr = getRGB(Polys(i).vertex(j).Color)
+                tehClr = getRGB(Polys(i).vertex(j).color)
                 vertexList(i).color(j).red = tehClr.red
                 vertexList(i).color(j).green = tehClr.green
                 vertexList(i).color(j).blue = tehClr.blue
@@ -13801,11 +13801,11 @@ Private Sub mnuSplit_Click()
 
                 vertexList(selectedPolys(i)).color(left) = vertexList(polyCount).color(right)
 
-                clr1 = getRGB(Polys(selectedPolys(i)).vertex(right).Color)
-                clr2 = getRGB(Polys(polyCount).vertex(left).Color)
-                alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(right).Color)
-                alpha2 = getAlpha(Polys(polyCount).vertex(left).Color)
-                Polys(polyCount).vertex(right).Color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
+                clr1 = getRGB(Polys(selectedPolys(i)).vertex(right).color)
+                clr2 = getRGB(Polys(polyCount).vertex(left).color)
+                alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(right).color)
+                alpha2 = getAlpha(Polys(polyCount).vertex(left).color)
+                Polys(polyCount).vertex(right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
 
                 Polys(selectedPolys(i)).vertex(left) = Polys(polyCount).vertex(right)
 
@@ -14501,7 +14501,7 @@ Public Sub getInfo()
                 End If
                 frmInfo.txtTexture(0).Text = Int(Polys(selectedPolys(1)).vertex(j).tu * 10000 + 0.5) / 10000
                 frmInfo.txtTexture(1).Text = Int(Polys(selectedPolys(1)).vertex(j).tv * 10000 + 0.5) / 10000
-                frmInfo.txtVertexAlpha.Text = Int((getAlpha(Polys(selectedPolys(1)).vertex(j).Color) / 255 * 100) * 100 + 0.5) / 100
+                frmInfo.txtVertexAlpha.Text = Int((getAlpha(Polys(selectedPolys(1)).vertex(j).color) / 255 * 100) * 100 + 0.5) / 100
                 frmInfo.lblCoords.Caption = Int(PolyCoords(selectedPolys(1)).vertex(j).X * 100 + 0.5) / 100 & ", " & Int(PolyCoords(selectedPolys(1)).vertex(j).Y * 100) / 100
                 Exit For
             End If
@@ -14644,7 +14644,7 @@ Public Sub applyVertexAlpha(tehValue As Single)
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                    Polys(selectedPolys(i)).vertex(j).Color = ARGB(tehValue * 255, Polys(selectedPolys(i)).vertex(j).Color)
+                    Polys(selectedPolys(i)).vertex(j).color = ARGB(tehValue * 255, Polys(selectedPolys(i)).vertex(j).color)
                 End If
             Next
         Next
@@ -14691,9 +14691,9 @@ Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
             ElseIf Index = 1 Then 'y scale
                 Scenery(i).Scaling.Y = tehValue
             ElseIf Index = 2 Then 'alpha
-                tempClr = getRGB(Scenery(i).Color)
+                tempClr = getRGB(Scenery(i).color)
                 Scenery(i).alpha = tehValue
-                Scenery(i).Color = ARGB(tehValue, RGB(tempClr.blue, tempClr.green, tempClr.red))
+                Scenery(i).color = ARGB(tehValue, RGB(tempClr.blue, tempClr.green, tempClr.red))
             ElseIf Index = 3 Then 'rotation
                 Scenery(i).rotation = tehValue
             ElseIf Index = 4 Then 'level
