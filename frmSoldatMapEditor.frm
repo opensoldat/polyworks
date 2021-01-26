@@ -12142,7 +12142,8 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     topVal = window.Top / Screen.TwipsPerPixelY
 
     iniString = "Visible=" & window.Visible & sNull & "Left=" & leftVal & sNull & "Top=" & topVal & sNull _
-            & "Collapsed=" & collapsed & sNull & sNull
+            & "Collapsed=" & collapsed & sNull & "Snapped=" & Tag & sNull & sNull
+
 
     saveSection sectionName, iniString, appPath & "\workspace\" & FileName
 
@@ -12362,36 +12363,44 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
     frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & FileName)
     frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & FileName)
     frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & FileName)
+    frmTools.Tag = loadString("Tools", "Snapped", appPath & "\workspace\" & FileName)
 
     mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & FileName)
     frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & FileName)
     frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & FileName)
     frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & FileName)
+    frmDisplay.Tag = loadString("Display", "Snapped", appPath & "\workspace\" & FileName)
 
     mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & FileName)
     frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & FileName)
     frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & FileName)
     frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & FileName)
+    frmInfo.Tag = loadString("Properties", "Snapped", appPath & "\workspace\" & FileName)
 
     mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & FileName)
     frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & FileName)
     frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & FileName)
     frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & FileName)
+    frmPalette.Tag = loadString("Palette", "Snapped", appPath & "\workspace\" & FileName)
 
     mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & FileName)
     frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & FileName)
     frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
     frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
-
+    frmScenery.Tag = loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName)
+    
+    frmScenery.Tag = "www"
     mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
     frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
     frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & FileName)
     frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & FileName)
+    frmWaypoints.Tag = loadString("Waypoints", "Snapped", appPath & "\workspace\" & FileName)
 
     mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & FileName)
     frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & FileName)
     frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & FileName)
     frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & FileName)
+    frmTexture.Tag = loadString("Texture", "Snapped", appPath & "\workspace\" & FileName)
 
     Exit Sub
 
