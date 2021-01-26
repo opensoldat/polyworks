@@ -12142,7 +12142,7 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     topVal = window.Top / Screen.TwipsPerPixelY
 
     iniString = "Visible=" & window.Visible & sNull & "Left=" & leftVal & sNull & "Top=" & topVal & sNull _
-            & "Collapsed=" & collapsed & sNull & "Snapped=" & Tag & sNull & sNull
+            & "Collapsed=" & collapsed & sNull & "Snapped=" & window.Tag & sNull & sNull
 
 
     saveSection sectionName, iniString, appPath & "\workspace\" & FileName
