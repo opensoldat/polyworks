@@ -1656,7 +1656,6 @@ Private Sub Form_Load()
     initialized = False
 
     loadINI
-    loadWorkspace
     loadColors
 
     err = "Error setting colors"
@@ -1735,6 +1734,8 @@ Private Sub Form_Load()
     InitDInput
 
     err = "Error setting up palette windows"
+
+    loadWorkspace
 
     'show windows
     frmTaskBar.Show
