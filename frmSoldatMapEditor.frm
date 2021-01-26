@@ -46,8 +46,8 @@ Begin VB.Form frmSoldatMapEditor
       TabIndex        =   13
       TabStop         =   0   'False
       Top             =   1200
-      Width           =   3615
       Visible         =   0   'False
+      Width           =   3615
    End
    Begin MSComctlLib.ImageList ImageList 
       Left            =   4080
@@ -461,8 +461,8 @@ Begin VB.Form frmSoldatMapEditor
       TabIndex        =   1
       TabStop         =   0   'False
       Top             =   1200
-      Width           =   1455
       Visible         =   0   'False
+      Width           =   1455
    End
    Begin MSComctlLib.TreeView tvwScenery 
       Height          =   8085
@@ -470,8 +470,8 @@ Begin VB.Form frmSoldatMapEditor
       TabIndex        =   18
       Tag             =   "font1"
       Top             =   600
-      Width           =   5730
       Visible         =   0   'False
+      Width           =   5730
       _ExtentX        =   10107
       _ExtentY        =   14261
       _Version        =   393217
