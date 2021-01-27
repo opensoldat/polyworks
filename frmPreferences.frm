@@ -1759,7 +1759,6 @@ Dim sceneryVerts As Boolean, topmost As Boolean
 
 Private Sub picHide_Click()
 
-    Me.ScaleHeight = 408
     Unload Me
     frmSoldatMapEditor.RegainFocus
 
@@ -1790,7 +1789,6 @@ End Sub
 
 Private Sub picCancel_Click()
 
-    Me.ScaleHeight = 408
     Unload Me
     frmSoldatMapEditor.RegainFocus
 
@@ -1924,7 +1922,6 @@ End Function
 
 Private Sub picOK_Click()
 
-    Me.ScaleHeight = 408
     Me.Hide
     If applyPreferences Then
         Unload Me
