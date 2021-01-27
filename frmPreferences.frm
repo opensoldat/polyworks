@@ -2,7 +2,7 @@ VERSION 5.00
 Begin VB.Form frmPreferences 
    BackColor       =   &H004A3C31&
    BorderStyle     =   1  'Fixed Single
-   ClientHeight    =   6600
+   ClientHeight    =   8175
    ClientLeft      =   15
    ClientTop       =   15
    ClientWidth     =   6840
@@ -10,7 +10,7 @@ Begin VB.Form frmPreferences
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   440
+   ScaleHeight     =   545
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   456
    ShowInTaskbar   =   0   'False
@@ -1741,6 +1741,9 @@ Private Type TColor
     blue As Byte
 End Type
 
+Const MinHeight = 440
+Const MaxHeight = 547
+
 Dim blendModes(0 To 7) As Integer
 
 Dim backClr As TColor
@@ -1764,10 +1767,10 @@ End Sub
 
 Private Sub picSekrit_Click()
 
-    If Me.ScaleHeight < 460 Then
-        Me.Height = 544 * Screen.TwipsPerPixelY
+    If Me.ScaleHeight < MaxHeight - 20 Then
+        Me.Height = MaxHeight * Screen.TwipsPerPixelY
     Else
-        Me.Height = 440 * Screen.TwipsPerPixelY
+        Me.Height = MinHeight * Screen.TwipsPerPixelY
     End If
 
 End Sub
@@ -1937,6 +1940,8 @@ Private Sub Form_Load()
     Dim i As Integer
 
     On Error GoTo ErrorHandler
+    
+    Me.Height = MinHeight * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts
     topmost = frmSoldatMapEditor.topmost
