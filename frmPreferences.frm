@@ -29,7 +29,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   78
       TabStop         =   0   'False
       Tag             =   "4"
-      Top             =   7440
+      Top             =   7515
       Visible         =   0   'False
       Width           =   240
    End
@@ -922,14 +922,14 @@ Begin VB.Form frmPreferences
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   360
       ItemData        =   "frmPreferences.frx":0000
       Left            =   1200
       List            =   "frmPreferences.frx":001C
       Style           =   2  'Dropdown List
       TabIndex        =   29
       TabStop         =   0   'False
-      Top             =   7080
+      Top             =   7230
       Width           =   1455
    End
    Begin VB.ComboBox cboWireDest 
@@ -942,14 +942,14 @@ Begin VB.Form frmPreferences
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   360
       ItemData        =   "frmPreferences.frx":0072
       Left            =   1200
       List            =   "frmPreferences.frx":008E
       Style           =   2  'Dropdown List
       TabIndex        =   30
       TabStop         =   0   'False
-      Top             =   7440
+      Top             =   7590
       Width           =   1455
    End
    Begin VB.ComboBox cboPolyDest 
@@ -962,14 +962,14 @@ Begin VB.Form frmPreferences
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   360
       ItemData        =   "frmPreferences.frx":00E4
       Left            =   2760
       List            =   "frmPreferences.frx":0100
       Style           =   2  'Dropdown List
       TabIndex        =   32
       TabStop         =   0   'False
-      Top             =   7440
+      Top             =   7590
       Width           =   1455
    End
    Begin VB.ComboBox cboPolySrc 
@@ -982,14 +982,14 @@ Begin VB.Form frmPreferences
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   360
       ItemData        =   "frmPreferences.frx":0156
       Left            =   2760
       List            =   "frmPreferences.frx":0172
       Style           =   2  'Dropdown List
       TabIndex        =   31
       TabStop         =   0   'False
-      Top             =   7080
+      Top             =   7230
       Width           =   1455
    End
    Begin VB.PictureBox picTitle 
@@ -1038,12 +1038,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   375
+      Height          =   450
       Index           =   24
       Left            =   5040
       TabIndex        =   80
       Tag             =   "font2"
-      Top             =   7440
+      Top             =   7515
       Visible         =   0   'False
       Width           =   1575
    End
@@ -1060,7 +1060,7 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   375
+      Height          =   450
       Index           =   23
       Left            =   5040
       TabIndex        =   79
@@ -1089,7 +1089,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
-      Height          =   1215
+      Height          =   1365
       Index           =   5
       Left            =   4560
       Top             =   6720
@@ -1515,7 +1515,7 @@ Begin VB.Form frmPreferences
       Index           =   18
       Left            =   1200
       TabIndex        =   51
-      Top             =   6840
+      Top             =   6915
       Width           =   1455
    End
    Begin VB.Label lblPref 
@@ -1536,7 +1536,7 @@ Begin VB.Form frmPreferences
       Index           =   19
       Left            =   2880
       TabIndex        =   50
-      Top             =   6840
+      Top             =   6915
       Width           =   1455
    End
    Begin VB.Label lblDirs 
@@ -1627,7 +1627,7 @@ Begin VB.Form frmPreferences
       Index           =   20
       Left            =   360
       TabIndex        =   43
-      Top             =   7080
+      Top             =   7230
       Width           =   735
    End
    Begin VB.Label lblPref 
@@ -1647,7 +1647,7 @@ Begin VB.Form frmPreferences
       Index           =   21
       Left            =   360
       TabIndex        =   42
-      Top             =   7440
+      Top             =   7590
       Width           =   735
    End
    Begin VB.Label lblPref 
@@ -1721,7 +1721,7 @@ Begin VB.Form frmPreferences
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
-      Height          =   1215
+      Height          =   1365
       Index           =   4
       Left            =   120
       Top             =   6720
