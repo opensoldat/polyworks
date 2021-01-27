@@ -1922,12 +1922,9 @@ End Function
 
 Private Sub picOK_Click()
 
-    Me.Hide
     If applyPreferences Then
         Unload Me
         frmSoldatMapEditor.RegainFocus
-    Else
-        Me.Show
     End If
 
 End Sub
