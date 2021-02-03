@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.13
+Soldat Polyworks 1.6.0.0
 
 
-updated 2014-02-16
+updated 2021-02-03
 
 
 
@@ -61,6 +61,28 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+Changes in v1.6.0.0
+- added remember sticky state of tools windows after reopening workspace/pw
+- added snapped subwindows stay by the main window if it moved
+- added support for collapsing Tools Window
+- modified execute form snapping for palette wndow like for other windows
+- modified use Arial in Display form
+- modified switch from colour to color in filenames and files
+- modified switch to Arial as default font
+- modified use lowercase pms file extension
+- modified replaced pwlib.dll with vb6 gif loading
+- modified refresh scenery reloads the complete scenery list not just the selected scenery
+- modified sort scenery in 'Scenery' panel
+- fixed make text in extended mode in preference form readable with arial font
+- fixed preferences dialog disappears and cannot be opened after save error popup
+- fixed error on startup due to uninitialized variables
+- fixed skipping detailed warning for invalid soldat directory setting/registry key
+- fixed position of texture window close button not all the way to the right
+- fixed missing textures reset polygons on maximize
+- fixed polyworks can't find Soldat directory
+- fixed text selection on focus doesn't work
+- fixed texture loading errors on startup
+- fixed error on missing undo folder
 
 Changes in v1.5.0.13
 - added flag collides, background, and background transition polygon types
