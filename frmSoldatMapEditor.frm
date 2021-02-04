@@ -12389,7 +12389,6 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
     frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
     frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
     
-    frmScenery.Tag = "www"
     mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
     frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
     frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & FileName)
