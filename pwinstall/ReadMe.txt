@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.5.0.13
+Soldat Polyworks 1.6.0.0
 
 
-updated 2014-02-16
+updated 2021-02-04
 
 
 
@@ -54,13 +54,35 @@ Try changing the Dir entry in the Preferences section in polyworks.ini to your S
 In PolyWorks the "bouncy poly" bug has been eliminated (where polys would randomly turn bouncy along the edge after compiling). Poly bugs associated with vertices still occur, but they are easy to prevent with correct poly placement. Read the Map Maker Manual for more info.
 
 12. I get a Direct3D initialization error when I start PolyWorks.
-Make sure your colour setting is either 16-bit or 32-bit (control panel -> display -> settings tab).
+Make sure your color setting is either 16-bit or 32-bit (control panel -> display -> settings tab).
 
 13. There is no scenery in my scenery window!
 Right click with the scenery tool to bring up the main scenery list.
 
 
 
+Changes in v1.6.0.0
+- added remember sticky state of tools windows after reopening workspace/pw
+- added snapped subwindows stay by the main window if it moved
+- added support for collapsing Tools Window
+- modified execute form snapping for palette wndow like for other windows
+- modified use Arial in Display form
+- modified switch from colour to color in filenames and files
+- modified switch to Arial as default font
+- modified use lowercase pms file extension
+- modified replaced pwlib.dll with vb6 gif loading
+- modified refresh scenery reloads the complete scenery list not just the selected scenery
+- modified sort scenery in 'Scenery' panel
+- fixed make text in extended mode in preference form readable with arial font
+- fixed preferences dialog disappears and cannot be opened after save error popup
+- fixed error on startup due to uninitialized variables
+- fixed skipping detailed warning for invalid soldat directory setting/registry key
+- fixed position of texture window close button not all the way to the right
+- fixed missing textures reset polygons on maximize
+- fixed polyworks can't find Soldat directory
+- fixed text selection on focus doesn't work
+- fixed texture loading errors on startup
+- fixed error on missing undo folder
 
 Changes in v1.5.0.13
 - added flag collides, background, and background transition polygon types
@@ -177,7 +199,7 @@ changes in v1.4.0.6
 - added vertex alpha control in properties window
 
 changes in v1.4.0.5
-- fixed red/blue components of poly colours switched on export
+- fixed red/blue components of poly colors switched on export
 - fixed scenery filter bug
 
 changes in v1.4.0.4
@@ -200,7 +222,7 @@ changes in v1.4
 - lights tool
 - depthmap tool
 - big scenery list on right click with scenery tool
-- average vertex colours function
+- average vertex colors function
 - some changes to the ini file
 - select skin from preferences window
 - snap radius in ini file
@@ -216,7 +238,7 @@ changes in v1.3
 - fixed scenery timestamp
 - fixed scenery file name (case sensitive)
 - horizontal flip on waypoints changes left<->right
-- colours picked from map are selected in the palette
+- colors picked from map are selected in the palette
 - save/load workspace
 - other bug fixes
 
@@ -227,7 +249,7 @@ changes in v1.2
 - keyboard input with directinput
 - loads png and jpg scenery and textures
 - load compiled map from Soldat Maps folder
-- select vertices by colour function
+- select vertices by color function
 - waypoint support
 - fixed some maps causing errors when loading
 - choose uncompiled maps dir and prefabs dir
@@ -240,7 +262,7 @@ changes in v1.2
 - properties window shows element name of scenery when single scenery is selected
 - disabled recent files when empty
 - creating something sets that layer to visible if it is not
-- can only colour polys/scenery when visible
+- can only color polys/scenery when visible
 - experimental textured quad function
 - pressing F1 or the ? button opens the help file
 - turned off vsync
@@ -252,8 +274,8 @@ changes in v1.0
 - custom hotkeys
 - gfx.bmp split up into two files
 - automatic directory detection
-- colour picker tool
-- show vertex colour radius
+- color picker tool
+- show vertex color radius
 - compile progress bar
 - type in zoom level
 - map options
@@ -272,7 +294,7 @@ changes in v1.0
 - properties window
 - recent files
 - ini files
-- hex code in colour picker window
+- hex code in color picker window
 - arrow keys move texture coords with texture tool
 - undo/redo
 - run soldat with last compiled map

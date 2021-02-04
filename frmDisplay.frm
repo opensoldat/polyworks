@@ -242,7 +242,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Sketch"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -265,7 +265,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Lights"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -288,7 +288,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Waypoints"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -311,7 +311,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Scenery"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -334,7 +334,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Objects"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -357,7 +357,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Grid"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -380,7 +380,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Background"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -403,7 +403,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Polygons"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -426,7 +426,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Texture"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -449,7 +449,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Wireframe"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -472,7 +472,7 @@ Begin VB.Form frmDisplay
       BackStyle       =   0  'Transparent
       Caption         =   " Points"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -521,13 +521,13 @@ Public Function getLayerKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Function setLayerKey(Index As Integer, ByVal value As Byte)
+Public Sub setLayerKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         layerKeys(Index) = value
     End If
 
-End Function
+End Sub
 
 Private Sub Form_GotFocus()
 
@@ -541,14 +541,16 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     formHeight = Me.ScaleHeight
 
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Display form"
 
 End Sub
@@ -621,7 +623,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmScenery
     snapForm Me, frmInfo
     snapForm Me, frmTexture
-    snapForm Me, frmSoldatMapEditor
+    Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -663,7 +665,7 @@ Public Sub refreshButtons()
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

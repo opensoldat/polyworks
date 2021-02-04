@@ -1,0 +1,24 @@
+# visual basic 6 expects crfl
+*.bas        text eol=crlf
+*.cls        text eol=crlf
+*.dsr        text eol=crlf
+*.frm        text eol=crlf
+*.vbp        text eol=crlf
+*.vbw        text eol=crlf
+
+*.RES        binary
+*.aps        binary
+*.bin        binary
+*.dll        binary
+*.exe        binary
+*.exe.compat binary
+*.frx        binary
+*.gif        binary
+*.ico        binary
+*.ism        binary
+*.ncb        binary
+*.ocx        binary
+*.ocx.bin    binary
+*.ocx.compat binary
+*.res        binary
+*.tlb        binary

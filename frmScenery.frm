@@ -166,7 +166,7 @@ Begin VB.Form frmScenery
    Begin VB.ListBox lstScenery 
       Appearance      =   0  'Flat
       BeginProperty Font 
-         Name            =   "Lucida Console"
+         Name            =   "Arial"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -186,7 +186,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Level:"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   238
          Weight          =   400
@@ -206,7 +206,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Rotate"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -226,7 +226,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Scale"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -246,7 +246,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Front"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -267,7 +267,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Middle"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -288,7 +288,7 @@ Begin VB.Form frmScenery
       BackStyle       =   0  'Transparent
       Caption         =   "Back"
       BeginProperty Font 
-         Name            =   "BankGothic Lt BT"
+         Name            =   "Arial"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -348,7 +348,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     formHeight = Me.ScaleHeight
 
@@ -357,7 +357,9 @@ Private Sub Form_Load()
     listScenery
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Scenery form"
 
 End Sub
@@ -589,7 +591,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTools
     snapForm Me, frmInfo
     snapForm Me, frmTexture
-    snapForm Me, frmSoldatMapEditor
+    Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -686,14 +688,13 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 
     Dim i As Integer
     Dim c As Control
 
-    '--------
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_scenery.bmp")
 
@@ -707,7 +708,6 @@ Public Sub SetColours()
     mouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
     mouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
 
-    '--------
 
     Me.BackColor = bgClr
     lblLvl.BackColor = lblBackClr

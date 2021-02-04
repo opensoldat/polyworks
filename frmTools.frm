@@ -83,8 +83,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   12
-      Tag             =   "Colour Picker"
-      ToolTipText     =   "Colour Picker (,)"
+      Tag             =   "Color Picker"
+      ToolTipText     =   "Color Picker (,)"
       Top             =   2640
       Width           =   480
    End
@@ -227,8 +227,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   4
-      Tag             =   "Vertex Colour"
-      ToolTipText     =   "Vertex Colour (E)"
+      Tag             =   "Vertex Color"
+      ToolTipText     =   "Vertex Color (E)"
       Top             =   1200
       Width           =   480
    End
@@ -245,8 +245,8 @@ Begin VB.Form frmTools
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   32
       TabIndex        =   3
-      Tag             =   "Poly Colour"
-      ToolTipText     =   "Poly Colour (R)"
+      Tag             =   "Poly Color"
+      ToolTipText     =   "Poly Color (R)"
       Top             =   1200
       Width           =   480
    End
@@ -312,6 +312,7 @@ Option Explicit
 Dim curTool As Byte
 Dim curButton As Byte
 Public xPos As Integer, yPos  As Integer
+Dim formHeight As Integer
 Public collapsed As Boolean
 Dim hotKeys(0 To 13) As Byte
 
@@ -321,13 +322,13 @@ Public Function getHotKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Function setHotKey(Index As Integer, ByVal value As Byte)
+Public Sub setHotKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         hotKeys(Index) = value
     End If
 
-End Function
+End Sub
 
 Public Sub initTool(value As Byte)
 
@@ -345,12 +346,16 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    SetColours
+    SetColors
+    
+    formHeight = Me.ScaleHeight
 
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading Tools form"
 
 End Sub
@@ -359,6 +364,22 @@ Public Sub setForm()
 
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Private Sub picTitle_DblClick()
+
+    collapsed = Not collapsed
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
 
 End Sub
 
@@ -373,7 +394,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmScenery
     snapForm Me, frmInfo
     snapForm Me, frmTexture
-    snapForm Me, frmSoldatMapEditor
+    Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -437,7 +458,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

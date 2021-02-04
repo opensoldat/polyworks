@@ -56,7 +56,7 @@ Begin VB.Form frmTexture
          BorderStyle     =   0  'None
          ForeColor       =   &H80000008&
          Height          =   240
-         Left            =   720
+         Left            =   960
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
@@ -84,14 +84,16 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
-    Me.SetColours
+    Me.SetColors
 
     formHeight = Me.ScaleHeight
 
     setForm
 
     Exit Sub
+
 ErrorHandler:
+
     MsgBox Error$ & vbNewLine & "Error loading texture form"
 
 End Sub
@@ -275,7 +277,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmDisplay
     snapForm Me, frmScenery
     snapForm Me, frmInfo
-    snapForm Me, frmSoldatMapEditor
+    Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
     xPos = Me.left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -307,7 +309,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub SetColours()
+Public Sub SetColors()
 
     On Error Resume Next
 

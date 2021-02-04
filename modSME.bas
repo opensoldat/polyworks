@@ -1,7 +1,7 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
-Global Const pi As Single = 3.14159265358979    'mmm... pi
+Global Const pi As Single = 3.14159265358979  'mmm... pi
 
 Global gfxDir As String
 
@@ -330,7 +330,7 @@ Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
     GetEncoderClsid = False
 End Function
 
-Private Function SaveImageAsPNG(ByVal sFileName, ByVal sDestFileName As String) As Boolean
+Private Function SaveImageAsPNG(ByVal sFileName As String, ByVal sDestFileName As String) As Boolean
 
     Dim lBitmap As Long
     Dim hBitmap As Long
@@ -472,28 +472,34 @@ End Function
 
 
 
-Public Sub snapForm(currentForm As Form, otherForm As Form)
+Public Function snapForm(currentForm As Form, otherForm As Form) As String
+
+    snapForm = ""
 
     'snap bottom to bottom
     If Abs(currentForm.Top + currentForm.Height - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - currentForm.Height
+            snapForm = "snap"
         End If
     'snap bottom to top
     ElseIf Abs(currentForm.Top + currentForm.Height - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top - currentForm.Height + Screen.TwipsPerPixelY
+            snapForm = "snap"
         End If
     End If
     'snap right to right
     If Abs(currentForm.left + currentForm.Width - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left + otherForm.Width - currentForm.Width
+            snapForm = "snap"
         End If
     'snap right to left
     ElseIf Abs(currentForm.left + currentForm.Width - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left - currentForm.Width + Screen.TwipsPerPixelX
+            snapForm = "snap"
         End If
     End If
 
@@ -502,26 +508,30 @@ Public Sub snapForm(currentForm As Form, otherForm As Form)
     If Abs(currentForm.Top - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top
+            snapForm = "snap"
         End If
     'snap top to bottom
     ElseIf Abs(currentForm.Top - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
         If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - Screen.TwipsPerPixelY
+            snapForm = "snap"
         End If
     End If
     'snap left to left
     If Abs(currentForm.left - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left
+           snapForm = "snap"
         End If
     'snap left to right
     ElseIf Abs(currentForm.left - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
             currentForm.left = otherForm.left + otherForm.Width - Screen.TwipsPerPixelX
+            snapForm = "snap"
         End If
     End If
 
-End Sub
+End Function
 
 
 Public Function GetSoldatDir() As String
@@ -540,34 +550,50 @@ Public Function GetSoldatDir() As String
 
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
-        
+
     Else
         'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
 
         sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
-        
+
         If hKey <> 0 Then
-        
+
             GetSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
-            
+
         Else
-            If Dir("C:\Soldat", vbDirectory) = "" Then
-                MsgBox "Could not locate the Soldat directory." & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
-            Else
-                GetSoldatDir = "C:\Soldat"
-            End If
-            
+
+            GetSoldatDir = "C:\Soldat"
+
         End If
 
     End If
 
+    If Not DirExists(GetSoldatDir) Then
+
+        MsgBox "Could not locate the Soldat directory. (" & GetSoldatDir & ")" & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
+
+    End If
+
     Exit Function
+
 ErrorHandler:
+
     MsgBox "Error getting soldat directory from registry" & vbNewLine & Error$
 
 End Function
+
+
+Private Function DirExists(DirName As String) As Boolean
+
+    On Error GoTo ErrorHandler
+    DirExists = GetAttr(DirName) And vbDirectory
+
+ErrorHandler:
+
+End Function
+
 
 Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Long
 
@@ -583,8 +609,8 @@ End Function
 
 Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
-    Dim lpValue As String   'name of the value to retrieve
-    Dim lpcbData As Long    'length of the retrieved value
+    Dim lpValue As String 'name of the value to retrieve
+    Dim lpcbData As Long  'length of the retrieved value
     Dim Result As Long
 
     'if valid
@@ -733,23 +759,23 @@ ErrorHandler:
 
 End Function
 
-Public Function RunSoldat()
+Public Sub RunSoldat()
 
     frmSoldatMapEditor.picMinimize_MouseUp 1, 0, 0, 0
 
     ShellExecute 0&, vbNullString, frmSoldatMapEditor.soldatDir & "Soldat.exe", "-start", vbNullString, vbNormalFocus
 
-End Function
+End Sub
 
-Public Function RunHelp()
+Public Sub RunHelp()
 
     Dim iReturn As Long
 
     iReturn = ShellExecute(frmSoldatMapEditor.hWnd, "Open", appPath & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
-End Function
+End Sub
 
-Public Function SetGameMode(fileName As String)
+Public Sub SetGameMode(fileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
@@ -766,14 +792,14 @@ Public Function SetGameMode(fileName As String)
 
     lReturn = WritePrivateProfileString("GAME", "GameStyle", gameMode, frmSoldatMapEditor.soldatDir & "soldat.ini")
 
-End Function
+End Sub
 
-Public Function SetColours()
+Public Sub SetColors()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
     frmPreferences.BackColor = bgClr
-    frmColour.BackColor = bgClr
+    frmColor.BackColor = bgClr
     frmDisplay.BackColor = bgClr
     frmInfo.BackColor = bgClr
     frmMap.BackColor = bgClr
@@ -782,9 +808,9 @@ Public Function SetColours()
     frmTools.BackColor = bgClr
     frmWaypoints.BackColor = bgClr
 
-End Function
+End Sub
 
-' Initialises GDI Plus
+'Initialises GDI Plus
 Public Function InitGDIPlus() As Long
     Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
@@ -794,12 +820,12 @@ Public Function InitGDIPlus() As Long
     InitGDIPlus = Token
 End Function
 
-' Frees GDI Plus
+'Frees GDI Plus
 Public Sub FreeGDIPlus(Token As Long)
     GdiplusShutdown Token
 End Sub
 
-' Loads the picture (optionally resized)
+'Loads the picture (optionally resized)
 Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -1, Optional Height As Long = -1, Optional ByVal BackColor As Long = vbWhite) As IPicture
 
     On Error GoTo ErrorHandler
@@ -808,25 +834,25 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     Dim hBitmap As Long
     Dim Img     As Long
     Dim hBrush As Long
-    Dim Graphics   As Long      ' Graphics Object Pointer
+    Dim Graphics   As Long      'Graphics Object Pointer
 
     Dim IID_IDispatch As GUID
     Dim pic           As PICTDESC
     Dim IPic          As IPicture
 
-    '' Load the image
+    'Load the image
     If Len(Dir$(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
             Exit Function
         End If
     End If
-    ' Calculate picture's width and height if not specified
+    'Calculate picture's width and height if not specified
     If Width = -1 Or Height = -1 Then
         GdipGetImageWidth Img, Width
         GdipGetImageHeight Img, Height
     End If
-    ' Initialise the hDC
-    ' Create a memory DC and select a bitmap into it, fill it in with the backcolor
+    'Initialise the hDC
+    'Create a memory DC and select a bitmap into it, fill it in with the backcolor
     hDC = CreateCompatibleDC(ByVal 0&)
     hBitmap = CreateBitmap(Width, Height, GetDeviceCaps(hDC, PLANES), GetDeviceCaps(hDC, BITSPIXEL), ByVal 0&)
     hBitmap = SelectObject(hDC, hBitmap)
@@ -834,24 +860,24 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     hBrush = SelectObject(hDC, hBrush)
     PatBlt hDC, 0, 0, Width, Height, PATCOPY
     DeleteObject SelectObject(hDC, hBrush)
-    ' Resize the picture
+    'Resize the picture
     GdipCreateFromHDC hDC, Graphics
     GdipDrawImageRectI Graphics, Img, 0, 0, Width, Height
     GdipDeleteGraphics Graphics
     GdipDisposeImage Img
-    ' Get the bitmap back
+    'Get the bitmap back
     hBitmap = SelectObject(hDC, hBitmap)
     DeleteDC hDC
-    ' Create the picture
-    ' Fill in OLE IDispatch Interface ID
+    'Create the picture
+    'Fill in OLE IDispatch Interface ID
     IID_IDispatch.Data1 = &H20400
     IID_IDispatch.Data4(0) = &HC0
     IID_IDispatch.Data4(7) = &H46
-    ' Fill Pic with necessary parts
-    pic.Size = Len(pic)        ' Length of structure
-    pic.Type = PICTYPE_BITMAP  ' Type of Picture (bitmap)
-    pic.hBmp = hBitmap         ' Handle to bitmap
-    ' Create the picture
+    'Fill Pic with necessary parts
+    pic.Size = Len(pic)       'Length of structure
+    pic.Type = PICTYPE_BITMAP 'Type of Picture (bitmap)
+    pic.hBmp = hBitmap        'Handle to bitmap
+    'Create the picture
     OleCreatePictureIndirect pic, IID_IDispatch, True, IPic
     Set LoadPictureGDIPlus = IPic
 
