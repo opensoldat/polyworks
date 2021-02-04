@@ -48,6 +48,9 @@ InstallDir "$PROGRAMFILES\Soldat PolyWorks"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
+
+BrandingText " "
+
 Section "MainSection" SEC01
 
   SetOutPath "$INSTDIR"
