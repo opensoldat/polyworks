@@ -69,3 +69,34 @@ Public Function makeColor(red As Byte, green As Byte, blue As Byte) As TColor
 
 End Function
 
+
+Public Function diffVal(val1 As Byte, val2 As Byte) As Byte
+
+    If val1 > val2 Then
+        diffVal = val1 - val2
+    Else
+        diffVal = val2 - val1
+    End If
+
+End Function
+
+Public Function lowerVal(val1 As Byte, val2 As Byte) As Byte
+
+    If val1 < val2 Then
+        lowerVal = val1
+    Else
+        lowerVal = val2
+    End If
+
+End Function
+
+Public Function higherVal(val1 As Byte, val2 As Byte) As Byte
+
+    If val1 > val2 Then
+        higherVal = val1
+    Else
+        higherVal = val2
+    End If
+
+End Function
+
