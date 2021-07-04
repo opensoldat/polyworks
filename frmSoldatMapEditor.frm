@@ -11670,12 +11670,6 @@ Public Sub setBlendMode(Index As Integer)
 
 End Sub
 
-Public Function getColor() As Long
-
-    getColor = RGB(polyClr.red, polyClr.green, polyClr.blue)
-
-End Function
-
 Public Sub getOptions()
 
     Dim i As Integer
