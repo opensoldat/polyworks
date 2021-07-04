@@ -1502,7 +1502,8 @@ Dim spawnPoints As Long, colliderCount As Long
 Dim waypointCount As Long, conCount As Integer
 Dim lightCount As Integer
 
-Public mapTitle As String, textureFile As String
+Dim mapTitle As String
+Public textureFile As String
 Dim maxX As Single, maxY As Single, minX As Single, minY  As Single
 
 Dim bgPolys(1 To 4) As TCustomVertex
