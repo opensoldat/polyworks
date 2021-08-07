@@ -714,7 +714,7 @@ Public Sub mnuRefresh_Click()
     loadTextures2
 
     For i = 0 To cboTexture.ListCount - 1
-        If cboTexture.List(i) = frmSoldatMapEditor.textureFile And cboTexture.List(i) <> "" Then
+        If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
             cboTexture.ListIndex = i
         End If
     Next

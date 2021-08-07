@@ -1497,7 +1497,7 @@ Dim waypointCount As Long, conCount As Integer
 Dim lightCount As Integer
 
 Dim mapTitle As String
-Public textureFile As String
+Public gTextureFile As String
 Dim maxX As Single, maxY As Single, minX As Single, minY  As Single
 
 Dim bgPolys(1 To 4) As TCustomVertex
@@ -2163,7 +2163,7 @@ Public Sub resetDevice()
         RefreshSceneryTextures i
     Next
 
-    setMapTexture textureFile
+    setMapTexture gTextureFile
 
     D3DDevice.SetVertexShader FVF
     D3DDevice.SetRenderState D3DRS_LIGHTING, False
@@ -2301,9 +2301,9 @@ Public Sub newMap()
 
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
-    If Len(Dir(soldatDir & "Textures\" & textureFile)) <> 0 Then
-        setMapTexture textureFile
-        frmTexture.setTexture textureFile
+    If Len(Dir(soldatDir & "Textures\" & gTextureFile)) <> 0 Then
+        setMapTexture gTextureFile
+        frmTexture.setTexture gTextureFile
     Else
         Set mapTexture = Nothing
     End If
@@ -2691,9 +2691,9 @@ Public Sub LoadFile(FileName As String)
     For i = 1 To Options.mapName(0)
         mapTitle = mapTitle + Chr$(Options.mapName(i))
     Next
-    textureFile = ""
+    gTextureFile = ""
     For i = 1 To Options.textureName(0)
-        textureFile = textureFile + Chr$(Options.textureName(i))
+        gTextureFile = gTextureFile + Chr$(Options.textureName(i))
     Next
 
     mapTitle = ""
@@ -2736,9 +2736,9 @@ Public Sub LoadFile(FileName As String)
         bgPolyCoords(i).Y = bgPolys(i).Y
     Next
 
-    If Len(Dir$(soldatDir & "textures\" & textureFile)) <> 0 Then
-        setMapTexture textureFile
-        frmTexture.setTexture textureFile
+    If Len(Dir$(soldatDir & "textures\" & gTextureFile)) <> 0 Then
+        setMapTexture gTextureFile
+        frmTexture.setTexture gTextureFile
     End If
 
     Colliders(0).radius = clrRadius
@@ -3050,9 +3050,9 @@ Private Sub SaveFile(FileName As String)
     Options.BackgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
     Options.BackgroundColor2 = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
     'set texture name
-    Options.textureName(0) = Len(textureFile)
-    For i = 1 To Len(textureFile)
-        Options.textureName(i) = Asc(mid(textureFile, i, 1))
+    Options.textureName(0) = Len(gTextureFile)
+    For i = 1 To Len(gTextureFile)
+        Options.textureName(i) = Asc(mid(gTextureFile, i, 1))
     Next
     'set map name
     Options.mapName(0) = Len(mapTitle)
@@ -3298,10 +3298,10 @@ Public Sub SaveAndCompile(FileName As String)
     Options.BackgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
     Options.BackgroundColor2 = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
     'set texture name
-    Options.textureName(0) = Len(textureFile)
+    Options.textureName(0) = Len(gTextureFile)
     If Options.textureName(0) > 24 Then Options.textureName(0) = 24
     For i = 1 To Options.textureName(0)
-        Options.textureName(i) = Asc(mid(textureFile, i, 1))
+        Options.textureName(i) = Asc(mid(gTextureFile, i, 1))
     Next
     'set map name
     Options.mapName(0) = Len(mapTitle)
@@ -11510,12 +11510,12 @@ End Function
 Public Sub setMapTexture(texturePath As String)
 
     On Error GoTo ErrorHandler
-    
+
     Set mapTexture = D3DX.CreateTextureFromFileEx(D3DDevice, frmSoldatMapEditor.soldatDir & "textures\" & texturePath, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE, _
             D3DX_FILTER_TRIANGLE, ColorKey, imageInfo, ByVal 0)
 
-    textureFile = texturePath
+    gTextureFile = texturePath
 
     xTexture = imageInfo.Width
     yTexture = imageInfo.Height
@@ -11586,7 +11586,7 @@ Public Sub getOptions()
     frmMap.picBackClr(1).BackColor = RGB(bgColors(2).red, bgColors(2).green, bgColors(2).blue)
 
     For i = 0 To frmMap.cboTexture.ListCount - 1
-        If frmMap.cboTexture.List(i) = textureFile Then
+        If frmMap.cboTexture.List(i) = gTextureFile Then
             frmMap.cboTexture.ListIndex = i
         End If
     Next
@@ -11970,7 +11970,7 @@ Private Sub saveSettings()
             & "BlendMode=" & blendMode & sNull & "SnapRadius=" & snapRadius & sNull _
             & "RotateScenery=" & frmScenery.rotateScenery & sNull & "ScaleScenery=" & frmScenery.scaleScenery & sNull _
             & "TextureWidth=" & xTexture & sNull & "TextureHeight=" & yTexture & sNull _
-            & "Texture=" & textureFile & sNull _
+            & "Texture=" & gTextureFile & sNull _
             & "CustomX=" & mnuCustomX.Checked & sNull _
             & "CustomY=" & mnuCustomY.Checked & sNull & sNull
     saveSection "ToolSettings", iniString
@@ -12118,7 +12118,7 @@ Private Sub loadINI()
     frmScenery.scaleScenery = loadString("ToolSettings", "ScaleScenery")
     xTexture = loadInt("ToolSettings", "TextureWidth")
     yTexture = loadInt("ToolSettings", "TextureHeight")
-    textureFile = loadString("ToolSettings", "Texture", , 1024)
+    gTextureFile = loadString("ToolSettings", "Texture", , 1024)
     mnuCustomX.Checked = loadString("ToolSettings", "CustomX")
     mnuCustomY.Checked = loadString("ToolSettings", "CustomY")
 
