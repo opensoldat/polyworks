@@ -1259,8 +1259,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim FileName, color, token, b
-    ' Dim FileName, color, token, b
+    Dim FileName, color, token, b, commonDialog
+    ' Dim FileName, color, token, b, commonDialog
 #End If
 
 Dim DX As DirectX8
