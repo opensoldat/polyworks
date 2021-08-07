@@ -58,7 +58,10 @@ GOTO:EOF
 
 
 :REGISTER_ACTIVEX_COMPONENT
-%systemroot%\system32\regsvr32.exe %2 %1
+:: unregister first
+%systemroot%\SysWOW64\regsvr32.exe /u %2 %1
+:: register
+%systemroot%\SysWOW64\regsvr32.exe %2 %1
 IF NOT %errorLevel% == 0 (
   ECHO ERROR:   Failed Registering %1 ErrorLevel: %errorLevel%
   SET REG_SUCCESS=0
