@@ -15,6 +15,15 @@
 ::       and verify that opening VB6 as normal user doesn't make it freeze.
 ::
 :: Note: Normally this script doesn't need admin rights (see note above)
+::
+:: Note: If Register=* paths are still different from the one in the repository
+::       when saving the project, for example:
+::       "C:\Windows\SysWow64\dx8vb.dll" instead of
+::       "C:\Windows\SysWOW64\dx8vb.dll" (Wow isntead of WOW),
+::       you can modify the path in the windows registry under:
+::       "Computer\HKEY_CLASSES_ROOT\TypeLib\{E1211242-8E94-11D1-8808-00C04FC2C603}\1.0\0\win32"
+::       where {E1211242-8E94-11D1-8808-00C04FC2C603} is the Register id.
+::       You can find the Register ids in the *.vbp file at the start of the line.
 
 @ECHO OFF
 IF [%CD:~0,2%]==[Z:] GOTO:DRIVE_ERROR
