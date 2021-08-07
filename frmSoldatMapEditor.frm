@@ -1489,7 +1489,7 @@ Dim Connections() As TConnection
 Dim Lights() As TLightSource
 
 Dim Options As TOptions
-Dim polyCount As Long
+Dim mPolyCount As Long
 
 Dim sceneryCount As Long, sceneryElements As Long
 Dim spawnPoints As Long, colliderCount As Long
@@ -1921,8 +1921,8 @@ Private Sub centerView()
 
     Dim i As Integer
 
-    If polyCount > 0 Then
-        For i = 1 To polyCount
+    If mPolyCount > 0 Then
+        For i = 1 To mPolyCount
             Polys(i).vertex(1).X = (PolyCoords(i).vertex(1).X - scrollCoords(2).X) * zoomFactor
             Polys(i).vertex(1).Y = (PolyCoords(i).vertex(1).Y - scrollCoords(2).Y) * zoomFactor
             Polys(i).vertex(2).X = (PolyCoords(i).vertex(2).X - scrollCoords(2).X) * zoomFactor
@@ -2242,7 +2242,7 @@ Public Sub newMap()
     ReDim selectedPolys(0)
     ReDim vertexList(0)
 
-    polyCount = 0
+    mPolyCount = 0
     ReDim Polys(0)
     ReDim vertexList(0)
     ReDim PolyCoords(0)
@@ -2391,12 +2391,12 @@ Public Sub LoadFile(FileName As String)
 
         Get #1, , Version
         Get #1, , Options
-        Get #1, , polyCount
-        ReDim Polys(0 To polyCount)
-        ReDim PolyCoords(0 To polyCount)
-        ReDim vertexList(0 To polyCount)
+        Get #1, , mPolyCount
+        ReDim Polys(0 To mPolyCount)
+        ReDim PolyCoords(0 To mPolyCount)
+        ReDim vertexList(0 To mPolyCount)
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             Get #1, , Polys(i)
             Get #1, , vertexList(i).polyType
 
@@ -2805,7 +2805,7 @@ Private Function getMapArea() As Long
     Dim c As Single
     Dim x1 As Single, y1 As Single, x2 As Single, y2 As Single
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         If vertexList(i).polyType <> 3 Then
             x1 = (PolyCoords(i).vertex(3).X - PolyCoords(i).vertex(2).X)
             y1 = (PolyCoords(i).vertex(3).Y - PolyCoords(i).vertex(2).Y)
@@ -2824,7 +2824,7 @@ End Function
 
 Public Sub setMapData()
 
-    frmInfo.lblCount(0).Caption = polyCount
+    frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(1).Caption = sceneryCount & "/500 (" & sceneryElements & ")"
     frmInfo.lblCount(2).Caption = spawnPoints & "/128"
     frmInfo.lblCount(3).Caption = colliderCount & "/128"
@@ -3077,8 +3077,8 @@ Private Sub SaveFile(FileName As String)
         Put #1, , Options
 
         'save polys
-        Put #1, , polyCount
-        For i = 1 To polyCount
+        Put #1, , mPolyCount
+        For i = 1 To mPolyCount
 
             Polygon.Poly = Polys(i)
 
@@ -3332,8 +3332,8 @@ Public Sub SaveAndCompile(FileName As String)
         Put #1, , Options
 
         'save polys
-        Put #1, , polyCount
-        For i = 1 To polyCount
+        Put #1, , mPolyCount
+        For i = 1 To mPolyCount
 
             Polygon.Poly = Polys(i)
             Polygon.polyType = vertexList(i).polyType
@@ -3386,7 +3386,7 @@ Public Sub SaveAndCompile(FileName As String)
 
                 If X >= -xSecNum And X <= xSecNum And Y >= -ySecNum And Y <= ySecNum Then 'if sectors within range
 
-                    For i = 1 To polyCount
+                    For i = 1 To mPolyCount
                         If vertexList(i).polyType <> 3 Then
                         If isInSector(i, sectorsDivision * (X - 0.5) + xOffset - 1, sectorsDivision * (Y - 0.5) + yOffset - 1, sectorsDivision + 2) Then
                             polysInSector = polysInSector + 1
@@ -3550,8 +3550,8 @@ Private Sub SaveUndo()
     Open FileName For Binary Access Write Lock Write As #1
 
         'save polys
-        Put #1, , polyCount
-        For i = 1 To polyCount
+        Put #1, , mPolyCount
+        For i = 1 To mPolyCount
             Polygon = Polys(i)
             For j = 1 To 3
                 Polygon.vertex(j).X = PolyCoords(i).vertex(j).X
@@ -3665,12 +3665,12 @@ Private Sub loadUndo(redo As Boolean)
 
         errorVal = "Error loading polygons"
 
-        Get #1, , polyCount
-        ReDim Polys(0 To polyCount)
-        ReDim PolyCoords(0 To polyCount)
-        ReDim vertexList(0 To polyCount)
+        Get #1, , mPolyCount
+        ReDim Polys(0 To mPolyCount)
+        ReDim PolyCoords(0 To mPolyCount)
+        ReDim vertexList(0 To mPolyCount)
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             Get #1, , Polys(i)
             Get #1, , vertexList(i)
             For j = 1 To 3
@@ -4229,9 +4229,9 @@ Public Sub Render()
     End If
 
     If numVerts > 0 And currentTool = TOOL_CREATE Then
-        numPolys = polyCount + 1
+        numPolys = mPolyCount + 1
     Else
-        numPolys = polyCount
+        numPolys = mPolyCount
     End If
 
     D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, backClr, 1#, 0
@@ -4469,7 +4469,7 @@ Public Sub Render()
 
         D3DDevice.setTexture 0, Nothing
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
 
             lineCoords(1) = Polys(i).vertex(1)
             lineCoords(2) = Polys(i).vertex(2)
@@ -4696,9 +4696,9 @@ Public Sub Render()
     End If
 
     'draw wireframe
-    If showWireframe And polyCount > 0 Then
+    If showWireframe And mPolyCount > 0 Then
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_WIREFRAME
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(i).vertex(1), Len(Polys(1).vertex(1))
         Next
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_SOLID
@@ -4794,7 +4794,7 @@ Public Sub Render()
 
     If numVerts > 0 And currentTool = TOOL_CREATE Then
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_WIREFRAME
-        D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(polyCount + 1).vertex(1), Len(Polys(polyCount + 1).vertex(1))
+        D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, Polys(mPolyCount + 1).vertex(1), Len(Polys(mPolyCount + 1).vertex(1))
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_SOLID
     End If
 
@@ -5505,7 +5505,7 @@ Private Sub TabPressed()
             vertexList(selectedPolys(1)).vertex(2) = 0
             vertexList(selectedPolys(1)).vertex(3) = 0
             If Not shiftDown Then
-                If selectedPolys(1) = polyCount Then
+                If selectedPolys(1) = mPolyCount Then
                     selectedPolys(1) = 1
                 Else
                     selectedPolys(1) = selectedPolys(1) + 1
@@ -5513,7 +5513,7 @@ Private Sub TabPressed()
             Else
                 Beep
                 If selectedPolys(1) = 1 Then
-                    selectedPolys(1) = polyCount
+                    selectedPolys(1) = mPolyCount
                 Else
                     selectedPolys(1) = selectedPolys(1) - 1
                 End If
@@ -6067,7 +6067,7 @@ Private Sub applyLights(Optional toSel As Boolean = False)
 
     If lightCount = 0 Then Exit Sub
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
 
         'get poly vectors
         v1.X = PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(2).X
@@ -6293,7 +6293,7 @@ Private Function GetVertSnapCoord(PolyNum As Integer, VertNum As Integer, GetXVa
     If ohSnap Then
         nearPoly = -1
         minDiff = snapRadius ^ 2 + 1
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If nearPoly = -1 Then
                     prevDiff = (Polys(i).vertex(j).X - xVal) ^ 2 + (Polys(i).vertex(j).Y - yVal) ^ 2
@@ -6369,7 +6369,7 @@ Private Sub AverageVertices()
 
     If numSelectedPolys = 0 Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
                     xVal = PolyCoords(i).vertex(j).X
@@ -6377,7 +6377,7 @@ Private Sub AverageVertices()
                     finalR = 0
                     finalG = 0
                     finalB = 0
-                    For P = 1 To polyCount
+                    For P = 1 To mPolyCount
                         For V = 1 To 3
                             If nearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And nearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 vertexList(P).vertex(V) = 1
@@ -6414,7 +6414,7 @@ Private Sub AverageVertices()
             Next
         Next
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             vertexList(i).vertex(1) = 0
             vertexList(i).vertex(2) = 0
             vertexList(i).vertex(3) = 0
@@ -6424,7 +6424,7 @@ Private Sub AverageVertices()
 
     Else
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 1 Then
                     xVal = PolyCoords(i).vertex(j).X
@@ -6432,7 +6432,7 @@ Private Sub AverageVertices()
                     finalR = 0
                     finalG = 0
                     finalB = 0
-                    For P = 1 To polyCount
+                    For P = 1 To mPolyCount
                         For V = 1 To 3
                             If nearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And nearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 If vertexList(P).vertex(V) = 1 Then
@@ -6470,7 +6470,7 @@ Private Sub AverageVertices()
             Next
         Next
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) > 1 Then
                     vertexList(i).vertex(j) = 1
@@ -6529,7 +6529,7 @@ Private Sub SelNearest(X As Single, Y As Single)
     addPoly = 0
     shortestDist = 64 ^ 2 + 1
     If showPolys Then
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             If nearCoord(X, Polys(i).vertex(j).X, 8) And nearCoord(Y, Polys(i).vertex(j).Y, 8) Then 'move by vertex
                 If addPoly <> i Then
@@ -6648,9 +6648,9 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
     yVal = Y
 
     If Shift = KEY_SHIFT Then
-        rtheta = ConstrainAngle(X - Polys(polyCount + 1).vertex(numVerts).X, Y - Polys(polyCount + 1).vertex(numVerts).Y)
-        xVal = Polys(polyCount + 1).vertex(numVerts).X + rtheta.X * Cos(rtheta.Y)
-        yVal = Polys(polyCount + 1).vertex(numVerts).Y + rtheta.X * Sin(rtheta.Y)
+        rtheta = ConstrainAngle(X - Polys(mPolyCount + 1).vertex(numVerts).X, Y - Polys(mPolyCount + 1).vertex(numVerts).Y)
+        xVal = Polys(mPolyCount + 1).vertex(numVerts).X + rtheta.X * Cos(rtheta.Y)
+        yVal = Polys(mPolyCount + 1).vertex(numVerts).Y + rtheta.X * Sin(rtheta.Y)
     End If
 
     If snapToGrid And showGrid Then
@@ -6658,41 +6658,41 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
         yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
 
-    Polys(polyCount + 1).vertex(numVerts + 1).X = xVal
-    Polys(polyCount + 1).vertex(numVerts + 1).Y = yVal
+    Polys(mPolyCount + 1).vertex(numVerts + 1).X = xVal
+    Polys(mPolyCount + 1).vertex(numVerts + 1).Y = yVal
 
-    PolyCoords(polyCount + 1).vertex(numVerts + 1).X = xVal / zoomFactor + scrollCoords(2).X
-    PolyCoords(polyCount + 1).vertex(numVerts + 1).Y = yVal / zoomFactor + scrollCoords(2).Y
+    PolyCoords(mPolyCount + 1).vertex(numVerts + 1).X = xVal / zoomFactor + scrollCoords(2).X
+    PolyCoords(mPolyCount + 1).vertex(numVerts + 1).Y = yVal / zoomFactor + scrollCoords(2).Y
 
     If mnuCustomX.Checked And mnuQuad.Checked Then
         If creatingQuad Then
-            Polys(polyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
+            Polys(mPolyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
         Else
             If numVerts = 1 Or numVerts = 2 Then
-                Polys(polyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x2tex * 2 - 0.5) / xTexture
+                Polys(mPolyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x2tex * 2 - 0.5) / xTexture
             Else
-                Polys(polyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
+                Polys(mPolyCount + 1).vertex(numVerts + 1).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
             End If
         End If
     Else
-        Polys(polyCount + 1).vertex(numVerts + 1).tu = (xVal / zoomFactor + scrollCoords(2).X) / xTexture
+        Polys(mPolyCount + 1).vertex(numVerts + 1).tu = (xVal / zoomFactor + scrollCoords(2).X) / xTexture
     End If
 
     If mnuCustomY.Checked And mnuQuad.Checked Then
         If creatingQuad Then
-            Polys(polyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
+            Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
         Else
             If numVerts > 1 Then
-                Polys(polyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
+                Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
             Else
-                Polys(polyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y1tex * 2 + 0.5) / yTexture
+                Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (frmTexture.y1tex * 2 + 0.5) / yTexture
             End If
         End If
     Else
-        Polys(polyCount + 1).vertex(numVerts + 1).tv = (yVal / zoomFactor + scrollCoords(2).Y) / yTexture
+        Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (yVal / zoomFactor + scrollCoords(2).Y) / yTexture
     End If
 
-    Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
 
     Render
 
@@ -7000,7 +7000,7 @@ Private Sub Scrolling(X As Single, Y As Single)
     scrollCoords(2).X = scrollCoords(2).X - (X - scrollCoords(1).X) / zoomFactor
     scrollCoords(2).Y = scrollCoords(2).Y - (Y - scrollCoords(1).Y) / zoomFactor
 
-    For i = 1 To polyCount 'move polys
+    For i = 1 To mPolyCount 'move polys
         Polys(i).vertex(1).X = Polys(i).vertex(1).X + X - scrollCoords(1).X
         Polys(i).vertex(1).Y = Polys(i).vertex(1).Y + Y - scrollCoords(1).Y
         Polys(i).vertex(2).X = Polys(i).vertex(2).X + X - scrollCoords(1).X
@@ -7021,8 +7021,8 @@ Private Sub Scrolling(X As Single, Y As Single)
 
     If numVerts > 0 Then 'move existing vertices of poly being created
         For i = 1 To 3
-            Polys(polyCount + 1).vertex(i).X = Polys(polyCount + 1).vertex(i).X + X - scrollCoords(1).X
-            Polys(polyCount + 1).vertex(i).Y = Polys(polyCount + 1).vertex(i).Y + Y - scrollCoords(1).Y
+            Polys(mPolyCount + 1).vertex(i).X = Polys(mPolyCount + 1).vertex(i).X + X - scrollCoords(1).X
+            Polys(mPolyCount + 1).vertex(i).Y = Polys(mPolyCount + 1).vertex(i).Y + Y - scrollCoords(1).Y
         Next
     End If
 
@@ -7781,7 +7781,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
 
     Else
 
-        For i = 1 To polyCount 'find closest
+        For i = 1 To mPolyCount 'find closest
             If pointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
@@ -7848,7 +7848,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
 
     ElseIf (showPolys Or showWireframe Or showPoints) And numSelectedScenery = 0 Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
@@ -7940,7 +7940,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
 
     ElseIf (showPolys Or showWireframe Or showPoints) And numSelectedScenery = 0 Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
@@ -7973,7 +7973,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
 
     shortestDist = 32 ^ 2 + 1
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
             For j = 1 To 3
                 If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
@@ -8034,7 +8034,7 @@ Private Sub depthPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
 
     shortestDist = 32 ^ 2 + 1
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
             For j = 1 To 3
                 If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
@@ -8078,7 +8078,7 @@ Private Sub lightPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
 
     shortestDist = 32 ^ 2 + 1
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
             For j = 1 To 3
                 If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
@@ -8197,8 +8197,8 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) And toolAction Then 'create polys
 
         If Shift = KEY_SHIFT And numVerts > 0 Then
-            X = Polys(polyCount + 1).vertex(numVerts + 1).X
-            Y = Polys(polyCount + 1).vertex(numVerts + 1).Y
+            X = Polys(mPolyCount + 1).vertex(numVerts + 1).X
+            Y = Polys(mPolyCount + 1).vertex(numVerts + 1).Y
         End If
         CreatePolys X, Y
 
@@ -8238,7 +8238,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
 
         toolAction = False
         If colorMode = 1 Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 For j = 1 To 3
                     If vertexList(i).vertex(j) > 1 Then
                         vertexList(i).vertex(j) = vertexList(i).vertex(j) - 2
@@ -8298,7 +8298,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
 
         toolAction = False
         If colorMode = 1 Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 For j = 1 To 3
                     If vertexList(i).vertex(j) > 1 Then
                         vertexList(i).vertex(j) = vertexList(i).vertex(j) - 2
@@ -8393,10 +8393,10 @@ Private Sub CreatePolys(X As Single, Y As Single)
     Dim tempVertex As TCustomVertex
 
     If numVerts = 0 Then
-        ReDim Preserve Polys(polyCount + 1)
-        ReDim Preserve PolyCoords(polyCount + 1)
-        ReDim Preserve vertexList(polyCount + 1)
-        vertexList(polyCount + 1).polyType = polyType
+        ReDim Preserve Polys(mPolyCount + 1)
+        ReDim Preserve PolyCoords(mPolyCount + 1)
+        ReDim Preserve vertexList(mPolyCount + 1)
+        vertexList(mPolyCount + 1).polyType = polyType
     End If
     numVerts = numVerts + 1
 
@@ -8406,11 +8406,11 @@ Private Sub CreatePolys(X As Single, Y As Single)
     If snapToGrid And showGrid Then
         xVal = snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
         yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
-        PolyCoords(polyCount + 1).vertex(numVerts).X = Int(xVal / zoomFactor + scrollCoords(2).X + 0.5)
-        PolyCoords(polyCount + 1).vertex(numVerts).Y = Int(yVal / zoomFactor + scrollCoords(2).Y + 0.5)
+        PolyCoords(mPolyCount + 1).vertex(numVerts).X = Int(xVal / zoomFactor + scrollCoords(2).X + 0.5)
+        PolyCoords(mPolyCount + 1).vertex(numVerts).Y = Int(yVal / zoomFactor + scrollCoords(2).Y + 0.5)
     ElseIf ohSnap Then 'snap
         shortestDist = snapRadius ^ 2 + 1
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If nearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And nearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
                     currentDist = ((Polys(i).vertex(j).X - xVal) ^ 2 + (Polys(i).vertex(j).Y - yVal) ^ 2)
@@ -8418,8 +8418,8 @@ Private Sub CreatePolys(X As Single, Y As Single)
                         shortestDist = currentDist
                         xVal = Polys(i).vertex(j).X
                         yVal = Polys(i).vertex(j).Y
-                        PolyCoords(polyCount + 1).vertex(numVerts).X = PolyCoords(i).vertex(j).X
-                        PolyCoords(polyCount + 1).vertex(numVerts).Y = PolyCoords(i).vertex(j).Y
+                        PolyCoords(mPolyCount + 1).vertex(numVerts).X = PolyCoords(i).vertex(j).X
+                        PolyCoords(mPolyCount + 1).vertex(numVerts).Y = PolyCoords(i).vertex(j).Y
                     End If
                 End If
             Next
@@ -8427,87 +8427,87 @@ Private Sub CreatePolys(X As Single, Y As Single)
     End If
 
     If (xVal = X And yVal = Y) Or (Not ohSnap And Not snapToGrid) Then  'no snapping occured
-        PolyCoords(polyCount + 1).vertex(numVerts).X = Int(xVal / zoomFactor + scrollCoords(2).X + 0.5)
-        PolyCoords(polyCount + 1).vertex(numVerts).Y = Int(yVal / zoomFactor + scrollCoords(2).Y + 0.5)
+        PolyCoords(mPolyCount + 1).vertex(numVerts).X = Int(xVal / zoomFactor + scrollCoords(2).X + 0.5)
+        PolyCoords(mPolyCount + 1).vertex(numVerts).Y = Int(yVal / zoomFactor + scrollCoords(2).Y + 0.5)
     End If
 
-    Polys(polyCount + 1).vertex(numVerts) = CreateCustomVertex(xVal, yVal, _
+    Polys(mPolyCount + 1).vertex(numVerts) = CreateCustomVertex(xVal, yVal, _
             0, 1, ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red)), _
             (xVal / zoomFactor + scrollCoords(2).X) / xTexture, (yVal / zoomFactor + scrollCoords(2).Y) / yTexture)
-    vertexList(polyCount + 1).color(numVerts).red = polyClr.red
-    vertexList(polyCount + 1).color(numVerts).green = polyClr.green
-    vertexList(polyCount + 1).color(numVerts).blue = polyClr.blue
+    vertexList(mPolyCount + 1).color(numVerts).red = polyClr.red
+    vertexList(mPolyCount + 1).color(numVerts).green = polyClr.green
+    vertexList(mPolyCount + 1).color(numVerts).blue = polyClr.blue
 
     If mnuQuad.Checked And mnuCustomX.Checked Then
         If creatingQuad Then
-            Polys(polyCount + 1).vertex(numVerts).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
+            Polys(mPolyCount + 1).vertex(numVerts).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
         Else
             If numVerts = 2 Or numVerts = 3 Then
-                Polys(polyCount + 1).vertex(numVerts).tu = (frmTexture.x2tex * 2 - 0.5) / xTexture
+                Polys(mPolyCount + 1).vertex(numVerts).tu = (frmTexture.x2tex * 2 - 0.5) / xTexture
             Else
-                Polys(polyCount + 1).vertex(numVerts).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
+                Polys(mPolyCount + 1).vertex(numVerts).tu = (frmTexture.x1tex * 2 + 0.5) / xTexture
             End If
         End If
     End If
 
     If mnuQuad.Checked And mnuCustomY.Checked Then
         If creatingQuad Then
-            Polys(polyCount + 1).vertex(numVerts).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
+            Polys(mPolyCount + 1).vertex(numVerts).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
         Else
             If numVerts > 2 Then
-                Polys(polyCount + 1).vertex(numVerts).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
+                Polys(mPolyCount + 1).vertex(numVerts).tv = (frmTexture.y2tex * 2 - 0.5) / yTexture
             Else
-                Polys(polyCount + 1).vertex(numVerts).tv = (frmTexture.y1tex * 2 + 0.5) / yTexture
+                Polys(mPolyCount + 1).vertex(numVerts).tv = (frmTexture.y1tex * 2 + 0.5) / yTexture
             End If
         End If
     End If
 
 
     If numVerts = 1 Then
-        Polys(polyCount + 1).vertex(2) = Polys(polyCount + 1).vertex(1)
-        Polys(polyCount + 1).vertex(numVerts + 1).X = X
-        Polys(polyCount + 1).vertex(numVerts + 1).Y = Y
-        Polys(polyCount + 1).vertex(numVerts + 2) = Polys(polyCount + 1).vertex(1)
-        PolyCoords(polyCount + 1).vertex(numVerts + 2) = PolyCoords(polyCount + 1).vertex(1)
+        Polys(mPolyCount + 1).vertex(2) = Polys(mPolyCount + 1).vertex(1)
+        Polys(mPolyCount + 1).vertex(numVerts + 1).X = X
+        Polys(mPolyCount + 1).vertex(numVerts + 1).Y = Y
+        Polys(mPolyCount + 1).vertex(numVerts + 2) = Polys(mPolyCount + 1).vertex(1)
+        PolyCoords(mPolyCount + 1).vertex(numVerts + 2) = PolyCoords(mPolyCount + 1).vertex(1)
     ElseIf numVerts = 3 Then
         numVerts = 0
-        polyCount = polyCount + 1
-        If Not isCW(polyCount) Then 'switch to make cw
-            temp = PolyCoords(polyCount).vertex(3)
-            PolyCoords(polyCount).vertex(3) = PolyCoords(polyCount).vertex(2)
-            PolyCoords(polyCount).vertex(2) = temp
+        mPolyCount = mPolyCount + 1
+        If Not isCW(mPolyCount) Then 'switch to make cw
+            temp = PolyCoords(mPolyCount).vertex(3)
+            PolyCoords(mPolyCount).vertex(3) = PolyCoords(mPolyCount).vertex(2)
+            PolyCoords(mPolyCount).vertex(2) = temp
 
-            tempVertex = Polys(polyCount).vertex(3)
-            Polys(polyCount).vertex(3) = Polys(polyCount).vertex(2)
-            Polys(polyCount).vertex(2) = tempVertex
+            tempVertex = Polys(mPolyCount).vertex(3)
+            Polys(mPolyCount).vertex(3) = Polys(mPolyCount).vertex(2)
+            Polys(mPolyCount).vertex(2) = tempVertex
         End If
         toolAction = False
-        frmInfo.lblCount(0).Caption = polyCount
+        frmInfo.lblCount(0).Caption = mPolyCount
         frmInfo.lblCount(6).Caption = getMapDimensions
 
-        applyLightsToVert CInt(polyCount), 1
-        applyLightsToVert CInt(polyCount), 2
-        applyLightsToVert CInt(polyCount), 3
+        applyLightsToVert CInt(mPolyCount), 1
+        applyLightsToVert CInt(mPolyCount), 2
+        applyLightsToVert CInt(mPolyCount), 3
 
-        Polys(polyCount).Perp.vertex(1).z = 2
-        Polys(polyCount).Perp.vertex(2).z = 2
-        Polys(polyCount).Perp.vertex(3).z = 2
+        Polys(mPolyCount).Perp.vertex(1).z = 2
+        Polys(mPolyCount).Perp.vertex(2).z = 2
+        Polys(mPolyCount).Perp.vertex(3).z = 2
 
         SaveUndo
         If mnuQuad.Checked And Not creatingQuad Then
-            ReDim Preserve Polys(polyCount + 1)
-            ReDim Preserve PolyCoords(polyCount + 1)
-            ReDim Preserve vertexList(polyCount + 1)
-            vertexList(polyCount + 1).polyType = polyType
-            Polys(polyCount + 1).vertex(1) = Polys(polyCount).vertex(1)
-            Polys(polyCount + 1).vertex(2) = Polys(polyCount).vertex(3)
-            PolyCoords(polyCount + 1).vertex(1) = PolyCoords(polyCount).vertex(1)
-            PolyCoords(polyCount + 1).vertex(2) = PolyCoords(polyCount).vertex(3)
-            vertexList(polyCount + 1).color(1) = vertexList(polyCount).color(1)
-            vertexList(polyCount + 1).color(2) = vertexList(polyCount).color(3)
+            ReDim Preserve Polys(mPolyCount + 1)
+            ReDim Preserve PolyCoords(mPolyCount + 1)
+            ReDim Preserve vertexList(mPolyCount + 1)
+            vertexList(mPolyCount + 1).polyType = polyType
+            Polys(mPolyCount + 1).vertex(1) = Polys(mPolyCount).vertex(1)
+            Polys(mPolyCount + 1).vertex(2) = Polys(mPolyCount).vertex(3)
+            PolyCoords(mPolyCount + 1).vertex(1) = PolyCoords(mPolyCount).vertex(1)
+            PolyCoords(mPolyCount + 1).vertex(2) = PolyCoords(mPolyCount).vertex(3)
+            vertexList(mPolyCount + 1).color(1) = vertexList(mPolyCount).color(1)
+            vertexList(mPolyCount + 1).color(2) = vertexList(mPolyCount).color(3)
             numVerts = 2
-            Polys(polyCount + 1).vertex(3) = Polys(polyCount).vertex(3)
-            PolyCoords(polyCount + 1).vertex(3) = PolyCoords(polyCount).vertex(3)
+            Polys(mPolyCount + 1).vertex(3) = Polys(mPolyCount).vertex(3)
+            PolyCoords(mPolyCount + 1).vertex(3) = PolyCoords(mPolyCount).vertex(3)
             toolAction = True
             creatingQuad = True
         ElseIf creatingQuad Then
@@ -8833,7 +8833,7 @@ Private Sub snapSelected(X As Single, Y As Single)
 
         'snap
         shortestDist = snapRadius ^ 2 + 1
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If nearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And nearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
                     currentDist = (Polys(i).vertex(j).X - xVal) ^ 2 + (Polys(i).vertex(j).Y - yVal) ^ 2
@@ -8905,7 +8905,7 @@ Private Sub regionSelection(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
         isSelected = RegionSelPolys(X, Y)
     ElseIf currentFunction = TOOL_VSELECT Then
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             vertexList(i).vertex(1) = 0
             vertexList(i).vertex(2) = 0
             vertexList(i).vertex(3) = 0
@@ -8961,7 +8961,7 @@ Private Function RegionSelPolys(X As Single, Y As Single) As Boolean
     xVal = X / zoomFactor + scrollCoords(2).X
     yVal = Y / zoomFactor + scrollCoords(2).Y
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
 
         If currentFunction = TOOL_VSELECT Then
             vertexList(i).vertex(1) = 0
@@ -9283,7 +9283,7 @@ Private Sub VertexSelection(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
         VertexSelPolys
     ElseIf currentFunction = TOOL_VSELECT Then
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 vertexList(i).vertex(j) = 0
             Next
@@ -9352,7 +9352,7 @@ Private Sub VertexSelPolys()
 
     If currentFunction = TOOL_VSELECT Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 vertexList(i).vertex(j) = 0
                 If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
@@ -9371,7 +9371,7 @@ Private Sub VertexSelPolys()
 
     ElseIf currentFunction = TOOL_VSELADD Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
                     notSel = notSel + 1
@@ -9392,7 +9392,7 @@ Private Sub VertexSelPolys()
 
     ElseIf currentFunction = TOOL_VSELSUB Then
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 1 Then 'if already selected and if in range
                     If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
@@ -9725,7 +9725,7 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
     numSelectedPolys = 0
     ReDim selectedPolys(numSelectedPolys)
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             'if in range
             If nearCoord(xCenter, Polys(i).vertex(j).X, Abs(xDist)) And nearCoord(yCenter, Polys(i).vertex(j).Y, Abs(yDist)) Then
@@ -9773,7 +9773,7 @@ Private Sub polySelection(X As Single, Y As Single)
 
         If showPolys Or showWireframe Or showPoints Then
             shortestDist = 16 ^ 2 + 1
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 If (pointInPoly(X, Y, i)) And addPoly = 0 Then 'if in poly and no other poly selected
                     If firstClicked = 0 Then
                         firstClicked = i
@@ -9859,7 +9859,7 @@ Private Sub polySelection(X As Single, Y As Single)
 
         addPoly = 0
         If showPolys Or showWireframe Or showPoints Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 If pointInPoly(X, Y, i) And vertexList(i).vertex(1) = 0 And addPoly = 0 Then 'if in poly and not already selected
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
@@ -9890,7 +9890,7 @@ Private Sub polySelection(X As Single, Y As Single)
         numSelectedPolys = 0
 
         If showPolys Or showWireframe Or showPoints Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 If vertexList(i).vertex(1) = 1 Then 'if poly already selected
                     If (pointInPoly(X, Y, i)) And addPoly = 0 Then 'if poly clicked
                         vertexList(i).vertex(1) = 0
@@ -10023,7 +10023,7 @@ Private Sub ColorFill(X As Single, Y As Single)
     Else
 
         If showPolys Or showWireframe Or showPoints Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 If (pointInPoly(X, Y, i)) Then
                     For j = 1 To 3
                         If selectionChanged Then
@@ -10227,7 +10227,7 @@ Private Sub deletePolys()
         If lightCount > 0 Then
             applyLights
         ElseIf lightCount = 0 Then
-            For i = 1 To polyCount
+            For i = 1 To mPolyCount
                 For j = 1 To 3
                     Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
                 Next
@@ -10248,7 +10248,7 @@ Private Sub deletePolys()
 
         offset = 1
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
 
             Polys(offset) = Polys(i)
             PolyCoords(offset) = PolyCoords(i)
@@ -10258,7 +10258,7 @@ Private Sub deletePolys()
                 vertexList(offset).vertex(1) = 0
                 vertexList(offset).vertex(2) = 0
                 vertexList(offset).vertex(3) = 0
-                polyCount = polyCount - 1
+                mPolyCount = mPolyCount - 1
             ElseIf (vertexList(i).vertex(1) + vertexList(i).vertex(2) + vertexList(i).vertex(3)) > 0 Then 'vertices selected
                 numSelectedPolys = numSelectedPolys + 1
                 ReDim Preserve selectedPolys(numSelectedPolys)
@@ -10270,9 +10270,9 @@ Private Sub deletePolys()
 
         Next
 
-        ReDim Preserve Polys(polyCount)
-        ReDim Preserve PolyCoords(polyCount)
-        ReDim Preserve vertexList(polyCount)
+        ReDim Preserve Polys(mPolyCount)
+        ReDim Preserve PolyCoords(mPolyCount)
+        ReDim Preserve vertexList(mPolyCount)
 
     End If
 
@@ -10510,8 +10510,8 @@ Private Sub mnuInvertSel_Click()
 
     If showPolys Or showWireframe Or showPoints Then
         numSelectedPolys = 0
-        ReDim selectedPolys(polyCount)
-        For i = 1 To polyCount
+        ReDim selectedPolys(mPolyCount)
+        For i = 1 To mPolyCount
             addPoly = False
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
@@ -11211,7 +11211,7 @@ Public Sub Zoom(zoomDir As Single)
         scrollCoords(2).Y = scrollCoords(2).Y - Me.ScaleHeight / zoomFactor / (2 / (1 - zoomDir))
     End If
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             Polys(i).vertex(j).X = (PolyCoords(i).vertex(j).X - scrollCoords(2).X) * zoomFactor
             Polys(i).vertex(j).Y = (PolyCoords(i).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
@@ -11225,8 +11225,8 @@ Public Sub Zoom(zoomDir As Single)
 
     If numVerts > 0 Then
         For j = 1 To 3
-            Polys(polyCount + 1).vertex(j).X = (PolyCoords(polyCount + 1).vertex(j).X - scrollCoords(2).X) * zoomFactor
-            Polys(polyCount + 1).vertex(j).Y = (PolyCoords(polyCount + 1).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
+            Polys(mPolyCount + 1).vertex(j).X = (PolyCoords(mPolyCount + 1).vertex(j).X - scrollCoords(2).X) * zoomFactor
+            Polys(mPolyCount + 1).vertex(j).Y = (PolyCoords(mPolyCount + 1).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
         Next
     End If
 
@@ -11281,7 +11281,7 @@ Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
         scrollCoords(2).Y = scrollCoords(2).Y - Me.ScaleHeight / zoomFactor / (2 / (1 - zoomDir))
     End If
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             Polys(i).vertex(j).X = (PolyCoords(i).vertex(j).X - scrollCoords(2).X) * zoomFactor
             Polys(i).vertex(j).Y = (PolyCoords(i).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
@@ -11295,8 +11295,8 @@ Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
 
     If numVerts > 0 Then
         For j = 1 To 3
-            Polys(polyCount + 1).vertex(j).X = (PolyCoords(polyCount + 1).vertex(j).X - scrollCoords(2).X) * zoomFactor
-            Polys(polyCount + 1).vertex(j).Y = (PolyCoords(polyCount + 1).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
+            Polys(mPolyCount + 1).vertex(j).X = (PolyCoords(mPolyCount + 1).vertex(j).X - scrollCoords(2).X) * zoomFactor
+            Polys(mPolyCount + 1).vertex(j).Y = (PolyCoords(mPolyCount + 1).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
         Next
     End If
 
@@ -11422,7 +11422,7 @@ Private Sub setLightsMode(lightsOn As Boolean)
     Dim i As Integer, j As Integer
 
     If Not lightsOn Then
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
             Next
@@ -11545,7 +11545,7 @@ Public Sub setPolyColor(Index As Integer, value As Byte)
         opacity = value / 100
     End If
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
     Scenery(0).color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
@@ -11559,7 +11559,7 @@ Public Sub setPaletteColor(red As Byte, green As Byte, blue As Byte)
     polyClr.green = green
     polyClr.blue = blue
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(polyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
     Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
@@ -12381,7 +12381,7 @@ Private Sub mnuOpen_Click()
     If commonDialog.FileName <> "" Then
         prompt = False
         recentFiles commonDialog.FileName
-        polyCount = 0
+        mPolyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
         ReDim vertexList(0)
@@ -12433,7 +12433,7 @@ Private Sub mnuOpenCompiled_Click()
     If commonDialog.FileName <> "" Then
         prompt = False
         recentFiles commonDialog.FileName
-        polyCount = 0
+        mPolyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
         ReDim vertexList(0)
@@ -12827,14 +12827,14 @@ Private Sub loadPrefab(FileName As String)
 
         Get #1, , newPolys
         If newPolys > 0 Then
-            ReDim Preserve Polys(polyCount + newPolys)
-            ReDim Preserve PolyCoords(polyCount + newPolys)
-            ReDim Preserve vertexList(polyCount + newPolys)
+            ReDim Preserve Polys(mPolyCount + newPolys)
+            ReDim Preserve PolyCoords(mPolyCount + newPolys)
+            ReDim Preserve vertexList(mPolyCount + newPolys)
             numSelectedPolys = newPolys
             ReDim selectedPolys(newPolys)
 
             For i = 1 To newPolys
-                tehValue = polyCount + i
+                tehValue = mPolyCount + i
                 Get #1, , Polys(tehValue)
                 Get #1, , vertexList(tehValue).vertex(1)
                 Get #1, , vertexList(tehValue).vertex(2)
@@ -12852,7 +12852,7 @@ Private Sub loadPrefab(FileName As String)
                 Next
                 selectedPolys(i) = tehValue
             Next
-            polyCount = polyCount + newPolys
+            mPolyCount = mPolyCount + newPolys
         End If
 
         Get #1, , newScenery
@@ -12997,28 +12997,28 @@ Private Sub mnuDuplicate_Click()
     End If
 
     If numSelectedPolys > 0 Then
-        polyCount = polyCount + numSelectedPolys
-        ReDim Preserve Polys(polyCount)
-        ReDim Preserve PolyCoords(polyCount)
-        ReDim Preserve vertexList(polyCount)
+        mPolyCount = mPolyCount + numSelectedPolys
+        ReDim Preserve Polys(mPolyCount)
+        ReDim Preserve PolyCoords(mPolyCount)
+        ReDim Preserve vertexList(mPolyCount)
         For i = 1 To numSelectedPolys
-            PolyCoords(polyCount - numSelectedPolys + i) = PolyCoords(selectedPolys(i))
-            PolyCoords(polyCount - numSelectedPolys + i).vertex(1).X = PolyCoords(selectedPolys(i)).vertex(1).X + 32
-            PolyCoords(polyCount - numSelectedPolys + i).vertex(2).X = PolyCoords(selectedPolys(i)).vertex(2).X + 32
-            PolyCoords(polyCount - numSelectedPolys + i).vertex(3).X = PolyCoords(selectedPolys(i)).vertex(3).X + 32
-            Polys(polyCount - numSelectedPolys + i) = Polys(selectedPolys(i))
-            Polys(polyCount - numSelectedPolys + i).vertex(1).X = (PolyCoords(polyCount - numSelectedPolys + i).vertex(1).X - scrollCoords(2).X) * zoomFactor
-            Polys(polyCount - numSelectedPolys + i).vertex(2).X = (PolyCoords(polyCount - numSelectedPolys + i).vertex(2).X - scrollCoords(2).X) * zoomFactor
-            Polys(polyCount - numSelectedPolys + i).vertex(3).X = (PolyCoords(polyCount - numSelectedPolys + i).vertex(3).X - scrollCoords(2).X) * zoomFactor
-            vertexList(polyCount - numSelectedPolys + i).polyType = vertexList(selectedPolys(i)).polyType
-            vertexList(polyCount - numSelectedPolys + i).color(1) = vertexList(selectedPolys(i)).color(1)
-            vertexList(polyCount - numSelectedPolys + i).color(2) = vertexList(selectedPolys(i)).color(2)
-            vertexList(polyCount - numSelectedPolys + i).color(3) = vertexList(selectedPolys(i)).color(3)
+            PolyCoords(mPolyCount - numSelectedPolys + i) = PolyCoords(selectedPolys(i))
+            PolyCoords(mPolyCount - numSelectedPolys + i).vertex(1).X = PolyCoords(selectedPolys(i)).vertex(1).X + 32
+            PolyCoords(mPolyCount - numSelectedPolys + i).vertex(2).X = PolyCoords(selectedPolys(i)).vertex(2).X + 32
+            PolyCoords(mPolyCount - numSelectedPolys + i).vertex(3).X = PolyCoords(selectedPolys(i)).vertex(3).X + 32
+            Polys(mPolyCount - numSelectedPolys + i) = Polys(selectedPolys(i))
+            Polys(mPolyCount - numSelectedPolys + i).vertex(1).X = (PolyCoords(mPolyCount - numSelectedPolys + i).vertex(1).X - scrollCoords(2).X) * zoomFactor
+            Polys(mPolyCount - numSelectedPolys + i).vertex(2).X = (PolyCoords(mPolyCount - numSelectedPolys + i).vertex(2).X - scrollCoords(2).X) * zoomFactor
+            Polys(mPolyCount - numSelectedPolys + i).vertex(3).X = (PolyCoords(mPolyCount - numSelectedPolys + i).vertex(3).X - scrollCoords(2).X) * zoomFactor
+            vertexList(mPolyCount - numSelectedPolys + i).polyType = vertexList(selectedPolys(i)).polyType
+            vertexList(mPolyCount - numSelectedPolys + i).color(1) = vertexList(selectedPolys(i)).color(1)
+            vertexList(mPolyCount - numSelectedPolys + i).color(2) = vertexList(selectedPolys(i)).color(2)
+            vertexList(mPolyCount - numSelectedPolys + i).color(3) = vertexList(selectedPolys(i)).color(3)
             For j = 1 To 3
                 vertexList(selectedPolys(i)).vertex(j) = 0
-                vertexList(polyCount - numSelectedPolys + i).vertex(j) = 1
+                vertexList(mPolyCount - numSelectedPolys + i).vertex(j) = 1
             Next
-            selectedPolys(i) = polyCount - numSelectedPolys + i
+            selectedPolys(i) = mPolyCount - numSelectedPolys + i
         Next
 
     End If
@@ -13135,14 +13135,14 @@ Private Sub mnuSelectAll_Click()
     Dim i As Integer, j As Integer
 
     If showPolys Or showWireframe Or showPoints Then
-        ReDim selectedPolys(polyCount)
-        For i = 1 To polyCount
+        ReDim selectedPolys(mPolyCount)
+        For i = 1 To mPolyCount
             selectedPolys(i) = i
             For j = 1 To 3
                 vertexList(i).vertex(j) = 1
             Next
         Next
-        numSelectedPolys = polyCount
+        numSelectedPolys = mPolyCount
     End If
 
     If showScenery Or showWireframe Or showPoints Then
@@ -13198,7 +13198,7 @@ Private Sub mnuDeselect_Click()
     numSelColliders = 0
     numSelWaypoints = 0
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
         Next
@@ -13230,7 +13230,7 @@ Private Sub mnuSelColor_Click()
     numSelectedPolys = 0
     ReDim selectedPolys(0)
 
-    For i = 1 To polyCount
+    For i = 1 To mPolyCount
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
             clrVal = getRGB(Polys(i).vertex(j).color)
@@ -13266,8 +13266,8 @@ Private Sub mnuBringToFront_Click()
     End If
 
     If numSelectedPolys > 0 Then
-        offset = polyCount
-        For i = polyCount To 1 Step -1
+        offset = mPolyCount
+        For i = mPolyCount To 1 Step -1
             If (vertexList(i).vertex(1) + vertexList(i).vertex(2) + vertexList(i).vertex(3)) > 0 Then 'if selected
                 tempPoly = Polys(i)
                 tempTri = PolyCoords(i)
@@ -13281,7 +13281,7 @@ Private Sub mnuBringToFront_Click()
                 PolyCoords(offset) = tempTri
                 vertexList(offset) = tempVertex
 
-                selectedPolys(polyCount - offset + 1) = offset
+                selectedPolys(mPolyCount - offset + 1) = offset
                 offset = offset - 1
             End If
         Next
@@ -13324,7 +13324,7 @@ Private Sub mnuSendToBack_Click()
 
     If numSelectedPolys > 0 Then
         offset = 1
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             If (vertexList(i).vertex(1) + vertexList(i).vertex(2) + vertexList(i).vertex(3)) > 0 Then 'if selected
                 tempPoly = Polys(i)
                 tempTri = PolyCoords(i)
@@ -13381,11 +13381,11 @@ Private Sub mnuBringForward_Click()
     End If
 
     If numSelectedPolys > 0 Then
-        offset = polyCount
-        For i = (polyCount - 1) To 1 Step -1
+        offset = mPolyCount
+        For i = (mPolyCount - 1) To 1 Step -1
             If (vertexList(i).vertex(1) + vertexList(i).vertex(2) + vertexList(i).vertex(3)) > 0 Then 'if selected
                 If (vertexList(i + 1).vertex(1) + vertexList(i + 1).vertex(2) + vertexList(i + 1).vertex(3)) > 0 Then
-                    selectedPolys(polyCount - offset + 1) = i + 1
+                    selectedPolys(mPolyCount - offset + 1) = i + 1
                     offset = offset - 1
                 Else
                     tempPoly = Polys(i)
@@ -13400,7 +13400,7 @@ Private Sub mnuBringForward_Click()
                     PolyCoords(i + 1) = tempTri
                     vertexList(i + 1) = tempVertex
 
-                    selectedPolys(polyCount - offset + 1) = i + 1
+                    selectedPolys(mPolyCount - offset + 1) = i + 1
                     offset = offset - 1
                 End If
             End If
@@ -13446,7 +13446,7 @@ Private Sub mnuSendBackward_Click()
 
     If numSelectedPolys > 0 Then
         offset = 1
-        For i = 2 To polyCount
+        For i = 2 To mPolyCount
             If (vertexList(i).vertex(1) + vertexList(i).vertex(2) + vertexList(i).vertex(3)) > 0 Then 'if selected
                 If (vertexList(i - 1).vertex(1) + vertexList(i - 1).vertex(2) + vertexList(i - 1).vertex(3)) > 0 Then
                     selectedPolys(offset) = i - 1
@@ -13612,7 +13612,7 @@ Private Sub mnuApplyLight_Click()
 
     Else
 
-        For i = 1 To polyCount
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 'apply poly color to base color
                 tehClr = getRGB(Polys(i).vertex(j).color)
@@ -13661,61 +13661,61 @@ Private Sub mnuSplit_Click()
                     left = 1
                     right = 2
                 End If
-                polyCount = polyCount + 1
+                mPolyCount = mPolyCount + 1
                 newPolys = newPolys + 1
 
-                ReDim Preserve Polys(polyCount)
-                ReDim Preserve PolyCoords(polyCount)
-                ReDim Preserve vertexList(polyCount)
+                ReDim Preserve Polys(mPolyCount)
+                ReDim Preserve PolyCoords(mPolyCount)
+                ReDim Preserve vertexList(mPolyCount)
 
                 ReDim Preserve selectedPolys(numSelectedPolys + newPolys)
-                selectedPolys(numSelectedPolys + newPolys) = polyCount
-                vertexList(polyCount).vertex(j) = 1
+                selectedPolys(numSelectedPolys + newPolys) = mPolyCount
+                vertexList(mPolyCount).vertex(j) = 1
 
-                PolyCoords(polyCount).vertex(j) = PolyCoords(selectedPolys(i)).vertex(j)
-                PolyCoords(polyCount).vertex(left) = PolyCoords(selectedPolys(i)).vertex(left)
+                PolyCoords(mPolyCount).vertex(j) = PolyCoords(selectedPolys(i)).vertex(j)
+                PolyCoords(mPolyCount).vertex(left) = PolyCoords(selectedPolys(i)).vertex(left)
 
-                PolyCoords(polyCount).vertex(right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).X, PolyCoords(selectedPolys(i)).vertex(right).X)
-                PolyCoords(polyCount).vertex(right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).Y, PolyCoords(selectedPolys(i)).vertex(right).Y)
+                PolyCoords(mPolyCount).vertex(right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).X, PolyCoords(selectedPolys(i)).vertex(right).X)
+                PolyCoords(mPolyCount).vertex(right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).Y, PolyCoords(selectedPolys(i)).vertex(right).Y)
 
-                PolyCoords(selectedPolys(i)).vertex(left) = PolyCoords(polyCount).vertex(right)
+                PolyCoords(selectedPolys(i)).vertex(left) = PolyCoords(mPolyCount).vertex(right)
 
-                Polys(polyCount).vertex(j) = Polys(selectedPolys(i)).vertex(j)
-                Polys(polyCount).vertex(left) = Polys(selectedPolys(i)).vertex(left)
-                Polys(polyCount).Perp.vertex(1).z = 2
-                Polys(polyCount).Perp.vertex(2).z = 2
-                Polys(polyCount).Perp.vertex(3).z = 2
+                Polys(mPolyCount).vertex(j) = Polys(selectedPolys(i)).vertex(j)
+                Polys(mPolyCount).vertex(left) = Polys(selectedPolys(i)).vertex(left)
+                Polys(mPolyCount).Perp.vertex(1).z = 2
+                Polys(mPolyCount).Perp.vertex(2).z = 2
+                Polys(mPolyCount).Perp.vertex(3).z = 2
 
                 'coords
-                Polys(polyCount).vertex(right) = Polys(selectedPolys(i)).vertex(right)
-                Polys(polyCount).vertex(right).X = (PolyCoords(polyCount).vertex(right).X - scrollCoords(2).X) * zoomFactor
-                Polys(polyCount).vertex(right).Y = (PolyCoords(polyCount).vertex(right).Y - scrollCoords(2).Y) * zoomFactor
+                Polys(mPolyCount).vertex(right) = Polys(selectedPolys(i)).vertex(right)
+                Polys(mPolyCount).vertex(right).X = (PolyCoords(mPolyCount).vertex(right).X - scrollCoords(2).X) * zoomFactor
+                Polys(mPolyCount).vertex(right).Y = (PolyCoords(mPolyCount).vertex(right).Y - scrollCoords(2).Y) * zoomFactor
 
                 'texture coords
-                Polys(polyCount).vertex(right).tu = Midpoint(Polys(selectedPolys(i)).vertex(right).tu, Polys(polyCount).vertex(left).tu)
-                Polys(polyCount).vertex(right).tv = Midpoint(Polys(selectedPolys(i)).vertex(right).tv, Polys(polyCount).vertex(left).tv)
+                Polys(mPolyCount).vertex(right).tu = Midpoint(Polys(selectedPolys(i)).vertex(right).tu, Polys(mPolyCount).vertex(left).tu)
+                Polys(mPolyCount).vertex(right).tv = Midpoint(Polys(selectedPolys(i)).vertex(right).tv, Polys(mPolyCount).vertex(left).tv)
 
-                vertexList(polyCount).color(j) = vertexList(selectedPolys(i)).color(j)
-                vertexList(polyCount).color(left) = vertexList(selectedPolys(i)).color(left)
+                vertexList(mPolyCount).color(j) = vertexList(selectedPolys(i)).color(j)
+                vertexList(mPolyCount).color(left) = vertexList(selectedPolys(i)).color(left)
 
                 'colors
                 clr1 = vertexList(selectedPolys(i)).color(right)
-                clr2 = vertexList(polyCount).color(left)
-                vertexList(polyCount).color(right).red = clr1.red * 0.5 + clr2.red * 0.5
-                vertexList(polyCount).color(right).green = clr1.green * 0.5 + clr2.green * 0.5
-                vertexList(polyCount).color(right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
+                clr2 = vertexList(mPolyCount).color(left)
+                vertexList(mPolyCount).color(right).red = clr1.red * 0.5 + clr2.red * 0.5
+                vertexList(mPolyCount).color(right).green = clr1.green * 0.5 + clr2.green * 0.5
+                vertexList(mPolyCount).color(right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
 
-                vertexList(selectedPolys(i)).color(left) = vertexList(polyCount).color(right)
+                vertexList(selectedPolys(i)).color(left) = vertexList(mPolyCount).color(right)
 
                 clr1 = getRGB(Polys(selectedPolys(i)).vertex(right).color)
-                clr2 = getRGB(Polys(polyCount).vertex(left).color)
+                clr2 = getRGB(Polys(mPolyCount).vertex(left).color)
                 alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(right).color)
-                alpha2 = getAlpha(Polys(polyCount).vertex(left).color)
-                Polys(polyCount).vertex(right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
+                alpha2 = getAlpha(Polys(mPolyCount).vertex(left).color)
+                Polys(mPolyCount).vertex(right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
 
-                Polys(selectedPolys(i)).vertex(left) = Polys(polyCount).vertex(right)
+                Polys(selectedPolys(i)).vertex(left) = Polys(mPolyCount).vertex(right)
 
-                vertexList(polyCount).polyType = vertexList(selectedPolys(i)).polyType
+                vertexList(mPolyCount).polyType = vertexList(selectedPolys(i)).polyType
             End If
         Next
     Next
@@ -13725,7 +13725,7 @@ Private Sub mnuSplit_Click()
     Render
     getInfo
 
-    frmInfo.lblCount(0).Caption = polyCount
+    frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(6).Caption = getMapDimensions
 
 End Sub
@@ -13782,18 +13782,18 @@ Private Sub mnuCreate_Click()
         selectionChanged = False
     End If
 
-    ReDim Preserve Polys(polyCount + 1)
-    ReDim Preserve PolyCoords(polyCount + 1)
-    ReDim Preserve vertexList(polyCount + 1)
+    ReDim Preserve Polys(mPolyCount + 1)
+    ReDim Preserve PolyCoords(mPolyCount + 1)
+    ReDim Preserve vertexList(mPolyCount + 1)
 
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
                 numSelVerts = numSelVerts + 1
-                Polys(polyCount + 1).vertex(numSelVerts) = Polys(selectedPolys(i)).vertex(j)
-                PolyCoords(polyCount + 1).vertex(numSelVerts) = PolyCoords(selectedPolys(i)).vertex(j)
-                vertexList(polyCount + 1).color(numSelVerts) = vertexList(selectedPolys(i)).color(j)
-                vertexList(polyCount + 1).polyType = vertexList(selectedPolys(i)).polyType
+                Polys(mPolyCount + 1).vertex(numSelVerts) = Polys(selectedPolys(i)).vertex(j)
+                PolyCoords(mPolyCount + 1).vertex(numSelVerts) = PolyCoords(selectedPolys(i)).vertex(j)
+                vertexList(mPolyCount + 1).color(numSelVerts) = vertexList(selectedPolys(i)).color(j)
+                vertexList(mPolyCount + 1).polyType = vertexList(selectedPolys(i)).polyType
             End If
             If numSelVerts = 3 Then Exit For
         Next
@@ -13801,28 +13801,28 @@ Private Sub mnuCreate_Click()
     Next
 
     If numSelVerts > 2 Then
-        polyCount = polyCount + 1
+        mPolyCount = mPolyCount + 1
     End If
 
-    If Not isCW(polyCount) Then 'switch to make cw
-        temp = PolyCoords(polyCount).vertex(3)
-        PolyCoords(polyCount).vertex(3) = PolyCoords(polyCount).vertex(2)
-        PolyCoords(polyCount).vertex(2) = temp
+    If Not isCW(mPolyCount) Then 'switch to make cw
+        temp = PolyCoords(mPolyCount).vertex(3)
+        PolyCoords(mPolyCount).vertex(3) = PolyCoords(mPolyCount).vertex(2)
+        PolyCoords(mPolyCount).vertex(2) = temp
 
-        tempVertex = Polys(polyCount).vertex(3)
-        Polys(polyCount).vertex(3) = Polys(polyCount).vertex(2)
-        Polys(polyCount).vertex(2) = tempVertex
+        tempVertex = Polys(mPolyCount).vertex(3)
+        Polys(mPolyCount).vertex(3) = Polys(mPolyCount).vertex(2)
+        Polys(mPolyCount).vertex(2) = tempVertex
 
-        tempClr = vertexList(polyCount).color(3)
-        vertexList(polyCount).color(3) = vertexList(polyCount).color(2)
-        vertexList(polyCount).color(2) = tempClr
+        tempClr = vertexList(mPolyCount).color(3)
+        vertexList(mPolyCount).color(3) = vertexList(mPolyCount).color(2)
+        vertexList(mPolyCount).color(2) = tempClr
     End If
 
-    Polys(polyCount).Perp.vertex(1).z = 2
-    Polys(polyCount).Perp.vertex(2).z = 2
-    Polys(polyCount).Perp.vertex(3).z = 2
+    Polys(mPolyCount).Perp.vertex(1).z = 2
+    Polys(mPolyCount).Perp.vertex(2).z = 2
+    Polys(mPolyCount).Perp.vertex(3).z = 2
 
-    frmInfo.lblCount(0).Caption = polyCount
+    frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(6).Caption = getMapDimensions
 
     SaveUndo
@@ -13886,8 +13886,8 @@ Private Sub mnuRefreshBG_Click()
     minX = 0
     minY = 0
 
-    If polyCount > 0 Then
-        For i = 1 To polyCount
+    If mPolyCount > 0 Then
+        For i = 1 To mPolyCount
             For j = 1 To 3
                 If PolyCoords(i).vertex(j).X > maxX Then maxX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).X < minX Then minX = PolyCoords(i).vertex(j).X
@@ -14305,7 +14305,7 @@ End Sub
 
 Private Sub mnuFitOnScreen_Click()
 
-    If polyCount < 1 Then Exit Sub
+    If mPolyCount < 1 Then Exit Sub
 
     Dim Width As Integer, Height As Integer
 
@@ -14924,7 +14924,7 @@ Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single
     Dim j As Integer
     Dim k As Integer
 
-    For i = 0 To polyCount
+    For i = 0 To mPolyCount
 
         For j = 1 To 3
             'if vertex is at these coords and not marked
