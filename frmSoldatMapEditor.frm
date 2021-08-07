@@ -1554,12 +1554,25 @@ Dim initialized As Boolean, initialized2 As Boolean
 Dim acquired As Boolean
 Dim selectionChanged As Boolean
 
-Dim clrPolys As Boolean, clrWireframe As Boolean
-Dim sslBack As Boolean, sslMid As Boolean, sslFront As Boolean
-Public backClr As Long, pointClr As Long, selectionClr As Long, gridClr As Long, gridClr2 As Long
-Public polyBlendSrc As Long, polyBlendDest As Long, wireBlendSrc As Long, wireBlendDest As Long
-Public soldatDir As String, uncompDir As String, prefabDir As String
-Public gridSpacing As Integer, gridDivisions As Integer
+Dim clrPolys As Boolean
+Dim clrWireframe As Boolean
+Dim sslBack As Boolean
+Dim sslMid As Boolean
+Dim sslFront As Boolean
+Public backClr As Long
+Public pointClr As Long
+Public selectionClr As Long
+Public gridClr As Long
+Public gridClr2 As Long
+Public polyBlendSrc As Long
+Public polyBlendDest As Long
+Public wireBlendSrc As Long
+Public wireBlendDest As Long
+Public soldatDir As String
+Public uncompDir As String
+Public prefabDir As String
+Public gridSpacing As Integer
+Public gridDivisions As Integer
 Public gridOp1 As Byte, gridOp2 As Byte
 Dim noRedraw As Boolean
 
