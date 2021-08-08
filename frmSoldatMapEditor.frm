@@ -1270,7 +1270,7 @@ Dim DI As DirectInput8
 Dim DIDevice As DirectInputDevice8
 Dim DIState As DIKEYBOARDSTATE
 
-Const BufferSize As Long = 10
+Const BUFFER_SIZE As Long = 10
 
 Dim hEvent As Long
 Implements DirectXEvent8
@@ -2097,7 +2097,7 @@ Private Sub InitDInput()
     Dim i As Long
     Dim DevProp As DIPROPLONG
     Dim DevInfo As DirectInputDeviceInstance8
-    Dim pBuffer(0 To BufferSize) As DIDEVICEOBJECTDATA
+    Dim pBuffer(0 To BUFFER_SIZE) As DIDEVICEOBJECTDATA
 
     tehValue = "Error creating DI device"
 
@@ -2112,7 +2112,7 @@ Private Sub InitDInput()
     tehValue = "Error setting DI properties"
 
     DevProp.lHow = DIPH_DEVICE
-    DevProp.lData = BufferSize
+    DevProp.lData = BUFFER_SIZE
     DIDevice.SetProperty DIPROP_BUFFERSIZE, DevProp
 
     tehValue = "Error setting DI device notification"
@@ -5137,7 +5137,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     Dim i As Long
     Dim hotKeyPressed As Integer, wayptKeyPressed As Integer, layerKeyPressed As Integer
-    Dim pBuffer(0 To BufferSize) As DIDEVICEOBJECTDATA
+    Dim pBuffer(0 To BUFFER_SIZE) As DIDEVICEOBJECTDATA
     Static tempFunction As Byte
 
     On Error GoTo ErrorHandler
