@@ -1336,7 +1336,7 @@ End Type
 Private Type TVertexData
     vertex(1 To 3)  As Byte
     polyType        As Byte
-    color(1 To 3)  As TColor
+    color(1 To 3)   As TColor
 End Type
 
 Private Type TTriangle
@@ -1345,7 +1345,7 @@ End Type
 
 Private Type TLightSource
     selected    As Byte
-    color      As TColor
+    color       As TColor
     intensity   As Single
     range       As Integer
     X           As Single
