@@ -1291,7 +1291,7 @@ Dim backBuffer As Direct3DSurface8
 
 Dim scenerySprite As D3DXSprite
 
-Const ColorKey As Long = &HFF00FF00
+Const COLOR_KEY As Long = &HFF00FF00
 
 Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
 Const FVF2 As Long = D3DFVF_XYZ
@@ -2012,7 +2012,7 @@ Public Sub Init()
     '----
     Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     objectsTexture.GetLevelDesc 0, textureDesc
 
@@ -2025,7 +2025,7 @@ Public Sub Init()
 
     Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     SceneryTextures(0).Texture.GetLevelDesc 0, textureDesc
 
@@ -2044,25 +2044,25 @@ Public Sub Init()
 
     Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     debugVal = "Error creating path texture"
 
     Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     debugVal = "Error creating rotation center texture"
 
     Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     debugVal = "Error creating sketch texture"
 
     Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     debugVal = "Error creating scenery sprite"
 
@@ -2072,7 +2072,7 @@ Public Sub Init()
 
     Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, ColorKey, ByVal 0, ByVal 0)
+            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
     initialized = True
 
@@ -2520,7 +2520,7 @@ Public Sub LoadFile(FileName As String)
                 If tempString = "" Then
                     Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                            D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                            D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 ElseIf checkLoaded(tempString) > -1 Then
@@ -2534,11 +2534,11 @@ Public Sub LoadFile(FileName As String)
                     If toTGARes = -1 Then
                         Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     Else
                         Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     End If
 
                     frmScenery.lstScenery.AddItem tempString
@@ -2554,18 +2554,18 @@ Public Sub LoadFile(FileName As String)
                     If toTGARes = -1 Then
                         Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     Else
                         Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     End If
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 Else
                     Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                            D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                            D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 End If
@@ -2892,11 +2892,11 @@ Public Sub setCurrentTexture(sceneryName As String)
     If toTGARes = -1 Then
         Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
         Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
 
     SceneryTextures(0).Texture.GetLevelDesc 0, textureDesc
@@ -2948,11 +2948,11 @@ Public Sub CreateSceneryTexture(sceneryName As String)
     If toTGARes = -1 Then
         Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
         Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
 
     frmScenery.lstScenery.AddItem sceneryName
@@ -3001,11 +3001,11 @@ Public Sub RefreshSceneryTextures(Index As Integer)
     If toTGARes = -1 Then
         Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, loadName, D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
         Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-                D3DX_FILTER_POINT, ColorKey, imageInfo, ByVal 0)
+                D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
 
     SceneryTextures(Index).Texture.GetLevelDesc 0, textureDesc
@@ -11526,7 +11526,7 @@ Public Sub setMapTexture(texturePath As String)
 
     Set mapTexture = D3DX.CreateTextureFromFileEx(D3DDevice, frmSoldatMapEditor.soldatDir & "textures\" & texturePath, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE, _
-            D3DX_FILTER_TRIANGLE, ColorKey, imageInfo, ByVal 0)
+            D3DX_FILTER_TRIANGLE, COLOR_KEY, imageInfo, ByVal 0)
 
     gTextureFile = texturePath
 
