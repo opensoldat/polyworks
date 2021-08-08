@@ -3040,7 +3040,7 @@ Private Sub SaveFile(FileName As String)
     Dim Polygon As TMapFile_Polygon
     Dim sectorsDivision As Long
 
-    Const zero As Integer = 0
+    Const ZERO As Integer = 0
 
     Dim Scenery_New As TMapFile_Scenery
     Dim newWaypoint As TNewWaypoint
@@ -3129,7 +3129,7 @@ Private Sub SaveFile(FileName As String)
 
         For i = -25 To 25
             For j = -25 To 25
-                Put #1, , zero
+                Put #1, , ZERO
             Next
         Next
 
@@ -3281,13 +3281,11 @@ Public Sub SaveAndCompile(FileName As String)
     Dim newSpawnPoint As TSaveSpawnPoint
     Dim newCollider As TCollider
 
-    Dim zero As Integer
+    Const ZERO As Integer = 0
 
     Dim fileOpen As Boolean
 
     On Error GoTo ErrorHandler
-
-    zero = 0
 
     Me.MousePointer = 11
 
@@ -3509,10 +3507,10 @@ Public Sub SaveAndCompile(FileName As String)
             Put #1, , newWaypoint
         Next
 
-        Put #1, , zero
-        Put #1, , zero
-        Put #1, , zero
-        Put #1, , zero
+        Put #1, , ZERO
+        Put #1, , ZERO
+        Put #1, , ZERO
+        Put #1, , ZERO
 
     Close #1
 
