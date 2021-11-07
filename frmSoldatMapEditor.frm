@@ -5075,8 +5075,8 @@ Public Sub Render()
     If circleOn Then
         For i = 0 To 32
             circleCoords(i).color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(i).X = mouseCoords.X + zoomFactor * clrRadius * Math.Cos(pi * i / 16)
-            circleCoords(i).Y = mouseCoords.Y + zoomFactor * clrRadius * Math.Sin(pi * i / 16)
+            circleCoords(i).X = mouseCoords.X + zoomFactor * clrRadius * Math.Cos(PI * i / 16)
+            circleCoords(i).Y = mouseCoords.Y + zoomFactor * clrRadius * Math.Sin(PI * i / 16)
         Next
         D3DDevice.DrawPrimitiveUP D3DPT_LINESTRIP, 32, circleCoords(0), Len(circleCoords(0))
     End If
@@ -6948,7 +6948,7 @@ Private Sub CreatingScenery(Shift As Integer, X As Single, Y As Single)
     If numCorners = 1 And toolAction Then
 
         If Shift = 1 Then
-            angle = (Int((angle * 180 / pi + 0) / 15) * 15) / 180 * pi
+            angle = (Int((angle * 180 / PI + 0) / 15) * 15) / 180 * PI
         End If
 
         Scenery(0).rotation = angle
@@ -6987,17 +6987,17 @@ Private Function ConstrainAngle(xDiff As Integer, yDiff As Integer) As D3DVECTOR
     R = Sqr(xDiff ^ 2 + yDiff ^ 2)
     If xDiff = 0 Then
         If yDiff > 0 Then
-            theta = pi / 2
+            theta = PI / 2
         Else
-            theta = 3 * pi / 2
+            theta = 3 * PI / 2
         End If
     ElseIf xDiff > 0 Then
         theta = Atn(yDiff / xDiff)
     ElseIf xDiff < 0 Then
-        theta = pi + Atn(yDiff / xDiff)
+        theta = PI + Atn(yDiff / xDiff)
     End If
 
-    theta = (Int((theta * 180 / pi + 7.5) / 15) * 15) / 180 * pi
+    theta = (Int((theta * 180 / PI + 7.5) / 15) * 15) / 180 * PI
 
     ConstrainAngle.X = R
     ConstrainAngle.Y = theta
@@ -7509,14 +7509,14 @@ Public Sub applyRotate(tehValue As Single)
                 R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
-                        theta = pi / 2
+                        theta = PI / 2
                     Else
-                        theta = 3 * pi / 2
+                        theta = 3 * PI / 2
                     End If
                 ElseIf xDiff > 0 Then
                     theta = Atn(yDiff / xDiff)
                 ElseIf xDiff < 0 Then
-                    theta = pi + Atn(yDiff / xDiff)
+                    theta = PI + Atn(yDiff / xDiff)
                 End If
                 theta = theta + rDiff
 
@@ -7599,18 +7599,18 @@ End Sub
 Private Function GetAngle(ByVal xVal As Single, ByVal yVal As Single) As Single
 
     If xVal < 0 Then
-        GetAngle = pi - Atn(yVal / xVal)
+        GetAngle = PI - Atn(yVal / xVal)
     ElseIf xVal > 0 Then
         If Atn(yVal / xVal) > 0 Then
-            GetAngle = 2 * pi - Atn(yVal / xVal)
+            GetAngle = 2 * PI - Atn(yVal / xVal)
         Else
             GetAngle = -Atn(yVal / xVal)
         End If
     Else
         If yVal > 0 Then
-            GetAngle = 3 * pi / 2
+            GetAngle = 3 * PI / 2
         Else
-            GetAngle = pi / 2
+            GetAngle = PI / 2
         End If
     End If
 
@@ -7634,32 +7634,32 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
     yCenter = (rCenter.Y - scrollCoords(2).Y) * zoomFactor
     If xCenter = moveCoords(1).X Then
         If moveCoords(1).Y - yCenter > 0 Then
-            oldAngle = pi / 2
+            oldAngle = PI / 2
         Else
-            oldAngle = 3 * pi / 2
+            oldAngle = 3 * PI / 2
         End If
     ElseIf moveCoords(1).X - xCenter > 0 Then
         oldAngle = Atn((moveCoords(1).Y - yCenter) / (moveCoords(1).X - xCenter))
     ElseIf moveCoords(1).X - xCenter < 0 Then
-        oldAngle = pi + Atn((moveCoords(1).Y - yCenter) / (moveCoords(1).X - xCenter))
+        oldAngle = PI + Atn((moveCoords(1).Y - yCenter) / (moveCoords(1).X - xCenter))
     End If
 
     If xCenter = X Then
         If Y - yCenter > 0 Then
-            angle = pi / 2
+            angle = PI / 2
         Else
-            angle = 3 * pi / 2
+            angle = 3 * PI / 2
         End If
     ElseIf X - xCenter > 0 Then
         angle = Atn((Y - yCenter) / (X - xCenter))
     ElseIf X - xCenter < 0 Then
-        angle = pi + Atn((Y - yCenter) / (X - xCenter))
+        angle = PI + Atn((Y - yCenter) / (X - xCenter))
     End If
 
     rDiff = angle - oldAngle
 
     If constrained Then
-        rDiff = (Int((rDiff * 180 / pi + 7.5) / 15) * 15) / 180 * pi
+        rDiff = (Int((rDiff * 180 / PI + 7.5) / 15) * 15) / 180 * PI
     End If
 
     If numSelectedPolys > 0 Then
@@ -7673,14 +7673,14 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                     R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                     If xDiff = 0 Then
                         If yDiff > 0 Then
-                            theta = pi / 2 + rDiff
+                            theta = PI / 2 + rDiff
                         Else
-                            theta = 3 * pi / 2 + rDiff
+                            theta = 3 * PI / 2 + rDiff
                         End If
                     ElseIf xDiff > 0 Then
                         theta = Atn(yDiff / xDiff) + rDiff
                     ElseIf xDiff < 0 Then
-                        theta = pi + Atn(yDiff / xDiff) + rDiff
+                        theta = PI + Atn(yDiff / xDiff) + rDiff
                     End If
 
                     Polys(PolyNum).vertex(j).X = xCenter + R * Cos(theta)
@@ -7699,14 +7699,14 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                 R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
-                        theta = pi / 2 + rDiff
+                        theta = PI / 2 + rDiff
                     Else
-                        theta = 3 * pi / 2 + rDiff
+                        theta = 3 * PI / 2 + rDiff
                     End If
                 ElseIf xDiff > 0 Then
                     theta = Atn(yDiff / xDiff) + rDiff
                 ElseIf xDiff < 0 Then
-                    theta = pi + Atn(yDiff / xDiff) + rDiff
+                    theta = PI + Atn(yDiff / xDiff) + rDiff
                 End If
 
                 Scenery(i).screenTr.X = xCenter + R * Cos(theta)
@@ -7724,14 +7724,14 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                 R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
-                        theta = pi / 2 + rDiff
+                        theta = PI / 2 + rDiff
                     Else
-                        theta = 3 * pi / 2 + rDiff
+                        theta = 3 * PI / 2 + rDiff
                     End If
                 ElseIf xDiff > 0 Then
                     theta = Atn(yDiff / xDiff) + rDiff
                 ElseIf xDiff < 0 Then
-                    theta = pi + Atn(yDiff / xDiff) + rDiff
+                    theta = PI + Atn(yDiff / xDiff) + rDiff
                 End If
 
                 Scenery(i).screenTr.X = xCenter + R * Cos(theta)
@@ -7743,7 +7743,7 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
     moveCoords(2).X = X
     moveCoords(2).Y = Y
 
-    frmInfo.txtRotate.Text = Int(rDiff / pi * 180 * 100) / 100
+    frmInfo.txtRotate.Text = Int(rDiff / PI * 180 * 100) / 100
 
     prompt = True
 
@@ -9233,8 +9233,8 @@ Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
         For j = 1 To 2
             dist = (X - sketch(i).vertex(j).X) ^ 2 + (Y - sketch(i).vertex(j).Y) ^ 2
             If dist < clrRadius ^ 2 Then
-                sketch(i).vertex(j).X = sketch(i).vertex(j).X + xDiff * Cos((dist / (clrRadius ^ 2)) * pi / 2)
-                sketch(i).vertex(j).Y = sketch(i).vertex(j).Y + yDiff * Cos((dist / (clrRadius ^ 2)) * pi / 2)
+                sketch(i).vertex(j).X = sketch(i).vertex(j).X + xDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
+                sketch(i).vertex(j).Y = sketch(i).vertex(j).Y + yDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
                 moveLines = 1
             End If
         Next
@@ -9954,14 +9954,14 @@ Private Function PointInProp(ByVal X As Single, ByVal Y As Single, Index As Inte
     R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from scenery rotation center
     If xDiff = 0 Then
         If yDiff > 0 Then
-            theta = pi / 2 + Scenery(Index).rotation
+            theta = PI / 2 + Scenery(Index).rotation
         Else
-            theta = 3 * pi / 2 + Scenery(Index).rotation
+            theta = 3 * PI / 2 + Scenery(Index).rotation
         End If
     ElseIf xDiff > 0 Then
         theta = Atn(yDiff / xDiff) + Scenery(Index).rotation
     ElseIf xDiff < 0 Then
-        theta = pi + Atn(yDiff / xDiff) + Scenery(Index).rotation
+        theta = PI + Atn(yDiff / xDiff) + Scenery(Index).rotation
     End If
 
     X = R * Cos(theta)
@@ -10702,11 +10702,11 @@ Private Sub mnuRotate_Click(Index As Integer)
     End If
 
     If Index = 0 Then
-        rDiff = pi
+        rDiff = PI
     ElseIf Index = 1 Then
-        rDiff = pi / 2
+        rDiff = PI / 2
     ElseIf Index = 2 Then
-        rDiff = 3 * pi / 2
+        rDiff = 3 * PI / 2
     End If
 
     rCenter.X = selRect(0).X + (selRect(2).X - selRect(0).X) / 2
@@ -10723,14 +10723,14 @@ Private Sub mnuRotate_Click(Index As Integer)
                     R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                     If xDiff = 0 Then
                         If yDiff > 0 Then
-                            theta = pi / 2
+                            theta = PI / 2
                         Else
-                            theta = 3 * pi / 2
+                            theta = 3 * PI / 2
                         End If
                     ElseIf xDiff > 0 Then
                         theta = Atn(yDiff / xDiff)
                     ElseIf xDiff < 0 Then
-                        theta = pi + Atn(yDiff / xDiff)
+                        theta = PI + Atn(yDiff / xDiff)
                     End If
                     theta = theta + rDiff
 
@@ -10753,14 +10753,14 @@ Private Sub mnuRotate_Click(Index As Integer)
                 R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
-                        theta = pi / 2
+                        theta = PI / 2
                     Else
-                        theta = 3 * pi / 2
+                        theta = 3 * PI / 2
                     End If
                 ElseIf xDiff > 0 Then
                     theta = Atn(yDiff / xDiff)
                 ElseIf xDiff < 0 Then
-                    theta = pi + Atn(yDiff / xDiff)
+                    theta = PI + Atn(yDiff / xDiff)
                 End If
                 theta = theta + rDiff
 
@@ -10806,11 +10806,11 @@ Private Sub mnuRotateTexture_Click(Index As Integer)
     End If
 
     If Index = 0 Then
-        rDiff = pi
+        rDiff = PI
     ElseIf Index = 2 Then
-        rDiff = pi / 2
+        rDiff = PI / 2
     ElseIf Index = 1 Then
-        rDiff = 3 * pi / 2
+        rDiff = 3 * PI / 2
     End If
 
     texRate = CSng(xTexture) / CSng(yTexture)
@@ -10843,14 +10843,14 @@ Private Sub mnuRotateTexture_Click(Index As Integer)
                     R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
                     If xDiff = 0 Then
                         If yDiff > 0 Then
-                            theta = pi / 2
+                            theta = PI / 2
                         Else
-                            theta = 3 * pi / 2
+                            theta = 3 * PI / 2
                         End If
                     ElseIf xDiff > 0 Then
                         theta = Atn(yDiff / xDiff)
                     ElseIf xDiff < 0 Then
-                        theta = pi + Atn(yDiff / xDiff)
+                        theta = PI + Atn(yDiff / xDiff)
                     End If
                     theta = theta + rDiff
 
@@ -14434,7 +14434,7 @@ Public Sub getInfo()
                 frmInfo.txtScenProp(0).Text = Int(Scenery(i).Scaling.X * 100 * 100 + 0.5) / 100
                 frmInfo.txtScenProp(1).Text = Int(Scenery(i).Scaling.Y * 100 * 100 + 0.5) / 100
                 frmInfo.txtScenProp(2).Text = Int(Scenery(i).alpha / 255 * 100 * 10 + 0.5) / 10
-                frmInfo.txtScenProp(3).Text = Int(Scenery(i).rotation * 180 / pi * 10 + 0.5) / 10
+                frmInfo.txtScenProp(3).Text = Int(Scenery(i).rotation * 180 / PI * 10 + 0.5) / 10
                 frmInfo.cboLevel.ListIndex = Scenery(i).level
                 If numSelectedPolys = 0 Then
                     frmInfo.lblCoords.Caption = Int(Scenery(i).Translation.X * 100 + 0.5) / 100 & ", " & Int(Scenery(i).Translation.Y * 100) / 100

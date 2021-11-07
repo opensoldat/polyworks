@@ -1,7 +1,7 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
-Global Const pi As Single = 3.14159265358979  'mmm... pi
+Global Const PI As Single = 3.14159265358979  'mmm... PI
 
 Global gfxDir As String
 
