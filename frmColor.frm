@@ -639,7 +639,7 @@ Dim mHexValue As String
 
 Dim mNonModal As Boolean
 
-Dim lastTool As Byte
+Dim mLastTool As Byte
 
 Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
@@ -678,7 +678,7 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
 
     mNonModal = True
 
-    lastTool = frmSoldatMapEditor.setTempTool(10)
+    mLastTool = frmSoldatMapEditor.setTempTool(10)
     frmSoldatMapEditor.setCurrentTool 10
 
     frmSoldatMapEditor.picMenuBar.Enabled = False
@@ -714,8 +714,8 @@ Private Sub HideColor(apply As Boolean)
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
 
-        frmSoldatMapEditor.setCurrentTool lastTool
-        lastTool = 0
+        frmSoldatMapEditor.setCurrentTool mLastTool
+        mLastTool = 0
 
     End If
 
