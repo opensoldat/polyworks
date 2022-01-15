@@ -635,7 +635,6 @@ Const R As Byte = 0
 Const G As Byte = 1
 Const B As Byte = 2
 
-Dim tempHexVal As String
 Dim hexValue As String
 
 Dim nonModal As Boolean
