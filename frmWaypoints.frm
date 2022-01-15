@@ -784,19 +784,19 @@ Public Sub SetColors()
 
     Me.BackColor = bgClr
 
-    For i = 0 To 4
-        lblType(i).BackColor = lblBackClr
-        lblType(i).ForeColor = lblTextClr
+    For Each c In lblType
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 1
-        lblPath(i).BackColor = lblBackClr
-        lblPath(i).ForeColor = lblTextClr
+    For Each c In lblPath
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 2
-        lblShow(i).BackColor = lblBackClr
-        lblShow(i).ForeColor = lblTextClr
+    For Each c In lblShow
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     lblWaypoints.BackColor = lblBackClr
