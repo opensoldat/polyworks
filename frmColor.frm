@@ -732,11 +732,13 @@ ErrorHandler:
 End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
+    Const ESCAPE = 27
+    Const ENTER = 13
 
-    If KeyAscii = 27 Then
+    If KeyAscii = ESCAPE Then
         picColor.SetFocus
         picCancel_Click
-    ElseIf KeyAscii = 13 Then
+    ElseIf KeyAscii = ENTER Then
         picColor.SetFocus
         picOK_Click
     End If
