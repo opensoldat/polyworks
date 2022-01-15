@@ -604,7 +604,10 @@ Public Sub ClearWaypt()
 
     Dim i As Integer
 
-    For i = 0 To 4
+    Debug.Assert picType.LBound = LBound(wayptType)
+    Debug.Assert picType.UBound = UBound(wayptType)
+
+    For i = picType.LBound To picType.UBound
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
         wayptType(i) = False
     Next
@@ -687,7 +690,7 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
     wayptPath = Index
 
-    For i = 0 To 1
+    For i = picPath.LBound To picPath.UBound
         If i <> Index Then
             mouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
         End If
@@ -749,7 +752,7 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
 
     showPaths = Index
 
-    For i = 0 To 2
+    For i = picShow.LBound To picShow.UBound
         If i <> Index Then
             mouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
         End If
@@ -773,11 +776,11 @@ Public Sub SetColors()
     mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
     mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
 
-    For i = 0 To 4
+    For i = picType.LBound To picType.UBound
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     Next
 
-    For i = 0 To 2
+    For i = picShow.LBound To picShow.UBound
         mouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
     Next
 
