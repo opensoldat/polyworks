@@ -410,7 +410,7 @@ Begin VB.Form frmColor
    Begin VB.Label lblClr 
       Alignment       =   2  'Center
       BackStyle       =   0  'Transparent
-      Caption         =   "ï¿½"
+      Caption         =   "°"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
