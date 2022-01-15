@@ -517,10 +517,10 @@ Public Function getWayptKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setWayptKey(Index As Integer, ByVal value As Byte)
+Public Sub setWayptKey(Index As Integer, ByVal Value As Byte)
 
-    If value > 0 Then
-        wayptKeys(Index) = value
+    If Value > 0 Then
+        wayptKeys(Index) = Value
     End If
 
 End Sub
@@ -567,18 +567,18 @@ Private Sub cboSpecial_Click()
 
 End Sub
 
-Public Sub getPathNum(tehValue As Byte)
+Public Sub getPathNum(Value As Byte)
 
-    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, tehValue = 1, BUTTON_UP
-    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, tehValue = 2, BUTTON_UP
-    wayptPath = tehValue - 1
+    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, Value = 1, BUTTON_UP
+    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, Value = 2, BUTTON_UP
+    wayptPath = Value - 1
 
 End Sub
 
-Public Sub getWayType(Index As Integer, tehValue As Boolean)
+Public Sub getWayType(Index As Integer, Value As Boolean)
 
-    wayptType(Index) = tehValue
-    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, tehValue, BUTTON_UP
+    wayptType(Index) = Value
+    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, Value, BUTTON_UP
 
 End Sub
 
