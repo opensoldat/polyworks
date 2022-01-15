@@ -637,7 +637,7 @@ Const B As Byte = 2
 
 Dim mHexValue As String
 
-Dim nonModal As Boolean
+Dim mNonModal As Boolean
 
 Dim lastTool As Byte
 
@@ -676,7 +676,7 @@ End Sub
 
 Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal As Byte, ByRef bVal As Byte, ByVal cTool As Byte)
 
-    nonModal = True
+    mNonModal = True
 
     lastTool = frmSoldatMapEditor.setTempTool(10)
     frmSoldatMapEditor.setCurrentTool 10
@@ -697,13 +697,13 @@ Private Sub HideColor(apply As Boolean)
 
     On Error GoTo ErrorHandler
 
-    If nonModal Then
+    If mNonModal Then
         If apply Then
             frmPalette.setValues red, green, blue
             frmPalette.checkPalette red, green, blue
         End If
 
-        nonModal = False
+        mNonModal = False
 
         frmSoldatMapEditor.picMenuBar.Enabled = True
 
