@@ -635,7 +635,7 @@ Const R As Byte = 0
 Const G As Byte = 1
 Const B As Byte = 2
 
-Dim hexValue As String
+Dim mHexValue As String
 
 Dim nonModal As Boolean
 
@@ -1145,7 +1145,7 @@ End Sub
 
 Private Sub updateHex()
 
-    hexValue = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
+    mHexValue = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
     txtHexCode.Text = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
 
 End Sub
@@ -1216,7 +1216,7 @@ Private Sub txtHexCode_Change()
 
     If HexToLong(txtHexCode.Text) = -1 Then
 
-    ElseIf hexValue <> txtHexCode.Text Then
+    ElseIf mHexValue <> txtHexCode.Text Then
         If Len(txtHexCode.Text) < 6 Then
             tempHexVal = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         ElseIf Len(txtHexCode.Text) > 6 Then
@@ -1240,12 +1240,12 @@ End Sub
 Private Sub txtHexCode_LostFocus()
 
     If HexToLong(txtHexCode.Text) = -1 Then
-        txtHexCode.Text = hexValue
-        clr(B) = CLng("&H" + right(hexValue, 2))
-        hexValue = left(hexValue, Len(hexValue) - 2)
-        clr(G) = CLng("&H" + right(hexValue, 2))
-        hexValue = left(hexValue, Len(hexValue) - 2)
-        clr(R) = CLng("&H" + right(hexValue, 2))
+        txtHexCode.Text = mHexValue
+        clr(B) = CLng("&H" + right(mHexValue, 2))
+        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        clr(G) = CLng("&H" + right(mHexValue, 2))
+        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        clr(R) = CLng("&H" + right(mHexValue, 2))
         changeRGB
         updateAll
         updateRGB
@@ -1256,7 +1256,7 @@ Private Sub txtHexCode_LostFocus()
         ElseIf Len(txtHexCode.Text) < 6 Then
             txtHexCode = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If
-        hexValue = txtHexCode.Text
+        mHexValue = txtHexCode.Text
 
     End If
 
