@@ -499,6 +499,7 @@ Option Explicit
 
 Dim formHeight As Integer
 Public collapsed As Boolean
+Const COLLAPSED_HEIGHT = 19
 
 Public xPos As Integer, yPos  As Integer
 
@@ -549,7 +550,7 @@ Public Sub setForm()
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
+        Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = formHeight * Screen.TwipsPerPixelY
     End If
@@ -618,7 +619,7 @@ Private Sub picTitle_DblClick()
 
     collapsed = Not collapsed
     If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
+        Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = formHeight * Screen.TwipsPerPixelY
     End If
