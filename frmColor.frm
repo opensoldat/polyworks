@@ -641,6 +641,18 @@ Dim mNonModal As Boolean
 
 Dim mLastTool As Byte
 
+Private Function Clamp(val As Single, min As Single, max As Single) As Single
+
+    If val < min Then
+        Clamp = min
+    ElseIf val > max Then
+        Clamp = max
+    Else
+        Clamp = val
+    End If
+
+End Function
+
 Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     On Error GoTo ErrorHandler
@@ -783,20 +795,9 @@ End Sub
 
 Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim xVal As Integer
-
     If Button = 1 Then
-        If X > 255 Then
-            X = 255
-        ElseIf X < 0 Then
-            X = 0
-        End If
-        If Y > 255 Then
-            Y = 255
-        ElseIf Y < 0 Then
-            Y = 0
-        End If
-
+        X = Clamp(X, 0, 255)
+        Y = Clamp(Y, 0, 255)
         sat = (255 - Y) / 255
         hue = X / 255 * 359
         calculateHue
@@ -823,19 +824,8 @@ End Sub
 
 Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         clr(Index) = X
         changeRGB
         txtRGB(Index).Text = clr(Index)
@@ -859,20 +849,8 @@ End Sub
 
 Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
-
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         hue = X / 255 * 359
 
         calculateHue
@@ -936,19 +914,8 @@ End Sub
 
 Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         sat = X / 255
         If clr(R) = clr(G) And clr(R) = clr(B) And sat > 0 Then 'determine rgb based on hue
             calculateHue
@@ -977,19 +944,8 @@ End Sub
 
 Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         bright = X / 255
         clr(low) = ((1 - sat) * 255) * bright
         clr(mid) = ((255 - pureClr(mid)) * (1 - sat) + pureClr(mid)) * bright
