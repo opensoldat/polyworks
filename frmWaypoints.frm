@@ -527,8 +527,6 @@ End Sub
 
 Private Sub Form_Load()
 
-    Dim i As Integer
-
     On Error GoTo ErrorHandler
 
     Me.SetColors
