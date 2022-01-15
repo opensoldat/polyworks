@@ -1672,16 +1672,16 @@ Private Sub Form_Load()
     Me.Show
 
     err = "Error setting directories"
-    If Len(Dir$(uncompDir)) = 0 Or uncompDir = "" Then
+    If Len(Dir$(uncompDir, vbDirectory)) = 0 Or uncompDir = "" Then
         uncompDir = appPath & "\Maps\"
     End If
 
-    If Len(Dir$(prefabDir)) = 0 Or prefabDir = "" Then
+    If Len(Dir$(prefabDir, vbDirectory)) = 0 Or prefabDir = "" Then
         prefabDir = appPath & "\Prefabs\"
     End If
 
     'if given directory doesn't exist, change to default
-    If Len(Dir$(soldatDir & "Textures\")) = 0 Or soldatDir = "" Then
+    If Len(Dir$(soldatDir & "Textures\", vbDirectory)) = 0 Or soldatDir = "" Then
         temp = GetSoldatDir
         If temp <> "" Then
             soldatDir = temp
