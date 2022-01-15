@@ -1489,7 +1489,6 @@ Public Sub SetColors()
 
     On Error Resume Next
 
-    Dim i As Integer
     Dim c As Control
 
 
@@ -1500,31 +1499,34 @@ Public Sub SetColors()
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
-    imgRGB(0).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(1).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(2).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    For Each c In imgRGB
+        c.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    Next
     imgHue.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     imgBright.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+
     picClr.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
 
 
     Me.BackColor = bgClr
 
-    For i = 0 To 8
-        lblClr(i).BackColor = lblBackClr
-        lblClr(i).ForeColor = lblTextClr
+    For Each c In lblClr
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 2
-        txtRGB(i).BackColor = txtBackClr
-        txtRGB(i).ForeColor = txtTextClr
+    For Each c In txtRGB
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
     Next
 
     txtHue.BackColor = txtBackClr
     txtHue.ForeColor = txtTextClr
+
     txtSat.BackColor = txtBackClr
     txtSat.ForeColor = txtTextClr
+
     txtBright.BackColor = txtBackClr
     txtBright.ForeColor = txtTextClr
 
