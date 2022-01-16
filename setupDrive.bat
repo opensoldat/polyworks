@@ -1,9 +1,12 @@
 :: Workaround for vbp file cosistency issue when saving
 ::
+:: Map project folder to "Z:" drive (if not already mapped) and
+:: open VB6 project (with option to skip if VB6.exe is running)
+::
 :: Detail: In the *.vbp project file the "Register=*..." lines use relative
 ::         paths if the project is opened on the same drive as registered
 ::         dlls/ocx files. This is problematic as the checkout folder might be
-::         at a different location for every developer. To avoid this issue this
+::         at a different location for every developer. To avoid the issue this
 ::         script maps the current folder to the Z: drive letter and runs VB6
 ::         with the project from Z:\* forcing VB6 to use absolue paths instead.
 ::
@@ -26,21 +29,58 @@
 ::       You can find the Register ids in the *.vbp file at the start of the line.
 
 @ECHO OFF
-IF [%CD:~0,2%]==[Z:] GOTO:DRIVE_ERROR
-
 PUSHD %~dp0
+SETLOCAL
+
+:: user config
+SET "MAPPED_DRIVE=Z:"
+SET "PROJECT_FILE=prjSoldatMapEditor.vbp"
+:: user config
+
+SET "MAPPED_PROJECT=%MAPPED_DRIVE%\%PROJECT_FILE%"
+IF EXIST %MAPPED_PROJECT% GOTO:CHECK_RUN_VB
+
 :: remove previous Z:
-SUBST Z: /d
+SUBST %MAPPED_DRIVE% /d
 :: register current folder as new Z:
-SUBST Z: .
+SUBST %MAPPED_DRIVE% .
+
+IF NOT EXIST %MAPPED_PROJECT% GOTO:DRIVE_ERROR
+
+:CHECK_RUN_VB
+IF NOT EXIST "%WINDIR%\zystem32\TASKLIST.EXE" CALL:REQUIREMENT_ERROR "%WINDIR%\System32\TASKLIST.EXE"
+IF NOT EXIST "%WINDIR%\zystem32\FIND.EXE"     CALL:REQUIREMENT_ERROR "%WINDIR%\System32\FIND.EXE"
+IF %ERRORLEVEL% NEQ 0 GOTO:WAIT_QUIT
+
+"%WINDIR%\System32\TASKLIST.EXE" /fi "ImageName eq VB6.exe" /fo csv 2>NUL | "%WINDIR%\System32\FIND.EXE" /I "VB6.exe">NUL
+IF NOT "%ERRORLEVEL%"=="0" GOTO:RUN_VB
+
+:ASK_VB_RUN
+SET /P "CHOICE=Visual Basic 6 already running. Start another instance[y/N]?"
+IF /I "%CHOICE%" == "Y" GOTO:RUN_VB
+IF /I "%CHOICE%" == "N" GOTO:END
+IF /I "%CHOICE%" == ""  GOTO:END
+GOTO:ASK_VB_RUN
+
 :: run vb6 as normal user with our project
-START Z:\prjSoldatMapEditor.vbp
-POPD
+:RUN_VB
+START %MAPPED_PROJECT%
 GOTO:END
 
 :: functions
 :DRIVE_ERROR
-ECHO ERROR: Please run the script from real project location instead of Z:
-PAUSE>NUL
+ECHO.ERROR: Cannot map %MAPPED_DRIVE% drive: %MAPPED_PROJECT% project file not found
+GOTO:WAIT_QUIT
+
+:WAIT_QUIT
+PAUSE>NULL
+GOTO:END
+
+:REQUIREMENT_ERROR
+ECHO.ERROR: Cannot find %1
+SET "ERRORLEVEL=1"
+GOTO:END
 
 :END
+POPD
+ENDLOCAL
