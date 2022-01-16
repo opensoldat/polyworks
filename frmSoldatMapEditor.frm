@@ -31,6 +31,33 @@ Begin VB.Form frmSoldatMapEditor
    ScaleMode       =   3  'Pixel
    ScaleWidth      =   800
    ShowInTaskbar   =   0   'False
+   Begin VB.PictureBox picResize 
+      Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H004A3C31&
+      BorderStyle     =   0  'None
+      FillColor       =   &H00FFFFFF&
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   300
+      Left            =   11700
+      MousePointer    =   8  'Size NW SE
+      ScaleHeight     =   20
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   20
+      TabIndex        =   21
+      TabStop         =   0   'False
+      Top             =   8700
+      Width           =   300
+   End
    Begin VB.PictureBox picButtonGfx 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
@@ -1653,6 +1680,15 @@ Dim lastCompiled As String
 Dim currentWaypoint As Integer
 
 Dim objTexSize As D3DVECTOR2
+
+Dim mIsResizingWindow As Boolean
+Dim mMouseStartPosX As Long
+Dim mMouseStartPosY As Long
+Dim mInitialWindowWidth As Single
+Dim mInitialWindowHeight As Single
+
+Const MIN_FORM_WIDTH = 300
+Const MIN_FORM_HEIGHT = 200
 
 Private Sub Form_Load()
 
@@ -10321,6 +10357,13 @@ Private Function inSelRect(ByVal X As Single, ByVal Y As Single) As Boolean
 
 End Function
 
+Private Sub lblMousePosition_Click()
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
+    formLeft = Me.left / Screen.TwipsPerPixelX
+    formTop = Me.Top / Screen.TwipsPerPixelY
+End Sub
+
 Private Sub mnuClrSketch_Click()
 
     sketchLines = 0
@@ -10983,6 +11026,57 @@ Private Sub mnuWayType_Click(Index As Integer)
             lblCurrentTool.Caption = lblCurrentTool.Caption & " (" & mnuWayType(i).Caption & ")"
         End If
     Next
+
+End Sub
+
+Private Sub picResize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mIsResizingWindow = True
+    picResize.Visible = False
+    noRedraw = True
+
+    mInitialWindowWidth = Me.Width
+    mInitialWindowHeight = Me.Height
+
+    mMouseStartPosX = X
+    mMouseStartPosY = Y
+
+End Sub
+
+Private Sub picResize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If mIsResizingWindow = True Then
+       Dim newWidth As Long
+       Dim newHeight As Long
+
+       newWidth = mInitialWindowWidth + (X - mMouseStartPosX) * Screen.TwipsPerPixelX
+       newHeight = mInitialWindowHeight + (Y - mMouseStartPosY) * Screen.TwipsPerPixelY
+
+       If newHeight > MIN_FORM_HEIGHT * Screen.TwipsPerPixelY Then
+           Me.Height = newHeight
+       End If
+
+       If newWidth > MIN_FORM_WIDTH * Screen.TwipsPerPixelX Then
+           Me.Width = newWidth
+       End If
+   End If
+
+End Sub
+
+Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    mIsResizingWindow = False
+
+    picResize.Top = Me.Height / Screen.TwipsPerPixelY - picResize.Height
+    picResize.left = Me.Width / Screen.TwipsPerPixelY - picResize.Width
+
+    picResize.Visible = True
+    noRedraw = False
+    If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
+      resetDevice
+    Else
+        Render
+    End If
 
 End Sub
 
@@ -14811,7 +14905,7 @@ Private Sub picTitle_DblClick()
 End Sub
 
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
+    
     If Me.WindowState < 2 Then
         If Len(frmDisplay.Tag) <> 0 Then
 
