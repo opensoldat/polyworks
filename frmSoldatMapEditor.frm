@@ -6714,7 +6714,9 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
     On Error GoTo ErrorHandler
 
     'if not in focus and not properties in focus and not text in focus
-    If Screen.ActiveForm.hWnd <> Me.hWnd And Screen.ActiveForm.hWnd <> frmInfo.hWnd Then
+    If Screen.ActiveForm Is Nothing Then
+        Exit Sub
+    ElseIf Screen.ActiveForm.hWnd <> Me.hWnd And Screen.ActiveForm.hWnd <> frmInfo.hWnd Then
         If Not (Screen.ActiveForm.hWnd = frmPalette.hWnd And frmPalette.textControl) Then
             RegainFocus
         End If
