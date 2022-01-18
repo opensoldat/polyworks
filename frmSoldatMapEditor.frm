@@ -249,23 +249,6 @@ Begin VB.Form frmSoldatMapEditor
          Top             =   0
          Width           =   960
       End
-      Begin VB.PictureBox picProgress 
-         Appearance      =   0  'Flat
-         AutoRedraw      =   -1  'True
-         BackColor       =   &H004A3C31&
-         BorderStyle     =   0  'None
-         FillColor       =   &H007B614A&
-         ForeColor       =   &H80000008&
-         Height          =   150
-         Left            =   9960
-         ScaleHeight     =   11
-         ScaleMode       =   0  'User
-         ScaleWidth      =   128
-         TabIndex        =   15
-         TabStop         =   0   'False
-         Top             =   30
-         Width           =   1920
-      End
       Begin VB.PictureBox picMenu 
          Appearance      =   0  'Flat
          AutoRedraw      =   -1  'True
@@ -373,6 +356,23 @@ Begin VB.Form frmSoldatMapEditor
          TabStop         =   0   'False
          Top             =   0
          Width           =   960
+      End
+      Begin VB.PictureBox picProgress 
+         Appearance      =   0  'Flat
+         AutoRedraw      =   -1  'True
+         BackColor       =   &H004A3C31&
+         BorderStyle     =   0  'None
+         FillColor       =   &H007B614A&
+         ForeColor       =   &H80000008&
+         Height          =   150
+         Left            =   9960
+         ScaleHeight     =   11
+         ScaleMode       =   0  'User
+         ScaleWidth      =   128
+         TabIndex        =   15
+         TabStop         =   0   'False
+         Top             =   30
+         Width           =   1920
       End
    End
    Begin VB.PictureBox picTitle 
