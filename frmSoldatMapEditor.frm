@@ -12314,7 +12314,7 @@ Private Sub loadINI()
 
     errVal = "10"
 
-    For i = 1 To 9
+    For i = mnuRecent.LBound + 1 To mnuRecent.UBound
         If mnuRecent(i).Caption = "" Then
             numRecent = numRecent + 1
             mnuRecent(i).Visible = False
@@ -12322,7 +12322,7 @@ Private Sub loadINI()
             mnuRecent(i).Visible = True
         End If
     Next
-    If numRecent = 9 And mnuRecent(0).Caption = "" Then
+    If numRecent = mnuRecent.Count - 1 And mnuRecent(mnuRecent.LBound).Caption = "" Then
         mnuRecentFiles.Enabled = False
     End If
 
