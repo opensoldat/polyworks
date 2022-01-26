@@ -12196,8 +12196,12 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     leftVal = window.left / Screen.TwipsPerPixelX
     topVal = window.Top / Screen.TwipsPerPixelY
 
-    iniString = "Visible=" & window.Visible & sNull & "Left=" & leftVal & sNull & "Top=" & topVal & sNull _
-            & "Collapsed=" & collapsed & sNull & "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & sNull & sNull
+    iniString = _
+        "Visible=" & window.Visible & sNull & _
+        "Left=" & leftVal & sNull & _
+        "Top=" & topVal & sNull & _
+        "Collapsed=" & collapsed & sNull & _
+        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & sNull & sNull
 
     saveSection sectionName, iniString, appPath & "\workspace\" & FileName
 
@@ -14261,9 +14265,12 @@ Private Sub mnuSaveSpace_Click()
 
     If commonDialog.FileName <> "" Then
 
-        iniString = "WindowState=" & Me.WindowState & sNull _
-            & "Width=" & formWidth & sNull & "Height=" & formHeight & sNull _
-            & "Left=" & formLeft & sNull & "Top=" & formTop & sNull & sNull
+        iniString = _
+            "WindowState=" & Me.WindowState & sNull & _
+            "Width=" & formWidth & sNull & _
+            "Height=" & formHeight & sNull & _
+            "Left=" & formLeft & sNull & _
+            "Top=" & formTop & sNull & sNull
         saveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
         saveWindow "Tools", frmTools, False, commonDialog.FileTitle
