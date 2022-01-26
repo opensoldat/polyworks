@@ -12048,70 +12048,114 @@ Private Sub saveSettings()
     sNull = Chr$(0)
 
     'preferences
-    iniString = "Dir=" & soldatDir & sNull & "Uncompiled=" & uncompDir & sNull & "Prefabs=" & prefabDir & sNull _
-            & "GridSpacing=" & gridSpacing & sNull & "GridDiv=" & gridDivisions & sNull _
-            & "GridClr1=" & RGBtoHex(gridClr) & sNull & "GridClr2=" & RGBtoHex(gridClr2) & sNull _
-            & "GridAlpha1=" & gridOp1 & sNull & "GridAlpha2=" & gridOp2 & sNull _
-            & "PolySrc=" & polyBlendSrc & sNull & "PolyDest=" & polyBlendDest & sNull _
-            & "WireSrc=" & wireBlendSrc & sNull & "WireDest=" & wireBlendDest & sNull _
-            & "PointClr=" & RGBtoHex(pointClr) & sNull & "SelectionClr=" & RGBtoHex(selectionClr) & sNull _
-            & "BackClr=" & RGBtoHex(backClr) & sNull & "MaxUndo=" & max_undo & sNull _
-            & "SceneryVerts=" & sceneryVerts & sNull & "Topmost=" & topmost & sNull & sNull
+    iniString = _
+        "Dir=" & soldatDir & sNull & _
+        "Uncompiled=" & uncompDir & sNull & _
+        "Prefabs=" & prefabDir & sNull & _
+        "GridSpacing=" & gridSpacing & sNull & _
+        "GridDiv=" & gridDivisions & sNull & _
+        "GridClr1=" & RGBtoHex(gridClr) & sNull & _
+        "GridClr2=" & RGBtoHex(gridClr2) & sNull & _
+        "GridAlpha1=" & gridOp1 & sNull & _
+        "GridAlpha2=" & gridOp2 & sNull & _
+        "PolySrc=" & polyBlendSrc & sNull & _
+        "PolyDest=" & polyBlendDest & sNull & _
+        "WireSrc=" & wireBlendSrc & sNull & _
+        "WireDest=" & wireBlendDest & sNull & _
+        "PointClr=" & RGBtoHex(pointClr) & sNull & _
+        "SelectionClr=" & RGBtoHex(selectionClr) & sNull & _
+        "BackClr=" & RGBtoHex(backClr) & sNull & _
+        "MaxUndo=" & max_undo & sNull & _
+        "SceneryVerts=" & sceneryVerts & sNull & _
+        "Topmost=" & topmost & sNull & sNull
     saveSection "Preferences", iniString
 
     'display
-    iniString = "Background=" & showBG & sNull & "Polys=" & showPolys & sNull _
-            & "Texture=" & showTexture & sNull & "Wireframe=" & showWireframe & sNull _
-            & "Points=" & showPoints & sNull & "Scenery=" & showScenery & sNull _
-            & "Objects=" & showObjects & sNull & "Waypoints=" & showWaypoints & sNull _
-            & "Grid=" & showGrid & sNull & "Lights=" & showLights & sNull _
-            & "Sketch=" & showSketch & sNull & sNull
+    iniString = _
+        "Background=" & showBG & sNull & _
+        "Polys=" & showPolys & sNull & _
+        "Texture=" & showTexture & sNull & _
+        "Wireframe=" & showWireframe & sNull & _
+        "Points=" & showPoints & sNull & _
+        "Scenery=" & showScenery & sNull & _
+        "Objects=" & showObjects & sNull & _
+        "Waypoints=" & showWaypoints & sNull & _
+        "Grid=" & showGrid & sNull & _
+        "Lights=" & showLights & sNull & _
+        "Sketch=" & showSketch & sNull & sNull
     saveSection "Display", iniString
 
     'tool settings
     currentColor = RGB(polyClr.blue, polyClr.green, polyClr.red)
-    iniString = "CurrentTool=" & currentTool & sNull & "SnapVertices=" & ohSnap & sNull _
-            & "SnapToGrid=" & snapToGrid & sNull & "FixedTexture=" & fixedTexture & sNull _
-            & "Opacity=" & (opacity * 100) & sNull & "ColorRadius=" & clrRadius & sNull _
-            & "CurrentColor=" & RGBtoHex(currentColor) & sNull & "ColorMode=" & colorMode & sNull _
-            & "BlendMode=" & blendMode & sNull & "SnapRadius=" & snapRadius & sNull _
-            & "RotateScenery=" & frmScenery.rotateScenery & sNull & "ScaleScenery=" & frmScenery.scaleScenery & sNull _
-            & "TextureWidth=" & xTexture & sNull & "TextureHeight=" & yTexture & sNull _
-            & "Texture=" & gTextureFile & sNull _
-            & "CustomX=" & mnuCustomX.Checked & sNull _
-            & "CustomY=" & mnuCustomY.Checked & sNull & sNull
+    iniString = _
+        "CurrentTool=" & currentTool & sNull & _
+        "SnapVertices=" & ohSnap & sNull & _
+        "SnapToGrid=" & snapToGrid & sNull & _
+        "FixedTexture=" & fixedTexture & sNull & _
+        "Opacity=" & (opacity * 100) & sNull & _
+        "ColorRadius=" & clrRadius & sNull & _
+        "CurrentColor=" & RGBtoHex(currentColor) & sNull & _
+        "ColorMode=" & colorMode & sNull & _
+        "BlendMode=" & blendMode & sNull & _
+        "SnapRadius=" & snapRadius & sNull & _
+        "RotateScenery=" & frmScenery.rotateScenery & sNull & _
+        "ScaleScenery=" & frmScenery.scaleScenery & sNull & _
+        "TextureWidth=" & xTexture & sNull & _
+        "TextureHeight=" & yTexture & sNull & _
+        "Texture=" & gTextureFile & sNull & _
+        "CustomX=" & mnuCustomX.Checked & sNull & _
+        "CustomY=" & mnuCustomY.Checked & sNull & sNull
     saveSection "ToolSettings", iniString
 
     'hotkeys
-    iniString = "Move=" & frmTools.getHotKey(0) & sNull & "Create=" & frmTools.getHotKey(1) & sNull _
-            & "VertexSelection=" & frmTools.getHotKey(2) & sNull & "PolySelection=" & frmTools.getHotKey(3) & sNull _
-            & "VertexColor=" & frmTools.getHotKey(4) & sNull & "PolyColor=" & frmTools.getHotKey(5) & sNull _
-            & "Texture=" & frmTools.getHotKey(6) & sNull & "Scenery=" & frmTools.getHotKey(7) & sNull _
-            & "Waypoints=" & frmTools.getHotKey(8) & sNull & "Objects=" & frmTools.getHotKey(9) & sNull _
-            & "ColorPicker=" & frmTools.getHotKey(10) & sNull & "Sketch=" & frmTools.getHotKey(11) & sNull _
-            & "Lights=" & frmTools.getHotKey(12) & sNull & "Depthmap=" & frmTools.getHotKey(13) & sNull & sNull
+    iniString = _
+        "Move=" & frmTools.getHotKey(0) & sNull & _
+        "Create=" & frmTools.getHotKey(1) & sNull & _
+        "VertexSelection=" & frmTools.getHotKey(2) & sNull & _
+        "PolySelection=" & frmTools.getHotKey(3) & sNull & _
+        "VertexColor=" & frmTools.getHotKey(4) & sNull & _
+        "PolyColor=" & frmTools.getHotKey(5) & sNull & _
+        "Texture=" & frmTools.getHotKey(6) & sNull & _
+        "Scenery=" & frmTools.getHotKey(7) & sNull & _
+        "Waypoints=" & frmTools.getHotKey(8) & sNull & _
+        "Objects=" & frmTools.getHotKey(9) & sNull & _
+        "ColorPicker=" & frmTools.getHotKey(10) & sNull & _
+        "Sketch=" & frmTools.getHotKey(11) & sNull & _
+        "Lights=" & frmTools.getHotKey(12) & sNull & _
+        "Depthmap=" & frmTools.getHotKey(13) & sNull & sNull
     saveSection "HotKeys", iniString
 
     'waypoint keys
-    iniString = "Left=" & frmWaypoints.getWayptKey(0) & sNull & "Right=" & frmWaypoints.getWayptKey(1) & sNull _
-            & "Up=" & frmWaypoints.getWayptKey(2) & sNull & "Down=" & frmWaypoints.getWayptKey(3) & sNull _
-            & "Fly=" & frmWaypoints.getWayptKey(4) & sNull & sNull
+    iniString = _
+        "Left=" & frmWaypoints.getWayptKey(0) & sNull & _
+        "Right=" & frmWaypoints.getWayptKey(1) & sNull & _
+        "Up=" & frmWaypoints.getWayptKey(2) & sNull & _
+        "Down=" & frmWaypoints.getWayptKey(3) & sNull & _
+        "Fly=" & frmWaypoints.getWayptKey(4) & sNull & sNull
     saveSection "WaypointKeys", iniString
 
     'layer keys
-    iniString = "Background=" & frmDisplay.getLayerKey(0) & sNull & "Polys=" & frmDisplay.getLayerKey(1) & sNull _
-            & "Texture=" & frmDisplay.getLayerKey(2) & sNull & "Wireframe=" & frmDisplay.getLayerKey(3) & sNull _
-            & "Points=" & frmDisplay.getLayerKey(4) & sNull & "Scenery=" & frmDisplay.getLayerKey(5) & sNull _
-            & "Objects=" & frmDisplay.getLayerKey(6) & sNull & "Waypoints=" & frmDisplay.getLayerKey(7) & sNull & sNull
+    iniString = _
+        "Background=" & frmDisplay.getLayerKey(0) & sNull & _
+        "Polys=" & frmDisplay.getLayerKey(1) & sNull & _
+        "Texture=" & frmDisplay.getLayerKey(2) & sNull & _
+        "Wireframe=" & frmDisplay.getLayerKey(3) & sNull & _
+        "Points=" & frmDisplay.getLayerKey(4) & sNull & _
+        "Scenery=" & frmDisplay.getLayerKey(5) & sNull & _
+        "Objects=" & frmDisplay.getLayerKey(6) & sNull & _
+        "Waypoints=" & frmDisplay.getLayerKey(7) & sNull & sNull
     saveSection "LayerKeys", iniString
 
     'palette
     frmPalette.savePalette appPath & "\palettes\current.txt"
 
     'workspace
-    iniString = "WindowState=" & Me.WindowState & sNull _
-        & "Width=" & formWidth & sNull & "Height=" & formHeight & sNull _
-        & "Left=" & formLeft & sNull & "Top=" & formTop & sNull & sNull
+    iniString = _
+        "WindowState=" & Me.WindowState & sNull & _
+        "Width=" & formWidth & sNull & _
+        "Height=" & formHeight & sNull & _
+        "Left=" & formLeft & sNull & _
+        "Top=" & formTop & sNull & sNull
     saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
     saveWindow "Tools", frmTools, False
@@ -12123,11 +12167,17 @@ Private Sub saveSettings()
     saveWindow "Texture", frmTexture, frmTexture.collapsed
 
     'recent files
-    iniString = "01=" & mnuRecent(0).Caption & sNull & "02=" & mnuRecent(1).Caption & sNull _
-            & "03=" & mnuRecent(2).Caption & sNull & "04=" & mnuRecent(3).Caption & sNull _
-            & "05=" & mnuRecent(4).Caption & sNull & "06=" & mnuRecent(5).Caption & sNull _
-            & "07=" & mnuRecent(6).Caption & sNull & "08=" & mnuRecent(7).Caption & sNull _
-            & "09=" & mnuRecent(8).Caption & sNull & "10=" & mnuRecent(9).Caption & sNull & sNull
+    iniString = _
+        "01=" & mnuRecent(0).Caption & sNull & _
+        "02=" & mnuRecent(1).Caption & sNull & _
+        "03=" & mnuRecent(2).Caption & sNull & _
+        "04=" & mnuRecent(3).Caption & sNull & _
+        "05=" & mnuRecent(4).Caption & sNull & _
+        "06=" & mnuRecent(5).Caption & sNull & _
+        "07=" & mnuRecent(6).Caption & sNull & _
+        "08=" & mnuRecent(7).Caption & sNull & _
+        "09=" & mnuRecent(8).Caption & sNull & _
+        "10=" & mnuRecent(9).Caption & sNull & sNull
     saveSection "RecentFiles", iniString
 
     'gfx dir
