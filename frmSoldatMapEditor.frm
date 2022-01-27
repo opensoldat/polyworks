@@ -1955,7 +1955,7 @@ Public Sub initGfx()
 
     'draw control box buttons
     mouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = 0), BUTTON_UP
+    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
     mouseEvent2 picMinimize, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
@@ -11073,10 +11073,13 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
     picResize.Visible = True
     noRedraw = False
     If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
-      resetDevice
+        resetDevice
     Else
         Render
     End If
+    
+    formWidth = Me.Width / Screen.TwipsPerPixelX
+    formHeight = Me.Height / Screen.TwipsPerPixelY
 
 End Sub
 
@@ -14879,10 +14882,10 @@ End Sub
 
 Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Me.WindowState = 2 Then
-        Me.WindowState = 0
+    If Me.WindowState = vbMaximized Then
+        Me.WindowState = vbNormal
     Else
-        Me.WindowState = 2
+        Me.WindowState = vbMaximized
     End If
 
     mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
@@ -14943,27 +14946,27 @@ Private Sub picStatus_Click()
         Dim hwnd1 As Long
         hwnd1 = FindWindow("Shell_traywnd", "")
         Call SetWindowPos(hwnd1, 0, 0, 0, 0, 0, SWP_SHOWWINDOW)
-
     End If
 
 End Sub
 
 Private Sub picTitle_DblClick()
 
-    If Me.WindowState = 2 Then
-        Me.WindowState = 0
-        mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+    If Me.WindowState = vbMaximized Then
+        Me.WindowState = vbNormal
     Else
-        Me.WindowState = 2
-        mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+        Me.WindowState = vbMaximized
     End If
+
+    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+
     resetDevice
 
 End Sub
 
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
-    If Me.WindowState < 2 Then
+    If Me.WindowState = vbMinimized Or Me.WindowState = vbNormal Then
         If Len(frmDisplay.Tag) <> 0 Then
 
         frmDisplay.Hide
