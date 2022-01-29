@@ -11068,7 +11068,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
     mIsResizingWindow = False
 
     picResize.Top = Me.Height / Screen.TwipsPerPixelY - picResize.Height
-    picResize.left = Me.Width / Screen.TwipsPerPixelY - picResize.Width
+    picResize.left = Me.Width / Screen.TwipsPerPixelX - picResize.Width
 
     picResize.Visible = True
     noRedraw = False
