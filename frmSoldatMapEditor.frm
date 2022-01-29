@@ -11031,21 +11031,23 @@ End Sub
 
 Private Sub picResize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mIsResizingWindow = True
-    picResize.Visible = False
-    noRedraw = True
+    If Me.WindowState = vbNormal Then
+        mIsResizingWindow = True
+        picResize.Visible = False
+        noRedraw = True
 
-    mInitialWindowWidth = Me.Width
-    mInitialWindowHeight = Me.Height
+        mInitialWindowWidth = Me.Width
+        mInitialWindowHeight = Me.Height
 
-    mMouseStartPosX = X
-    mMouseStartPosY = Y
+        mMouseStartPosX = X
+        mMouseStartPosY = Y
+    End If
 
 End Sub
 
 Private Sub picResize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If mIsResizingWindow = True Then
+    If Me.WindowState = vbNormal And mIsResizingWindow = True Then
        Dim newWidth As Long
        Dim newHeight As Long
 
@@ -11067,19 +11069,21 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
 
     mIsResizingWindow = False
 
-    picResize.Top = Me.Height / Screen.TwipsPerPixelY - picResize.Height
-    picResize.left = Me.Width / Screen.TwipsPerPixelX - picResize.Width
+    If Me.WindowState = vbNormal Then
+        formHeight = Me.Height / Screen.TwipsPerPixelY
+        formWidth = Me.Width / Screen.TwipsPerPixelX
 
-    picResize.Visible = True
-    noRedraw = False
-    If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
-        resetDevice
-    Else
-        Render
+        picResize.Top = formHeight - picResize.Height
+        picResize.left = formWidth - picResize.Width
+
+        picResize.Visible = True
+        noRedraw = False
+        If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
+            resetDevice
+        Else
+            Render
+        End If
     End If
-
-    formWidth = Me.Width / Screen.TwipsPerPixelX
-    formHeight = Me.Height / Screen.TwipsPerPixelY
 
 End Sub
 
@@ -12417,6 +12421,9 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
         Me.left = formLeft * Screen.TwipsPerPixelX
         Me.Top = formTop * Screen.TwipsPerPixelY
     End If
+
+    picResize.Top = formHeight - picResize.Height
+    picResize.left = formWidth - picResize.Width
 
     tvwScenery.Height = formHeight - 41 - 20
 
@@ -14312,6 +14319,9 @@ Private Sub mnuResetWindows_Click()
         Me.left = Screen.Width / 2 - Me.Width / 2 - Screen.TwipsPerPixelX
         Me.Top = Screen.Height / 2 - Me.Height / 2 - Screen.TwipsPerPixelY
 
+        picResize.Top = formHeight - picResize.Height
+        picResize.left = formWidth - picResize.Width
+
         frmTools.left = Me.left - frmTools.Width + Screen.TwipsPerPixelX
         frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
         frmPalette.left = Me.left + Me.Width - Screen.TwipsPerPixelX
@@ -14888,6 +14898,8 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
         Me.WindowState = vbMaximized
     End If
 
+    picResize.Visible = Me.WindowState = vbNormal
+
     mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
 
     resetDevice
@@ -14959,6 +14971,8 @@ Private Sub picTitle_DblClick()
     End If
 
     mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+
+    picResize.Visible = Me.WindowState = vbNormal
 
     resetDevice
 
