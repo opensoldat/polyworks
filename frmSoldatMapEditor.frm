@@ -11077,7 +11077,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
     Else
         Render
     End If
-    
+
     formWidth = Me.Width / Screen.TwipsPerPixelX
     formHeight = Me.Height / Screen.TwipsPerPixelY
 
@@ -12449,7 +12449,7 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
     frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
     frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
     frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
-    
+
     mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
     frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
     frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & FileName)
@@ -14965,7 +14965,7 @@ Private Sub picTitle_DblClick()
 End Sub
 
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    
+
     If Me.WindowState = vbMinimized Or Me.WindowState = vbNormal Then
         If Len(frmDisplay.Tag) <> 0 Then
 
@@ -15005,7 +15005,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
         ReleaseCapture
         SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-        
+
         If Len(frmDisplay.Tag) <> 0 Then
 
             frmDisplay.Move (frmDisplay.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
