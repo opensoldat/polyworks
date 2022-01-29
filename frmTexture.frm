@@ -85,9 +85,7 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
 
     Exit Sub
@@ -192,7 +190,6 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
         frmInfo.txtQuadY(0).Text = y1tex * 2
         frmInfo.txtQuadX(1).Text = x2tex * 2
         frmInfo.txtQuadY(1).Text = y2tex * 2
-
     End If
 
 End Sub

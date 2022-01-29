@@ -47,16 +47,19 @@ Public Function ARGB(ByVal alphaVal As Byte, clrVal As Long) As Long
     Dim clrString As String
 
     clrString = Hex$(clrVal)
+
     If Len(clrString) < 6 Then
         clrString = String$(6 - Len(clrString), "0") & clrString
     ElseIf Len(clrString) > 6 Then
         clrString = right$(clrString, 6)
     End If
+
     If Len(Hex$(alphaVal)) = 1 Then
         clrString = "0" + Hex$(alphaVal) & clrString
     ElseIf Len(Hex$(alphaVal)) = 2 Then
         clrString = Hex$(alphaVal) & clrString
     End If
+
     ARGB = CLng("&H" & clrString)
 
 End Function

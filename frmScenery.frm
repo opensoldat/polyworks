@@ -442,7 +442,6 @@ Public Sub listScenery()
 
         fileOpen = False
         file = Dir$
-
     Loop
 
     Exit Sub

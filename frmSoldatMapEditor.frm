@@ -1365,26 +1365,32 @@ Private Type TCustomVertex
     tu      As Single
     tv      As Single
 End Type
+
 Private Type TSketchVertex
     X As Single
     Y As Single
     z As Single
 End Type
+
 Private Type TSketchLine
     vertex(1 To 2) As TSketchVertex
 End Type
+
 Private Type TVertexHit
     X As Single 'sin of angle
     Y As Single 'cos of angle
     z As Single '0
 End Type
+
 Private Type TPolyHit
     vertex(1 To 3) As TVertexHit
 End Type
+
 Private Type TPolygon
     vertex(1 To 3) As TCustomVertex
     Perp           As TPolyHit
 End Type
+
 Private Type TLine
     vertex(1 To 2) As TCustomVertex
 End Type
@@ -2000,6 +2006,7 @@ Public Sub Init()
     Dim D3DWindow As D3DPRESENT_PARAMETERS
     Dim debugVal As String
 
+
     debugVal = "Error creating Direct3D objects"
 
     If Not initialized2 Then
@@ -2009,12 +2016,14 @@ Public Sub Init()
         initialized2 = True
     End If
 
+
     debugVal = "Error getting display mode"
 
     D3D.GetAdapterDisplayMode D3DADAPTER_DEFAULT, DispMode
     D3DWindow.Windowed = 1
     D3DWindow.SwapEffect = D3DSWAPEFFECT_COPY
     D3DWindow.BackBufferFormat = D3DFMT_A8R8G8B8
+
 
     debugVal = "Error creating D3D device"
 
@@ -2039,13 +2048,14 @@ Public Sub Init()
     Set renderSurface = renderTarget.GetSurfaceLevel(0)
     Set backBuffer = D3DDevice.GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO)
 
+
     debugVal = "Error creating pattern texture"
 
     Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, appPath & "\" & gfxDir & "\pattern.bmp")
 
+
     debugVal = "Error creating objects texture"
 
-    '----
     Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
@@ -2055,7 +2065,6 @@ Public Sub Init()
     objTexSize.X = textureDesc.Width
     objTexSize.Y = textureDesc.Height
 
-    '----
 
     debugVal = "Error creating scenery not found texture"
 
@@ -2076,11 +2085,13 @@ Public Sub Init()
         SceneryTextures(0).reScale.Y = 1
     End If
 
+
     debugVal = "Error creating line texture"
 
     Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
+
 
     debugVal = "Error creating path texture"
 
@@ -2088,11 +2099,13 @@ Public Sub Init()
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
+
     debugVal = "Error creating rotation center texture"
 
     Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
+
 
     debugVal = "Error creating sketch texture"
 
@@ -2100,9 +2113,11 @@ Public Sub Init()
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
+
     debugVal = "Error creating scenery sprite"
 
     Set scenerySprite = D3DX.CreateSprite(D3DDevice)
+
 
     debugVal = "Error creating particle texture"
 
@@ -2480,7 +2495,6 @@ Public Sub LoadFile(FileName As String)
         ReDim Scenery(sceneryCount)
 
         If sceneryCount > 0 Then
-
             Dim offset As Integer
             offset = 0
 
@@ -2519,11 +2533,9 @@ Public Sub LoadFile(FileName As String)
                     End If
                     Scenery(i - offset).color = ARGB(Scenery(i - offset).alpha, Scenery(i - offset).color)
                 End If
-
             Next
 
             sceneryCount = sceneryCount - offset
-
         End If
 
         ReDim Preserve Scenery(sceneryCount)
@@ -2540,9 +2552,7 @@ Public Sub LoadFile(FileName As String)
         Dim firstOccurence As Integer
 
         If sceneryElements > 0 And sceneryElements < 500 Then
-
             For i = 1 To sceneryElements
-
                 tempString = ""
 
                 Get #1, , Scenery_New
@@ -2617,7 +2627,6 @@ Public Sub LoadFile(FileName As String)
                     SceneryTextures(i).reScale.X = 1
                     SceneryTextures(i).reScale.Y = 1
                 End If
-
             Next
 
             For i = 1 To sceneryCount
@@ -2627,11 +2636,9 @@ Public Sub LoadFile(FileName As String)
                     Scenery(i).Style = 1
                 End If
             Next
-
         ElseIf sceneryElements <> 0 Then
-        'if we got to this point it means that scenery were loaded but scenery elements are borked
-        'or scenery are borked too
-
+            'if we got to this point it means that scenery were loaded but scenery elements are borked
+            'or scenery are borked too
             sceneryElements = 0
             For i = 1 To sceneryCount
                 Scenery(i).Style = 0
@@ -2700,7 +2707,6 @@ Public Sub LoadFile(FileName As String)
         Next
 
         If Options.MapRandomID < 0 Then
-
             Get #1, , lightCount
             ReDim Lights(lightCount)
 
@@ -2714,7 +2720,6 @@ Public Sub LoadFile(FileName As String)
             For i = 1 To sketchLines
                 Get #1, , sketch(i)
             Next
-
         Else
             lightCount = 0
             ReDim Lights(lightCount)
@@ -3128,11 +3133,9 @@ Private Sub SaveFile(FileName As String)
         'save polys
         Put #1, , mPolyCount
         For i = 1 To mPolyCount
-
             Polygon.Poly = Polys(i)
 
             For j = 1 To 3
-
                 Polygon.Poly.vertex(j).X = PolyCoords(i).vertex(j).X
                 Polygon.Poly.vertex(j).Y = PolyCoords(i).vertex(j).Y
 
@@ -3151,13 +3154,11 @@ Private Sub SaveFile(FileName As String)
                 Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
                 Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
                 Polygon.Poly.Perp.vertex(j).z = 1
-
             Next
 
             Polygon.polyType = vertexList(i).polyType
 
             Put #1, , Polygon
-
         Next
 
         Put #1, , sectorsDivision
@@ -3381,7 +3382,6 @@ Public Sub SaveAndCompile(FileName As String)
         'save polys
         Put #1, , mPolyCount
         For i = 1 To mPolyCount
-
             Polygon.Poly = Polys(i)
             Polygon.polyType = vertexList(i).polyType
 
@@ -3393,7 +3393,6 @@ Public Sub SaveAndCompile(FileName As String)
             Polygon.Poly.vertex(3).Y = PolyCoords(i).vertex(3).Y - yOffset
 
             For j = 1 To 3
-
                 VertNum = j + 1
                 If VertNum > 3 Then VertNum = 1
 
@@ -3415,11 +3414,9 @@ Public Sub SaveAndCompile(FileName As String)
                 Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
                 Polygon.Poly.Perp.vertex(j).z = 1
                 Polygon.Poly.vertex(j).z = 1
-
             Next
 
             Put #1, , Polygon
-
         Next
 
         Put #1, , sectorsDivision
@@ -3428,11 +3425,9 @@ Public Sub SaveAndCompile(FileName As String)
         'generate sectors
         For X = -SECTOR_NUM To SECTOR_NUM
             For Y = -SECTOR_NUM To SECTOR_NUM
-
                 polysInSector = 0
 
                 If X >= -xSecNum And X <= xSecNum And Y >= -ySecNum And Y <= ySecNum Then 'if sectors within range
-
                     For i = 1 To mPolyCount
                         If vertexList(i).polyType <> 3 Then
                         If isInSector(i, sectorsDivision * (X - 0.5) + xOffset - 1, sectorsDivision * (Y - 0.5) + yOffset - 1, sectorsDivision + 2) Then
@@ -3447,7 +3442,6 @@ Public Sub SaveAndCompile(FileName As String)
                     Next
 
                     If polysInSector > 256 Then polysInSector = 256
-
                 End If
 
                 Put #1, , polysInSector
@@ -3457,7 +3451,6 @@ Public Sub SaveAndCompile(FileName As String)
                         Put #1, , sector(k)
                     Next
                 End If
-
             Next
             picProgress.Line ((X + SECTOR_NUM) * 2, 0)-((X + SECTOR_NUM) * 2, 12), RGB(61, 75, 97)
             picProgress.Line ((X + SECTOR_NUM) * 2 + 1, 0)-((X + SECTOR_NUM) * 2 + 1, 12), RGB(61, 75, 97)
@@ -3933,7 +3926,6 @@ Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div A
     isInSector2 = False
 
     For j = 1 To 3
-
         VertNum = j + 1
         If VertNum > 3 Then VertNum = 1
         x1 = PolyCoords(Index).vertex(j).X
@@ -3950,7 +3942,6 @@ Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div A
         ElseIf segmentsIntersect(x1, y1, x2, y2, X, Y + div, X + div, Y + div) Then
             isInSector2 = True
         End If
-
     Next
 
     Exit Function
@@ -4255,7 +4246,6 @@ Public Sub Render()
     D3DXMatrixPerspectiveLH matProj, Me.ScaleWidth / zoomFactor, -Me.ScaleHeight / zoomFactor, -1, 0
     D3DDevice.SetTransform D3DTS_PROJECTION, matProj
 
-
     rc.X = 0
     rc.Y = 0
 
@@ -4320,7 +4310,6 @@ Public Sub Render()
 
         D3DDevice.SetRenderState D3DRS_SRCBLEND, polyBlendSrc
         D3DDevice.SetRenderState D3DRS_DESTBLEND, polyBlendDest
-
     ElseIf showPolys = False And numPolys > 0 Then
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ZERO
@@ -4500,7 +4489,6 @@ Public Sub Render()
 
     'draw depthmap
     If showPolys And currentTool = TOOL_DEPTHMAP Then
-
         lineCoords(1).tu = 0
         lineCoords(1).tv = 0
         lineCoords(2).tu = 0
@@ -4517,7 +4505,6 @@ Public Sub Render()
         D3DDevice.setTexture 0, Nothing
 
         For i = 1 To mPolyCount
-
             lineCoords(1) = Polys(i).vertex(1)
             lineCoords(2) = Polys(i).vertex(2)
             lineCoords(3) = Polys(i).vertex(3)
@@ -4530,7 +4517,6 @@ Public Sub Render()
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
         Next
-
     End If
 
     'draw scenery
@@ -4758,7 +4744,6 @@ Public Sub Render()
     srcRect.bottom = 8
     If sceneryCount > 0 And showScenery Then
         For i = 1 To sceneryCount
-
             sVal = Scenery(i).Style
 
             sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, ARGB(255, Scenery(i).color), 0, 0)
@@ -4835,7 +4820,6 @@ Public Sub Render()
             sceneryCoords(4) = sceneryCoords(0)
 
             D3DDevice.DrawPrimitiveUP D3DPT_LINESTRIP, 4, sceneryCoords(0), Len(sceneryCoords(0))
-
         End If
     End If
 
@@ -4987,7 +4971,6 @@ Public Sub Render()
         End If
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, False
-
     End If
 
     If showWaypoints Then
@@ -5178,6 +5161,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     If DIDevice Is Nothing Then Exit Sub
 
+    ' TODO: indent
     If eventid = hEvent Then
 
     DIDevice.GetDeviceStateKeyboard DIState
@@ -5357,7 +5341,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
     End If
 
     If ctrlDown Then 'shortcut
-
         If DIState.Key(DIK_EQUALS) = 128 Then  'ctrl++
             Zoom getZoomDir(2) '2
         ElseIf DIState.Key(DIK_MINUS) = 128 Then 'ctrl+-
@@ -5412,9 +5395,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
         ElseIf DIState.Key(MapVirtualKey(84, 0)) = 128 Then 'ctrl+t
             AutoTexture
         End If
-
     Else
-
         If hotKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then 'hotkey
             setCurrentTool hotKeyPressed
             frmTools.picTools_MouseDown hotKeyPressed, 1, 0, 1, 1
@@ -5519,11 +5500,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 SaveUndo
             End If
         End If
-
     End If
 
     lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
-
     End If
 
     Exit Sub
@@ -5546,7 +5525,6 @@ Private Sub TabPressed()
     Dim i As Integer
 
     If numSelectedPolys = 1 And numSelectedScenery = 0 Then
-
         If vertexList(selectedPolys(1)).vertex(1) + vertexList(selectedPolys(1)).vertex(2) + vertexList(selectedPolys(1)).vertex(3) = 3 Then
             vertexList(selectedPolys(1)).vertex(1) = 0
             vertexList(selectedPolys(1)).vertex(2) = 0
@@ -5578,7 +5556,6 @@ Private Sub TabPressed()
         Render
 
     ElseIf numSelectedScenery = 1 And numSelectedPolys = 0 Then
-
         For i = 1 To sceneryCount
             If Scenery(i).selected = 1 Then
                     scenNum = i
@@ -5600,7 +5577,6 @@ Private Sub TabPressed()
         End If
 
         Render
-
     End If
 
     getInfo
@@ -5612,6 +5588,7 @@ Private Sub findDragPoint(X As Single, Y As Single)
     Dim i As Integer, j As Integer, k As Integer
     Dim midCoords As D3DVECTOR2
 
+    ' TODO: indent
         'check if user moused down on corner drag point of sel rect
         For i = 0 To 3
             j = i + 2
@@ -5664,7 +5641,6 @@ Private Sub findDragPoint(X As Single, Y As Single)
             Render
         End If
 
-
 End Sub
 
 Private Sub findDragPoint2(X As Single, Y As Single)
@@ -5709,20 +5685,15 @@ End Function
 Private Sub Form_DblClick()
 
     If currentTool = TOOL_CREATE Then 'poly creation
-
         toolAction = True
-
     ElseIf currentTool = TOOL_VSELECT Then 'vertex selection
-
         toolAction = True
-
         selectedCoords(1).X = MouseHelper.CursorX - (Me.left / Screen.TwipsPerPixelX) - 1
         selectedCoords(1).Y = MouseHelper.CursorY - (Me.Top / Screen.TwipsPerPixelY) - 1
         selectedCoords(2).X = selectedCoords(1).X
         selectedCoords(2).Y = selectedCoords(1).Y
 
         Render
-
     End If
 
 End Sub
@@ -5779,12 +5750,9 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
     If Button <> 1 Then Exit Sub
 
     If spaceDown Then
-
         scrollCoords(1).X = X
         scrollCoords(1).Y = Y
-
     ElseIf currentFunction = TOOL_MOVE Then 'move
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5792,9 +5760,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
         toolAction = True
         MouseDownMove X, Y
-
     ElseIf currentFunction = TOOL_ROTATE Or currentFunction = TOOL_SCALE Then 'scaling/rotation
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5806,9 +5772,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         moveCoords(2).Y = Y
 
         findDragPoint2 X, Y
-
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then 'poly creation
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5826,21 +5790,15 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             End If
             toolAction = True
         End If
-
     ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then 'vertex selection
-
         toolAction = True
         selectedCoords(1).X = X
         selectedCoords(1).Y = Y
         selectedCoords(2).X = X
         selectedCoords(2).Y = Y
-
     ElseIf currentFunction = TOOL_PSELECT Or currentFunction = TOOL_PSELADD Or currentFunction = TOOL_PSELSUB Then 'poly selection
-
         polySelection X, Y
-
     ElseIf currentFunction = TOOL_VCOLOR Then 'vertex color
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5852,18 +5810,14 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         Else
             PrecisionColoring X, Y
         End If
-
     ElseIf currentFunction = TOOL_PCOLOR Then 'poly color
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
         End If
 
         ColorFill X, Y
-
     ElseIf currentFunction = TOOL_TEXTURE Then 'texture
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5879,9 +5833,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             moveCoords(1).X = X
             moveCoords(1).Y = Y
         End If
-
     ElseIf currentFunction = TOOL_SCENERY Then
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5892,18 +5844,14 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             frmDisplay.setLayer 5, showScenery
         End If
         toolAction = True
-
     ElseIf currentFunction = TOOL_CLRPICKER Then 'color picker
-
         If currentTool = TOOL_DEPTHMAP Then
             depthPicker X, Y
         ElseIf currentTool = TOOL_SCENERY Then
         Else
             ColorPicker X, Y
         End If
-
     ElseIf currentFunction = TOOL_PIXPICKER Then
-
         Dim tempClr As TColor
         tempClr = getRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
@@ -5915,13 +5863,9 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
         End If
-
     ElseIf currentFunction = TOOL_LITPICKER Then
-
         lightPicker X, Y
-
     ElseIf currentFunction = TOOL_OBJECTS Then 'objects
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -5961,9 +5905,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         End If
         Render
         toolAction = True
-
     ElseIf currentFunction = TOOL_WAYPOINT Then 'waypoints
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -6007,18 +5949,14 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         getInfo
         Render
         toolAction = True
-
     ElseIf currentFunction = TOOL_CONNECT Then
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
         End If
 
         toolAction = True
-
     ElseIf currentFunction = TOOL_DEPTHMAP Then
-
         If selectionChanged Then
             SaveUndo
             selectionChanged = False
@@ -6027,13 +5965,9 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         EditDepthMap X, Y
 
         toolAction = True
-
     ElseIf currentFunction = TOOL_LIGHTS Then
-
         CreateLight X, Y
-
     ElseIf currentFunction = TOOL_SKETCH Then
-
         If Shift = 0 Then 'freeform
             startSketch X, Y
             toolAction = True
@@ -6041,22 +5975,17 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             showSketch = True
             frmDisplay.setLayer 10, showSketch
         End If
-
     ElseIf currentFunction = TOOL_ERASER Then
-
         If eraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
             Render
         End If
         toolAction = True
-
     ElseIf currentFunction = TOOL_SMUDGE Then
-
         moveCoords(2).X = X
         moveCoords(2).Y = Y
         moveCoords(1).X = X
         moveCoords(1).Y = Y
         toolAction = True
-
     End If
 
     Exit Sub
@@ -6115,7 +6044,6 @@ Private Sub applyLights(Optional toSel As Boolean = False)
     If lightCount = 0 Then Exit Sub
 
     For i = 1 To mPolyCount
-
         'get poly vectors
         v1.X = PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(2).X
         v1.Y = PolyCoords(i).vertex(1).Y - PolyCoords(i).vertex(2).Y
@@ -6139,11 +6067,10 @@ Private Sub applyLights(Optional toSel As Boolean = False)
         End If
 
         For j = 1 To 3
-
+            ' TODO: indent
             If (vertexList(i).vertex(j) = 1 And toSel) Or toSel = False Then
 
             For k = 1 To lightCount
-
                 'get light dir vector
                 lightDir.X = Lights(k).X - PolyCoords(i).vertex(j).X
                 lightDir.Y = Lights(k).Y - PolyCoords(i).vertex(j).Y
@@ -6179,7 +6106,6 @@ Private Sub applyLights(Optional toSel As Boolean = False)
                 bVal = bVal + (Lights(k).color.blue * diffuseFactor) * mag
 
                 totalDiffuse = totalDiffuse + diffuseFactor
-
             Next
 
             totalDiffuse = totalDiffuse / lightCount
@@ -6201,9 +6127,7 @@ Private Sub applyLights(Optional toSel As Boolean = False)
             totalDiffuse = 0
 
             End If
-
         Next
-
     Next
 
     Render
@@ -6249,7 +6173,6 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
     End If
 
     For k = 1 To lightCount
-
         'get light dir vector
         lightDir.X = Lights(k).X - PolyCoords(pIndex).vertex(vIndex).X
         lightDir.Y = Lights(k).Y - PolyCoords(pIndex).vertex(vIndex).Y
@@ -6271,7 +6194,6 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
         bVal = bVal + (Lights(k).color.blue * diffuseFactor)
 
         totalDiffuse = totalDiffuse + diffuseFactor
-
     Next
 
     totalDiffuse = totalDiffuse / lightCount
@@ -6415,7 +6337,6 @@ Private Sub AverageVertices()
     Me.MousePointer = 11
 
     If numSelectedPolys = 0 Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
@@ -6468,9 +6389,7 @@ Private Sub AverageVertices()
         Next
 
         applyLights
-
     Else
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 1 Then
@@ -6526,7 +6445,6 @@ Private Sub AverageVertices()
         Next
 
         applyLights True
-
     End If
 
     Me.MousePointer = 99
@@ -6658,11 +6576,9 @@ Private Sub SelNearest(X As Single, Y As Single)
             numSelColliders = numSelColliders + 1
             addPoly = notSel
         End If
-
     End If
 
     If addPoly = 0 And showWaypoints Then
-
         notSel = 0
         shortestDist = (8 ^ 2 + 1)
         For i = 1 To waypointCount
@@ -6679,7 +6595,6 @@ Private Sub SelNearest(X As Single, Y As Single)
             Waypoints(notSel).selected = True
             numSelWaypoints = numSelWaypoints + 1
         End If
-
     End If
 
     Render
@@ -6794,9 +6709,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
     If Button <> 1 Then Exit Sub
 
-
     If spaceDown Then 'scrolling
-
         If currentFunction = TOOL_SCENERY And numCorners = 0 Then
             Scenery(0).screenTr.X = X
             Scenery(0).screenTr.Y = Y
@@ -6816,9 +6729,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             moveCoords(1).X = X
             moveCoords(1).Y = Y
         End If
-
     ElseIf currentFunction = TOOL_MOVE And toolAction Then  'moving
-
         If Shift = KEY_SHIFT Then 'constrained
             If Abs(X - moveCoords(2).X) > Abs(Y - moveCoords(2).Y) Then
                 Y = moveCoords(2).Y
@@ -6827,45 +6738,32 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             End If
         End If
         Moving X, Y
-
     ElseIf currentFunction = TOOL_SCALE And toolAction Then 'scaling
-
         If Shift = KEY_CTRL Then
             Scaling X, Y, False
         ElseIf Shift = KEY_SHIFT + KEY_CTRL Then 'constrained scaling
             Scaling X, Y, True
         End If
-
     ElseIf currentFunction = TOOL_ROTATE And toolAction Then 'rotating
-
         If Shift = KEY_ALT Then
             Rotating X, Y, False
         ElseIf Shift = KEY_SHIFT + KEY_ALT Then 'constrained rotating
             Rotating X, Y, True
         End If
-
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_CREATE) And toolAction Then 'poly creation --------
-
     ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then 'vertex selection --------
-
         If toolAction Then
             Render
             selectedCoords(2).X = X
             selectedCoords(2).Y = Y
         End If
-
     ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection
-
     ElseIf currentFunction = TOOL_VCOLOR And toolAction Then ' vertex coloring
-
         If colorMode > 0 Then
             VertexColoring X, Y
         End If
-
     ElseIf currentFunction = TOOL_PCOLOR Then 'poly coloring
-
     ElseIf currentFunction = TOOL_TEXTURE And toolAction Then 'texture
-
         If Shift = 0 Then
             StretchingTexture X, Y
         ElseIf Shift = KEY_SHIFT Then
@@ -6876,9 +6774,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             End If
             StretchingTexture X, Y
         End If
-
     ElseIf currentFunction = TOOL_SCENERY Then 'scenery
-
     ElseIf currentFunction = TOOL_CLRPICKER Then 'color picker
 
         If currentTool = TOOL_DEPTHMAP Then
@@ -6888,9 +6784,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         Else
             ColorPicker X, Y
         End If
-
     ElseIf currentFunction = TOOL_PIXPICKER Then 'pixel picker
-
         Dim tempClr As TColor
         tempClr = getRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
@@ -6904,11 +6798,8 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         End If
 
         Render
-
     ElseIf currentFunction = TOOL_LITPICKER Then 'light picker
-
     ElseIf currentFunction = TOOL_OBJECTS Then 'objects
-
         Spawns(0).X = X
         Spawns(0).Y = Y
         If mnuGostek.Checked Then
@@ -6916,15 +6807,10 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             gostek.Y = Y / zoomFactor + scrollCoords(2).Y
             Render
         End If
-
     ElseIf currentFunction = TOOL_WAYPOINT And toolAction Then 'waypoints
-
     ElseIf currentFunction = TOOL_DEPTHMAP And toolAction Then 'depthmap
-
         EditDepthMap X, Y
-
     ElseIf currentFunction = TOOL_SKETCH And toolAction Then 'sketch
-
         If Shift = 0 Then 'freeform
             linkSketch X, Y
             sketch(sketchLines).vertex(2).X = X / zoomFactor + scrollCoords(2).X
@@ -6935,21 +6821,16 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             sketch(0).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
             Render
         End If
-
     ElseIf currentFunction = TOOL_ERASER And toolAction Then
-
         If eraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
             Render
         End If
-
     ElseIf currentFunction = TOOL_SMUDGE And toolAction Then
-
         If moveLines(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y, X - moveCoords(2).X, Y - moveCoords(2).Y) = 1 Then
             Render
         End If
         moveCoords(2).X = X
         moveCoords(2).Y = Y
-
     End If
 
     Exit Sub
@@ -6984,15 +6865,12 @@ Private Sub CreatingScenery(Shift As Integer, X As Single, Y As Single)
     angle = GetAngle(xVal, yVal)
 
     If numCorners = 1 And toolAction Then
-
         If Shift = 1 Then
             angle = (Int((angle * 180 / PI + 0) / 15) * 15) / 180 * PI
         End If
 
         Scenery(0).rotation = angle
-
     ElseIf numCorners = 2 And toolAction Then
-
         angle = angle - Scenery(0).rotation
 
         Scenery(0).Scaling.X = (Cos(angle) * Sqr(xVal ^ 2 + yVal ^ 2)) / (SceneryTextures(Scenery(0).Style).Width) / zoomFactor
@@ -7010,7 +6888,6 @@ Private Sub CreatingScenery(Shift As Integer, X As Single, Y As Single)
                 Scenery(0).Scaling.Y = Scenery(0).Scaling.X
             End If
         End If
-
     End If
 
     Render
@@ -7287,7 +7164,6 @@ Private Sub ApplyTransform(Rotating As Boolean)
     For i = 1 To numSelectedPolys
         pNum = selectedPolys(i)
         For j = 1 To 3
-
             PolyCoords(pNum).vertex(j).X = Polys(pNum).vertex(j).X / zoomFactor + scrollCoords(2).X
             PolyCoords(pNum).vertex(j).Y = Polys(pNum).vertex(j).Y / zoomFactor + scrollCoords(2).Y
 
@@ -7317,12 +7193,10 @@ Private Sub ApplyTransform(Rotating As Boolean)
     If numSelectedScenery > 0 Then
     For i = 1 To sceneryCount
         If Scenery(i).selected = 1 Then
-
             Scenery(i).Translation.X = Scenery(i).screenTr.X / zoomFactor + scrollCoords(2).X
             Scenery(i).Translation.Y = Scenery(i).screenTr.Y / zoomFactor + scrollCoords(2).Y
 
             If Not Rotating Then
-
                 xVal = SceneryTextures(Scenery(i).Style).Width * Scenery(i).Scaling.X
                 yVal = SceneryTextures(Scenery(i).Style).Height * Scenery(i).Scaling.Y
                 angle = GetAngle(xVal, yVal) + Scenery(i).rotation
@@ -7335,7 +7209,6 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
                 Scenery(i).Scaling.X = (Cos(angle) * R) / (SceneryTextures(Scenery(i).Style).Width)
                 Scenery(i).Scaling.Y = -(Sin(angle) * R) / (SceneryTextures(Scenery(i).Style).Height)
-
             End If
 
             If scaleDiff.X * scaleDiff.Y < 0 And Rotating Then
@@ -7827,9 +7700,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
         End If
-
     Else
-
         For i = 1 To mPolyCount 'find closest
             If pointInPoly(X, Y, i) Then
                 For j = 1 To 3
@@ -7853,7 +7724,6 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
         End If
-
     End If
 
     prompt = True
@@ -7873,7 +7743,6 @@ Private Sub VertexColoring(X As Single, Y As Single)
     R = clrRadius * zoomFactor
 
     If numSelectedPolys > 0 And (showPolys Or showWireframe Or showPoints) Then
-
         For i = 1 To numSelectedPolys
             pNum = selectedPolys(i)
             For j = 1 To 3
@@ -7894,9 +7763,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 End If
             Next
         Next
-
     ElseIf (showPolys Or showWireframe Or showPoints) And numSelectedScenery = 0 Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
@@ -7916,11 +7783,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 End If
             Next
         Next
-
     End If
 
     If numSelectedScenery > 0 And showScenery Then
-
         For i = 1 To sceneryCount
             If Scenery(i).selected = 1 Then
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
@@ -7934,9 +7799,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 End If
             End If
         Next
-
     ElseIf showScenery And numSelectedPolys = 0 Then
-
         For i = 1 To sceneryCount
             If Scenery(i).selected = 0 Then
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
@@ -7950,7 +7813,6 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 End If
             End If
         Next
-
     End If
 
     If colored Then
@@ -7971,7 +7833,6 @@ Private Sub EditDepthMap(X As Single, Y As Single)
     R = clrRadius * zoomFactor
 
     If numSelectedPolys > 0 And (showPolys Or showWireframe Or showPoints) Then
-
         For i = 1 To numSelectedPolys
             pNum = selectedPolys(i)
             For j = 1 To 3
@@ -7986,9 +7847,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 End If
             Next
         Next
-
     ElseIf (showPolys Or showWireframe Or showPoints) And numSelectedScenery = 0 Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
@@ -8002,7 +7861,6 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 End If
             Next
         Next
-
     End If
 
     If edited Then
@@ -8019,8 +7877,8 @@ Private Sub ColorPicker(X As Single, Y As Single)
     Dim pNum As Integer, vNum As Integer
     Dim tempClr As TColor
 
+    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
-
     shortestDist = 32 ^ 2 + 1
     For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
@@ -8036,13 +7894,11 @@ Private Sub ColorPicker(X As Single, Y As Single)
             Next
         End If
     Next
-
     End If
 
     If vNum > 0 Then 'poly color absorbed
         tempClr = vertexList(pNum).color(vNum)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
-
         ElseIf frmPalette.Enabled = False Then 'non modal
             frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
         Else
@@ -8080,8 +7936,8 @@ Private Sub depthPicker(X As Single, Y As Single)
     Dim shortestDist As Integer, currentDist As Integer
     Dim pNum As Integer, vNum As Integer
 
+    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
-
     shortestDist = 32 ^ 2 + 1
     For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
@@ -8097,7 +7953,6 @@ Private Sub depthPicker(X As Single, Y As Single)
             Next
         End If
     Next
-
     End If
 
     If vNum > 0 Then 'poly color absorbed
@@ -8124,8 +7979,8 @@ Private Sub lightPicker(X As Single, Y As Single)
     Dim pNum As Integer, vNum As Integer
     Dim tempClr As TColor
 
+    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
-
     shortestDist = 32 ^ 2 + 1
     For i = 1 To mPolyCount
         If pointInPoly(X, Y, i) Then
@@ -8141,14 +7996,11 @@ Private Sub lightPicker(X As Single, Y As Single)
             Next
         End If
     Next
-
     End If
 
     If vNum > 0 Then 'poly color absorbed
-
         tempClr = getRGB(Polys(pNum).vertex(vNum).color)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
-
         ElseIf frmPalette.Enabled = False Then 'non modal
             frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
         Else
@@ -8157,7 +8009,6 @@ Private Sub lightPicker(X As Single, Y As Single)
             frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
             frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
         End If
-
     End If
 
 End Sub
@@ -8201,11 +8052,8 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
     End If
 
     If spaceDown Then
-
         Render
-
     ElseIf currentFunction = TOOL_MOVE And toolAction Then 'snap selected vertex
-
         If Shift = KEY_SHIFT Then 'constrained, don't snap
         Else
             snapSelected X, Y
@@ -8226,37 +8074,27 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
         End If
 
         SaveUndo
-
     ElseIf currentFunction = TOOL_SCALE And toolAction Then 'apply scaling
-
         If Shift = KEY_CTRL Then
             ApplyTransform False
         ElseIf Shift = KEY_SHIFT + KEY_CTRL Then 'constrained scaling
             ApplyTransform False
         End If
-
     ElseIf currentFunction = TOOL_ROTATE And toolAction Then 'apply rotation
-
         If Shift = KEY_ALT Then
             ApplyTransform True
         ElseIf Shift = KEY_SHIFT + KEY_ALT Then 'constrained rotation
             ApplyTransform True
         End If
-
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) And toolAction Then 'create polys
-
         If Shift = KEY_SHIFT And numVerts > 0 Then
             X = Polys(mPolyCount + 1).vertex(numVerts + 1).X
             Y = Polys(mPolyCount + 1).vertex(numVerts + 1).Y
         End If
         CreatePolys X, Y
-
     ElseIf currentFunction = TOOL_SCENERY And toolAction Then 'create scenery
-
         CreateScenery X, Y
-
     ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then 'select vertices
-
         If toolAction Then
             selectedCoords(2).X = X
             selectedCoords(2).Y = Y
@@ -8280,11 +8118,8 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
                 Next
             End If
         End If
-
     ElseIf currentFunction = TOOL_PSELECT And toolAction Then 'poly selection
-
     ElseIf currentFunction = TOOL_VCOLOR And toolAction Then 'vertex coloring
-
         toolAction = False
         If colorMode = 1 Then
             For i = 1 To mPolyCount
@@ -8301,27 +8136,16 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             Next
         End If
         SaveUndo
-
     ElseIf currentFunction = TOOL_PCOLOR And toolAction Then 'poly color
-
     ElseIf currentFunction = TOOL_TEXTURE And toolAction Then 'texture
-
         SaveUndo
-
     ElseIf currentFunction = TOOL_OBJECTS And toolAction Then 'objects
-
         SaveUndo
-
     ElseIf currentFunction = TOOL_WAYPOINT And toolAction Then 'waypoints
-
         SaveUndo
-
     ElseIf currentFunction = TOOL_CONNECT And toolAction Then
-
         CreateConnection X, Y
-
     ElseIf currentFunction = TOOL_SKETCH Then
-
         If Shift = 0 And toolAction Then 'freeform
             endSketch X, Y
             toolAction = False
@@ -8338,13 +8162,9 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
         End If
 
         deleteSmallLines
-
     ElseIf currentFunction = TOOL_ERASER Then
-
         toolAction = False
-
     ElseIf currentFunction = TOOL_DEPTHMAP Then
-
         toolAction = False
         If colorMode = 1 Then
             For i = 1 To mPolyCount
@@ -8356,7 +8176,6 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             Next
         End If
         SaveUndo
-
     End If
 
     If currentFunction <> TOOL_CREATE And currentFunction <> TOOL_QUAD And currentFunction <> TOOL_SKETCH And currentFunction <> TOOL_SCENERY Then
@@ -8630,7 +8449,6 @@ Private Sub linkSketch(X As Single, Y As Single)
     yVal = Y / zoomFactor + scrollCoords(2).Y
 
     If (xVal - sketch(sketchLines).vertex(1).X) ^ 2 + (yVal - sketch(sketchLines).vertex(1).Y) ^ 2 > 16 ^ 2 Then
-
         sketch(sketchLines).vertex(2).X = X / zoomFactor + scrollCoords(2).X
         sketch(sketchLines).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
 
@@ -8644,7 +8462,6 @@ Private Sub linkSketch(X As Single, Y As Single)
 
         sketch(sketchLines).vertex(1).z = 1
         sketch(sketchLines).vertex(2).z = 1
-
     End If
 
     Exit Sub
@@ -8663,6 +8480,7 @@ Private Sub endSketch(X As Single, Y As Single)
     Render
 
     Exit Sub
+
 ErrorHandler:
     MsgBox "Error ending sketch" & vbNewLine & Error$
 
@@ -8686,7 +8504,6 @@ Private Sub CreateScenery(X As Single, Y As Single)
     yVal = (Scenery(0).screenTr.Y)
 
     If snapToGrid And showGrid Then
-
         xVal = snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
         yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
 
@@ -8694,16 +8511,13 @@ Private Sub CreateScenery(X As Single, Y As Single)
             Scenery(0).screenTr.X = xVal
             Scenery(0).screenTr.Y = yVal
         ElseIf numCorners = 2 Then
-
         End If
-
     End If
 
     If numCorners = 1 And Not frmScenery.rotateScenery Then numCorners = numCorners + 1
     If numCorners = 2 And Not frmScenery.scaleScenery Then numCorners = numCorners + 1
 
     If numCorners = 3 Then
-
         sceneryCount = sceneryCount + 1
         ReDim Preserve Scenery(sceneryCount)
 
@@ -8724,7 +8538,6 @@ Private Sub CreateScenery(X As Single, Y As Single)
 
         prompt = True
         SaveUndo
-
     End If
 
     Exit Sub
@@ -8794,7 +8607,6 @@ Private Sub snapSelected(X As Single, Y As Single)
     End If
 
     If snapToGrid And showGrid Then
-
         xDiff = xVal - snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
         yDiff = yVal - snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
 
@@ -8863,9 +8675,7 @@ Private Sub snapSelected(X As Single, Y As Single)
             selRect(i).X = selRect(i).X - xDiff / zoomFactor
             selRect(i).Y = selRect(i).Y - yDiff / zoomFactor
         Next
-
     ElseIf ohSnap And numSelectedPolys > 0 Then
-
         'if vertices with different coords are selected then exit sub
         If numSelectedPolys > 1 Then 'check if any different coords
             For i = 2 To numSelectedPolys
@@ -8920,7 +8730,6 @@ Private Sub snapSelected(X As Single, Y As Single)
         End If
 
         PolyNum = 0
-
     End If
 
     getInfo
@@ -9011,7 +8820,6 @@ Private Function RegionSelPolys(X As Single, Y As Single) As Boolean
     yVal = Y / zoomFactor + scrollCoords(2).Y
 
     For i = 1 To mPolyCount
-
         If currentFunction = TOOL_VSELECT Then
             vertexList(i).vertex(1) = 0
             vertexList(i).vertex(2) = 0
@@ -9037,7 +8845,6 @@ Private Function RegionSelPolys(X As Single, Y As Single) As Boolean
                 End If
             End If
         End If
-
     Next
 
     If pIndex > 0 And vIndex > 0 Then
@@ -9400,7 +9207,6 @@ Private Sub VertexSelPolys()
     Dim addPoly As Integer, notSel As Integer
 
     If currentFunction = TOOL_VSELECT Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 vertexList(i).vertex(j) = 0
@@ -9417,9 +9223,7 @@ Private Sub VertexSelPolys()
             addPoly = 0
             notSel = 0
         Next
-
     ElseIf currentFunction = TOOL_VSELADD Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
@@ -9438,9 +9242,7 @@ Private Sub VertexSelPolys()
             addPoly = 0
             notSel = 0
         Next
-
     ElseIf currentFunction = TOOL_VSELSUB Then
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 1 Then 'if already selected and if in range
@@ -9460,7 +9262,6 @@ Private Sub VertexSelPolys()
             addPoly = 0
             notSel = 0
         Next
-
     End If
 
 End Sub
@@ -9815,7 +9616,6 @@ Private Sub polySelection(X As Single, Y As Single)
 
     addPoly = 0
     If currentFunction = TOOL_PSELECT Then 'select polys (destroy and remake)
-
         ReDim selectedPolys(0)
         numSelectedPolys = 0
         numSelectedScenery = 0
@@ -9903,9 +9703,7 @@ Private Sub polySelection(X As Single, Y As Single)
             Next
             numSelWaypoints = 0
         End If
-
     ElseIf currentFunction = TOOL_PSELADD Then 'add polys
-
         addPoly = 0
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To mPolyCount
@@ -9932,9 +9730,7 @@ Private Sub polySelection(X As Single, Y As Single)
                 End If
             Next
         End If
-
     ElseIf currentFunction = TOOL_PSELSUB Then 'subtract polys
-
         ReDim selectedPolys(1)
         numSelectedPolys = 0
 
@@ -9966,7 +9762,6 @@ Private Sub polySelection(X As Single, Y As Single)
                 End If
             Next
         End If
-
     End If
 
     getRCenter
@@ -10027,7 +9822,6 @@ Private Sub ColorFill(X As Single, Y As Single)
     Dim polyColored As Boolean
 
     If numSelectedPolys > 0 Or numSelectedScenery > 0 Then
-
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To numSelectedPolys
                 PolyNum = selectedPolys(i)
@@ -10068,9 +9862,7 @@ Private Sub ColorFill(X As Single, Y As Single)
         If polyColored Then
             SaveUndo
         End If
-
     Else
-
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To mPolyCount
                 If (pointInPoly(X, Y, i)) Then
@@ -10110,7 +9902,6 @@ Private Sub ColorFill(X As Single, Y As Single)
         If polyColored Then
             SaveUndo
         End If
-
     End If
 
     prompt = True
@@ -10224,7 +10015,6 @@ Private Sub deletePolys()
     End If
 
     If numSelWaypoints > 0 Then
-
         currentWaypoint = 0
         offset = 1
         For i = 1 To waypointCount
@@ -10259,7 +10049,6 @@ Private Sub deletePolys()
         For i = 1 To conCount
             Waypoints(Connections(i).point1).numConnections = Waypoints(Connections(i).point1).numConnections + 1
         Next
-
     End If
 
     If numSelLights > 0 Then
@@ -10291,14 +10080,12 @@ Private Sub deletePolys()
     numSelLights = 0
 
     If numSelectedPolys > 0 Then 'delete polys
-
         numSelectedPolys = 0
         ReDim selectedPolys(0)
 
         offset = 1
 
         For i = 1 To mPolyCount
-
             Polys(offset) = Polys(i)
             PolyCoords(offset) = PolyCoords(i)
             vertexList(offset) = vertexList(i)
@@ -10316,13 +10103,11 @@ Private Sub deletePolys()
             Else 'not selected
                 offset = offset + 1
             End If
-
         Next
 
         ReDim Preserve Polys(mPolyCount)
         ReDim Preserve PolyCoords(mPolyCount)
         ReDim Preserve vertexList(mPolyCount)
-
     End If
 
     setMapData
@@ -10460,7 +10245,6 @@ Private Sub mnuFlip_Click(Index As Integer)
     If numSelectedScenery > 0 Then
         For i = 1 To sceneryCount
             If Scenery(i).selected = 1 Then
-
                 If scaleDiff.X * scaleDiff.Y < 0 Then
                     Scenery(i).rotation = -Scenery(i).rotation
                 Else
@@ -10680,7 +10464,6 @@ Private Sub mnuRecent_Click(Index As Integer)
     FileName = mnuRecent(Index).Caption
 
     If Len(Dir$(FileName)) <> 0 And FileName <> "" Then
-
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -11174,7 +10957,6 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
     End If
 
     If tvwScenery.SelectedItem.Parent.Key = "In Use" Then
-
         currentScenery = tvwScenery.SelectedItem.Text
 
         token = InitGDIPlus
@@ -11190,9 +10972,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             End If
             Set tempNode = tempNode.Next
         Next
-
     Else
-
         If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
 
             currentScenery = tvwScenery.SelectedItem.Text
@@ -11215,11 +10995,9 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             If Not isInList Then
                 frmSoldatMapEditor.setCurrentTexture currentScenery
             End If
-
         End If
 
         frmScenery.lstScenery.ListIndex = -1
-
     End If
 
     Exit Sub
@@ -11733,7 +11511,6 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
     End If
 
     If LCase$(right(temp, 4)) = ".pms" Then
-
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -11749,7 +11526,6 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
         recentFiles Data.Files.Item(1)
 
         LoadFile Data.Files.Item(1)
-
     End If
 
 End Sub
@@ -12020,7 +11796,6 @@ Public Sub ClearUnused()
     Next
 
     If numDeleted > 0 Then
-
         Scenery(0).Style = 0
 
         sceneryElements = sceneryElements - numDeleted
@@ -12031,7 +11806,6 @@ Public Sub ClearUnused()
         For i = 0 To frmScenery.lstScenery.ListCount - 1
             tvwScenery.Nodes.Add "In Use", tvwChild, frmScenery.lstScenery.List(i), frmScenery.lstScenery.List(i)
         Next
-
     End If
 
     numUndo = 0
@@ -12641,18 +12415,15 @@ Private Sub mnuSave_Click()
     commonDialog.InitDir = uncompDir
 
     If lblFileName.Caption = "Untitled.pms" Then
-
         commonDialog.ShowSave
 
         If commonDialog.FileName <> "" Then
-
             recentFiles commonDialog.FileName
 
             DoEvents
             SaveFile commonDialog.FileName
             prompt = False
         End If
-
     Else
         SaveFile commonDialog.FileName
         prompt = False
@@ -12684,7 +12455,6 @@ Private Sub mnuSaveAs_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-
         recentFiles commonDialog.FileName
 
         DoEvents
@@ -12718,12 +12488,10 @@ Private Sub mnuCompile_Click()
     frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
 
     If lblFileName.Caption = "Untitled.pms" Then
-
         commonDialog.ShowSave
         DoEvents
 
         If commonDialog.FileName <> "" Then
-
             SaveAndCompile commonDialog.FileName
             prompt = False
 
@@ -12744,7 +12512,6 @@ Private Sub mnuCompile_Click()
             End If
         Next
         lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
-
     End If
 
     RegainFocus
@@ -12833,9 +12600,7 @@ Private Sub mnuExport_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-
         savePrefab commonDialog.FileName
-
     End If
 
     RegainFocus
@@ -12862,9 +12627,7 @@ Private Sub mnuImport_Click()
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
-
         loadPrefab commonDialog.FileName
-
     End If
 
     RegainFocus
@@ -13191,7 +12954,6 @@ Private Sub mnuDuplicate_Click()
             Next
             selectedPolys(i) = mPolyCount - numSelectedPolys + i
         Next
-
     End If
     offset = 0
     If numSelectedScenery > 0 Then
@@ -13241,7 +13003,6 @@ Private Sub mnuDuplicate_Click()
     colliderCount = colliderCount + offset
 
     If numSelWaypoints > 0 Then
-
         offset = 0
         For i = 1 To waypointCount
             If Waypoints(i).selected Then
@@ -13274,7 +13035,6 @@ Private Sub mnuDuplicate_Click()
             End If
             Waypoints(i).tempIndex = i
         Next
-
     End If
 
     setMapData
@@ -13514,7 +13274,6 @@ Private Sub mnuSendToBack_Click()
             End If
         Next
     End If
-
 
     If numSelectedScenery > 0 Then
         offset = 1
@@ -13770,7 +13529,6 @@ Private Sub mnuApplyLight_Click()
     If lightCount = 0 Then Exit Sub
 
     If numSelectedPolys > 0 Then
-
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 'apply poly color to base color
@@ -13780,9 +13538,7 @@ Private Sub mnuApplyLight_Click()
                 vertexList(selectedPolys(i)).color(j).blue = tehClr.blue
             Next
         Next
-
     Else
-
         For i = 1 To mPolyCount
             For j = 1 To 3
                 'apply poly color to base color
@@ -13792,7 +13548,6 @@ Private Sub mnuApplyLight_Click()
                 vertexList(i).color(j).blue = tehClr.blue
             Next
         Next
-
     End If
 
     ReDim Lights(0)
@@ -14274,7 +14029,6 @@ Private Sub mnuSaveSpace_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-
         iniString = _
             "WindowState=" & Me.WindowState & sNull & _
             "Width=" & formWidth & sNull & _
@@ -14290,7 +14044,6 @@ Private Sub mnuSaveSpace_Click()
         saveWindow "Scenery", frmScenery, frmScenery.collapsed, commonDialog.FileTitle
         saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, commonDialog.FileTitle
         saveWindow "Texture", frmTexture, frmTexture.collapsed, commonDialog.FileTitle
-
     End If
 
     RegainFocus
@@ -14306,7 +14059,6 @@ End Sub
 Private Sub mnuResetWindows_Click()
 
     If Me.WindowState = vbNormal Then
-
         formWidth = Screen.Width / Screen.TwipsPerPixelX - (64 + 208 + 208)
         formHeight = formWidth * 3 / 4
         formLeft = Screen.Width / Screen.TwipsPerPixelX / 2 - formWidth / 2 - 1
@@ -14338,9 +14090,7 @@ Private Sub mnuResetWindows_Click()
         frmTexture.left = frmPalette.left - frmTexture.Width + Screen.TwipsPerPixelX
 
         resetDevice
-
     Else
-
         frmTools.left = Me.left
         frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
         frmPalette.left = Me.left + Me.Width - frmPalette.Width
@@ -14570,7 +14320,6 @@ Public Sub getInfo()
     End If
 
     If numSelectedPolys > 0 Then
-
         frmInfo.cboPolyType.ListIndex = vertexList(selectedPolys(1)).polyType
         frmInfo.txtBounciness.Enabled = False
         For j = 1 To 3
@@ -14589,7 +14338,6 @@ Public Sub getInfo()
                 Exit For
             End If
         Next
-
     End If
 
     If numSelectedScenery > 0 Then
@@ -14608,7 +14356,6 @@ Public Sub getInfo()
                 Exit For
             End If
         Next
-
     End If
 
     If numSelectedPolys = 1 And numSelectedScenery = 0 Then
@@ -14982,90 +14729,61 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     If Me.WindowState = vbMinimized Or Me.WindowState = vbNormal Then
         If Len(frmDisplay.Tag) <> 0 Then
-
-        frmDisplay.Hide
-
+            frmDisplay.Hide
         End If
         If Len(frmInfo.Tag) <> 0 Then
-
-        frmInfo.Hide
-
+            frmInfo.Hide
         End If
         If Len(frmPalette.Tag) <> 0 Then
-
-        frmPalette.Hide
-
+            frmPalette.Hide
         End If
         If Len(frmScenery.Tag) <> 0 Then
-
-        frmScenery.Hide
-
+            frmScenery.Hide
         End If
         If Len(frmTexture.Tag) <> 0 Then
-
-        frmTexture.Hide
-
+            frmTexture.Hide
         End If
         If Len(frmTools.Tag) <> 0 Then
-
-        frmTools.Hide
-
+            frmTools.Hide
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-
-        frmWaypoints.Hide
-
+            frmWaypoints.Hide
         End If
 
         ReleaseCapture
         SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
         If Len(frmDisplay.Tag) <> 0 Then
-
             frmDisplay.Move (frmDisplay.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmDisplay.Show
-
         End If
         If Len(frmInfo.Tag) <> 0 Then
-
             frmInfo.Move (frmInfo.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmInfo.Show
-
         End If
         If Len(frmPalette.Tag) <> 0 Then
-
             frmPalette.Move (frmPalette.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmPalette.Show
-
         End If
         If Len(frmScenery.Tag) <> 0 Then
-
             frmScenery.Move (frmScenery.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmScenery.Show
-
         End If
         If Len(frmTexture.Tag) <> 0 Then
-
             frmTexture.Move (frmTexture.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmTexture.Show
-
         End If
         If Len(frmTools.Tag) <> 0 Then
-
             frmTools.Move (frmTools.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmTools.Show
-
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-
             frmWaypoints.Move (frmWaypoints.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
             frmWaypoints.Show
-
         End If
 
         formLeft = Me.left / Screen.TwipsPerPixelX
         formTop = Me.Top / Screen.TwipsPerPixelY
-
     End If
 
 End Sub
@@ -15106,7 +14824,6 @@ Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single
     Dim k As Integer
 
     For i = 0 To mPolyCount
-
         For j = 1 To 3
             'if vertex is at these coords and not marked
             If Int(PolyCoords(i).vertex(j).X) = Int(X) _

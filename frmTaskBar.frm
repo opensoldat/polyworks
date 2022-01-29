@@ -56,7 +56,7 @@ Private Sub Form_Resize()
         End If
         frmSoldatMapEditor.RegainFocus
     ElseIf Not frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
-
+        ' no-op
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then
         frmSoldatMapEditor.RegainFocus
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then

@@ -728,7 +728,6 @@ Private Sub HideColor(apply As Boolean)
 
         frmSoldatMapEditor.setCurrentTool mLastTool
         mLastTool = 0
-
     End If
 
     Me.Hide
@@ -743,6 +742,7 @@ ErrorHandler:
 End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
+
     Const ESCAPE = 27
     Const ENTER = 13
 
@@ -1112,7 +1112,6 @@ Private Sub Render()
     Dim redVal As Byte, greenVal As Byte, blueVal As Byte
 
     For i = 0 To 255
-
         picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, clr(G), clr(B))
         picRGB(G).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), i, clr(B))
         picRGB(B).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), clr(G), i)
@@ -1154,7 +1153,6 @@ Private Sub Render()
         End If
 
         picHue.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
-
     Next
 
     picRGB(R).Refresh
@@ -1213,7 +1211,6 @@ Private Sub txtHexCode_LostFocus()
             txtHexCode = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If
         mHexValue = txtHexCode.Text
-
     End If
 
 End Sub
@@ -1223,7 +1220,7 @@ Private Sub txtRGB_Change(Index As Integer)
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
         txtRGB(Index).Text = clr(Index)
     ElseIf txtRGB(Index).Text = "" Then
-
+        ' no-op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         If clr(Index) <> txtRGB(Index).Text Then
             clr(Index) = txtRGB(Index).Text
@@ -1253,7 +1250,7 @@ Private Sub txtHue_Change()
     If IsNumeric(txtHue.Text) = False And txtHue.Text <> "" Then
         txtHue.Text = Int(hue + 0.5)
     ElseIf txtHue.Text = "" Then
-
+        ' no-op
     ElseIf txtHue.Text >= 0 And txtHue.Text <= 359 Then
         If Int(hue + 0.5) <> txtHue.Text Then
             hue = txtHue.Text
@@ -1292,7 +1289,7 @@ Private Sub txtSat_Change()
     If IsNumeric(txtSat.Text) = False And txtSat.Text <> "" Then
         txtSat.Text = Int(sat * 100 + 0.5)
     ElseIf txtSat.Text = "" Then
-
+        ' no-op
     ElseIf txtSat.Text >= 0 And txtSat.Text <= 100 Then
         If Int(sat * 100 + 0.5) <> txtSat.Text Then
             sat = txtSat.Text / 100
@@ -1328,7 +1325,7 @@ Private Sub txtBright_Change()
     If IsNumeric(txtBright.Text) = False And txtBright.Text <> "" Then
         txtBright.Text = Int(bright * 100 + 0.5)
     ElseIf txtBright.Text = "" Then
-
+        ' no-op
     ElseIf txtBright.Text >= 0 And txtBright.Text <= 100 Then
         If Int(bright * 100 + 0.5) <> txtBright.Text Then
             bright = txtBright.Text / 100
@@ -1445,7 +1442,6 @@ Public Sub SetColors()
     On Error Resume Next
 
     Dim c As Control
-
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colorpicker.bmp")
     picClr.Picture = LoadPicture(appPath & "\" & gfxDir & "\color_picker.bmp")

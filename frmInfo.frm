@@ -1713,7 +1713,6 @@ Private Sub Form_Load()
 
     setForm
 
-
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
     txtQuadX(0).Text = 0
@@ -1872,8 +1871,8 @@ Private Sub txtScale_LostFocus(Index As Integer)
     Else
         txtScale(Index).Text = tempVal
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub
@@ -1954,8 +1953,8 @@ Private Sub txtVertexAlpha_LostFocus()
     ElseIf applyChange Then
         frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub
@@ -1977,8 +1976,8 @@ Private Sub txtBounciness_LostFocus()
     ElseIf applyChange Then
         frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub

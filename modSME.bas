@@ -547,10 +547,8 @@ Public Function GetSoldatDir() As String
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
     If hKey <> 0 Then
-
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
-
     Else
         'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
 
@@ -558,22 +556,15 @@ Public Function GetSoldatDir() As String
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
 
         If hKey <> 0 Then
-
             GetSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
-
         Else
-
             GetSoldatDir = "C:\Soldat"
-
         End If
-
     End If
 
     If Not DirExists(GetSoldatDir) Then
-
         MsgBox "Could not locate the Soldat directory. (" & GetSoldatDir & ")" & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
-
     End If
 
     Exit Function
@@ -600,9 +591,7 @@ Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Lon
     Dim hSubKey As Long
 
     If RegOpenKeyEx(hKey, lpSubKey, 0, KEY_READ, hSubKey) = 0 Then
-
         OpenRegKey = hSubKey
-
     End If
 
 End Function
@@ -615,17 +604,13 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
     'if valid
     If hSubKey <> 0 Then
-
         lpValue = Space$(260)
         lpcbData = Len(lpValue)
 
         'find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-
             GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
-
         End If
-
     End If
 
 End Function
@@ -812,17 +797,21 @@ End Sub
 
 'Initialises GDI Plus
 Public Function InitGDIPlus() As Long
+
     Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
     GdiplusStartup Token, gdipInit, ByVal 0&
     InitGDIPlus = Token
+
 End Function
 
 'Frees GDI Plus
 Public Sub FreeGDIPlus(Token As Long)
+
     GdiplusShutdown Token
+
 End Sub
 
 'Loads the picture (optionally resized)

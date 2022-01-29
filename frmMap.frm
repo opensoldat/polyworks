@@ -537,7 +537,6 @@ Private Sub cboJet_Click()
         Case 7 'infinite
             txtJet.Text = "32766"
         Case 8 'custom
-
     End Select
 
     If cboJet.ListIndex <> 8 Then
@@ -598,7 +597,6 @@ Private Sub cboTexture_Click()
     On Error GoTo ErrorHandler
 
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-
         frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
 
