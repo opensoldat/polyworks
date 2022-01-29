@@ -203,7 +203,7 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (B
 Public Declare Function MapVirtualKey Lib "user32" Alias "MapVirtualKeyA" _
         (ByVal wCode As Long, ByVal wMapType As Long) As Long
 
-'gdi+
+'GDI+
 Private Type GUID
    Data1    As Long
    Data2    As Integer
@@ -795,7 +795,7 @@ Public Sub SetColors()
 
 End Sub
 
-'Initialises GDI Plus
+'Initializes GDI+
 Public Function InitGDIPlus() As Long
 
     Dim Token    As Long
@@ -840,7 +840,7 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
         GdipGetImageWidth Img, Width
         GdipGetImageHeight Img, Height
     End If
-    'Initialise the hDC
+    'Initialize the hDC
     'Create a memory DC and select a bitmap into it, fill it in with the backcolor
     hDC = CreateCompatibleDC(ByVal 0&)
     hBitmap = CreateBitmap(Width, Height, GetDeviceCaps(hDC, PLANES), GetDeviceCaps(hDC, BITSPIXEL), ByVal 0&)
