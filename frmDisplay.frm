@@ -542,9 +542,7 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
 
     Exit Sub
@@ -559,6 +557,7 @@ Public Sub setForm()
 
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
+
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
     Else

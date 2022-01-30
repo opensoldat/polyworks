@@ -577,11 +577,8 @@ Public Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     loadTextures2
-
     frmSoldatMapEditor.getOptions
-
     getJets
 
     Exit Sub
@@ -689,10 +686,8 @@ Public Sub loadFromList()
     Open appPath & "\texture_list.txt" For Input As #1
 
         Do While Not EOF(1)
-
             Input #1, textureName
             cboTexture.AddItem textureName
-
         Loop
 
     Close #1

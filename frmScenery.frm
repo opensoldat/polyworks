@@ -348,11 +348,8 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
-
     listScenery
 
     Exit Sub
