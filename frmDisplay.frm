@@ -658,7 +658,10 @@ Public Sub refreshButtons()
 
     Dim i As Integer
 
-    For i = 0 To 10
+    Debug.Assert picLayer.LBound = LBound(layers)
+    Debug.Assert picLayer.UBound = UBound(layers)
+
+    For i = picLayer.LBound To picLayer.UBound
         mouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
     Next
 
@@ -676,9 +679,9 @@ Public Sub SetColors()
 
     Me.BackColor = bgClr
 
-    For i = 0 To 10
-        lblLayer(i).BackColor = lblBackClr
-        lblLayer(i).ForeColor = lblTextClr
+    For Each c In lblLayer
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     For Each c In Me.Controls
