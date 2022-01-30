@@ -631,9 +631,9 @@ Dim oldX As Integer, oldY As Integer
 
 Public ok As Boolean
 
-Const R As Byte = 0
-Const G As Byte = 1
-Const B As Byte = 2
+Private Const R As Byte = 0
+Private Const G As Byte = 1
+Private Const B As Byte = 2
 
 Dim mHexValue As String
 

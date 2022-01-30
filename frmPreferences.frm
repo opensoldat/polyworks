@@ -1741,8 +1741,8 @@ Private Type TColor
     blue As Byte
 End Type
 
-Const MinHeight = 440
-Const MaxHeight = 547
+Private Const MinHeight = 440
+Private Const MaxHeight = 547
 
 Dim blendModes(0 To 7) As Integer
 
