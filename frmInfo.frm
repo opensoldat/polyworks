@@ -1694,10 +1694,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim formHeight As Integer
+Private formHeight As Integer
 Public collapsed As Boolean
 
-Dim tempVal As Single
+Private tempVal As Single
 
 Public xPos As Integer, yPos  As Integer
 Public noChange As Boolean

@@ -1744,18 +1744,22 @@ End Type
 Private Const MinHeight = 440
 Private Const MaxHeight = 547
 
-Dim blendModes(0 To 7) As Integer
+Private blendModes(0 To 7) As Integer
 
-Dim backClr As TColor
-Dim pointClr As TColor
-Dim selClr As TColor
-Dim gridClr As TColor
-Dim gridClr2 As TColor
+Private backClr As TColor
+Private pointClr As TColor
+Private selClr As TColor
+Private gridClr As TColor
+Private gridClr2 As TColor
 
-Dim spacing As Integer, divisions As Integer
-Dim formWidth As Integer, formHeight As Integer
-Dim opacity1 As Integer, opacity2 As Integer
-Dim sceneryVerts As Boolean, topmost As Boolean
+Private spacing As Integer
+Private divisions As Integer
+Private formWidth As Integer
+Private formHeight As Integer
+Private opacity1 As Integer
+Private opacity2 As Integer
+Private sceneryVerts As Boolean
+Private topmost As Boolean
 
 Private Sub picHide_Click()
 

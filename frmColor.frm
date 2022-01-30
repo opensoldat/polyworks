@@ -620,14 +620,22 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public red As Byte, green As Byte, blue As Byte
-Dim hue As Single, sat As Single, bright As Single
-Dim low As Byte, mid As Byte, high As Byte
+Public red As Byte
+Public green As Byte
+Public blue As Byte
 
-Dim clr(0 To 2) As Byte
-Dim pureClr(0 To 2) As Byte
+Private hue As Single
+Private sat As Single
+Private bright As Single
 
-Dim oldX As Integer, oldY As Integer
+Private low As Byte
+Private mid As Byte
+Private high As Byte
+
+Private clr(0 To 2) As Byte
+Private pureClr(0 To 2) As Byte
+
+Private oldX As Integer, oldY As Integer
 
 Public ok As Boolean
 
@@ -635,11 +643,11 @@ Private Const R As Byte = 0
 Private Const G As Byte = 1
 Private Const B As Byte = 2
 
-Dim mHexValue As String
+Private mHexValue As String
 
-Dim mNonModal As Boolean
+Private mNonModal As Boolean
 
-Dim mLastTool As Byte
+Private mLastTool As Byte
 
 Private Function Clamp(val As Single, min As Single, max As Single) As Single
 

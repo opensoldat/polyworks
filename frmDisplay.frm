@@ -507,13 +507,14 @@ Private Const LAYER_OBJECTS As Byte = 6
 Private Const LAYER_WAYPOINTS As Byte = 7
 Private Const LAYER_GRID As Byte = 8
 
-Dim layers(0 To 10) As Boolean
-Dim layerKeys(0 To 7) As Byte
+Private layers(0 To 10) As Boolean
+Private layerKeys(0 To 7) As Byte
 
-Dim formHeight As Integer
+Private formHeight As Integer
+
 Public collapsed As Boolean
-
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos As Integer
 
 Public Function getLayerKey(ByVal Index As Byte) As Byte
 

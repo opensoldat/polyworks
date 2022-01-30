@@ -545,18 +545,21 @@ Private Type TColor
     blue As Byte
 End Type
 
-Dim clrPalette(0 To 11, 0 To 5) As TColor
+Private clrPalette(0 To 11, 0 To 5) As TColor
 
-Dim formHeight As Integer
+Private formHeight As Integer
+
 Public collapsed As Boolean
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos As Integer
 
-Dim radius As Integer
-Dim clrMode As Byte
+Private radius As Integer
+Private clrMode As Byte
 
-Dim xVal As Integer, yVal As Integer
+Private xVal As Integer
+Private yVal As Integer
 
-Dim tempVal As Integer
+Private tempVal As Integer
 
 Public Function getPalClr(X As Integer, Y As Integer) As Long
 
