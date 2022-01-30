@@ -552,21 +552,21 @@ Private Sub getJets()
     Select Case txtJet.Text
         Case 0 'none
             cboJet.ListIndex = 0
-        Case 12
+        Case 12 'minimal
             cboJet.ListIndex = 1
-        Case 45
+        Case 45 'very low
             cboJet.ListIndex = 2
-        Case 95
+        Case 95 'low
             cboJet.ListIndex = 3
-        Case 190
+        Case 190 'normal
             cboJet.ListIndex = 4
-        Case 320
+        Case 320 'high
             cboJet.ListIndex = 5
-        Case 800
+        Case 800 'maximum
             cboJet.ListIndex = 6
-        Case 32766
+        Case 32766 'infinite
             cboJet.ListIndex = 7
-        Case Else
+        Case Else 'custom
             cboJet.ListIndex = 8
     End Select
 
