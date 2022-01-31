@@ -20,8 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim minimized As Boolean
-
 Private Sub Form_GotFocus()
 
     If frmSoldatMapEditor.Visible Then
