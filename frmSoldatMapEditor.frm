@@ -1524,14 +1524,20 @@ Dim Lights() As TLightSource
 Dim Options As TOptions
 Dim mPolyCount As Long
 
-Dim sceneryCount As Long, sceneryElements As Long
-Dim spawnPoints As Long, colliderCount As Long
-Dim waypointCount As Long, conCount As Integer
+Dim sceneryCount As Long
+Dim sceneryElements As Long
+Dim spawnPoints As Long
+Dim colliderCount As Long
+Dim waypointCount As Long
+Dim conCount As Integer
 Dim lightCount As Integer
 
 Dim mapTitle As String
 Public gTextureFile As String
-Dim maxX As Single, maxY As Single, minX As Single, minY  As Single
+Dim maxX As Single
+Dim maxY As Single
+Dim minX As Single
+Dim minY As Single
 
 Dim bgPolys(1 To 4) As TCustomVertex
 Dim bgPolyCoords(1 To 4) As D3DVECTOR2
@@ -1583,7 +1589,8 @@ Dim selectedSketch(1 To 2) As Integer
 Dim circleOn As Boolean
 Dim leftMouseDown As Boolean
 
-Dim initialized As Boolean, initialized2 As Boolean
+Dim initialized As Boolean
+Dim initialized2 As Boolean
 Dim acquired As Boolean
 Dim selectionChanged As Boolean
 
@@ -1606,12 +1613,17 @@ Public uncompDir As String
 Public prefabDir As String
 Public gridSpacing As Integer
 Public gridDivisions As Integer
-Public gridOp1 As Byte, gridOp2 As Byte
+Public gridOp1 As Byte
+Public gridOp2 As Byte
 Dim noRedraw As Boolean
 
-Public sceneryVerts As Boolean, topmost As Boolean
+Public sceneryVerts As Boolean
+Public topmost As Boolean
 
-Public formHeight As Integer, formWidth As Integer, formLeft As Integer, formTop As Integer
+Public formHeight As Integer
+Public formWidth As Integer
+Public formLeft As Integer
+Public formTop As Integer
 
 Dim polyClr As TColor
 Dim opacity As Single
@@ -1633,7 +1645,8 @@ Dim numSelSpawns As Integer
 Dim numSelWaypoints As Integer
 Dim numSelLights As Integer
 
-Public xTexture As Integer, yTexture As Integer
+Public xTexture As Integer
+Public yTexture As Integer
 Dim creatingQuad As Boolean
 
 Dim currentFileName As String
@@ -1646,21 +1659,37 @@ Dim currentScenery As String
 
 Dim zoomFactor As Single
 Dim pointRadius As Integer
-Dim snapRadius As Integer, clrRadius As Integer
-Dim ohSnap As Boolean, snapToGrid As Boolean, fixedTexture As Boolean
-Dim showBG As Boolean, showPolys As Boolean, showTexture As Boolean, showWireframe As Boolean
-Dim showPoints As Boolean, showScenery As Boolean, showObjects As Boolean, showGrid As Boolean
-Dim showWaypoints As Boolean, showPath1 As Boolean, showPath2 As Boolean
-Dim showSketch As Boolean, showLights As Boolean
-Dim currentTool As Byte, currentFunction As Byte
+Dim snapRadius As Integer
+Dim clrRadius As Integer
+Dim ohSnap As Boolean
+Dim snapToGrid As Boolean
+Dim fixedTexture As Boolean
+Dim showBG As Boolean
+Dim showPolys As Boolean
+Dim showTexture As Boolean
+Dim showWireframe As Boolean
+Dim showPoints As Boolean
+Dim showScenery As Boolean
+Dim showObjects As Boolean
+Dim showGrid As Boolean
+Dim showWaypoints As Boolean
+Dim showPath1 As Boolean
+Dim showPath2 As Boolean
+Dim showSketch As Boolean
+Dim showLights As Boolean
+Dim currentTool As Byte
+Dim currentFunction As Byte
 Dim particleSize As Single
 Dim colorMode As Byte
-Dim eraseCircle As Boolean, eraseLines As Boolean
+Dim eraseCircle As Boolean
+Dim eraseLines As Boolean
 
 Dim polyType As Byte
 Dim PolyTypeClrs(0 To 25) As Long
 
-Public shiftDown As Boolean, ctrlDown As Boolean, altDown As Boolean
+Public shiftDown As Boolean
+Public ctrlDown As Boolean
+Public altDown As Boolean
 
 Dim rCenter As D3DVECTOR2
 Dim selRect(3) As D3DVECTOR2  'RECT
@@ -1679,7 +1708,9 @@ Dim textureDesc As D3DSURFACE_DESC
 
 Dim noneSelected As Boolean
 
-Dim currentUndo As Integer, numUndo As Integer, numRedo As Integer
+Dim currentUndo As Integer
+Dim numUndo As Integer
+Dim numRedo As Integer
 Dim max_undo As Integer
 Dim lastCompiled As String
 
@@ -2399,8 +2430,11 @@ Public Sub LoadFile(FileName As String)
     Dim errorVal As String
     Dim fileOpen As Boolean
 
-    Dim i As Integer, j As Integer, k As Integer
-    Dim temp As Long, tempString As String
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim temp As Long
+    Dim tempString As String
 
     Dim polyIndex As Integer
     Dim polysInSector As Integer
@@ -2855,9 +2889,13 @@ Private Function getMapArea() As Long
 
     Dim i As Integer
     Dim area As Double
-    Dim a As Single, b As Single
+    Dim a As Single
+    Dim b As Single
     Dim c As Single
-    Dim x1 As Single, y1 As Single, x2 As Single, y2 As Single
+    Dim x1 As Single
+    Dim y1 As Single
+    Dim x2 As Single
+    Dim y2 As Single
 
     For i = 1 To mPolyCount
         If vertexList(i).polyType <> 3 Then
@@ -3066,15 +3104,21 @@ End Sub
 
 Private Sub SaveFile(FileName As String)
 
-    Dim i As Integer, j As Integer, k As Integer
-    Dim X As Integer, Y As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim X As Integer
+    Dim Y As Integer
 
-    Dim xOffset As Integer, yOffset As Integer
+    Dim xOffset As Integer
+    Dim yOffset As Integer
 
-    Dim xDiff As Single, yDiff As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
     Dim length As Single
     Dim VertNum As Byte
-    Dim mapWidth As Long, mapHeight As Long
+    Dim mapWidth As Long
+    Dim mapHeight As Long
 
     Const SECTOR_NUM As Long = 25
 
@@ -3290,17 +3334,24 @@ End Sub
 
 Public Sub SaveAndCompile(FileName As String)
 
-    Dim i As Integer, j As Integer, k As Integer
-    Dim X As Integer, Y As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim X As Integer
+    Dim Y As Integer
 
-    Dim xOffset As Integer, yOffset As Integer
+    Dim xOffset As Integer
+    Dim yOffset As Integer
 
-    Dim xDiff As Single, yDiff As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
     Dim length As Single
     Dim VertNum As Byte
     Dim sector(1 To 256) As Integer
-    Dim xSecNum As Integer, ySecNum As Integer
-    Dim mapWidth As Integer, mapHeight As Integer
+    Dim xSecNum As Integer
+    Dim ySecNum As Integer
+    Dim mapWidth As Integer
+    Dim mapHeight As Integer
 
     Const SECTOR_NUM As Long = 25
 
@@ -3565,7 +3616,8 @@ Private Sub SaveUndo()
 
     On Error GoTo ErrorHandler
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim Polygon As TPolygon
     Dim FileName As String
 
@@ -3657,7 +3709,8 @@ End Sub
 
 Private Sub loadUndo(redo As Boolean)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim FileName As String
     Dim errorVal As String
 
@@ -3916,8 +3969,12 @@ End Function
 
 Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div As Long) As Integer
 
-    Dim i As Integer, j As Integer
-    Dim x1 As Integer, x2 As Integer, y1 As Integer, y2 As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim x1 As Integer
+    Dim x2 As Integer
+    Dim y1 As Integer
+    Dim y2 As Integer
 
     Dim VertNum As Byte
 
@@ -4120,7 +4177,8 @@ Private Sub initGrid()
     Dim i As Integer
 
     Dim clrString As String
-    Dim clr1 As Long, clr2 As Long
+    Dim clr1 As Long
+    Dim clr2 As Long
 
     clr1 = ARGB(gridOp1, gridClr)
     clr2 = ARGB(gridOp2, gridClr2)
@@ -4153,7 +4211,8 @@ End Sub
 
 Private Sub setGrid()
 
-    Dim xGridOffset As Single, yGridOffset As Single
+    Dim xGridOffset As Single
+    Dim yGridOffset As Single
     Dim i As Integer
 
     xGridOffset = (scrollCoords(2).X - (Int(scrollCoords(2).X / gridSpacing) * gridSpacing)) * zoomFactor
@@ -4205,7 +4264,8 @@ Public Sub Render()
 
     If Not initialized Or noRedraw Then Exit Sub
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim lineCoords(1 To 4) As TCustomVertex
     Dim sceneryCoords(4) As TCustomVertex
     Dim circleCoords(0 To 32) As TCustomVertex
@@ -4213,7 +4273,8 @@ Public Sub Render()
     Dim scenR As Single
     Dim backtypePolys() As TPolygon
 
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
     Dim theta As Single
     Dim R As Single
 
@@ -5153,7 +5214,9 @@ End Function
 Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     Dim i As Long
-    Dim hotKeyPressed As Integer, wayptKeyPressed As Integer, layerKeyPressed As Integer
+    Dim hotKeyPressed As Integer
+    Dim wayptKeyPressed As Integer
+    Dim layerKeyPressed As Integer
     Dim pBuffer(0 To BUFFER_SIZE) As DIDEVICEOBJECTDATA
     Static tempFunction As Byte
 
@@ -5585,7 +5648,9 @@ End Sub
 
 Private Sub findDragPoint(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer, k As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
     Dim midCoords As D3DVECTOR2
 
     ' TODO: indent
@@ -5645,7 +5710,9 @@ End Sub
 
 Private Sub findDragPoint2(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer, k As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
     Dim midCoords As D3DVECTOR2
 
     toolAction = checkDragPoint(selRect(0).X, selRect(0).Y, selRect(2).X, selRect(2).Y)
@@ -5700,7 +5767,9 @@ End Sub
 
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer, k As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
 
     On Error GoTo ErrorHandler
 
@@ -6028,18 +6097,23 @@ End Sub
 
 Private Sub applyLights(Optional toSel As Boolean = False)
 
-    Dim i As Integer, j As Integer, k As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
 
     Dim lightDir As D3DVECTOR
     Dim polyNormal As D3DVECTOR
-    Dim v1 As D3DVECTOR, v2 As D3DVECTOR
+    Dim v1 As D3DVECTOR
+    Dim v2 As D3DVECTOR
     Dim mag As Single
     Dim diffuseFactor As Single
     Dim totalDiffuse As Single
 
     Dim clr As TColor
 
-    Dim rVal As Integer, gVal As Integer, bVal As Integer
+    Dim rVal As Integer
+    Dim gVal As Integer
+    Dim bVal As Integer
 
     If lightCount = 0 Then Exit Sub
 
@@ -6143,12 +6217,15 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
     Dim k As Integer
     Dim lightDir As D3DVECTOR
     Dim polyNormal As D3DVECTOR
-    Dim v1 As D3DVECTOR, v2 As D3DVECTOR
+    Dim v1 As D3DVECTOR
+    Dim v2 As D3DVECTOR
     Dim mag As Single
     Dim diffuseFactor As Single
     Dim totalDiffuse As Single
     Dim clr As TColor
-    Dim rVal As Integer, gVal As Integer, bVal As Integer
+    Dim rVal As Integer
+    Dim gVal As Integer
+    Dim bVal As Integer
 
     'get poly vectors
     v1.X = PolyCoords(pIndex).vertex(1).X - PolyCoords(pIndex).vertex(2).X
@@ -6224,7 +6301,10 @@ End Sub
 
 Private Sub SnapSelection()
 
-    Dim i As Integer, j As Integer, k As Integer, l As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim k As Integer
+    Dim l As Integer
     Dim PolyNum As Integer
 
     For i = 1 To numSelectedPolys
@@ -6247,9 +6327,15 @@ End Sub
 
 Private Function GetVertSnapCoord(PolyNum As Integer, VertNum As Integer, GetXVal As Boolean) As Integer
 
-    Dim i As Integer, j As Integer, xVal As Integer, yVal As Integer
-    Dim nearPoly As Integer, nearVert As Integer
-    Dim minDiff As Long, thisDiff As Long, prevDiff As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim xVal As Integer
+    Dim yVal As Integer
+    Dim nearPoly As Integer
+    Dim nearVert As Integer
+    Dim minDiff As Long
+    Dim thisDiff As Long
+    Dim prevDiff As Long
 
     xVal = Polys(PolyNum).vertex(VertNum).X
     yVal = Polys(PolyNum).vertex(VertNum).Y
@@ -6287,8 +6373,11 @@ End Function
 
 Private Sub AverageVerts()
 
-    Dim i As Integer, j As Integer
-    Dim finalR As Integer, finalG As Integer, finalB As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim finalR As Integer
+    Dim finalG As Integer
+    Dim finalB As Integer
     Dim tehClr As TColor
 
     For i = 1 To numSelectedPolys
@@ -6318,12 +6407,18 @@ End Sub
 
 Private Sub AverageVertices()
 
-    Dim i As Integer, j As Integer
-    Dim P As Integer, V As Integer
-    Dim finalR As Integer, finalG As Integer, finalB As Integer
-    Dim tehClr As TColor, vertexClr As TColor
+    Dim i As Integer
+    Dim j As Integer
+    Dim P As Integer
+    Dim V As Integer
+    Dim finalR As Integer
+    Dim finalG As Integer
+    Dim finalB As Integer
+    Dim tehClr As TColor
+    Dim vertexClr As TColor
     Dim numVertices As Integer
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
     Dim connectedPolys() As Integer
     Dim numConnectedPolys As Integer
 
@@ -6483,10 +6578,15 @@ End Sub
 
 Private Sub SelNearest(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim addPoly As Integer, addVert As Integer, notSel As Integer
-    Dim currentDist As Long, shortestDist As Long
-    Dim xVal As Single, yVal As Single
+    Dim i As Integer
+    Dim j As Integer
+    Dim addPoly As Integer
+    Dim addVert As Integer
+    Dim notSel As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
+    Dim xVal As Single
+    Dim yVal As Single
 
     xVal = X / zoomFactor + scrollCoords(2).X
     yVal = Y / zoomFactor + scrollCoords(2).Y
@@ -6603,7 +6703,8 @@ End Sub
 
 Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
 
-    Dim xVal As Integer, yVal As Integer
+    Dim xVal As Integer
+    Dim yVal As Integer
     Dim rtheta As D3DVECTOR2
 
     xVal = X
@@ -6843,7 +6944,8 @@ End Sub
 
 Private Sub CreatingScenery(Shift As Integer, X As Single, Y As Single)
 
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
     Dim angle As Single
 
     xVal = X
@@ -6985,10 +7087,13 @@ End Sub
 
 Private Sub Moving(ByVal X As Single, ByVal Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
-    Dim xDiff As Single, yDiff As Single
-    Dim xVal As Single, yVal As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
+    Dim xVal As Single
+    Dim yVal As Single
 
     If snapToGrid And showGrid And toolAction Then
         X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
@@ -7075,9 +7180,12 @@ End Sub
 
 Private Sub Scaling(ByVal X As Single, ByVal Y As Single, constrained As Boolean)
 
-    Dim i As Integer, j As Integer
-    Dim xVal As Single, yVal As Single
-    Dim xCenter As Single, yCenter As Single
+    Dim i As Integer
+    Dim j As Integer
+    Dim xVal As Single
+    Dim yVal As Single
+    Dim xCenter As Single
+    Dim yCenter As Single
     Dim PolyNum As Integer
     Dim theta As Single
 
@@ -7146,13 +7254,16 @@ End Sub
 
 Private Sub ApplyTransform(Rotating As Boolean)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim pNum As Integer
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
     Dim vertSel As Byte
-    Dim xVal As Single, yVal As Single
-    Dim angle As Single, theta As Single
+    Dim xVal As Single
+    Dim yVal As Single
+    Dim angle As Single
+    Dim theta As Single
     Dim R As Single
     Dim tempClr As TColor
 
@@ -7253,13 +7364,16 @@ End Sub
 
 Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
     Dim vertSel As Byte
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
-    Dim xVal As Single, yVal As Single
-    Dim R As Single, angle As Single
+    Dim xVal As Single
+    Dim yVal As Single
+    Dim R As Single
+    Dim angle As Single
 
     If selectionChanged Then
         SaveUndo
@@ -7376,9 +7490,12 @@ End Sub
 
 Public Sub applyRotate(tehValue As Single)
 
-    Dim R As Single, theta As Single
-    Dim xDiff As Single, yDiff As Single
-    Dim i As Integer, j As Integer
+    Dim R As Single
+    Dim theta As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
 
     If selectionChanged Then
@@ -7529,12 +7646,17 @@ End Function
 
 Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
 
-    Dim i As Integer, j As Integer
-    Dim angle As Single, oldAngle As Single
-    Dim xCenter As Single, yCenter As Single
-    Dim xDiff As Integer, yDiff As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim angle As Single
+    Dim oldAngle As Single
+    Dim xCenter As Single
+    Dim yCenter As Single
+    Dim xDiff As Integer
+    Dim yDiff As Integer
     Dim PolyNum As Integer
-    Dim R As Single, theta As Single
+    Dim R As Single
+    Dim theta As Single
 
     If snapToGrid And showGrid Then
         X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
@@ -7664,9 +7786,12 @@ End Sub
 
 Private Sub PrecisionColoring(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim closestPoly As Single, closestVert As Single
-    Dim currentDist As Long, shortestDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim closestPoly As Single
+    Dim closestVert As Single
+    Dim currentDist As Long
+    Dim shortestDist As Long
     Dim PolyNum As Integer
     Dim destClr As TColor
     Dim R As Integer
@@ -7734,7 +7859,8 @@ End Sub
 
 Private Sub VertexColoring(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim pNum As Integer
     Dim destClr As TColor
     Dim R As Integer
@@ -7824,7 +7950,8 @@ End Sub
 
 Private Sub EditDepthMap(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim pNum As Integer
     Dim destClr As TColor
     Dim R As Integer
@@ -7872,9 +7999,12 @@ End Sub
 
 Private Sub ColorPicker(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim shortestDist As Integer, currentDist As Integer
-    Dim pNum As Integer, vNum As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim shortestDist As Integer
+    Dim currentDist As Integer
+    Dim pNum As Integer
+    Dim vNum As Integer
     Dim tempClr As TColor
 
     ' TODO: indent
@@ -7932,9 +8062,12 @@ End Sub
 
 Private Sub depthPicker(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim shortestDist As Integer, currentDist As Integer
-    Dim pNum As Integer, vNum As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim shortestDist As Integer
+    Dim currentDist As Integer
+    Dim pNum As Integer
+    Dim vNum As Integer
 
     ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
@@ -7974,9 +8107,12 @@ End Sub
 
 Private Sub lightPicker(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim shortestDist As Integer, currentDist As Integer
-    Dim pNum As Integer, vNum As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim shortestDist As Integer
+    Dim currentDist As Integer
+    Dim pNum As Integer
+    Dim vNum As Integer
     Dim tempClr As TColor
 
     ' TODO: indent
@@ -8015,7 +8151,8 @@ End Sub
 
 Private Sub StretchingTexture(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
 
     If numSelectedPolys > 0 Then
@@ -8041,7 +8178,8 @@ End Sub
 
 Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If Button = 4 Then
         SetCursor currentFunction + 1
@@ -8204,8 +8342,10 @@ Private Sub CreateConnection(X As Single, Y As Single)
 
     Dim i As Integer
     Dim notSel As Integer
-    Dim currentDist As Long, shortestDist As Long
-    Dim xVal As Single, yVal As Single
+    Dim currentDist As Long
+    Dim shortestDist As Long
+    Dim xVal As Single
+    Dim yVal As Single
 
     xVal = X / zoomFactor + scrollCoords(2).X
     yVal = Y / zoomFactor + scrollCoords(2).Y
@@ -8254,9 +8394,12 @@ End Sub
 
 Private Sub CreatePolys(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim xVal As Single, yVal As Single
-    Dim shortestDist As Integer, currentDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim xVal As Single
+    Dim yVal As Single
+    Dim shortestDist As Integer
+    Dim currentDist As Long
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
 
@@ -8441,7 +8584,8 @@ End Sub
 
 Private Sub linkSketch(X As Single, Y As Single)
 
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
 
     On Error GoTo ErrorHandler
 
@@ -8488,7 +8632,8 @@ End Sub
 
 Private Sub CreateScenery(X As Single, Y As Single)
 
-    Dim xVal As Integer, yVal As Integer
+    Dim xVal As Integer
+    Dim yVal As Integer
     Dim i As Integer
 
     On Error GoTo ErrorHandler
@@ -8550,13 +8695,17 @@ End Sub
 
 Private Sub snapSelected(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
-    Dim shortestDist As Single, currentDist As Single
-    Dim xDiff As Single, yDiff As Single
+    Dim shortestDist As Single
+    Dim currentDist As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
 
     'make sure polys are cw
     For i = 1 To numSelectedPolys
@@ -8740,8 +8889,10 @@ End Sub
 
 Private Sub regionSelection(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim xVal As Single, yVal As Single
+    Dim i As Integer
+    Dim j As Integer
+    Dim xVal As Single
+    Dim yVal As Single
     Dim isSelected As Boolean
 
     xVal = X / zoomFactor + scrollCoords(2).X
@@ -8810,11 +8961,16 @@ End Sub
 
 Private Function RegionSelPolys(X As Single, Y As Single) As Boolean
 
-    Dim i As Integer, j As Integer
-    Dim currentDist As Long, shortestDist As Long
-    Dim pIndex As Integer, vIndex As Integer
-    Dim selVerts As Byte, selected As Byte
-    Dim xVal As Single, yVal As Single
+    Dim i As Integer
+    Dim j As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
+    Dim pIndex As Integer
+    Dim vIndex As Integer
+    Dim selVerts As Byte
+    Dim selected As Byte
+    Dim xVal As Single
+    Dim yVal As Single
 
     xVal = X / zoomFactor + scrollCoords(2).X
     yVal = Y / zoomFactor + scrollCoords(2).Y
@@ -8888,8 +9044,10 @@ End Function
 
 Private Function RegionSelObjects(xVal As Single, yVal As Single, skipSel As Boolean) As Boolean
 
-    Dim i As Integer, j As Integer
-    Dim currentDist As Long, shortestDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
     Dim Index As Integer
 
     shortestDist = (8 ^ 2 + 1)
@@ -8954,8 +9112,10 @@ End Function
 
 Private Function regionSelLights(xVal As Single, yVal As Single, skipSel As Boolean) As Boolean
 
-    Dim i As Integer, j As Integer
-    Dim currentDist As Long, shortestDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
     Dim Index As Integer
 
     shortestDist = (8 ^ 2 + 1)
@@ -8992,8 +9152,10 @@ End Function
 
 Private Function RegionSelWaypoints(xVal As Single, yVal As Single, skipSel As Boolean) As Boolean
 
-    Dim i As Integer, j As Integer
-    Dim currentDist As Long, shortestDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
     Dim Index As Integer
 
     shortestDist = (8 ^ 2 + 1)
@@ -9027,8 +9189,10 @@ End Function
 
 Private Function eraseSketch(X As Single, Y As Single) As Byte
 
-    Dim i As Integer, j As Integer
-    Dim currentDist As Long, shortestDist As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim currentDist As Long
+    Dim shortestDist As Long
     Dim lineIndex As Integer
 
     On Error GoTo ErrorHandler
@@ -9064,7 +9228,8 @@ End Function
 
 Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As Single) As Byte
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim dist As Single
 
     On Error GoTo ErrorHandler
@@ -9120,7 +9285,8 @@ End Sub
 
 Private Sub VertexSelection(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     On Error GoTo ErrorHandler
 
@@ -9203,8 +9369,10 @@ End Sub
 
 Private Sub VertexSelPolys()
 
-    Dim i As Integer, j As Integer
-    Dim addPoly As Integer, notSel As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim addPoly As Integer
+    Dim notSel As Integer
 
     If currentFunction = TOOL_VSELECT Then
         For i = 1 To mPolyCount
@@ -9268,7 +9436,8 @@ End Sub
 
 Private Sub VertexSelScenery()
 
-    Dim i As Integer, sVal As Integer
+    Dim i As Integer
+    Dim sVal As Integer
     Dim sceneryCoords(3) As TCustomVertex
     Dim selected(3) As Boolean
 
@@ -9323,8 +9492,10 @@ End Sub
 
 Private Sub VertexSelObjects()
 
-    Dim i As Integer, j As Integer
-    Dim xCoord As Long, yCoord As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim xCoord As Long
+    Dim yCoord As Long
 
     For i = 1 To spawnPoints
         xCoord = (Spawns(i).X - scrollCoords(2).X) * zoomFactor
@@ -9366,8 +9537,10 @@ End Sub
 
 Private Sub VertexSelLights()
 
-    Dim i As Integer, j As Integer
-    Dim xCoord As Long, yCoord As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim xCoord As Long
+    Dim yCoord As Long
 
     For i = 1 To lightCount
         xCoord = (Lights(i).X - scrollCoords(2).X) * zoomFactor
@@ -9391,8 +9564,10 @@ End Sub
 
 Private Sub VertexSelWaypoints()
 
-    Dim i As Integer, j As Integer
-    Dim xCoord As Long, yCoord As Long
+    Dim i As Integer
+    Dim j As Integer
+    Dim xCoord As Long
+    Dim yCoord As Long
 
     For i = 1 To waypointCount
         If (frmWaypoints.showPaths = Waypoints(i).pathNum) Or frmWaypoints.showPaths = 0 Then
@@ -9418,10 +9593,13 @@ End Sub
 
 Private Sub getRCenter()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim setCoords As Boolean
-    Dim xVal As Single, yVal As Single
-    Dim Width As Single, Height As Single
+    Dim xVal As Single
+    Dim yVal As Single
+    Dim Width As Single
+    Dim Height As Single
 
     On Error GoTo ErrorHandler
 
@@ -9561,10 +9739,14 @@ End Sub
 
 Private Sub vertexSelAlt(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
-    Dim xDist As Integer, yDist As Integer
-    Dim xCenter As Integer, yCenter As Integer
-    Dim addPoly As Integer, notSel As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim xDist As Integer
+    Dim yDist As Integer
+    Dim xCenter As Integer
+    Dim yCenter As Integer
+    Dim addPoly As Integer
+    Dim notSel As Integer
 
     xDist = (X - selectedCoords(1).X) / 2 'x distance from coord
     yDist = (Y - selectedCoords(1).Y) / 2 'y distance from coord
@@ -9608,7 +9790,8 @@ End Sub
 
 Private Sub polySelection(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim addPoly As Integer
     Dim shortestDist As Integer
     Dim firstClicked As Integer
@@ -9773,7 +9956,8 @@ End Sub
 
 Private Function PointInProp(ByVal X As Single, ByVal Y As Single, Index As Integer) As Boolean
 
-    Dim xDiff As Long, yDiff As Long
+    Dim xDiff As Long
+    Dim yDiff As Long
     Dim theta As Single
     Dim R As Single
 
@@ -9816,7 +10000,8 @@ End Function
 
 Private Sub ColorFill(X As Single, Y As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
     Dim destClr As TColor
     Dim polyColored As Boolean
@@ -9963,7 +10148,8 @@ End Function
 
 Private Sub deletePolys()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim offset As Integer
 
     On Error GoTo ErrorHandler
@@ -10188,7 +10374,8 @@ End Sub
 
 Private Sub mnuFlip_Click(Index As Integer)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
     Dim vertSel As Byte
     Dim temp As D3DVECTOR2
@@ -10290,7 +10477,8 @@ End Sub
 
 Private Sub mnuFlipTexture_Click(Index As Integer)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
     Dim avgMul As Single
 
@@ -10345,7 +10533,8 @@ End Sub
 
 Private Sub mnuInvertSel_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim addPoly As Boolean
 
     If showPolys Or showWireframe Or showPoints Then
@@ -10519,9 +10708,12 @@ End Sub
 
 Private Sub mnuRotate_Click(Index As Integer)
 
-    Dim R As Single, theta As Single
-    Dim xDiff As Single, yDiff As Single
-    Dim i As Integer, j As Integer
+    Dim R As Single
+    Dim theta As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
 
     If selectionChanged Then
@@ -10621,9 +10813,12 @@ End Sub
 
 Private Sub mnuRotateTexture_Click(Index As Integer)
 
-    Dim R As Single, theta As Single
-    Dim xDiff As Single, yDiff As Single
-    Dim i As Integer, j As Integer
+    Dim R As Single
+    Dim theta As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
+    Dim i As Integer
+    Dim j As Integer
     Dim PolyNum As Integer
     Dim avgMul As Single
     Dim texRate As Single
@@ -11084,7 +11279,8 @@ End Function
 
 Public Sub Zoom(zoomDir As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim zoomVal As Single
 
     If zoomFactor * zoomDir < MIN_ZOOM Or zoomFactor * zoomDir > MAX_ZOOM Then Exit Sub
@@ -11147,7 +11343,8 @@ End Sub
 
 Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If (zoomFactor * zoomDir < MIN_ZOOM) And zoomFactor > MIN_ZOOM Then
         zoomDir = MIN_ZOOM / zoomFactor
@@ -11211,8 +11408,10 @@ End Sub
 
 Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As Integer) As Boolean
 
-    Dim xDist As Single, yDist As Single
-    Dim xDiff As Single, yDiff As Single
+    Dim xDist As Single
+    Dim yDist As Single
+    Dim xDiff As Single
+    Dim yDiff As Single
     Dim length As Single
     Dim D As Single
 
@@ -11258,7 +11457,8 @@ End Function
 
 Private Function isCW(ByVal i As Integer) As Boolean
 
-    Dim xVal As Single, yVal As Single
+    Dim xVal As Single
+    Dim yVal As Single
 
     xVal = Midpoint(Polys(i).vertex(1).X, Midpoint(Polys(i).vertex(2).X, Polys(i).vertex(3).X))
     yVal = Midpoint(Polys(i).vertex(1).Y, Midpoint(Polys(i).vertex(2).Y, Polys(i).vertex(3).Y))
@@ -11311,7 +11511,8 @@ End Sub
 
 Private Sub setLightsMode(lightsOn As Boolean)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If Not lightsOn Then
         For i = 1 To mPolyCount
@@ -11758,7 +11959,8 @@ End Sub
 
 Public Sub ClearUnused()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim doesExist As Boolean
     Dim offset As Integer
     Dim numDeleted As Integer
@@ -11820,8 +12022,10 @@ End Sub
 
 Private Sub saveSettings()
 
-    Dim X As Integer, Y As Integer
-    Dim i As Integer, KeyCode As Byte
+    Dim X As Integer
+    Dim Y As Integer
+    Dim i As Integer
+    Dim KeyCode As Byte
 
     Dim iniString As String
     Dim currentColor As Long
@@ -11969,7 +12173,8 @@ End Sub
 
 Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, Optional FileName As String = "current.ini")
 
-    Dim leftVal As Integer, topVal As Integer
+    Dim leftVal As Integer
+    Dim topVal As Integer
     Dim iniString As String
     Dim sNull As String
     sNull = Chr$(0)
@@ -12647,7 +12852,8 @@ Private Sub savePrefab(FileName As String)
 
     On Error GoTo ErrorHandler
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim Polygon As TPolygon
     Dim elementName(50) As Byte
     Dim elementString As String
@@ -12746,12 +12952,17 @@ Private Sub loadPrefab(FileName As String)
 
     On Error GoTo ErrorHandler
 
-    Dim newPolys As Integer, newScenery As Integer
+    Dim newPolys As Integer
+    Dim newScenery As Integer
     Dim newElements As Integer
     Dim elementName(50) As Byte
     Dim elementString As String
-    Dim newColliders As Integer, newSpawnPoints As Integer, newWaypoints As Integer, newConnections As Integer
-    Dim i As Integer, j As Integer
+    Dim newColliders As Integer
+    Dim newSpawnPoints As Integer
+    Dim newWaypoints As Integer
+    Dim newConnections As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim tehValue As Integer
     Dim tempClr As TColor
 
@@ -12920,7 +13131,8 @@ End Sub
 
 Private Sub mnuDuplicate_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim offset As Integer
 
     On Error GoTo ErrorHandler
@@ -13063,7 +13275,8 @@ End Sub
 
 Private Sub mnuSelectAll_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If showPolys Or showWireframe Or showPoints Then
         ReDim selectedPolys(mPolyCount)
@@ -13120,7 +13333,8 @@ End Sub
 
 Private Sub mnuDeselect_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     numSelectedPolys = 0
     ReDim selectedPolys(0)
@@ -13154,7 +13368,8 @@ End Sub
 
 Private Sub mnuSelColor_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim addPoly As Byte
     Dim clrVal As TColor
 
@@ -13184,7 +13399,8 @@ End Sub
 
 Private Sub mnuBringToFront_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim tempTri As TTriangle
     Dim tempPoly As TPolygon
     Dim tempScenery As TScenery
@@ -13241,7 +13457,8 @@ End Sub
 
 Private Sub mnuSendToBack_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim tempTri As TTriangle
     Dim tempPoly As TPolygon
     Dim tempScenery As TScenery
@@ -13427,7 +13644,8 @@ End Sub
 Private Sub mnuFixTexture_Click()
 
     Dim PolyNum As Integer
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -13455,7 +13673,8 @@ End Sub
 
 Private Sub mnuUntexture_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -13482,7 +13701,8 @@ End Sub
 
 Private Sub mnuVisible_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     On Error GoTo ErrorHandler
 
@@ -13523,7 +13743,8 @@ End Sub
 
 Private Sub mnuApplyLight_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim tehClr As TColor
 
     If lightCount = 0 Then Exit Sub
@@ -13561,8 +13782,10 @@ Private Sub mnuSplit_Click()
 
     If numSelectedPolys < 1 Then Exit Sub
 
-    Dim i As Integer, j As Integer
-    Dim left As Byte, right As Byte
+    Dim i As Integer
+    Dim j As Integer
+    Dim left As Byte
+    Dim right As Byte
     Dim clr1 As TColor
     Dim clr2 As TColor
     Dim alpha1 As Byte
@@ -13659,7 +13882,8 @@ End Sub
 Private Sub mnuJoinVertices_Click()
 
     Dim firstVertex As Integer
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -13697,7 +13921,8 @@ Private Sub mnuCreate_Click()
 
     If numSelectedPolys < 1 Or numSelectedPolys > 3 Then Exit Sub
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim numSelVerts As Integer
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
@@ -13803,9 +14028,11 @@ End Sub
 
 Private Sub mnuRefreshBG_Click()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim bgSize As Integer
-    Dim xOffset As Integer, yOffset As Integer
+    Dim xOffset As Integer
+    Dim yOffset As Integer
 
     maxX = 0
     maxY = 0
@@ -14234,7 +14461,8 @@ Private Sub mnuFitOnScreen_Click()
 
     If mPolyCount < 1 Then Exit Sub
 
-    Dim Width As Integer, Height As Integer
+    Dim Width As Integer
+    Dim Height As Integer
 
     mnuRefreshBG_Click
 
@@ -14276,7 +14504,8 @@ End Sub
 
 Public Sub getInfo()
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
     Dim scenNum As Integer
 
     On Error GoTo ErrorHandler
@@ -14436,7 +14665,8 @@ End Sub
 
 Public Sub applyTextureCoords(ByVal tehValue As Single, Index As Integer)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -14463,7 +14693,8 @@ End Sub
 
 Public Sub applyVertexAlpha(tehValue As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -14486,7 +14717,8 @@ End Sub
 
 Public Sub applyBounciness(tehValue As Single)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer
+    Dim j As Integer
 
     If selectionChanged Then
         SaveUndo
@@ -14794,7 +15026,9 @@ Private Sub AutoTexture()
         Exit Sub
     End If
 
-    Dim X As Single, Y As Single, z As Single
+    Dim X As Single
+    Dim Y As Single
+    Dim z As Single
     Dim vertIndex As Integer
     Dim i As Integer
 
