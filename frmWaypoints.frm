@@ -501,7 +501,8 @@ Dim formHeight As Integer
 Public collapsed As Boolean
 Const COLLAPSED_HEIGHT = 19
 
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 
 Dim wayptType(0 To 4) As Boolean
 Public wayptPath As Byte

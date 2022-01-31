@@ -635,7 +635,8 @@ Private high As Byte
 Private clr(0 To 2) As Byte
 Private pureClr(0 To 2) As Byte
 
-Private oldX As Integer, oldY As Integer
+Private oldX As Integer
+Private oldY As Integer
 
 Public ok As Boolean
 
@@ -1117,7 +1118,9 @@ End Sub
 Private Sub Render()
 
     Dim i As Integer
-    Dim redVal As Byte, greenVal As Byte, blueVal As Byte
+    Dim redVal As Byte
+    Dim greenVal As Byte
+    Dim blueVal As Byte
 
     For i = 0 To 255
         picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, clr(G), clr(B))

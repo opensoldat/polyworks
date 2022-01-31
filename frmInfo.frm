@@ -1699,7 +1699,8 @@ Public collapsed As Boolean
 
 Private tempVal As Single
 
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 Public noChange As Boolean
 Private applyChange As Boolean
 

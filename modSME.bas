@@ -392,8 +392,10 @@ End Function
 'mouse event
 Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
 
-    Dim xSrc As Integer, ySrc As Integer
-    Dim Width As Integer, Height As Integer
+    Dim xSrc As Integer
+    Dim ySrc As Integer
+    Dim Width As Integer
+    Dim Height As Integer
 
     On Error GoTo ErrorHandler
 

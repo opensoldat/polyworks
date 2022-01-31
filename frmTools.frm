@@ -311,7 +311,8 @@ Option Explicit
 
 Dim curTool As Byte
 Dim curButton As Byte
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 Dim formHeight As Integer
 Public collapsed As Boolean
 Dim hotKeys(0 To 13) As Byte

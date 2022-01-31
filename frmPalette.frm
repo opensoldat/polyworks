@@ -624,7 +624,8 @@ End Function
 
 Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim foundClr As Boolean
 
     For Y = 0 To 5
@@ -698,7 +699,8 @@ Public Sub loadPalette(fileName As String)
 
     On Error GoTo ErrorHandler
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim fileOpen As Boolean
 
     fileOpen = False
@@ -768,7 +770,8 @@ End Sub
 
 Public Sub savePalette(fileName As String)
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim fileOpen As Boolean
 
     On Error GoTo ErrorHandler
@@ -817,7 +820,8 @@ End Sub
 
 Private Sub mnuClearPalette_Click()
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
 
     For Y = 0 To 5
         For X = 0 To 11
