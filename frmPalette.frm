@@ -845,7 +845,6 @@ End Sub
 Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then 'select color
-
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         frmSoldatMapEditor.setPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
@@ -859,13 +858,10 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
         shpSel1.Top = Int(Y / 16) * 16 + 1
         shpSel2.left = Int(X / 16) * 16
         shpSel2.Top = Int(Y / 16) * 16
-
     ElseIf Button = 2 Then 'new color
-
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         Me.PopupMenu mnuNewColor
-
     End If
 
     cmdDefault.SetFocus
