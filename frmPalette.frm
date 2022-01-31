@@ -972,7 +972,7 @@ Private Sub txtOpacity_Change()
     If IsNumeric(txtOpacity.Text) = False And txtOpacity.Text <> "" Then
         txtOpacity.Text = 100
     ElseIf txtOpacity.Text = "" Then
-
+        ' no-op
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
         frmSoldatMapEditor.setPolyColor 3, txtOpacity.Text
     End If
@@ -990,6 +990,7 @@ Private Sub txtOpacity_LostFocus()
     If txtOpacity.Text = "" Then
         txtOpacity.Text = 0
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
+        ' no-op
     Else
         txtOpacity.Text = 0
     End If

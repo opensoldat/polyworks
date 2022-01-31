@@ -1177,7 +1177,7 @@ Private Sub txtHexCode_Change()
     Dim tempHexVal As String
 
     If HexToLong(txtHexCode.Text) = -1 Then
-
+        ' no-op
     ElseIf mHexValue <> txtHexCode.Text Then
         If Len(txtHexCode.Text) < 6 Then
             tempHexVal = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
