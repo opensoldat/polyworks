@@ -1724,8 +1724,14 @@ Dim mMouseStartPosY As Long
 Dim mInitialWindowWidth As Single
 Dim mInitialWindowHeight As Single
 
-Const MIN_FORM_WIDTH = 300
-Const MIN_FORM_HEIGHT = 200
+' Global constants
+Property Get MIN_FORM_WIDTH() As Integer
+    MIN_FORM_WIDTH = 300
+End Property
+
+Property Get MIN_FORM_HEIGHT() As Integer
+    MIN_FORM_HEIGHT = 200
+End Property
 
 Private Sub Form_Load()
 

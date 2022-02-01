@@ -2323,11 +2323,11 @@ Private Sub txtWidth_LostFocus()
         txtWidth.Text = formWidth
     ElseIf txtWidth.Text = "" Then
         txtWidth.Text = formWidth
-    ElseIf txtWidth.Text >= 320 And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
+    ElseIf txtWidth.Text >= frmSoldatMapEditor.MIN_FORM_WIDTH And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
         formWidth = Int(txtWidth.Text)
         txtWidth.Text = formWidth
     Else
-        If txtWidth.Text < 320 Then formWidth = 320
+        If txtWidth.Text < frmSoldatMapEditor.MIN_FORM_WIDTH Then formWidth = frmSoldatMapEditor.MIN_FORM_WIDTH
         If txtWidth.Text > (Screen.Width / Screen.TwipsPerPixelX) Then formWidth = (Screen.Width / Screen.TwipsPerPixelX)
         txtWidth.Text = formWidth
     End If
@@ -2355,11 +2355,11 @@ Private Sub txtHeight_LostFocus()
         txtHeight.Text = formHeight
     ElseIf txtHeight.Text = "" Then
         txtHeight.Text = formHeight
-    ElseIf txtHeight.Text >= 320 And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
+    ElseIf txtHeight.Text >= frmSoldatMapEditor.MIN_FORM_HEIGHT And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
         formHeight = Int(txtHeight.Text)
         txtHeight.Text = formHeight
     Else
-        If txtHeight.Text < 320 Then formHeight = 320
+        If txtHeight.Text < frmSoldatMapEditor.MIN_FORM_HEIGHT Then formHeight = frmSoldatMapEditor.MIN_FORM_HEIGHT
         If txtHeight.Text > (Screen.Height / Screen.TwipsPerPixelY) Then formHeight = (Screen.Height / Screen.TwipsPerPixelY)
         txtHeight.Text = formHeight
     End If
