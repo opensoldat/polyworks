@@ -1874,6 +1874,9 @@ Private Function applyPreferences() As Boolean
         frmSoldatMapEditor.WindowState = vbMaximized
     End If
 
+    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
+    frmSoldatMapEditor.picResize.left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
+
     frmSoldatMapEditor.gridSpacing = spacing
     frmSoldatMapEditor.gridDivisions = divisions
     frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
