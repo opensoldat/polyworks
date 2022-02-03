@@ -12585,7 +12585,7 @@ Private Sub mnuOpenCompiled_Click()
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = soldatDir & "Maps\"
     commonDialog.FileName = soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
+    frmSoldatMapEditor.commonDialog.DialogTitle = "Load Compiled Map"
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
