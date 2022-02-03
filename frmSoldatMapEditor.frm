@@ -1290,38 +1290,38 @@ Option Explicit
     ' Dim FileName, color, token, b, commonDialog
 #End If
 
-Dim DX As DirectX8
-Dim D3D As Direct3D8
-Dim D3DDevice As Direct3DDevice8
-Dim DI As DirectInput8
-Dim DIDevice As DirectInputDevice8
-Dim DIState As DIKEYBOARDSTATE
+Private DX As DirectX8
+Private D3D As Direct3D8
+Private D3DDevice As Direct3DDevice8
+Private DI As DirectInput8
+Private DIDevice As DirectInputDevice8
+Private DIState As DIKEYBOARDSTATE
 
 Const BUFFER_SIZE As Long = 10
 
-Dim hEvent As Long
+Private hEvent As Long
 Implements DirectXEvent8
 
-Dim D3DX As D3DX8
-Dim mapTexture As Direct3DTexture8
-Dim particleTexture As Direct3DTexture8
-Dim patternTexture As Direct3DTexture8
-Dim objectsTexture As Direct3DTexture8
-Dim lineTexture As Direct3DTexture8
-Dim pathTexture As Direct3DTexture8
-Dim rCenterTexture As Direct3DTexture8
-Dim sketchTexture As Direct3DTexture8
+Private D3DX As D3DX8
+Private mapTexture As Direct3DTexture8
+Private particleTexture As Direct3DTexture8
+Private patternTexture As Direct3DTexture8
+Private objectsTexture As Direct3DTexture8
+Private lineTexture As Direct3DTexture8
+Private pathTexture As Direct3DTexture8
+Private rCenterTexture As Direct3DTexture8
+Private sketchTexture As Direct3DTexture8
 
-Dim renderTarget As Direct3DTexture8
-Dim renderSurface As Direct3DSurface8
-Dim backBuffer As Direct3DSurface8
+Private renderTarget As Direct3DTexture8
+Private renderSurface As Direct3DSurface8
+Private backBuffer As Direct3DSurface8
 
-Dim scenerySprite As D3DXSprite
+Private scenerySprite As D3DXSprite
 
-Const COLOR_KEY As Long = &HFF00FF00
+Private Const COLOR_KEY As Long = &HFF00FF00
 
-Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
-Const FVF2 As Long = D3DFVF_XYZ
+Private Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
+Private Const FVF2 As Long = D3DFVF_XYZ
 
 
 'types
@@ -1507,98 +1507,99 @@ Private Type TConnection
 End Type
 
 
-Dim Version As Long
-Dim Polys() As TPolygon
-Dim PolyCoords() As TTriangle
+Private Version As Long
+Private Polys() As TPolygon
+Private PolyCoords() As TTriangle
 
-Dim Scenery() As TScenery
-Dim SceneryTextures() As TextureData
+Private Scenery() As TScenery
+Private SceneryTextures() As TextureData
 
-Dim Spawns() As TSpawnPoint
-Dim Colliders() As TCollider
-Dim Waypoints() As TWaypoint
-Dim Connections() As TConnection
+Private Spawns() As TSpawnPoint
+Private Colliders() As TCollider
+Private Waypoints() As TWaypoint
+Private Connections() As TConnection
 
-Dim Lights() As TLightSource
+Private Lights() As TLightSource
 
-Dim Options As TOptions
-Dim mPolyCount As Long
+Private Options As TOptions
+Private mPolyCount As Long
 
-Dim sceneryCount As Long
-Dim sceneryElements As Long
-Dim spawnPoints As Long
-Dim colliderCount As Long
-Dim waypointCount As Long
-Dim conCount As Integer
-Dim lightCount As Integer
+Private sceneryCount As Long
+Private sceneryElements As Long
+Private spawnPoints As Long
+Private colliderCount As Long
+Private waypointCount As Long
+Private conCount As Integer
+Private lightCount As Integer
 
-Dim mapTitle As String
+Private mapTitle As String
 Public gTextureFile As String
-Dim maxX As Single
-Dim maxY As Single
-Dim minX As Single
-Dim minY As Single
+Private maxX As Single
+Private maxY As Single
+Private minX As Single
+Private minY As Single
 
-Dim bgPolys(1 To 4) As TCustomVertex
-Dim bgPolyCoords(1 To 4) As D3DVECTOR2
-Dim bgColors(1 To 2) As TColor
+Private bgPolys(1 To 4) As TCustomVertex
+Private bgPolyCoords(1 To 4) As D3DVECTOR2
+Private bgColors(1 To 2) As TColor
 
-Const MAX_POLYS  As Integer = 4000
-Const MAX_ZOOM  As Single = 16
-Const MIN_ZOOM As Single = 0.03125
+Private Const MAX_POLYS  As Integer = 4000
+Private Const MAX_ZOOM  As Single = 16
+Private Const MIN_ZOOM As Single = 0.03125
 
-Const TOOL_MOVE As Byte = 0
-Const TOOL_CREATE As Byte = 1
-Const TOOL_VSELECT As Byte = 2
-Const TOOL_PSELECT As Byte = 3
-Const TOOL_VCOLOR As Byte = 4
-Const TOOL_PCOLOR As Byte = 5
-Const TOOL_TEXTURE As Byte = 6
-Const TOOL_SCENERY As Byte = 7
-Const TOOL_WAYPOINT As Byte = 8
-Const TOOL_OBJECTS As Byte = 9
-Const TOOL_CLRPICKER As Byte = 10
-Const TOOL_SKETCH As Byte = 11
-Const TOOL_LIGHTS As Byte = 12
-Const TOOL_DEPTHMAP As Byte = 13
+Private Const TOOL_MOVE As Byte = 0
+Private Const TOOL_CREATE As Byte = 1
+Private Const TOOL_VSELECT As Byte = 2
+Private Const TOOL_PSELECT As Byte = 3
+Private Const TOOL_VCOLOR As Byte = 4
+Private Const TOOL_PCOLOR As Byte = 5
+Private Const TOOL_TEXTURE As Byte = 6
+Private Const TOOL_SCENERY As Byte = 7
+Private Const TOOL_WAYPOINT As Byte = 8
+Private Const TOOL_OBJECTS As Byte = 9
+Private Const TOOL_CLRPICKER As Byte = 10
+Private Const TOOL_SKETCH As Byte = 11
+Private Const TOOL_LIGHTS As Byte = 12
+Private Const TOOL_DEPTHMAP As Byte = 13
 
-Const TOOL_HAND As Byte = 14
-Const TOOL_VSELADD As Byte = 15
-Const TOOL_VSELSUB As Byte = 16
-Const TOOL_PSELADD As Byte = 17
-Const TOOL_PSELSUB As Byte = 18
-Const TOOL_SCALE As Byte = 19
-Const TOOL_ROTATE As Byte = 20
-Const TOOL_CONNECT As Byte = 21
-Const TOOL_QUAD As Byte = 22
-Const TOOL_PIXPICKER As Byte = 23
-Const TOOL_LITPICKER As Byte = 24
-Const TOOL_ERASER As Byte = 25
-Const TOOL_SMUDGE As Byte = 26
-Const TOOL_NULL As Byte = 255
+Private Const TOOL_HAND As Byte = 14
+Private Const TOOL_VSELADD As Byte = 15
+Private Const TOOL_VSELSUB As Byte = 16
+Private Const TOOL_PSELADD As Byte = 17
+Private Const TOOL_PSELSUB As Byte = 18
+Private Const TOOL_SCALE As Byte = 19
+Private Const TOOL_ROTATE As Byte = 20
+Private Const TOOL_CONNECT As Byte = 21
+Private Const TOOL_QUAD As Byte = 22
+Private Const TOOL_PIXPICKER As Byte = 23
+Private Const TOOL_LITPICKER As Byte = 24
+Private Const TOOL_ERASER As Byte = 25
+Private Const TOOL_SMUDGE As Byte = 26
+Private Const TOOL_NULL As Byte = 255
 
-Const KEY_SHIFT As Byte = 1
-Const KEY_CTRL As Byte = 2
-Const KEY_ALT As Byte = 4
+Private Const KEY_SHIFT As Byte = 1
+Private Const KEY_CTRL As Byte = 2
+Private Const KEY_ALT As Byte = 4
 
 
-Dim sketch() As TSketchLine
-Dim sketchLines As Integer
-Dim selectedSketch(1 To 2) As Integer
+Private sketch() As TSketchLine
+Private sketchLines As Integer
+Private selectedSketch(1 To 2) As Integer
 
-Dim circleOn As Boolean
-Dim leftMouseDown As Boolean
+Private circleOn As Boolean
+Private leftMouseDown As Boolean
 
-Dim initialized As Boolean
-Dim initialized2 As Boolean
-Dim acquired As Boolean
-Dim selectionChanged As Boolean
+Private initialized As Boolean
+Private initialized2 As Boolean
+Private acquired As Boolean
+Private selectionChanged As Boolean
 
-Dim clrPolys As Boolean
-Dim clrWireframe As Boolean
-Dim sslBack As Boolean
-Dim sslMid As Boolean
-Dim sslFront As Boolean
+Private clrPolys As Boolean
+Private clrWireframe As Boolean
+Private sslBack As Boolean
+Private sslMid As Boolean
+Private sslFront As Boolean
+
 Public backClr As Long
 Public pointClr As Long
 Public selectionClr As Long
@@ -1615,7 +1616,8 @@ Public gridSpacing As Integer
 Public gridDivisions As Integer
 Public gridOp1 As Byte
 Public gridOp2 As Byte
-Dim noRedraw As Boolean
+
+Private noRedraw As Boolean
 
 Public sceneryVerts As Boolean
 Public topmost As Boolean
@@ -1625,104 +1627,105 @@ Public formWidth As Integer
 Public formLeft As Integer
 Public formTop As Integer
 
-Dim polyClr As TColor
-Dim opacity As Single
-Dim blendMode As Integer
+Private polyClr As TColor
+Private opacity As Single
+Private blendMode As Integer
 
-Dim scrollCoords(1 To 2) As D3DVECTOR2   'coordinates for scrolling
-Dim mouseCoords As D3DVECTOR2            'coordinates of mouse
-Dim moveCoords(1 To 2) As D3DVECTOR2     'coordinates for moving vertices
-Dim selectedCoords(1 To 2) As D3DVECTOR2 'coordinates of selected area
-Dim selectedPolys() As Integer           'list of selected polys and verts
-Dim vertexList() As TVertexData          'list of polys with selected verts
-Dim numVerts As Integer                  'number of current vertex being created
-Dim numCorners As Integer                'number of corner of scenery being created
+Private scrollCoords(1 To 2) As D3DVECTOR2    'coordinates for scrolling
+Private mouseCoords As D3DVECTOR2             'coordinates of mouse
+Private moveCoords(1 To 2) As D3DVECTOR2      'coordinates for moving vertices
+Private selectedCoords(1 To 2) As D3DVECTOR2  'coordinates of selected area
+Private selectedPolys() As Integer            'list of selected polys and verts
+Private vertexList() As TVertexData           'list of polys with selected verts
+Private numVerts As Integer                   'number of current vertex being created
+Private numCorners As Integer                 'number of corner of scenery being created
 
-Dim numSelectedPolys As Integer
-Dim numSelectedScenery As Integer        'number of currently selected scenery
-Dim numSelColliders As Integer
-Dim numSelSpawns As Integer
-Dim numSelWaypoints As Integer
-Dim numSelLights As Integer
+Private numSelectedPolys As Integer
+Private numSelectedScenery As Integer         'number of currently selected scenery
+Private numSelColliders As Integer
+Private numSelSpawns As Integer
+Private numSelWaypoints As Integer
+Private numSelLights As Integer
 
 Public xTexture As Integer
 Public yTexture As Integer
-Dim creatingQuad As Boolean
 
-Dim currentFileName As String
-Dim prompt As Boolean
+Private creatingQuad As Boolean
 
-Dim toolAction As Boolean
-Dim spaceDown As Boolean
+Private currentFileName As String
+Private prompt As Boolean
 
-Dim currentScenery As String
+Private toolAction As Boolean
+Private spaceDown As Boolean
 
-Dim zoomFactor As Single
-Dim pointRadius As Integer
-Dim snapRadius As Integer
-Dim clrRadius As Integer
-Dim ohSnap As Boolean
-Dim snapToGrid As Boolean
-Dim fixedTexture As Boolean
-Dim showBG As Boolean
-Dim showPolys As Boolean
-Dim showTexture As Boolean
-Dim showWireframe As Boolean
-Dim showPoints As Boolean
-Dim showScenery As Boolean
-Dim showObjects As Boolean
-Dim showGrid As Boolean
-Dim showWaypoints As Boolean
-Dim showPath1 As Boolean
-Dim showPath2 As Boolean
-Dim showSketch As Boolean
-Dim showLights As Boolean
-Dim currentTool As Byte
-Dim currentFunction As Byte
-Dim particleSize As Single
-Dim colorMode As Byte
-Dim eraseCircle As Boolean
-Dim eraseLines As Boolean
+Private currentScenery As String
 
-Dim polyType As Byte
-Dim PolyTypeClrs(0 To 25) As Long
+Private zoomFactor As Single
+Private pointRadius As Integer
+Private snapRadius As Integer
+Private clrRadius As Integer
+Private ohSnap As Boolean
+Private snapToGrid As Boolean
+Private fixedTexture As Boolean
+Private showBG As Boolean
+Private showPolys As Boolean
+Private showTexture As Boolean
+Private showWireframe As Boolean
+Private showPoints As Boolean
+Private showScenery As Boolean
+Private showObjects As Boolean
+Private showGrid As Boolean
+Private showWaypoints As Boolean
+Private showPath1 As Boolean
+Private showPath2 As Boolean
+Private showSketch As Boolean
+Private showLights As Boolean
+Private currentTool As Byte
+Private currentFunction As Byte
+Private particleSize As Single
+Private colorMode As Byte
+Private eraseCircle As Boolean
+Private eraseLines As Boolean
+
+Private polyType As Byte
+Private PolyTypeClrs(0 To 25) As Long
 
 Public shiftDown As Boolean
 Public ctrlDown As Boolean
 Public altDown As Boolean
 
-Dim rCenter As D3DVECTOR2
-Dim selRect(3) As D3DVECTOR2  'RECT
+Private rCenter As D3DVECTOR2
+Private selRect(3) As D3DVECTOR2   'RECT
 
-Dim xGridLines() As TLine
-Dim yGridLines() As TLine
-Dim inc As Single
+Private xGridLines() As TLine
+Private yGridLines() As TLine
+Private inc As Single
 
-Dim scaleDiff As D3DVECTOR2
-Dim rDiff As Single
+Private scaleDiff As D3DVECTOR2
+Private rDiff As Single
 
-Dim gostek As D3DVECTOR2
+Private gostek As D3DVECTOR2
 
-Dim imageInfo As TImageInfo
-Dim textureDesc As D3DSURFACE_DESC
+Private imageInfo As TImageInfo
+Private textureDesc As D3DSURFACE_DESC
 
-Dim noneSelected As Boolean
+Private noneSelected As Boolean
 
-Dim currentUndo As Integer
-Dim numUndo As Integer
-Dim numRedo As Integer
-Dim max_undo As Integer
-Dim lastCompiled As String
+Private currentUndo As Integer
+Private numUndo As Integer
+Private numRedo As Integer
+Private max_undo As Integer
+Private lastCompiled As String
 
-Dim currentWaypoint As Integer
+Private currentWaypoint As Integer
 
-Dim objTexSize As D3DVECTOR2
+Private objTexSize As D3DVECTOR2
 
-Dim mIsResizingWindow As Boolean
-Dim mMouseStartPosX As Long
-Dim mMouseStartPosY As Long
-Dim mInitialWindowWidth As Single
-Dim mInitialWindowHeight As Single
+Private mIsResizingWindow As Boolean
+Private mMouseStartPosX As Long
+Private mMouseStartPosY As Long
+Private mInitialWindowWidth As Single
+Private mInitialWindowHeight As Single
 
 ' Global constants
 Property Get MIN_FORM_WIDTH() As Integer
