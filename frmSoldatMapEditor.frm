@@ -5421,6 +5421,8 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             Zoom 1
         ElseIf DIState.Key(MapVirtualKey(78, 0)) = 128 Then 'ctrl+n
             mnuNew_Click
+        ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 And shiftDown Then 'ctrl+shift+o
+            mnuOpenCompiled_Click
         ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 Then 'ctrl+o
             mnuOpen_Click
         ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 And shiftDown Then 'ctrl+shift+s
