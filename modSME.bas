@@ -1,6 +1,12 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private fileName, Token, X, Y, Val
+    'Private fileName, Token, X, Y, Val
+#End If
+
 Global Const PI As Single = 3.14159265358979  'mmm... PI
 
 Global gfxDir As String

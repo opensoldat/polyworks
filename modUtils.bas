@@ -1,6 +1,12 @@
 Attribute VB_Name = "modUtils"
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private Val, left
+    'Private Val, left
+#End If
+
 Public Type TColor
     red     As Byte
     green   As Byte

@@ -1735,6 +1735,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Dim fileName, Val
+    'Dim fileName, Val
+#End If
+
 Private Type TColor
     red As Byte
     green As Byte

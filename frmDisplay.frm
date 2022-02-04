@@ -497,6 +497,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private X, Y
+    'Private X, Y
+#End If
+
 Private Const LAYER_BG As Byte = 0
 Private Const LAYER_POLYS As Byte = 1
 Private Const LAYER_TEXTURE As Byte = 2

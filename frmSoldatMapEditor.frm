@@ -1286,8 +1286,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim FileName, color, token, b, commonDialog
-    ' Dim FileName, color, token, b, commonDialog
+    Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd
+    'Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd
 #End If
 
 Private DX As DirectX8

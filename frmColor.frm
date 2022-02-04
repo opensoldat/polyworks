@@ -620,6 +620,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private B, X, Y, hWnd
+    'Private B, X, Y, hWnd
+#End If
+
 Public red As Byte
 Public green As Byte
 Public blue As Byte
