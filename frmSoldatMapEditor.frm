@@ -1727,6 +1727,16 @@ Private mMouseStartPosY As Long
 Private mInitialWindowWidth As Single
 Private mInitialWindowHeight As Single
 
+Private Const QUICK_MOVE_DELTA = 90000
+
+Private Declare Function MoveWindow Lib "user32.dll" ( _
+  ByVal hWnd As Long, _
+  ByVal X As Long, _
+  ByVal Y As Long, _
+  ByVal nWidth As Long, _
+  ByVal nHeight As Long, _
+  ByVal bRepaint As Long) As Long
+
 ' Global constants
 Property Get MIN_FORM_WIDTH() As Integer
     MIN_FORM_WIDTH = 300
@@ -1735,6 +1745,19 @@ End Property
 Property Get MIN_FORM_HEIGHT() As Integer
     MIN_FORM_HEIGHT = 200
 End Property
+
+Private Function QuickHide(ByRef myWindow As Form)
+    MoveWindow myWindow.hWnd, _
+        (myWindow.left - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelX, _
+        (myWindow.Top - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelY, _
+        myWindow.Width / Screen.TwipsPerPixelX, _
+        myWindow.Height / Screen.TwipsPerPixelY, _
+        False
+End Function
+
+Private Function QuickMoveAndShow(ByRef myWindow As Form, nLeft, nTop)
+    myWindow.Move nLeft + QUICK_MOVE_DELTA, nTop + QUICK_MOVE_DELTA
+End Function
 
 Private Sub Form_Load()
 
@@ -14972,57 +14995,50 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     If Me.WindowState = vbMinimized Or Me.WindowState = vbNormal Then
         If Len(frmDisplay.Tag) <> 0 Then
-            frmDisplay.Hide
+            QuickHide frmDisplay
         End If
         If Len(frmInfo.Tag) <> 0 Then
-            frmInfo.Hide
+            QuickHide frmInfo
         End If
         If Len(frmPalette.Tag) <> 0 Then
-            frmPalette.Hide
+            QuickHide frmPalette
         End If
         If Len(frmScenery.Tag) <> 0 Then
-            frmScenery.Hide
+            QuickHide frmScenery
         End If
         If Len(frmTexture.Tag) <> 0 Then
-            frmTexture.Hide
+            QuickHide frmTexture
         End If
         If Len(frmTools.Tag) <> 0 Then
-            frmTools.Hide
+            QuickHide frmTools
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-            frmWaypoints.Hide
+            QuickHide frmWaypoints
         End If
 
         ReleaseCapture
         SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
         If Len(frmDisplay.Tag) <> 0 Then
-            frmDisplay.Move (frmDisplay.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmDisplay.Show
+            QuickMoveAndShow frmDisplay, (frmDisplay.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmInfo.Tag) <> 0 Then
-            frmInfo.Move (frmInfo.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmInfo.Show
+            QuickMoveAndShow frmInfo, (frmInfo.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmPalette.Tag) <> 0 Then
-            frmPalette.Move (frmPalette.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmPalette.Show
+            QuickMoveAndShow frmPalette, (frmPalette.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmScenery.Tag) <> 0 Then
-            frmScenery.Move (frmScenery.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmScenery.Show
+            QuickMoveAndShow frmScenery, (frmScenery.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTexture.Tag) <> 0 Then
-            frmTexture.Move (frmTexture.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmTexture.Show
+            QuickMoveAndShow frmTexture, (frmTexture.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTools.Tag) <> 0 Then
-            frmTools.Move (frmTools.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmTools.Show
+            QuickMoveAndShow frmTools, (frmTools.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-            frmWaypoints.Move (frmWaypoints.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
-            frmWaypoints.Show
+            QuickMoveAndShow frmWaypoints, (frmWaypoints.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
 
         formLeft = Me.left / Screen.TwipsPerPixelX
