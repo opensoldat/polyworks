@@ -12065,6 +12065,10 @@ Private Sub saveSettings()
     Dim currentColor As Long
     Dim sNull As String
     sNull = Chr$(0)
+    Dim newLine As String
+    newLine = Chr$(13) & Chr$(10)
+    Dim isNewFile As Boolean
+    isNewFile = False
 
     'preferences
     iniString = _
@@ -12169,21 +12173,24 @@ Private Sub saveSettings()
     frmPalette.savePalette appPath & "\palettes\current.txt"
 
     'workspace
+    isNewFile = Not FileExists(appPath & "\workspace\current.ini")
+
     iniString = _
         "WindowState=" & Me.WindowState & sNull & _
         "Width=" & formWidth & sNull & _
         "Height=" & formHeight & sNull & _
         "Left=" & formLeft & sNull & _
-        "Top=" & formTop & sNull & sNull
+        "Top=" & formTop & _
+        IIf(isNewFile, newLine, "") & sNull & sNull
     saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
-    saveWindow "Tools", frmTools, False
-    saveWindow "Display", frmDisplay, frmDisplay.collapsed
-    saveWindow "Properties", frmInfo, frmInfo.collapsed
-    saveWindow "Palette", frmPalette, frmPalette.collapsed
-    saveWindow "Scenery", frmScenery, frmScenery.collapsed
-    saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed
-    saveWindow "Texture", frmTexture, frmTexture.collapsed
+    saveWindow "Tools", frmTools, False, isNewFile
+    saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
+    saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
+    saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
+    saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
+    saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
+    saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
 
     'recent files
     iniString = _
@@ -12205,13 +12212,15 @@ Private Sub saveSettings()
 
 End Sub
 
-Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, Optional FileName As String = "current.ini")
+Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional FileName As String = "current.ini")
 
     Dim leftVal As Integer
     Dim topVal As Integer
     Dim iniString As String
     Dim sNull As String
     sNull = Chr$(0)
+    Dim newLine As String
+    newLine = Chr$(13) & Chr$(10)
 
     leftVal = window.left / Screen.TwipsPerPixelX
     topVal = window.Top / Screen.TwipsPerPixelY
@@ -12221,7 +12230,8 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
         "Left=" & leftVal & sNull & _
         "Top=" & topVal & sNull & _
         "Collapsed=" & collapsed & sNull & _
-        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & sNull & sNull
+        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
+        IIf(isNewFile, newLine, "") & sNull & sNull
 
     saveSection sectionName, iniString, appPath & "\workspace\" & FileName
 
@@ -14281,7 +14291,12 @@ Private Sub mnuSaveSpace_Click()
 
     Dim iniString As String
     Dim sNull As String
+    Dim newLine As String
+    Dim isNewFile As Boolean
+
     sNull = Chr$(0)
+    newLine = Chr$(13) & Chr$(10)
+    isNewFile = False
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
     commonDialog.InitDir = appPath & "\Workspace\"
@@ -14290,21 +14305,24 @@ Private Sub mnuSaveSpace_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
+        isNewFile = Not FileExists(appPath & "\workspace\" & commonDialog.FileTitle)
+
         iniString = _
             "WindowState=" & Me.WindowState & sNull & _
             "Width=" & formWidth & sNull & _
             "Height=" & formHeight & sNull & _
             "Left=" & formLeft & sNull & _
-            "Top=" & formTop & sNull & sNull
+            "Top=" & formTop & _
+            IIf(isNewFile, newLine, "") & sNull & sNull
         saveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
-        saveWindow "Tools", frmTools, False, commonDialog.FileTitle
-        saveWindow "Display", frmDisplay, frmDisplay.collapsed, commonDialog.FileTitle
-        saveWindow "Properties", frmInfo, frmInfo.collapsed, commonDialog.FileTitle
-        saveWindow "Palette", frmPalette, frmPalette.collapsed, commonDialog.FileTitle
-        saveWindow "Scenery", frmScenery, frmScenery.collapsed, commonDialog.FileTitle
-        saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, commonDialog.FileTitle
-        saveWindow "Texture", frmTexture, frmTexture.collapsed, commonDialog.FileTitle
+        saveWindow "Tools", frmTools, False, isNewFile, commonDialog.FileTitle
+        saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile, commonDialog.FileTitle
+        saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile, commonDialog.FileTitle
+        saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile, commonDialog.FileTitle
+        saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile, commonDialog.FileTitle
+        saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile, commonDialog.FileTitle
+        saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile, commonDialog.FileTitle
     End If
 
     RegainFocus
