@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.6.0.0
+Soldat Polyworks 1.6.0.1
 
 
-updated 2021-02-04
+updated 2022-02-04
 
 
 
@@ -60,6 +60,20 @@ Make sure your color setting is either 16-bit or 32-bit (control panel -> displa
 Right click with the scenery tool to bring up the main scenery list.
 
 
+
+Changes in v1.6.0.1
+- Added resizing support for main window (bottom right corner)
+- Added ctrl+shift+o hotkey for opening compiled maps
+- Modified newly created ini files are easier to read due to space between sections
+- Modified minimal main window width and height to can be as low as 300x200
+- Modified used "Load Compiled Map" title for open-compiled-map dialog
+- Fixed broken "°" label for Hue in Color Picker
+- Fixed broken Soldat directory check in Preferences Dialog
+- Fixed missing gif.tga file prevents texture loading
+- Fixed saving Preferences shuffles around scenery textures resulting in wrong texture positions
+- Fixed mouse move error message while refreshing preferences (after saving Preferences)
+- Fixed issue with overlapping hidden progressbar control on small windows sizes
+- Fixed side-window content flickers white on show after dragging main window
 
 Changes in v1.6.0.0
 - added remember sticky state of tools windows after reopening workspace/pw
