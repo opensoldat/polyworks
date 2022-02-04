@@ -16,7 +16,7 @@ Unzipping creates a PolyWorks folder.
 If PolyWorks does not detect your Soldat directory on startup, go to Edit -> Preferences and set it there.
 If you don't have Soldat installed you can create a folder with the Maps, Scenery-gfx, and Textures directories.
 
-Requirements: Windows 98/Me/2000/XP; DirectX 8.1
+Requirements: Windows 98/Me/2000/XP/Vista/7/8/10/11; DirectX 8.1
 
 
 
