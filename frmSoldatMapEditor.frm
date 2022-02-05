@@ -1843,6 +1843,7 @@ Private Sub Form_Load()
 
     err = "Error initializing D3D"
     initialized2 = False
+    loadWorkspace "current.ini", True
     Init
     err = "Error initializing DInput"
     InitDInput
@@ -12424,7 +12425,7 @@ Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) 
 
 End Function
 
-Private Sub loadWorkspace(Optional FileName As String = "current.ini")
+Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
 
     On Error GoTo ErrorHandler
 
@@ -12472,11 +12473,13 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
     frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & FileName)
     frmPalette.Tag = IIf(loadString("Palette", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
 
-    mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & FileName)
-    frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & FileName)
-    frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
-    frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
-    frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    If Not bSkipScenery Then
+        mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & FileName)
+        frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & FileName)
+        frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
+        frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
+        frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    End If
 
     mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
     frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
