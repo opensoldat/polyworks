@@ -3668,7 +3668,7 @@ Private Sub SaveUndo()
 
     FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
-    If Len(Dir(appPath & "\undo\")) = 0 Then
+    If Dir(appPath & "\undo\", vbDirectory) = "" Then
          MkDir (appPath & "\undo\")
     End If
 
