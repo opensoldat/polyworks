@@ -1735,27 +1735,37 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Dim fileName, Val
+    'Dim fileName, Val
+#End If
+
 Private Type TColor
     red As Byte
     green As Byte
     blue As Byte
 End Type
 
-Const MinHeight = 440
-Const MaxHeight = 547
+Private Const MinHeight = 440
+Private Const MaxHeight = 547
 
-Dim blendModes(0 To 7) As Integer
+Private blendModes(0 To 7) As Integer
 
-Dim backClr As TColor
-Dim pointClr As TColor
-Dim selClr As TColor
-Dim gridClr As TColor
-Dim gridClr2 As TColor
+Private backClr As TColor
+Private pointClr As TColor
+Private selClr As TColor
+Private gridClr As TColor
+Private gridClr2 As TColor
 
-Dim spacing As Integer, divisions As Integer
-Dim formWidth As Integer, formHeight As Integer
-Dim opacity1 As Integer, opacity2 As Integer
-Dim sceneryVerts As Boolean, topmost As Boolean
+Private spacing As Integer
+Private divisions As Integer
+Private formWidth As Integer
+Private formHeight As Integer
+Private opacity1 As Integer
+Private opacity2 As Integer
+Private sceneryVerts As Boolean
+Private topmost As Boolean
 
 Private Sub picHide_Click()
 
@@ -1869,6 +1879,9 @@ Private Function applyPreferences() As Boolean
         frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
         frmSoldatMapEditor.WindowState = vbMaximized
     End If
+
+    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
+    frmSoldatMapEditor.picResize.left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
 
     frmSoldatMapEditor.gridSpacing = spacing
     frmSoldatMapEditor.gridDivisions = divisions
@@ -2316,11 +2329,11 @@ Private Sub txtWidth_LostFocus()
         txtWidth.Text = formWidth
     ElseIf txtWidth.Text = "" Then
         txtWidth.Text = formWidth
-    ElseIf txtWidth.Text >= 320 And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
+    ElseIf txtWidth.Text >= frmSoldatMapEditor.MIN_FORM_WIDTH And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
         formWidth = Int(txtWidth.Text)
         txtWidth.Text = formWidth
     Else
-        If txtWidth.Text < 320 Then formWidth = 320
+        If txtWidth.Text < frmSoldatMapEditor.MIN_FORM_WIDTH Then formWidth = frmSoldatMapEditor.MIN_FORM_WIDTH
         If txtWidth.Text > (Screen.Width / Screen.TwipsPerPixelX) Then formWidth = (Screen.Width / Screen.TwipsPerPixelX)
         txtWidth.Text = formWidth
     End If
@@ -2348,11 +2361,11 @@ Private Sub txtHeight_LostFocus()
         txtHeight.Text = formHeight
     ElseIf txtHeight.Text = "" Then
         txtHeight.Text = formHeight
-    ElseIf txtHeight.Text >= 320 And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
+    ElseIf txtHeight.Text >= frmSoldatMapEditor.MIN_FORM_HEIGHT And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
         formHeight = Int(txtHeight.Text)
         txtHeight.Text = formHeight
     Else
-        If txtHeight.Text < 320 Then formHeight = 320
+        If txtHeight.Text < frmSoldatMapEditor.MIN_FORM_HEIGHT Then formHeight = frmSoldatMapEditor.MIN_FORM_HEIGHT
         If txtHeight.Text > (Screen.Height / Screen.TwipsPerPixelY) Then formHeight = (Screen.Height / Screen.TwipsPerPixelY)
         txtHeight.Text = formHeight
     End If

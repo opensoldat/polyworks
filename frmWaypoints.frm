@@ -499,8 +499,10 @@ Option Explicit
 
 Dim formHeight As Integer
 Public collapsed As Boolean
+Const COLLAPSED_HEIGHT = 19
 
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 
 Dim wayptType(0 To 4) As Boolean
 Public wayptPath As Byte
@@ -516,24 +518,20 @@ Public Function getWayptKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setWayptKey(Index As Integer, ByVal value As Byte)
+Public Sub setWayptKey(Index As Integer, ByVal Value As Byte)
 
-    If value > 0 Then
-        wayptKeys(Index) = value
+    If Value > 0 Then
+        wayptKeys(Index) = Value
     End If
 
 End Sub
 
 Private Sub Form_Load()
 
-    Dim i As Integer
-
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
 
     Exit Sub
@@ -549,7 +547,7 @@ Public Sub setForm()
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
+        Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = formHeight * Screen.TwipsPerPixelY
     End If
@@ -566,18 +564,18 @@ Private Sub cboSpecial_Click()
 
 End Sub
 
-Public Sub getPathNum(tehValue As Byte)
+Public Sub getPathNum(Value As Byte)
 
-    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, tehValue = 1, BUTTON_UP
-    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, tehValue = 2, BUTTON_UP
-    wayptPath = tehValue - 1
+    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, Value = 1, BUTTON_UP
+    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, Value = 2, BUTTON_UP
+    wayptPath = Value - 1
 
 End Sub
 
-Public Sub getWayType(Index As Integer, tehValue As Boolean)
+Public Sub getWayType(Index As Integer, Value As Boolean)
 
-    wayptType(Index) = tehValue
-    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, tehValue, BUTTON_UP
+    wayptType(Index) = Value
+    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, Value, BUTTON_UP
 
 End Sub
 
@@ -603,7 +601,10 @@ Public Sub ClearWaypt()
 
     Dim i As Integer
 
-    For i = 0 To 4
+    Debug.Assert picType.LBound = LBound(wayptType)
+    Debug.Assert picType.UBound = UBound(wayptType)
+
+    For i = picType.LBound To picType.UBound
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
         wayptType(i) = False
     Next
@@ -618,7 +619,7 @@ Private Sub picTitle_DblClick()
 
     collapsed = Not collapsed
     If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
+        Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = formHeight * Screen.TwipsPerPixelY
     End If
@@ -686,7 +687,7 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
     wayptPath = Index
 
-    For i = 0 To 1
+    For i = picPath.LBound To picPath.UBound
         If i <> Index Then
             mouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
         End If
@@ -748,7 +749,7 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
 
     showPaths = Index
 
-    For i = 0 To 2
+    For i = picShow.LBound To picShow.UBound
         If i <> Index Then
             mouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
         End If
@@ -772,30 +773,30 @@ Public Sub SetColors()
     mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
     mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
 
-    For i = 0 To 4
+    For i = picType.LBound To picType.UBound
         mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     Next
 
-    For i = 0 To 2
+    For i = picShow.LBound To picShow.UBound
         mouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
     Next
 
 
     Me.BackColor = bgClr
 
-    For i = 0 To 4
-        lblType(i).BackColor = lblBackClr
-        lblType(i).ForeColor = lblTextClr
+    For Each c In lblType
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 1
-        lblPath(i).BackColor = lblBackClr
-        lblPath(i).ForeColor = lblTextClr
+    For Each c In lblPath
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 2
-        lblShow(i).BackColor = lblBackClr
-        lblShow(i).ForeColor = lblTextClr
+    For Each c In lblShow
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     lblWaypoints.BackColor = lblBackClr

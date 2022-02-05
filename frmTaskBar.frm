@@ -20,8 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim minimized As Boolean
-
 Private Sub Form_GotFocus()
 
     If frmSoldatMapEditor.Visible Then
@@ -56,7 +54,7 @@ Private Sub Form_Resize()
         End If
         frmSoldatMapEditor.RegainFocus
     ElseIf Not frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
-
+        ' no-op
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then
         frmSoldatMapEditor.RegainFocus
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then

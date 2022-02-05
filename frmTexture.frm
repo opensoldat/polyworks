@@ -75,19 +75,21 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 Dim formHeight As Integer
 Public collapsed As Boolean
-Public x1tex As Single, x2tex As Single, y1tex As Single, y2tex As Single
+Public x1tex As Single
+Public x2tex As Single
+Public y1tex As Single
+Public y2tex As Single
 
 Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
 
     Exit Sub
@@ -192,7 +194,6 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
         frmInfo.txtQuadY(0).Text = y1tex * 2
         frmInfo.txtQuadX(1).Text = x2tex * 2
         frmInfo.txtQuadY(1).Text = y2tex * 2
-
     End If
 
 End Sub
@@ -201,8 +202,10 @@ Public Sub setTexture(texturePath As String)
 
     On Error GoTo ErrorHandler
 
-    Dim texWidth As Integer, texHeight As Integer
-    Dim X As Integer, Y As Integer
+    Dim texWidth As Integer
+    Dim texHeight As Integer
+    Dim X As Integer
+    Dim Y As Integer
 
     texWidth = frmSoldatMapEditor.xTexture
     texHeight = frmSoldatMapEditor.yTexture

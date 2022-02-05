@@ -537,7 +537,6 @@ Private Sub cboJet_Click()
         Case 7 'infinite
             txtJet.Text = "32766"
         Case 8 'custom
-
     End Select
 
     If cboJet.ListIndex <> 8 Then
@@ -553,21 +552,21 @@ Private Sub getJets()
     Select Case txtJet.Text
         Case 0 'none
             cboJet.ListIndex = 0
-        Case 12
+        Case 12 'minimal
             cboJet.ListIndex = 1
-        Case 45
+        Case 45 'very low
             cboJet.ListIndex = 2
-        Case 95
+        Case 95 'low
             cboJet.ListIndex = 3
-        Case 190
+        Case 190 'normal
             cboJet.ListIndex = 4
-        Case 320
+        Case 320 'high
             cboJet.ListIndex = 5
-        Case 800
+        Case 800 'maximum
             cboJet.ListIndex = 6
-        Case 32766
+        Case 32766 'infinite
             cboJet.ListIndex = 7
-        Case Else
+        Case Else 'custom
             cboJet.ListIndex = 8
     End Select
 
@@ -578,11 +577,8 @@ Public Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     loadTextures2
-
     frmSoldatMapEditor.getOptions
-
     getJets
 
     Exit Sub
@@ -598,7 +594,6 @@ Private Sub cboTexture_Click()
     On Error GoTo ErrorHandler
 
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-
         frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
 
@@ -691,10 +686,8 @@ Public Sub loadFromList()
     Open appPath & "\texture_list.txt" For Input As #1
 
         Do While Not EOF(1)
-
             Input #1, textureName
             cboTexture.AddItem textureName
-
         Loop
 
     Close #1
@@ -714,7 +707,7 @@ Public Sub mnuRefresh_Click()
     loadTextures2
 
     For i = 0 To cboTexture.ListCount - 1
-        If cboTexture.List(i) = frmSoldatMapEditor.textureFile And cboTexture.List(i) <> "" Then
+        If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
             cboTexture.ListIndex = i
         End If
     Next

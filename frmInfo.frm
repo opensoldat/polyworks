@@ -1694,12 +1694,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim formHeight As Integer
+Private formHeight As Integer
 Public collapsed As Boolean
 
-Dim tempVal As Single
+Private tempVal As Single
 
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos  As Integer
 Public noChange As Boolean
 Private applyChange As Boolean
 
@@ -1712,7 +1713,6 @@ Private Sub Form_Load()
     formHeight = Me.ScaleHeight
 
     setForm
-
 
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
@@ -1845,7 +1845,7 @@ End Sub
 Private Sub txtRotate_LostFocus()
 
     If IsNumeric(txtRotate.Text) And applyChange Then
-        frmSoldatMapEditor.applyRotate (txtRotate.Text / 180 * pi)
+        frmSoldatMapEditor.applyRotate (txtRotate.Text / 180 * PI)
     Else
         txtRotate.Text = tempVal
     End If
@@ -1872,8 +1872,8 @@ Private Sub txtScale_LostFocus(Index As Integer)
     Else
         txtScale(Index).Text = tempVal
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub
@@ -1903,7 +1903,7 @@ Private Sub txtScenProp_LostFocus(Index As Integer)
         ElseIf Index = 2 And txtScenProp(Index).Text >= 0 And txtScenProp(Index).Text <= 100 Then
             frmSoldatMapEditor.applySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
         ElseIf Index = 3 And txtScenProp(Index).Text >= -360 And txtScenProp(Index).Text <= 360 Then
-            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 180 * pi, Index
+            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 180 * PI, Index
         Else
             txtScenProp(Index).Text = tempVal
         End If
@@ -1954,8 +1954,8 @@ Private Sub txtVertexAlpha_LostFocus()
     ElseIf applyChange Then
         frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub
@@ -1977,8 +1977,8 @@ Private Sub txtBounciness_LostFocus()
     ElseIf applyChange Then
         frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
     End If
-    tempVal = 0
 
+    tempVal = 0
     applyChange = False
 
 End Sub

@@ -1,7 +1,13 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
-Global Const pi As Single = 3.14159265358979  'mmm... pi
+' Fix vb6 ide casing changes
+#If False Then
+    Private fileName, Token, X, Y, Val
+    'Private fileName, Token, X, Y, Val
+#End If
+
+Global Const PI As Single = 3.14159265358979  'mmm... PI
 
 Global gfxDir As String
 
@@ -203,7 +209,7 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (B
 Public Declare Function MapVirtualKey Lib "user32" Alias "MapVirtualKeyA" _
         (ByVal wCode As Long, ByVal wMapType As Long) As Long
 
-'gdi+
+'GDI+
 Private Type GUID
    Data1    As Long
    Data2    As Integer
@@ -392,8 +398,10 @@ End Function
 'mouse event
 Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
 
-    Dim xSrc As Integer, ySrc As Integer
-    Dim Width As Integer, Height As Integer
+    Dim xSrc As Integer
+    Dim ySrc As Integer
+    Dim Width As Integer
+    Dim Height As Integer
 
     On Error GoTo ErrorHandler
 
@@ -547,10 +555,8 @@ Public Function GetSoldatDir() As String
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
     If hKey <> 0 Then
-
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
-
     Else
         'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
 
@@ -558,22 +564,25 @@ Public Function GetSoldatDir() As String
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
 
         If hKey <> 0 Then
-
             GetSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
-
         Else
-
             GetSoldatDir = "C:\Soldat"
-
         End If
+    End If
 
+    ' Fix soldat installer sets invalid soldat dir path
+    GetSoldatDir = Replace(GetSoldatDir, Chr(34), "")
+    ' Fix other possible paths too
+    GetSoldatDir = Replace(GetSoldatDir, "'", "")
+    GetSoldatDir = Replace(GetSoldatDir, "/", "\")
+
+    If Not DirExists(GetSoldatDir) And FileExists(GetSoldatDir) Then
+        GetSoldatDir = left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
     End If
 
     If Not DirExists(GetSoldatDir) Then
-
         MsgBox "Could not locate the Soldat directory. (" & GetSoldatDir & ")" & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
-
     End If
 
     Exit Function
@@ -600,9 +609,7 @@ Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Lon
     Dim hSubKey As Long
 
     If RegOpenKeyEx(hKey, lpSubKey, 0, KEY_READ, hSubKey) = 0 Then
-
         OpenRegKey = hSubKey
-
     End If
 
 End Function
@@ -615,17 +622,13 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
     'if valid
     If hSubKey <> 0 Then
-
         lpValue = Space$(260)
         lpcbData = Len(lpValue)
 
         'find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-
             GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
-
         End If
-
     End If
 
 End Function
@@ -810,19 +813,23 @@ Public Sub SetColors()
 
 End Sub
 
-'Initialises GDI Plus
+'Initializes GDI+
 Public Function InitGDIPlus() As Long
+
     Dim Token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
     GdiplusStartup Token, gdipInit, ByVal 0&
     InitGDIPlus = Token
+
 End Function
 
 'Frees GDI Plus
 Public Sub FreeGDIPlus(Token As Long)
+
     GdiplusShutdown Token
+
 End Sub
 
 'Loads the picture (optionally resized)
@@ -851,7 +858,7 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
         GdipGetImageWidth Img, Width
         GdipGetImageHeight Img, Height
     End If
-    'Initialise the hDC
+    'Initialize the hDC
     'Create a memory DC and select a bitmap into it, fill it in with the backcolor
     hDC = CreateCompatibleDC(ByVal 0&)
     hBitmap = CreateBitmap(Width, Height, GetDeviceCaps(hDC, PLANES), GetDeviceCaps(hDC, BITSPIXEL), ByVal 0&)

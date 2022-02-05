@@ -545,18 +545,21 @@ Private Type TColor
     blue As Byte
 End Type
 
-Dim clrPalette(0 To 11, 0 To 5) As TColor
+Private clrPalette(0 To 11, 0 To 5) As TColor
 
-Dim formHeight As Integer
+Private formHeight As Integer
+
 Public collapsed As Boolean
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos As Integer
 
-Dim radius As Integer
-Dim clrMode As Byte
+Private radius As Integer
+Private clrMode As Byte
 
-Dim xVal As Integer, yVal As Integer
+Private xVal As Integer
+Private yVal As Integer
 
-Dim tempVal As Integer
+Private tempVal As Integer
 
 Public Function getPalClr(X As Integer, Y As Integer) As Long
 
@@ -621,7 +624,8 @@ End Function
 
 Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim foundClr As Boolean
 
     For Y = 0 To 5
@@ -695,7 +699,8 @@ Public Sub loadPalette(fileName As String)
 
     On Error GoTo ErrorHandler
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim fileOpen As Boolean
 
     fileOpen = False
@@ -765,7 +770,8 @@ End Sub
 
 Public Sub savePalette(fileName As String)
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
     Dim fileOpen As Boolean
 
     On Error GoTo ErrorHandler
@@ -814,7 +820,8 @@ End Sub
 
 Private Sub mnuClearPalette_Click()
 
-    Dim X As Integer, Y As Integer
+    Dim X As Integer
+    Dim Y As Integer
 
     For Y = 0 To 5
         For X = 0 To 11
@@ -842,7 +849,6 @@ End Sub
 Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then 'select color
-
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         frmSoldatMapEditor.setPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
@@ -856,13 +862,10 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
         shpSel1.Top = Int(Y / 16) * 16 + 1
         shpSel2.left = Int(X / 16) * 16
         shpSel2.Top = Int(Y / 16) * 16
-
     ElseIf Button = 2 Then 'new color
-
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
         Me.PopupMenu mnuNewColor
-
     End If
 
     cmdDefault.SetFocus
@@ -973,7 +976,7 @@ Private Sub txtOpacity_Change()
     If IsNumeric(txtOpacity.Text) = False And txtOpacity.Text <> "" Then
         txtOpacity.Text = 100
     ElseIf txtOpacity.Text = "" Then
-
+        ' no-op
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
         frmSoldatMapEditor.setPolyColor 3, txtOpacity.Text
     End If
@@ -991,6 +994,7 @@ Private Sub txtOpacity_LostFocus()
     If txtOpacity.Text = "" Then
         txtOpacity.Text = 0
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
+        ' no-op
     Else
         txtOpacity.Text = 0
     End If

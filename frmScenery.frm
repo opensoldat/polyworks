@@ -176,7 +176,6 @@ Begin VB.Form frmScenery
       EndProperty
       Height          =   1350
       Left            =   1320
-      Sorted          =   -1  'True
       TabIndex        =   0
       Tag             =   "font1"
       Top             =   360
@@ -333,14 +332,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim formHeight As Integer
 Public collapsed As Boolean
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos As Integer
 Public level As Byte
-Public rotateScenery As Boolean, scaleScenery As Boolean
+Public rotateScenery As Boolean
+Public scaleScenery As Boolean
 Public notClicked As Boolean
-Dim checkVal As Boolean
-Dim selNode As Node
+
+Private formHeight As Integer
+Private checkVal As Boolean
+Private selNode As Node
 
 Private Sub Form_Load()
 
@@ -349,11 +351,8 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
-
     listScenery
 
     Exit Sub
@@ -443,7 +442,6 @@ Public Sub listScenery()
 
         fileOpen = False
         file = Dir$
-
     Loop
 
     Exit Sub

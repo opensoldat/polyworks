@@ -497,23 +497,30 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Const LAYER_BG As Byte = 0
-Const LAYER_POLYS As Byte = 1
-Const LAYER_TEXTURE As Byte = 2
-Const LAYER_WIREFRAME As Byte = 3
-Const LAYER_POINTS As Byte = 4
-Const LAYER_SCENERY As Byte = 5
-Const LAYER_OBJECTS As Byte = 6
-Const LAYER_WAYPOINTS As Byte = 7
-Const LAYER_GRID As Byte = 8
+' Fix vb6 ide casing changes
+#If False Then
+    Private X, Y
+    'Private X, Y
+#End If
 
-Dim layers(0 To 10) As Boolean
-Dim layerKeys(0 To 7) As Byte
+Private Const LAYER_BG As Byte = 0
+Private Const LAYER_POLYS As Byte = 1
+Private Const LAYER_TEXTURE As Byte = 2
+Private Const LAYER_WIREFRAME As Byte = 3
+Private Const LAYER_POINTS As Byte = 4
+Private Const LAYER_SCENERY As Byte = 5
+Private Const LAYER_OBJECTS As Byte = 6
+Private Const LAYER_WAYPOINTS As Byte = 7
+Private Const LAYER_GRID As Byte = 8
 
-Dim formHeight As Integer
+Private layers(0 To 10) As Boolean
+Private layerKeys(0 To 7) As Byte
+
+Private formHeight As Integer
+
 Public collapsed As Boolean
-
-Public xPos As Integer, yPos  As Integer
+Public xPos As Integer
+Public yPos As Integer
 
 Public Function getLayerKey(ByVal Index As Byte) As Byte
 
@@ -542,9 +549,7 @@ Private Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-
     formHeight = Me.ScaleHeight
-
     setForm
 
     Exit Sub
@@ -559,6 +564,7 @@ Public Sub setForm()
 
     Me.left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
+
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
     Else
@@ -659,7 +665,10 @@ Public Sub refreshButtons()
 
     Dim i As Integer
 
-    For i = 0 To 10
+    Debug.Assert picLayer.LBound = LBound(layers)
+    Debug.Assert picLayer.UBound = UBound(layers)
+
+    For i = picLayer.LBound To picLayer.UBound
         mouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
     Next
 
@@ -677,9 +686,9 @@ Public Sub SetColors()
 
     Me.BackColor = bgClr
 
-    For i = 0 To 10
-        lblLayer(i).BackColor = lblBackClr
-        lblLayer(i).ForeColor = lblTextClr
+    For Each c In lblLayer
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     For Each c In Me.Controls

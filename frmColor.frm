@@ -410,7 +410,7 @@ Begin VB.Form frmColor
    Begin VB.Label lblClr 
       Alignment       =   2  'Center
       BackStyle       =   0  'Transparent
-      Caption         =   "ï¿½"
+      Caption         =   "°"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -620,27 +620,53 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public red As Byte, green As Byte, blue As Byte
-Dim hue As Single, sat As Single, bright As Single
-Dim low As Byte, mid As Byte, high As Byte
+' Fix vb6 ide casing changes
+#If False Then
+    Private B, X, Y, hWnd
+    'Private B, X, Y, hWnd
+#End If
 
-Dim clr(0 To 2) As Byte
-Dim pureClr(0 To 2) As Byte
+Public red As Byte
+Public green As Byte
+Public blue As Byte
 
-Dim oldX As Integer, oldY As Integer
+Private hue As Single
+Private sat As Single
+Private bright As Single
+
+Private low As Byte
+Private mid As Byte
+Private high As Byte
+
+Private clr(0 To 2) As Byte
+Private pureClr(0 To 2) As Byte
+
+Private oldX As Integer
+Private oldY As Integer
 
 Public ok As Boolean
 
-Const R As Byte = 0
-Const G As Byte = 1
-Const B As Byte = 2
+Private Const R As Byte = 0
+Private Const G As Byte = 1
+Private Const B As Byte = 2
 
-Dim tempHexVal As String
-Dim hexValue As String
+Private mHexValue As String
 
-Dim nonModal As Boolean
+Private mNonModal As Boolean
 
-Dim lastTool As Byte
+Private mLastTool As Byte
+
+Private Function Clamp(val As Single, min As Single, max As Single) As Single
+
+    If val < min Then
+        Clamp = min
+    ElseIf val > max Then
+        Clamp = max
+    Else
+        Clamp = val
+    End If
+
+End Function
 
 Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
@@ -677,9 +703,9 @@ End Sub
 
 Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal As Byte, ByRef bVal As Byte, ByVal cTool As Byte)
 
-    nonModal = True
+    mNonModal = True
 
-    lastTool = frmSoldatMapEditor.setTempTool(10)
+    mLastTool = frmSoldatMapEditor.setTempTool(10)
     frmSoldatMapEditor.setCurrentTool 10
 
     frmSoldatMapEditor.picMenuBar.Enabled = False
@@ -698,13 +724,13 @@ Private Sub HideColor(apply As Boolean)
 
     On Error GoTo ErrorHandler
 
-    If nonModal Then
+    If mNonModal Then
         If apply Then
             frmPalette.setValues red, green, blue
             frmPalette.checkPalette red, green, blue
         End If
 
-        nonModal = False
+        mNonModal = False
 
         frmSoldatMapEditor.picMenuBar.Enabled = True
 
@@ -715,9 +741,8 @@ Private Sub HideColor(apply As Boolean)
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
 
-        frmSoldatMapEditor.setCurrentTool lastTool
-        lastTool = 0
-
+        frmSoldatMapEditor.setCurrentTool mLastTool
+        mLastTool = 0
     End If
 
     Me.Hide
@@ -733,10 +758,13 @@ End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
 
-    If KeyAscii = 27 Then
+    Const ESCAPE = 27
+    Const ENTER = 13
+
+    If KeyAscii = ESCAPE Then
         picColor.SetFocus
         picCancel_Click
-    ElseIf KeyAscii = 13 Then
+    ElseIf KeyAscii = ENTER Then
         picColor.SetFocus
         picOK_Click
     End If
@@ -782,20 +810,9 @@ End Sub
 
 Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim xVal As Integer
-
     If Button = 1 Then
-        If X > 255 Then
-            X = 255
-        ElseIf X < 0 Then
-            X = 0
-        End If
-        If Y > 255 Then
-            Y = 255
-        ElseIf Y < 0 Then
-            Y = 0
-        End If
-
+        X = Clamp(X, 0, 255)
+        Y = Clamp(Y, 0, 255)
         sat = (255 - Y) / 255
         hue = X / 255 * 359
         calculateHue
@@ -822,19 +839,8 @@ End Sub
 
 Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         clr(Index) = X
         changeRGB
         txtRGB(Index).Text = clr(Index)
@@ -858,20 +864,8 @@ End Sub
 
 Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
-
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         hue = X / 255 * 359
 
         calculateHue
@@ -935,19 +929,8 @@ End Sub
 
 Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         sat = X / 255
         If clr(R) = clr(G) And clr(R) = clr(B) And sat > 0 Then 'determine rgb based on hue
             calculateHue
@@ -976,19 +959,8 @@ End Sub
 
 Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If X > 255 Then
-        X = 255
-    ElseIf X < 0 Then
-        X = 0
-    End If
-    If Y > 255 Then
-        Y = 255
-    ElseIf Y < 0 Then
-        Y = 0
-    End If
-
-    X = 255 - Y
     If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         bright = X / 255
         clr(low) = ((1 - sat) * 255) * bright
         clr(mid) = ((255 - pureClr(mid)) * (1 - sat) + pureClr(mid)) * bright
@@ -1144,7 +1116,7 @@ End Sub
 
 Private Sub updateHex()
 
-    hexValue = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
+    mHexValue = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
     txtHexCode.Text = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
 
 End Sub
@@ -1152,10 +1124,11 @@ End Sub
 Private Sub Render()
 
     Dim i As Integer
-    Dim redVal As Byte, greenVal As Byte, blueVal As Byte
+    Dim redVal As Byte
+    Dim greenVal As Byte
+    Dim blueVal As Byte
 
     For i = 0 To 255
-
         picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, clr(G), clr(B))
         picRGB(G).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), i, clr(B))
         picRGB(B).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), clr(G), i)
@@ -1197,7 +1170,6 @@ Private Sub Render()
         End If
 
         picHue.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
-
     Next
 
     picRGB(R).Refresh
@@ -1214,8 +1186,8 @@ Private Sub txtHexCode_Change()
     Dim tempHexVal As String
 
     If HexToLong(txtHexCode.Text) = -1 Then
-
-    ElseIf hexValue <> txtHexCode.Text Then
+        ' no-op
+    ElseIf mHexValue <> txtHexCode.Text Then
         If Len(txtHexCode.Text) < 6 Then
             tempHexVal = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         ElseIf Len(txtHexCode.Text) > 6 Then
@@ -1239,12 +1211,12 @@ End Sub
 Private Sub txtHexCode_LostFocus()
 
     If HexToLong(txtHexCode.Text) = -1 Then
-        txtHexCode.Text = hexValue
-        clr(B) = CLng("&H" + right(hexValue, 2))
-        hexValue = left(hexValue, Len(hexValue) - 2)
-        clr(G) = CLng("&H" + right(hexValue, 2))
-        hexValue = left(hexValue, Len(hexValue) - 2)
-        clr(R) = CLng("&H" + right(hexValue, 2))
+        txtHexCode.Text = mHexValue
+        clr(B) = CLng("&H" + right(mHexValue, 2))
+        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        clr(G) = CLng("&H" + right(mHexValue, 2))
+        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        clr(R) = CLng("&H" + right(mHexValue, 2))
         changeRGB
         updateAll
         updateRGB
@@ -1255,8 +1227,7 @@ Private Sub txtHexCode_LostFocus()
         ElseIf Len(txtHexCode.Text) < 6 Then
             txtHexCode = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If
-        hexValue = txtHexCode.Text
-
+        mHexValue = txtHexCode.Text
     End If
 
 End Sub
@@ -1266,7 +1237,7 @@ Private Sub txtRGB_Change(Index As Integer)
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
         txtRGB(Index).Text = clr(Index)
     ElseIf txtRGB(Index).Text = "" Then
-
+        ' no-op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         If clr(Index) <> txtRGB(Index).Text Then
             clr(Index) = txtRGB(Index).Text
@@ -1296,7 +1267,7 @@ Private Sub txtHue_Change()
     If IsNumeric(txtHue.Text) = False And txtHue.Text <> "" Then
         txtHue.Text = Int(hue + 0.5)
     ElseIf txtHue.Text = "" Then
-
+        ' no-op
     ElseIf txtHue.Text >= 0 And txtHue.Text <= 359 Then
         If Int(hue + 0.5) <> txtHue.Text Then
             hue = txtHue.Text
@@ -1335,7 +1306,7 @@ Private Sub txtSat_Change()
     If IsNumeric(txtSat.Text) = False And txtSat.Text <> "" Then
         txtSat.Text = Int(sat * 100 + 0.5)
     ElseIf txtSat.Text = "" Then
-
+        ' no-op
     ElseIf txtSat.Text >= 0 And txtSat.Text <= 100 Then
         If Int(sat * 100 + 0.5) <> txtSat.Text Then
             sat = txtSat.Text / 100
@@ -1371,7 +1342,7 @@ Private Sub txtBright_Change()
     If IsNumeric(txtBright.Text) = False And txtBright.Text <> "" Then
         txtBright.Text = Int(bright * 100 + 0.5)
     ElseIf txtBright.Text = "" Then
-
+        ' no-op
     ElseIf txtBright.Text >= 0 And txtBright.Text <= 100 Then
         If Int(bright * 100 + 0.5) <> txtBright.Text Then
             bright = txtBright.Text / 100
@@ -1487,9 +1458,7 @@ Public Sub SetColors()
 
     On Error Resume Next
 
-    Dim i As Integer
     Dim c As Control
-
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colorpicker.bmp")
     picClr.Picture = LoadPicture(appPath & "\" & gfxDir & "\color_picker.bmp")
@@ -1498,31 +1467,34 @@ Public Sub SetColors()
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
-    imgRGB(0).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(1).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgRGB(2).Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    For Each c In imgRGB
+        c.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    Next
     imgHue.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     imgBright.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+
     picClr.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
 
 
     Me.BackColor = bgClr
 
-    For i = 0 To 8
-        lblClr(i).BackColor = lblBackClr
-        lblClr(i).ForeColor = lblTextClr
+    For Each c In lblClr
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 2
-        txtRGB(i).BackColor = txtBackClr
-        txtRGB(i).ForeColor = txtTextClr
+    For Each c In txtRGB
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
     Next
 
     txtHue.BackColor = txtBackClr
     txtHue.ForeColor = txtTextClr
+
     txtSat.BackColor = txtBackClr
     txtSat.ForeColor = txtTextClr
+
     txtBright.BackColor = txtBackClr
     txtBright.ForeColor = txtTextClr
 
