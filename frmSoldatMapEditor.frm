@@ -12434,15 +12434,17 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini")
     Me.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & FileName)
     Me.formTop = loadInt("Main", "Top", appPath & "\workspace\" & FileName)
 
+    picResize.Top = Me.formHeight - picResize.Height
+    picResize.left = Me.formWidth - picResize.Width
+    
     If Me.WindowState = vbNormal Then
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
         Me.left = formLeft * Screen.TwipsPerPixelX
         Me.Top = formTop * Screen.TwipsPerPixelY
+    Else
+      picResize.Visible = False
     End If
-
-    picResize.Top = formHeight - picResize.Height
-    picResize.left = formWidth - picResize.Width
 
     tvwScenery.Height = formHeight - 41 - 20
 
@@ -14919,6 +14921,8 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
 
     If Me.WindowState = vbMaximized Then
         Me.WindowState = vbNormal
+        picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
+        picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
         Me.WindowState = vbMaximized
     End If
@@ -14991,6 +14995,8 @@ Private Sub picTitle_DblClick()
 
     If Me.WindowState = vbMaximized Then
         Me.WindowState = vbNormal
+        picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
+        picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
         Me.WindowState = vbMaximized
     End If
