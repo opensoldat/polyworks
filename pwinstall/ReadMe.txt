@@ -74,6 +74,7 @@ Changes in v1.6.0.1
 - Fixed mouse move error message while refreshing preferences (after saving Preferences)
 - Fixed issue with overlapping hidden progressbar control on small windows sizes
 - Fixed side-window content flickers white on show after dragging main window
+- Fixed wrong initial input handling due to non default window size
 
 Changes in v1.6.0.0
 - added remember sticky state of tools windows after reopening workspace/pw
