@@ -571,6 +571,16 @@ Public Function GetSoldatDir() As String
         End If
     End If
 
+    ' Fix soldat installer sets invalid soldat dir path
+    GetSoldatDir = Replace(GetSoldatDir, Chr(34), "")
+    ' Fix other possible paths too
+    GetSoldatDir = Replace(GetSoldatDir, "'", "")
+    GetSoldatDir = Replace(GetSoldatDir, "/", "\")
+
+    If Not DirExists(GetSoldatDir) And FileExists(GetSoldatDir) Then
+        GetSoldatDir = left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
+    End If
+
     If Not DirExists(GetSoldatDir) Then
         MsgBox "Could not locate the Soldat directory. (" & GetSoldatDir & ")" & vbNewLine & "Please configure the Soldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
     End If
