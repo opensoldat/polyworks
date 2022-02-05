@@ -12065,8 +12065,6 @@ Private Sub saveSettings()
     Dim currentColor As Long
     Dim sNull As String
     sNull = Chr$(0)
-    Dim newLine As String
-    newLine = Chr$(13) & Chr$(10)
     Dim isNewFile As Boolean
     isNewFile = False
 
@@ -12181,7 +12179,7 @@ Private Sub saveSettings()
         "Height=" & formHeight & sNull & _
         "Left=" & formLeft & sNull & _
         "Top=" & formTop & _
-        IIf(isNewFile, newLine, "") & sNull & sNull
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
     saveWindow "Tools", frmTools, False, isNewFile
@@ -12219,8 +12217,6 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     Dim iniString As String
     Dim sNull As String
     sNull = Chr$(0)
-    Dim newLine As String
-    newLine = Chr$(13) & Chr$(10)
 
     leftVal = window.left / Screen.TwipsPerPixelX
     topVal = window.Top / Screen.TwipsPerPixelY
@@ -12231,7 +12227,7 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
         "Top=" & topVal & sNull & _
         "Collapsed=" & collapsed & sNull & _
         "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
-        IIf(isNewFile, newLine, "") & sNull & sNull
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
 
     saveSection sectionName, iniString, appPath & "\workspace\" & FileName
 
@@ -14291,11 +14287,9 @@ Private Sub mnuSaveSpace_Click()
 
     Dim iniString As String
     Dim sNull As String
-    Dim newLine As String
     Dim isNewFile As Boolean
 
     sNull = Chr$(0)
-    newLine = Chr$(13) & Chr$(10)
     isNewFile = False
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
@@ -14313,7 +14307,7 @@ Private Sub mnuSaveSpace_Click()
             "Height=" & formHeight & sNull & _
             "Left=" & formLeft & sNull & _
             "Top=" & formTop & _
-            IIf(isNewFile, newLine, "") & sNull & sNull
+            IIf(isNewFile, vbNewLine, "") & sNull & sNull
         saveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
         saveWindow "Tools", frmTools, False, isNewFile, commonDialog.FileTitle
