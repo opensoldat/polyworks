@@ -1546,8 +1546,11 @@ Private bgPolyCoords(1 To 4) As D3DVECTOR2
 Private bgColors(1 To 2) As TColor
 
 Private Const MAX_POLYS  As Integer = 4000
-Private Const MAX_ZOOM  As Single = 16
-Private Const MIN_ZOOM As Single = 0.03125
+
+Private mMaxZoom As Single
+Private mMinZoom As Single
+Private Const DEFAULT_MAX_ZOOM As Single = 512
+Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
 
 Private Const TOOL_MOVE As Byte = 0
 Private Const TOOL_CREATE As Byte = 1
@@ -11285,7 +11288,7 @@ Private Sub txtZoom_LostFocus()
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     End If
 
-    If (zoomInput / 100) >= MIN_ZOOM Or (zoomInput / 100) <= MAX_ZOOM Then
+    If (zoomInput / 100) >= mMinZoom Or (zoomInput / 100) <= mMaxZoom Then
         Zoom ((zoomInput / 100) / zoomFactor)
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     Else
@@ -11301,7 +11304,7 @@ Private Function getZoomDir(zoomDir As Single) As Single
 
     getZoomDir = zoomDir
 
-    zoomVal = MIN_ZOOM
+    zoomVal = mMinZoom
     For i = 1 To 8
         If zoomDir > 1 Then 'zooming in
             If (zoomFactor) > zoomVal And (zoomFactor) < (zoomVal * 2) Then
@@ -11325,7 +11328,7 @@ Public Sub Zoom(zoomDir As Single)
     Dim j As Integer
     Dim zoomVal As Single
 
-    If zoomFactor * zoomDir < MIN_ZOOM Or zoomFactor * zoomDir > MAX_ZOOM Then Exit Sub
+    If zoomFactor * zoomDir < mMinZoom Or zoomFactor * zoomDir > mMaxZoom Then Exit Sub
 
     Scenery(0).screenTr.X = Scenery(0).screenTr.X / zoomFactor + scrollCoords(2).X
     Scenery(0).screenTr.Y = Scenery(0).screenTr.Y / zoomFactor + scrollCoords(2).Y
@@ -11388,13 +11391,13 @@ Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
     Dim i As Integer
     Dim j As Integer
 
-    If (zoomFactor * zoomDir < MIN_ZOOM) And zoomFactor > MIN_ZOOM Then
-        zoomDir = MIN_ZOOM / zoomFactor
-    ElseIf zoomFactor * zoomDir > MAX_ZOOM And zoomFactor < MAX_ZOOM Then
-        zoomDir = MAX_ZOOM / zoomFactor
+    If (zoomFactor * zoomDir < mMinZoom) And zoomFactor > mMinZoom Then
+        zoomDir = mMinZoom / zoomFactor
+    ElseIf zoomFactor * zoomDir > mMaxZoom And zoomFactor < mMaxZoom Then
+        zoomDir = mMaxZoom / zoomFactor
     End If
 
-    If zoomFactor * zoomDir < MIN_ZOOM Or zoomFactor * zoomDir > MAX_ZOOM Then Exit Sub
+    If zoomFactor * zoomDir < mMinZoom Or zoomFactor * zoomDir > mMaxZoom Then Exit Sub
 
     Scenery(0).screenTr.X = Scenery(0).screenTr.X / zoomFactor + scrollCoords(2).X
     Scenery(0).screenTr.Y = Scenery(0).screenTr.Y / zoomFactor + scrollCoords(2).Y
@@ -12096,7 +12099,9 @@ Private Sub saveSettings()
         "BackClr=" & RGBtoHex(backClr) & sNull & _
         "MaxUndo=" & max_undo & sNull & _
         "SceneryVerts=" & sceneryVerts & sNull & _
-        "Topmost=" & topmost & sNull & sNull
+        "Topmost=" & topmost & sNull & _
+        "MinZoom=" & mMaxZoom * 100 & sNull & _
+        "MaxZoom=" & mMinZoom * 100 & sNull & sNull
     saveSection "Preferences", iniString
 
     'display
@@ -12258,6 +12263,8 @@ Private Sub loadINI()
 
     Dim i As Integer
     Dim numRecent As Integer
+    Dim strTemp As String
+    Dim sgnTemp As Single
     Dim errVal As String
 
     errVal = "1"
@@ -12282,6 +12289,29 @@ Private Sub loadINI()
     max_undo = loadInt("Preferences", "MaxUndo")
     sceneryVerts = loadString("Preferences", "SceneryVerts")
     topmost = loadString("Preferences", "Topmost")
+
+    strTemp = loadString("Preferences", "MinZoom")
+    If IsNumeric(strTemp) Then
+        mMinZoom = CSng(strTemp) / 100
+    Else
+       mMinZoom = DEFAULT_MIN_ZOOM
+    End If
+
+    strTemp = loadString("Preferences", "MaxZoom")
+    If IsNumeric(strTemp) Then
+        mMaxZoom = CSng(strTemp) / 100
+    Else
+        mMaxZoom = DEFAULT_MAX_ZOOM
+    End If
+    
+    If mMinZoom = mMaxZoom Then
+        mMinZoom = DEFAULT_MIN_ZOOM
+        mMaxZoom = DEFAULT_MAX_ZOOM
+    ElseIf mMinZoom > mMaxZoom Then
+       sgnTemp = mMaxZoom
+       mMaxZoom = mMinZoom
+       mMinZoom = sgnTemp
+    End If
 
     errVal = "2"
 
