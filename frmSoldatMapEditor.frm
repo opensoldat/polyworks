@@ -118,6 +118,7 @@ Begin VB.Form frmSoldatMapEditor
          ForeColor       =   &H00FFFFFF&
          Height          =   240
          Left            =   3000
+         MousePointer    =   3  'I-Beam
          TabIndex        =   14
          TabStop         =   0   'False
          Tag             =   "font1"
