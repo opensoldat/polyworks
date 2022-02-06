@@ -180,6 +180,7 @@ Begin VB.Form frmSoldatMapEditor
          ForeColor       =   &H00FFFFFF&
          Height          =   255
          Left            =   2400
+         MousePointer    =   1  'Arrow
          TabIndex        =   12
          Tag             =   "font2"
          Top             =   45
@@ -11253,6 +11254,11 @@ Private Function confirmExists(FileName As String) As Boolean
     Next
 
 End Function
+
+Private Sub lblZoom_Click()
+    txtZoom.Text = "100%"
+    txtZoom_LostFocus
+End Sub
 
 Private Sub txtZoom_KeyPress(KeyAscii As Integer)
 
