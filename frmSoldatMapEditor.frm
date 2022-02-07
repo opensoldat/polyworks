@@ -1299,7 +1299,7 @@ Private DI As DirectInput8
 Private DIDevice As DirectInputDevice8
 Private DIState As DIKEYBOARDSTATE
 
-Const BUFFER_SIZE As Long = 10
+Private Const BUFFER_SIZE As Long = 10
 
 Private hEvent As Long
 Implements DirectXEvent8
@@ -5103,8 +5103,10 @@ Public Sub Render()
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
         D3DDevice.setTexture 0, pathTexture
         For i = 1 To conCount
-            If (Waypoints(Connections(i).point1).pathNum = 1 And frmWaypoints.showPaths <> 2) Or (Waypoints(Connections(i).point1).pathNum = 2 And frmWaypoints.showPaths <> 1) _
-                    Or (Waypoints(Connections(i).point2).pathNum = 1 And frmWaypoints.showPaths <> 2) Or (Waypoints(Connections(i).point2).pathNum = 2 And frmWaypoints.showPaths <> 1) Then
+            If (Waypoints(Connections(i).point1).pathNum = 1 And frmWaypoints.showPaths <> 2) _
+                    Or (Waypoints(Connections(i).point1).pathNum = 2 And frmWaypoints.showPaths <> 1) _
+                    Or (Waypoints(Connections(i).point2).pathNum = 1 And frmWaypoints.showPaths <> 2) _
+                    Or (Waypoints(Connections(i).point2).pathNum = 2 And frmWaypoints.showPaths <> 1) Then
                 lineCoords(1).X = (Waypoints(Connections(i).point1).X - scrollCoords(2).X) * zoomFactor
                 lineCoords(1).Y = (Waypoints(Connections(i).point1).Y - scrollCoords(2).Y) * zoomFactor
                 lineCoords(2).X = (Waypoints(Connections(i).point2).X - scrollCoords(2).X) * zoomFactor
@@ -5441,7 +5443,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     End If
 
-    If ctrlDown Then 'shortcut
+    If ctrlDown Then 'shortcuts
         If DIState.Key(DIK_EQUALS) = 128 Then  'ctrl++
             Zoom getZoomDir(2) '2
         ElseIf DIState.Key(DIK_MINUS) = 128 Then 'ctrl+-
@@ -5562,7 +5564,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 setCurrentTool currentTool + 1
             End If
             frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
-        ElseIf (DIState.Key(DIK_LEFT) = 128 Or DIState.Key(DIK_UP) = 128 Or DIState.Key(DIK_RIGHT) = 128 Or DIState.Key(DIK_DOWN) = 128) Then 'arrow keys
+        ElseIf (DIState.Key(DIK_LEFT) = 128 Or DIState.Key(DIK_UP) = 128 _
+                Or DIState.Key(DIK_RIGHT) = 128 _
+                Or DIState.Key(DIK_DOWN) = 128) Then 'arrow keys
             Dim n As Single
             moveCoords(1).X = 0
             moveCoords(1).Y = 0
