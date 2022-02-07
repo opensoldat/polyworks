@@ -801,6 +801,7 @@ Public Sub SetColors()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
+    frmSoldatMapEditor.picResize.BackColor = bgClr
     frmPreferences.BackColor = bgClr
     frmColor.BackColor = bgClr
     frmDisplay.BackColor = bgClr

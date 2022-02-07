@@ -14925,6 +14925,7 @@ Public Sub SetColors()
 
     frmSoldatMapEditor.picMenuBar.BackColor = bgClr
     frmSoldatMapEditor.picStatus.BackColor = bgClr
+    frmSoldatMapEditor.picResize.BackColor = bgClr
     txtZoom.BackColor = bgClr
     txtZoom.ForeColor = lblTextClr
     picProgress.BackColor = bgClr
@@ -14934,6 +14935,8 @@ Public Sub SetColors()
     lblZoom.ForeColor = lblTextClr
     lblCurrentTool.BackColor = lblBackClr
     lblCurrentTool.ForeColor = lblTextClr
+    lblMousePosition.BackColor = lblBackClr
+    lblMousePosition.ForeColor = lblTextClr
 
     For Each c In Me.Controls
         If c.Tag = "font1" Then

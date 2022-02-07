@@ -2114,6 +2114,11 @@ Public Sub SetColors()
         lblCount(i).BackColor = lblBackClr
         lblCount(i).ForeColor = lblTextClr
     Next
+    
+    txtVertexAlpha.BackColor = txtBackClr
+    txtVertexAlpha.ForeColor = txtTextClr
+    txtBounciness.BackColor = txtBackClr
+    txtBounciness.ForeColor = txtTextClr
 
     lblDimensions.BackColor = lblBackClr
     lblDimensions.ForeColor = lblTextClr
@@ -2125,8 +2130,10 @@ Public Sub SetColors()
     cboPolyType.BackColor = txtBackClr
     cboPolyType.ForeColor = txtTextClr
 
-    txtLightProp(0).BackColor = txtBackClr
-    txtLightProp(0).ForeColor = txtTextClr
+    For Each c In txtLightProp
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
+    Next
 
     square.BorderColor = lblTextClr
     diagonal.BorderColor = lblTextClr

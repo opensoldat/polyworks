@@ -2568,6 +2568,8 @@ Public Sub SetColors()
     lblWayKeys.ForeColor = lblTextClr
     lblBlending.BackColor = bgClr
     lblBlending.ForeColor = lblTextClr
+    lblOther.BackColor = bgClr
+    lblOther.ForeColor = lblTextClr
 
     For i = 0 To 13
         txtHotkey(i).BackColor = bgClr
