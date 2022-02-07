@@ -103,6 +103,7 @@ Section "MainSection" SEC01
   File "gfx\rcenter.bmp"
   File "gfx\titlebar_waypoints.bmp"
   File "gfx\titlebar_scenery.bmp"
+  File "gfx\resize.bmp"
   SetOutPath "$INSTDIR\gfx\cursors"
   File "gfx\cursors\pselect.cur"
   File "gfx\cursors\waypoint.cur"
@@ -247,6 +248,7 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\gfx\rcenter.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_waypoints.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_scenery.bmp"
+  Delete /REBOOTOK "$INSTDIR\gfx\rename.bmp"
 
 
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselect.cur"

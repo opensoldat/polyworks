@@ -2025,6 +2025,11 @@ Public Sub initGfx()
     Dim c As Control
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_main.bmp")
+    If FileExists(appPath & "\" & gfxDir & "\resize.bmp") Then
+        picResize.Picture = LoadPicture(appPath & "\" & gfxDir & "\resize.bmp")
+    Else
+        picResize.Picture = Nothing
+    End If
 
     picGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\tool_gfx.bmp")
     picButtonGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\button_gfx.bmp")
