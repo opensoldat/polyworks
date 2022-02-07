@@ -2553,9 +2553,9 @@ Public Sub SetColors()
 
     Me.BackColor = bgClr
 
-    For i = 0 To 22
-        lblPref(i).BackColor = lblBackClr
-        lblPref(i).ForeColor = lblTextClr
+    For Each c In lblPref
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     lblDisplay.BackColor = bgClr
@@ -2571,12 +2571,12 @@ Public Sub SetColors()
     lblOther.BackColor = bgClr
     lblOther.ForeColor = lblTextClr
 
-    For i = 0 To 13
-        txtHotkey(i).BackColor = bgClr
-        txtHotkey(i).ForeColor = lblTextClr
+    For Each c In txtHotkey
+        c.BackColor = bgClr
+        c.ForeColor = lblTextClr
     Next
 
-    For i = 0 To 4
+    For i = txtWayptKey.LBound To txtWayptKey.UBound
         txtWayptKey(i).BackColor = bgClr
         txtWayptKey(i).ForeColor = lblTextClr
         fraPref(i).BorderColor = frameClr

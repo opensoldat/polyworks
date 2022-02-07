@@ -2088,31 +2088,37 @@ Public Sub SetColors()
     mouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgClr
-    For i = 0 To 35
-        lblInfo(i).BackColor = lblBackClr
-        lblInfo(i).ForeColor = lblTextClr
+    For Each c In lblInfo
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
-    For i = 0 To 5
-        picProp(i).BackColor = bgClr
+    For Each c In picProp
+        c.BackColor = bgClr
     Next
 
-    For i = 0 To 1
-        txtScenProp(i).BackColor = txtBackClr
-        txtScenProp(i).ForeColor = txtTextClr
-        txtQuadX(i).BackColor = bgClr
-        txtQuadX(i).ForeColor = lblTextClr
-        txtQuadY(i).BackColor = bgClr
-        txtQuadY(i).ForeColor = lblTextClr
+    For Each c In txtScenProp
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
     Next
-    For i = 0 To 1
-        txtScale(i).BackColor = txtBackClr
-        txtScale(i).ForeColor = txtTextClr
-        txtTexture(i).BackColor = txtBackClr
-        txtTexture(i).ForeColor = txtTextClr
+    For Each c In txtQuadX
+        c.BackColor = bgClr
+        c.ForeColor = lblTextClr
     Next
-    For i = 0 To 6
-        lblCount(i).BackColor = lblBackClr
-        lblCount(i).ForeColor = lblTextClr
+    For Each c In txtQuadY
+        c.BackColor = bgClr
+        c.ForeColor = lblTextClr
+    Next
+    For Each c In txtScale
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
+    Next
+    For Each c In txtTexture
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
+    Next
+    For Each c In lblCount
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
     
     txtVertexAlpha.BackColor = txtBackClr
