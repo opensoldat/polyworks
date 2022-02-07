@@ -1060,7 +1060,7 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   450
+      Height          =   570
       Index           =   23
       Left            =   5040
       TabIndex        =   79

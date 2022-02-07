@@ -2022,6 +2022,7 @@ End Sub
 Public Sub initGfx()
 
     Dim i As Integer
+    Dim c As Control
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_main.bmp")
 
@@ -2035,8 +2036,8 @@ Public Sub initGfx()
     mouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     'draw menu buttons
-    For i = 0 To 4
-        mouseEvent2 picMenu(i), 0, 0, BUTTON_MENU, 0, BUTTON_UP
+    For Each c In picMenu
+        mouseEvent2 c, 0, 0, BUTTON_MENU, 0, BUTTON_UP
     Next
 
 End Sub
