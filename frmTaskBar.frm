@@ -46,7 +46,7 @@ Private Sub Form_Resize()
         If frmSoldatMapEditor.mnuScenery.Checked Then frmScenery.Show
         If frmSoldatMapEditor.mnuInfo.Checked Then frmInfo.Show
         If frmSoldatMapEditor.mnuTexture.Checked Then frmTexture.Show
-        If frmSoldatMapEditor.WindowState = vbNormal Then
+        If frmSoldatMapEditor.Tag = vbNormal Then
             frmSoldatMapEditor.left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
             frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
             frmSoldatMapEditor.ScaleWidth = frmSoldatMapEditor.formWidth

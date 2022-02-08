@@ -55,7 +55,7 @@ Begin VB.Form frmSoldatMapEditor
       ScaleWidth      =   20
       TabIndex        =   21
       TabStop         =   0   'False
-      Top             =   8700
+      Top             =   8715
       Width           =   300
    End
    Begin VB.PictureBox picButtonGfx 
@@ -1732,6 +1732,11 @@ Private mMouseStartPosY As Long
 Private mInitialWindowWidth As Single
 Private mInitialWindowHeight As Single
 
+Private mPrevWidth As Long
+Private mPrevHeight As Long
+Private mPrevLeft As Long
+Private mPrevTop As Long
+
 Private Const QUICK_MOVE_DELTA = 90000
 
 Private Declare Function MoveWindow Lib "user32.dll" ( _
@@ -1741,6 +1746,12 @@ Private Declare Function MoveWindow Lib "user32.dll" ( _
   ByVal nWidth As Long, _
   ByVal nHeight As Long, _
   ByVal bRepaint As Long) As Long
+
+Private Const SPI_GETWORKAREA = 48
+Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParametersInfoA" ( _
+    ByVal uAction As Long, _
+    ByVal uParam As Long, lpvParam As Any, _
+    ByVal fuWinIni As Long)
 
 ' Global constants
 Property Get MIN_FORM_WIDTH() As Integer
@@ -1780,6 +1791,7 @@ Private Sub Form_Load()
     err = "Error setting colors"
     Me.SetColors
     Me.Show
+    Me.Tag = vbNormal
 
     err = "Error setting directories"
     If Len(Dir$(uncompDir, vbDirectory)) = 0 Or uncompDir = "" Then
@@ -1932,6 +1944,38 @@ ErrorHandler:
 
 End Sub
 
+Public Sub RestoreBorderLessForm()
+
+    If Me.Tag = vbNormal Then Exit Sub
+
+    Me.Tag = vbNormal
+    Me.Move mPrevLeft, mPrevTop, mPrevWidth, mPrevHeight
+
+End Sub
+
+Public Sub MaximizeBorderLessForm()
+
+    If Me.Tag = vbMaximized Then Exit Sub
+
+    Dim ScreenWidth&, ScreenHeight&, ScreenLeft&, ScreenTop&
+    Dim DesktopArea As RECT
+    Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
+
+    ScreenHeight = (DesktopArea.bottom - DesktopArea.Top) * Screen.TwipsPerPixelY
+    ScreenWidth = (DesktopArea.right - DesktopArea.left) * Screen.TwipsPerPixelX
+    ScreenLeft = DesktopArea.left * Screen.TwipsPerPixelX
+    ScreenTop = DesktopArea.Top * Screen.TwipsPerPixelY
+
+    mPrevLeft = Me.left
+    mPrevTop = Me.Top
+    mPrevWidth = Me.Width
+    mPrevHeight = Me.Height
+
+    Me.Tag = vbMaximized
+    Me.Move ScreenLeft, ScreenTop, ScreenWidth, ScreenHeight
+
+End Sub
+
 Private Sub SetCursor(Index As Integer)
 
     On Error GoTo ErrorHandler
@@ -2036,7 +2080,7 @@ Public Sub initGfx()
 
     'draw control box buttons
     mouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
     mouseEvent2 picMinimize, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
@@ -5839,7 +5883,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             Me.PopupMenu mnuVertexSelect
         ElseIf currentFunction = TOOL_SCENERY Then
             If tvwScenery.Visible = False Then
-                If Me.WindowState = vbMaximized Then
+                If Me.Tag = vbMaximized Then
                     tvwScenery.left = mouseCoords.X
                     If mouseCoords.Y + tvwScenery.Height > Me.ScaleHeight - 17 Then
                         tvwScenery.Top = Me.ScaleHeight - tvwScenery.Height - 17
@@ -11059,7 +11103,7 @@ End Sub
 
 Private Sub picResize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Me.WindowState = vbNormal Then
+    If Me.Tag = vbNormal Then
         mIsResizingWindow = True
         picResize.Visible = False
         noRedraw = True
@@ -11075,7 +11119,7 @@ End Sub
 
 Private Sub picResize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Me.WindowState = vbNormal And mIsResizingWindow = True Then
+    If Me.Tag = vbNormal And mIsResizingWindow = True Then
        Dim newWidth As Long
        Dim newHeight As Long
 
@@ -11097,7 +11141,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
 
     mIsResizingWindow = False
 
-    If Me.WindowState = vbNormal Then
+    If Me.Tag = vbNormal Then
         formHeight = Me.Height / Screen.TwipsPerPixelY
         formWidth = Me.Width / Screen.TwipsPerPixelX
 
@@ -12476,7 +12520,7 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional 
 
     On Error GoTo ErrorHandler
 
-    Me.WindowState = loadInt("Main", "WindowState", appPath & "\workspace\" & FileName)
+    Me.Tag = loadInt("Main", "WindowState", appPath & "\workspace\" & FileName)
     Me.formWidth = loadInt("Main", "Width", appPath & "\workspace\" & FileName)
     Me.formHeight = loadInt("Main", "Height", appPath & "\workspace\" & FileName)
     Me.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & FileName)
@@ -12485,7 +12529,7 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional 
     picResize.Top = Me.formHeight - picResize.Height
     picResize.left = Me.formWidth - picResize.Width
     
-    If Me.WindowState = vbNormal Then
+    If Me.Tag = vbNormal Then
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
         Me.left = formLeft * Screen.TwipsPerPixelX
@@ -14383,7 +14427,7 @@ End Sub
 
 Private Sub mnuResetWindows_Click()
 
-    If Me.WindowState = vbNormal Then
+    If Me.Tag = vbNormal Then
         formWidth = Screen.Width / Screen.TwipsPerPixelX - (64 + 208 + 208)
         formHeight = formWidth * 3 / 4
         formLeft = Screen.Width / Screen.TwipsPerPixelX / 2 - formWidth / 2 - 1
@@ -14960,29 +15004,29 @@ End Sub
 
 Private Sub picMaximize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_DOWN
+    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_DOWN
 
 End Sub
 
 Private Sub picMaximize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_MOVE
+    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_MOVE
 
 End Sub
 
 Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Me.WindowState = vbMaximized Then
-        Me.WindowState = vbNormal
+    If Me.Tag = vbMaximized Then
+        RestoreBorderLessForm
         picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
         picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
-        Me.WindowState = vbMaximized
+        MaximizeBorderLessForm
     End If
 
-    picResize.Visible = Me.WindowState = vbNormal
+    picResize.Visible = Me.Tag = vbNormal
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
 
     resetDevice
 
@@ -15036,7 +15080,7 @@ End Sub
 
 Private Sub picStatus_Click()
 
-    If Me.WindowState = vbMaximized Then
+    If Me.Tag = vbMaximized Then
         Dim hwnd1 As Long
         hwnd1 = FindWindow("Shell_traywnd", "")
         Call SetWindowPos(hwnd1, 0, 0, 0, 0, 0, SWP_SHOWWINDOW)
@@ -15046,17 +15090,18 @@ End Sub
 
 Private Sub picTitle_DblClick()
 
-    If Me.WindowState = vbMaximized Then
-        Me.WindowState = vbNormal
+    If Me.Tag = vbMaximized Then
+        RestoreBorderLessForm
+
         picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
         picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
-        Me.WindowState = vbMaximized
+        MaximizeBorderLessForm
     End If
 
-    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.WindowState = vbNormal), BUTTON_UP
+    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
 
-    picResize.Visible = Me.WindowState = vbNormal
+    picResize.Visible = Me.Tag = vbNormal
 
     resetDevice
 
@@ -15064,7 +15109,7 @@ End Sub
 
 Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Me.WindowState = vbMinimized Or Me.WindowState = vbNormal Then
+    If Me.Tag = vbMinimized Or Me.Tag = vbNormal Then
         If Len(frmDisplay.Tag) <> 0 Then
             QuickHide frmDisplay
         End If
