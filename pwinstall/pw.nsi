@@ -248,7 +248,7 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\gfx\rcenter.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_waypoints.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_scenery.bmp"
-  Delete /REBOOTOK "$INSTDIR\gfx\rename.bmp"
+  Delete /REBOOTOK "$INSTDIR\gfx\resize.bmp"
 
 
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselect.cur"
