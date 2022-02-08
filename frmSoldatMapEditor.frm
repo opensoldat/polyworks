@@ -1739,13 +1739,13 @@ Private mPrevTop As Long
 
 Private Const QUICK_MOVE_DELTA = 90000
 
-Private Declare Function MoveWindow Lib "user32.dll" ( _
-  ByVal hWnd As Long, _
-  ByVal X As Long, _
-  ByVal Y As Long, _
-  ByVal nWidth As Long, _
-  ByVal nHeight As Long, _
-  ByVal bRepaint As Long) As Long
+Private Declare Function MoveWindow Lib "user32" ( _
+    ByVal hWnd As Long, _
+    ByVal X As Long, _
+    ByVal Y As Long, _
+    ByVal nWidth As Long, _
+    ByVal nHeight As Long, _
+    ByVal bRepaint As Long) As Long
 
 Private Const SPI_GETWORKAREA = 48
 Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParametersInfoA" ( _
