@@ -1326,7 +1326,6 @@ Begin VB.Form frmPreferences
       Width           =   255
    End
    Begin VB.Label lblPref 
-      Alignment       =   2  'Center
       BackColor       =   &H004A3C31&
       BackStyle       =   0  'Transparent
       Caption         =   "Colors"
@@ -1534,7 +1533,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   19
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   50
       Top             =   6915
       Width           =   1455
