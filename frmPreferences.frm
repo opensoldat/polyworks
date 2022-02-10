@@ -1869,14 +1869,9 @@ Private Function applyPreferences() As Boolean
 
     frmSoldatMapEditor.formWidth = formWidth
     frmSoldatMapEditor.formHeight = formHeight
-    If frmSoldatMapEditor.Tag = vbNormal Then
+    If frmSoldatMapEditor.Tag = vbNormal Or frmSoldatMapEditor.Tag = vbMaximized Then
         frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
         frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
-    ElseIf frmSoldatMapEditor.Tag = vbMaximized Then
-        'frmSoldatMapEditor.Tag = vbNormal
-        frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
-        'frmSoldatMapEditor.Tag = vbMaximized
     End If
 
     frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
