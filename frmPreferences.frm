@@ -5,16 +5,70 @@ Begin VB.Form frmPreferences
    ClientHeight    =   8175
    ClientLeft      =   15
    ClientTop       =   15
-   ClientWidth     =   6840
+   ClientWidth     =   8775
    ControlBox      =   0   'False
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   545
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   456
+   ScaleWidth      =   585
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.TextBox txtResetZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   89
+      Tag             =   "font1"
+      Top             =   1680
+      Width           =   735
+   End
+   Begin VB.TextBox txtMinZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   82
+      Tag             =   "font1"
+      Top             =   960
+      Width           =   735
+   End
+   Begin VB.TextBox txtMaxZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   81
+      Tag             =   "font1"
+      Top             =   1320
+      Width           =   735
+   End
    Begin VB.PictureBox picTopmost 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
@@ -22,7 +76,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   4800
+      Left            =   6720
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -40,7 +94,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   4800
+      Left            =   6720
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -67,7 +121,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   6
       Tag             =   "font1"
       Top             =   3600
-      Width           =   2535
+      Width           =   4455
    End
    Begin VB.TextBox txtHotkey 
       Appearance      =   0  'Flat
@@ -85,7 +139,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   13
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   23
       Tag             =   "font1"
       Top             =   3720
@@ -108,7 +162,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   12
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   22
       Tag             =   "font1"
       Top             =   3720
@@ -157,7 +211,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   4
-      Left            =   6120
+      Left            =   8040
       TabIndex        =   28
       Tag             =   "font1"
       Text            =   "X"
@@ -182,7 +236,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   3
-      Left            =   5400
+      Left            =   7320
       TabIndex        =   27
       Tag             =   "font1"
       Text            =   "Z"
@@ -207,7 +261,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   2
-      Left            =   5400
+      Left            =   7320
       TabIndex        =   24
       Tag             =   "font1"
       Text            =   "W"
@@ -232,7 +286,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   1
-      Left            =   5760
+      Left            =   7680
       TabIndex        =   26
       Tag             =   "font1"
       Text            =   "S"
@@ -257,7 +311,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   0
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   25
       Tag             =   "font1"
       Text            =   "A"
@@ -272,7 +326,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -300,7 +354,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   9
       Tag             =   "font1"
       Top             =   5520
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.TextBox txtUncomp 
       Appearance      =   0  'Flat
@@ -320,7 +374,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   8
       Tag             =   "font1"
       Top             =   4920
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.PictureBox picUncomp 
       Appearance      =   0  'Flat
@@ -329,7 +383,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -355,7 +409,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   11
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   21
       Tag             =   "font1"
       Top             =   3240
@@ -378,7 +432,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   10
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   20
       Tag             =   "font1"
       Top             =   3240
@@ -400,7 +454,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   9
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   19
       Tag             =   "font1"
       Top             =   2760
@@ -423,7 +477,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   8
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   18
       Tag             =   "font1"
       Top             =   2760
@@ -445,7 +499,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   7
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   17
       Tag             =   "font1"
       Top             =   2280
@@ -468,7 +522,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   6
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   16
       Tag             =   "font1"
       Top             =   2280
@@ -490,7 +544,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   5
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   15
       Tag             =   "font1"
       Top             =   1800
@@ -513,7 +567,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   4
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   14
       Tag             =   "font1"
       Top             =   1800
@@ -535,7 +589,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   3
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   13
       Tag             =   "font1"
       Top             =   1320
@@ -558,7 +612,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   2
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   12
       Tag             =   "font1"
       Top             =   1320
@@ -580,7 +634,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   1
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   11
       Tag             =   "font1"
       Top             =   840
@@ -603,7 +657,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   0
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   10
       Tag             =   "font1"
       Top             =   840
@@ -615,7 +669,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   3360
-      Left            =   5160
+      Left            =   7080
       ScaleHeight     =   224
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -636,7 +690,7 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   5
       Tag             =   "font1"
       Top             =   2640
@@ -654,7 +708,7 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   4
       Tag             =   "font1"
       Top             =   2280
@@ -665,7 +719,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   60
@@ -680,7 +734,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -744,7 +798,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   7
       Tag             =   "font1"
       Top             =   4320
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.TextBox txtDivisions 
       Appearance      =   0  'Flat
@@ -787,7 +841,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   53
@@ -811,7 +865,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   5760
+      Left            =   7680
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -837,7 +891,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   3600
+      Left            =   5520
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -863,7 +917,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   4680
+      Left            =   6600
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -878,7 +932,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   38
@@ -891,7 +945,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   37
@@ -904,7 +958,7 @@ Begin VB.Form frmPreferences
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   36
@@ -930,7 +984,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   29
       TabStop         =   0   'False
       Top             =   7230
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.ComboBox cboWireDest 
       BeginProperty Font 
@@ -950,7 +1004,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   30
       TabStop         =   0   'False
       Top             =   7590
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.ComboBox cboPolyDest 
       BeginProperty Font 
@@ -964,13 +1018,13 @@ Begin VB.Form frmPreferences
       EndProperty
       Height          =   360
       ItemData        =   "frmPreferences.frx":00E4
-      Left            =   2760
+      Left            =   3720
       List            =   "frmPreferences.frx":0100
       Style           =   2  'Dropdown List
       TabIndex        =   32
       TabStop         =   0   'False
       Top             =   7590
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.ComboBox cboPolySrc 
       BeginProperty Font 
@@ -984,13 +1038,13 @@ Begin VB.Form frmPreferences
       EndProperty
       Height          =   360
       ItemData        =   "frmPreferences.frx":0156
-      Left            =   2760
+      Left            =   3720
       List            =   "frmPreferences.frx":0172
       Style           =   2  'Dropdown List
       TabIndex        =   31
       TabStop         =   0   'False
       Top             =   7230
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.PictureBox picTitle 
       Align           =   1  'Align Top
@@ -1002,11 +1056,11 @@ Begin VB.Form frmPreferences
       Left            =   0
       ScaleHeight     =   17
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   456
+      ScaleWidth      =   585
       TabIndex        =   34
       TabStop         =   0   'False
       Top             =   0
-      Width           =   6840
+      Width           =   8775
       Begin VB.PictureBox picHide 
          Appearance      =   0  'Flat
          AutoRedraw      =   -1  'True
@@ -1014,7 +1068,7 @@ Begin VB.Form frmPreferences
          BorderStyle     =   0  'None
          ForeColor       =   &H80000008&
          Height          =   240
-         Left            =   6600
+         Left            =   8535
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
@@ -1024,6 +1078,154 @@ Begin VB.Form frmPreferences
          Top             =   0
          Width           =   240
       End
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   31
+      Left            =   6030
+      TabIndex        =   90
+      Tag             =   "font2"
+      Top             =   1680
+      Width           =   255
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Reset:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   28
+      Left            =   4440
+      TabIndex        =   88
+      Tag             =   "font2"
+      Top             =   1680
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Max:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   27
+      Left            =   4440
+      TabIndex        =   87
+      Tag             =   "font2"
+      Top             =   1320
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Min:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   26
+      Left            =   4440
+      TabIndex        =   86
+      Tag             =   "font2"
+      Top             =   960
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H004A3C31&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Zoom"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   25
+      Left            =   4440
+      TabIndex        =   85
+      Tag             =   "font2"
+      Top             =   720
+      Width           =   1815
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   29
+      Left            =   6030
+      TabIndex        =   84
+      Tag             =   "font2"
+      Top             =   960
+      Width           =   255
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   30
+      Left            =   6030
+      TabIndex        =   83
+      Tag             =   "font2"
+      Top             =   1320
+      Width           =   255
    End
    Begin VB.Label lblPref 
       BackStyle       =   0  'Transparent
@@ -1040,7 +1242,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   570
       Index           =   24
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   80
       Tag             =   "font2"
       Top             =   7515
@@ -1062,13 +1264,14 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   570
       Index           =   23
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   79
       Tag             =   "font2"
       Top             =   6960
       Width           =   1575
    End
    Begin VB.Label lblOther 
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Other"
       BeginProperty Font 
@@ -1081,17 +1284,17 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   76
       Top             =   6600
-      Width           =   735
+      Width           =   480
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   1365
       Index           =   5
-      Left            =   4560
+      Left            =   6480
       Top             =   6720
       Width           =   2175
    End
@@ -1118,7 +1321,7 @@ Begin VB.Form frmPreferences
       Width           =   975
    End
    Begin VB.Label lblWayKeys 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Waypoint Keys"
       BeginProperty Font 
@@ -1131,18 +1334,18 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   73
       Tag             =   "font2"
       Top             =   4440
-      Width           =   1575
+      Width           =   1365
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   1455
       Index           =   3
-      Left            =   4560
+      Left            =   6480
       Top             =   4560
       Width           =   2175
    End
@@ -1166,7 +1369,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   72
       Tag             =   "font2"
       Top             =   5280
-      Width           =   1335
+      Width           =   5415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1188,7 +1391,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   70
       Tag             =   "font2"
       Top             =   4680
-      Width           =   1335
+      Width           =   5415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1210,10 +1413,10 @@ Begin VB.Form frmPreferences
       TabIndex        =   69
       Tag             =   "font2"
       Top             =   4080
-      Width           =   975
+      Width           =   5415
    End
    Begin VB.Label lblHotkeys 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004F3D31&
       Caption         =   "HotKeys"
       BeginProperty Font 
@@ -1226,18 +1429,18 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   66
       Tag             =   "font2"
       Top             =   360
-      Width           =   975
+      Width           =   765
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   3855
       Index           =   1
-      Left            =   4560
+      Left            =   6480
       Top             =   480
       Width           =   2175
    End
@@ -1256,7 +1459,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   12
-      Left            =   2280
+      Left            =   2190
       TabIndex        =   65
       Tag             =   "font2"
       Top             =   1320
@@ -1277,7 +1480,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   11
-      Left            =   2280
+      Left            =   2190
       TabIndex        =   64
       Tag             =   "font2"
       Top             =   960
@@ -1298,7 +1501,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   15
-      Left            =   3360
+      Left            =   3270
       TabIndex        =   63
       Tag             =   "font2"
       Top             =   2640
@@ -1319,7 +1522,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   14
-      Left            =   3360
+      Left            =   3270
       TabIndex        =   62
       Tag             =   "font2"
       Top             =   2280
@@ -1341,11 +1544,11 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   8
-      Left            =   3000
+      Left            =   2760
       TabIndex        =   61
       Tag             =   "font2"
       Top             =   720
-      Width           =   855
+      Width           =   1335
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1367,7 +1570,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   59
       Tag             =   "font2"
       Top             =   720
-      Width           =   855
+      Width           =   2175
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1426,7 +1629,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   13
-      Left            =   2160
+      Left            =   2070
       TabIndex        =   56
       Tag             =   "font2"
       Top             =   2280
@@ -1494,7 +1697,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   52
       Tag             =   "font2"
       Top             =   2040
-      Width           =   615
+      Width           =   2055
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1515,7 +1718,7 @@ Begin VB.Form frmPreferences
       Left            =   1200
       TabIndex        =   51
       Top             =   6915
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1533,13 +1736,13 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   19
-      Left            =   2760
+      Left            =   3720
       TabIndex        =   50
       Top             =   6915
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.Label lblDirs 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Directories"
       BeginProperty Font 
@@ -1552,12 +1755,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   46
       Tag             =   "font2"
       Top             =   3240
-      Width           =   1335
+      Width           =   945
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1565,10 +1768,10 @@ Begin VB.Form frmPreferences
       Index           =   2
       Left            =   120
       Top             =   3360
-      Width           =   4335
+      Width           =   6255
    End
    Begin VB.Label lblDisplay 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004F3D31&
       Caption         =   "Display"
       BeginProperty Font 
@@ -1581,12 +1784,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   45
       Tag             =   "font2"
       Top             =   360
-      Width           =   855
+      Width           =   675
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1603,7 +1806,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   3
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   44
       Tag             =   "font2"
       Top             =   1320
@@ -1664,7 +1867,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   4
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   41
       Tag             =   "font2"
       Top             =   1680
@@ -1685,13 +1888,14 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   2
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   40
       Tag             =   "font2"
       Top             =   960
       Width           =   975
    End
    Begin VB.Label lblBlending 
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Blending"
       BeginProperty Font 
@@ -1704,11 +1908,11 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   39
       Top             =   6600
-      Width           =   975
+      Width           =   750
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1716,7 +1920,7 @@ Begin VB.Form frmPreferences
       Index           =   0
       Left            =   120
       Top             =   480
-      Width           =   4335
+      Width           =   6255
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1724,7 +1928,7 @@ Begin VB.Form frmPreferences
       Index           =   4
       Left            =   120
       Top             =   6720
-      Width           =   4335
+      Width           =   6255
    End
 End
 Attribute VB_Name = "frmPreferences"
@@ -1736,7 +1940,7 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim fileName, Val
+    Dim FileName, val
     'Dim fileName, Val
 #End If
 
@@ -1765,6 +1969,10 @@ Private opacity1 As Integer
 Private opacity2 As Integer
 Private sceneryVerts As Boolean
 Private topmost As Boolean
+
+Private formMinZoom As Single
+Private formMaxZoom As Single
+Private formResetZoom As Single
 
 Private Sub picHide_Click()
 
@@ -1881,6 +2089,11 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.gridDivisions = divisions
     frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
     frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
+    
+    
+    frmSoldatMapEditor.gMinZoom = formMinZoom / 100
+    frmSoldatMapEditor.gMaxZoom = formMaxZoom / 100
+    frmSoldatMapEditor.gResetZoom = formResetZoom / 100
 
     frmSoldatMapEditor.sceneryVerts = sceneryVerts
     frmSoldatMapEditor.topmost = topmost
@@ -1991,6 +2204,13 @@ Private Sub Form_Load()
     opacity2 = frmSoldatMapEditor.gridOp2 / 255 * 100
     txtOpacity2.Text = opacity2
 
+    txtMinZoom.Text = frmSoldatMapEditor.gMinZoom * 100
+    txtMaxZoom.Text = frmSoldatMapEditor.gMaxZoom * 100
+    txtResetZoom.Text = frmSoldatMapEditor.gResetZoom * 100
+    formMinZoom = txtMinZoom.Text
+    formMaxZoom = txtMaxZoom.Text
+    formResetZoom = txtResetZoom.Text
+
     For i = 0 To 13
         txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.getHotKey(i), 1))
         txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
@@ -2024,11 +2244,11 @@ ErrorHandler:
 
 End Sub
 
-Private Function FileExists(fileName As String) As Boolean
+Private Function FileExists(FileName As String) As Boolean
 
     On Error GoTo ErrorHandler
 
-    FileExists = FileLen(fileName) > 0
+    FileExists = FileLen(FileName) > 0
 
 ErrorHandler:
 
@@ -2155,6 +2375,96 @@ Private Sub txtHotkey_KeyPress(Index As Integer, KeyAscii As Integer)
 
     txtHotkey(Index).Text = UCase$(Chr$(KeyAscii))
     KeyAscii = 0
+
+End Sub
+
+Private Sub txtMaxZoom_Change()
+
+    If IsNumeric(txtMaxZoom.Text) = False And txtMaxZoom.Text <> "" Then
+        txtMaxZoom.Text = formMaxZoom
+    End If
+
+End Sub
+
+Private Sub txtMaxZoom_GotFocus()
+
+    txtMaxZoom.SelStart = 0
+    txtMaxZoom.SelLength = Len(txtMaxZoom.Text)
+
+End Sub
+
+Private Sub txtMaxZoom_LostFocus()
+
+    If IsNumeric(txtMaxZoom.Text) = False And txtMaxZoom.Text <> "" Then
+        txtMaxZoom.Text = formMaxZoom
+    ElseIf txtMaxZoom.Text = "" Then
+        txtMaxZoom.Text = formMaxZoom
+    ElseIf txtMaxZoom.Text > 0 And txtMaxZoom.Text < 10000000 Then
+        formMaxZoom = CSng(txtMaxZoom.Text)
+        txtMaxZoom.Text = formMaxZoom
+    Else
+        txtMaxZoom.Text = formMaxZoom
+    End If
+
+End Sub
+
+Private Sub txtMinZoom_Change()
+
+    If IsNumeric(txtMinZoom.Text) = False And txtMinZoom.Text <> "" Then
+        txtMinZoom.Text = formMinZoom
+    End If
+
+End Sub
+
+Private Sub txtMinZoom_GotFocus()
+
+    txtMinZoom.SelStart = 0
+    txtMinZoom.SelLength = Len(txtMinZoom.Text)
+
+End Sub
+
+Private Sub txtMinZoom_LostFocus()
+
+    If IsNumeric(txtMinZoom.Text) = False And txtMinZoom.Text <> "" Then
+        txtMinZoom.Text = formMinZoom
+    ElseIf txtMinZoom.Text = "" Then
+        txtMinZoom.Text = formMinZoom
+    ElseIf txtMinZoom.Text > 0 And txtMinZoom.Text < 10000000 Then
+        formMinZoom = CSng(txtMinZoom.Text)
+        txtMinZoom.Text = formMinZoom
+    Else
+        txtMinZoom.Text = formMinZoom
+    End If
+
+End Sub
+
+Private Sub txtResetZoom_Change()
+
+    If IsNumeric(txtResetZoom.Text) = False And txtResetZoom.Text <> "" Then
+        txtResetZoom.Text = formResetZoom
+    End If
+
+End Sub
+
+Private Sub txtResetZoom_GotFocus()
+
+    txtResetZoom.SelStart = 0
+    txtResetZoom.SelLength = Len(txtResetZoom.Text)
+
+End Sub
+
+Private Sub txtResetZoom_LostFocus()
+
+    If IsNumeric(txtResetZoom.Text) = False And txtResetZoom.Text <> "" Then
+        txtResetZoom.Text = formResetZoom
+    ElseIf txtResetZoom.Text = "" Then
+        txtResetZoom.Text = formResetZoom
+    ElseIf txtResetZoom.Text >= formMinZoom And txtResetZoom.Text <= formMaxZoom Then
+        formResetZoom = CSng(txtResetZoom.Text)
+        txtResetZoom.Text = formResetZoom
+    Else
+        txtResetZoom.Text = formResetZoom
+    End If
 
 End Sub
 
@@ -2370,7 +2680,7 @@ Private Function getRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
-    hexValue = Hex(Val(DecValue))
+    hexValue = Hex(val(DecValue))
 
     If Len(hexValue) < 6 Then
         hexValue = String(6 - Len(hexValue), "0") + hexValue
@@ -2583,6 +2893,7 @@ Public Sub SetColors()
     txtWidth.ForeColor = txtTextClr
     txtHeight.BackColor = txtBackClr
     txtHeight.ForeColor = txtTextClr
+
     txtSpacing.BackColor = txtBackClr
     txtSpacing.ForeColor = txtTextClr
     txtDivisions.BackColor = txtBackClr
@@ -2591,6 +2902,14 @@ Public Sub SetColors()
     txtOpacity1.ForeColor = txtTextClr
     txtOpacity2.BackColor = txtBackClr
     txtOpacity2.ForeColor = txtTextClr
+
+    txtMinZoom.BackColor = txtBackClr
+    txtMinZoom.ForeColor = txtTextClr
+    txtMaxZoom.BackColor = txtBackClr
+    txtMaxZoom.ForeColor = txtTextClr
+    txtResetZoom.BackColor = txtBackClr
+    txtResetZoom.ForeColor = txtTextClr
+
     txtDir.BackColor = txtBackClr
     txtDir.ForeColor = txtTextClr
     txtUncomp.BackColor = txtBackClr
