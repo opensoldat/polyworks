@@ -1549,8 +1549,10 @@ Private Const MAX_POLYS  As Integer = 4000
 
 Public gMaxZoom As Single
 Public gMinZoom As Single
+Public gResetZoom As Single
 Private Const DEFAULT_MAX_ZOOM As Single = 512
 Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
+Private Const DEFAULT_RESET_ZOOM As Single = 1
 
 Private Const TOOL_MOVE As Byte = 0
 Private Const TOOL_CREATE As Byte = 1
@@ -11370,7 +11372,7 @@ Private Function confirmExists(FileName As String) As Boolean
 End Function
 
 Private Sub lblZoom_Click()
-    txtZoom.Text = "100%"
+    txtZoom.Text = gResetZoom * 100 & "%"
     txtZoom_LostFocus
 End Sub
 
@@ -12212,6 +12214,7 @@ Private Sub saveSettings()
         "Topmost=" & topmost & sNull & _
         "MinZoom=" & gMaxZoom * 100 & sNull & _
         "MaxZoom=" & gMinZoom * 100 & sNull & _
+        "ResetZoom=" & gResetZoom * 100 & sNull & sNull
     saveSection "Preferences", iniString
 
     'display
@@ -12421,6 +12424,19 @@ Private Sub loadINI()
        sgnTemp = gMaxZoom
        gMaxZoom = gMinZoom
        gMinZoom = sgnTemp
+    End If
+
+    strTemp = loadString("Preferences", "ResetZoom")
+    If IsNumeric(strTemp) Then
+        gResetZoom = CSng(strTemp) / 100
+    Else
+        gResetZoom = DEFAULT_RESET_ZOOM
+    End If
+
+    If gResetZoom > gMaxZoom Then
+        gResetZoom = gMaxZoom
+    ElseIf gResetZoom < gMinZoom Then
+        gResetZoom = gMinZoom
     End If
 
     errVal = "2"
