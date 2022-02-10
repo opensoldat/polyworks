@@ -2575,10 +2575,13 @@ Public Sub SetColors()
         c.ForeColor = lblTextClr
     Next
 
-    For i = txtWayptKey.LBound To txtWayptKey.UBound
-        txtWayptKey(i).BackColor = bgClr
-        txtWayptKey(i).ForeColor = lblTextClr
-        fraPref(i).BorderColor = frameClr
+    For Each c In txtWayptKey
+        c.BackColor = bgClr
+        c.ForeColor = lblTextClr
+    Next
+    
+    For Each c In fraPref
+        c.BorderColor = frameClr
     Next
 
     txtWidth.BackColor = txtBackClr
