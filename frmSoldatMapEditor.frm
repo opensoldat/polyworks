@@ -1547,8 +1547,8 @@ Private bgColors(1 To 2) As TColor
 
 Private Const MAX_POLYS  As Integer = 4000
 
-Private mMaxZoom As Single
-Private mMinZoom As Single
+Public gMaxZoom As Single
+Public gMinZoom As Single
 Private Const DEFAULT_MAX_ZOOM As Single = 512
 Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
 
@@ -11398,7 +11398,7 @@ Private Sub txtZoom_LostFocus()
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     End If
 
-    If (zoomInput / 100) >= mMinZoom Or (zoomInput / 100) <= mMaxZoom Then
+    If (zoomInput / 100) >= gMinZoom Or (zoomInput / 100) <= gMaxZoom Then
         Zoom ((zoomInput / 100) / zoomFactor)
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     Else
@@ -11414,7 +11414,7 @@ Private Function getZoomDir(zoomDir As Single) As Single
 
     getZoomDir = zoomDir
 
-    zoomVal = mMinZoom
+    zoomVal = gMinZoom
     For i = 1 To 8
         If zoomDir > 1 Then 'zooming in
             If (zoomFactor) > zoomVal And (zoomFactor) < (zoomVal * 2) Then
@@ -11438,7 +11438,7 @@ Public Sub Zoom(zoomDir As Single)
     Dim j As Integer
     Dim zoomVal As Single
 
-    If zoomFactor * zoomDir < mMinZoom Or zoomFactor * zoomDir > mMaxZoom Then Exit Sub
+    If zoomFactor * zoomDir < gMinZoom Or zoomFactor * zoomDir > gMaxZoom Then Exit Sub
 
     Scenery(0).screenTr.X = Scenery(0).screenTr.X / zoomFactor + scrollCoords(2).X
     Scenery(0).screenTr.Y = Scenery(0).screenTr.Y / zoomFactor + scrollCoords(2).Y
@@ -11501,13 +11501,13 @@ Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
     Dim i As Integer
     Dim j As Integer
 
-    If (zoomFactor * zoomDir < mMinZoom) And zoomFactor > mMinZoom Then
-        zoomDir = mMinZoom / zoomFactor
-    ElseIf zoomFactor * zoomDir > mMaxZoom And zoomFactor < mMaxZoom Then
-        zoomDir = mMaxZoom / zoomFactor
+    If (zoomFactor * zoomDir < gMinZoom) And zoomFactor > gMinZoom Then
+        zoomDir = gMinZoom / zoomFactor
+    ElseIf zoomFactor * zoomDir > gMaxZoom And zoomFactor < gMaxZoom Then
+        zoomDir = gMaxZoom / zoomFactor
     End If
 
-    If zoomFactor * zoomDir < mMinZoom Or zoomFactor * zoomDir > mMaxZoom Then Exit Sub
+    If zoomFactor * zoomDir < gMinZoom Or zoomFactor * zoomDir > gMaxZoom Then Exit Sub
 
     Scenery(0).screenTr.X = Scenery(0).screenTr.X / zoomFactor + scrollCoords(2).X
     Scenery(0).screenTr.Y = Scenery(0).screenTr.Y / zoomFactor + scrollCoords(2).Y
@@ -12210,8 +12210,8 @@ Private Sub saveSettings()
         "MaxUndo=" & max_undo & sNull & _
         "SceneryVerts=" & sceneryVerts & sNull & _
         "Topmost=" & topmost & sNull & _
-        "MinZoom=" & mMaxZoom * 100 & sNull & _
-        "MaxZoom=" & mMinZoom * 100 & sNull & sNull
+        "MinZoom=" & gMaxZoom * 100 & sNull & _
+        "MaxZoom=" & gMinZoom * 100 & sNull & _
     saveSection "Preferences", iniString
 
     'display
@@ -12402,25 +12402,25 @@ Private Sub loadINI()
 
     strTemp = loadString("Preferences", "MinZoom")
     If IsNumeric(strTemp) Then
-        mMinZoom = CSng(strTemp) / 100
+        gMinZoom = CSng(strTemp) / 100
     Else
-       mMinZoom = DEFAULT_MIN_ZOOM
+       gMinZoom = DEFAULT_MIN_ZOOM
     End If
 
     strTemp = loadString("Preferences", "MaxZoom")
     If IsNumeric(strTemp) Then
-        mMaxZoom = CSng(strTemp) / 100
+        gMaxZoom = CSng(strTemp) / 100
     Else
-        mMaxZoom = DEFAULT_MAX_ZOOM
+        gMaxZoom = DEFAULT_MAX_ZOOM
     End If
     
-    If mMinZoom = mMaxZoom Then
-        mMinZoom = DEFAULT_MIN_ZOOM
-        mMaxZoom = DEFAULT_MAX_ZOOM
-    ElseIf mMinZoom > mMaxZoom Then
-       sgnTemp = mMaxZoom
-       mMaxZoom = mMinZoom
-       mMinZoom = sgnTemp
+    If gMinZoom = gMaxZoom Then
+        gMinZoom = DEFAULT_MIN_ZOOM
+        gMaxZoom = DEFAULT_MAX_ZOOM
+    ElseIf gMinZoom > gMaxZoom Then
+       sgnTemp = gMaxZoom
+       gMaxZoom = gMinZoom
+       gMinZoom = sgnTemp
     End If
 
     errVal = "2"
