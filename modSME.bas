@@ -7,19 +7,20 @@ Option Explicit
     'Private fileName, Token, X, Y, Val
 #End If
 
-Global Const PI As Single = 3.14159265358979  'mmm... PI
+Public Const PI As Single = 3.14159265358979  'mmm... PI
 
-Global gfxDir As String
+Public gfxDir As String
 
-Global appPath As String
-Global bgClr As Long
-Global lblBackClr As Long
-Global lblTextClr As Long
-Global txtBackClr As Long
-Global txtTextClr As Long
-Global frameClr As Long
+Public appPath As String
+Public bgClr As Long
+Public lblBackClr As Long
+Public lblTextClr As Long
+Public txtBackClr As Long
+Public txtTextClr As Long
+Public frameClr As Long
 
-Global font1 As String, font2 As String
+Public font1 As String
+Public font2 As String
 
 Public Const BUTTON_WIDTH = 64
 Public Const BUTTON_HEIGHT = 24
