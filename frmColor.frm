@@ -1088,9 +1088,9 @@ Private Sub updateAll()
 
     picColor.BackColor = RGB(clr(R), clr(G), clr(B))
 
-    imgRGB(0).Top = picRGB(0).Top + 255 - clr(0) - 7
-    imgRGB(1).Top = picRGB(1).Top + 255 - clr(1) - 7
-    imgRGB(2).Top = picRGB(2).Top + 255 - clr(2) - 7
+    imgRGB(R).Top = picRGB(R).Top + 255 - clr(R) - 7
+    imgRGB(G).Top = picRGB(G).Top + 255 - clr(G) - 7
+    imgRGB(B).Top = picRGB(B).Top + 255 - clr(B) - 7
 
     imgHue.Top = picHue.Top + 255 - Int(mHue * 256 / 360) - 7
     imgSat.Top = picSat.Top + 255 - Int(mSat * 255) - 7
