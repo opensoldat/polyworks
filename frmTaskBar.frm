@@ -65,6 +65,10 @@ End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 
+    If frmColor.Visible Then
+      frmColor.Hide
+    End If
+
     frmSoldatMapEditor.Terminate
 
 End Sub
