@@ -1772,6 +1772,7 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then
             frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 And txtLightProp(Index).Text <= 100 Then
+           ' no op
         Else
             txtLightProp(Index).Text = tempVal
         End If

@@ -715,6 +715,7 @@ Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer
 
     wayptType(Index) = Not wayptType(Index)
     mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
+
     If Index = 0 Then
         wayptType(1) = False
         mouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP

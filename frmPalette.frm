@@ -936,7 +936,7 @@ Private Sub txtRGB_Change(Index As Integer)
 
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
     ElseIf txtRGB(Index).Text = "" Then
-
+        ' no op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         picColor.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
         frmSoldatMapEditor.setPolyColor Index, txtRGB(Index).Text
@@ -1086,7 +1086,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
     snapForm Me, frmTools
-    ' snapForm Me, frmPalette
+    'snapForm Me, frmPalette
     snapForm Me, frmWaypoints
     snapForm Me, frmDisplay
     snapForm Me, frmScenery

@@ -2100,6 +2100,7 @@ Private Function applyPreferences() As Boolean
 
     Debug.Assert txtHotkey.LBound = frmTools.picTools.LBound
     Debug.Assert txtHotkey.UBound = frmTools.picTools.UBound
+
     For i = txtHotkey.LBound To txtHotkey.UBound
         frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
@@ -2109,6 +2110,7 @@ Private Function applyPreferences() As Boolean
     Debug.Assert txtWayptKey.UBound = frmWaypoints.picType.UBound
     Debug.Assert txtWayptKey.LBound = frmWaypoints.lblType.LBound
     Debug.Assert txtWayptKey.UBound = frmWaypoints.lblType.UBound
+
     For i = txtWayptKey.LBound To txtWayptKey.UBound
         frmWaypoints.setWayptKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
         frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
