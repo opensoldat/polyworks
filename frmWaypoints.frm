@@ -566,8 +566,11 @@ End Sub
 
 Public Sub getPathNum(Value As Byte)
 
-    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, Value = 1, BUTTON_UP
-    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, Value = 2, BUTTON_UP
+    Dim i As Integer
+
+    For i = picPath.LBound To picPath.UBound
+        mouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, Value = i + 1, BUTTON_UP
+    Next
     wayptPath = Value - 1
 
 End Sub

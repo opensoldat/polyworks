@@ -579,7 +579,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
     For Y = 0 To 5
         For X = 0 To 11
-            frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
+            picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
         Next
     Next
 
@@ -1022,12 +1022,12 @@ End Sub
 
 Public Function textControl() As Boolean
 
-    Dim i As Integer
+    Dim c As Control
 
     textControl = False
 
-    For i = 0 To 2
-        If Me.ActiveControl = txtRGB(i) Then
+    For Each c In txtRGB
+        If Me.ActiveControl = c Then
             textControl = True
         End If
     Next
@@ -1058,7 +1058,7 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
 
     clrMode = Index
 
-    For i = 0 To 2
+    For i = picClrMode.LBound To picClrMode.UBound
         If i <> Index Then
             mouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = clrMode), BUTTON_UP
         End If
@@ -1145,20 +1145,25 @@ Public Sub SetColors()
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    For i = 0 To 2
+    For i = picClrMode.LBound To picClrMode.UBound
         mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
 
     Me.BackColor = bgClr
-    For i = 0 To 6
-        lblPal(i).BackColor = lblBackClr
-        lblPal(i).ForeColor = lblTextClr
+
+    For Each c In lblPal
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
-    For i = 0 To 2
-        lblClrMode(i).BackColor = lblBackClr
-        lblClrMode(i).ForeColor = lblTextClr
-        txtRGB(i).BackColor = txtBackClr
-        txtRGB(i).ForeColor = txtTextClr
+
+    For Each c In lblClrMode
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
+    Next
+
+    For Each c In txtRGB
+        c.BackColor = txtBackClr
+        c.ForeColor = txtTextClr
     Next
 
     txtOpacity.BackColor = txtBackClr

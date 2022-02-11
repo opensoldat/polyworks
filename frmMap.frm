@@ -815,9 +815,9 @@ Public Sub SetColors()
 
     Me.BackColor = bgClr
 
-    For i = 0 To 7
-        lblMap(i).BackColor = lblBackClr
-        lblMap(i).ForeColor = lblTextClr
+    For Each c In lblMap
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
 
     txtDesc.BackColor = txtBackClr
@@ -838,8 +838,9 @@ Public Sub SetColors()
     cboTexture.BackColor = txtBackClr
     cboTexture.ForeColor = txtTextClr
 
-    fraMap(0).BorderColor = frameClr
-    fraMap(1).BorderColor = frameClr
+    For Each c In fraMap
+        c.BorderColor = frameClr
+    Next
 
     For Each c In Me.Controls
         If c.Tag = "font1" Then

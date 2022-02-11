@@ -405,7 +405,7 @@ Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Inte
     Dim i As Integer
 
     If curTool <> Index Then
-        For i = 0 To 13
+        For i = picTools.LBound To picTools.UBound
             BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
             picTools(i).Refresh
         Next
@@ -467,7 +467,7 @@ Public Sub SetColors()
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    For i = 0 To 13
+    For i = picTools.LBound To picTools.UBound
         BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
         picTools(i).Refresh
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr$(MapVirtualKey(hotKeys(i), 1)) & ")"
