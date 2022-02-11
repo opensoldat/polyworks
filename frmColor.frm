@@ -645,8 +645,8 @@ Private mHigh As Byte
 Private mColor(0 To 2) As Byte
 Private mPureColor(0 To 2) As Byte
 
-Private oldX As Integer
-Private oldY As Integer
+Private mOldX As Integer
+Private mOldY As Integer
 
 Private Const R As Byte = 0
 Private Const G As Byte = 1
@@ -684,9 +684,9 @@ Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
     changeRGB
 
     picClr.Cls
-    oldX = (mHue / 360 * 256)
-    oldY = 255 - (mSat * 255)
-    picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+    mOldX = (mHue / 360 * 256)
+    mOldY = 255 - (mSat * 255)
+    picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
 
     picColor.BackColor = RGB(mColor(R), mColor(B), mColor(G))
 
@@ -779,8 +779,8 @@ Private Sub Form_Load()
 
     Me.SetColors
 
-    oldX = -16
-    oldY = -16
+    mOldX = -16
+    mOldY = -16
     ok = False
     mHue = 0
     mSat = 0
@@ -825,9 +825,9 @@ Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-        oldX = X
-        oldY = Y
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = X
+        mOldY = Y
         picClr.Circle (X, Y), 5.5, RGB(0, 0, 0)
     End If
 
@@ -850,10 +850,10 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
         updateHSB
         updateHex
 
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-        oldX = mHue / 360 * 255
-        oldY = 255 - mSat * 255
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = mHue / 360 * 255
+        mOldY = 255 - mSat * 255
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -878,9 +878,9 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-        oldX = X
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = X
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -946,9 +946,9 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-        oldY = 255 - X
-        picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldY = 255 - X
+        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -1283,9 +1283,9 @@ Private Sub txtHue_Change()
             updateRGB
             updateHex
 
-            picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-            oldX = mHue / 360 * 256
-            picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            mOldX = mHue / 360 * 256
+            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         End If
     End If
 
@@ -1319,9 +1319,9 @@ Private Sub txtSat_Change()
             updateRGB
             updateHex
 
-            picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
-            oldY = 255 - mSat * 255
-            picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
+            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            mOldY = 255 - mSat * 255
+            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         End If
     End If
 
