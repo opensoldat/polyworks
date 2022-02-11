@@ -2098,12 +2098,18 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.sceneryVerts = sceneryVerts
     frmSoldatMapEditor.topmost = topmost
 
-    For i = 0 To 13
+    Debug.Assert txtHotkey.LBound = frmTools.picTools.LBound
+    Debug.Assert txtHotkey.UBound = frmTools.picTools.UBound
+    For i = txtHotkey.LBound To txtHotkey.UBound
         frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
     Next
 
-    For i = 0 To 4
+    Debug.Assert txtWayptKey.LBound = frmWaypoints.picType.LBound
+    Debug.Assert txtWayptKey.UBound = frmWaypoints.picType.UBound
+    Debug.Assert txtWayptKey.LBound = frmWaypoints.lblType.LBound
+    Debug.Assert txtWayptKey.UBound = frmWaypoints.lblType.UBound
+    For i = txtWayptKey.LBound To txtWayptKey.UBound
         frmWaypoints.setWayptKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
         frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
         frmWaypoints.lblType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
@@ -2177,7 +2183,7 @@ Private Sub Form_Load()
     gridClr = getRGB(frmSoldatMapEditor.gridClr)
     gridClr2 = getRGB(frmSoldatMapEditor.gridClr2)
 
-    For i = 0 To 7
+    For i = LBound(blendModes) To UBound(blendModes)
         If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
         If frmSoldatMapEditor.wireBlendDest = blendModes(i) Then cboWireDest.ListIndex = i
         If frmSoldatMapEditor.polyBlendSrc = blendModes(i) Then cboPolySrc.ListIndex = i
@@ -2211,12 +2217,12 @@ Private Sub Form_Load()
     formMaxZoom = txtMaxZoom.Text
     formResetZoom = txtResetZoom.Text
 
-    For i = 0 To 13
+    For i = txtHotkey.LBound To txtHotkey.UBound
         txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.getHotKey(i), 1))
         txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
     Next
 
-    For i = 0 To 4
+    For i = txtWayptKey.LBound To txtWayptKey.UBound
         txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.getWayptKey(i), 1))
         txtWayptKey(i).Tag = Asc(txtWayptKey(i).Text)
     Next
