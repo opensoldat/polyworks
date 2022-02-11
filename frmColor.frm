@@ -642,8 +642,8 @@ Private mLow As Byte
 Private mMid As Byte
 Private mHigh As Byte
 
-Private clr(0 To 2) As Byte
-Private pureClr(0 To 2) As Byte
+Private mColor(0 To 2) As Byte
+Private mPureColor(0 To 2) As Byte
 
 Private oldX As Integer
 Private oldY As Integer
@@ -674,12 +674,12 @@ Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     On Error GoTo ErrorHandler
 
-    clr(R) = initRed
-    clr(G) = initGreen
-    clr(B) = initBlue
-    red = clr(R)
-    green = clr(G)
-    blue = clr(B)
+    mColor(R) = initRed
+    mColor(G) = initGreen
+    mColor(B) = initBlue
+    red = mColor(R)
+    green = mColor(G)
+    blue = mColor(B)
 
     changeRGB
 
@@ -688,7 +688,7 @@ Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
     oldY = 255 - (mSat * 255)
     picClr.Circle (oldX, oldY), 5.5, RGB(0, 0, 0)
 
-    picColor.BackColor = RGB(clr(R), clr(B), clr(G))
+    picColor.BackColor = RGB(mColor(R), mColor(B), mColor(G))
 
     updateAll
     updateRGB
@@ -788,9 +788,9 @@ Private Sub Form_Load()
     mLow = B
     mMid = G
     mHigh = R
-    pureClr(0) = 255
-    pureClr(1) = 255
-    pureClr(2) = 255
+    mPureColor(0) = 255
+    mPureColor(1) = 255
+    mPureColor(2) = 255
 
     Exit Sub
 
@@ -843,9 +843,9 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
 
     If Button = 1 Then
         X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
-        clr(Index) = X
+        mColor(Index) = X
         changeRGB
-        txtRGB(Index).Text = clr(Index)
+        txtRGB(Index).Text = mColor(Index)
         updateAll
         updateHSB
         updateHex
@@ -890,29 +890,29 @@ Private Sub calculateHue()
     On Error GoTo ErrorHandler
 
     If mHue < 60 Then
-        clr(R) = mBright * 255
-        clr(G) = ((255 - (mHue / 60 * 255)) * (1 - mSat) + (mHue / 60 * 255)) * mBright
-        clr(B) = 255 * (1 - mSat) * mBright
+        mColor(R) = mBright * 255
+        mColor(G) = ((255 - (mHue / 60 * 255)) * (1 - mSat) + (mHue / 60 * 255)) * mBright
+        mColor(B) = 255 * (1 - mSat) * mBright
     ElseIf mHue < 120 Then
-        clr(R) = ((255 - ((120 - mHue) / 60 * 255)) * (1 - mSat) + ((120 - mHue) / 60 * 255)) * mBright
-        clr(G) = mBright * 255
-        clr(B) = 255 * (1 - mSat) * mBright
+        mColor(R) = ((255 - ((120 - mHue) / 60 * 255)) * (1 - mSat) + ((120 - mHue) / 60 * 255)) * mBright
+        mColor(G) = mBright * 255
+        mColor(B) = 255 * (1 - mSat) * mBright
     ElseIf mHue < 180 Then
-        clr(R) = 255 * (1 - mSat) * mBright
-        clr(G) = mBright * 255
-        clr(B) = ((255 - ((mHue - 120) / 60 * 255)) * (1 - mSat) + ((mHue - 120) / 60 * 255)) * mBright
+        mColor(R) = 255 * (1 - mSat) * mBright
+        mColor(G) = mBright * 255
+        mColor(B) = ((255 - ((mHue - 120) / 60 * 255)) * (1 - mSat) + ((mHue - 120) / 60 * 255)) * mBright
     ElseIf mHue < 240 Then
-        clr(R) = 255 * (1 - mSat) * mBright
-        clr(G) = ((255 - ((240 - mHue) / 60 * 255)) * (1 - mSat) + ((240 - mHue) / 60 * 255)) * mBright
-        clr(B) = mBright * 255
+        mColor(R) = 255 * (1 - mSat) * mBright
+        mColor(G) = ((255 - ((240 - mHue) / 60 * 255)) * (1 - mSat) + ((240 - mHue) / 60 * 255)) * mBright
+        mColor(B) = mBright * 255
     ElseIf mHue < 300 Then
-        clr(R) = ((255 - ((mHue - 240) / 60 * 255)) * (1 - mSat) + ((mHue - 240) / 60 * 255)) * mBright
-        clr(G) = 255 * (1 - mSat) * mBright
-        clr(B) = mBright * 255
+        mColor(R) = ((255 - ((mHue - 240) / 60 * 255)) * (1 - mSat) + ((mHue - 240) / 60 * 255)) * mBright
+        mColor(G) = 255 * (1 - mSat) * mBright
+        mColor(B) = mBright * 255
     ElseIf mHue < 360 Then
-        clr(R) = mBright * 255
-        clr(G) = 255 * (1 - mSat) * mBright
-        clr(B) = ((255 - ((360 - mHue) / 60 * 255)) * (1 - mSat) + ((360 - mHue) / 60 * 255)) * mBright
+        mColor(R) = mBright * 255
+        mColor(G) = 255 * (1 - mSat) * mBright
+        mColor(B) = ((255 - ((360 - mHue) / 60 * 255)) * (1 - mSat) + ((360 - mHue) / 60 * 255)) * mBright
     End If
 
     Exit Sub
@@ -934,12 +934,12 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
     If Button = 1 Then
         X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         mSat = X / 255
-        If clr(R) = clr(G) And clr(R) = clr(B) And mSat > 0 Then 'determine rgb based on hue
+        If mColor(R) = mColor(G) And mColor(R) = mColor(B) And mSat > 0 Then 'determine rgb based on hue
             calculateHue
         Else
-            clr(mLow) = ((1 - mSat) * 255) * mBright
-            clr(mMid) = ((255 - pureClr(mMid)) * (1 - mSat) + pureClr(mMid)) * mBright
-            clr(mHigh) = pureClr(mHigh) * mBright
+            mColor(mLow) = ((1 - mSat) * 255) * mBright
+            mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+            mColor(mHigh) = mPureColor(mHigh) * mBright
         End If
         updateAll
         txtSat.Text = Int(mSat * 100 + 0.5)
@@ -964,9 +964,9 @@ Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single
     If Button = 1 Then
         X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
         mBright = X / 255
-        clr(mLow) = ((1 - mSat) * 255) * mBright
-        clr(mMid) = ((255 - pureClr(mMid)) * (1 - mSat) + pureClr(mMid)) * mBright
-        clr(mHigh) = pureClr(mHigh) * mBright
+        mColor(mLow) = ((1 - mSat) * 255) * mBright
+        mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+        mColor(mHigh) = mPureColor(mHigh) * mBright
         updateAll
         txtBright.Text = Int(mBright * 100 + 0.5)
         updateRGB
@@ -977,62 +977,62 @@ End Sub
 
 Private Sub changeRGB() 'when rgb modified by user
 
-    If clr(R) = clr(G) And clr(R) = clr(B) Then
-        mBright = clr(R) / 255
+    If mColor(R) = mColor(G) And mColor(R) = mColor(B) Then
+        mBright = mColor(R) / 255
         mSat = 0
         If mHue < 60 Then
-            pureClr(R) = 255
-            pureClr(G) = (mHue / 60) * 255
-            pureClr(B) = 0
+            mPureColor(R) = 255
+            mPureColor(G) = (mHue / 60) * 255
+            mPureColor(B) = 0
         ElseIf mHue < 120 Then
-            pureClr(R) = ((120 - mHue) / 60) * 255
-            pureClr(G) = 255
-            pureClr(B) = 0
+            mPureColor(R) = ((120 - mHue) / 60) * 255
+            mPureColor(G) = 255
+            mPureColor(B) = 0
         ElseIf mHue < 180 Then
-            pureClr(R) = 0
-            pureClr(G) = 255
-            pureClr(B) = ((mHue - 120) / 60) * 255
+            mPureColor(R) = 0
+            mPureColor(G) = 255
+            mPureColor(B) = ((mHue - 120) / 60) * 255
         ElseIf mHue < 240 Then
-            pureClr(R) = 0
-            pureClr(G) = ((240 - mHue) / 60) * 255
-            pureClr(B) = 255
+            mPureColor(R) = 0
+            mPureColor(G) = ((240 - mHue) / 60) * 255
+            mPureColor(B) = 255
         ElseIf mHue < 300 Then
-            pureClr(R) = ((mHue - 240) / 60) * 255
-            pureClr(G) = 0
-            pureClr(B) = 255
+            mPureColor(R) = ((mHue - 240) / 60) * 255
+            mPureColor(G) = 0
+            mPureColor(B) = 255
         ElseIf mHue < 360 Then
-            pureClr(R) = 255
-            pureClr(G) = 0
-            pureClr(B) = ((360 - mHue) / 60) * 255
+            mPureColor(R) = 255
+            mPureColor(G) = 0
+            mPureColor(B) = ((360 - mHue) / 60) * 255
         End If
         Exit Sub
     End If
 
     'get hue from rgb
-    If clr(R) >= clr(G) And clr(R) >= clr(B) Then
-        If clr(G) >= clr(B) Then
-            mHue = (clr(G) - clr(B)) / (clr(R) - clr(B)) * 60
+    If mColor(R) >= mColor(G) And mColor(R) >= mColor(B) Then
+        If mColor(G) >= mColor(B) Then
+            mHue = (mColor(G) - mColor(B)) / (mColor(R) - mColor(B)) * 60
         Else
-            mHue = 360 - (clr(B) - clr(G)) / (clr(R) - clr(G)) * 60
+            mHue = 360 - (mColor(B) - mColor(G)) / (mColor(R) - mColor(G)) * 60
         End If
-    ElseIf clr(G) >= clr(R) And clr(G) >= clr(B) Then
-        If clr(R) >= clr(B) Then
-            mHue = 120 - (clr(R) - clr(B)) / (clr(G) - clr(B)) * 60
+    ElseIf mColor(G) >= mColor(R) And mColor(G) >= mColor(B) Then
+        If mColor(R) >= mColor(B) Then
+            mHue = 120 - (mColor(R) - mColor(B)) / (mColor(G) - mColor(B)) * 60
         Else
-            mHue = (clr(B) - clr(R)) / (clr(G) - clr(R)) * 60 + 120
+            mHue = (mColor(B) - mColor(R)) / (mColor(G) - mColor(R)) * 60 + 120
         End If
-    ElseIf clr(B) >= clr(R) And clr(B) >= clr(G) Then
-        If clr(R) >= clr(G) Then
-            mHue = (clr(R) - clr(G)) / (clr(B) - clr(G)) * 60 + 240
+    ElseIf mColor(B) >= mColor(R) And mColor(B) >= mColor(G) Then
+        If mColor(R) >= mColor(G) Then
+            mHue = (mColor(R) - mColor(G)) / (mColor(B) - mColor(G)) * 60 + 240
         Else
-            mHue = 240 - (clr(G) - clr(R)) / (clr(B) - clr(R)) * 60
+            mHue = 240 - (mColor(G) - mColor(R)) / (mColor(B) - mColor(R)) * 60
         End If
     End If
 
     changeHue
 
-    mSat = 1 - (clr(mLow) / clr(mHigh))
-    mBright = clr(mHigh) / 255
+    mSat = 1 - (mColor(mLow) / mColor(mHigh))
+    mBright = mColor(mHigh) / 255
 
 End Sub
 
@@ -1042,55 +1042,55 @@ Private Sub changeHue()
         mHigh = R
         mMid = G
         mLow = B
-        pureClr(R) = 255
-        pureClr(G) = (mHue / 60) * 255
-        pureClr(B) = 0
+        mPureColor(R) = 255
+        mPureColor(G) = (mHue / 60) * 255
+        mPureColor(B) = 0
     ElseIf mHue < 120 Then
         mHigh = G
         mMid = R
         mLow = B
-        pureClr(R) = ((120 - mHue) / 60) * 255
-        pureClr(G) = 255
-        pureClr(B) = 0
+        mPureColor(R) = ((120 - mHue) / 60) * 255
+        mPureColor(G) = 255
+        mPureColor(B) = 0
     ElseIf mHue < 180 Then
         mHigh = G
         mMid = B
         mLow = R
-        pureClr(R) = 0
-        pureClr(G) = 255
-        pureClr(B) = ((mHue - 120) / 60) * 255
+        mPureColor(R) = 0
+        mPureColor(G) = 255
+        mPureColor(B) = ((mHue - 120) / 60) * 255
     ElseIf mHue < 240 Then
         mHigh = B
         mMid = G
         mLow = R
-        pureClr(R) = 0
-        pureClr(G) = ((240 - mHue) / 60) * 255
-        pureClr(B) = 255
+        mPureColor(R) = 0
+        mPureColor(G) = ((240 - mHue) / 60) * 255
+        mPureColor(B) = 255
     ElseIf mHue < 300 Then
         mHigh = B
         mMid = R
         mLow = G
-        pureClr(R) = ((mHue - 240) / 60) * 255
-        pureClr(G) = 0
-        pureClr(B) = 255
+        mPureColor(R) = ((mHue - 240) / 60) * 255
+        mPureColor(G) = 0
+        mPureColor(B) = 255
     ElseIf mHue < 360 Then
         mHigh = R
         mMid = B
         mLow = G
-        pureClr(R) = 255
-        pureClr(G) = 0
-        pureClr(B) = ((360 - mHue) / 60) * 255
+        mPureColor(R) = 255
+        mPureColor(G) = 0
+        mPureColor(B) = ((360 - mHue) / 60) * 255
     End If
 
 End Sub
 
 Private Sub updateAll()
 
-    picColor.BackColor = RGB(clr(R), clr(G), clr(B))
+    picColor.BackColor = RGB(mColor(R), mColor(G), mColor(B))
 
-    imgRGB(R).Top = picRGB(R).Top + 255 - clr(R) - 7
-    imgRGB(G).Top = picRGB(G).Top + 255 - clr(G) - 7
-    imgRGB(B).Top = picRGB(B).Top + 255 - clr(B) - 7
+    imgRGB(R).Top = picRGB(R).Top + 255 - mColor(R) - 7
+    imgRGB(G).Top = picRGB(G).Top + 255 - mColor(G) - 7
+    imgRGB(B).Top = picRGB(B).Top + 255 - mColor(B) - 7
 
     imgHue.Top = picHue.Top + 255 - Int(mHue * 256 / 360) - 7
     imgSat.Top = picSat.Top + 255 - Int(mSat * 255) - 7
@@ -1102,9 +1102,9 @@ End Sub
 
 Private Sub updateRGB()
 
-    txtRGB(R).Text = clr(R)
-    txtRGB(G).Text = clr(G)
-    txtRGB(B).Text = clr(B)
+    txtRGB(R).Text = mColor(R)
+    txtRGB(G).Text = mColor(G)
+    txtRGB(B).Text = mColor(B)
 
 End Sub
 
@@ -1118,8 +1118,8 @@ End Sub
 
 Private Sub updateHex()
 
-    mHexValue = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
-    txtHexCode.Text = RGBtoHex(RGB(clr(B), clr(G), clr(R)))
+    mHexValue = RGBtoHex(RGB(mColor(B), mColor(G), mColor(R)))
+    txtHexCode.Text = RGBtoHex(RGB(mColor(B), mColor(G), mColor(R)))
 
 End Sub
 
@@ -1131,18 +1131,18 @@ Private Sub Render()
     Dim blueVal As Byte
 
     For i = 0 To 255
-        picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, clr(G), clr(B))
-        picRGB(G).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), i, clr(B))
-        picRGB(B).Line (0, 255 - i)-(16, 255 - i), RGB(clr(R), clr(G), i)
+        picRGB(R).Line (0, 255 - i)-(16, 255 - i), RGB(i, mColor(G), mColor(B))
+        picRGB(G).Line (0, 255 - i)-(16, 255 - i), RGB(mColor(R), i, mColor(B))
+        picRGB(B).Line (0, 255 - i)-(16, 255 - i), RGB(mColor(R), mColor(G), i)
 
-        redVal = ((255 - pureClr(R)) * (1 - i / 255) + pureClr(R)) * mBright
-        greenVal = ((255 - pureClr(G)) * (1 - i / 255) + pureClr(G)) * mBright
-        blueVal = ((255 - pureClr(B)) * (1 - i / 255) + pureClr(B)) * mBright
+        redVal = ((255 - mPureColor(R)) * (1 - i / 255) + mPureColor(R)) * mBright
+        greenVal = ((255 - mPureColor(G)) * (1 - i / 255) + mPureColor(G)) * mBright
+        blueVal = ((255 - mPureColor(B)) * (1 - i / 255) + mPureColor(B)) * mBright
         picSat.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
 
-        redVal = ((255 - pureClr(R)) * (1 - mSat) + pureClr(R)) * (i / 255)
-        greenVal = ((255 - pureClr(G)) * (1 - mSat) + pureClr(G)) * (i / 255)
-        blueVal = ((255 - pureClr(B)) * (1 - mSat) + pureClr(B)) * (i / 255)
+        redVal = ((255 - mPureColor(R)) * (1 - mSat) + mPureColor(R)) * (i / 255)
+        greenVal = ((255 - mPureColor(G)) * (1 - mSat) + mPureColor(G)) * (i / 255)
+        blueVal = ((255 - mPureColor(B)) * (1 - mSat) + mPureColor(B)) * (i / 255)
         picBright.Line (0, 255 - i)-(16, 255 - i), RGB(redVal, greenVal, blueVal)
 
         If i <= (255 / 6) Then
@@ -1197,11 +1197,11 @@ Private Sub txtHexCode_Change()
         Else
             tempHexVal = txtHexCode.Text
         End If
-        clr(B) = CLng("&H" + right(tempHexVal, 2))
+        mColor(B) = CLng("&H" + right(tempHexVal, 2))
         tempHexVal = left(tempHexVal, Len(tempHexVal) - 2)
-        clr(G) = CLng("&H" + right(tempHexVal, 2))
+        mColor(G) = CLng("&H" + right(tempHexVal, 2))
         tempHexVal = left(tempHexVal, Len(tempHexVal) - 2)
-        clr(R) = CLng("&H" + right(tempHexVal, 2))
+        mColor(R) = CLng("&H" + right(tempHexVal, 2))
         changeRGB
         updateAll
         updateRGB
@@ -1214,11 +1214,11 @@ Private Sub txtHexCode_LostFocus()
 
     If HexToLong(txtHexCode.Text) = -1 Then
         txtHexCode.Text = mHexValue
-        clr(B) = CLng("&H" + right(mHexValue, 2))
+        mColor(B) = CLng("&H" + right(mHexValue, 2))
         mHexValue = left(mHexValue, Len(mHexValue) - 2)
-        clr(G) = CLng("&H" + right(mHexValue, 2))
+        mColor(G) = CLng("&H" + right(mHexValue, 2))
         mHexValue = left(mHexValue, Len(mHexValue) - 2)
-        clr(R) = CLng("&H" + right(mHexValue, 2))
+        mColor(R) = CLng("&H" + right(mHexValue, 2))
         changeRGB
         updateAll
         updateRGB
@@ -1237,12 +1237,12 @@ End Sub
 Private Sub txtRGB_Change(Index As Integer)
 
     If IsNumeric(txtRGB(Index).Text) = False And txtRGB(Index).Text <> "" Then
-        txtRGB(Index).Text = clr(Index)
+        txtRGB(Index).Text = mColor(Index)
     ElseIf txtRGB(Index).Text = "" Then
         ' no-op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
-        If clr(Index) <> txtRGB(Index).Text Then
-            clr(Index) = txtRGB(Index).Text
+        If mColor(Index) <> txtRGB(Index).Text Then
+            mColor(Index) = txtRGB(Index).Text
             changeRGB
             updateAll
             updateHSB
@@ -1260,7 +1260,7 @@ End Sub
 
 Private Sub txtRGB_LostFocus(Index As Integer)
 
-    txtRGB(Index).Text = clr(Index)
+    txtRGB(Index).Text = mColor(Index)
 
 End Sub
 
@@ -1273,7 +1273,7 @@ Private Sub txtHue_Change()
     ElseIf txtHue.Text >= 0 And txtHue.Text <= 359 Then
         If Int(mHue + 0.5) <> txtHue.Text Then
             mHue = txtHue.Text
-            If Not (clr(R) = clr(G) And clr(R) = clr(B)) Then
+            If Not (mColor(R) = mColor(G) And mColor(R) = mColor(B)) Then
                 calculateHue
             Else
 
@@ -1312,9 +1312,9 @@ Private Sub txtSat_Change()
     ElseIf txtSat.Text >= 0 And txtSat.Text <= 100 Then
         If Int(mSat * 100 + 0.5) <> txtSat.Text Then
             mSat = txtSat.Text / 100
-            clr(mLow) = ((1 - mSat) * 255) * mBright
-            clr(mMid) = ((255 - pureClr(mMid)) * (1 - mSat) + pureClr(mMid)) * mBright
-            clr(mHigh) = pureClr(mHigh) * mBright
+            mColor(mLow) = ((1 - mSat) * 255) * mBright
+            mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+            mColor(mHigh) = mPureColor(mHigh) * mBright
             updateAll
             updateRGB
             updateHex
@@ -1348,9 +1348,9 @@ Private Sub txtBright_Change()
     ElseIf txtBright.Text >= 0 And txtBright.Text <= 100 Then
         If Int(mBright * 100 + 0.5) <> txtBright.Text Then
             mBright = txtBright.Text / 100
-            clr(mLow) = ((1 - mSat) * 255) * mBright
-            clr(mMid) = ((255 - pureClr(mMid)) * (1 - mSat) + pureClr(mMid)) * mBright
-            clr(mHigh) = pureClr(mHigh) * mBright
+            mColor(mLow) = ((1 - mSat) * 255) * mBright
+            mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+            mColor(mHigh) = mPureColor(mHigh) * mBright
             updateAll
             updateRGB
             updateHex
@@ -1430,9 +1430,9 @@ End Sub
 Private Sub picOK_Click()
 
     ok = True
-    red = clr(R)
-    green = clr(G)
-    blue = clr(B)
+    red = mColor(R)
+    green = mColor(G)
+    blue = mColor(B)
 
     HideColor True
 
