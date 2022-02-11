@@ -626,10 +626,14 @@ Option Explicit
     'Private B, X, Y, hWnd
 #End If
 
+' globals
 Public red As Byte
 Public green As Byte
 Public blue As Byte
 
+Public ok As Boolean
+
+' module globals
 Private mHue As Single
 Private mSat As Single
 Private mBright As Single
@@ -643,8 +647,6 @@ Private pureClr(0 To 2) As Byte
 
 Private oldX As Integer
 Private oldY As Integer
-
-Public ok As Boolean
 
 Private Const R As Byte = 0
 Private Const G As Byte = 1
