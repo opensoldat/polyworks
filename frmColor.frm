@@ -658,7 +658,7 @@ Private mNonModal As Boolean
 
 Private mLastTool As Byte
 
-Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
+Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     On Error GoTo ErrorHandler
 

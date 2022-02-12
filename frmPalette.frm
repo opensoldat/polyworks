@@ -893,7 +893,7 @@ End Sub
 
 Private Sub picColor_Click()
 
-    frmColor.InitClr txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
+    frmColor.InitColor txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text
 
     frmColor.ChangeColor picColor, txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text, 0
 

@@ -2265,7 +2265,7 @@ End Function
 
 Private Sub picPointClr_Click()
 
-    frmColor.InitClr pointClr.red, pointClr.green, pointClr.blue
+    frmColor.InitColor pointClr.red, pointClr.green, pointClr.blue
     frmColor.Show 1
     picPointClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     pointClr.red = frmColor.red
@@ -2276,7 +2276,7 @@ End Sub
 
 Private Sub picSelectionClr_Click()
 
-    frmColor.InitClr selClr.red, selClr.green, selClr.blue
+    frmColor.InitColor selClr.red, selClr.green, selClr.blue
     frmColor.Show 1
     picSelectionClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     selClr.red = frmColor.red
@@ -2287,7 +2287,7 @@ End Sub
 
 Private Sub picBackClr_Click()
 
-    frmColor.InitClr backClr.red, backClr.green, backClr.blue
+    frmColor.InitColor backClr.red, backClr.green, backClr.blue
     frmColor.Show 1
     picBackClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     backClr.red = frmColor.red
@@ -2298,7 +2298,7 @@ End Sub
 
 Private Sub picGridClr_Click()
 
-    frmColor.InitClr gridClr.red, gridClr.green, gridClr.blue
+    frmColor.InitColor gridClr.red, gridClr.green, gridClr.blue
     frmColor.Show 1
     picGridClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     gridClr.red = frmColor.red
@@ -2309,7 +2309,7 @@ End Sub
 
 Private Sub picGridClr2_Click()
 
-    frmColor.InitClr gridClr2.red, gridClr2.green, gridClr2.blue
+    frmColor.InitColor gridClr2.red, gridClr2.green, gridClr2.blue
     frmColor.Show 1
     picGridClr2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     gridClr2.red = frmColor.red

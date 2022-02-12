@@ -1851,7 +1851,7 @@ Private Sub Form_Load()
     err = "Error initializing color picker"
 
     frmColor.picClr.Cls
-    frmColor.InitClr polyClr.red, polyClr.green, polyClr.blue
+    frmColor.InitColor polyClr.red, polyClr.green, polyClr.blue
 
     err = "Error setting current tool icon (" & currentTool & ")"
 
@@ -6020,7 +6020,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         Dim tempClr As TColor
         tempClr = getRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
-            frmColor.InitClr tempClr.blue, tempClr.green, tempClr.red
+            frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
             polyClr.red = tempClr.blue
             polyClr.green = tempClr.green
@@ -6985,7 +6985,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         Dim tempClr As TColor
         tempClr = getRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
-            frmColor.InitClr tempClr.blue, tempClr.green, tempClr.red
+            frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
             polyClr.red = tempClr.blue
             polyClr.green = tempClr.green
@@ -8126,7 +8126,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
         tempClr = vertexList(pNum).color(vNum)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
         ElseIf frmPalette.Enabled = False Then 'non modal
-            frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
+            frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
         Else
             polyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
@@ -8144,7 +8144,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
 
             ElseIf frmPalette.Enabled = False Then 'non modal
-                frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
+                frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
             Else
                 polyClr = tempClr
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
@@ -8234,7 +8234,7 @@ Private Sub lightPicker(X As Single, Y As Single)
         tempClr = getRGB(Polys(pNum).vertex(vNum).color)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
         ElseIf frmPalette.Enabled = False Then 'non modal
-            frmColor.InitClr tempClr.red, tempClr.green, tempClr.blue
+            frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
         Else
             polyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
@@ -11981,7 +11981,7 @@ End Sub
 
 Public Function setBGColor(Index As Integer) As Long
 
-    frmColor.InitClr bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue
+    frmColor.InitColor bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue
     frmColor.Show 1
     bgColors(Index).red = frmColor.red
     bgColors(Index).green = frmColor.green
@@ -12010,7 +12010,7 @@ Public Sub setLightColor()
         End If
     Next
 
-    frmColor.InitClr Lights(Index).color.red, Lights(Index).color.green, Lights(Index).color.blue
+    frmColor.InitColor Lights(Index).color.red, Lights(Index).color.green, Lights(Index).color.blue
     frmColor.Show 1
 
     For i = 1 To lightCount
