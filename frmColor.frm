@@ -658,18 +658,6 @@ Private mNonModal As Boolean
 
 Private mLastTool As Byte
 
-Private Function Clamp(val As Single, min As Single, max As Single) As Single
-
-    If val < min Then
-        Clamp = min
-    ElseIf val > max Then
-        Clamp = max
-    Else
-        Clamp = val
-    End If
-
-End Function
-
 Public Sub InitClr(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     On Error GoTo ErrorHandler
