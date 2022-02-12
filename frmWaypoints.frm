@@ -497,6 +497,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private Value
+    'Private Value
+#End If
+
 
 Public collapsed As Boolean
 Public noChange As Boolean

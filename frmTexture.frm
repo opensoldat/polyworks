@@ -76,6 +76,13 @@ Attribute VB_Exposed = False
 Option Explicit
 
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private Token
+    'Private Token
+#End If
+
+
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean

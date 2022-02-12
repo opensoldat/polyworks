@@ -1288,8 +1288,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd
-    'Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd
+    Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd, mid
+    'Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd, mid
 #End If
 
 

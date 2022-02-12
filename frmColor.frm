@@ -622,8 +622,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private B, X, Y, hWnd
-    'Private B, X, Y, hWnd
+    Private B, X, Y, hWnd, val
+    'Private B, X, Y, hWnd, val
 #End If
 
 

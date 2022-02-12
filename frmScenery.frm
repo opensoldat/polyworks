@@ -333,6 +333,13 @@ Attribute VB_Exposed = False
 Option Explicit
 
 
+' Fix vb6 ide casing changes
+#If False Then
+    Private fileName
+    'Private fileName
+#End If
+
+
 Public collapsed As Boolean
 Public xPos As Integer
 Public yPos As Integer
