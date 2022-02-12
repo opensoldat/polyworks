@@ -2156,7 +2156,7 @@ Public Sub Init()
     D3DDevice.SetVertexShader FVF
     D3DDevice.SetRenderState D3DRS_LIGHTING, False
 
-    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE 'polys that are ccw
+    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE ' polys that are ccw
 
     D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
     D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 1

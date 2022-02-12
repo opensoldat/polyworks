@@ -497,20 +497,24 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim formHeight As Integer
+
 Public collapsed As Boolean
-Const COLLAPSED_HEIGHT = 19
+Public noChange As Boolean
 
 Public xPos As Integer
 Public yPos  As Integer
 
-Dim wayptType(0 To 4) As Boolean
 Public wayptPath As Byte
 Public showPaths As Byte
 
-Dim wayptKeys(0 To 4) As Byte
 
-Public noChange As Boolean
+Private formHeight As Integer
+
+Private wayptType(0 To 4) As Boolean
+Private wayptKeys(0 To 4) As Byte
+
+Private Const COLLAPSED_HEIGHT = 19
+
 
 Public Function getWayptKey(ByVal Index As Byte) As Byte
 

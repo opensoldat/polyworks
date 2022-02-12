@@ -545,13 +545,15 @@ Private Type TColor
     blue As Byte
 End Type
 
-Private clrPalette(0 To 11, 0 To 5) As TColor
-
-Private formHeight As Integer
 
 Public collapsed As Boolean
 Public xPos As Integer
 Public yPos As Integer
+
+
+Private clrPalette(0 To 11, 0 To 5) As TColor
+
+Private formHeight As Integer
 
 Private radius As Integer
 Private clrMode As Byte

@@ -309,13 +309,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim curTool As Byte
-Dim curButton As Byte
+
 Public xPos As Integer
 Public yPos  As Integer
-Dim formHeight As Integer
 Public collapsed As Boolean
-Dim hotKeys(0 To 13) As Byte
+
+
+Private curTool As Byte
+Private curButton As Byte
+Private formHeight As Integer
+Private hotKeys(0 To 13) As Byte
+
 
 Public Function getHotKey(ByVal Index As Byte) As Byte
 
