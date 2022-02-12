@@ -1292,6 +1292,7 @@ Option Explicit
     'Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd
 #End If
 
+
 Private DX As DirectX8
 Private D3D As Direct3D8
 Private D3DDevice As Direct3DDevice8
@@ -4952,7 +4953,6 @@ Public Sub Render()
                     D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 1, sceneryCoords(0), Len(sceneryCoords(0))
                 End If
             End If
-
         Next
         If currentTool = TOOL_SCENERY And Scenery(0).Style > 0 And Not (ctrlDown Or altDown) Then
             sVal = Scenery(0).Style
@@ -5058,7 +5058,6 @@ Public Sub Render()
 
     ' draw selection rect
     If currentTool = TOOL_MOVE And (numSelectedPolys > 0 Or numSelectedScenery > 0) And noneSelected = False Then
-
         objClr = &H80FFFFFF
 
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
@@ -5296,6 +5295,7 @@ Function FtoDW(f As Single) As Long
 
     Dim buf As D3DXBuffer
     Dim l As Long
+
     Set buf = D3DX.CreateBuffer(4)
     D3DX.BufferSetData buf, 0, 4, 1, f
     D3DX.BufferGetData buf, 0, 4, 1, l

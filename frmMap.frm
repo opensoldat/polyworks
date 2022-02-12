@@ -511,11 +511,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+
 Private Type TColor
     red As Byte
     green As Byte
     blue As Byte
 End Type
+
 
 Private Sub cboJet_Click()
 

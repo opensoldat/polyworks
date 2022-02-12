@@ -75,6 +75,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+
 Public xPos As Integer
 Public yPos  As Integer
 Dim formHeight As Integer
@@ -83,6 +84,7 @@ Public x1tex As Single
 Public x2tex As Single
 Public y1tex As Single
 Public y2tex As Single
+
 
 Private Sub Form_Load()
 

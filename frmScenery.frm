@@ -332,6 +332,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+
 Public collapsed As Boolean
 Public xPos As Integer
 Public yPos As Integer
@@ -340,9 +341,11 @@ Public rotateScenery As Boolean
 Public scaleScenery As Boolean
 Public notClicked As Boolean
 
+
 Private formHeight As Integer
 Private checkVal As Boolean
 Private selNode As Node
+
 
 Private Sub Form_Load()
 

@@ -626,14 +626,14 @@ Option Explicit
     'Private B, X, Y, hWnd
 #End If
 
-' globals
+
 Public red As Byte
 Public green As Byte
 Public blue As Byte
 
 Public ok As Boolean
 
-' module globals
+
 Private mHue As Single
 Private mSat As Single
 Private mBright As Single
@@ -657,6 +657,7 @@ Private mHexValue As String
 Private mNonModal As Boolean
 
 Private mLastTool As Byte
+
 
 Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
@@ -709,6 +710,7 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
     Me.Show , frmSoldatMapEditor
 
 End Sub
+
 
 Private Sub HideColor(apply As Boolean)
 

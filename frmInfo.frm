@@ -1704,6 +1704,7 @@ Public yPos  As Integer
 Public noChange As Boolean
 Private applyChange As Boolean
 
+
 Private Sub Form_Load()
 
     On Error GoTo ErrorHandler

@@ -1944,11 +1944,13 @@ Option Explicit
     'Dim fileName, Val
 #End If
 
+
 Private Type TColor
     red As Byte
     green As Byte
     blue As Byte
 End Type
+
 
 Private Const MinHeight = 440
 Private Const MaxHeight = 547
@@ -1973,6 +1975,7 @@ Private topmost As Boolean
 Private formMinZoom As Single
 Private formMaxZoom As Single
 Private formResetZoom As Single
+
 
 Private Sub picHide_Click()
 
@@ -2261,7 +2264,6 @@ Private Function FileExists(FileName As String) As Boolean
 ErrorHandler:
 
 End Function
-
 
 Private Sub picPointClr_Click()
 

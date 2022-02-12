@@ -561,6 +561,7 @@ Private yVal As Integer
 
 Private tempVal As Integer
 
+
 Public Function getPalClr(X As Integer, Y As Integer) As Long
 
     getPalClr = RGB(clrPalette(X, Y).blue, clrPalette(X, Y).green, clrPalette(X, Y).red)
