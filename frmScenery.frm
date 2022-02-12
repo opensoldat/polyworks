@@ -678,7 +678,7 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
 
     level = Index
 
-    For i = 0 To 2
+    For i = picLevel.LBound To picLevel.UBound
         If i <> Index Then
             mouseEvent2 picLevel(i), X, Y, BUTTON_SMALL, (i = level), BUTTON_UP
         End If
@@ -702,7 +702,7 @@ Public Sub SetColors()
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    For i = 0 To 2
+    For i = picLevel.LBound To picLevel.UBound
         mouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
     Next
 
@@ -713,9 +713,9 @@ Public Sub SetColors()
     Me.BackColor = bgClr
     lblLvl.BackColor = lblBackClr
     lblLvl.ForeColor = lblTextClr
-    For i = 0 To 2
-        lblLevel(i).BackColor = lblBackClr
-        lblLevel(i).ForeColor = lblTextClr
+    For Each c In lblLevel
+        c.BackColor = lblBackClr
+        c.ForeColor = lblTextClr
     Next
     lblRotate.BackColor = lblBackClr
     lblRotate.ForeColor = lblTextClr

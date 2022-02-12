@@ -2000,8 +2000,10 @@ Public Sub mnuProp_Click(Index As Integer)
 
     Dim i As Integer
 
-    For i = 0 To 5
+    For i = mnuProp.LBound To mnuProp.UBound
         mnuProp(i).Checked = False
+    Next
+    For i = picProp.LBound To picProp.UBound
         picProp(i).Visible = False
     Next
 
