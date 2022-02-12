@@ -520,23 +520,23 @@ End Type
 Private Sub cboJet_Click()
 
     Select Case cboJet.ListIndex
-        Case 0 'none
+        Case 0 ' none
             txtJet.Text = "0"
-        Case 1 'minimal
+        Case 1 ' minimal
             txtJet.Text = "12"
-        Case 2 'very low
+        Case 2 ' very low
             txtJet.Text = "45"
-        Case 3 'low
+        Case 3 ' low
             txtJet.Text = "95"
-        Case 4 'normal
+        Case 4 ' normal
             txtJet.Text = "190"
-        Case 5 'high
+        Case 5 ' high
             txtJet.Text = "320"
-        Case 6 'maximum
+        Case 6 ' maximum
             txtJet.Text = "800"
-        Case 7 'infinite
+        Case 7 ' infinite
             txtJet.Text = "32766"
-        Case 8 'custom
+        Case 8 ' custom
     End Select
 
     If cboJet.ListIndex <> 8 Then
@@ -550,23 +550,23 @@ End Sub
 Private Sub getJets()
 
     Select Case txtJet.Text
-        Case 0 'none
+        Case 0 ' none
             cboJet.ListIndex = 0
-        Case 12 'minimal
+        Case 12 ' minimal
             cboJet.ListIndex = 1
-        Case 45 'very low
+        Case 45 ' very low
             cboJet.ListIndex = 2
-        Case 95 'low
+        Case 95 ' low
             cboJet.ListIndex = 3
-        Case 190 'normal
+        Case 190 ' normal
             cboJet.ListIndex = 4
-        Case 320 'high
+        Case 320 ' high
             cboJet.ListIndex = 5
-        Case 800 'maximum
+        Case 800 ' maximum
             cboJet.ListIndex = 6
-        Case 32766 'infinite
+        Case 32766 ' infinite
             cboJet.ListIndex = 7
-        Case Else 'custom
+        Case Else ' custom
             cboJet.ListIndex = 8
     End Select
 

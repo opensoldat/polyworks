@@ -830,7 +830,7 @@ End Sub
 Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
+        X = 255 - Clamp(Y, 0, 255) ' grab y pos as it's a vertical bar
         mColor(Index) = X
         changeRGB
         txtRGB(Index).Text = mColor(Index)
@@ -855,7 +855,7 @@ End Sub
 Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
+        X = 255 - Clamp(Y, 0, 255) ' grab y pos as it's a vertical bar
         mHue = X / 255 * 359
 
         calculateHue
@@ -920,7 +920,7 @@ End Sub
 Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
+        X = 255 - Clamp(Y, 0, 255) ' grab y pos as it's a vertical bar
         mSat = X / 255
         If mColor(R) = mColor(G) And mColor(R) = mColor(B) And mSat > 0 Then 'determine rgb based on hue
             calculateHue
@@ -950,7 +950,7 @@ End Sub
 Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255) 'grab y pos as it's a vertical bar
+        X = 255 - Clamp(Y, 0, 255) ' grab y pos as it's a vertical bar
         mBright = X / 255
         mColor(mLow) = ((1 - mSat) * 255) * mBright
         mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
@@ -963,7 +963,7 @@ Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single
 
 End Sub
 
-Private Sub changeRGB() 'when rgb modified by user
+Private Sub changeRGB() ' when rgb modified by user
 
     If mColor(R) = mColor(G) And mColor(R) = mColor(B) Then
         mBright = mColor(R) / 255
@@ -996,7 +996,7 @@ Private Sub changeRGB() 'when rgb modified by user
         Exit Sub
     End If
 
-    'get hue from rgb
+    ' get hue from rgb
     If mColor(R) >= mColor(G) And mColor(R) >= mColor(B) Then
         If mColor(G) >= mColor(B) Then
             mHue = (mColor(G) - mColor(B)) / (mColor(R) - mColor(B)) * 60

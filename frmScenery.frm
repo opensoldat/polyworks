@@ -390,7 +390,7 @@ Public Sub listScenery()
 
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "In Use", "In Use"
 
-    'load all scenery
+    ' load all scenery
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
 
     file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
@@ -423,7 +423,7 @@ Public Sub listScenery()
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
     frmSoldatMapEditor.tvwScenery_NodeClick frmSoldatMapEditor.tvwScenery.SelectedItem
 
-    'load lists
+    ' load lists
 
     file = Dir$(appPath & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file) 'for every txt file in lists
