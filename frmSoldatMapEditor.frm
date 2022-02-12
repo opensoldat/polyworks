@@ -123,7 +123,7 @@ Begin VB.Form frmSoldatMapEditor
          TabStop         =   0   'False
          Tag             =   "font1"
          Top             =   45
-         Width           =   735
+         Width           =   975
       End
       Begin VB.Label lblMousePosition 
          BackStyle       =   0  'Transparent
