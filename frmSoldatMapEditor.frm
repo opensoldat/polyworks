@@ -1850,7 +1850,7 @@ Private Sub Form_Load()
 
     err = "Error initializing color picker"
 
-    frmColor.picClr.Cls
+    frmColor.picSpectrum.Cls
     frmColor.InitColor polyClr.red, polyClr.green, polyClr.blue
 
     err = "Error setting current tool icon (" & currentTool & ")"

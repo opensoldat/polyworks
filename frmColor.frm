@@ -39,7 +39,7 @@ Begin VB.Form frmColor
       Top             =   5160
       Width           =   855
    End
-   Begin VB.PictureBox picClr 
+   Begin VB.PictureBox picSpectrum 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -671,10 +671,10 @@ Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     changeRGB
 
-    picClr.Cls
+    picSpectrum.Cls
     mOldX = (mHue / 360 * 256)
     mOldY = 255 - (mSat * 255)
-    picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+    picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
 
     picColor.BackColor = RGB(mColor(R), mColor(B), mColor(G))
 
@@ -792,13 +792,13 @@ Private Sub lblRGB_Click(Index As Integer)
 
 End Sub
 
-Private Sub picClr_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpectrum_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    picClr_MouseMove Button, Shift, X, Y
+    picSpectrum_MouseMove Button, Shift, X, Y
 
 End Sub
 
-Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button = 1 Then
         X = Clamp(X, 0, 255)
@@ -813,10 +813,10 @@ Private Sub picClr_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = X
         mOldY = Y
-        picClr.Circle (X, Y), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (X, Y), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -838,10 +838,10 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
         updateHSB
         updateHex
 
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = mHue / 360 * 255
         mOldY = 255 - mSat * 255
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -866,9 +866,9 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = X
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -934,9 +934,9 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         updateRGB
         updateHex
 
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldY = 255 - X
-        picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
     End If
 
 End Sub
@@ -1271,9 +1271,9 @@ Private Sub txtHue_Change()
             updateRGB
             updateHex
 
-            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
             mOldX = mHue / 360 * 256
-            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         End If
     End If
 
@@ -1307,9 +1307,9 @@ Private Sub txtSat_Change()
             updateRGB
             updateHex
 
-            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
             mOldY = 255 - mSat * 255
-            picClr.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+            picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         End If
     End If
 
@@ -1451,7 +1451,7 @@ Public Sub SetColors()
     Dim c As Control
 
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colorpicker.bmp")
-    picClr.Picture = LoadPicture(appPath & "\" & gfxDir & "\color_picker.bmp")
+    picSpectrum.Picture = LoadPicture(appPath & "\" & gfxDir & "\color_picker.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
@@ -1464,7 +1464,7 @@ Public Sub SetColors()
     imgBright.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
     imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
 
-    picClr.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
+    picSpectrum.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
 
 
     Me.BackColor = bgClr
