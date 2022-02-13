@@ -504,6 +504,11 @@ Option Explicit
 #End If
 
 
+Public xPos As Integer
+Public yPos As Integer
+Public collapsed As Boolean
+
+
 Private Const LAYER_BG As Byte = 0
 Private Const LAYER_POLYS As Byte = 1
 Private Const LAYER_TEXTURE As Byte = 2
@@ -518,10 +523,6 @@ Private layers(0 To 10) As Boolean
 Private layerKeys(0 To 7) As Byte
 
 Private formHeight As Integer
-
-Public collapsed As Boolean
-Public xPos As Integer
-Public yPos As Integer
 
 
 Public Function getLayerKey(ByVal Index As Byte) As Byte

@@ -553,9 +553,9 @@ Private Type TColor
 End Type
 
 
-Public collapsed As Boolean
 Public xPos As Integer
 Public yPos As Integer
+Public collapsed As Boolean
 
 
 Private clrPalette(0 To 11, 0 To 5) As TColor

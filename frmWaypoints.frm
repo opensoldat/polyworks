@@ -504,11 +504,11 @@ Option Explicit
 #End If
 
 
-Public collapsed As Boolean
-Public noChange As Boolean
-
 Public xPos As Integer
 Public yPos  As Integer
+Public collapsed As Boolean
+
+Public noChange As Boolean
 
 Public wayptPath As Byte
 Public showPaths As Byte

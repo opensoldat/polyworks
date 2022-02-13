@@ -340,9 +340,10 @@ Option Explicit
 #End If
 
 
-Public collapsed As Boolean
 Public xPos As Integer
 Public yPos As Integer
+Public collapsed As Boolean
+
 Public level As Byte
 Public rotateScenery As Boolean
 Public scaleScenery As Boolean

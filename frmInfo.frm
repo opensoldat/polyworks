@@ -1695,9 +1695,10 @@ Attribute VB_Exposed = False
 Option Explicit
 
 
-Public collapsed As Boolean
 Public xPos As Integer
 Public yPos  As Integer
+Public collapsed As Boolean
+
 Public noChange As Boolean
 
 

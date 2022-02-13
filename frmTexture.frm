@@ -86,9 +86,11 @@ Option Explicit
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean
+
 Public x1tex As Single
-Public x2tex As Single
 Public y1tex As Single
+
+Public x2tex As Single
 Public y2tex As Single
 
 
