@@ -361,6 +361,8 @@ Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
 
     Dim token As Long
 
+    On Error GoTo ErrorHandler
+
     token = InitGDIPlus
 
     If SaveImageAsPNG(src, dest) Then
@@ -368,6 +370,8 @@ Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
     Else
       GifToPng = 5
     End If
+
+ErrorHandler:
 
     FreeGDIPlus token
 
