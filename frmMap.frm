@@ -513,8 +513,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 
@@ -642,7 +642,7 @@ Public Sub loadTextures()
     Set objFiles = objFSO.GetFolder(strPath).Files
 
     For Each objFile In objFiles
-        If right(objFile.Name, 3) = "bmp" Then
+        If Right(objFile.Name, 3) = "bmp" Then
             cboTexture.AddItem objFile.Name
         End If
     Next

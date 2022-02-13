@@ -622,8 +622,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 
@@ -1183,15 +1183,15 @@ Private Sub txtHexCode_Change()
         If Len(txtHexCode.Text) < 6 Then
             tempHexVal = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         ElseIf Len(txtHexCode.Text) > 6 Then
-            tempHexVal = right(txtHexCode.Text, 6)
+            tempHexVal = Right(txtHexCode.Text, 6)
         Else
             tempHexVal = txtHexCode.Text
         End If
-        mColor(B) = CLng("&H" + right(tempHexVal, 2))
+        mColor(B) = CLng("&H" + Right(tempHexVal, 2))
         tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
-        mColor(G) = CLng("&H" + right(tempHexVal, 2))
+        mColor(G) = CLng("&H" + Right(tempHexVal, 2))
         tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
-        mColor(R) = CLng("&H" + right(tempHexVal, 2))
+        mColor(R) = CLng("&H" + Right(tempHexVal, 2))
         changeRGB
         updateAll
         updateRGB
@@ -1204,18 +1204,18 @@ Private Sub txtHexCode_LostFocus()
 
     If HexToLong(txtHexCode.Text) = -1 Then
         txtHexCode.Text = mHexValue
-        mColor(B) = CLng("&H" + right(mHexValue, 2))
+        mColor(B) = CLng("&H" + Right(mHexValue, 2))
         mHexValue = Left(mHexValue, Len(mHexValue) - 2)
-        mColor(G) = CLng("&H" + right(mHexValue, 2))
+        mColor(G) = CLng("&H" + Right(mHexValue, 2))
         mHexValue = Left(mHexValue, Len(mHexValue) - 2)
-        mColor(R) = CLng("&H" + right(mHexValue, 2))
+        mColor(R) = CLng("&H" + Right(mHexValue, 2))
         changeRGB
         updateAll
         updateRGB
         updateHSB
     Else
         If Len(txtHexCode.Text) > 6 Then
-            txtHexCode.Text = right(txtHexCode.Text, 6)
+            txtHexCode.Text = Right(txtHexCode.Text, 6)
         ElseIf Len(txtHexCode.Text) < 6 Then
             txtHexCode = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If

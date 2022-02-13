@@ -1940,8 +1940,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 
@@ -2027,7 +2027,7 @@ Private Function applyPreferences() As Boolean
     mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    If right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
+    If Right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
 
     If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmSoldatMapEditor.soldatDir <> txtDir.Text Then
         If Not Len(Dir(txtDir.Text & "Maps\", vbDirectory)) <> 0 Then
@@ -2049,7 +2049,7 @@ Private Function applyPreferences() As Boolean
         Exit Function
     End If
 
-    If right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
+    If Right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
 
     If Len(Dir(txtUncomp.Text, vbDirectory)) <> 0 Then
         frmSoldatMapEditor.uncompDir = txtUncomp.Text
@@ -2058,7 +2058,7 @@ Private Function applyPreferences() As Boolean
         Exit Function
     End If
 
-    If right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
+    If Right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
 
     If Len(Dir(txtPrefabs.Text, vbDirectory)) <> 0 Then
         frmSoldatMapEditor.prefabDir = txtPrefabs.Text
@@ -2316,7 +2316,7 @@ Private Sub picFolder_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
+    If Right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtDir.Text = folder
@@ -2332,7 +2332,7 @@ Private Sub picUncomp_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
+    If Right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtUncomp.Text = folder
@@ -2348,7 +2348,7 @@ Private Sub picPrefabs_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
+    If Right(folder, 1) <> "\" Then folder = folder & "\"
 
     If Len(folder) > 1 Then
         txtPrefabs.Text = folder

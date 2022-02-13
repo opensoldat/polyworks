@@ -3,8 +3,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 Public Type TColor
@@ -23,11 +23,11 @@ Public Function getRGB(DecValue As Long) As TColor
         hexValue = String$(6 - Len(hexValue), "0") + hexValue
     End If
 
-    getRGB.blue = CLng("&H" + right$(hexValue, 2))
+    getRGB.blue = CLng("&H" + Right$(hexValue, 2))
     hexValue = Left$(hexValue, Len(hexValue) - 2)
-    getRGB.green = CLng("&H" + right$(hexValue, 2))
+    getRGB.green = CLng("&H" + Right$(hexValue, 2))
     hexValue = Left$(hexValue, Len(hexValue) - 2)
-    getRGB.red = CLng("&H" + right$(hexValue, 2))
+    getRGB.red = CLng("&H" + Right$(hexValue, 2))
 
 End Function
 
@@ -57,7 +57,7 @@ Public Function ARGB(ByVal alphaVal As Byte, clrVal As Long) As Long
     If Len(clrString) < 6 Then
         clrString = String$(6 - Len(clrString), "0") & clrString
     ElseIf Len(clrString) > 6 Then
-        clrString = right$(clrString, 6)
+        clrString = Right$(clrString, 6)
     End If
 
     If Len(Hex$(alphaVal)) = 1 Then

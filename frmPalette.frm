@@ -541,8 +541,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 
@@ -624,11 +624,11 @@ Private Function getRGB(DecValue As Long) As TColor
         hexValue = String$(6 - Len(hexValue), "0") + hexValue
     End If
 
-    getRGB.blue = CLng("&H" + right(hexValue, 2))
+    getRGB.blue = CLng("&H" + Right(hexValue, 2))
     hexValue = Left(hexValue, Len(hexValue) - 2)
-    getRGB.green = CLng("&H" + right(hexValue, 2))
+    getRGB.green = CLng("&H" + Right(hexValue, 2))
     hexValue = Left(hexValue, Len(hexValue) - 2)
-    getRGB.red = CLng("&H" + right(hexValue, 2))
+    getRGB.red = CLng("&H" + Right(hexValue, 2))
 
 End Function
 

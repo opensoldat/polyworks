@@ -1288,8 +1288,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
-    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
 
@@ -1454,7 +1454,7 @@ Private Type TNewWaypoint
     X                       As Long
     Y                       As Long
     Left                    As Byte
-    right                   As Byte
+    Right                   As Byte
     up                      As Byte
     down                    As Byte
     m2                      As Byte
@@ -1889,13 +1889,13 @@ Private Sub Form_Load()
     err = "Error parsing command line args"
 
     temp = Command$
-    If right(temp, 1) = """" Then
+    If Right(temp, 1) = """" Then
         temp = Left(temp, Len(temp) - 1)
-        temp = right(temp, Len(temp) - 1)
+        temp = Right(temp, Len(temp) - 1)
     End If
 
     newMap
-    If LCase$(right(temp, 4)) = ".pms" Then
+    If LCase$(Right(temp, 4)) = ".pms" Then
         If Dir$(temp) <> "" Then
             LoadFile temp
         ElseIf Dir$(appPath & "\Maps\" & temp) <> "" Then
@@ -1937,7 +1937,7 @@ Public Sub MaximizeBorderLessForm()
     Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
 
     ScreenHeight = (DesktopArea.bottom - DesktopArea.Top) * Screen.TwipsPerPixelY
-    ScreenWidth = (DesktopArea.right - DesktopArea.Left) * Screen.TwipsPerPixelX
+    ScreenWidth = (DesktopArea.Right - DesktopArea.Left) * Screen.TwipsPerPixelX
     ScreenLeft = DesktopArea.Left * Screen.TwipsPerPixelX
     ScreenTop = DesktopArea.Top * Screen.TwipsPerPixelY
 
@@ -2670,7 +2670,7 @@ Public Sub LoadFile(theFileName As String)
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-                    If right$(loadName, 4) = ".gif" Then
+                    If Right$(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
                     End If
 
@@ -2690,7 +2690,7 @@ Public Sub LoadFile(theFileName As String)
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-                    If right$(loadName, 4) = ".gif" Then
+                    If Right$(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
                     End If
 
@@ -2789,7 +2789,7 @@ Public Sub LoadFile(theFileName As String)
             Waypoints(i).X = newWaypoint.X
             Waypoints(i).Y = newWaypoint.Y
             Waypoints(i).wayType(0) = CBool(newWaypoint.Left)
-            Waypoints(i).wayType(1) = CBool(newWaypoint.right)
+            Waypoints(i).wayType(1) = CBool(newWaypoint.Right)
             Waypoints(i).wayType(2) = CBool(newWaypoint.up)
             Waypoints(i).wayType(3) = CBool(newWaypoint.down)
             Waypoints(i).wayType(4) = CBool(newWaypoint.m2)
@@ -3027,7 +3027,7 @@ Public Sub setCurrentTexture(sceneryName As String)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If right$(loadName, 4) = ".gif" Then
+    If Right$(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -3083,7 +3083,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If right$(loadName, 4) = ".gif" Then
+    If Right$(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -3136,7 +3136,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If right$(loadName, 4) = ".gif" Then
+    If Right$(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -3336,7 +3336,7 @@ Private Sub SaveFile(theFileName As String)
             newWaypoint.Y = Waypoints(i).Y
             newWaypoint.connectionsNum = Waypoints(i).numConnections
             If Waypoints(i).wayType(0) Then newWaypoint.Left = 1 Else newWaypoint.Left = 0
-            If Waypoints(i).wayType(1) Then newWaypoint.right = 1 Else newWaypoint.right = 0
+            If Waypoints(i).wayType(1) Then newWaypoint.Right = 1 Else newWaypoint.Right = 0
             If Waypoints(i).wayType(2) Then newWaypoint.up = 1 Else newWaypoint.up = 0
             If Waypoints(i).wayType(3) Then newWaypoint.down = 1 Else newWaypoint.down = 0
             If Waypoints(i).wayType(4) Then newWaypoint.m2 = 1 Else newWaypoint.m2 = 0
@@ -3631,7 +3631,7 @@ Public Sub SaveAndCompile(theFileName As String)
             newWaypoint.Y = Waypoints(i).Y - yOffset
             newWaypoint.connectionsNum = Waypoints(i).numConnections
             If Waypoints(i).wayType(0) Then newWaypoint.Left = 1 Else newWaypoint.Left = 0
-            If Waypoints(i).wayType(1) Then newWaypoint.right = 1 Else newWaypoint.right = 0
+            If Waypoints(i).wayType(1) Then newWaypoint.Right = 1 Else newWaypoint.Right = 0
             If Waypoints(i).wayType(2) Then newWaypoint.up = 1 Else newWaypoint.up = 0
             If Waypoints(i).wayType(3) Then newWaypoint.down = 1 Else newWaypoint.down = 0
             If Waypoints(i).wayType(4) Then newWaypoint.m2 = 1 Else newWaypoint.m2 = 0
@@ -4476,7 +4476,7 @@ Public Sub Render()
                     sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(i).Scaling.Y * zoomFactor
                     scenR = Scenery(i).rotation
                 End If
-                srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
+                srcRect.Right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
                 scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
@@ -4512,7 +4512,7 @@ Public Sub Render()
                     sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(i).Scaling.Y * zoomFactor
                     scenR = Scenery(i).rotation
                 End If
-                srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
+                srcRect.Right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
                 scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
@@ -4524,7 +4524,7 @@ Public Sub Render()
             sVal = Scenery(0).Style
             sc.X = SceneryTextures(sVal).reScale.X * Scenery(0).Scaling.X * zoomFactor
             sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(0).Scaling.Y * zoomFactor
-            srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
+            srcRect.Right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
             srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
             scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).color
         End If
@@ -4674,7 +4674,7 @@ Public Sub Render()
                     sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(i).Scaling.Y * zoomFactor
                     scenR = Scenery(i).rotation
                 End If
-                srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
+                srcRect.Right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X
                 srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y
                 scenerySprite.Draw SceneryTextures(sVal).Texture, ByVal 0, sc, rc, scenR, Scenery(i).screenTr, Scenery(i).color
             End If
@@ -4687,7 +4687,7 @@ Public Sub Render()
             sVal = Scenery(0).Style
             sc.X = SceneryTextures(sVal).reScale.X * Scenery(0).Scaling.X * zoomFactor
             sc.Y = SceneryTextures(sVal).reScale.Y * Scenery(0).Scaling.Y * zoomFactor
-            srcRect.right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X + 0
+            srcRect.Right = SceneryTextures(sVal).Width / SceneryTextures(sVal).reScale.X + 0
             srcRect.bottom = SceneryTextures(sVal).Height / SceneryTextures(sVal).reScale.Y + 0
             scenerySprite.Draw SceneryTextures(sVal).Texture, srcRect, sc, rc, Scenery(0).rotation, Scenery(0).screenTr, Scenery(0).color
         End If
@@ -4706,7 +4706,7 @@ Public Sub Render()
                 tr.Y = Int((Spawns(i).Y - scrollCoords(2).Y) * zoomFactor - 15 + 0.5)
                 srcRect.Top = Int(Spawns(i).Team / 8) * (objTexSize.Y / 4)
                 srcRect.Left = (Spawns(i).Team - (Int(Spawns(i).Team / 8) * 8)) * (objTexSize.X / 8)
-                srcRect.right = srcRect.Left + (objTexSize.X / 8)
+                srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 If Spawns(i).active = 1 Then
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionClr)
@@ -4725,13 +4725,13 @@ Public Sub Render()
                 If Colliders(i).active = 1 Then
                     srcRect.Left = 0
                     srcRect.Top = (objTexSize.Y / 4) * 3
-                    srcRect.right = srcRect.Left + (objTexSize.X / 8)
+                    srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 Else
                     srcRect.Left = (objTexSize.X / 8)
                     srcRect.Top = (objTexSize.Y / 4) * 2
-                    srcRect.right = srcRect.Left + (objTexSize.X / 8)
+                    srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 End If
@@ -4748,7 +4748,7 @@ Public Sub Render()
         If lightCount > 0 Then
             srcRect.Left = (objTexSize.X / 8) * 7
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.Left + (objTexSize.X / 8)
+            srcRect.Right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             For i = 1 To lightCount
                 objClr = ARGB(255, RGB(Lights(i).color.blue, Lights(i).color.green, Lights(i).color.red))
@@ -4773,7 +4773,7 @@ Public Sub Render()
             sc.Y = 32 / (objTexSize.Y / 4) * zoomFactor
             srcRect.Left = (objTexSize.X / 8) * 2 + 1
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.Left + (objTexSize.X / 8) - 2
+            srcRect.Right = srcRect.Left + (objTexSize.X / 8) - 2
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             tr.X = mouseCoords.X - 16 * zoomFactor
             tr.Y = mouseCoords.Y - 16 * zoomFactor
@@ -4781,7 +4781,7 @@ Public Sub Render()
         ElseIf mnuCollider.Checked = True Then ' collider
             srcRect.Left = (objTexSize.X / 8)
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.Left + (objTexSize.X / 8)
+            srcRect.Right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             sc.X = Colliders(0).radius / (objTexSize.X / 8) * zoomFactor
             sc.Y = Colliders(0).radius / (objTexSize.Y / 4) * zoomFactor
@@ -4795,7 +4795,7 @@ Public Sub Render()
             tr.Y = Spawns(0).Y - 15
             srcRect.Top = Int(Spawns(0).Team / 8) * (objTexSize.Y / 4)
             srcRect.Left = (Spawns(0).Team - (Int(Spawns(0).Team / 8) * 8)) * (objTexSize.X / 8)
-            srcRect.right = srcRect.Left + (objTexSize.X / 8)
+            srcRect.Right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
         End If
@@ -4807,7 +4807,7 @@ Public Sub Render()
         sc.Y = 32 / (objTexSize.Y / 4) * zoomFactor
         srcRect.Left = ((objTexSize.X / 8) * 2) + 1
         srcRect.Top = (objTexSize.Y / 4) * 2
-        srcRect.right = srcRect.Left + (objTexSize.X / 8) - 2
+        srcRect.Right = srcRect.Left + (objTexSize.X / 8) - 2
         srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
         tr.X = (gostek.X - 16 - scrollCoords(2).X) * zoomFactor
         tr.Y = (gostek.Y - 16 - scrollCoords(2).Y) * zoomFactor
@@ -4864,7 +4864,7 @@ Public Sub Render()
     ' draw scenery boxes
     sc.X = 1
     sc.Y = 1
-    srcRect.right = 8
+    srcRect.Right = 8
     srcRect.bottom = 8
     If sceneryCount > 0 And showScenery Then
         For i = 1 To sceneryCount
@@ -5115,7 +5115,7 @@ Public Sub Render()
                 sc.X = 32 / (objTexSize.X / 8)
                 sc.Y = 32 / (objTexSize.Y / 4)
                 srcRect.Top = (objTexSize.Y / 4) * 2
-                srcRect.right = srcRect.Left + (objTexSize.X / 8)
+                srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 tr.X = Int((Waypoints(i).X - scrollCoords(2).X) * zoomFactor - 15 + 0.5)
                 tr.Y = Int((Waypoints(i).Y - scrollCoords(2).Y) * zoomFactor - 15 + 0.5)
@@ -11367,7 +11367,7 @@ Private Sub txtZoom_LostFocus()
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     ElseIf IsNumeric(txtZoom.Text) Then
         zoomInput = txtZoom.Text
-    ElseIf IsNumeric(Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And right$(txtZoom.Text, 1) = "%" Then
+    ElseIf IsNumeric(Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And Right$(txtZoom.Text, 1) = "%" Then
         zoomInput = Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)
     Else
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
@@ -11836,12 +11836,12 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
     Dim temp As String
 
     temp = Data.Files.Item(1)
-    If right(temp, 1) = """" Then
+    If Right(temp, 1) = """" Then
         temp = Left(temp, Len(temp) - 1)
-        temp = right(temp, Len(temp) - 1)
+        temp = Right(temp, Len(temp) - 1)
     End If
 
-    If LCase$(right(temp, 4)) = ".pms" Then
+    If LCase$(Right(temp, 4)) = ".pms" Then
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -13966,7 +13966,7 @@ Private Sub mnuSplit_Click()
     Dim i As Integer
     Dim j As Integer
     Dim Left As Byte
-    Dim right As Byte
+    Dim Right As Byte
     Dim clr1 As TColor
     Dim clr2 As TColor
     Dim alpha1 As Byte
@@ -13983,13 +13983,13 @@ Private Sub mnuSplit_Click()
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
                 If j = 1 Then
                     Left = 2
-                    right = 3
+                    Right = 3
                 ElseIf j = 2 Then
                     Left = 3
-                    right = 1
+                    Right = 1
                 ElseIf j = 3 Then
                     Left = 1
-                    right = 2
+                    Right = 2
                 End If
                 mPolyCount = mPolyCount + 1
                 newPolys = newPolys + 1
@@ -14005,10 +14005,10 @@ Private Sub mnuSplit_Click()
                 PolyCoords(mPolyCount).vertex(j) = PolyCoords(selectedPolys(i)).vertex(j)
                 PolyCoords(mPolyCount).vertex(Left) = PolyCoords(selectedPolys(i)).vertex(Left)
 
-                PolyCoords(mPolyCount).vertex(right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).X, PolyCoords(selectedPolys(i)).vertex(right).X)
-                PolyCoords(mPolyCount).vertex(right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).Y, PolyCoords(selectedPolys(i)).vertex(right).Y)
+                PolyCoords(mPolyCount).vertex(Right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).X, PolyCoords(selectedPolys(i)).vertex(Right).X)
+                PolyCoords(mPolyCount).vertex(Right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).Y, PolyCoords(selectedPolys(i)).vertex(Right).Y)
 
-                PolyCoords(selectedPolys(i)).vertex(Left) = PolyCoords(mPolyCount).vertex(right)
+                PolyCoords(selectedPolys(i)).vertex(Left) = PolyCoords(mPolyCount).vertex(Right)
 
                 Polys(mPolyCount).vertex(j) = Polys(selectedPolys(i)).vertex(j)
                 Polys(mPolyCount).vertex(Left) = Polys(selectedPolys(i)).vertex(Left)
@@ -14017,33 +14017,33 @@ Private Sub mnuSplit_Click()
                 Polys(mPolyCount).Perp.vertex(3).Z = 2
 
                 ' coords
-                Polys(mPolyCount).vertex(right) = Polys(selectedPolys(i)).vertex(right)
-                Polys(mPolyCount).vertex(right).X = (PolyCoords(mPolyCount).vertex(right).X - scrollCoords(2).X) * zoomFactor
-                Polys(mPolyCount).vertex(right).Y = (PolyCoords(mPolyCount).vertex(right).Y - scrollCoords(2).Y) * zoomFactor
+                Polys(mPolyCount).vertex(Right) = Polys(selectedPolys(i)).vertex(Right)
+                Polys(mPolyCount).vertex(Right).X = (PolyCoords(mPolyCount).vertex(Right).X - scrollCoords(2).X) * zoomFactor
+                Polys(mPolyCount).vertex(Right).Y = (PolyCoords(mPolyCount).vertex(Right).Y - scrollCoords(2).Y) * zoomFactor
 
                 ' texture coords
-                Polys(mPolyCount).vertex(right).tu = Midpoint(Polys(selectedPolys(i)).vertex(right).tu, Polys(mPolyCount).vertex(Left).tu)
-                Polys(mPolyCount).vertex(right).tv = Midpoint(Polys(selectedPolys(i)).vertex(right).tv, Polys(mPolyCount).vertex(Left).tv)
+                Polys(mPolyCount).vertex(Right).tu = Midpoint(Polys(selectedPolys(i)).vertex(Right).tu, Polys(mPolyCount).vertex(Left).tu)
+                Polys(mPolyCount).vertex(Right).tv = Midpoint(Polys(selectedPolys(i)).vertex(Right).tv, Polys(mPolyCount).vertex(Left).tv)
 
                 vertexList(mPolyCount).color(j) = vertexList(selectedPolys(i)).color(j)
                 vertexList(mPolyCount).color(Left) = vertexList(selectedPolys(i)).color(Left)
 
                 ' colors
-                clr1 = vertexList(selectedPolys(i)).color(right)
+                clr1 = vertexList(selectedPolys(i)).color(Right)
                 clr2 = vertexList(mPolyCount).color(Left)
-                vertexList(mPolyCount).color(right).red = clr1.red * 0.5 + clr2.red * 0.5
-                vertexList(mPolyCount).color(right).green = clr1.green * 0.5 + clr2.green * 0.5
-                vertexList(mPolyCount).color(right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
+                vertexList(mPolyCount).color(Right).red = clr1.red * 0.5 + clr2.red * 0.5
+                vertexList(mPolyCount).color(Right).green = clr1.green * 0.5 + clr2.green * 0.5
+                vertexList(mPolyCount).color(Right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
 
-                vertexList(selectedPolys(i)).color(Left) = vertexList(mPolyCount).color(right)
+                vertexList(selectedPolys(i)).color(Left) = vertexList(mPolyCount).color(Right)
 
-                clr1 = getRGB(Polys(selectedPolys(i)).vertex(right).color)
+                clr1 = getRGB(Polys(selectedPolys(i)).vertex(Right).color)
                 clr2 = getRGB(Polys(mPolyCount).vertex(Left).color)
-                alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(right).color)
+                alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(Right).color)
                 alpha2 = getAlpha(Polys(mPolyCount).vertex(Left).color)
-                Polys(mPolyCount).vertex(right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
+                Polys(mPolyCount).vertex(Right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
 
-                Polys(selectedPolys(i)).vertex(Left) = Polys(mPolyCount).vertex(right)
+                Polys(selectedPolys(i)).vertex(Left) = Polys(mPolyCount).vertex(Right)
 
                 vertexList(mPolyCount).polyType = vertexList(selectedPolys(i)).polyType
             End If
