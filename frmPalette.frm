@@ -541,8 +541,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim fileName, Val
-    'Dim fileName, Val
+    Dim fileName, Val, B
+    'Dim fileName, Val, B
 #End If
 
 
