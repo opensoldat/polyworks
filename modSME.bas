@@ -750,7 +750,7 @@ Public Function HexToLong(hexValue As String) As Long
     On Error GoTo ErrorHandler
 
     If Len(hexValue) > 8 Then
-        hexValue = right$(hexValue, 8)
+        hexValue = Right$(hexValue, 8)
     End If
 
     HexToLong = CLng("&H" & hexValue)
