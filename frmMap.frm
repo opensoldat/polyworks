@@ -518,13 +518,6 @@ Option Explicit
 #End If
 
 
-Private Type TColor
-    red As Byte
-    green As Byte
-    blue As Byte
-End Type
-
-
 Private Sub cboJet_Click()
 
     Select Case cboJet.ListIndex

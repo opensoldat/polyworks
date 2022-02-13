@@ -546,13 +546,6 @@ Option Explicit
 #End If
 
 
-Private Type TColor
-    red As Byte
-    green As Byte
-    blue As Byte
-End Type
-
-
 Public xPos As Integer
 Public yPos As Integer
 Public collapsed As Boolean

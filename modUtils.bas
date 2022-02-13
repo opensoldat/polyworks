@@ -7,11 +7,13 @@ Option Explicit
     'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right
 #End If
 
+
 Public Type TColor
     red     As Byte
     green   As Byte
     blue    As Byte
 End Type
+
 
 Public Function getRGB(DecValue As Long) As TColor
 
