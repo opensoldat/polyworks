@@ -119,14 +119,14 @@ ErrorHandler:
 
 End Function
 
-Public Function Clamp(Val As Single, min As Single, max As Single) As Single
+Public Function Clamp(value As Single, min As Single, max As Single) As Single
 
-    If Val < min Then
+    If value < min Then
         Clamp = min
-    ElseIf Val > max Then
+    ElseIf value > max Then
         Clamp = max
     Else
-        Clamp = Val
+        Clamp = value
     End If
 
 End Function
