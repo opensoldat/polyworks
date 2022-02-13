@@ -463,16 +463,6 @@ ErrorHandler:
 
 End Sub
 
-Private Function FileExists(FileName As String) As Boolean
-
-    On Error GoTo ErrorHandler
-
-    FileExists = FileLen(FileName) > 0
-
-ErrorHandler:
-
-End Function
-
 Private Sub lblLevel_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     picLevel_MouseMove Index, 1, 0, 0, 0
