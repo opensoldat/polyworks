@@ -109,11 +109,11 @@ Public Function higherVal(val1 As Byte, val2 As Byte) As Byte
 
 End Function
 
-Public Function FileExists(FileName As String) As Boolean
+Public Function FileExists(theFileName As String) As Boolean
 
     On Error GoTo ErrorHandler
 
-    FileExists = FileLen(FileName) > 0
+    FileExists = FileLen(theFileName) > 0
 
 ErrorHandler:
 

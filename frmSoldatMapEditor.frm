@@ -2486,7 +2486,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub LoadFile(FileName As String)
+Public Sub LoadFile(theFileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -2530,9 +2530,9 @@ Public Sub LoadFile(FileName As String)
     ReDim selectedPolys(numSelectedPolys)
 
     currentFileName = ""
-    For i = 0 To Len(FileName) - 1
-        If Mid(FileName, Len(FileName) - i, 1) <> "\" Then
-            currentFileName = Mid(FileName, Len(FileName) - i, 1) + currentFileName
+    For i = 0 To Len(theFileName) - 1
+        If Mid(theFileName, Len(theFileName) - i, 1) <> "\" Then
+            currentFileName = Mid(theFileName, Len(theFileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -2540,7 +2540,7 @@ Public Sub LoadFile(FileName As String)
 
     lblFileName.Caption = currentFileName
 
-    Open FileName For Binary Access Read Lock Read As #1
+    Open theFileName For Binary Access Read Lock Read As #1
 
         fileOpen = True
         errorVal = "Error loading polys"
@@ -3165,7 +3165,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
 
 End Sub
 
-Private Sub SaveFile(FileName As String)
+Private Sub SaveFile(theFileName As String)
 
     Dim i As Integer
     Dim j As Integer
@@ -3230,7 +3230,7 @@ Private Sub SaveFile(FileName As String)
         sectorsDivision = Int((mapHeight + 100) / 25)
     End If
 
-    Open FileName For Binary Access Write Lock Write As #1
+    Open theFileName For Binary Access Write Lock Write As #1
 
         fileOpen = True
 
@@ -3372,9 +3372,9 @@ Private Sub SaveFile(FileName As String)
     fileOpen = False
 
     currentFileName = ""
-    For i = 0 To Len(FileName) - 1
-        If Mid(FileName, Len(FileName) - i, 1) <> "\" Then
-            currentFileName = Mid(FileName, Len(FileName) - i, 1) + currentFileName
+    For i = 0 To Len(theFileName) - 1
+        If Mid(theFileName, Len(theFileName) - i, 1) <> "\" Then
+            currentFileName = Mid(theFileName, Len(theFileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -3395,7 +3395,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub SaveAndCompile(FileName As String)
+Public Sub SaveAndCompile(theFileName As String)
 
     Dim i As Integer
     Dim j As Integer
@@ -3486,7 +3486,7 @@ Public Sub SaveAndCompile(FileName As String)
         xSecNum = (mapWidth + 100) / sectorsDivision
     End If
 
-    Open FileName For Binary Access Write Lock Write As #1
+    Open theFileName For Binary Access Write Lock Write As #1
 
         fileOpen = True
 
@@ -3682,7 +3682,7 @@ Private Sub SaveUndo()
     Dim i As Integer
     Dim j As Integer
     Dim Polygon As TPolygon
-    Dim FileName As String
+    Dim theFileName As String
 
     selectionChanged = False
 
@@ -3696,13 +3696,13 @@ Private Sub SaveUndo()
         currentUndo = 0
     End If
 
-    FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
+    theFileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     If Dir(appPath & "\undo\", vbDirectory) = "" Then
          MkDir (appPath & "\undo\")
     End If
 
-    Open FileName For Binary Access Write Lock Write As #1
+    Open theFileName For Binary Access Write Lock Write As #1
 
         ' save polys
         Put #1, , mPolyCount
@@ -3774,7 +3774,7 @@ Private Sub loadUndo(redo As Boolean)
 
     Dim i As Integer
     Dim j As Integer
-    Dim FileName As String
+    Dim theFileName As String
     Dim errorVal As String
 
     On Error GoTo ErrorHandler
@@ -3813,11 +3813,11 @@ Private Sub loadUndo(redo As Boolean)
     numSelectedPolys = 0
     ReDim selectedPolys(0)
 
-    FileName = appPath & "\undo\undo" & currentUndo & ".pwn"
+    theFileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     errorVal = "Error opening file"
 
-    Open FileName For Binary Access Read Lock Read As #1
+    Open theFileName For Binary Access Read Lock Read As #1
 
         errorVal = "Error loading polygons"
 
@@ -10717,11 +10717,11 @@ Private Sub mnuRecent_Click(Index As Integer)
 
     Dim i As Integer
     Dim Result As VbMsgBoxResult
-    Dim FileName As String
+    Dim theFileName As String
 
-    FileName = mnuRecent(Index).Caption
+    theFileName = mnuRecent(Index).Caption
 
-    If Len(Dir$(FileName)) <> 0 And FileName <> "" Then
+    If Len(Dir$(theFileName)) <> 0 And theFileName <> "" Then
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -10734,19 +10734,19 @@ Private Sub mnuRecent_Click(Index As Integer)
         End If
         DoEvents
 
-        LoadFile FileName
+        LoadFile theFileName
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
-        mnuRecent(0).Caption = FileName
-    ElseIf Len(Dir$(FileName)) = 0 Then
-        MsgBox "File not found: " & FileName
+        mnuRecent(0).Caption = theFileName
+    ElseIf Len(Dir$(theFileName)) = 0 Then
+        MsgBox "File not found: " & theFileName
     End If
 
 End Sub
 
 ' put in recent files if it isn't already
-Private Sub updateRecent(FileName As String)
+Private Sub updateRecent(theFileName As String)
 
     Dim i As Integer
 
@@ -10760,7 +10760,7 @@ Private Sub updateRecent(FileName As String)
             mnuRecent(i).Visible = True
         End If
     Next
-    mnuRecent(0).Caption = FileName
+    mnuRecent(0).Caption = theFileName
 
 End Sub
 
@@ -11328,7 +11328,7 @@ ErrorHandler:
 
 End Sub
 
-Private Function confirmExists(FileName As String) As Boolean
+Private Function confirmExists(theFileName As String) As Boolean
 
     Dim tempNode As Node
     Dim i As Integer
@@ -11336,7 +11336,7 @@ Private Function confirmExists(FileName As String) As Boolean
     Set tempNode = tvwScenery.Nodes.Item("Master List").Child
 
     For i = 1 To (tvwScenery.Nodes.Item("Master List").Children)
-        If LCase$(FileName) = LCase$(tempNode.Text) Then
+        If LCase$(theFileName) = LCase$(tempNode.Text) Then
             confirmExists = True
         End If
         Set tempNode = tempNode.Next
@@ -12309,7 +12309,7 @@ Private Sub saveSettings()
 
 End Sub
 
-Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional FileName As String = "current.ini")
+Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional theFileName As String = "current.ini")
 
     Dim leftVal As Integer
     Dim topVal As Integer
@@ -12328,7 +12328,7 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
         "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
 
-    saveSection sectionName, iniString, appPath & "\workspace\" & FileName
+    saveSection sectionName, iniString, appPath & "\workspace\" & theFileName
 
 End Sub
 
@@ -12561,15 +12561,15 @@ Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) 
 
 End Function
 
-Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
+Private Sub loadWorkspace(Optional theFileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
 
     On Error GoTo ErrorHandler
 
-    Me.Tag = loadInt("Main", "WindowState", appPath & "\workspace\" & FileName)
-    Me.formWidth = loadInt("Main", "Width", appPath & "\workspace\" & FileName)
-    Me.formHeight = loadInt("Main", "Height", appPath & "\workspace\" & FileName)
-    Me.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & FileName)
-    Me.formTop = loadInt("Main", "Top", appPath & "\workspace\" & FileName)
+    Me.Tag = loadInt("Main", "WindowState", appPath & "\workspace\" & theFileName)
+    Me.formWidth = loadInt("Main", "Width", appPath & "\workspace\" & theFileName)
+    Me.formHeight = loadInt("Main", "Height", appPath & "\workspace\" & theFileName)
+    Me.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & theFileName)
+    Me.formTop = loadInt("Main", "Top", appPath & "\workspace\" & theFileName)
 
     picResize.Top = Me.formHeight - picResize.Height
     picResize.Left = Me.formWidth - picResize.Width
@@ -12585,49 +12585,49 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional 
 
     tvwScenery.Height = formHeight - 41 - 20
 
-    mnuTools.Checked = loadString("Tools", "Visible", appPath & "\workspace\" & FileName)
-    frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & FileName)
-    frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & FileName)
-    frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & FileName)
-    frmTools.Tag = IIf(loadString("Tools", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuTools.Checked = loadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
+    frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & theFileName)
+    frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & theFileName)
+    frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTools.Tag = IIf(loadString("Tools", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & FileName)
-    frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & FileName)
-    frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & FileName)
-    frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & FileName)
-    frmDisplay.Tag = IIf(loadString("Display", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & theFileName)
+    frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & theFileName)
+    frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & theFileName)
+    frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmDisplay.Tag = IIf(loadString("Display", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & FileName)
-    frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & FileName)
-    frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & FileName)
-    frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & FileName)
-    frmInfo.Tag = IIf(loadString("Properties", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
+    frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & theFileName)
+    frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & theFileName)
+    frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmInfo.Tag = IIf(loadString("Properties", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & FileName)
-    frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & FileName)
-    frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & FileName)
-    frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & FileName)
-    frmPalette.Tag = IIf(loadString("Palette", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
+    frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & theFileName)
+    frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & theFileName)
+    frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmPalette.Tag = IIf(loadString("Palette", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
     If Not bSkipScenery Then
-        mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & FileName)
-        frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & FileName)
-        frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & FileName)
-        frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & FileName)
-        frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+        mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
+        frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & theFileName)
+        frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & theFileName)
+        frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & theFileName)
+        frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
     End If
 
-    mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & FileName)
-    frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & FileName)
-    frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & FileName)
-    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & FileName)
-    frmWaypoints.Tag = IIf(loadString("Waypoints", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
+    frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & theFileName)
+    frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & theFileName)
+    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmWaypoints.Tag = IIf(loadString("Waypoints", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & FileName)
-    frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & FileName)
-    frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & FileName)
-    frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & FileName)
-    frmTexture.Tag = IIf(loadString("Texture", "Snapped", appPath & "\workspace\" & FileName) = "True", "snap", "")
+    mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
+    frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & theFileName)
+    frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & theFileName)
+    frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTexture.Tag = IIf(loadString("Texture", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
     Exit Sub
 
@@ -12952,25 +12952,25 @@ ErrorHandler:
 
 End Sub
 
-Private Function recentFiles(FileName As String) As Boolean
+Private Function recentFiles(theFileName As String) As Boolean
 
     Dim i As Integer
     Dim inRecent As Boolean
     Dim Index As Integer
 
     For i = 0 To 9
-        If mnuRecent(i).Caption = FileName Then
+        If mnuRecent(i).Caption = theFileName Then
             inRecent = True
             Index = i
         End If
     Next
     If Not inRecent Then
-        updateRecent FileName
+        updateRecent theFileName
     Else
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
-        mnuRecent(0).Caption = FileName
+        mnuRecent(0).Caption = theFileName
     End If
 
 End Function
@@ -13029,7 +13029,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub savePrefab(FileName As String)
+Private Sub savePrefab(theFileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -13043,7 +13043,7 @@ Private Sub savePrefab(FileName As String)
     Dim tempConnection As TConnection
     Dim alpha As Byte
 
-    Open FileName For Binary Access Write Lock Write As #1
+    Open theFileName For Binary Access Write Lock Write As #1
 
         Put #1, , numSelectedPolys
         For i = 1 To numSelectedPolys
@@ -13129,7 +13129,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub loadPrefab(FileName As String)
+Private Sub loadPrefab(theFileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -13149,7 +13149,7 @@ Private Sub loadPrefab(FileName As String)
 
     mnuDeselect_Click
 
-    Open FileName For Binary Access Read Lock Read As #1
+    Open theFileName For Binary Access Read Lock Read As #1
 
         Get #1, , newPolys
         If newPolys > 0 Then
@@ -13290,10 +13290,10 @@ Private Sub mnuRunSoldat_Click()
 
 End Sub
 
-Private Sub SetMapList(FileName As String)
+Private Sub SetMapList(theFileName As String)
 
     Open soldatDir & "mapslist.txt" For Output As #1
-        Print #1, FileName
+        Print #1, theFileName
     Close #1
 
 End Sub
