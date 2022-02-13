@@ -541,8 +541,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim fileName, Val, B
-    'Dim fileName, Val, B
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -625,9 +625,9 @@ Private Function getRGB(DecValue As Long) As TColor
     End If
 
     getRGB.blue = CLng("&H" + right(hexValue, 2))
-    hexValue = left(hexValue, Len(hexValue) - 2)
+    hexValue = Left(hexValue, Len(hexValue) - 2)
     getRGB.green = CLng("&H" + right(hexValue, 2))
-    hexValue = left(hexValue, Len(hexValue) - 2)
+    hexValue = Left(hexValue, Len(hexValue) - 2)
     getRGB.red = CLng("&H" + right(hexValue, 2))
 
 End Function
@@ -641,9 +641,9 @@ Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
     For Y = 0 To 5
         For X = 0 To 11
             If red = clrPalette(X, Y).red And green = clrPalette(X, Y).green And blue = clrPalette(X, Y).blue And Not foundClr Then
-                shpSel1.left = X * 16 + 1
+                shpSel1.Left = X * 16 + 1
                 shpSel1.Top = Y * 16 + 1
-                shpSel2.left = X * 16
+                shpSel2.Left = X * 16
                 shpSel2.Top = Y * 16
                 foundClr = True
             End If
@@ -676,9 +676,9 @@ Private Sub Form_Load()
 
     setValues frmColor.red, frmColor.green, frmColor.blue
 
-    shpSel1.left = picPalette.ScaleWidth + 2
+    shpSel1.Left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.left = picPalette.ScaleWidth + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
 
     formHeight = Me.ScaleHeight
@@ -695,7 +695,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
@@ -705,7 +705,7 @@ Public Sub setForm()
 
 End Sub
 
-Public Sub loadPalette(fileName As String)
+Public Sub loadPalette(FileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -715,7 +715,7 @@ Public Sub loadPalette(fileName As String)
 
     fileOpen = False
 
-    Open fileName For Input As #1
+    Open FileName For Input As #1
     fileOpen = True
 
         For Y = 0 To 5
@@ -730,9 +730,9 @@ Public Sub loadPalette(fileName As String)
     Close #1
     fileOpen = False
 
-    shpSel1.left = picPalette.ScaleWidth + 2
+    shpSel1.Left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.left = picPalette.ScaleWidth + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
 
     picPalette.Refresh
@@ -768,8 +768,8 @@ Private Sub mnuLoadPalette_Click()
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowOpen
 
-    If commonDialog.fileName <> "" Then
-        loadPalette commonDialog.fileName
+    If commonDialog.FileName <> "" Then
+        loadPalette commonDialog.FileName
     End If
 
     Exit Sub
@@ -778,7 +778,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub savePalette(fileName As String)
+Public Sub savePalette(FileName As String)
 
     Dim X As Integer
     Dim Y As Integer
@@ -788,7 +788,7 @@ Public Sub savePalette(fileName As String)
 
     fileOpen = False
 
-    Open fileName For Output As #1
+    Open FileName For Output As #1
     fileOpen = True
 
         For Y = 0 To 5
@@ -818,8 +818,8 @@ Private Sub mnuSavePalette_Click()
     commonDialog.Filter = "Text Documents (*.txt)|*.txt"
     commonDialog.ShowSave
 
-    If commonDialog.fileName <> "" Then
-        savePalette commonDialog.fileName
+    If commonDialog.FileName <> "" Then
+        savePalette commonDialog.FileName
     End If
 
     Exit Sub
@@ -842,9 +842,9 @@ Private Sub mnuClearPalette_Click()
         Next
     Next
 
-    shpSel1.left = picPalette.ScaleWidth + 2
+    shpSel1.Left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.left = picPalette.ScaleWidth + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
 
 End Sub
@@ -868,9 +868,9 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
         txtRGB(2).Text = clrPalette(xVal, yVal).blue
         picColor.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
 
-        shpSel1.left = Int(X / 16) * 16 + 1
+        shpSel1.Left = Int(X / 16) * 16 + 1
         shpSel1.Top = Int(Y / 16) * 16 + 1
-        shpSel2.left = Int(X / 16) * 16
+        shpSel2.Left = Int(X / 16) * 16
         shpSel2.Top = Int(Y / 16) * 16
     ElseIf Button = 2 Then ' new color
         xVal = Int(X / 16)
@@ -888,9 +888,9 @@ Public Sub newPaletteColor()
     clrPalette(xVal, yVal).green = txtRGB(1).Text
     clrPalette(xVal, yVal).blue = txtRGB(2).Text
     picPalette.Line (xVal * 16, yVal * 16)-(xVal * 16 + 15, yVal * 16 + 15), RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue), BF
-    shpSel1.left = xVal * 16 + 1
+    shpSel1.Left = xVal * 16 + 1
     shpSel1.Top = yVal * 16 + 1
-    shpSel2.left = xVal * 16
+    shpSel2.Left = xVal * 16
     shpSel2.Top = yVal * 16
 
 End Sub
@@ -1023,9 +1023,9 @@ Public Sub setValues(R As Byte, G As Byte, B As Byte)
     txtRGB(1).Text = G
     txtRGB(2).Text = B
     picColor.BackColor = RGB(R, G, B)
-    shpSel1.left = picPalette.ScaleWidth + 2
+    shpSel1.Left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.left = picPalette.ScaleWidth + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
     shpSel2.Top = picPalette.ScaleHeight + 2
 
 End Sub
@@ -1104,7 +1104,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTexture
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub
@@ -1113,7 +1113,7 @@ Private Sub picPaletteMenu_MouseDown(Button As Integer, Shift As Integer, X As S
 
     mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
-    PopupMenu mnuPalette, , picPaletteMenu.left + 32, picPaletteMenu.Top + 16
+    PopupMenu mnuPalette, , picPaletteMenu.Left + 32, picPaletteMenu.Top + 16
 
     mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 

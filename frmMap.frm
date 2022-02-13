@@ -513,8 +513,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private Token
-    'Private Token
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -605,10 +605,10 @@ Private Sub cboTexture_Click()
         frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
 
-        Dim Token As Long
-        Token = InitGDIPlus
+        Dim token As Long
+        token = InitGDIPlus
         picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
-        FreeGDIPlus Token
+        FreeGDIPlus token
     End If
 
     Exit Sub

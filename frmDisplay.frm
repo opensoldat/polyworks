@@ -499,8 +499,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private X, Y
-    'Private X, Y
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -565,7 +565,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
 
     If collapsed Then
@@ -634,7 +634,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTexture
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub

@@ -3,8 +3,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private Val, left
-    'Private Val, left
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 Public Type TColor
@@ -24,9 +24,9 @@ Public Function getRGB(DecValue As Long) As TColor
     End If
 
     getRGB.blue = CLng("&H" + right$(hexValue, 2))
-    hexValue = left$(hexValue, Len(hexValue) - 2)
+    hexValue = Left$(hexValue, Len(hexValue) - 2)
     getRGB.green = CLng("&H" + right$(hexValue, 2))
-    hexValue = left$(hexValue, Len(hexValue) - 2)
+    hexValue = Left$(hexValue, Len(hexValue) - 2)
     getRGB.red = CLng("&H" + right$(hexValue, 2))
 
 End Function
@@ -43,7 +43,7 @@ Public Function getAlpha(tehColor As Long) As Byte
         If Len(hexValue) < 8 Then
             hexValue = String$(8 - Len(hexValue), "0") + hexValue
         End If
-        getAlpha = CLng("&H" + left$(hexValue, 2))
+        getAlpha = CLng("&H" + Left$(hexValue, 2))
     End If
 
 End Function

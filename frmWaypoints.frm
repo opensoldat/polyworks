@@ -499,8 +499,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private Value
-    'Private Value
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -528,10 +528,10 @@ Public Function getWayptKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setWayptKey(Index As Integer, ByVal Value As Byte)
+Public Sub setWayptKey(Index As Integer, ByVal value As Byte)
 
-    If Value > 0 Then
-        wayptKeys(Index) = Value
+    If value > 0 Then
+        wayptKeys(Index) = value
     End If
 
 End Sub
@@ -554,7 +554,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
@@ -574,21 +574,21 @@ Private Sub cboSpecial_Click()
 
 End Sub
 
-Public Sub getPathNum(Value As Byte)
+Public Sub getPathNum(value As Byte)
 
     Dim i As Integer
 
     For i = picPath.LBound To picPath.UBound
-        mouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, Value = i + 1, BUTTON_UP
+        mouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, value = i + 1, BUTTON_UP
     Next
-    wayptPath = Value - 1
+    wayptPath = value - 1
 
 End Sub
 
-Public Sub getWayType(Index As Integer, Value As Boolean)
+Public Sub getWayType(Index As Integer, value As Boolean)
 
-    wayptType(Index) = Value
-    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, Value, BUTTON_UP
+    wayptType(Index) = value
+    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, value, BUTTON_UP
 
 End Sub
 
@@ -652,7 +652,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTexture
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub

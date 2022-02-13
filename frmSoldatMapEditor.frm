@@ -1288,8 +1288,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd, mid
-    'Private FileName, color, token, b, commonDialog, value, val, X, Y, left, hWnd, mid
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -1334,7 +1334,7 @@ Private Const FVF2 As Long = D3DFVF_XYZ
 Private Type TCustomVertex
     X       As Single
     Y       As Single
-    z       As Single
+    Z       As Single
     rhw     As Single
     color   As Long
     tu      As Single
@@ -1344,7 +1344,7 @@ End Type
 Private Type TSketchVertex
     X As Single
     Y As Single
-    z As Single
+    Z As Single
 End Type
 
 Private Type TSketchLine
@@ -1354,7 +1354,7 @@ End Type
 Private Type TVertexHit
     X As Single ' sin of angle
     Y As Single ' cos of angle
-    z As Single ' 0
+    Z As Single ' 0
 End Type
 
 Private Type TPolyHit
@@ -1453,7 +1453,7 @@ Private Type TNewWaypoint
     id                      As Long
     X                       As Long
     Y                       As Long
-    left                    As Byte
+    Left                    As Byte
     right                   As Byte
     up                      As Byte
     down                    As Byte
@@ -1739,7 +1739,7 @@ End Property
 
 Private Function QuickHide(ByRef myWindow As Form)
     MoveWindow myWindow.hWnd, _
-        (myWindow.left - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelX, _
+        (myWindow.Left - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelX, _
         (myWindow.Top - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelY, _
         myWindow.Width / Screen.TwipsPerPixelX, _
         myWindow.Height / Screen.TwipsPerPixelY, _
@@ -1816,8 +1816,8 @@ Private Sub Form_Load()
 
     ReDim sketch(0)
 
-    sketch(0).vertex(1).z = 1
-    sketch(0).vertex(2).z = 1
+    sketch(0).vertex(1).Z = 1
+    sketch(0).vertex(2).Z = 1
 
     Colliders(0).radius = clrRadius
 
@@ -1890,7 +1890,7 @@ Private Sub Form_Load()
 
     temp = Command$
     If right(temp, 1) = """" Then
-        temp = left(temp, Len(temp) - 1)
+        temp = Left(temp, Len(temp) - 1)
         temp = right(temp, Len(temp) - 1)
     End If
 
@@ -1937,11 +1937,11 @@ Public Sub MaximizeBorderLessForm()
     Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
 
     ScreenHeight = (DesktopArea.bottom - DesktopArea.Top) * Screen.TwipsPerPixelY
-    ScreenWidth = (DesktopArea.right - DesktopArea.left) * Screen.TwipsPerPixelX
-    ScreenLeft = DesktopArea.left * Screen.TwipsPerPixelX
+    ScreenWidth = (DesktopArea.right - DesktopArea.Left) * Screen.TwipsPerPixelX
+    ScreenLeft = DesktopArea.Left * Screen.TwipsPerPixelX
     ScreenTop = DesktopArea.Top * Screen.TwipsPerPixelY
 
-    mPrevLeft = Me.left
+    mPrevLeft = Me.Left
     mPrevTop = Me.Top
     mPrevWidth = Me.Width
     mPrevHeight = Me.Height
@@ -2531,8 +2531,8 @@ Public Sub LoadFile(FileName As String)
 
     currentFileName = ""
     For i = 0 To Len(FileName) - 1
-        If mid(FileName, Len(FileName) - i, 1) <> "\" Then
-            currentFileName = mid(FileName, Len(FileName) - i, 1) + currentFileName
+        If Mid(FileName, Len(FileName) - i, 1) <> "\" Then
+            currentFileName = Mid(FileName, Len(FileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -2569,7 +2569,7 @@ Public Sub LoadFile(FileName As String)
                 If PolyCoords(i).vertex(j).X < minX Then minX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).Y > maxY Then maxY = PolyCoords(i).vertex(j).Y
                 If PolyCoords(i).vertex(j).Y < minY Then minY = PolyCoords(i).vertex(j).Y
-                Polys(i).Perp.vertex(j).z = Sqr(Polys(i).Perp.vertex(j).X ^ 2 + Polys(i).Perp.vertex(j).Y ^ 2)
+                Polys(i).Perp.vertex(j).Z = Sqr(Polys(i).Perp.vertex(j).X ^ 2 + Polys(i).Perp.vertex(j).Y ^ 2)
             Next
         Next
 
@@ -2788,7 +2788,7 @@ Public Sub LoadFile(FileName As String)
             Waypoints(i).special = newWaypoint.special
             Waypoints(i).X = newWaypoint.X
             Waypoints(i).Y = newWaypoint.Y
-            Waypoints(i).wayType(0) = CBool(newWaypoint.left)
+            Waypoints(i).wayType(0) = CBool(newWaypoint.Left)
             Waypoints(i).wayType(1) = CBool(newWaypoint.right)
             Waypoints(i).wayType(2) = CBool(newWaypoint.up)
             Waypoints(i).wayType(3) = CBool(newWaypoint.down)
@@ -2952,8 +2952,8 @@ Private Function getMapArea() As Long
 
     Dim i As Integer
     Dim area As Double
-    Dim a As Single
-    Dim b As Single
+    Dim A As Single
+    Dim B As Single
     Dim c As Single
     Dim x1 As Single
     Dim y1 As Single
@@ -2966,10 +2966,10 @@ Private Function getMapArea() As Long
             y1 = (PolyCoords(i).vertex(3).Y - PolyCoords(i).vertex(2).Y)
             x2 = (PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(3).X)
             y2 = (PolyCoords(i).vertex(1).Y - PolyCoords(i).vertex(3).Y)
-            a = Sqr(x1 ^ 2 + y1 ^ 2)
-            b = Sqr(x2 ^ 2 + y2 ^ 2)
+            A = Sqr(x1 ^ 2 + y1 ^ 2)
+            B = Sqr(x2 ^ 2 + y2 ^ 2)
             c = GetAngle(x1, y1) - GetAngle(x2, y2)
-            area = area + (a * b * Sin(c) / 2)
+            area = area + (A * B * Sin(c) / 2)
         End If
     Next
 
@@ -3213,13 +3213,13 @@ Private Sub SaveFile(FileName As String)
     ' set texture name
     Options.textureName(0) = Len(gTextureFile)
     For i = 1 To Len(gTextureFile)
-        Options.textureName(i) = Asc(mid(gTextureFile, i, 1))
+        Options.textureName(i) = Asc(Mid(gTextureFile, i, 1))
     Next
     ' set map name
     Options.mapName(0) = Len(mapTitle)
     If Options.mapName(0) > 38 Then Options.mapName(0) = 38
     For i = 1 To Options.mapName(0)
-        Options.mapName(i) = Asc(mid(mapTitle, i, 1))
+        Options.mapName(i) = Asc(Mid(mapTitle, i, 1))
     Next
 
     Options.MapRandomID = -1
@@ -3258,9 +3258,9 @@ Private Sub SaveFile(FileName As String)
                 Else
                     length = Sqr(xDiff ^ 2 + yDiff ^ 2)
                 End If
-                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
-                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
-                Polygon.Poly.Perp.vertex(j).z = 1
+                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).Z
+                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).Z
+                Polygon.Poly.Perp.vertex(j).Z = 1
             Next
 
             Polygon.polyType = vertexList(i).polyType
@@ -3303,7 +3303,7 @@ Private Sub SaveFile(FileName As String)
             sceneryName = frmScenery.lstScenery.List(i - 1)
             Scenery_New.sceneryName(0) = Len(sceneryName)
             For j = 1 To Scenery_New.sceneryName(0)
-                Scenery_New.sceneryName(j) = Asc(mid(sceneryName, j, 1))
+                Scenery_New.sceneryName(j) = Asc(Mid(sceneryName, j, 1))
             Next
             Scenery_New.Date = getFileDate(sceneryName)
             Put #1, , Scenery_New
@@ -3335,7 +3335,7 @@ Private Sub SaveFile(FileName As String)
             newWaypoint.X = Waypoints(i).X
             newWaypoint.Y = Waypoints(i).Y
             newWaypoint.connectionsNum = Waypoints(i).numConnections
-            If Waypoints(i).wayType(0) Then newWaypoint.left = 1 Else newWaypoint.left = 0
+            If Waypoints(i).wayType(0) Then newWaypoint.Left = 1 Else newWaypoint.Left = 0
             If Waypoints(i).wayType(1) Then newWaypoint.right = 1 Else newWaypoint.right = 0
             If Waypoints(i).wayType(2) Then newWaypoint.up = 1 Else newWaypoint.up = 0
             If Waypoints(i).wayType(3) Then newWaypoint.down = 1 Else newWaypoint.down = 0
@@ -3373,8 +3373,8 @@ Private Sub SaveFile(FileName As String)
 
     currentFileName = ""
     For i = 0 To Len(FileName) - 1
-        If mid(FileName, Len(FileName) - i, 1) <> "\" Then
-            currentFileName = mid(FileName, Len(FileName) - i, 1) + currentFileName
+        If Mid(FileName, Len(FileName) - i, 1) <> "\" Then
+            currentFileName = Mid(FileName, Len(FileName) - i, 1) + currentFileName
         Else
             Exit For
         End If
@@ -3463,13 +3463,13 @@ Public Sub SaveAndCompile(FileName As String)
     Options.textureName(0) = Len(gTextureFile)
     If Options.textureName(0) > 24 Then Options.textureName(0) = 24
     For i = 1 To Options.textureName(0)
-        Options.textureName(i) = Asc(mid(gTextureFile, i, 1))
+        Options.textureName(i) = Asc(Mid(gTextureFile, i, 1))
     Next
     ' set map name
     Options.mapName(0) = Len(mapTitle)
     If Options.mapName(0) > 38 Then Options.mapName(0) = 38
     For i = 1 To Options.mapName(0)
-        Options.mapName(i) = Asc(mid(mapTitle, i, 1))
+        Options.mapName(i) = Asc(Mid(mapTitle, i, 1))
     Next
 
     ' set map random ID
@@ -3518,16 +3518,16 @@ Public Sub SaveAndCompile(FileName As String)
                     length = Sqr(xDiff ^ 2 + yDiff ^ 2)
                 End If
                 If Polygon.polyType = 18 Then
-                    If Polygon.Poly.Perp.vertex(j).z < 1 Then
-                        Polygon.Poly.Perp.vertex(j).z = 1
+                    If Polygon.Poly.Perp.vertex(j).Z < 1 Then
+                        Polygon.Poly.Perp.vertex(j).Z = 1
                     End If
                 Else
-                    Polygon.Poly.Perp.vertex(j).z = 1
+                    Polygon.Poly.Perp.vertex(j).Z = 1
                 End If
-                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).z
-                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).z
-                Polygon.Poly.Perp.vertex(j).z = 1
-                Polygon.Poly.vertex(j).z = 1
+                Polygon.Poly.Perp.vertex(j).X = (yDiff / length) * Polygon.Poly.Perp.vertex(j).Z
+                Polygon.Poly.Perp.vertex(j).Y = (xDiff / length) * Polygon.Poly.Perp.vertex(j).Z
+                Polygon.Poly.Perp.vertex(j).Z = 1
+                Polygon.Poly.vertex(j).Z = 1
             Next
 
             Put #1, , Polygon
@@ -3599,7 +3599,7 @@ Public Sub SaveAndCompile(FileName As String)
             sceneryName = frmScenery.lstScenery.List(i - 1)
             Scenery_New.sceneryName(0) = Len(sceneryName)
             For j = 1 To Scenery_New.sceneryName(0)
-                Scenery_New.sceneryName(j) = Asc(mid(sceneryName, j, 1))
+                Scenery_New.sceneryName(j) = Asc(Mid(sceneryName, j, 1))
             Next
             Scenery_New.Date = getFileDate(sceneryName)
             Put #1, , Scenery_New
@@ -3630,7 +3630,7 @@ Public Sub SaveAndCompile(FileName As String)
             newWaypoint.X = Waypoints(i).X - xOffset
             newWaypoint.Y = Waypoints(i).Y - yOffset
             newWaypoint.connectionsNum = Waypoints(i).numConnections
-            If Waypoints(i).wayType(0) Then newWaypoint.left = 1 Else newWaypoint.left = 0
+            If Waypoints(i).wayType(0) Then newWaypoint.Left = 1 Else newWaypoint.Left = 0
             If Waypoints(i).wayType(1) Then newWaypoint.right = 1 Else newWaypoint.right = 0
             If Waypoints(i).wayType(2) Then newWaypoint.up = 1 Else newWaypoint.up = 0
             If Waypoints(i).wayType(3) Then newWaypoint.down = 1 Else newWaypoint.down = 0
@@ -4296,12 +4296,12 @@ Private Sub setGrid()
 
 End Sub
 
-Private Function CreateCustomVertex(ByVal X As Single, ByVal Y As Single, z As Single, rhw As Single, color As Long, _
+Private Function CreateCustomVertex(ByVal X As Single, ByVal Y As Single, Z As Single, rhw As Single, color As Long, _
                                             tu As Single, tv As Single) As TCustomVertex
 
     CreateCustomVertex.X = X
     CreateCustomVertex.Y = Y
-    CreateCustomVertex.z = z
+    CreateCustomVertex.Z = Z
     CreateCustomVertex.rhw = rhw
     CreateCustomVertex.color = color
     CreateCustomVertex.tu = tu
@@ -4356,13 +4356,13 @@ Public Sub Render()
     Dim matProj As D3DMATRIX
 
     upVector.Y = -1
-    atVector.z = 1
+    atVector.Z = 1
     atVector.X = scrollCoords(2).X + Me.ScaleWidth / 2 / zoomFactor
     atVector.Y = (scrollCoords(2).Y + Me.ScaleHeight / 2 / zoomFactor)
 
     viewVector.X = scrollCoords(2).X + Me.ScaleWidth / 2 / zoomFactor
     viewVector.Y = (scrollCoords(2).Y + Me.ScaleHeight / 2 / zoomFactor)
-    viewVector.z = 0
+    viewVector.Z = 0
 
     D3DXMatrixLookAtLH matView, viewVector, atVector, upVector
     D3DDevice.SetTransform D3DTS_VIEW, matView
@@ -4373,12 +4373,12 @@ Public Sub Render()
     rc.X = 0
     rc.Y = 0
 
-    srcRect.left = 0
+    srcRect.Left = 0
     srcRect.Top = 0
 
     For i = 1 To 4
         lineCoords(i).rhw = 1
-        lineCoords(i).z = 1
+        lineCoords(i).Z = 1
     Next
 
     initialized = False
@@ -4596,9 +4596,9 @@ Public Sub Render()
             lineCoords(2).color = 0
             lineCoords(3).color = 0
 
-            lineCoords(1).z = 1
-            lineCoords(2).z = 1
-            lineCoords(3).z = 1
+            lineCoords(1).Z = 1
+            lineCoords(2).Z = 1
+            lineCoords(3).Z = 1
             lineCoords(1).rhw = 1
             lineCoords(2).rhw = 1
             lineCoords(3).rhw = 1
@@ -4619,9 +4619,9 @@ Public Sub Render()
         lineCoords(2).tv = 0
         lineCoords(3).tu = 0
         lineCoords(3).tv = 0
-        lineCoords(1).z = 1
-        lineCoords(2).z = 1
-        lineCoords(3).z = 1
+        lineCoords(1).Z = 1
+        lineCoords(2).Z = 1
+        lineCoords(3).Z = 1
         lineCoords(1).rhw = 1
         lineCoords(2).rhw = 1
         lineCoords(3).rhw = 1
@@ -4633,10 +4633,10 @@ Public Sub Render()
             lineCoords(2) = Polys(i).vertex(2)
             lineCoords(3) = Polys(i).vertex(3)
 
-            If Polys(i).vertex(1).z >= 0 And Polys(i).vertex(2).z >= 0 And Polys(i).vertex(3).z >= 0 Then
-                lineCoords(1).color = ARGB(255, RGB(Polys(i).vertex(1).z, Polys(i).vertex(1).z, Polys(i).vertex(1).z))
-                lineCoords(2).color = ARGB(255, RGB(Polys(i).vertex(2).z, Polys(i).vertex(2).z, Polys(i).vertex(2).z))
-                lineCoords(3).color = ARGB(255, RGB(Polys(i).vertex(3).z, Polys(i).vertex(3).z, Polys(i).vertex(3).z))
+            If Polys(i).vertex(1).Z >= 0 And Polys(i).vertex(2).Z >= 0 And Polys(i).vertex(3).Z >= 0 Then
+                lineCoords(1).color = ARGB(255, RGB(Polys(i).vertex(1).Z, Polys(i).vertex(1).Z, Polys(i).vertex(1).Z))
+                lineCoords(2).color = ARGB(255, RGB(Polys(i).vertex(2).Z, Polys(i).vertex(2).Z, Polys(i).vertex(2).Z))
+                lineCoords(3).color = ARGB(255, RGB(Polys(i).vertex(3).Z, Polys(i).vertex(3).Z, Polys(i).vertex(3).Z))
             End If
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
@@ -4705,8 +4705,8 @@ Public Sub Render()
                 tr.X = Int((Spawns(i).X - scrollCoords(2).X) * zoomFactor - 15 + 0.5)
                 tr.Y = Int((Spawns(i).Y - scrollCoords(2).Y) * zoomFactor - 15 + 0.5)
                 srcRect.Top = Int(Spawns(i).Team / 8) * (objTexSize.Y / 4)
-                srcRect.left = (Spawns(i).Team - (Int(Spawns(i).Team / 8) * 8)) * (objTexSize.X / 8)
-                srcRect.right = srcRect.left + (objTexSize.X / 8)
+                srcRect.Left = (Spawns(i).Team - (Int(Spawns(i).Team / 8) * 8)) * (objTexSize.X / 8)
+                srcRect.right = srcRect.Left + (objTexSize.X / 8)
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 If Spawns(i).active = 1 Then
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionClr)
@@ -4723,15 +4723,15 @@ Public Sub Render()
                 tr.X = Int((Colliders(i).X - scrollCoords(2).X) * zoomFactor - (objTexSize.X / 8) / 2 * sc.X + 0.5)
                 tr.Y = Int((Colliders(i).Y - scrollCoords(2).Y) * zoomFactor - (objTexSize.Y / 4) / 2 * sc.Y + 0.5)
                 If Colliders(i).active = 1 Then
-                    srcRect.left = 0
+                    srcRect.Left = 0
                     srcRect.Top = (objTexSize.Y / 4) * 3
-                    srcRect.right = srcRect.left + (objTexSize.X / 8)
+                    srcRect.right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 Else
-                    srcRect.left = (objTexSize.X / 8)
+                    srcRect.Left = (objTexSize.X / 8)
                     srcRect.Top = (objTexSize.Y / 4) * 2
-                    srcRect.right = srcRect.left + (objTexSize.X / 8)
+                    srcRect.right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 End If
@@ -4746,9 +4746,9 @@ Public Sub Render()
         rc.X = (objTexSize.X / 8) / 2
         rc.Y = (objTexSize.Y / 4) / 2
         If lightCount > 0 Then
-            srcRect.left = (objTexSize.X / 8) * 7
+            srcRect.Left = (objTexSize.X / 8) * 7
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.left + (objTexSize.X / 8)
+            srcRect.right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             For i = 1 To lightCount
                 objClr = ARGB(255, RGB(Lights(i).color.blue, Lights(i).color.green, Lights(i).color.red))
@@ -4771,17 +4771,17 @@ Public Sub Render()
         If mnuGostek.Checked Then ' gostek
             sc.X = 32 / (objTexSize.X / 8) * zoomFactor
             sc.Y = 32 / (objTexSize.Y / 4) * zoomFactor
-            srcRect.left = (objTexSize.X / 8) * 2 + 1
+            srcRect.Left = (objTexSize.X / 8) * 2 + 1
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.left + (objTexSize.X / 8) - 2
+            srcRect.right = srcRect.Left + (objTexSize.X / 8) - 2
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             tr.X = mouseCoords.X - 16 * zoomFactor
             tr.Y = mouseCoords.Y - 16 * zoomFactor
             scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
         ElseIf mnuCollider.Checked = True Then ' collider
-            srcRect.left = (objTexSize.X / 8)
+            srcRect.Left = (objTexSize.X / 8)
             srcRect.Top = (objTexSize.Y / 4) * 2
-            srcRect.right = srcRect.left + (objTexSize.X / 8)
+            srcRect.right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             sc.X = Colliders(0).radius / (objTexSize.X / 8) * zoomFactor
             sc.Y = Colliders(0).radius / (objTexSize.Y / 4) * zoomFactor
@@ -4794,8 +4794,8 @@ Public Sub Render()
             tr.X = Spawns(0).X - 15
             tr.Y = Spawns(0).Y - 15
             srcRect.Top = Int(Spawns(0).Team / 8) * (objTexSize.Y / 4)
-            srcRect.left = (Spawns(0).Team - (Int(Spawns(0).Team / 8) * 8)) * (objTexSize.X / 8)
-            srcRect.right = srcRect.left + (objTexSize.X / 8)
+            srcRect.Left = (Spawns(0).Team - (Int(Spawns(0).Team / 8) * 8)) * (objTexSize.X / 8)
+            srcRect.right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
         End If
@@ -4805,9 +4805,9 @@ Public Sub Render()
     If gostek.X <> 0 Or gostek.Y <> 0 Then
         sc.X = 32 / (objTexSize.X / 8) * zoomFactor
         sc.Y = 32 / (objTexSize.Y / 4) * zoomFactor
-        srcRect.left = ((objTexSize.X / 8) * 2) + 1
+        srcRect.Left = ((objTexSize.X / 8) * 2) + 1
         srcRect.Top = (objTexSize.Y / 4) * 2
-        srcRect.right = srcRect.left + (objTexSize.X / 8) - 2
+        srcRect.right = srcRect.Left + (objTexSize.X / 8) - 2
         srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
         tr.X = (gostek.X - 16 - scrollCoords(2).X) * zoomFactor
         tr.Y = (gostek.Y - 16 - scrollCoords(2).Y) * zoomFactor
@@ -4963,9 +4963,9 @@ Public Sub Render()
             lineCoords(2) = Polys(i).vertex(2)
             lineCoords(3) = Polys(i).vertex(3)
 
-            lineCoords(1).z = 1
-            lineCoords(2).z = 1
-            lineCoords(3).z = 1
+            lineCoords(1).Z = 1
+            lineCoords(2).Z = 1
+            lineCoords(3).Z = 1
             lineCoords(1).rhw = 1
             lineCoords(2).rhw = 1
             lineCoords(3).rhw = 1
@@ -4999,9 +4999,9 @@ Public Sub Render()
             lineCoords(2) = Polys(selectedPolys(i)).vertex(2)
             lineCoords(3) = Polys(selectedPolys(i)).vertex(3)
 
-            lineCoords(1).z = 1: lineCoords(1).rhw = 1
-            lineCoords(2).z = 1: lineCoords(2).rhw = 1
-            lineCoords(3).z = 1: lineCoords(3).rhw = 1
+            lineCoords(1).Z = 1: lineCoords(1).rhw = 1
+            lineCoords(2).Z = 1: lineCoords(2).rhw = 1
+            lineCoords(3).Z = 1: lineCoords(3).rhw = 1
 
             If vertexList(selectedPolys(i)).vertex(1) = 1 Or vertexList(selectedPolys(i)).vertex(1) = 3 Then
                 lineCoords(1).color = pointClr
@@ -5101,21 +5101,21 @@ Public Sub Render()
             If (Waypoints(i).pathNum = 1 And frmWaypoints.showPaths <> 2) Or (Waypoints(i).pathNum = 2 And frmWaypoints.showPaths <> 1) Then
                 If Waypoints(i).selected = True Then
                     If Waypoints(i).pathNum = 1 Then
-                        srcRect.left = (objTexSize.X / 8) * 5
+                        srcRect.Left = (objTexSize.X / 8) * 5
                     Else
-                        srcRect.left = (objTexSize.X / 8) * 6
+                        srcRect.Left = (objTexSize.X / 8) * 6
                     End If
                 Else
                     If Waypoints(i).pathNum = 1 Then
-                        srcRect.left = (objTexSize.X / 8) * 3
+                        srcRect.Left = (objTexSize.X / 8) * 3
                     Else
-                        srcRect.left = (objTexSize.X / 8) * 4
+                        srcRect.Left = (objTexSize.X / 8) * 4
                     End If
                 End If
                 sc.X = 32 / (objTexSize.X / 8)
                 sc.Y = 32 / (objTexSize.Y / 4)
                 srcRect.Top = (objTexSize.Y / 4) * 2
-                srcRect.right = srcRect.left + (objTexSize.X / 8)
+                srcRect.right = srcRect.Left + (objTexSize.X / 8)
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 tr.X = Int((Waypoints(i).X - scrollCoords(2).X) * zoomFactor - 15 + 0.5)
                 tr.Y = Int((Waypoints(i).Y - scrollCoords(2).Y) * zoomFactor - 15 + 0.5)
@@ -5824,7 +5824,7 @@ Private Sub Form_DblClick()
         toolAction = True
     ElseIf currentTool = TOOL_VSELECT Then 'vertex selection
         toolAction = True
-        selectedCoords(1).X = MouseHelper.CursorX - (Me.left / Screen.TwipsPerPixelX) - 1
+        selectedCoords(1).X = MouseHelper.CursorX - (Me.Left / Screen.TwipsPerPixelX) - 1
         selectedCoords(1).Y = MouseHelper.CursorY - (Me.Top / Screen.TwipsPerPixelY) - 1
         selectedCoords(2).X = selectedCoords(1).X
         selectedCoords(2).Y = selectedCoords(1).Y
@@ -5859,14 +5859,14 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         ElseIf currentFunction = TOOL_SCENERY Then
             If tvwScenery.Visible = False Then
                 If Me.Tag = vbMaximized Then
-                    tvwScenery.left = mouseCoords.X
+                    tvwScenery.Left = mouseCoords.X
                     If mouseCoords.Y + tvwScenery.Height > Me.ScaleHeight - 17 Then
                         tvwScenery.Top = Me.ScaleHeight - tvwScenery.Height - 17
                     Else
                         tvwScenery.Top = mouseCoords.Y
                     End If
                 Else
-                    tvwScenery.left = 0
+                    tvwScenery.Left = 0
                     tvwScenery.Top = 41
                 End If
             End If
@@ -6148,7 +6148,7 @@ Private Sub CreateLight(X As Single, Y As Single)
     ReDim Preserve Lights(lightCount)
     Lights(lightCount).X = X / zoomFactor + scrollCoords(2).X
     Lights(lightCount).Y = Y / zoomFactor + scrollCoords(2).Y
-    Lights(lightCount).z = 255
+    Lights(lightCount).Z = 255
     Lights(lightCount).color = polyClr
     Lights(lightCount).intensity = opacity
     Lights(lightCount).range = 0
@@ -6190,23 +6190,23 @@ Private Sub applyLights(Optional toSel As Boolean = False)
         ' get poly vectors
         v1.X = PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(2).X
         v1.Y = PolyCoords(i).vertex(1).Y - PolyCoords(i).vertex(2).Y
-        v1.z = Polys(i).vertex(1).z - Polys(i).vertex(2).z
+        v1.Z = Polys(i).vertex(1).Z - Polys(i).vertex(2).Z
 
         v2.X = PolyCoords(i).vertex(1).X - PolyCoords(i).vertex(3).X
         v2.Y = PolyCoords(i).vertex(1).Y - PolyCoords(i).vertex(3).Y
-        v2.z = Polys(i).vertex(1).z - Polys(i).vertex(3).z
+        v2.Z = Polys(i).vertex(1).Z - Polys(i).vertex(3).Z
 
         ' get poly normal
-        polyNormal.X = (v1.Y * v2.z) - (v1.z * v2.Y)
-        polyNormal.Y = (v1.z * v2.X) - (v1.X * v2.z)
-        polyNormal.z = (v1.X * v2.Y) - (v1.Y * v2.X)
+        polyNormal.X = (v1.Y * v2.Z) - (v1.Z * v2.Y)
+        polyNormal.Y = (v1.Z * v2.X) - (v1.X * v2.Z)
+        polyNormal.Z = (v1.X * v2.Y) - (v1.Y * v2.X)
 
         ' normalize poly normal
-        mag = Sqr(polyNormal.X ^ 2 + polyNormal.Y ^ 2 + polyNormal.z ^ 2)
+        mag = Sqr(polyNormal.X ^ 2 + polyNormal.Y ^ 2 + polyNormal.Z ^ 2)
         If mag > 0 Then
             polyNormal.X = polyNormal.X / mag
             polyNormal.Y = polyNormal.Y / mag
-            polyNormal.z = polyNormal.z / mag
+            polyNormal.Z = polyNormal.Z / mag
         End If
 
         For j = 1 To 3
@@ -6217,16 +6217,16 @@ Private Sub applyLights(Optional toSel As Boolean = False)
                 ' get light dir vector
                 lightDir.X = Lights(k).X - PolyCoords(i).vertex(j).X
                 lightDir.Y = Lights(k).Y - PolyCoords(i).vertex(j).Y
-                lightDir.z = Lights(k).z - Polys(i).vertex(j).z
+                lightDir.Z = Lights(k).Z - Polys(i).vertex(j).Z
                 ' normalize light dir
-                mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.z ^ 2)
+                mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.Z ^ 2)
                 If mag > 0 Then
                     lightDir.X = lightDir.X / mag
                     lightDir.Y = lightDir.Y / mag
-                    lightDir.z = lightDir.z / mag
+                    lightDir.Z = lightDir.Z / mag
                 End If
                 ' get angle between light dir and poly normal (dot product)
-                diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.z * lightDir.z)
+                diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.Z * lightDir.Z)
                 If diffuseFactor < 0 Then diffuseFactor = 0
 
                 If Lights(k).range = 0 Then ' normal
@@ -6299,39 +6299,39 @@ Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
     ' get poly vectors
     v1.X = PolyCoords(pIndex).vertex(1).X - PolyCoords(pIndex).vertex(2).X
     v1.Y = PolyCoords(pIndex).vertex(1).Y - PolyCoords(pIndex).vertex(2).Y
-    v1.z = Polys(pIndex).vertex(1).z - Polys(pIndex).vertex(2).z
+    v1.Z = Polys(pIndex).vertex(1).Z - Polys(pIndex).vertex(2).Z
 
     v2.X = PolyCoords(pIndex).vertex(1).X - PolyCoords(pIndex).vertex(3).X
     v2.Y = PolyCoords(pIndex).vertex(1).Y - PolyCoords(pIndex).vertex(3).Y
-    v2.z = Polys(pIndex).vertex(1).z - Polys(pIndex).vertex(3).z
+    v2.Z = Polys(pIndex).vertex(1).Z - Polys(pIndex).vertex(3).Z
 
     ' get poly normal
-    polyNormal.X = (v1.Y * v2.z) - (v1.z * v2.Y)
-    polyNormal.Y = (v1.z * v2.X) - (v1.X * v2.z)
-    polyNormal.z = (v1.X * v2.Y) - (v1.Y * v2.X)
+    polyNormal.X = (v1.Y * v2.Z) - (v1.Z * v2.Y)
+    polyNormal.Y = (v1.Z * v2.X) - (v1.X * v2.Z)
+    polyNormal.Z = (v1.X * v2.Y) - (v1.Y * v2.X)
 
     ' normalize poly normal
-    mag = Sqr(polyNormal.X ^ 2 + polyNormal.Y ^ 2 + polyNormal.z ^ 2)
+    mag = Sqr(polyNormal.X ^ 2 + polyNormal.Y ^ 2 + polyNormal.Z ^ 2)
     If mag > 0 Then
         polyNormal.X = polyNormal.X / mag
         polyNormal.Y = polyNormal.Y / mag
-        polyNormal.z = polyNormal.z / mag
+        polyNormal.Z = polyNormal.Z / mag
     End If
 
     For k = 1 To lightCount
         ' get light dir vector
         lightDir.X = Lights(k).X - PolyCoords(pIndex).vertex(vIndex).X
         lightDir.Y = Lights(k).Y - PolyCoords(pIndex).vertex(vIndex).Y
-        lightDir.z = Lights(k).z - Polys(pIndex).vertex(vIndex).z
+        lightDir.Z = Lights(k).Z - Polys(pIndex).vertex(vIndex).Z
         ' normalize light dir
-        mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.z ^ 2)
+        mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.Z ^ 2)
         If mag > 0 Then
             lightDir.X = lightDir.X / mag
             lightDir.Y = lightDir.Y / mag
-            lightDir.z = lightDir.z / mag
+            lightDir.Z = lightDir.Z / mag
         End If
         ' get angle between light dir and poly normal (dot product)
-        diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.z * lightDir.z)
+        diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.Z * lightDir.Z)
         If diffuseFactor < 0 Then diffuseFactor = 0
 
         ' calculate final color components
@@ -8035,7 +8035,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(pNum).vertex(j).z = Polys(pNum).vertex(j).z * (1 - opacity) + polyClr.red * opacity
+                            Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + polyClr.red * opacity
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
                             edited = True
                         End If
@@ -8049,7 +8049,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(i).vertex(j).z = Polys(i).vertex(j).z * (1 - opacity) + polyClr.red * opacity
+                            Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + polyClr.red * opacity
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
                             edited = True
                         End If
@@ -8158,11 +8158,11 @@ Private Sub depthPicker(X As Single, Y As Single)
     End If
 
     If vNum > 0 Then ' poly color absorbed
-        If Polys(pNum).vertex(vNum).z >= 0 And Polys(pNum).vertex(vNum).z <= 255 Then
-            polyClr.red = Polys(pNum).vertex(vNum).z
-        ElseIf Polys(pNum).vertex(vNum).z < 0 Then
+        If Polys(pNum).vertex(vNum).Z >= 0 And Polys(pNum).vertex(vNum).Z <= 255 Then
+            polyClr.red = Polys(pNum).vertex(vNum).Z
+        ElseIf Polys(pNum).vertex(vNum).Z < 0 Then
             polyClr.red = 0
-        ElseIf Polys(pNum).vertex(vNum).z > 255 Then
+        ElseIf Polys(pNum).vertex(vNum).Z > 255 Then
             polyClr.red = 255
         End If
         polyClr.green = polyClr.red
@@ -8569,9 +8569,9 @@ Private Sub CreatePolys(X As Single, Y As Single)
         applyLightsToVert CInt(mPolyCount), 2
         applyLightsToVert CInt(mPolyCount), 3
 
-        Polys(mPolyCount).Perp.vertex(1).z = 2
-        Polys(mPolyCount).Perp.vertex(2).z = 2
-        Polys(mPolyCount).Perp.vertex(3).z = 2
+        Polys(mPolyCount).Perp.vertex(1).Z = 2
+        Polys(mPolyCount).Perp.vertex(2).Z = 2
+        Polys(mPolyCount).Perp.vertex(3).Z = 2
 
         SaveUndo
         If mnuQuad.Checked And Not creatingQuad Then
@@ -8615,8 +8615,8 @@ Private Sub startSketch(X As Single, Y As Single)
     sketch(sketchLines).vertex(2).X = sketch(sketchLines).vertex(1).X
     sketch(sketchLines).vertex(2).Y = sketch(sketchLines).vertex(1).Y
 
-    sketch(sketchLines).vertex(1).z = 1
-    sketch(sketchLines).vertex(2).z = 1
+    sketch(sketchLines).vertex(1).Z = 1
+    sketch(sketchLines).vertex(2).Z = 1
 
     Render
 
@@ -8640,8 +8640,8 @@ Private Sub lineSketch(X As Single, Y As Single)
     sketch(sketchLines).vertex(2).X = Int(X / zoomFactor + scrollCoords(2).X + 0.5)
     sketch(sketchLines).vertex(2).Y = Int(Y / zoomFactor + scrollCoords(2).Y + 0.5)
 
-    sketch(sketchLines).vertex(1).z = 1
-    sketch(sketchLines).vertex(2).z = 1
+    sketch(sketchLines).vertex(1).Z = 1
+    sketch(sketchLines).vertex(2).Z = 1
 
     Exit Sub
 
@@ -8673,8 +8673,8 @@ Private Sub linkSketch(X As Single, Y As Single)
         sketch(sketchLines).vertex(2).X = X / zoomFactor + scrollCoords(2).X
         sketch(sketchLines).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
 
-        sketch(sketchLines).vertex(1).z = 1
-        sketch(sketchLines).vertex(2).z = 1
+        sketch(sketchLines).vertex(1).Z = 1
+        sketch(sketchLines).vertex(2).Z = 1
     End If
 
     Exit Sub
@@ -10400,7 +10400,7 @@ End Function
 Private Sub lblMousePosition_Click()
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
-    formLeft = Me.left / Screen.TwipsPerPixelX
+    formLeft = Me.Left / Screen.TwipsPerPixelX
     formTop = Me.Top / Screen.TwipsPerPixelY
 End Sub
 
@@ -11121,7 +11121,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
         formWidth = Me.Width / Screen.TwipsPerPixelX
 
         picResize.Top = formHeight - picResize.Height
-        picResize.left = formWidth - picResize.Width
+        picResize.Left = formWidth - picResize.Width
 
         picResize.Visible = True
         noRedraw = False
@@ -11163,28 +11163,28 @@ Private Sub picTitle_MouseMove(Button As Integer, Shift As Integer, X As Single,
         SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
         If Len(frmDisplay.Tag) <> 0 Then
-            QuickMoveAndShow frmDisplay, (frmDisplay.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmDisplay, (frmDisplay.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmInfo.Tag) <> 0 Then
-            QuickMoveAndShow frmInfo, (frmInfo.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmInfo, (frmInfo.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmPalette.Tag) <> 0 Then
-            QuickMoveAndShow frmPalette, (frmPalette.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmPalette, (frmPalette.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmScenery.Tag) <> 0 Then
-            QuickMoveAndShow frmScenery, (frmScenery.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmScenery, (frmScenery.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTexture.Tag) <> 0 Then
-            QuickMoveAndShow frmTexture, (frmTexture.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmTexture, (frmTexture.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTools.Tag) <> 0 Then
-            QuickMoveAndShow frmTools, (frmTools.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmTools, (frmTools.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-            QuickMoveAndShow frmWaypoints, (frmWaypoints.left + (Me.left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+            QuickMoveAndShow frmWaypoints, (frmWaypoints.Left + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
         End If
 
-        formLeft = Me.left / Screen.TwipsPerPixelX
+        formLeft = Me.Left / Screen.TwipsPerPixelX
         formTop = Me.Top / Screen.TwipsPerPixelY
     End If
 
@@ -11367,8 +11367,8 @@ Private Sub txtZoom_LostFocus()
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     ElseIf IsNumeric(txtZoom.Text) Then
         zoomInput = txtZoom.Text
-    ElseIf IsNumeric(mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And right$(txtZoom.Text, 1) = "%" Then
-        zoomInput = mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)
+    ElseIf IsNumeric(Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And right$(txtZoom.Text, 1) = "%" Then
+        zoomInput = Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)
     Else
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     End If
@@ -11837,7 +11837,7 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
 
     temp = Data.Files.Item(1)
     If right(temp, 1) = """" Then
-        temp = left(temp, Len(temp) - 1)
+        temp = Left(temp, Len(temp) - 1)
         temp = right(temp, Len(temp) - 1)
     End If
 
@@ -11922,12 +11922,12 @@ End Sub
 
 Private Sub Form_Resize()
 
-    picHelp.left = frmSoldatMapEditor.ScaleWidth - 80
-    picMinimize.left = frmSoldatMapEditor.ScaleWidth - 48
-    picMaximize.left = frmSoldatMapEditor.ScaleWidth - 32
-    picExit.left = frmSoldatMapEditor.ScaleWidth - 16
+    picHelp.Left = frmSoldatMapEditor.ScaleWidth - 80
+    picMinimize.Left = frmSoldatMapEditor.ScaleWidth - 48
+    picMaximize.Left = frmSoldatMapEditor.ScaleWidth - 32
+    picExit.Left = frmSoldatMapEditor.ScaleWidth - 16
 
-    picProgress.left = frmSoldatMapEditor.ScaleWidth - 136
+    picProgress.Left = frmSoldatMapEditor.ScaleWidth - 136
 
 End Sub
 
@@ -12317,7 +12317,7 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
     Dim sNull As String
     sNull = Chr$(0)
 
-    leftVal = window.left / Screen.TwipsPerPixelX
+    leftVal = window.Left / Screen.TwipsPerPixelX
     topVal = window.Top / Screen.TwipsPerPixelY
 
     iniString = _
@@ -12557,7 +12557,7 @@ Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) 
 
     eIndex = InStr(eIndex, sectionString, "=") + 1
     nIndex = InStr(eIndex, sectionString, vbNullChar)
-    getNextValue = mid$(sectionString, eIndex, nIndex)
+    getNextValue = Mid$(sectionString, eIndex, nIndex)
 
 End Function
 
@@ -12572,12 +12572,12 @@ Private Sub loadWorkspace(Optional FileName As String = "current.ini", Optional 
     Me.formTop = loadInt("Main", "Top", appPath & "\workspace\" & FileName)
 
     picResize.Top = Me.formHeight - picResize.Height
-    picResize.left = Me.formWidth - picResize.Width
+    picResize.Left = Me.formWidth - picResize.Width
     
     If Me.Tag = vbNormal Then
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
-        Me.left = formLeft * Screen.TwipsPerPixelX
+        Me.Left = formLeft * Screen.TwipsPerPixelX
         Me.Top = formTop * Screen.TwipsPerPixelY
     Else
       picResize.Visible = False
@@ -12882,22 +12882,22 @@ Private Sub mnuCompile_Click()
             prompt = False
 
             For i = 1 To Len(commonDialog.FileName)
-                If mid(commonDialog.FileName, i, 1) = "\" Then
+                If Mid(commonDialog.FileName, i, 1) = "\" Then
                     length = i + 1
                 End If
             Next
-            lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
+            lastCompiled = Mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
         End If
     Else
         SaveAndCompile commonDialog.FileName
         prompt = False
 
         For i = 1 To Len(commonDialog.FileName)
-            If mid(commonDialog.FileName, i, 1) = "\" Then
+            If Mid(commonDialog.FileName, i, 1) = "\" Then
                 length = i + 1
             End If
         Next
-        lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
+        lastCompiled = Mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
     End If
 
     RegainFocus
@@ -12932,11 +12932,11 @@ Private Sub mnuCompileAs_Click()
         prompt = False
 
         For i = 1 To Len(commonDialog.FileName)
-            If mid(commonDialog.FileName, i, 1) = "\" Then
+            If Mid(commonDialog.FileName, i, 1) = "\" Then
                 length = i + 1
             End If
         Next
-        lastCompiled = mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
+        lastCompiled = Mid(commonDialog.FileName, length, Len(commonDialog.FileName) - length - 3)
     End If
 
     RegainFocus
@@ -13069,7 +13069,7 @@ Private Sub savePrefab(FileName As String)
                 elementString = frmScenery.lstScenery.List(Scenery(i).Style - 1)
                 elementName(0) = Len(elementString)
                 For j = 1 To elementName(0)
-                    elementName(j) = Asc(mid(elementString, j, 1))
+                    elementName(j) = Asc(Mid(elementString, j, 1))
                 Next
                 Put #1, , elementName
             End If
@@ -13894,12 +13894,12 @@ Private Sub mnuVisible_Click()
 
     For i = 1 To numSelectedPolys
         For j = 1 To 3
-            If Polys(selectedPolys(i)).vertex(j).z < 0 Then
+            If Polys(selectedPolys(i)).vertex(j).Z < 0 Then
                 Polys(selectedPolys(i)).vertex(j).rhw = 1
-                Polys(selectedPolys(i)).vertex(j).z = 1
+                Polys(selectedPolys(i)).vertex(j).Z = 1
             Else
                 Polys(selectedPolys(i)).vertex(j).rhw = -10
-                Polys(selectedPolys(i)).vertex(j).z = -1
+                Polys(selectedPolys(i)).vertex(j).Z = -1
             End If
         Next
     Next
@@ -13965,7 +13965,7 @@ Private Sub mnuSplit_Click()
 
     Dim i As Integer
     Dim j As Integer
-    Dim left As Byte
+    Dim Left As Byte
     Dim right As Byte
     Dim clr1 As TColor
     Dim clr2 As TColor
@@ -13982,13 +13982,13 @@ Private Sub mnuSplit_Click()
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
                 If j = 1 Then
-                    left = 2
+                    Left = 2
                     right = 3
                 ElseIf j = 2 Then
-                    left = 3
+                    Left = 3
                     right = 1
                 ElseIf j = 3 Then
-                    left = 1
+                    Left = 1
                     right = 2
                 End If
                 mPolyCount = mPolyCount + 1
@@ -14003,18 +14003,18 @@ Private Sub mnuSplit_Click()
                 vertexList(mPolyCount).vertex(j) = 1
 
                 PolyCoords(mPolyCount).vertex(j) = PolyCoords(selectedPolys(i)).vertex(j)
-                PolyCoords(mPolyCount).vertex(left) = PolyCoords(selectedPolys(i)).vertex(left)
+                PolyCoords(mPolyCount).vertex(Left) = PolyCoords(selectedPolys(i)).vertex(Left)
 
-                PolyCoords(mPolyCount).vertex(right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).X, PolyCoords(selectedPolys(i)).vertex(right).X)
-                PolyCoords(mPolyCount).vertex(right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(left).Y, PolyCoords(selectedPolys(i)).vertex(right).Y)
+                PolyCoords(mPolyCount).vertex(right).X = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).X, PolyCoords(selectedPolys(i)).vertex(right).X)
+                PolyCoords(mPolyCount).vertex(right).Y = Midpoint(PolyCoords(selectedPolys(i)).vertex(Left).Y, PolyCoords(selectedPolys(i)).vertex(right).Y)
 
-                PolyCoords(selectedPolys(i)).vertex(left) = PolyCoords(mPolyCount).vertex(right)
+                PolyCoords(selectedPolys(i)).vertex(Left) = PolyCoords(mPolyCount).vertex(right)
 
                 Polys(mPolyCount).vertex(j) = Polys(selectedPolys(i)).vertex(j)
-                Polys(mPolyCount).vertex(left) = Polys(selectedPolys(i)).vertex(left)
-                Polys(mPolyCount).Perp.vertex(1).z = 2
-                Polys(mPolyCount).Perp.vertex(2).z = 2
-                Polys(mPolyCount).Perp.vertex(3).z = 2
+                Polys(mPolyCount).vertex(Left) = Polys(selectedPolys(i)).vertex(Left)
+                Polys(mPolyCount).Perp.vertex(1).Z = 2
+                Polys(mPolyCount).Perp.vertex(2).Z = 2
+                Polys(mPolyCount).Perp.vertex(3).Z = 2
 
                 ' coords
                 Polys(mPolyCount).vertex(right) = Polys(selectedPolys(i)).vertex(right)
@@ -14022,28 +14022,28 @@ Private Sub mnuSplit_Click()
                 Polys(mPolyCount).vertex(right).Y = (PolyCoords(mPolyCount).vertex(right).Y - scrollCoords(2).Y) * zoomFactor
 
                 ' texture coords
-                Polys(mPolyCount).vertex(right).tu = Midpoint(Polys(selectedPolys(i)).vertex(right).tu, Polys(mPolyCount).vertex(left).tu)
-                Polys(mPolyCount).vertex(right).tv = Midpoint(Polys(selectedPolys(i)).vertex(right).tv, Polys(mPolyCount).vertex(left).tv)
+                Polys(mPolyCount).vertex(right).tu = Midpoint(Polys(selectedPolys(i)).vertex(right).tu, Polys(mPolyCount).vertex(Left).tu)
+                Polys(mPolyCount).vertex(right).tv = Midpoint(Polys(selectedPolys(i)).vertex(right).tv, Polys(mPolyCount).vertex(Left).tv)
 
                 vertexList(mPolyCount).color(j) = vertexList(selectedPolys(i)).color(j)
-                vertexList(mPolyCount).color(left) = vertexList(selectedPolys(i)).color(left)
+                vertexList(mPolyCount).color(Left) = vertexList(selectedPolys(i)).color(Left)
 
                 ' colors
                 clr1 = vertexList(selectedPolys(i)).color(right)
-                clr2 = vertexList(mPolyCount).color(left)
+                clr2 = vertexList(mPolyCount).color(Left)
                 vertexList(mPolyCount).color(right).red = clr1.red * 0.5 + clr2.red * 0.5
                 vertexList(mPolyCount).color(right).green = clr1.green * 0.5 + clr2.green * 0.5
                 vertexList(mPolyCount).color(right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
 
-                vertexList(selectedPolys(i)).color(left) = vertexList(mPolyCount).color(right)
+                vertexList(selectedPolys(i)).color(Left) = vertexList(mPolyCount).color(right)
 
                 clr1 = getRGB(Polys(selectedPolys(i)).vertex(right).color)
-                clr2 = getRGB(Polys(mPolyCount).vertex(left).color)
+                clr2 = getRGB(Polys(mPolyCount).vertex(Left).color)
                 alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(right).color)
-                alpha2 = getAlpha(Polys(mPolyCount).vertex(left).color)
+                alpha2 = getAlpha(Polys(mPolyCount).vertex(Left).color)
                 Polys(mPolyCount).vertex(right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
 
-                Polys(selectedPolys(i)).vertex(left) = Polys(mPolyCount).vertex(right)
+                Polys(selectedPolys(i)).vertex(Left) = Polys(mPolyCount).vertex(right)
 
                 vertexList(mPolyCount).polyType = vertexList(selectedPolys(i)).polyType
             End If
@@ -14150,9 +14150,9 @@ Private Sub mnuCreate_Click()
         vertexList(mPolyCount).color(2) = tempClr
     End If
 
-    Polys(mPolyCount).Perp.vertex(1).z = 2
-    Polys(mPolyCount).Perp.vertex(2).z = 2
-    Polys(mPolyCount).Perp.vertex(3).z = 2
+    Polys(mPolyCount).Perp.vertex(1).Z = 2
+    Polys(mPolyCount).Perp.vertex(2).Z = 2
+    Polys(mPolyCount).Perp.vertex(3).Z = 2
 
     frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(6).Caption = getMapDimensions
@@ -14482,43 +14482,43 @@ Private Sub mnuResetWindows_Click()
 
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
-        Me.left = Screen.Width / 2 - Me.Width / 2 - Screen.TwipsPerPixelX
+        Me.Left = Screen.Width / 2 - Me.Width / 2 - Screen.TwipsPerPixelX
         Me.Top = Screen.Height / 2 - Me.Height / 2 - Screen.TwipsPerPixelY
 
         picResize.Top = formHeight - picResize.Height
-        picResize.left = formWidth - picResize.Width
+        picResize.Left = formWidth - picResize.Width
 
-        frmTools.left = Me.left - frmTools.Width + Screen.TwipsPerPixelX
+        frmTools.Left = Me.Left - frmTools.Width + Screen.TwipsPerPixelX
         frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
-        frmPalette.left = Me.left + Me.Width - Screen.TwipsPerPixelX
+        frmPalette.Left = Me.Left + Me.Width - Screen.TwipsPerPixelX
         frmPalette.Top = Me.Top + 41 * Screen.TwipsPerPixelY
-        frmDisplay.left = frmPalette.left
+        frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
-        frmScenery.left = Me.left + Me.Width - Screen.TwipsPerPixelX
+        frmScenery.Left = Me.Left + Me.Width - Screen.TwipsPerPixelX
         frmScenery.Top = frmDisplay.Top + frmDisplay.Height - Screen.TwipsPerPixelY
-        frmInfo.left = Me.left - frmInfo.Width + Screen.TwipsPerPixelX
+        frmInfo.Left = Me.Left - frmInfo.Width + Screen.TwipsPerPixelX
         frmInfo.Top = frmTools.Top + frmTools.Height - Screen.TwipsPerPixelY
-        frmWaypoints.left = Me.left - frmWaypoints.Width + Screen.TwipsPerPixelX
+        frmWaypoints.Left = Me.Left - frmWaypoints.Width + Screen.TwipsPerPixelX
         frmWaypoints.Top = frmInfo.Top + frmInfo.Height - Screen.TwipsPerPixelY
         frmTexture.Top = frmPalette.Top
-        frmTexture.left = frmPalette.left - frmTexture.Width + Screen.TwipsPerPixelX
+        frmTexture.Left = frmPalette.Left - frmTexture.Width + Screen.TwipsPerPixelX
 
         resetDevice
     Else
-        frmTools.left = Me.left
+        frmTools.Left = Me.Left
         frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
-        frmPalette.left = Me.left + Me.Width - frmPalette.Width
+        frmPalette.Left = Me.Left + Me.Width - frmPalette.Width
         frmPalette.Top = Me.Top + 41 * Screen.TwipsPerPixelY
-        frmDisplay.left = frmPalette.left
+        frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
-        frmWaypoints.left = Me.left
+        frmWaypoints.Left = Me.Left
         frmWaypoints.Top = Me.Top + Me.Height - frmWaypoints.Height - 19 * Screen.TwipsPerPixelY
-        frmScenery.left = Me.left + Me.Width - frmScenery.Width
+        frmScenery.Left = Me.Left + Me.Width - frmScenery.Width
         frmScenery.Top = frmDisplay.Top + frmDisplay.Height - Screen.TwipsPerPixelY
-        frmInfo.left = Me.left
+        frmInfo.Left = Me.Left
         frmInfo.Top = frmWaypoints.Top - frmInfo.Height + Screen.TwipsPerPixelY
         frmTexture.Top = frmPalette.Top
-        frmTexture.left = frmPalette.left - frmTexture.Width + Screen.TwipsPerPixelX
+        frmTexture.Left = frmPalette.Left - frmTexture.Width + Screen.TwipsPerPixelX
 
     End If
 
@@ -14716,7 +14716,7 @@ Public Sub getInfo()
         If numSelLights > 0 Then
             For i = 1 To lightCount
                 If Lights(i).selected = 1 Then
-                    frmInfo.txtLightProp(0).Text = Lights(i).z
+                    frmInfo.txtLightProp(0).Text = Lights(i).Z
                     frmInfo.txtLightProp(1).Text = Lights(i).range
                     frmInfo.picLight.BackColor = RGB(Lights(i).color.red, Lights(i).color.green, Lights(i).color.blue)
                     Exit For
@@ -14740,7 +14740,7 @@ Public Sub getInfo()
         frmInfo.txtBounciness.Enabled = False
         For j = 1 To 3
             If vertexList(selectedPolys(1)).vertex(j) = 1 Then
-                frmInfo.txtBounciness.Text = Int((Polys(selectedPolys(1)).Perp.vertex(j).z - 1) * 100)
+                frmInfo.txtBounciness.Text = Int((Polys(selectedPolys(1)).Perp.vertex(j).Z - 1) * 100)
                 If frmInfo.txtBounciness.Text < 0 Then
                     frmInfo.txtBounciness.Text = 0
                 End If
@@ -14915,7 +14915,7 @@ Public Sub applyBounciness(tehValue As Single)
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
             For j = 1 To 3
-                Polys(selectedPolys(i)).Perp.vertex(j).z = tehValue
+                Polys(selectedPolys(i)).Perp.vertex(j).Z = tehValue
             Next
         Next
     End If
@@ -14970,7 +14970,7 @@ Public Sub applyLightProp(ByVal tehValue As Single, Index As Integer)
     For i = 1 To lightCount
         If Lights(i).selected = 1 Then
             If Index = 0 Then 'z-coord
-                Lights(i).z = tehValue
+                Lights(i).Z = tehValue
             ElseIf Index = 1 Then
                 Lights(i).range = tehValue
             End If
@@ -15064,7 +15064,7 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
     If Me.Tag = vbMaximized Then
         RestoreBorderLessForm
         picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
-        picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
+        picResize.Left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
         MaximizeBorderLessForm
     End If
@@ -15139,7 +15139,7 @@ Private Sub picTitle_DblClick()
         RestoreBorderLessForm
 
         picResize.Top = (Me.Height / Screen.TwipsPerPixelY) - picResize.Height
-        picResize.left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
+        picResize.Left = (Me.Width / Screen.TwipsPerPixelX) - picResize.Width
     Else
         MaximizeBorderLessForm
     End If
@@ -15160,7 +15160,7 @@ Private Sub AutoTexture()
 
     Dim X As Single
     Dim Y As Single
-    Dim z As Single
+    Dim Z As Single
     Dim vertIndex As Integer
     Dim i As Integer
 
@@ -15172,18 +15172,18 @@ Private Sub AutoTexture()
 
     X = PolyCoords(selectedPolys(1)).vertex(vertIndex).X
     Y = PolyCoords(selectedPolys(1)).vertex(vertIndex).Y
-    z = Polys(selectedPolys(1)).vertex(vertIndex).z
+    Z = Polys(selectedPolys(1)).vertex(vertIndex).Z
 
     numSelectedPolys = 0
     ReDim selectedPolys(0)
 
-    SetTextureCoords X, Y, z, 0, 0
+    SetTextureCoords X, Y, Z, 0, 0
 
     Render
 
 End Sub
 
-Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single, tv As Single)
+Private Sub SetTextureCoords(X As Single, Y As Single, Z As Single, tu As Single, tv As Single)
 
     Dim i As Integer
     Dim j As Integer
@@ -15194,7 +15194,7 @@ Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single
             ' if vertex is at these coords and not marked
             If Int(PolyCoords(i).vertex(j).X) = Int(X) _
                     And Int(PolyCoords(i).vertex(j).Y) = Int(Y) _
-                    And Int(Polys(i).vertex(j).z) = Int(z) _
+                    And Int(Polys(i).vertex(j).Z) = Int(Z) _
                     And vertexList(i).vertex(j) < 10 Then
                 ' set its tex coords to these tex coords
                 Polys(i).vertex(j).tu = tu
@@ -15209,7 +15209,7 @@ Private Sub SetTextureCoords(X As Single, Y As Single, z As Single, tu As Single
                     ' calculate new tex coords
 
                     ' call this routine again with new coords & tex coords
-                    SetTextureCoords PolyCoords(i).vertex(k).X, PolyCoords(i).vertex(k).Y, Polys(i).vertex(k).z, 0, 0
+                    SetTextureCoords PolyCoords(i).vertex(k).X, PolyCoords(i).vertex(k).Y, Polys(i).vertex(k).Z, 0, 0
                 End If
             End If
         Next

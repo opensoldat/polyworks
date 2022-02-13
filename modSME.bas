@@ -3,8 +3,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private fileName, Token, X, Y, Val
-    'Private fileName, Token, X, Y, Val
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 Public Const PI As Single = 3.14159265358979  'mmm... PI
@@ -262,8 +262,8 @@ Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Lon
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 
 'GDI+ functions
-Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
-Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
+Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As Long, GpImage As Long) As Long
+Private Declare Function GdiplusStartup Lib "gdiplus.dll" (token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
 Private Declare Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal Img As Long, ByVal X As Long, ByVal Y As Long, ByVal Width As Long, ByVal Height As Long) As Long
 Private Declare Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As Long) As Long
@@ -271,11 +271,11 @@ Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal image As Long
 Private Declare Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As Long, ByVal hpal As Long, GpBitmap As Long) As Long
 Private Declare Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal image As Long, Width As Long) As Long
 Private Declare Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal image As Long, Height As Long) As Long
-Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As Long)
+Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal token As Long)
 
 'functions for gif loading
-Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal fileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
-Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal fileName As Long, ByRef Bitmap As Long) As Long
+Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal FileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
+Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal FileName As Long, ByRef Bitmap As Long) As Long
 Private Declare Function GdipCreateHBITMAPFromBitmap Lib "gdiplus.dll" (ByVal Bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
 Private Declare Function GdipGetImageEncodersSize Lib "gdiplus.dll" (ByRef numEncoders As Long, ByRef Size As Long) As Long
 Private Declare Function GdipGetImageEncoders Lib "gdiplus.dll" (ByVal numEncoders As Long, ByVal Size As Long, ByRef Encoders As Any) As Long
@@ -359,9 +359,9 @@ End Function
 
 Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
 
-    Dim Token As Long
+    Dim token As Long
 
-    Token = InitGDIPlus
+    token = InitGDIPlus
 
     If SaveImageAsPNG(src, dest) Then
       GifToPng = -1
@@ -369,7 +369,7 @@ Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
       GifToPng = 5
     End If
 
-    FreeGDIPlus Token
+    FreeGDIPlus token
 
 End Function
 
@@ -472,7 +472,7 @@ Public Function SelectFolder(ownerForm As Form) As String
 
     If SHGetPathFromIDList(ByVal pidl, ByVal path) Then
         pos = InStr(path, Chr$(0))
-        SelectFolder = LCase$(left(path, pos - 1))
+        SelectFolder = LCase$(Left(path, pos - 1))
     End If
 
     Call CoTaskMemFree(pidl)
@@ -487,27 +487,27 @@ Public Function snapForm(currentForm As Form, otherForm As Form) As String
 
     'snap bottom to bottom
     If Abs(currentForm.Top + currentForm.Height - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+        If (currentForm.Left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.Left And currentForm.Left <= (otherForm.Left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - currentForm.Height
             snapForm = "snap"
         End If
     'snap bottom to top
     ElseIf Abs(currentForm.Top + currentForm.Height - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+        If (currentForm.Left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.Left And currentForm.Left <= (otherForm.Left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top - currentForm.Height + Screen.TwipsPerPixelY
             snapForm = "snap"
         End If
     End If
     'snap right to right
-    If Abs(currentForm.left + currentForm.Width - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
+    If Abs(currentForm.Left + currentForm.Width - otherForm.Left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left + otherForm.Width - currentForm.Width
+            currentForm.Left = otherForm.Left + otherForm.Width - currentForm.Width
             snapForm = "snap"
         End If
     'snap right to left
-    ElseIf Abs(currentForm.left + currentForm.Width - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
+    ElseIf Abs(currentForm.Left + currentForm.Width - otherForm.Left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left - currentForm.Width + Screen.TwipsPerPixelX
+            currentForm.Left = otherForm.Left - currentForm.Width + Screen.TwipsPerPixelX
             snapForm = "snap"
         End If
     End If
@@ -515,27 +515,27 @@ Public Function snapForm(currentForm As Form, otherForm As Form) As String
 
     'snap top to top
     If Abs(currentForm.Top - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+        If (currentForm.Left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.Left And currentForm.Left <= (otherForm.Left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top
             snapForm = "snap"
         End If
     'snap top to bottom
     ElseIf Abs(currentForm.Top - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+        If (currentForm.Left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.Left And currentForm.Left <= (otherForm.Left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
             currentForm.Top = otherForm.Top + otherForm.Height - Screen.TwipsPerPixelY
             snapForm = "snap"
         End If
     End If
     'snap left to left
-    If Abs(currentForm.left - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
+    If Abs(currentForm.Left - otherForm.Left) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left
+            currentForm.Left = otherForm.Left
            snapForm = "snap"
         End If
     'snap left to right
-    ElseIf Abs(currentForm.left - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
+    ElseIf Abs(currentForm.Left - otherForm.Left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
         If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left + otherForm.Width - Screen.TwipsPerPixelX
+            currentForm.Left = otherForm.Left + otherForm.Width - Screen.TwipsPerPixelX
             snapForm = "snap"
         End If
     End If
@@ -579,7 +579,7 @@ Public Function GetSoldatDir() As String
     GetSoldatDir = Replace(GetSoldatDir, "/", "\")
 
     If Not DirExists(GetSoldatDir) And FileExists(GetSoldatDir) Then
-        GetSoldatDir = left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
+        GetSoldatDir = Left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
     End If
 
     If Not DirExists(GetSoldatDir) Then
@@ -628,14 +628,14 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
         'find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-            GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
+            GetRegValue = Left$(lpValue, lstrlenW(StrPtr(lpValue)))
         End If
     End If
 
 End Function
 
 
-Public Function getFileDate(fileName As String) As Long
+Public Function getFileDate(FileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -651,7 +651,7 @@ Public Function getFileDate(fileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
 
@@ -673,59 +673,59 @@ ErrorHandler:
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
+Public Sub saveSection(sectionName As String, sectionData As String, Optional FileName As String)
 
     Dim lReturn  As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
+    lReturn = WritePrivateProfileSection(sectionName, sectionData, FileName)
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
+Public Function loadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
 
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
     If length = 0 Then length = 10
 
     sString = String$(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
+    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
 
-    loadString = left(sString, lReturn)
+    loadString = Left(sString, lReturn)
 
 End Function
 
-Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
+Public Function loadInt(section As String, Entry As String, Optional FileName As String) As Long
 
     Dim lReturn As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
+    lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
 
     loadInt = lReturn
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
+Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    GetPrivateProfileSection section, lReturn, length, fileName
+    GetPrivateProfileSection section, lReturn, length, FileName
 
     loadSection = lReturn
 
@@ -779,16 +779,16 @@ Public Sub RunHelp()
 
 End Sub
 
-Public Sub SetGameMode(fileName As String)
+Public Sub SetGameMode(FileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
 
-    If LCase(left(fileName, 4)) = "ctf_" Then
+    If LCase(Left(FileName, 4)) = "ctf_" Then
         gameMode = 3
-    ElseIf LCase(left(fileName, 4)) = "inf_" Then
+    ElseIf LCase(Left(FileName, 4)) = "inf_" Then
         gameMode = 5
-    ElseIf LCase(left(fileName, 4)) = "htf_" Then
+    ElseIf LCase(Left(FileName, 4)) = "htf_" Then
         gameMode = 6
     Else
         gameMode = 0
@@ -818,19 +818,19 @@ End Sub
 'Initializes GDI+
 Public Function InitGDIPlus() As Long
 
-    Dim Token    As Long
+    Dim token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
-    GdiplusStartup Token, gdipInit, ByVal 0&
-    InitGDIPlus = Token
+    GdiplusStartup token, gdipInit, ByVal 0&
+    InitGDIPlus = token
 
 End Function
 
 'Frees GDI Plus
-Public Sub FreeGDIPlus(Token As Long)
+Public Sub FreeGDIPlus(token As Long)
 
-    GdiplusShutdown Token
+    GdiplusShutdown token
 
 End Sub
 

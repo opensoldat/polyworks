@@ -1,6 +1,12 @@
 Attribute VB_Name = "modSoldatMap"
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+#End If
+
 ' loading and saving soldat maps
 
 ' types
@@ -29,5 +35,5 @@ Public Type TLightSource
     range       As Integer
     X           As Single
     Y           As Single
-    z           As Single
+    Z           As Single
 End Type

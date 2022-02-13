@@ -332,11 +332,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-
 ' Fix vb6 ide casing changes
 #If False Then
-    Private fileName
-    'Private fileName
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -376,7 +375,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
@@ -439,7 +438,7 @@ Public Sub listScenery()
     file = Dir$(appPath & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file) 'for every txt file in lists
 
-        file = left(file, Len(file) - 4)
+        file = Left(file, Len(file) - 4)
         frmSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
         fileOpen = True
         Open appPath & "\lists\" & file & ".txt" For Input As #1
@@ -464,11 +463,11 @@ ErrorHandler:
 
 End Sub
 
-Private Function FileExists(fileName As String) As Boolean
+Private Function FileExists(FileName As String) As Boolean
 
     On Error GoTo ErrorHandler
 
-    FileExists = FileLen(fileName) > 0
+    FileExists = FileLen(FileName) > 0
 
 ErrorHandler:
 
@@ -494,7 +493,7 @@ End Sub
 
 Public Sub lstScenery_Click()
 
-    Dim Token As Long
+    Dim token As Long
 
     On Error GoTo ErrorHandler
 
@@ -504,9 +503,9 @@ Public Sub lstScenery_Click()
     End If
 
     If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
-        Token = InitGDIPlus
+        token = InitGDIPlus
         picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
-        FreeGDIPlus Token
+        FreeGDIPlus token
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
     Else
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
@@ -556,7 +555,7 @@ End Sub
 
 Private Sub picSceneryMenu_Click()
 
-    PopupMenu mnuScenery, , picHide.left + picHide.ScaleWidth, picSceneryMenu.Top + picSceneryMenu.ScaleHeight
+    PopupMenu mnuScenery, , picHide.Left + picHide.ScaleWidth, picSceneryMenu.Top + picSceneryMenu.ScaleHeight
 
 End Sub
 
@@ -602,7 +601,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTexture
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub

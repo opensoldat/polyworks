@@ -1694,6 +1694,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+#End If
+
 
 Public xPos As Integer
 Public yPos  As Integer
@@ -1736,7 +1742,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
@@ -2038,7 +2044,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmTexture
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub
@@ -2072,7 +2078,7 @@ Private Sub picPropMenu_MouseDown(Button As Integer, Shift As Integer, X As Sing
 
     mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
-    PopupMenu mnuProperties, , picPropMenu.left + 32, picPropMenu.Top + 16
+    PopupMenu mnuProperties, , picPropMenu.Left + 32, picPropMenu.Top + 16
 
     mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 

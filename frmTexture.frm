@@ -75,11 +75,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-
 ' Fix vb6 ide casing changes
 #If False Then
-    Private Token
-    'Private Token
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -115,7 +114,7 @@ End Sub
 
 Public Sub setForm()
 
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
@@ -230,12 +229,12 @@ Public Sub setTexture(texturePath As String)
     frmTexture.Width = (texWidth / 2 + 2 + 16) * Screen.TwipsPerPixelX
     formHeight = texHeight / 2 + 18 + 16
     frmTexture.Height = formHeight * Screen.TwipsPerPixelY
-    picHide.left = frmTexture.Width / Screen.TwipsPerPixelX - 17
+    picHide.Left = frmTexture.Width / Screen.TwipsPerPixelX - 17
 
-    Dim Token As Long
-    Token = InitGDIPlus
+    Dim token As Long
+    token = InitGDIPlus
     picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
-    FreeGDIPlus Token
+    FreeGDIPlus token
 
     For Y = 0 To (texHeight / 32)
         If Y Mod 4 = 0 Then
@@ -295,7 +294,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     snapForm Me, frmInfo
     Me.Tag = snapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub

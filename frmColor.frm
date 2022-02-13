@@ -622,8 +622,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Private B, X, Y, hWnd, val
-    'Private B, X, Y, hWnd, val
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -1188,9 +1188,9 @@ Private Sub txtHexCode_Change()
             tempHexVal = txtHexCode.Text
         End If
         mColor(B) = CLng("&H" + right(tempHexVal, 2))
-        tempHexVal = left(tempHexVal, Len(tempHexVal) - 2)
+        tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
         mColor(G) = CLng("&H" + right(tempHexVal, 2))
-        tempHexVal = left(tempHexVal, Len(tempHexVal) - 2)
+        tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
         mColor(R) = CLng("&H" + right(tempHexVal, 2))
         changeRGB
         updateAll
@@ -1205,9 +1205,9 @@ Private Sub txtHexCode_LostFocus()
     If HexToLong(txtHexCode.Text) = -1 Then
         txtHexCode.Text = mHexValue
         mColor(B) = CLng("&H" + right(mHexValue, 2))
-        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        mHexValue = Left(mHexValue, Len(mHexValue) - 2)
         mColor(G) = CLng("&H" + right(mHexValue, 2))
-        mHexValue = left(mHexValue, Len(mHexValue) - 2)
+        mHexValue = Left(mHexValue, Len(mHexValue) - 2)
         mColor(R) = CLng("&H" + right(mHexValue, 2))
         changeRGB
         updateAll

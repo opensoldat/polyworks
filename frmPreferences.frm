@@ -1940,8 +1940,8 @@ Option Explicit
 
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim FileName, val
-    'Dim fileName, Val
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
 #End If
 
 
@@ -2086,7 +2086,7 @@ Private Function applyPreferences() As Boolean
     End If
 
     frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
-    frmSoldatMapEditor.picResize.left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
+    frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
 
     frmSoldatMapEditor.gridSpacing = spacing
     frmSoldatMapEditor.gridDivisions = divisions
@@ -2690,15 +2690,15 @@ Private Function getRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
-    hexValue = Hex(val(DecValue))
+    hexValue = Hex(Val(DecValue))
 
     If Len(hexValue) < 6 Then
         hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
-    getRGB.red = CLng("&H" + mid(hexValue, 1, 2))
-    getRGB.green = CLng("&H" + mid(hexValue, 3, 2))
-    getRGB.blue = CLng("&H" + mid(hexValue, 5, 2))
+    getRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
+    getRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
+    getRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
 
 End Function
 

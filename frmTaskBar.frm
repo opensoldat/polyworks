@@ -20,6 +20,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid
+#End If
+
 
 Private Sub Form_GotFocus()
 
@@ -31,7 +37,7 @@ End Sub
 
 Private Sub Form_Load()
 
-    Me.left = 2000 * Screen.TwipsPerPixelX
+    Me.Left = 2000 * Screen.TwipsPerPixelX
     Me.Top = 2000 * Screen.TwipsPerPixelY
 
 End Sub
@@ -48,7 +54,7 @@ Private Sub Form_Resize()
         If frmSoldatMapEditor.mnuInfo.Checked Then frmInfo.Show
         If frmSoldatMapEditor.mnuTexture.Checked Then frmTexture.Show
         If frmSoldatMapEditor.Tag = vbNormal Then
-            frmSoldatMapEditor.left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+            frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
             frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
             frmSoldatMapEditor.ScaleWidth = frmSoldatMapEditor.formWidth
             frmSoldatMapEditor.ScaleHeight = frmSoldatMapEditor.formHeight
