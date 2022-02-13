@@ -1327,34 +1327,6 @@ Private Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
 Private Const FVF2 As Long = D3DFVF_XYZ
 
 
-' types
-
-Private Type TImageInfo
-    Width       As Integer
-    miplevels   As Integer
-    Height      As Integer
-    depth       As Integer
-End Type
-
-Private Type TVertexData
-    vertex(1 To 3)  As Byte
-    polyType        As Byte
-    color(1 To 3)   As TColor
-End Type
-
-Private Type TTriangle
-    vertex(1 To 3) As D3DVECTOR2
-End Type
-
-Private Type TLightSource
-    selected    As Byte
-    color       As TColor
-    intensity   As Single
-    range       As Integer
-    X           As Single
-    Y           As Single
-    z           As Single
-End Type
 
 
 ' map types
