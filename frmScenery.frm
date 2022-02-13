@@ -174,7 +174,7 @@ Begin VB.Form frmScenery
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1350
+      Height          =   1500
       Left            =   1320
       TabIndex        =   0
       Tag             =   "font1"
