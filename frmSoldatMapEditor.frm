@@ -2169,7 +2169,7 @@ Public Sub resetDevice()
 
     D3DDevice.SetVertexShader FVF
     D3DDevice.SetRenderState D3DRS_LIGHTING, False
-    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE 'polys that are ccwise
+    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE ' polys that are ccwise
 
     D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
     D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 1
@@ -4672,18 +4672,26 @@ Public Sub Render()
 
         For i = 0 To (Int((Me.ScaleWidth / gridSpacing) / zoomFactor) + 1)
             If inc * zoomFactor >= 8 Then
-                D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, gridDivisions, xGridLines(1).vertex(1), Len(xGridLines(1).vertex(1))
                 D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, gridDivisions, yGridLines(1).vertex(1), Len(yGridLines(1).vertex(1))
             ElseIf gridSpacing * zoomFactor >= 8 Then
-                D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, 1, xGridLines(1).vertex(1), Len(xGridLines(1).vertex(1))
                 D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, 1, yGridLines(1).vertex(1), Len(yGridLines(1).vertex(1))
+            End If
+
+            For j = 1 To gridDivisions
+                yGridLines(j).vertex(1).X = yGridLines(j).vertex(1).X + gridSpacing * zoomFactor
+                yGridLines(j).vertex(2).X = yGridLines(j).vertex(1).X
+            Next
+        Next
+        For i = 0 To (Int((Me.ScaleHeight / gridSpacing) / zoomFactor) + 1)
+            If inc * zoomFactor >= 8 Then
+                D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, gridDivisions, xGridLines(1).vertex(1), Len(xGridLines(1).vertex(1))
+            ElseIf gridSpacing * zoomFactor >= 8 Then
+                D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, 1, xGridLines(1).vertex(1), Len(xGridLines(1).vertex(1))
             End If
 
             For j = 1 To gridDivisions
                 xGridLines(j).vertex(1).Y = xGridLines(j).vertex(1).Y + gridSpacing * zoomFactor
                 xGridLines(j).vertex(2).Y = xGridLines(j).vertex(1).Y
-                yGridLines(j).vertex(1).X = yGridLines(j).vertex(1).X + gridSpacing * zoomFactor
-                yGridLines(j).vertex(2).X = yGridLines(j).vertex(1).X
             Next
         Next
     End If
