@@ -12277,6 +12277,8 @@ Private Sub loadINI()
     showGrid = loadString("Display", "Grid")
     showLights = loadString("Display", "Lights")
     showSketch = loadString("Display", "Sketch")
+    
+    mnuGrid.Checked = showGrid
 
     errVal = "3"
 
