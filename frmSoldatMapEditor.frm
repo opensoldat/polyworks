@@ -1687,6 +1687,7 @@ Private Sub Form_Load()
     err = "Error setting up palette windows"
 
     loadWorkspace
+    initGrid
 
     ' show windows
     frmTaskBar.Show
