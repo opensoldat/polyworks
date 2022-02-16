@@ -1521,7 +1521,7 @@ Private polyType As Byte
 Private PolyTypeClrs(0 To 25) As Long
 
 Private rCenter As D3DVECTOR2
-Private selRect(3) As D3DVECTOR2   ' RECT
+Private selRect(3) As D3DVECTOR2 ' RECT
 
 Private xGridLines() As TLine
 Private yGridLines() As TLine
@@ -1970,6 +1970,7 @@ Public Sub Init()
 
     Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, Me.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) 'Main screen turn on.
 
+
     debugVal = "Error setting render states"
 
     D3DDevice.SetVertexShader FVF
@@ -2084,39 +2085,45 @@ Private Sub InitDInput()
 
     On Error GoTo ErrorHandler
 
-    Dim tehValue As String
+    Dim debugVal As String
 
     Dim i As Long
     Dim DevProp As DIPROPLONG
     Dim DevInfo As DirectInputDeviceInstance8
     Dim pBuffer(0 To BUFFER_SIZE) As DIDEVICEOBJECTDATA
 
-    tehValue = "Error creating DI device"
+
+    debugVal = "Error creating DI device"
 
     Set DI = DX.DirectInputCreate
     Set DIDevice = DI.CreateDevice("GUID_SysKeyboard")
 
-    tehValue = "Error setting DI device"
+
+    debugVal = "Error setting DI device"
 
     DIDevice.SetCommonDataFormat DIFORMAT_KEYBOARD
     DIDevice.SetCooperativeLevel Me.hWnd, DISCL_NONEXCLUSIVE Or DISCL_FOREGROUND
 
-    tehValue = "Error setting DI properties"
+
+    debugVal = "Error setting DI properties"
 
     DevProp.lHow = DIPH_DEVICE
     DevProp.lData = BUFFER_SIZE
     DIDevice.SetProperty DIPROP_BUFFERSIZE, DevProp
 
-    tehValue = "Error setting DI device notification"
+
+    debugVal = "Error setting DI device notification"
 
     hEvent = DX.CreateEvent(Me)
     DIDevice.SetEventNotification hEvent
 
-    tehValue = "Error getting device info"
+
+    debugVal = "Error getting device info"
 
     Set DevInfo = DIDevice.GetDeviceInfo()
 
-    tehValue = "Error acquiring device"
+
+    debugVal = "Error acquiring device"
 
     Me.SetFocus
     DIDevice.Acquire
@@ -2126,8 +2133,8 @@ Private Sub InitDInput()
 
 ErrorHandler:
 
-    If tehValue <> "Error acquiring device" Then
-        MsgBox "DirectInput initialization failed" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & tehValue
+    If debugVal <> "Error acquiring device" Then
+        MsgBox "DirectInput initialization failed" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
     End If
 
 End Sub
