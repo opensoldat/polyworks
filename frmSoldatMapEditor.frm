@@ -1293,6 +1293,47 @@ Option Explicit
 #End If
 
 
+Public backClr As Long
+Public pointClr As Long
+Public selectionClr As Long
+Public gridClr As Long
+Public gridClr2 As Long
+Public polyBlendSrc As Long
+Public polyBlendDest As Long
+Public wireBlendSrc As Long
+Public wireBlendDest As Long
+Public soldatDir As String
+Public uncompDir As String
+Public prefabDir As String
+Public gridSpacing As Integer
+Public gridDivisions As Integer
+Public gridOp1 As Byte
+Public gridOp2 As Byte
+
+Public sceneryVerts As Boolean
+Public topmost As Boolean
+
+Public formHeight As Integer
+Public formWidth As Integer
+Public formLeft As Integer
+Public formTop As Integer
+
+Public gMaxZoom As Single
+Public gMinZoom As Single
+Public gResetZoom As Single
+
+Public gTextureFile As String
+
+Public xTexture As Integer
+Public yTexture As Integer
+
+Public shiftDown As Boolean
+Public ctrlDown As Boolean
+Public altDown As Boolean
+
+
+Private noRedraw As Boolean
+
 Private DX As DirectX8
 Private D3D As Direct3D8
 Private D3DDevice As Direct3DDevice8
@@ -1352,7 +1393,6 @@ Private conCount As Integer
 Private lightCount As Integer
 
 Private mapTitle As String
-Public gTextureFile As String
 Private maxX As Single
 Private maxY As Single
 Private minX As Single
@@ -1364,9 +1404,6 @@ Private bgColors(1 To 2) As TColor
 
 Private Const MAX_POLYS  As Integer = 4000
 
-Public gMaxZoom As Single
-Public gMinZoom As Single
-Public gResetZoom As Single
 Private Const DEFAULT_MAX_ZOOM As Single = 512
 Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
 Private Const DEFAULT_RESET_ZOOM As Single = 1
@@ -1405,7 +1442,6 @@ Private Const KEY_SHIFT As Byte = 1
 Private Const KEY_CTRL As Byte = 2
 Private Const KEY_ALT As Byte = 4
 
-
 Private sketch() As TSketchLine
 Private sketchLines As Integer
 Private selectedSketch(1 To 2) As Integer
@@ -1423,33 +1459,6 @@ Private clrWireframe As Boolean
 Private sslBack As Boolean
 Private sslMid As Boolean
 Private sslFront As Boolean
-
-Public backClr As Long
-Public pointClr As Long
-Public selectionClr As Long
-Public gridClr As Long
-Public gridClr2 As Long
-Public polyBlendSrc As Long
-Public polyBlendDest As Long
-Public wireBlendSrc As Long
-Public wireBlendDest As Long
-Public soldatDir As String
-Public uncompDir As String
-Public prefabDir As String
-Public gridSpacing As Integer
-Public gridDivisions As Integer
-Public gridOp1 As Byte
-Public gridOp2 As Byte
-
-Private noRedraw As Boolean
-
-Public sceneryVerts As Boolean
-Public topmost As Boolean
-
-Public formHeight As Integer
-Public formWidth As Integer
-Public formLeft As Integer
-Public formTop As Integer
 
 Private polyClr As TColor
 Private opacity As Single
@@ -1470,9 +1479,6 @@ Private numSelColliders As Integer
 Private numSelSpawns As Integer
 Private numSelWaypoints As Integer
 Private numSelLights As Integer
-
-Public xTexture As Integer
-Public yTexture As Integer
 
 Private creatingQuad As Boolean
 
@@ -1513,10 +1519,6 @@ Private eraseLines As Boolean
 
 Private polyType As Byte
 Private PolyTypeClrs(0 To 25) As Long
-
-Public shiftDown As Boolean
-Public ctrlDown As Boolean
-Public altDown As Boolean
 
 Private rCenter As D3DVECTOR2
 Private selRect(3) As D3DVECTOR2   ' RECT
