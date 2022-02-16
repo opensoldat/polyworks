@@ -1968,7 +1968,7 @@ Public Sub Init()
 
     debugVal = "Error creating D3D device"
 
-    Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, Me.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) 'Main screen turn on.
+    Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, Me.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) ' Main screen turn on.
 
 
     debugVal = "Error setting render states"
@@ -2540,7 +2540,7 @@ Public Sub LoadFile(theFileName As String)
 
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, , tempString
-                ElseIf confirmExists(tempString) Then 'if scenery texture is in master list
+                ElseIf confirmExists(tempString) Then ' if scenery texture is in master list
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
@@ -3395,7 +3395,7 @@ Public Sub SaveAndCompile(theFileName As String)
             For Y = -SECTOR_NUM To SECTOR_NUM
                 polysInSector = 0
 
-                If X >= -xSecNum And X <= xSecNum And Y >= -ySecNum And Y <= ySecNum Then 'if sectors within range
+                If X >= -xSecNum And X <= xSecNum And Y >= -ySecNum And Y <= ySecNum Then ' if sectors within range
                     For i = 1 To mPolyCount
                         If vertexList(i).polyType <> 3 Then
                         If isInSector(i, sectorsDivision * (X - 0.5) + xOffset - 1, sectorsDivision * (Y - 0.5) + yOffset - 1, sectorsDivision + 2) Then
@@ -4252,7 +4252,7 @@ Public Sub Render()
     D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, backClr, 1#, 0
 
     D3DDevice.BeginScene
-    '----
+    ' ----
 
     D3DDevice.setTexture 0, Nothing
 
@@ -5221,13 +5221,13 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 End If
                 toolAction = False
             End If
-        Case Is = TOOL_VSELECT 'subtract verts
+        Case Is = TOOL_VSELECT ' subtract verts
             currentFunction = TOOL_VSELSUB
-        Case Is = TOOL_PSELECT 'subtract polys
+        Case Is = TOOL_PSELECT ' subtract polys
             currentFunction = TOOL_PSELSUB
-        Case Is = TOOL_VCOLOR 'color picker
+        Case Is = TOOL_VCOLOR ' color picker
             currentFunction = TOOL_CLRPICKER
-        Case Is = TOOL_PCOLOR 'color picker
+        Case Is = TOOL_PCOLOR ' color picker
             currentFunction = TOOL_CLRPICKER
         Case Is = TOOL_DEPTHMAP
             currentFunction = TOOL_CLRPICKER
@@ -5320,7 +5320,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             End If
             Render
             currentFunction = currentTool
-        ElseIf (pBuffer(0).lOfs = DIK_SPACE And spaceDown) Then 'scrolling
+        ElseIf (pBuffer(0).lOfs = DIK_SPACE And spaceDown) Then ' scrolling
             spaceDown = False
         End If
 
@@ -5505,7 +5505,7 @@ ErrorHandler:
     If err.Number = DIERR_INPUTLOST Then
         acquired = False
     ElseIf err.Number = DIERR_NOTACQUIRED Then
-        ' no op
+        ' no-op
     Else
         MsgBox "DirectInput error" & vbNewLine & D3DX.GetErrorString(err.Number)
     End If
@@ -5682,9 +5682,9 @@ End Function
 
 Private Sub Form_DblClick()
 
-    If currentTool = TOOL_CREATE Then 'poly creation
+    If currentTool = TOOL_CREATE Then ' poly creation
         toolAction = True
-    ElseIf currentTool = TOOL_VSELECT Then 'vertex selection
+    ElseIf currentTool = TOOL_VSELECT Then ' vertex selection
         toolAction = True
         selectedCoords(1).X = MouseHelper.CursorX - (Me.Left / Screen.TwipsPerPixelX) - 1
         selectedCoords(1).Y = MouseHelper.CursorY - (Me.Top / Screen.TwipsPerPixelY) - 1
@@ -6527,7 +6527,7 @@ Private Sub SelNearest(X As Single, Y As Single)
     If showPolys Then
     For i = 1 To mPolyCount
         For j = 1 To 3
-            If nearCoord(X, Polys(i).vertex(j).X, 8) And nearCoord(Y, Polys(i).vertex(j).Y, 8) Then 'move by vertex
+            If nearCoord(X, Polys(i).vertex(j).X, 8) And nearCoord(Y, Polys(i).vertex(j).Y, 8) Then ' move by vertex
                 If addPoly <> i Then
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
@@ -6539,7 +6539,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         Next
         If (pointInPoly(X, Y, i)) And addPoly = 0 Then
             For j = 1 To 3
-                If nearCoord(X, Polys(i).vertex(j).X, 64) And nearCoord(Y, Polys(i).vertex(j).Y, 64) Then 'move by region
+                If nearCoord(X, Polys(i).vertex(j).X, 64) And nearCoord(Y, Polys(i).vertex(j).Y, 64) Then ' move by region
                     currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                     If currentDist < shortestDist Then
                         shortestDist = currentDist
@@ -6559,7 +6559,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         vertexList(addPoly).vertex(addVert) = 1
     End If
 
-    If numSelectedPolys = 0 And addPoly = 0 And showScenery Then 'select scenery
+    If numSelectedPolys = 0 And addPoly = 0 And showScenery Then ' select scenery
         For i = 1 To sceneryCount
             If PointInProp(X, Y, i) And addPoly = 0 Then
                 Scenery(i).selected = 1
@@ -6715,12 +6715,12 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         Render
     End If
 
-    If Button = 4 Or Button = 5 Then 'scrolling
+    If Button = 4 Or Button = 5 Then ' scrolling
         Scrolling X, Y
     End If
 
     If (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) And toolAction Then
-        If (Shift = 0 Or Shift = KEY_SHIFT) And numVerts > 0 Then 'poly creation
+        If (Shift = 0 Or Shift = KEY_SHIFT) And numVerts > 0 Then ' poly creation
             CreatingPoly Shift, X, Y
         End If
     ElseIf Button = 0 And currentFunction = TOOL_SCENERY Then
@@ -6782,8 +6782,8 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         ElseIf Shift = KEY_SHIFT + KEY_ALT Then ' constrained rotating
             Rotating X, Y, True
         End If
-    ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_CREATE) And toolAction Then 'poly creation --------
-    ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then 'vertex selection --------
+    ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_CREATE) And toolAction Then ' poly creation --------
+    ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then ' vertex selection --------
         If toolAction Then
             Render
             selectedCoords(2).X = X
@@ -7042,7 +7042,7 @@ Private Sub Moving(ByVal X As Single, ByVal Y As Single)
                 yDiff = Polys(PolyNum).vertex(j).tv - PolyCoords(PolyNum).vertex(j).Y / yTexture
                 PolyCoords(PolyNum).vertex(j).X = PolyCoords(PolyNum).vertex(j).X + xVal / zoomFactor
                 PolyCoords(PolyNum).vertex(j).Y = PolyCoords(PolyNum).vertex(j).Y + yVal / zoomFactor
-                'switch
+                ' switch
                 Polys(PolyNum).vertex(j).X = (PolyCoords(PolyNum).vertex(j).X - scrollCoords(2).X) * zoomFactor
                 Polys(PolyNum).vertex(j).Y = (PolyCoords(PolyNum).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
 
@@ -7634,7 +7634,7 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                     xDiff = (PolyCoords(PolyNum).vertex(j).X - rCenter.X) * zoomFactor
                     yDiff = (PolyCoords(PolyNum).vertex(j).Y - rCenter.Y) * zoomFactor
 
-                    R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
+                    R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) ' distance of point from rotation center
                     If xDiff = 0 Then
                         If yDiff > 0 Then
                             theta = PI / 2 + rDiff
@@ -7660,7 +7660,7 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                 xDiff = (Scenery(i).Translation.X - rCenter.X) * zoomFactor
                 yDiff = (Scenery(i).Translation.Y - rCenter.Y) * zoomFactor
 
-                R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
+                R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) ' distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
                         theta = PI / 2 + rDiff
@@ -7685,7 +7685,7 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
                 xDiff = (Scenery(i).Translation.X - rCenter.X) * zoomFactor
                 yDiff = (Scenery(i).Translation.Y - rCenter.Y) * zoomFactor
 
-                R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) 'distance of point from rotation center
+                R = Sqr((xDiff) ^ 2 + (yDiff) ^ 2) ' distance of point from rotation center
                 If xDiff = 0 Then
                     If yDiff > 0 Then
                         theta = PI / 2 + rDiff
@@ -8068,7 +8068,7 @@ Private Sub lightPicker(X As Single, Y As Single)
     If vNum > 0 Then ' poly color absorbed
         tempClr = getRGB(Polys(pNum).vertex(vNum).color)
         If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
-        ElseIf frmPalette.Enabled = False Then 'non modal
+        ElseIf frmPalette.Enabled = False Then ' non modal
             frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
         Else
             polyClr = tempClr
@@ -8163,7 +8163,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
         CreatePolys X, Y
     ElseIf currentFunction = TOOL_SCENERY And toolAction Then ' create scenery
         CreateScenery X, Y
-    ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then 'select vertices
+    ElseIf currentFunction = TOOL_VSELECT Or currentFunction = TOOL_VSELADD Or currentFunction = TOOL_VSELSUB Then ' select vertices
         If toolAction Then
             selectedCoords(2).X = X
             selectedCoords(2).Y = Y
@@ -8694,7 +8694,7 @@ Private Sub snapSelected(X As Single, Y As Single)
             For i = 1 To numSelectedPolys
                 PolyNum = selectedPolys(i)
                 For j = 1 To 3
-                    If vertexList(PolyNum).vertex(j) = 1 Then 'if selected
+                    If vertexList(PolyNum).vertex(j) = 1 Then ' if selected
                         Polys(PolyNum).vertex(j).X = Polys(PolyNum).vertex(j).X - xDiff
                         Polys(PolyNum).vertex(j).Y = Polys(PolyNum).vertex(j).Y - yDiff
 
@@ -9679,8 +9679,8 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
     Dim addPoly As Integer
     Dim notSel As Integer
 
-    xDist = (X - selectedCoords(1).X) / 2 'x distance from coord
-    yDist = (Y - selectedCoords(1).Y) / 2 'y distance from coord
+    xDist = (X - selectedCoords(1).X) / 2 ' x distance from coord
+    yDist = (Y - selectedCoords(1).Y) / 2 ' y distance from coord
 
     xCenter = X - xDist
     yCenter = Y - yDist
@@ -9987,7 +9987,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = getRGB(Polys(i).vertex(j).color) 'get clr of poly
+                        destClr = getRGB(Polys(i).vertex(j).color) ' get clr of poly
                         destClr = applyBlend(destClr)
                         Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
@@ -11283,7 +11283,7 @@ Public Sub Zoom(zoomDir As Single)
     zoomFactor = zoomFactor * zoomDir
 
     If zoomDir > 1 Then
-        'zoom to middle
+        ' zoom to middle
         scrollCoords(2).X = scrollCoords(2).X + Me.ScaleWidth / zoomFactor / (2 / (zoomDir - 1))
         scrollCoords(2).Y = scrollCoords(2).Y + Me.ScaleHeight / zoomFactor / (2 / (zoomDir - 1))
     ElseIf zoomDir < 1 Then
@@ -14833,7 +14833,7 @@ Public Sub applyLightProp(ByVal tehValue As Single, Index As Integer)
 
     For i = 1 To lightCount
         If Lights(i).selected = 1 Then
-            If Index = 0 Then 'z-coord
+            If Index = 0 Then ' z-coord
                 Lights(i).Z = tehValue
             ElseIf Index = 1 Then
                 Lights(i).range = tehValue
