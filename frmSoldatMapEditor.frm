@@ -1295,7 +1295,7 @@ Option Explicit
 
 Public backClr As Long
 Public pointColor As Long
-Public selectionClr As Long
+Public selectionColor As Long
 Public gridColor1 As Long
 Public gridColor2 As Long
 Public polyBlendSrc As Long
@@ -1653,7 +1653,7 @@ Private Sub Form_Load()
     sslMid = True
     sslFront = True
 
-    PolyTypeClrs(0) = selectionClr
+    PolyTypeClrs(0) = selectionColor
 
     ReDim Scenery(0)
     ReDim Preserve SceneryTextures(0)
@@ -4563,7 +4563,7 @@ Public Sub Render()
                 srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 If Spawns(i).active = 1 Then
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionClr)
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionColor)
                 Else
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 End If
@@ -4611,7 +4611,7 @@ Public Sub Render()
                 tr.X = Int((Lights(i).X - scrollCoords(2).X) * zoomFactor - 16 * sc.X + 0.5)
                 tr.Y = Int((Lights(i).Y - scrollCoords(2).Y) * zoomFactor - 16 * sc.Y + 0.5)
                 If Lights(i).selected = 1 Then
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionClr)
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionColor)
                 Else
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
                 End If
@@ -4844,7 +4844,7 @@ Public Sub Render()
             sceneryCoords(0).X = (Colliders(i).X - scrollCoords(2).X) * zoomFactor
             sceneryCoords(0).Y = (Colliders(i).Y - scrollCoords(2).Y) * zoomFactor
             If Colliders(i).active = 1 Then
-                sceneryCoords(0).color = selectionClr
+                sceneryCoords(0).color = selectionColor
             Else
                 sceneryCoords(0).color = ARGB(255, RGB(255, 255, 255))
             End If
@@ -12042,7 +12042,7 @@ Private Sub saveSettings()
         "WireSrc=" & wireBlendSrc & sNull & _
         "WireDest=" & wireBlendDest & sNull & _
         "PointColor=" & RGBtoHex(pointColor) & sNull & _
-        "SelectionClr=" & RGBtoHex(selectionClr) & sNull & _
+        "SelectionColor=" & RGBtoHex(selectionColor) & sNull & _
         "BackClr=" & RGBtoHex(backClr) & sNull & _
         "MaxUndo=" & max_undo & sNull & _
         "SceneryVerts=" & sceneryVerts & sNull & _
@@ -12232,7 +12232,7 @@ Private Sub loadINI()
     wireBlendSrc = loadInt("Preferences", "WireSrc")
     wireBlendDest = loadInt("Preferences", "WireDest")
     pointColor = HexToLong(loadString("Preferences", "PointColor"))
-    selectionClr = HexToLong(loadString("Preferences", "SelectionClr"))
+    selectionColor = HexToLong(loadString("Preferences", "SelectionColor"))
     backClr = HexToLong(loadString("Preferences", "BackClr"))
     max_undo = loadInt("Preferences", "MaxUndo")
     sceneryVerts = loadString("Preferences", "SceneryVerts")
@@ -14130,7 +14130,7 @@ End Sub
 Private Sub mnuPreferences_Click()
 
     frmPreferences.Show 1
-    PolyTypeClrs(0) = frmSoldatMapEditor.selectionClr
+    PolyTypeClrs(0) = frmSoldatMapEditor.selectionColor
 
 End Sub
 

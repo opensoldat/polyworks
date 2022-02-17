@@ -1952,7 +1952,7 @@ Private blendModes(0 To 7) As Integer
 
 Private backClr As TColor
 Private pointColor As TColor
-Private selClr As TColor
+Private selectionColor As TColor
 Private gridColor1 As TColor
 Private gridColor2 As TColor
 
@@ -2067,7 +2067,7 @@ Private Function applyPreferences() As Boolean
 
     frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
     frmSoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
-    frmSoldatMapEditor.selectionClr = RGB(selClr.blue, selClr.green, selClr.red)
+    frmSoldatMapEditor.selectionColor = RGB(selectionColor.blue, selectionColor.green, selectionColor.red)
     frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
     frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
 
@@ -2177,7 +2177,7 @@ Private Sub Form_Load()
 
     backClr = getRGB(frmSoldatMapEditor.backClr)
     pointColor = getRGB(frmSoldatMapEditor.pointColor)
-    selClr = getRGB(frmSoldatMapEditor.selectionClr)
+    selectionColor = getRGB(frmSoldatMapEditor.selectionColor)
     gridColor1 = getRGB(frmSoldatMapEditor.gridColor1)
     gridColor2 = getRGB(frmSoldatMapEditor.gridColor2)
 
@@ -2190,7 +2190,7 @@ Private Sub Form_Load()
 
     Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
     Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
-    Me.picSelectionClr.BackColor = RGB(selClr.red, selClr.green, selClr.blue)
+    Me.picSelectionClr.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
     Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
     Me.picGridClr2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
 
@@ -2250,23 +2250,23 @@ End Sub
 
 Private Sub picPointClr_Click()
 
-    frmColor.InitColor pointClr.red, pointClr.green, pointClr.blue
+    frmColor.InitColor pointColor.red, pointColor.green, pointColor.blue
     frmColor.Show 1
     picPointClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    pointClr.red = frmColor.red
-    pointClr.green = frmColor.green
-    pointClr.blue = frmColor.blue
+    pointColor.red = frmColor.red
+    pointColor.green = frmColor.green
+    pointColor.blue = frmColor.blue
 
 End Sub
 
 Private Sub picSelectionClr_Click()
 
-    frmColor.InitColor selClr.red, selClr.green, selClr.blue
+    frmColor.InitColor selectionColor.red, selectionColor.green, selectionColor.blue
     frmColor.Show 1
     picSelectionClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    selClr.red = frmColor.red
-    selClr.green = frmColor.green
-    selClr.blue = frmColor.blue
+    selectionColor.red = frmColor.red
+    selectionColor.green = frmColor.green
+    selectionColor.blue = frmColor.blue
 
 End Sub
 
