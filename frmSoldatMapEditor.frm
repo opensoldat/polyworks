@@ -1294,7 +1294,7 @@ Option Explicit
 
 
 Public backClr As Long
-Public pointClr As Long
+Public pointColor As Long
 Public selectionClr As Long
 Public gridColor1 As Long
 Public gridColor2 As Long
@@ -4734,7 +4734,7 @@ Public Sub Render()
 
             sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, ARGB(255, Scenery(i).color), 0, 0)
             If Scenery(i).selected = 1 Or Scenery(i).selected = 3 Then
-                sceneryCoords(0).color = ARGB(255, pointClr)
+                sceneryCoords(0).color = ARGB(255, pointColor)
             End If
             sceneryCoords(1) = sceneryCoords(0)
             sceneryCoords(2) = sceneryCoords(0)
@@ -4866,21 +4866,21 @@ Public Sub Render()
             lineCoords(3).Z = 1: lineCoords(3).rhw = 1
 
             If vertexList(selectedPolys(i)).vertex(1) = 1 Or vertexList(selectedPolys(i)).vertex(1) = 3 Then
-                lineCoords(1).color = pointClr
+                lineCoords(1).color = pointColor
             End If
             If vertexList(selectedPolys(i)).vertex(2) = 1 Or vertexList(selectedPolys(i)).vertex(2) = 3 Then
-                lineCoords(2).color = pointClr
+                lineCoords(2).color = pointColor
             End If
             If vertexList(selectedPolys(i)).vertex(3) = 1 Or vertexList(selectedPolys(i)).vertex(3) = 3 Then
-                lineCoords(3).color = pointClr
+                lineCoords(3).color = pointColor
             End If
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
 
             If showPoints Then
-                If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = pointClr
-                If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = pointClr
-                If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = pointClr
+                If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = pointColor
+                If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = pointColor
+                If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = pointColor
                 D3DDevice.setTexture 0, particleTexture
                 D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 3, lineCoords(1), Len(lineCoords(1))
                 D3DDevice.setTexture 0, Nothing
@@ -12041,7 +12041,7 @@ Private Sub saveSettings()
         "PolyDest=" & polyBlendDest & sNull & _
         "WireSrc=" & wireBlendSrc & sNull & _
         "WireDest=" & wireBlendDest & sNull & _
-        "PointClr=" & RGBtoHex(pointClr) & sNull & _
+        "PointColor=" & RGBtoHex(pointColor) & sNull & _
         "SelectionClr=" & RGBtoHex(selectionClr) & sNull & _
         "BackClr=" & RGBtoHex(backClr) & sNull & _
         "MaxUndo=" & max_undo & sNull & _
@@ -12231,7 +12231,7 @@ Private Sub loadINI()
     polyBlendDest = loadInt("Preferences", "PolyDest")
     wireBlendSrc = loadInt("Preferences", "WireSrc")
     wireBlendDest = loadInt("Preferences", "WireDest")
-    pointClr = HexToLong(loadString("Preferences", "PointClr"))
+    pointColor = HexToLong(loadString("Preferences", "PointColor"))
     selectionClr = HexToLong(loadString("Preferences", "SelectionClr"))
     backClr = HexToLong(loadString("Preferences", "BackClr"))
     max_undo = loadInt("Preferences", "MaxUndo")

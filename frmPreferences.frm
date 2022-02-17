@@ -1951,7 +1951,7 @@ Private Const MaxHeight = 547
 Private blendModes(0 To 7) As Integer
 
 Private backClr As TColor
-Private pointClr As TColor
+Private pointColor As TColor
 Private selClr As TColor
 Private gridColor1 As TColor
 Private gridColor2 As TColor
@@ -2066,7 +2066,7 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
 
     frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
-    frmSoldatMapEditor.pointClr = RGB(pointClr.blue, pointClr.green, pointClr.red)
+    frmSoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
     frmSoldatMapEditor.selectionClr = RGB(selClr.blue, selClr.green, selClr.red)
     frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
     frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
@@ -2176,7 +2176,7 @@ Private Sub Form_Load()
     blendModes(7) = 6
 
     backClr = getRGB(frmSoldatMapEditor.backClr)
-    pointClr = getRGB(frmSoldatMapEditor.pointClr)
+    pointColor = getRGB(frmSoldatMapEditor.pointColor)
     selClr = getRGB(frmSoldatMapEditor.selectionClr)
     gridColor1 = getRGB(frmSoldatMapEditor.gridColor1)
     gridColor2 = getRGB(frmSoldatMapEditor.gridColor2)
@@ -2189,7 +2189,7 @@ Private Sub Form_Load()
     Next
 
     Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
-    Me.picPointClr.BackColor = RGB(pointClr.red, pointClr.green, pointClr.blue)
+    Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
     Me.picSelectionClr.BackColor = RGB(selClr.red, selClr.green, selClr.blue)
     Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
     Me.picGridClr2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
