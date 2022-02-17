@@ -1953,8 +1953,8 @@ Private blendModes(0 To 7) As Integer
 Private backClr As TColor
 Private pointClr As TColor
 Private selClr As TColor
-Private gridClr As TColor
-Private gridClr2 As TColor
+Private gridColor1 As TColor
+Private gridColor2 As TColor
 
 Private spacing As Integer
 Private divisions As Integer
@@ -2068,8 +2068,8 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
     frmSoldatMapEditor.pointClr = RGB(pointClr.blue, pointClr.green, pointClr.red)
     frmSoldatMapEditor.selectionClr = RGB(selClr.blue, selClr.green, selClr.red)
-    frmSoldatMapEditor.gridClr = RGB(gridClr.blue, gridClr.green, gridClr.red)
-    frmSoldatMapEditor.gridClr2 = RGB(gridClr2.blue, gridClr2.green, gridClr2.red)
+    frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
+    frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
 
     frmSoldatMapEditor.formWidth = formWidth
     frmSoldatMapEditor.formHeight = formHeight
@@ -2178,8 +2178,8 @@ Private Sub Form_Load()
     backClr = getRGB(frmSoldatMapEditor.backClr)
     pointClr = getRGB(frmSoldatMapEditor.pointClr)
     selClr = getRGB(frmSoldatMapEditor.selectionClr)
-    gridClr = getRGB(frmSoldatMapEditor.gridClr)
-    gridClr2 = getRGB(frmSoldatMapEditor.gridClr2)
+    gridColor1 = getRGB(frmSoldatMapEditor.gridColor1)
+    gridColor2 = getRGB(frmSoldatMapEditor.gridColor2)
 
     For i = LBound(blendModes) To UBound(blendModes)
         If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
@@ -2191,8 +2191,8 @@ Private Sub Form_Load()
     Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
     Me.picPointClr.BackColor = RGB(pointClr.red, pointClr.green, pointClr.blue)
     Me.picSelectionClr.BackColor = RGB(selClr.red, selClr.green, selClr.blue)
-    Me.picGridClr.BackColor = RGB(gridClr.red, gridClr.green, gridClr.blue)
-    Me.picGridClr2.BackColor = RGB(gridClr2.red, gridClr2.green, gridClr2.blue)
+    Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
+    Me.picGridClr2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
 
     txtWidth.Text = frmSoldatMapEditor.formWidth
     txtHeight.Text = frmSoldatMapEditor.formHeight
@@ -2283,23 +2283,23 @@ End Sub
 
 Private Sub picGridClr_Click()
 
-    frmColor.InitColor gridClr.red, gridClr.green, gridClr.blue
+    frmColor.InitColor gridColor1.red, gridColor1.green, gridColor1.blue
     frmColor.Show 1
     picGridClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    gridClr.red = frmColor.red
-    gridClr.green = frmColor.green
-    gridClr.blue = frmColor.blue
+    gridColor1.red = frmColor.red
+    gridColor1.green = frmColor.green
+    gridColor1.blue = frmColor.blue
 
 End Sub
 
 Private Sub picGridClr2_Click()
 
-    frmColor.InitColor gridClr2.red, gridClr2.green, gridClr2.blue
+    frmColor.InitColor gridColor2.red, gridColor2.green, gridColor2.blue
     frmColor.Show 1
     picGridClr2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    gridClr2.red = frmColor.red
-    gridClr2.green = frmColor.green
-    gridClr2.blue = frmColor.blue
+    gridColor2.red = frmColor.red
+    gridColor2.green = frmColor.green
+    gridColor2.blue = frmColor.blue
 
 End Sub
 

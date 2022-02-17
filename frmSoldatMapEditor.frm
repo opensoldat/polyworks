@@ -1296,8 +1296,8 @@ Option Explicit
 Public backClr As Long
 Public pointClr As Long
 Public selectionClr As Long
-Public gridClr As Long
-Public gridClr2 As Long
+Public gridColor1 As Long
+Public gridColor2 As Long
 Public polyBlendSrc As Long
 Public polyBlendDest As Long
 Public wireBlendSrc As Long
@@ -4097,8 +4097,8 @@ Private Sub initGrid()
     Dim clr1 As Long
     Dim clr2 As Long
 
-    clr1 = ARGB(gridOp1, gridClr)
-    clr2 = ARGB(gridOp2, gridClr2)
+    clr1 = ARGB(gridOp1, gridColor1)
+    clr2 = ARGB(gridOp2, gridColor2)
 
     ReDim xGridLines(gridDivisions)
     ReDim yGridLines(gridDivisions)
@@ -12033,8 +12033,8 @@ Private Sub saveSettings()
         "Prefabs=" & prefabDir & sNull & _
         "GridSpacing=" & gridSpacing & sNull & _
         "GridDiv=" & gridDivisions & sNull & _
-        "GridClr1=" & RGBtoHex(gridClr) & sNull & _
-        "GridClr2=" & RGBtoHex(gridClr2) & sNull & _
+        "GridColor1=" & RGBtoHex(gridColor1) & sNull & _
+        "GridColor2=" & RGBtoHex(gridColor2) & sNull & _
         "GridAlpha1=" & gridOp1 & sNull & _
         "GridAlpha2=" & gridOp2 & sNull & _
         "PolySrc=" & polyBlendSrc & sNull & _
@@ -12223,8 +12223,8 @@ Private Sub loadINI()
 
     gridSpacing = loadInt("Preferences", "GridSpacing")
     gridDivisions = loadInt("Preferences", "GridDiv")
-    gridClr = HexToLong(loadString("Preferences", "GridClr1"))
-    gridClr2 = HexToLong(loadString("Preferences", "GridClr2"))
+    gridColor1 = HexToLong(loadString("Preferences", "GridColor1"))
+    gridColor2 = HexToLong(loadString("Preferences", "GridColor2"))
     gridOp1 = loadInt("Preferences", "GridAlpha1")
     gridOp2 = loadInt("Preferences", "GridAlpha2")
     polyBlendSrc = loadInt("Preferences", "PolySrc")
