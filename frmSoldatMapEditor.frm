@@ -5585,57 +5585,57 @@ Private Sub findDragPoint(X As Single, Y As Single)
     Dim midCoords As D3DVECTOR2
 
     ' TODO: indent
-        ' check if user moused down on corner drag point of sel rect
+    ' check if user moused down on corner drag point of sel rect
+    For i = 0 To 3
+        j = i + 2
+        If j > 3 Then
+            j = i - 2
+        End If
+        If nearCoord((selRect(i).X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
+                nearCoord((selRect(i).Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
+            If mnuFixedRCenter.Checked Then
+                rCenter.X = selRect(j).X
+                rCenter.Y = selRect(j).Y
+            End If
+            moveCoords(1).X = (selRect(i).X - scrollCoords(2).X) * zoomFactor
+            moveCoords(1).Y = (selRect(i).Y - scrollCoords(2).Y) * zoomFactor
+            X = moveCoords(1).X
+            Y = moveCoords(1).Y
+            toolAction = True
+        End If
+    Next
+
+    If toolAction = False Then
         For i = 0 To 3
             j = i + 2
             If j > 3 Then
                 j = i - 2
             End If
-            If nearCoord((selRect(i).X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
-                    nearCoord((selRect(i).Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
+            k = i + 1
+            If k > 3 Then
+                k = 0
+            End If
+            midCoords.X = Midpoint(selRect(i).X, selRect(k).X)
+            midCoords.Y = Midpoint(selRect(i).Y, selRect(k).Y)
+            k = i - 1
+            If k < 0 Then
+                k = 3
+            End If
+            If nearCoord((midCoords.X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
+                    nearCoord((midCoords.Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
                 If mnuFixedRCenter.Checked Then
-                    rCenter.X = selRect(j).X
-                    rCenter.Y = selRect(j).Y
+                    rCenter.X = Midpoint(selRect(j).X, selRect(k).X)
+                    rCenter.Y = Midpoint(selRect(j).Y, selRect(k).Y)
                 End If
-                moveCoords(1).X = (selRect(i).X - scrollCoords(2).X) * zoomFactor
-                moveCoords(1).Y = (selRect(i).Y - scrollCoords(2).Y) * zoomFactor
+                moveCoords(1).X = (midCoords.X - scrollCoords(2).X) * zoomFactor
+                moveCoords(1).Y = (midCoords.Y - scrollCoords(2).Y) * zoomFactor
                 X = moveCoords(1).X
                 Y = moveCoords(1).Y
                 toolAction = True
             End If
         Next
-
-        If toolAction = False Then
-            For i = 0 To 3
-                j = i + 2
-                If j > 3 Then
-                    j = i - 2
-                End If
-                k = i + 1
-                If k > 3 Then
-                    k = 0
-                End If
-                midCoords.X = Midpoint(selRect(i).X, selRect(k).X)
-                midCoords.Y = Midpoint(selRect(i).Y, selRect(k).Y)
-                k = i - 1
-                If k < 0 Then
-                    k = 3
-                End If
-                If nearCoord((midCoords.X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
-                        nearCoord((midCoords.Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
-                    If mnuFixedRCenter.Checked Then
-                        rCenter.X = Midpoint(selRect(j).X, selRect(k).X)
-                        rCenter.Y = Midpoint(selRect(j).Y, selRect(k).Y)
-                    End If
-                    moveCoords(1).X = (midCoords.X - scrollCoords(2).X) * zoomFactor
-                    moveCoords(1).Y = (midCoords.Y - scrollCoords(2).Y) * zoomFactor
-                    X = moveCoords(1).X
-                    Y = moveCoords(1).Y
-                    toolAction = True
-                End If
-            Next
-            Render
-        End If
+        Render
+    End If
 
 End Sub
 
