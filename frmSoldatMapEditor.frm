@@ -8048,21 +8048,21 @@ Private Sub lightPicker(X As Single, Y As Single)
 
     ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
-    shortestDist = 32 ^ 2 + 1
-    For i = 1 To mPolyCount
-        If pointInPoly(X, Y, i) Then
-            For j = 1 To 3
-                If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
-                    currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
-                    If currentDist < shortestDist Then
-                        shortestDist = currentDist
-                        pNum = i
-                        vNum = j
+        shortestDist = 32 ^ 2 + 1
+        For i = 1 To mPolyCount
+            If pointInPoly(X, Y, i) Then
+                For j = 1 To 3
+                    If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
+                        currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
+                        If currentDist < shortestDist Then
+                            shortestDist = currentDist
+                            pNum = i
+                            vNum = j
+                        End If
                     End If
-                End If
-            Next
-        End If
-    Next
+                Next
+            End If
+        Next
     End If
 
     If vNum > 0 Then ' poly color absorbed
