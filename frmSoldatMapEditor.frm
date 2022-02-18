@@ -5150,7 +5150,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     If DIDevice Is Nothing Then Exit Sub
 
-    ' TODO: indent
     If eventid = hEvent Then
 
         DIDevice.GetDeviceStateKeyboard DIState
@@ -5584,7 +5583,6 @@ Private Sub findDragPoint(X As Single, Y As Single)
     Dim k As Integer
     Dim midCoords As D3DVECTOR2
 
-    ' TODO: indent
     ' check if user moused down on corner drag point of sel rect
     For i = 0 To 3
         j = i + 2
@@ -6072,7 +6070,6 @@ Private Sub applyLights(Optional toSel As Boolean = False)
         End If
 
         For j = 1 To 3
-            ' TODO: indent
             If (vertexList(i).vertex(j) = 1 And toSel) Or toSel = False Then
 
                 For k = 1 To lightCount
@@ -7938,7 +7935,6 @@ Private Sub ColorPicker(X As Single, Y As Single)
     Dim vNum As Integer
     Dim tempClr As TColor
 
-    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
@@ -8000,7 +7996,6 @@ Private Sub depthPicker(X As Single, Y As Single)
     Dim pNum As Integer
     Dim vNum As Integer
 
-    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
@@ -8046,7 +8041,6 @@ Private Sub lightPicker(X As Single, Y As Single)
     Dim vNum As Integer
     Dim tempClr As TColor
 
-    ' TODO: indent
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
