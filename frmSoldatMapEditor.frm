@@ -5153,349 +5153,349 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
     ' TODO: indent
     If eventid = hEvent Then
 
-    DIDevice.GetDeviceStateKeyboard DIState
-    DIDevice.GetDeviceData pBuffer, DIGDD_DEFAULT
+        DIDevice.GetDeviceStateKeyboard DIState
+        DIDevice.GetDeviceData pBuffer, DIGDD_DEFAULT
 
-    If tvwScenery.Visible = True Then Exit Sub
+        If tvwScenery.Visible = True Then Exit Sub
 
-    If Screen.ActiveForm.hWnd <> Me.hWnd Or Me.ActiveControl = txtZoom Then Exit Sub
+        If Screen.ActiveForm.hWnd <> Me.hWnd Or Me.ActiveControl = txtZoom Then Exit Sub
 
-    If DIState.Key(DIK_SPACE) = 128 And Not spaceDown Then
-        circleOn = False
-        spaceDown = True
-        scrollCoords(1).X = mouseCoords.X
-        scrollCoords(1).Y = mouseCoords.Y
-        SetCursor TOOL_HAND + 1
-        Exit Sub
-    ElseIf (DIState.Key(DIK_LSHIFT) = 128 Or DIState.Key(DIK_RSHIFT) = 128) And Not shiftDown Then
-        circleOn = False
-        shiftDown = True
-        Select Case currentTool
-        Case Is = TOOL_VSELECT ' add verts
-            currentFunction = TOOL_VSELADD
-        Case Is = TOOL_PSELECT ' add polys
-            currentFunction = TOOL_PSELADD
-        Case Is = TOOL_WAYPOINT
-            currentFunction = TOOL_CONNECT
-        Case Is = TOOL_CLRPICKER
-            currentFunction = TOOL_PIXPICKER
-        Case Is = TOOL_SKETCH
-            sketch(0).vertex(1).X = mouseCoords.X / zoomFactor + scrollCoords(2).X
-            sketch(0).vertex(1).Y = mouseCoords.Y / zoomFactor + scrollCoords(2).Y
-        End Select
-        SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
-        Exit Sub
-    ElseIf (DIState.Key(DIK_LCONTROL) = 128 Or DIState.Key(DIK_RCONTROL) = 128) And Not ctrlDown Then
-        circleOn = False
-        ctrlDown = True
-        Select Case currentTool
-        Case Is = TOOL_MOVE
-            currentFunction = TOOL_SCALE
-            If altDown Then
-                ApplyTransform True
-            End If
-            toolAction = False
-        Case Is = TOOL_SKETCH
-            currentFunction = TOOL_SMUDGE
-            circleOn = True
-        Case Is > TOOL_MOVE
-            currentFunction = TOOL_MOVE
-            If currentTool <> TOOL_CREATE Then
-                toolAction = False
-            End If
-        End Select
-        Render
-        SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
-        Exit Sub
-    ElseIf (DIState.Key(DIK_LALT) = 128 Or DIState.Key(DIK_RALT) = 128) And Not altDown Then
-        circleOn = False
-        altDown = True
-        Select Case currentTool
-        Case Is = TOOL_MOVE
-            currentFunction = TOOL_ROTATE
-            If toolAction Then
-                If ctrlDown Then
-                    ApplyTransform False
-                End If
-                toolAction = False
-            End If
-        Case Is = TOOL_VSELECT ' subtract verts
-            currentFunction = TOOL_VSELSUB
-        Case Is = TOOL_PSELECT ' subtract polys
-            currentFunction = TOOL_PSELSUB
-        Case Is = TOOL_VCOLOR ' color picker
-            currentFunction = TOOL_CLRPICKER
-        Case Is = TOOL_PCOLOR ' color picker
-            currentFunction = TOOL_CLRPICKER
-        Case Is = TOOL_DEPTHMAP
-            currentFunction = TOOL_CLRPICKER
-        Case Is = TOOL_CLRPICKER
-            currentFunction = TOOL_LITPICKER
-        Case Is = TOOL_SKETCH
-            currentFunction = TOOL_ERASER
-            circleOn = True
-        Case Else
-            currentFunction = TOOL_VSELECT
-        End Select
-        If currentFunction = TOOL_TEXTURE Then toolAction = False
-        If currentFunction = TOOL_VCOLOR Or currentFunction = TOOL_DEPTHMAP Then circleOn = True
-        Render
-        SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
-        Exit Sub
-    End If
-
-    hotKeyPressed = -1
-    For i = 0 To 13
-        If (DIState.Key(frmTools.getHotKey(i))) Then hotKeyPressed = i
-    Next
-    wayptKeyPressed = -1
-    For i = 0 To 4
-        If (DIState.Key(frmWaypoints.getWayptKey(i))) Then wayptKeyPressed = i
-    Next
-    layerKeyPressed = -1
-    For i = 0 To 7
-        If (DIState.Key(frmDisplay.getLayerKey(i))) Then layerKeyPressed = i
-    Next
-
-    ' key up
-    If (pBuffer(0).lData = 0) Then
-
-        If ((pBuffer(0).lOfs = DIK_RSHIFT Or pBuffer(0).lOfs = DIK_LSHIFT) And shiftDown) Then
-            shiftDown = False
-            currentFunction = currentTool
-            If currentFunction = TOOL_SKETCH Then
-                toolAction = False
-                Render
-            ElseIf currentFunction = TOOL_MOVE Then
+        If DIState.Key(DIK_SPACE) = 128 And Not spaceDown Then
+            circleOn = False
+            spaceDown = True
+            scrollCoords(1).X = mouseCoords.X
+            scrollCoords(1).Y = mouseCoords.Y
+            SetCursor TOOL_HAND + 1
+            Exit Sub
+        ElseIf (DIState.Key(DIK_LSHIFT) = 128 Or DIState.Key(DIK_RSHIFT) = 128) And Not shiftDown Then
+            circleOn = False
+            shiftDown = True
+            Select Case currentTool
+            Case Is = TOOL_VSELECT ' add verts
+                currentFunction = TOOL_VSELADD
+            Case Is = TOOL_PSELECT ' add polys
+                currentFunction = TOOL_PSELADD
+            Case Is = TOOL_WAYPOINT
+                currentFunction = TOOL_CONNECT
+            Case Is = TOOL_CLRPICKER
+                currentFunction = TOOL_PIXPICKER
+            Case Is = TOOL_SKETCH
+                sketch(0).vertex(1).X = mouseCoords.X / zoomFactor + scrollCoords(2).X
+                sketch(0).vertex(1).Y = mouseCoords.Y / zoomFactor + scrollCoords(2).Y
+            End Select
+            SetCursor currentFunction + 1
+            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            Exit Sub
+        ElseIf (DIState.Key(DIK_LCONTROL) = 128 Or DIState.Key(DIK_RCONTROL) = 128) And Not ctrlDown Then
+            circleOn = False
+            ctrlDown = True
+            Select Case currentTool
+            Case Is = TOOL_MOVE
+                currentFunction = TOOL_SCALE
                 If altDown Then
-                    currentFunction = TOOL_ROTATE
-                ElseIf ctrlDown Then
-                    currentFunction = TOOL_SCALE
+                    ApplyTransform True
                 End If
-            End If
-        ElseIf ((pBuffer(0).lOfs = DIK_RCONTROL Or pBuffer(0).lOfs = DIK_LCONTROL) And ctrlDown) Then
-            ctrlDown = False
-            If currentTool = TOOL_VSELECT Then
                 toolAction = False
-            ElseIf currentTool = TOOL_MOVE Then
-                ApplyTransform False
-            ElseIf currentTool = TOOL_SCENERY Then
-                Scenery(0).screenTr.X = mouseCoords.X
-                Scenery(0).screenTr.Y = mouseCoords.Y
-                Scenery(0).Translation.X = mouseCoords.X
-                Scenery(0).Translation.Y = mouseCoords.Y
-            ElseIf currentTool = TOOL_OBJECTS Then
-                Spawns(0).X = mouseCoords.X
-                Spawns(0).Y = mouseCoords.Y
-            ElseIf currentTool = TOOL_DEPTHMAP Then
+            Case Is = TOOL_SKETCH
+                currentFunction = TOOL_SMUDGE
                 circleOn = True
-            ElseIf currentTool = TOOL_VCOLOR Then
-                circleOn = True
-            ElseIf currentTool = TOOL_SKETCH Then
-                circleOn = False
-            End If
+            Case Is > TOOL_MOVE
+                currentFunction = TOOL_MOVE
+                If currentTool <> TOOL_CREATE Then
+                    toolAction = False
+                End If
+            End Select
             Render
-            currentFunction = currentTool
-        ElseIf ((pBuffer(0).lOfs = DIK_RALT Or pBuffer(0).lOfs = DIK_LALT) And altDown) Then
-            altDown = False
-            If currentTool = TOOL_MOVE Then
-                ApplyTransform True
-            ElseIf currentTool = TOOL_SCENERY Then
-                Scenery(0).screenTr.X = mouseCoords.X
-                Scenery(0).screenTr.Y = mouseCoords.Y
-                Scenery(0).Translation.X = mouseCoords.X
-                Scenery(0).Translation.Y = mouseCoords.Y
-            ElseIf currentTool = TOOL_OBJECTS Then
-                Spawns(0).X = mouseCoords.X
-                Spawns(0).Y = mouseCoords.Y
-            ElseIf currentTool = TOOL_DEPTHMAP Then
+            SetCursor currentFunction + 1
+            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            Exit Sub
+        ElseIf (DIState.Key(DIK_LALT) = 128 Or DIState.Key(DIK_RALT) = 128) And Not altDown Then
+            circleOn = False
+            altDown = True
+            Select Case currentTool
+            Case Is = TOOL_MOVE
+                currentFunction = TOOL_ROTATE
+                If toolAction Then
+                    If ctrlDown Then
+                        ApplyTransform False
+                    End If
+                    toolAction = False
+                End If
+            Case Is = TOOL_VSELECT ' subtract verts
+                currentFunction = TOOL_VSELSUB
+            Case Is = TOOL_PSELECT ' subtract polys
+                currentFunction = TOOL_PSELSUB
+            Case Is = TOOL_VCOLOR ' color picker
+                currentFunction = TOOL_CLRPICKER
+            Case Is = TOOL_PCOLOR ' color picker
+                currentFunction = TOOL_CLRPICKER
+            Case Is = TOOL_DEPTHMAP
+                currentFunction = TOOL_CLRPICKER
+            Case Is = TOOL_CLRPICKER
+                currentFunction = TOOL_LITPICKER
+            Case Is = TOOL_SKETCH
+                currentFunction = TOOL_ERASER
                 circleOn = True
-            ElseIf currentTool = TOOL_VCOLOR Then
-                circleOn = True
-            ElseIf currentTool = TOOL_SKETCH Then
-                circleOn = False
-            End If
+            Case Else
+                currentFunction = TOOL_VSELECT
+            End Select
+            If currentFunction = TOOL_TEXTURE Then toolAction = False
+            If currentFunction = TOOL_VCOLOR Or currentFunction = TOOL_DEPTHMAP Then circleOn = True
             Render
-            currentFunction = currentTool
-        ElseIf (pBuffer(0).lOfs = DIK_SPACE And spaceDown) Then ' scrolling
-            spaceDown = False
+            SetCursor currentFunction + 1
+            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            Exit Sub
         End If
 
-        SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+        hotKeyPressed = -1
+        For i = 0 To 13
+            If (DIState.Key(frmTools.getHotKey(i))) Then hotKeyPressed = i
+        Next
+        wayptKeyPressed = -1
+        For i = 0 To 4
+            If (DIState.Key(frmWaypoints.getWayptKey(i))) Then wayptKeyPressed = i
+        Next
+        layerKeyPressed = -1
+        For i = 0 To 7
+            If (DIState.Key(frmDisplay.getLayerKey(i))) Then layerKeyPressed = i
+        Next
 
-    End If
+        ' key up
+        If (pBuffer(0).lData = 0) Then
 
-    If ctrlDown Then ' shortcuts
-        If DIState.Key(DIK_EQUALS) = 128 Then  ' ctrl++
-            Zoom getZoomDir(2) ' 2
-        ElseIf DIState.Key(DIK_MINUS) = 128 Then ' ctrl+-
-            Zoom getZoomDir(0.5) ' 0.5
-        ElseIf DIState.Key(DIK_0) = 128 Then ' ctrl+0
-            zoomFactor = 1
-            scrollCoords(2).X = -ScaleWidth / 2
-            scrollCoords(2).Y = -ScaleHeight / 2
-            Zoom 1
-        ElseIf DIState.Key(MapVirtualKey(78, 0)) = 128 Then ' ctrl+n
-            mnuNew_Click
-        ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 And shiftDown Then ' ctrl+shift+o
-            mnuOpenCompiled_Click
-        ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 Then ' ctrl+o
-            mnuOpen_Click
-        ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 And shiftDown Then ' ctrl+shift+s
-            mnuSaveAs_Click
-        ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 Then ' ctrl+s
-            mnuSave_Click
-        ElseIf DIState.Key(MapVirtualKey(69, 0)) = 128 Then ' ctrl+e
-            mnuCreate_Click
-        ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then ' ctrl+v
-            mnuPaste_Click
-        ElseIf DIState.Key(MapVirtualKey(67, 0)) = 128 Then ' ctrl+c
-            mnuCopy_Click
-        ElseIf DIState.Key(MapVirtualKey(90, 0)) = 128 Then ' ctrl+z
-            loadUndo False
-        ElseIf DIState.Key(MapVirtualKey(89, 0)) = 128 Then ' ctrl+y
-            loadUndo True
-        ElseIf DIState.Key(MapVirtualKey(65, 0)) = 128 Then ' ctrl+a
-            mnuSelectAll_Click
-        ElseIf DIState.Key(MapVirtualKey(68, 0)) = 128 Then ' ctrl+d
-            mnuDuplicate_Click
-        ElseIf DIState.Key(MapVirtualKey(73, 0)) = 128 Then ' ctrl+i
-            mnuInvertSel_Click
-        ElseIf DIState.Key(MapVirtualKey(66, 0)) = 128 Then ' ctrl+b
-            mnuSelColor_Click
-        ElseIf DIState.Key(MapVirtualKey(74, 0)) = 128 Then ' ctrl+j
-            mnuJoinVertices_Click
-        ElseIf DIState.Key(MapVirtualKey(85, 0)) = 128 Then ' ctrl+u
-            mnuUntexture_Click
-        ElseIf DIState.Key(MapVirtualKey(70, 0)) = 128 Then ' ctrl+f
-            mnuFixTexture_Click
-        ElseIf DIState.Key(MapVirtualKey(76, 0)) = 128 Then ' ctrl+l
-            mnuSplit_Click
-        ElseIf DIState.Key(MapVirtualKey(77, 0)) = 128 Then ' ctrl+m
-            mnuMap_Click
-        ElseIf DIState.Key(MapVirtualKey(80, 0)) = 128 Then ' ctrl+p
-            mnuPreferences_Click
-        ElseIf DIState.Key(MapVirtualKey(71, 0)) = 128 Then ' ctrl+g
-            AverageVertices
-        ElseIf DIState.Key(DIK_APOSTROPHE) = 128 Then ' ctrl+'
-            mnuGrid_Click
-        ElseIf DIState.Key(MapVirtualKey(84, 0)) = 128 Then ' ctrl+t
-            AutoTexture
-        End If
-    Else
-        If hotKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' hotkey
-            setCurrentTool hotKeyPressed
-            frmTools.picTools_MouseDown hotKeyPressed, 1, 0, 1, 1
-        ElseIf wayptKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' waypoint key
-            frmWaypoints.picType_MouseUp wayptKeyPressed, 1, 0, 0, 0
-        ElseIf layerKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' layer key
-            frmDisplay.picLayer_MouseUp layerKeyPressed, 1, 0, 0, 0
-        ElseIf DIState.Key(DIK_NUMPADPLUS) = 128 Then ' +
-            Zoom getZoomDir(2)
-        ElseIf DIState.Key(DIK_NUMPADMINUS) = 128 Then ' -
-            Zoom getZoomDir(0.5)
-        ElseIf DIState.Key(DIK_NUMPADSTAR) = 128 Then ' *
-            Zoom 1 / zoomFactor
-        ElseIf DIState.Key(DIK_DELETE) = 128 Then ' delete
-            deletePolys
-        ElseIf DIState.Key(DIK_TAB) = 128 Then ' tab
-            TabPressed
-        ElseIf (DIState.Key(DIK_ESCAPE) = 128) Then ' esc
-            If numVerts > 0 Or numCorners > 0 Or currentWaypoint > 0 Then
-                numVerts = 0
-                numCorners = 0
-                currentWaypoint = 0
-                toolAction = False
+            If ((pBuffer(0).lOfs = DIK_RSHIFT Or pBuffer(0).lOfs = DIK_LSHIFT) And shiftDown) Then
+                shiftDown = False
+                currentFunction = currentTool
+                If currentFunction = TOOL_SKETCH Then
+                    toolAction = False
+                    Render
+                ElseIf currentFunction = TOOL_MOVE Then
+                    If altDown Then
+                        currentFunction = TOOL_ROTATE
+                    ElseIf ctrlDown Then
+                        currentFunction = TOOL_SCALE
+                    End If
+                End If
+            ElseIf ((pBuffer(0).lOfs = DIK_RCONTROL Or pBuffer(0).lOfs = DIK_LCONTROL) And ctrlDown) Then
+                ctrlDown = False
+                If currentTool = TOOL_VSELECT Then
+                    toolAction = False
+                ElseIf currentTool = TOOL_MOVE Then
+                    ApplyTransform False
+                ElseIf currentTool = TOOL_SCENERY Then
+                    Scenery(0).screenTr.X = mouseCoords.X
+                    Scenery(0).screenTr.Y = mouseCoords.Y
+                    Scenery(0).Translation.X = mouseCoords.X
+                    Scenery(0).Translation.Y = mouseCoords.Y
+                ElseIf currentTool = TOOL_OBJECTS Then
+                    Spawns(0).X = mouseCoords.X
+                    Spawns(0).Y = mouseCoords.Y
+                ElseIf currentTool = TOOL_DEPTHMAP Then
+                    circleOn = True
+                ElseIf currentTool = TOOL_VCOLOR Then
+                    circleOn = True
+                ElseIf currentTool = TOOL_SKETCH Then
+                    circleOn = False
+                End If
                 Render
-            Else
-                mnuDeselect_Click
+                currentFunction = currentTool
+            ElseIf ((pBuffer(0).lOfs = DIK_RALT Or pBuffer(0).lOfs = DIK_LALT) And altDown) Then
+                altDown = False
+                If currentTool = TOOL_MOVE Then
+                    ApplyTransform True
+                ElseIf currentTool = TOOL_SCENERY Then
+                    Scenery(0).screenTr.X = mouseCoords.X
+                    Scenery(0).screenTr.Y = mouseCoords.Y
+                    Scenery(0).Translation.X = mouseCoords.X
+                    Scenery(0).Translation.Y = mouseCoords.Y
+                ElseIf currentTool = TOOL_OBJECTS Then
+                    Spawns(0).X = mouseCoords.X
+                    Spawns(0).Y = mouseCoords.Y
+                ElseIf currentTool = TOOL_DEPTHMAP Then
+                    circleOn = True
+                ElseIf currentTool = TOOL_VCOLOR Then
+                    circleOn = True
+                ElseIf currentTool = TOOL_SKETCH Then
+                    circleOn = False
+                End If
+                Render
+                currentFunction = currentTool
+            ElseIf (pBuffer(0).lOfs = DIK_SPACE And spaceDown) Then ' scrolling
+                spaceDown = False
             End If
-        ElseIf (DIState.Key(DIK_BACKSPACE) = 128) Then ' backspace
-            mnuSever_Click
-        ElseIf (DIState.Key(DIK_INSERT) = 128 And shiftDown) Then ' shift+insert
-            mnuDuplicate_Click
-        ElseIf (DIState.Key(DIK_HOME) = 128) Then ' Home
-            mnuBringToFront_Click
-        ElseIf (DIState.Key(DIK_END) = 128) Then ' End
-            mnuSendToBack_Click
-        ElseIf (DIState.Key(DIK_PGUP) = 128) Then ' Page Up
-            mnuBringForward_Click
-        ElseIf (DIState.Key(DIK_PGDN) = 128) Then ' Page Down
-            mnuSendBackward_Click
-        ElseIf (DIState.Key(DIK_F1) = 128) Then ' F1
-            RunHelp
-        ElseIf (DIState.Key(DIK_F5) = 128) Then ' F5
-            mnuRefreshBG_Click
-        ElseIf (DIState.Key(DIK_F8) = 128) Then ' F8
-            mnuRunSoldat_Click
-        ElseIf (DIState.Key(DIK_F9) = 128) Then ' F9
-            mnuCompileAs_Click
-        ElseIf (DIState.Key(DIK_F4) = 128 And altDown) Then ' alt+F4
-            mnuExit_Click
-        ElseIf (DIState.Key(DIK_LBRACKET) = 128) Then ' [
-            If currentTool = 0 Then
-                setCurrentTool TOOL_DEPTHMAP
-            Else
-                setCurrentTool currentTool - 1
+
+            SetCursor currentFunction + 1
+            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+
+        End If
+
+        If ctrlDown Then ' shortcuts
+            If DIState.Key(DIK_EQUALS) = 128 Then  ' ctrl++
+                Zoom getZoomDir(2) ' 2
+            ElseIf DIState.Key(DIK_MINUS) = 128 Then ' ctrl+-
+                Zoom getZoomDir(0.5) ' 0.5
+            ElseIf DIState.Key(DIK_0) = 128 Then ' ctrl+0
+                zoomFactor = 1
+                scrollCoords(2).X = -ScaleWidth / 2
+                scrollCoords(2).Y = -ScaleHeight / 2
+                Zoom 1
+            ElseIf DIState.Key(MapVirtualKey(78, 0)) = 128 Then ' ctrl+n
+                mnuNew_Click
+            ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 And shiftDown Then ' ctrl+shift+o
+                mnuOpenCompiled_Click
+            ElseIf DIState.Key(MapVirtualKey(79, 0)) = 128 Then ' ctrl+o
+                mnuOpen_Click
+            ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 And shiftDown Then ' ctrl+shift+s
+                mnuSaveAs_Click
+            ElseIf DIState.Key(MapVirtualKey(83, 0)) = 128 Then ' ctrl+s
+                mnuSave_Click
+            ElseIf DIState.Key(MapVirtualKey(69, 0)) = 128 Then ' ctrl+e
+                mnuCreate_Click
+            ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then ' ctrl+v
+                mnuPaste_Click
+            ElseIf DIState.Key(MapVirtualKey(67, 0)) = 128 Then ' ctrl+c
+                mnuCopy_Click
+            ElseIf DIState.Key(MapVirtualKey(90, 0)) = 128 Then ' ctrl+z
+                loadUndo False
+            ElseIf DIState.Key(MapVirtualKey(89, 0)) = 128 Then ' ctrl+y
+                loadUndo True
+            ElseIf DIState.Key(MapVirtualKey(65, 0)) = 128 Then ' ctrl+a
+                mnuSelectAll_Click
+            ElseIf DIState.Key(MapVirtualKey(68, 0)) = 128 Then ' ctrl+d
+                mnuDuplicate_Click
+            ElseIf DIState.Key(MapVirtualKey(73, 0)) = 128 Then ' ctrl+i
+                mnuInvertSel_Click
+            ElseIf DIState.Key(MapVirtualKey(66, 0)) = 128 Then ' ctrl+b
+                mnuSelColor_Click
+            ElseIf DIState.Key(MapVirtualKey(74, 0)) = 128 Then ' ctrl+j
+                mnuJoinVertices_Click
+            ElseIf DIState.Key(MapVirtualKey(85, 0)) = 128 Then ' ctrl+u
+                mnuUntexture_Click
+            ElseIf DIState.Key(MapVirtualKey(70, 0)) = 128 Then ' ctrl+f
+                mnuFixTexture_Click
+            ElseIf DIState.Key(MapVirtualKey(76, 0)) = 128 Then ' ctrl+l
+                mnuSplit_Click
+            ElseIf DIState.Key(MapVirtualKey(77, 0)) = 128 Then ' ctrl+m
+                mnuMap_Click
+            ElseIf DIState.Key(MapVirtualKey(80, 0)) = 128 Then ' ctrl+p
+                mnuPreferences_Click
+            ElseIf DIState.Key(MapVirtualKey(71, 0)) = 128 Then ' ctrl+g
+                AverageVertices
+            ElseIf DIState.Key(DIK_APOSTROPHE) = 128 Then ' ctrl+'
+                mnuGrid_Click
+            ElseIf DIState.Key(MapVirtualKey(84, 0)) = 128 Then ' ctrl+t
+                AutoTexture
             End If
-            frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
-        ElseIf (DIState.Key(DIK_RBRACKET) = 128) Then ' ]
-            If currentTool = TOOL_DEPTHMAP Then
-                setCurrentTool TOOL_MOVE
-            Else
-                setCurrentTool currentTool + 1
-            End If
-            frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
-        ElseIf (DIState.Key(DIK_LEFT) = 128 Or DIState.Key(DIK_UP) = 128 _
-                Or DIState.Key(DIK_RIGHT) = 128 _
-                Or DIState.Key(DIK_DOWN) = 128) Then ' arrow keys
-            Dim n As Single
-            moveCoords(1).X = 0
-            moveCoords(1).Y = 0
-            If shiftDown Then
-                n = gridSpacing / gridDivisions * zoomFactor
-            Else
-                n = zoomFactor
-            End If
-            If currentTool = TOOL_TEXTURE And numSelectedPolys > 0 Then
-                If selectionChanged Then
+        Else
+            If hotKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' hotkey
+                setCurrentTool hotKeyPressed
+                frmTools.picTools_MouseDown hotKeyPressed, 1, 0, 1, 1
+            ElseIf wayptKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' waypoint key
+                frmWaypoints.picType_MouseUp wayptKeyPressed, 1, 0, 0, 0
+            ElseIf layerKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then ' layer key
+                frmDisplay.picLayer_MouseUp layerKeyPressed, 1, 0, 0, 0
+            ElseIf DIState.Key(DIK_NUMPADPLUS) = 128 Then ' +
+                Zoom getZoomDir(2)
+            ElseIf DIState.Key(DIK_NUMPADMINUS) = 128 Then ' -
+                Zoom getZoomDir(0.5)
+            ElseIf DIState.Key(DIK_NUMPADSTAR) = 128 Then ' *
+                Zoom 1 / zoomFactor
+            ElseIf DIState.Key(DIK_DELETE) = 128 Then ' delete
+                deletePolys
+            ElseIf DIState.Key(DIK_TAB) = 128 Then ' tab
+                TabPressed
+            ElseIf (DIState.Key(DIK_ESCAPE) = 128) Then ' esc
+                If numVerts > 0 Or numCorners > 0 Or currentWaypoint > 0 Then
+                    numVerts = 0
+                    numCorners = 0
+                    currentWaypoint = 0
+                    toolAction = False
+                    Render
+                Else
+                    mnuDeselect_Click
+                End If
+            ElseIf (DIState.Key(DIK_BACKSPACE) = 128) Then ' backspace
+                mnuSever_Click
+            ElseIf (DIState.Key(DIK_INSERT) = 128 And shiftDown) Then ' shift+insert
+                mnuDuplicate_Click
+            ElseIf (DIState.Key(DIK_HOME) = 128) Then ' Home
+                mnuBringToFront_Click
+            ElseIf (DIState.Key(DIK_END) = 128) Then ' End
+                mnuSendToBack_Click
+            ElseIf (DIState.Key(DIK_PGUP) = 128) Then ' Page Up
+                mnuBringForward_Click
+            ElseIf (DIState.Key(DIK_PGDN) = 128) Then ' Page Down
+                mnuSendBackward_Click
+            ElseIf (DIState.Key(DIK_F1) = 128) Then ' F1
+                RunHelp
+            ElseIf (DIState.Key(DIK_F5) = 128) Then ' F5
+                mnuRefreshBG_Click
+            ElseIf (DIState.Key(DIK_F8) = 128) Then ' F8
+                mnuRunSoldat_Click
+            ElseIf (DIState.Key(DIK_F9) = 128) Then ' F9
+                mnuCompileAs_Click
+            ElseIf (DIState.Key(DIK_F4) = 128 And altDown) Then ' alt+F4
+                mnuExit_Click
+            ElseIf (DIState.Key(DIK_LBRACKET) = 128) Then ' [
+                If currentTool = 0 Then
+                    setCurrentTool TOOL_DEPTHMAP
+                Else
+                    setCurrentTool currentTool - 1
+                End If
+                frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
+            ElseIf (DIState.Key(DIK_RBRACKET) = 128) Then ' ]
+                If currentTool = TOOL_DEPTHMAP Then
+                    setCurrentTool TOOL_MOVE
+                Else
+                    setCurrentTool currentTool + 1
+                End If
+                frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
+            ElseIf (DIState.Key(DIK_LEFT) = 128 Or DIState.Key(DIK_UP) = 128 _
+                    Or DIState.Key(DIK_RIGHT) = 128 _
+                    Or DIState.Key(DIK_DOWN) = 128) Then ' arrow keys
+                Dim n As Single
+                moveCoords(1).X = 0
+                moveCoords(1).Y = 0
+                If shiftDown Then
+                    n = gridSpacing / gridDivisions * zoomFactor
+                Else
+                    n = zoomFactor
+                End If
+                If currentTool = TOOL_TEXTURE And numSelectedPolys > 0 Then
+                    If selectionChanged Then
+                        SaveUndo
+                        selectionChanged = False
+                    End If
+                    If DIState.Key(DIK_LEFT) = 128 Then ' left
+                        StretchingTexture -n, 0
+                    ElseIf DIState.Key(DIK_UP) = 128 Then ' up
+                        StretchingTexture 0, -n
+                    ElseIf DIState.Key(DIK_RIGHT) = 128 Then ' right
+                        StretchingTexture n, 0
+                    ElseIf DIState.Key(DIK_DOWN) = 128 Then ' down
+                        StretchingTexture 0, n
+                    End If
                     SaveUndo
-                    selectionChanged = False
-                End If
-                If DIState.Key(DIK_LEFT) = 128 Then ' left
-                    StretchingTexture -n, 0
-                ElseIf DIState.Key(DIK_UP) = 128 Then ' up
-                    StretchingTexture 0, -n
-                ElseIf DIState.Key(DIK_RIGHT) = 128 Then ' right
-                    StretchingTexture n, 0
-                ElseIf DIState.Key(DIK_DOWN) = 128 Then ' down
-                    StretchingTexture 0, n
-                End If
-                SaveUndo
-            Else
-                If selectionChanged Then
+                Else
+                    If selectionChanged Then
+                        SaveUndo
+                        selectionChanged = False
+                    End If
+                    If DIState.Key(DIK_LEFT) = 128 Then ' left
+                        Moving -n, 0
+                    ElseIf DIState.Key(DIK_UP) = 128 Then ' up
+                        Moving 0, -n
+                    ElseIf DIState.Key(DIK_RIGHT) = 128 Then ' right
+                        Moving n, 0
+                    ElseIf DIState.Key(DIK_DOWN) = 128 Then ' down
+                        Moving 0, n
+                    End If
                     SaveUndo
-                    selectionChanged = False
                 End If
-                If DIState.Key(DIK_LEFT) = 128 Then ' left
-                    Moving -n, 0
-                ElseIf DIState.Key(DIK_UP) = 128 Then ' up
-                    Moving 0, -n
-                ElseIf DIState.Key(DIK_RIGHT) = 128 Then ' right
-                    Moving n, 0
-                ElseIf DIState.Key(DIK_DOWN) = 128 Then ' down
-                    Moving 0, n
-                End If
-                SaveUndo
             End If
         End If
-    End If
 
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
     End If
 
     Exit Sub
