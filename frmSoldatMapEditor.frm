@@ -12043,7 +12043,7 @@ Private Sub saveSettings()
         "WireDest=" & wireBlendDest & sNull & _
         "PointColor=" & RGBtoHex(pointColor) & sNull & _
         "SelectionColor=" & RGBtoHex(selectionColor) & sNull & _
-        "BackClr=" & RGBtoHex(backClr) & sNull & _
+        "BackColor=" & RGBtoHex(backClr) & sNull & _
         "MaxUndo=" & max_undo & sNull & _
         "SceneryVerts=" & sceneryVerts & sNull & _
         "Topmost=" & topmost & sNull & _
@@ -12233,7 +12233,7 @@ Private Sub loadINI()
     wireBlendDest = loadInt("Preferences", "WireDest")
     pointColor = HexToLong(loadString("Preferences", "PointColor"))
     selectionColor = HexToLong(loadString("Preferences", "SelectionColor"))
-    backClr = HexToLong(loadString("Preferences", "BackClr"))
+    backClr = HexToLong(loadString("Preferences", "BackColor"))
     max_undo = loadInt("Preferences", "MaxUndo")
     sceneryVerts = loadString("Preferences", "SceneryVerts")
     topmost = loadString("Preferences", "Topmost")
