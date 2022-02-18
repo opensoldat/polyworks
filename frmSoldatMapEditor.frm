@@ -6075,61 +6075,61 @@ Private Sub applyLights(Optional toSel As Boolean = False)
             ' TODO: indent
             If (vertexList(i).vertex(j) = 1 And toSel) Or toSel = False Then
 
-            For k = 1 To lightCount
-                ' get light dir vector
-                lightDir.X = Lights(k).X - PolyCoords(i).vertex(j).X
-                lightDir.Y = Lights(k).Y - PolyCoords(i).vertex(j).Y
-                lightDir.Z = Lights(k).Z - Polys(i).vertex(j).Z
-                ' normalize light dir
-                mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.Z ^ 2)
-                If mag > 0 Then
-                    lightDir.X = lightDir.X / mag
-                    lightDir.Y = lightDir.Y / mag
-                    lightDir.Z = lightDir.Z / mag
-                End If
-                ' get angle between light dir and poly normal (dot product)
-                diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.Z * lightDir.Z)
-                If diffuseFactor < 0 Then diffuseFactor = 0
-
-                If Lights(k).range = 0 Then ' normal
-                    mag = 1
-                Else ' range > 0
+                For k = 1 To lightCount
+                    ' get light dir vector
+                    lightDir.X = Lights(k).X - PolyCoords(i).vertex(j).X
+                    lightDir.Y = Lights(k).Y - PolyCoords(i).vertex(j).Y
+                    lightDir.Z = Lights(k).Z - Polys(i).vertex(j).Z
+                    ' normalize light dir
+                    mag = Sqr(lightDir.X ^ 2 + lightDir.Y ^ 2 + lightDir.Z ^ 2)
                     If mag > 0 Then
-                        If mag <= Lights(k).range Then
-                            mag = 1 - mag / Lights(k).range
-                        Else ' vertex is out of range
+                        lightDir.X = lightDir.X / mag
+                        lightDir.Y = lightDir.Y / mag
+                        lightDir.Z = lightDir.Z / mag
+                    End If
+                    ' get angle between light dir and poly normal (dot product)
+                    diffuseFactor = (polyNormal.X * lightDir.X) + (polyNormal.Y * lightDir.Y) + (polyNormal.Z * lightDir.Z)
+                    If diffuseFactor < 0 Then diffuseFactor = 0
+
+                    If Lights(k).range = 0 Then ' normal
+                        mag = 1
+                    Else ' range > 0
+                        If mag > 0 Then
+                            If mag <= Lights(k).range Then
+                                mag = 1 - mag / Lights(k).range
+                            Else ' vertex is out of range
+                                mag = 0
+                            End If
+                        Else
                             mag = 0
                         End If
-                    Else
-                        mag = 0
                     End If
-                End If
 
-                ' calculate final color components
-                rVal = rVal + (Lights(k).color.red * diffuseFactor) * mag
-                gVal = gVal + (Lights(k).color.green * diffuseFactor) * mag
-                bVal = bVal + (Lights(k).color.blue * diffuseFactor) * mag
+                    ' calculate final color components
+                    rVal = rVal + (Lights(k).color.red * diffuseFactor) * mag
+                    gVal = gVal + (Lights(k).color.green * diffuseFactor) * mag
+                    bVal = bVal + (Lights(k).color.blue * diffuseFactor) * mag
 
-                totalDiffuse = totalDiffuse + diffuseFactor
-            Next
+                    totalDiffuse = totalDiffuse + diffuseFactor
+                Next
 
-            totalDiffuse = totalDiffuse / lightCount
+                totalDiffuse = totalDiffuse / lightCount
 
-            clr = vertexList(i).color(j)
-            rVal = rVal + clr.red
-            gVal = gVal + clr.green
-            bVal = bVal + clr.blue
+                clr = vertexList(i).color(j)
+                rVal = rVal + clr.red
+                gVal = gVal + clr.green
+                bVal = bVal + clr.blue
 
-            If rVal > 255 Then rVal = 255
-            If gVal > 255 Then gVal = 255
-            If bVal > 255 Then bVal = 255
+                If rVal > 255 Then rVal = 255
+                If gVal > 255 Then gVal = 255
+                If bVal > 255 Then bVal = 255
 
-            Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
+                Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
 
-            rVal = 0
-            gVal = 0
-            bVal = 0
-            totalDiffuse = 0
+                rVal = 0
+                gVal = 0
+                bVal = 0
+                totalDiffuse = 0
 
             End If
         Next
