@@ -1603,6 +1603,8 @@ Private Sub Form_Load()
     Dim i As Integer
     Dim temp As String
     Dim err As String
+    
+    Dim prevMousePointer As Integer
 
     initialized = False
 
@@ -1743,6 +1745,10 @@ Private Sub Form_Load()
 
     newMap
     If LCase$(Right(temp, 4)) = ".pms" Then
+    
+        prevMousePointer = Me.MousePointer
+        Me.MousePointer = vbHourglass
+
         If Dir$(temp) <> "" Then
             LoadFile temp
         ElseIf Dir$(appPath & "\Maps\" & temp) <> "" Then
@@ -1750,6 +1756,8 @@ Private Sub Form_Load()
         ElseIf Dir$(soldatDir & "Maps\" & temp) <> "" Then
             LoadFile soldatDir & "Maps\" & temp
         End If
+
+        Me.MousePointer = prevMousePointer
     End If
 
     err = "Error acquiring input device"
@@ -10571,6 +10579,8 @@ Private Sub mnuRecent_Click(Index As Integer)
     Dim i As Integer
     Dim Result As VbMsgBoxResult
     Dim theFileName As String
+    
+    Dim prevMousePointer As Integer
 
     theFileName = mnuRecent(Index).Caption
 
@@ -10587,7 +10597,13 @@ Private Sub mnuRecent_Click(Index As Integer)
         End If
         DoEvents
 
+        prevMousePointer = Me.MousePointer
+        Me.MousePointer = vbHourglass
+
         LoadFile theFileName
+
+        Me.MousePointer = prevMousePointer
+
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
@@ -11687,6 +11703,8 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
 
     Dim Result As VbMsgBoxResult
     Dim temp As String
+    
+    Dim prevMousePointer As Integer
 
     temp = Data.Files.Item(1)
     If Right(temp, 1) = """" Then
@@ -11709,7 +11727,12 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
 
         recentFiles Data.Files.Item(1)
 
+        prevMousePointer = Me.MousePointer
+        Me.MousePointer = vbHourglass
+
         LoadFile Data.Files.Item(1)
+
+        Me.MousePointer = prevMousePointer
     End If
 
 End Sub
@@ -12551,6 +12574,8 @@ Private Sub mnuOpen_Click()
     On Error GoTo ErrorHandler
 
     Dim Result As VbMsgBoxResult
+    
+    Dim prevMousePointer As Integer
 
     If prompt Then
         Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
@@ -12582,7 +12607,13 @@ Private Sub mnuOpen_Click()
         selectedCoords(1).Y = 0
         selectedCoords(2).X = 0
         selectedCoords(2).Y = 0
+
+        prevMousePointer = Me.MousePointer
+        Me.MousePointer = vbHourglass
+
         LoadFile commonDialog.FileName
+
+        Me.MousePointer = prevMousePointer
     End If
 
     RegainFocus
@@ -12603,6 +12634,9 @@ Private Sub mnuOpenCompiled_Click()
     On Error GoTo ErrorHandler
 
     Dim Result As VbMsgBoxResult
+
+    Dim prevMousePointer As Integer
+    
 
     If prompt Then
         Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
@@ -12634,7 +12668,13 @@ Private Sub mnuOpenCompiled_Click()
         selectedCoords(1).Y = 0
         selectedCoords(2).X = 0
         selectedCoords(2).Y = 0
+
+        prevMousePointer = Me.MousePointer
+        Me.MousePointer = vbHourglass
+
         LoadFile commonDialog.FileName
+
+        Me.MousePointer = prevMousePointer
     End If
 
     RegainFocus
