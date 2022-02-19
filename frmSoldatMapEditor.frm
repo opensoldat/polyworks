@@ -5151,7 +5151,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
     If DIDevice Is Nothing Then Exit Sub
 
     If eventid = hEvent Then
-
         DIDevice.GetDeviceStateKeyboard DIState
         DIDevice.GetDeviceData pBuffer, DIGDD_DEFAULT
 
@@ -5261,7 +5260,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
         ' key up
         If (pBuffer(0).lData = 0) Then
-
             If ((pBuffer(0).lOfs = DIK_RSHIFT Or pBuffer(0).lOfs = DIK_LSHIFT) And shiftDown) Then
                 shiftDown = False
                 currentFunction = currentTool
@@ -5325,7 +5323,6 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
             SetCursor currentFunction + 1
             lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
-
         End If
 
         If ctrlDown Then ' shortcuts
