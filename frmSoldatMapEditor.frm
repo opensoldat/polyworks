@@ -9650,7 +9650,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub compareRect(ByVal xVal As Integer, ByVal yVal As Integer)
+Private Sub compareRect(ByVal xVal As Single, ByVal yVal As Single)
 
     If xVal < selRect(0).X Then selRect(0).X = xVal
     If xVal > selRect(2).X Then selRect(2).X = xVal
