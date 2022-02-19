@@ -12129,7 +12129,7 @@ Private Sub saveSettings()
     isNewFile = Not FileExists(appPath & "\workspace\current.ini")
 
     iniString = _
-        "WindowState=" & Me.WindowState & sNull & _
+        "WindowState=" & Me.Tag & sNull & _
         "Width=" & formWidth & sNull & _
         "Height=" & formHeight & sNull & _
         "Left=" & formLeft & sNull & _
@@ -12438,7 +12438,13 @@ Private Sub loadWorkspace(Optional theFileName As String = "current.ini", Option
         Me.Left = formLeft * Screen.TwipsPerPixelX
         Me.Top = formTop * Screen.TwipsPerPixelY
     Else
-      picResize.Visible = False
+        Me.Tag = vbNormal
+        Me.Width = formWidth * Screen.TwipsPerPixelX
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+        Me.Left = formLeft * Screen.TwipsPerPixelX
+        Me.Top = formTop * Screen.TwipsPerPixelY
+        MaximizeBorderLessForm
+        picResize.Visible = False
     End If
 
     tvwScenery.Height = formHeight - 41 - 20
@@ -14301,7 +14307,7 @@ Private Sub mnuSaveSpace_Click()
         isNewFile = Not FileExists(appPath & "\workspace\" & commonDialog.FileTitle)
 
         iniString = _
-            "WindowState=" & Me.WindowState & sNull & _
+            "WindowState=" & Me.Tag & sNull & _
             "Width=" & formWidth & sNull & _
             "Height=" & formHeight & sNull & _
             "Left=" & formLeft & sNull & _
