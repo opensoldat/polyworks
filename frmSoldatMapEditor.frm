@@ -9419,8 +9419,8 @@ Private Sub VertexSelObjects()
 
     Dim i As Integer
     Dim j As Integer
-    Dim xCoord As Long
-    Dim yCoord As Long
+    Dim xCoord As Single
+    Dim yCoord As Single
 
     For i = 1 To spawnPoints
         xCoord = (Spawns(i).X - scrollCoords(2).X) * zoomFactor
