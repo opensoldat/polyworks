@@ -3054,7 +3054,7 @@ Private Sub SaveFile(theFileName As String)
 
     Dim fileOpen As Boolean
 
-    Me.MousePointer = 11
+    Me.MousePointer = vbHourglass
 
     ' refresh background
     mnuRefreshBG_Click
@@ -3236,7 +3236,7 @@ Private Sub SaveFile(theFileName As String)
 
     lblFileName.Caption = currentFileName
 
-    Me.MousePointer = 99
+    Me.MousePointer = vbCustom
 
     Exit Sub
 
@@ -3292,7 +3292,7 @@ Public Sub SaveAndCompile(theFileName As String)
 
     On Error GoTo ErrorHandler
 
-    Me.MousePointer = 11
+    Me.MousePointer = vbHourglass
 
     Randomize
 
@@ -3513,7 +3513,7 @@ Public Sub SaveAndCompile(theFileName As String)
 
     fileOpen = False
 
-    Me.MousePointer = 99
+    Me.MousePointer = vbCustom
     SetCursor currentFunction + 1
 
     Render
@@ -6354,7 +6354,7 @@ Private Sub AverageVertices()
         selectionChanged = False
     End If
 
-    Me.MousePointer = 11
+    Me.MousePointer = vbHourglass
 
     If numSelectedPolys = 0 Then
         For i = 1 To mPolyCount
@@ -6467,7 +6467,7 @@ Private Sub AverageVertices()
         applyLights True
     End If
 
-    Me.MousePointer = 99
+    Me.MousePointer = vbCustom
 
     ctrlDown = False
     currentFunction = currentTool
