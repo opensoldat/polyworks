@@ -1583,6 +1583,7 @@ Property Get MIN_FORM_HEIGHT() As Integer
     MIN_FORM_HEIGHT = 200
 End Property
 
+
 Private Function QuickHide(ByRef myWindow As Form)
     MoveWindow myWindow.hWnd, _
         (myWindow.Left - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelX, _
@@ -1611,10 +1612,12 @@ Private Sub Form_Load()
     loadINI
     loadColors
 
+
     err = "Error setting colors"
     Me.SetColors
     Me.Show
     Me.Tag = vbNormal
+
 
     err = "Error setting directories"
     If Len(Dir$(uncompDir, vbDirectory)) = 0 Or uncompDir = "" Then
@@ -1638,8 +1641,10 @@ Private Sub Form_Load()
 
     initGfx
 
+
     err = "Error loading cursors"
     loadCursors
+
 
     err = "Error initializing values"
 
@@ -1669,24 +1674,31 @@ Private Sub Form_Load()
 
     Colliders(0).radius = clrRadius
 
+
     err = "Error initializing color picker"
 
     frmColor.picSpectrum.Cls
     frmColor.InitColor polyClr.red, polyClr.green, polyClr.blue
 
+
     err = "Error setting current tool icon (" & currentTool & ")"
 
     currentFunction = currentTool
 
+
     err = "Error initializing grid"
     initGrid
+
 
     err = "Error initializing D3D"
     initialized2 = False
     loadWorkspace "current.ini", True
     Init
+
+
     err = "Error initializing DInput"
     InitDInput
+
 
     err = "Error setting up palette windows"
 
@@ -1735,6 +1747,7 @@ Private Sub Form_Load()
     frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.Flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist Or cdlOFNFileMustExist
 
+
     err = "Error parsing command line args"
 
     temp = Command$
@@ -1759,6 +1772,7 @@ Private Sub Form_Load()
 
         Me.MousePointer = prevMousePointer
     End If
+
 
     err = "Error acquiring input device"
 
