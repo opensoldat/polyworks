@@ -490,55 +490,64 @@ Public Function snapForm(currentForm As Form, otherForm As Form) As String
     Const SNAP_DELTA = 8
     Dim SNAP_DELTA_X As Single
     Dim SNAP_DELTA_Y As Single
+
+    Dim currentFormBottom As Single
+    Dim currentFormRight As Single
     Dim otherFormBottom As Single
     Dim otherFormRight As Single
-    
-    otherFormBottom = otherForm.Top + otherForm.Height
-    otherFormRight = otherForm.Left + otherForm.Width
 
     SNAP_DELTA_X = SNAP_DELTA * Screen.TwipsPerPixelX
     SNAP_DELTA_Y = SNAP_DELTA * Screen.TwipsPerPixelY
 
+    currentFormBottom = currentForm.Top + currentForm.Height
+    currentFormRight = currentForm.Left + currentForm.Width
+    otherFormBottom = otherForm.Top + otherForm.Height
+    otherFormRight = otherForm.Left + otherForm.Width
+
     snapForm = ""
 
     'snap bottom to bottom
-    If Abs(currentForm.Top + currentForm.Height - otherFormBottom) <= SNAP_DELTA_Y Then
-        If (currentForm.Left + currentForm.Width + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+    If Abs(currentFormBottom - otherFormBottom) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherFormBottom - currentForm.Height
             snapForm = "snap"
         End If
     'snap bottom to top
-    ElseIf Abs(currentForm.Top + currentForm.Height - otherForm.Top) <= SNAP_DELTA_Y Then
-        If (currentForm.Left + currentForm.Width + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+    ElseIf Abs(currentFormBottom - otherForm.Top) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherForm.Top - currentForm.Height + Screen.TwipsPerPixelY
             snapForm = "snap"
         End If
     End If
 
     'snap right to right
-    If Abs(currentForm.Left + currentForm.Width - otherFormRight) <= SNAP_DELTA_X Then
-        If (currentForm.Top + currentForm.Height + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+    If Abs(currentFormRight - otherFormRight) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
             currentForm.Left = otherFormRight - currentForm.Width
             snapForm = "snap"
         End If
     'snap right to left
-    ElseIf Abs(currentForm.Left + currentForm.Width - otherForm.Left) <= SNAP_DELTA_X Then
-        If (currentForm.Top + currentForm.Height + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+    ElseIf Abs(currentFormRight - otherForm.Left) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
             currentForm.Left = otherForm.Left - currentForm.Width + Screen.TwipsPerPixelX
             snapForm = "snap"
         End If
     End If
 
 
+    currentFormBottom = currentForm.Top + currentForm.Height
+    currentFormRight = currentForm.Left + currentForm.Width
+
+
     'snap top to top
     If Abs(currentForm.Top - otherForm.Top) <= SNAP_DELTA_Y Then
-        If (currentForm.Left + currentForm.Width + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherForm.Top
             snapForm = "snap"
         End If
     'snap top to bottom
     ElseIf Abs(currentForm.Top - otherFormBottom) <= SNAP_DELTA_Y Then
-        If (currentForm.Left + currentForm.Width + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherFormBottom - Screen.TwipsPerPixelY
             snapForm = "snap"
         End If
@@ -546,13 +555,13 @@ Public Function snapForm(currentForm As Form, otherForm As Form) As String
 
     'snap left to left
     If Abs(currentForm.Left - otherForm.Left) <= SNAP_DELTA_X Then
-        If (currentForm.Top + currentForm.Height + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
             currentForm.Left = otherForm.Left
            snapForm = "snap"
         End If
     'snap left to right
     ElseIf Abs(currentForm.Left - otherFormRight) <= SNAP_DELTA_X Then
-        If (currentForm.Top + currentForm.Height + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
             currentForm.Left = otherFormRight - Screen.TwipsPerPixelX
             snapForm = "snap"
         End If
