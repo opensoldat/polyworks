@@ -1152,7 +1152,7 @@ Public Sub SetColors()
         mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
     For Each c In lblPal
         c.BackColor = lblBackClr

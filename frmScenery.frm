@@ -707,7 +707,7 @@ Public Sub SetColors()
     mouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
 
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
     lblLvl.BackColor = lblBackClr
     lblLvl.ForeColor = lblTextClr
     For Each c In lblLevel
@@ -720,7 +720,7 @@ Public Sub SetColors()
     lblScale.ForeColor = lblTextClr
     lstScenery.BackColor = txtBackClr
     lstScenery.ForeColor = txtTextClr
-    picScenery.BackColor = bgClr
+    picScenery.BackColor = bgColor
 
     For Each c In Me.Controls
         If c.Tag = "font1" Then

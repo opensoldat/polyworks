@@ -796,7 +796,7 @@ Public Sub SetColors()
     Next
 
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
     For Each c In lblType
         c.BackColor = lblBackClr

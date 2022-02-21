@@ -2848,33 +2848,33 @@ Public Sub SetColors()
     mouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
 
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
     For Each c In lblPref
         c.BackColor = lblBackClr
         c.ForeColor = lblTextClr
     Next
 
-    lblDisplay.BackColor = bgClr
+    lblDisplay.BackColor = bgColor
     lblDisplay.ForeColor = lblTextClr
-    lblHotkeys.BackColor = bgClr
+    lblHotkeys.BackColor = bgColor
     lblHotkeys.ForeColor = lblTextClr
-    lblDirs.BackColor = bgClr
+    lblDirs.BackColor = bgColor
     lblDirs.ForeColor = lblTextClr
-    lblWayKeys.BackColor = bgClr
+    lblWayKeys.BackColor = bgColor
     lblWayKeys.ForeColor = lblTextClr
-    lblBlending.BackColor = bgClr
+    lblBlending.BackColor = bgColor
     lblBlending.ForeColor = lblTextClr
-    lblOther.BackColor = bgClr
+    lblOther.BackColor = bgColor
     lblOther.ForeColor = lblTextClr
 
     For Each c In txtHotkey
-        c.BackColor = bgClr
+        c.BackColor = bgColor
         c.ForeColor = lblTextClr
     Next
 
     For Each c In txtWayptKey
-        c.BackColor = bgClr
+        c.BackColor = bgColor
         c.ForeColor = lblTextClr
     Next
     

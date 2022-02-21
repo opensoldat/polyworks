@@ -12539,7 +12539,7 @@ Public Sub loadColors()
 
     On Error GoTo ErrorHandler
 
-    bgClr = CLng("&H" + loadString("GUIColors", "Background", appPath & "\" & gfxDir & "\colors.ini"))
+    bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\" & gfxDir & "\colors.ini"))
     lblBackClr = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\" & gfxDir & "\colors.ini"))
     lblTextClr = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\" & gfxDir & "\colors.ini"))
     txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\" & gfxDir & "\colors.ini"))
@@ -14937,12 +14937,12 @@ Public Sub SetColors()
 
     Dim c As Control
 
-    frmSoldatMapEditor.picMenuBar.BackColor = bgClr
-    frmSoldatMapEditor.picStatus.BackColor = bgClr
-    frmSoldatMapEditor.picResize.BackColor = bgClr
-    txtZoom.BackColor = bgClr
+    frmSoldatMapEditor.picMenuBar.BackColor = bgColor
+    frmSoldatMapEditor.picStatus.BackColor = bgColor
+    frmSoldatMapEditor.picResize.BackColor = bgColor
+    txtZoom.BackColor = bgColor
     txtZoom.ForeColor = lblTextClr
-    picProgress.BackColor = bgClr
+    picProgress.BackColor = bgColor
     lblFileName.BackColor = lblBackClr
     lblFileName.ForeColor = lblTextClr
     lblZoom.BackColor = lblBackClr

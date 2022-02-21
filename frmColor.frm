@@ -1469,7 +1469,7 @@ Public Sub SetColors()
     picSpectrum.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
 
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
     For Each c In lblClr
         c.BackColor = lblBackClr
@@ -1490,7 +1490,7 @@ Public Sub SetColors()
     txtBright.BackColor = txtBackClr
     txtBright.ForeColor = txtTextClr
 
-    txtHexCode.BackColor = bgClr
+    txtHexCode.BackColor = bgColor
     txtHexCode.ForeColor = lblTextClr
 
     For Each c In Me.Controls

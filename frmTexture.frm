@@ -331,6 +331,6 @@ Public Sub SetColors()
     picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_texture.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
 End Sub

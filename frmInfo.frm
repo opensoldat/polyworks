@@ -2101,13 +2101,13 @@ Public Sub SetColors()
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
     For Each c In lblInfo
         c.BackColor = lblBackClr
         c.ForeColor = lblTextClr
     Next
     For Each c In picProp
-        c.BackColor = bgClr
+        c.BackColor = bgColor
     Next
 
     For Each c In txtScenProp
@@ -2115,11 +2115,11 @@ Public Sub SetColors()
         c.ForeColor = txtTextClr
     Next
     For Each c In txtQuadX
-        c.BackColor = bgClr
+        c.BackColor = bgColor
         c.ForeColor = lblTextClr
     Next
     For Each c In txtQuadY
-        c.BackColor = bgClr
+        c.BackColor = bgColor
         c.ForeColor = lblTextClr
     Next
     For Each c In txtScale

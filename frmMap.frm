@@ -814,7 +814,7 @@ Public Sub SetColors()
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
-    Me.BackColor = bgClr
+    Me.BackColor = bgColor
 
     For Each c In lblMap
         c.BackColor = lblBackClr

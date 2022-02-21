@@ -12,7 +12,7 @@ Public Const PI As Single = 3.14159265358979  ' mmm... PI
 Public gfxDir As String
 
 Public appPath As String
-Public bgClr As Long
+Public bgColor As Long
 Public lblBackClr As Long
 Public lblTextClr As Long
 Public txtBackClr As Long
@@ -827,18 +827,18 @@ End Sub
 
 Public Sub SetColors()
 
-    frmSoldatMapEditor.picMenuBar.BackColor = bgClr
-    frmSoldatMapEditor.picStatus.BackColor = bgClr
-    frmSoldatMapEditor.picResize.BackColor = bgClr
-    frmPreferences.BackColor = bgClr
-    frmColor.BackColor = bgClr
-    frmDisplay.BackColor = bgClr
-    frmInfo.BackColor = bgClr
-    frmMap.BackColor = bgClr
+    frmSoldatMapEditor.picMenuBar.BackColor = bgColor
+    frmSoldatMapEditor.picStatus.BackColor = bgColor
+    frmSoldatMapEditor.picResize.BackColor = bgColor
+    frmPreferences.BackColor = bgColor
+    frmColor.BackColor = bgColor
+    frmDisplay.BackColor = bgColor
+    frmInfo.BackColor = bgColor
+    frmMap.BackColor = bgColor
 
-    frmScenery.BackColor = bgClr
-    frmTools.BackColor = bgClr
-    frmWaypoints.BackColor = bgClr
+    frmScenery.BackColor = bgColor
+    frmTools.BackColor = bgColor
+    frmWaypoints.BackColor = bgColor
 
 End Sub
 
