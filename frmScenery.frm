@@ -436,7 +436,7 @@ Public Sub listScenery()
     ' load lists
 
     file = Dir$(appPath & "\lists\" & "*.txt", vbDirectory)
-    Do While Len(file) 'for every txt file in lists
+    Do While Len(file)  ' for every txt file in lists
 
         file = Left(file, Len(file) - 4)
         frmSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
