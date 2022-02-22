@@ -574,11 +574,10 @@ Public Function GetSoldatDir() As String
 
     On Error GoTo ErrorHandler
 
-    ' HKEY_CLASSES_ROOT\Soldat\DefaultIcon
-
     Dim hKey As Long
     Dim sKey As String
 
+    ' HKEY_CLASSES_ROOT\Soldat\DefaultIcon
     sKey = "Soldat\DefaultIcon"
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
@@ -587,7 +586,6 @@ Public Function GetSoldatDir() As String
         RegCloseKey hKey
     Else
         ' HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
-
         sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
 
