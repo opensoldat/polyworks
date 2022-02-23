@@ -2001,7 +2001,7 @@ Public Sub Init()
     D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE  ' polys that are ccw
 
     D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
-    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 1
+    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 0
     D3DDevice.SetRenderState D3DRS_POINTSIZE, FtoDW(particleSize)
 
     D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
@@ -2204,7 +2204,7 @@ Public Sub resetDevice()
     D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE  ' polys that are ccwise
 
     D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
-    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 1
+    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 0
     D3DDevice.SetRenderState D3DRS_POINTSIZE, FtoDW(particleSize)
 
     D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
