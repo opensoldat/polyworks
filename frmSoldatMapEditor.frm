@@ -14330,6 +14330,7 @@ Private Sub mnuLoadSpace_Click()
             frmScenery.setForm
             frmTexture.setForm
             frmWaypoints.setForm
+            resetDevice
         End If
     End If
 
