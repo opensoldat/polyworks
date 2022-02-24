@@ -2164,16 +2164,7 @@ End Sub
 Public Sub resetDevice()
 
     On Error GoTo ErrorHandler
-
-    Dim DispMode As D3DDISPLAYMODE
-    Dim D3DWindow As D3DPRESENT_PARAMETERS
     Dim i As Integer
-
-    D3D.GetAdapterDisplayMode D3DADAPTER_DEFAULT, DispMode
-
-    D3DWindow.Windowed = 1
-    D3DWindow.SwapEffect = D3DSWAPEFFECT_COPY
-    D3DWindow.BackBufferFormat = D3DFMT_A8R8G8B8
 
     noRedraw = True
     If selectionChanged Then
@@ -2198,18 +2189,6 @@ Public Sub resetDevice()
     Next
 
     setMapTexture gTextureFile
-
-    D3DDevice.SetVertexShader FVF
-    D3DDevice.SetRenderState D3DRS_LIGHTING, False
-    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE  ' polys that are ccwise
-
-    D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
-    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 0
-    D3DDevice.SetRenderState D3DRS_POINTSIZE, FtoDW(particleSize)
-
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE
 
     initGrid
 
