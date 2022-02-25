@@ -365,7 +365,7 @@ Begin VB.Form frmColor
       Top             =   4560
       Width           =   960
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       BackStyle       =   0  'Transparent
       Caption         =   "%"
       BeginProperty Font 
@@ -386,7 +386,7 @@ Begin VB.Form frmColor
       Top             =   5160
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       BackStyle       =   0  'Transparent
       Caption         =   "%"
       BeginProperty Font 
@@ -407,7 +407,7 @@ Begin VB.Form frmColor
       Top             =   4800
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   2  'Center
       BackStyle       =   0  'Transparent
       Caption         =   "°"
@@ -474,7 +474,7 @@ Begin VB.Form frmColor
       Top             =   480
       Width           =   225
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -497,7 +497,7 @@ Begin VB.Form frmColor
       Top             =   4440
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -520,7 +520,7 @@ Begin VB.Form frmColor
       Top             =   4800
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -543,7 +543,7 @@ Begin VB.Form frmColor
       Top             =   5160
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -566,7 +566,7 @@ Begin VB.Form frmColor
       Top             =   4440
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -589,7 +589,7 @@ Begin VB.Form frmColor
       Top             =   4800
       Width           =   255
    End
-   Begin VB.Label lblClr 
+   Begin VB.Label lblColor 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
@@ -1471,7 +1471,7 @@ Public Sub SetColors()
 
     Me.BackColor = bgColor
 
-    For Each c In lblClr
+    For Each c In lblColor
         c.BackColor = lblBackClr
         c.ForeColor = lblTextClr
     Next
