@@ -2922,12 +2922,6 @@ Public Sub SetColors()
     cboSkin.BackColor = txtBackClr
     cboSkin.ForeColor = txtTextClr
 
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
+    SetFormFonts Me
 
 End Sub

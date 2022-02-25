@@ -132,3 +132,15 @@ Public Function Clamp(value As Single, min As Single, max As Single) As Single
     End If
 
 End Function
+
+Public Sub SetFormFonts(theForm As Form)
+    Dim c As Control
+
+    For Each c In theForm.Controls
+        If c.Tag = "font1" Then
+            c.Font.Name = font1
+        ElseIf c.Tag = "font2" Then
+            c.Font.Name = font2
+        End If
+    Next
+End Sub

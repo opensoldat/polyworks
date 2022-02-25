@@ -1265,8 +1265,6 @@ Private Sub txtHue_Change()
             mHue = txtHue.Text
             If Not (mColor(R) = mColor(G) And mColor(R) = mColor(B)) Then
                 calculateHue
-            Else
-
             End If
             changeHue
             updateAll
@@ -1493,12 +1491,6 @@ Public Sub SetColors()
     txtHexCode.BackColor = bgColor
     txtHexCode.ForeColor = lblTextClr
 
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
+    SetFormFonts Me
 
 End Sub
