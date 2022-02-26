@@ -1841,34 +1841,34 @@ Public Sub loadCursors()
     ImageList.ListImages.Clear
 
     ' load cursors
-    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(appPath & "\" & gfxDir & "\cursors\move.cur")
-    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(appPath & "\" & gfxDir & "\cursors\create.cur")
-    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(appPath & "\" & gfxDir & "\cursors\vselect.cur")
-    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(appPath & "\" & gfxDir & "\cursors\pselect.cur")
-    ImageList.ListImages.Add TOOL_VCOLOR + 1, "vcolor", LoadPicture(appPath & "\" & gfxDir & "\cursors\vcolor.cur")
-    ImageList.ListImages.Add TOOL_PCOLOR + 1, "pcolor", LoadPicture(appPath & "\" & gfxDir & "\cursors\pcolor.cur")
-    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(appPath & "\" & gfxDir & "\cursors\texture.cur")
-    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(appPath & "\" & gfxDir & "\cursors\scenery.cur")
-    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(appPath & "\" & gfxDir & "\cursors\waypoint.cur")
-    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(appPath & "\" & gfxDir & "\cursors\objects.cur")
-    ImageList.ListImages.Add TOOL_CLRPICKER + 1, "clrpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\clrpicker.cur")
-    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(appPath & "\" & gfxDir & "\cursors\sketch.cur")
-    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(appPath & "\" & gfxDir & "\cursors\light.cur")
-    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(appPath & "\" & gfxDir & "\cursors\depthmap.cur")
+    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\move.cur")
+    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\create.cur")
+    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vselect.cur")
+    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pselect.cur")
+    ImageList.ListImages.Add TOOL_VCOLOR + 1, "vcolor", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vcolor.cur")
+    ImageList.ListImages.Add TOOL_PCOLOR + 1, "pcolor", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pcolor.cur")
+    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\texture.cur")
+    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\scenery.cur")
+    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\waypoint.cur")
+    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\objects.cur")
+    ImageList.ListImages.Add TOOL_CLRPICKER + 1, "clrpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\clrpicker.cur")
+    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\sketch.cur")
+    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\light.cur")
+    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\depthmap.cur")
 
-    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(appPath & "\" & gfxDir & "\cursors\hand.cur")
-    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(appPath & "\" & gfxDir & "\cursors\vseladd.cur")
-    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(appPath & "\" & gfxDir & "\cursors\vselsub.cur")
-    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(appPath & "\" & gfxDir & "\cursors\pseladd.cur")
-    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(appPath & "\" & gfxDir & "\cursors\pselsub.cur")
-    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(appPath & "\" & gfxDir & "\cursors\scale.cur")
-    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(appPath & "\" & gfxDir & "\cursors\rotate.cur")
-    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(appPath & "\" & gfxDir & "\cursors\connect.cur")
-    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(appPath & "\" & gfxDir & "\cursors\quad.cur")
-    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\pixpicker.cur")
-    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(appPath & "\" & gfxDir & "\cursors\litpicker.cur")
-    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(appPath & "\" & gfxDir & "\cursors\eraser.cur")
-    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(appPath & "\" & gfxDir & "\cursors\smudge.cur")
+    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\hand.cur")
+    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vseladd.cur")
+    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vselsub.cur")
+    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pseladd.cur")
+    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pselsub.cur")
+    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\scale.cur")
+    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\rotate.cur")
+    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\connect.cur")
+    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\quad.cur")
+    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pixpicker.cur")
+    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\litpicker.cur")
+    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\eraser.cur")
+    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\smudge.cur")
 
     ImageList.ListImages.Item(TOOL_MOVE + 1).Tag = "Move Selection"
     ImageList.ListImages.Item(TOOL_CREATE + 1).Tag = "Create Polygons"
@@ -1912,15 +1912,15 @@ Public Sub initGfx()
     Dim i As Integer
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_main.bmp")
-    If FileExists(appPath & "\" & gfxDir & "\resize.bmp") Then
-        picResize.Picture = LoadPicture(appPath & "\" & gfxDir & "\resize.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_main.bmp")
+    If FileExists(appPath & "\skins\" & gfxDir & "\resize.bmp") Then
+        picResize.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\resize.bmp")
     Else
         picResize.Picture = Nothing
     End If
 
-    picGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\tool_gfx.bmp")
-    picButtonGfx.Picture = LoadPicture(appPath & "\" & gfxDir & "\button_gfx.bmp")
+    picGfx.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tool_gfx.bmp")
+    picButtonGfx.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\button_gfx.bmp")
 
     ' draw control box buttons
     mouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
@@ -2015,12 +2015,12 @@ Public Sub Init()
 
     debugVal = "Error creating pattern texture"
 
-    Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, appPath & "\" & gfxDir & "\pattern.bmp")
+    Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, appPath & "\skins\" & gfxDir & "\pattern.bmp")
 
 
     debugVal = "Error creating objects texture"
 
-    Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
@@ -2032,7 +2032,7 @@ Public Sub Init()
 
     debugVal = "Error creating scenery not found texture"
 
-    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
@@ -2052,28 +2052,28 @@ Public Sub Init()
 
     debugVal = "Error creating line texture"
 
-    Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
 
     debugVal = "Error creating path texture"
 
-    Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
 
     debugVal = "Error creating rotation center texture"
 
-    Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
 
     debugVal = "Error creating sketch texture"
 
-    Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
@@ -2085,7 +2085,7 @@ Public Sub Init()
 
     debugVal = "Error creating particle texture"
 
-    Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
+    Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
             D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
 
@@ -2516,7 +2516,7 @@ Public Sub LoadFile(theFileName As String)
                 Dim loadName As String
 
                 If tempString = "" Then
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
@@ -2534,7 +2534,7 @@ Public Sub LoadFile(theFileName As String)
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     Else
-                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     End If
@@ -2554,14 +2554,14 @@ Public Sub LoadFile(theFileName As String)
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     Else
-                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                        Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     End If
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 Else
-                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+                    Set SceneryTextures(i).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                             D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
@@ -2891,7 +2891,7 @@ Public Sub setCurrentTexture(sceneryName As String)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
@@ -2947,7 +2947,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(sceneryElements).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
@@ -3000,7 +3000,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     Else
-        Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
+        Set SceneryTextures(Index).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
                 D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
                 D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
     End If
@@ -11140,7 +11140,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
     If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
 
     If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
-        frmScenery.picScenery.Picture = LoadPicture(appPath & "\" & gfxDir & "\notfound.bmp")
+        frmScenery.picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
         Exit Sub
     End If
 
@@ -12524,14 +12524,14 @@ Public Sub loadColors()
 
     On Error GoTo ErrorHandler
 
-    bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\" & gfxDir & "\colors.ini"))
-    lblBackClr = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\" & gfxDir & "\colors.ini"))
-    lblTextClr = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\" & gfxDir & "\colors.ini"))
-    txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\" & gfxDir & "\colors.ini"))
-    txtTextClr = CLng("&H" + loadString("GUIColors", "TextBoxText", appPath & "\" & gfxDir & "\colors.ini"))
-    frameClr = CLng("&H" + loadString("GUIColors", "Frame", appPath & "\" & gfxDir & "\colors.ini"))
-    font1 = loadString("GUIColors", "font1", appPath & "\" & gfxDir & "\colors.ini", 40)
-    font2 = loadString("GUIColors", "font2", appPath & "\" & gfxDir & "\colors.ini", 40)
+    bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblBackClr = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblTextClr = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    txtTextClr = CLng("&H" + loadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    frameClr = CLng("&H" + loadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    font1 = loadString("GUIColors", "font1", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
+    font2 = loadString("GUIColors", "font2", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
 
     If font1 = "" Then font1 = "Arial"
     If font2 = "" Then font2 = "Arial"

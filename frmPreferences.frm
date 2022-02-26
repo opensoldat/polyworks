@@ -2227,9 +2227,9 @@ Private Sub Form_Load()
 
     Dim file As Variant
 
-    file = Dir$(appPath & "\*.*", vbDirectory)
+    file = Dir$(appPath & "\skins\*.*", vbDirectory)
     Do While Len(file)
-        If FileExists(appPath & "\" & file & "\colors.ini") Then
+        If FileExists(appPath & "\skins\" & file & "\colors.ini") Then
             cboSkin.AddItem file
             If file = gfxDir Then cboSkin.ListIndex = cboSkin.ListCount - 1
         End If
@@ -2833,8 +2833,8 @@ Public Sub SetColors()
     Dim c As Control
 
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_preferences.bmp")
-    picHotkeys.Picture = LoadPicture(appPath & "\" & gfxDir & "\tools.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_preferences.bmp")
+    picHotkeys.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tools.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
