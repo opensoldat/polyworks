@@ -144,3 +144,23 @@ Public Sub SetFormFonts(theForm As Form)
         End If
     Next
 End Sub
+
+Public Function GetAngle(ByVal xVal As Single, ByVal yVal As Single) As Single
+
+    If xVal < 0 Then
+        GetAngle = PI - Atn(yVal / xVal)
+    ElseIf xVal > 0 Then
+        If Atn(yVal / xVal) > 0 Then
+            GetAngle = 2 * PI - Atn(yVal / xVal)
+        Else
+            GetAngle = -Atn(yVal / xVal)
+        End If
+    Else
+        If yVal > 0 Then
+            GetAngle = 3 * PI / 2
+        Else
+            GetAngle = PI / 2
+        End If
+    End If
+
+End Function
