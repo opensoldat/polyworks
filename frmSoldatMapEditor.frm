@@ -11444,16 +11444,6 @@ Private Function isCW(ByVal i As Integer) As Boolean
 
 End Function
 
-Private Function Midpoint(ByVal p1 As Single, ByVal p2 As Single) As Single
-
-    If p1 < p2 Then
-        Midpoint = p1 + (p2 - p1) / 2
-    Else
-        Midpoint = p2 + (p1 - p2) / 2
-    End If
-
-End Function
-
 Public Sub setDispOptions(layerNum As Integer, value As Boolean)
 
     If layerNum = 0 Then
