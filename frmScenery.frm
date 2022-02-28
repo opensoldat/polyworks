@@ -499,7 +499,7 @@ Public Sub lstScenery_Click()
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
     Else
         frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
-        picScenery.Picture = LoadPicture(appPath & "\" & gfxDir & "\notfound.bmp")
+        picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
         frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
     End If
 
@@ -694,7 +694,7 @@ Public Sub SetColors()
     Dim c As Control
 
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_scenery.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_scenery.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP

@@ -473,7 +473,7 @@ Public Sub SetColors()
 
     Dim i As Integer
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_tools.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_tools.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 

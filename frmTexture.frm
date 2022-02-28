@@ -328,7 +328,7 @@ Public Sub SetColors()
 
     On Error Resume Next
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_texture.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_texture.bmp")
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgColor

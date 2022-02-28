@@ -1450,21 +1450,21 @@ Public Sub SetColors()
 
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_colorpicker.bmp")
-    picSpectrum.Picture = LoadPicture(appPath & "\" & gfxDir & "\color_picker.bmp")
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_colorpicker.bmp")
+    picSpectrum.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\color_picker.bmp")
 
     mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
     For Each c In imgRGB
-        c.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+        c.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
     Next
-    imgHue.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgBright.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
-    imgSat.Picture = LoadPicture(appPath & "\" & gfxDir & "\slider_arrow.bmp")
+    imgHue.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
+    imgBright.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
+    imgSat.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
 
-    picSpectrum.MouseIcon = LoadPicture(appPath & "\" & gfxDir & "\cursors\color_picker.cur")
+    picSpectrum.MouseIcon = LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\color_picker.cur")
 
 
     Me.BackColor = bgColor
