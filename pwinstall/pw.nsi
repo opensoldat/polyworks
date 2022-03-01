@@ -8,8 +8,10 @@
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
+
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
+
 
 ; MUI Settings
 !define MUI_ABORTWARNING
@@ -19,14 +21,15 @@
 
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
+
 ; License page
 !insertmacro MUI_PAGE_LICENSE "../LICENSE"
+
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
+
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
-
-
 
 ; Finish page
 !insertmacro MUI_PAGE_FINISH
@@ -36,6 +39,7 @@
 
 ; Language files
 !insertmacro MUI_LANGUAGE "English"
+
 
 ; MUI end ------
 
@@ -51,8 +55,10 @@ ShowUnInstDetails show
 
 BrandingText " "
 
-Section "MainSection" SEC01
 
+; On Install
+
+Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "Soldat PolyWorks.exe"
@@ -64,6 +70,7 @@ Section "MainSection" SEC01
   File "ReadMe.txt"
   File "PMS.ico"
   File "PFB.ico"
+
   SetOutPath "$SYSDIR"
   File "dx8vb.dll"
   File "MBMouse.ocx"
@@ -77,6 +84,7 @@ Section "MainSection" SEC01
   SetOutPath "$INSTDIR\BMPtoCUR"
   File "BMPtoCUR\BMP to CUR.exe"
   File "BMPtoCUR\ReadMe.txt"
+
   SetOutPath "$INSTDIR\gfx"
   File "gfx\titlebar_palette.bmp"
   File "gfx\tool_gfx.bmp"
@@ -104,6 +112,7 @@ Section "MainSection" SEC01
   File "gfx\titlebar_waypoints.bmp"
   File "gfx\titlebar_scenery.bmp"
   File "gfx\resize.bmp"
+
   SetOutPath "$INSTDIR\gfx\cursors"
   File "gfx\cursors\pselect.cur"
   File "gfx\cursors\waypoint.cur"
@@ -133,6 +142,7 @@ Section "MainSection" SEC01
   File "gfx\cursors\eraser.cur"
   File "gfx\cursors\vseladd.cur"
   File "gfx\cursors\litpicker.cur"
+
   SetOutPath "$INSTDIR\Help"
   File "Help\tool_sketch.gif"
   File "Help\tool_pcolor.gif"
@@ -148,9 +158,11 @@ Section "MainSection" SEC01
   File "Help\tool_move.gif"
   File "Help\tool_pselect.gif"
   File "Help\tool_waypoint.gif"
+
   SetOutPath "$INSTDIR\lists"
   File "lists\defaults.txt"
   CreateDirectory "$INSTDIR\Maps"
+
   SetOutPath "$INSTDIR\palettes"
   File "palettes\current.txt"
   File "palettes\MZpalette.txt"
@@ -158,6 +170,7 @@ Section "MainSection" SEC01
   CreateDirectory "$INSTDIR\Prefabs"
   CreateDirectory "$INSTDIR\undo"
   CreateDirectory "$INSTDIR\Temp"
+
   SetOutPath "$INSTDIR\Workspace"
   File "Workspace\current.ini"
 
@@ -185,10 +198,10 @@ Section -Post
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
-
 SectionEnd
 
 
+; On Uninstall
 
 Function un.onUninstSuccess
   HideWindow
@@ -202,8 +215,6 @@ Function un.onInit
 FunctionEnd
 
 Section Uninstall
-
-
   Delete /REBOOTOK "$INSTDIR\uninst.exe"
   Delete /REBOOTOK "$INSTDIR\Soldat PolyWorks.exe"
   Delete /REBOOTOK "$INSTDIR\bgothl.ttf"
@@ -249,7 +260,6 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_waypoints.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\titlebar_scenery.bmp"
   Delete /REBOOTOK "$INSTDIR\gfx\resize.bmp"
-
 
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\pselect.cur"
   Delete /REBOOTOK "$INSTDIR\gfx\cursors\waypoint.cur"
@@ -307,9 +317,12 @@ Section Uninstall
   Delete /REBOOTOK "$INSTDIR\palettes\MZpalette.txt"
   Delete /REBOOTOK "$INSTDIR\palettes\palette.txt"
   RMDir /REBOOTOK "$INSTDIR\palettes"
+
   RMDir /REBOOTOK "$INSTDIR\Prefabs"
+
   Delete /REBOOTOK "$INSTDIR\undo\*.pwn"
   RMDir /REBOOTOK "$INSTDIR\undo"
+
   Delete /REBOOTOK "$INSTDIR\Temp\Thumbs.db"
   Delete /REBOOTOK "$INSTDIR\Temp\gif.tga"
   Delete /REBOOTOK "$INSTDIR\Temp\copy.PFB"
