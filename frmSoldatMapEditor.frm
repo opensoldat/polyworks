@@ -1418,7 +1418,7 @@ Private Const TOOL_TEXTURE As Byte = 6
 Private Const TOOL_SCENERY As Byte = 7
 Private Const TOOL_WAYPOINT As Byte = 8
 Private Const TOOL_OBJECTS As Byte = 9
-Private Const TOOL_CLRPICKER As Byte = 10
+Private Const TOOL_COLORPICKER As Byte = 10
 Private Const TOOL_SKETCH As Byte = 11
 Private Const TOOL_LIGHTS As Byte = 12
 Private Const TOOL_DEPTHMAP As Byte = 13
@@ -1851,7 +1851,7 @@ Public Sub loadCursors()
     ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\scenery.cur")
     ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\waypoint.cur")
     ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\objects.cur")
-    ImageList.ListImages.Add TOOL_CLRPICKER + 1, "clrpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\clrpicker.cur")
+    ImageList.ListImages.Add TOOL_COLORPICKER + 1, "clrpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\clrpicker.cur")
     ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\sketch.cur")
     ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\light.cur")
     ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\depthmap.cur")
@@ -1880,7 +1880,7 @@ Public Sub loadCursors()
     ImageList.ListImages.Item(TOOL_SCENERY + 1).Tag = "Create Scenery"
     ImageList.ListImages.Item(TOOL_WAYPOINT + 1).Tag = "Create Waypoints"
     ImageList.ListImages.Item(TOOL_OBJECTS + 1).Tag = "Place Spawn Points or Colliders"
-    ImageList.ListImages.Item(TOOL_CLRPICKER + 1).Tag = "Pick a Vertex Color"
+    ImageList.ListImages.Item(TOOL_COLORPICKER + 1).Tag = "Pick a Vertex Color"
     ImageList.ListImages.Item(TOOL_SKETCH + 1).Tag = "Sketch"
     ImageList.ListImages.Item(TOOL_LIGHTS + 1).Tag = "Create Lights"
     ImageList.ListImages.Item(TOOL_DEPTHMAP + 1).Tag = "Edit Depth Map"
@@ -5176,7 +5176,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 currentFunction = TOOL_PSELADD
             Case Is = TOOL_WAYPOINT
                 currentFunction = TOOL_CONNECT
-            Case Is = TOOL_CLRPICKER
+            Case Is = TOOL_COLORPICKER
                 currentFunction = TOOL_PIXPICKER
             Case Is = TOOL_SKETCH
                 sketch(0).vertex(1).X = mouseCoords.X / zoomFactor + scrollCoords(2).X
@@ -5225,12 +5225,12 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             Case Is = TOOL_PSELECT  ' subtract polys
                 currentFunction = TOOL_PSELSUB
             Case Is = TOOL_VCOLOR  ' color picker
-                currentFunction = TOOL_CLRPICKER
+                currentFunction = TOOL_COLORPICKER
             Case Is = TOOL_PCOLOR  ' color picker
-                currentFunction = TOOL_CLRPICKER
+                currentFunction = TOOL_COLORPICKER
             Case Is = TOOL_DEPTHMAP
-                currentFunction = TOOL_CLRPICKER
-            Case Is = TOOL_CLRPICKER
+                currentFunction = TOOL_COLORPICKER
+            Case Is = TOOL_COLORPICKER
                 currentFunction = TOOL_LITPICKER
             Case Is = TOOL_SKETCH
                 currentFunction = TOOL_ERASER
@@ -5840,7 +5840,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             frmDisplay.setLayer 5, showScenery
         End If
         toolAction = True
-    ElseIf currentFunction = TOOL_CLRPICKER Then  ' color picker
+    ElseIf currentFunction = TOOL_COLORPICKER Then  ' color picker
         If currentTool = TOOL_DEPTHMAP Then
             depthPicker X, Y
         ElseIf currentTool = TOOL_SCENERY Then
@@ -6806,7 +6806,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         End If
     ElseIf currentFunction = TOOL_SCENERY Then  ' scenery
         ' no-op
-    ElseIf currentFunction = TOOL_CLRPICKER Then  ' color picker
+    ElseIf currentFunction = TOOL_COLORPICKER Then  ' color picker
 
         If currentTool = TOOL_DEPTHMAP Then
             depthPicker X, Y
