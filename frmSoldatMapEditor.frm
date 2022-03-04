@@ -1404,10 +1404,6 @@ Private bgColors(1 To 2) As TColor
 
 Private Const MAX_POLYS  As Integer = 4000
 
-Private Const DEFAULT_MAX_ZOOM As Single = 512
-Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
-Private Const DEFAULT_RESET_ZOOM As Single = 1
-
 Private Const TOOL_MOVE As Byte = 0
 Private Const TOOL_CREATE As Byte = 1
 Private Const TOOL_VSELECT As Byte = 2
@@ -1460,9 +1456,8 @@ Private sslBack As Boolean
 Private sslMid As Boolean
 Private sslFront As Boolean
 
-Private polyClr As TColor
-Private opacity As Single
-Private blendMode As Integer
+Public opacity As Single
+Public blendMode As Integer
 
 Private scrollCoords(1 To 2) As D3DVECTOR2    ' coordinates for scrolling
 Private mouseCoords As D3DVECTOR2             ' coordinates of mouse
@@ -1492,33 +1487,32 @@ Private currentScenery As String
 
 Private zoomFactor As Single
 Private pointRadius As Integer
-Private snapRadius As Integer
-Private clrRadius As Integer
-Private ohSnap As Boolean
-Private snapToGrid As Boolean
-Private fixedTexture As Boolean
-Private showBG As Boolean
-Private showPolys As Boolean
-Private showTexture As Boolean
-Private showWireframe As Boolean
-Private showPoints As Boolean
-Private showScenery As Boolean
-Private showObjects As Boolean
-Private showGrid As Boolean
-Private showWaypoints As Boolean
+Public snapRadius As Integer
+Public clrRadius As Integer
+Public ohSnap As Boolean
+Public snapToGrid As Boolean
+Public fixedTexture As Boolean
+Public showBG As Boolean
+Public showPolys As Boolean
+Public showTexture As Boolean
+Public showWireframe As Boolean
+Public showPoints As Boolean
+Public showScenery As Boolean
+Public showObjects As Boolean
+Public showGrid As Boolean
+Public showWaypoints As Boolean
 Private showPath1 As Boolean
 Private showPath2 As Boolean
-Private showSketch As Boolean
-Private showLights As Boolean
-Private currentTool As Byte
+Public showSketch As Boolean
+Public showLights As Boolean
+Public currentTool As Byte
 Private currentFunction As Byte
 Private particleSize As Single
-Private colorMode As Byte
+Public colorMode As Byte
 Private eraseCircle As Boolean
 Private eraseLines As Boolean
 
 Private polyType As Byte
-Private PolyTypeClrs(0 To 25) As Long
 
 Private rCenter As D3DVECTOR2
 Private selRect(3) As D3DVECTOR2 ' RECT
@@ -1540,7 +1534,7 @@ Private noneSelected As Boolean
 Private currentUndo As Integer
 Private numUndo As Integer
 Private numRedo As Integer
-Private max_undo As Integer
+Public max_undo As Integer
 Private lastCompiled As String
 
 Private currentWaypoint As Integer
@@ -1609,7 +1603,7 @@ Private Sub Form_Load()
 
     initialized = False
 
-    loadINI
+    modConfig.loadINI
     loadColors
 
 
@@ -1660,7 +1654,7 @@ Private Sub Form_Load()
     sslMid = True
     sslFront = True
 
-    PolyTypeClrs(0) = selectionColor
+    gPolyTypeClrs(0) = selectionColor
 
     ReDim Scenery(0)
     ReDim Preserve SceneryTextures(0)
@@ -1678,7 +1672,7 @@ Private Sub Form_Load()
     err = "Error initializing color picker"
 
     frmColor.picSpectrum.Cls
-    frmColor.InitColor polyClr.red, polyClr.green, polyClr.blue
+    frmColor.InitColor gPolyClr.red, gPolyClr.green, gPolyClr.blue
 
 
     err = "Error setting current tool icon (" & currentTool & ")"
@@ -1725,7 +1719,7 @@ Private Sub Form_Load()
     frmTexture.Visible = mnuTexture.Checked
 
     frmPalette.refreshPalette clrRadius, opacity, blendMode, colorMode
-    frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
+    frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
     frmDisplay.setLayer 0, showBG
     frmDisplay.setLayer 1, showPolys
     frmDisplay.setLayer 2, showTexture
@@ -2857,7 +2851,7 @@ Public Sub setCurrentScenery(Optional styleVal As Integer = -1, Optional scenery
     End If
 
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
     Scenery(0).level = frmScenery.level
     Scenery(0).Scaling.X = 1
     Scenery(0).Scaling.Y = 1
@@ -4435,7 +4429,7 @@ Public Sub Render()
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         For i = 1 To numSelectedPolys
-            objClr = PolyTypeClrs(vertexList(selectedPolys(i)).polyType)
+            objClr = gPolyTypeClrs(vertexList(selectedPolys(i)).polyType)
             lineCoords(1) = Polys(selectedPolys(i)).vertex(1)
             lineCoords(2) = Polys(selectedPolys(i)).vertex(2)
             lineCoords(3) = Polys(selectedPolys(i)).vertex(3)
@@ -5853,11 +5847,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
-            polyClr.red = tempClr.blue
-            polyClr.green = tempClr.green
-            polyClr.blue = tempClr.red
-            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
-            frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
+            gPolyClr.red = tempClr.blue
+            gPolyClr.green = tempClr.green
+            gPolyClr.blue = tempClr.red
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf currentFunction = TOOL_LITPICKER Then
         lightPicker X, Y
@@ -6007,7 +6001,7 @@ Private Sub CreateLight(X As Single, Y As Single)
     Lights(lightCount).X = X / zoomFactor + scrollCoords(2).X
     Lights(lightCount).Y = Y / zoomFactor + scrollCoords(2).Y
     Lights(lightCount).Z = 255
-    Lights(lightCount).color = polyClr
+    Lights(lightCount).color = gPolyClr
     Lights(lightCount).intensity = opacity
     Lights(lightCount).range = 0
 
@@ -6681,7 +6675,7 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
         Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (yVal / zoomFactor + scrollCoords(2).Y) / yTexture
     End If
 
-    Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
 
     Render
 
@@ -6821,11 +6815,11 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
-            polyClr.red = tempClr.blue
-            polyClr.green = tempClr.green
-            polyClr.blue = tempClr.red
-            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
-            frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
+            gPolyClr.red = tempClr.blue
+            gPolyClr.green = tempClr.green
+            gPolyClr.blue = tempClr.red
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
 
         Render
@@ -7877,7 +7871,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + polyClr.red * opacity
+                            Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
                             edited = True
                         End If
@@ -7891,7 +7885,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + polyClr.red * opacity
+                            Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
                             edited = True
                         End If
@@ -7938,14 +7932,14 @@ Private Sub ColorPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         tempClr = vertexList(pNum).color(vNum)
-        If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
+        If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
             frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
         Else
-            polyClr = tempClr
+            gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
-            frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
+            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf showScenery Then  ' no poly clrs absorbed, do scenery
         For i = 1 To sceneryCount
@@ -7955,15 +7949,15 @@ Private Sub ColorPicker(X As Single, Y As Single)
         Next
         If vNum > 0 Then
             tempClr = getRGB(Scenery(vNum).color)
-            If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
+            If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
 
             ElseIf frmPalette.Enabled = False Then  ' non modal
                 frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
             Else
-                polyClr = tempClr
+                gPolyClr = tempClr
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
-                frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
-                frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
+                frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+                frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
             End If
         End If
     End If
@@ -7999,17 +7993,17 @@ Private Sub depthPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         If Polys(pNum).vertex(vNum).Z >= 0 And Polys(pNum).vertex(vNum).Z <= 255 Then
-            polyClr.red = Polys(pNum).vertex(vNum).Z
+            gPolyClr.red = Polys(pNum).vertex(vNum).Z
         ElseIf Polys(pNum).vertex(vNum).Z < 0 Then
-            polyClr.red = 0
+            gPolyClr.red = 0
         ElseIf Polys(pNum).vertex(vNum).Z > 255 Then
-            polyClr.red = 255
+            gPolyClr.red = 255
         End If
-        polyClr.green = polyClr.red
-        polyClr.blue = polyClr.red
+        gPolyClr.green = gPolyClr.red
+        gPolyClr.blue = gPolyClr.red
         Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-        frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
-        frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
+        frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+        frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
     End If
 
 End Sub
@@ -8044,14 +8038,14 @@ Private Sub lightPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         tempClr = getRGB(Polys(pNum).vertex(vNum).color)
-        If tempClr.red = polyClr.red And tempClr.green = polyClr.green And tempClr.blue = polyClr.blue Then
+        If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
             frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
         Else
-            polyClr = tempClr
+            gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.setValues polyClr.red, polyClr.green, polyClr.blue
-            frmPalette.checkPalette polyClr.red, polyClr.green, polyClr.blue
+            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     End If
 
@@ -8351,11 +8345,11 @@ Private Sub CreatePolys(X As Single, Y As Single)
     End If
 
     Polys(mPolyCount + 1).vertex(numVerts) = CreateCustomVertex(xVal, yVal, _
-            0, 1, ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red)), _
+            0, 1, ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)), _
             (xVal / zoomFactor + scrollCoords(2).X) / xTexture, (yVal / zoomFactor + scrollCoords(2).Y) / yTexture)
-    vertexList(mPolyCount + 1).color(numVerts).red = polyClr.red
-    vertexList(mPolyCount + 1).color(numVerts).green = polyClr.green
-    vertexList(mPolyCount + 1).color(numVerts).blue = polyClr.blue
+    vertexList(mPolyCount + 1).color(numVerts).red = gPolyClr.red
+    vertexList(mPolyCount + 1).color(numVerts).green = gPolyClr.green
+    vertexList(mPolyCount + 1).color(numVerts).blue = gPolyClr.blue
 
     If mnuQuad.Checked And mnuCustomX.Checked Then
         If creatingQuad Then
@@ -10006,29 +10000,29 @@ End Sub
 Private Function applyBlend(dClr As TColor) As TColor
 
     If blendMode = 0 Then  ' normal
-        applyBlend.red = polyClr.red * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = polyClr.green * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = polyClr.blue * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = gPolyClr.red * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = gPolyClr.green * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = gPolyClr.blue * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 1 Then  ' multiply
-        applyBlend.red = (dClr.red / 255 * polyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = (dClr.green / 255 * polyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = (dClr.blue / 255 * polyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = (dClr.red / 255 * gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = (dClr.green / 255 * gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = (dClr.blue / 255 * gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 2 Then  ' screen
-        applyBlend.red = (dClr.red - dClr.red / 255 * polyClr.red + polyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = (dClr.green - dClr.green / 255 * polyClr.green + polyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = (dClr.blue - dClr.blue / 255 * polyClr.blue + polyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = (dClr.red - dClr.red / 255 * gPolyClr.red + gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = (dClr.green - dClr.green / 255 * gPolyClr.green + gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyClr.blue + gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 3 Then  ' AND ' darken
-        applyBlend.red = lowerVal(dClr.red, polyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = lowerVal(dClr.green, polyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = lowerVal(dClr.blue, polyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = lowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = lowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = lowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 4 Then  ' OR ' lighten
-        applyBlend.red = higherVal(dClr.red, polyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = higherVal(dClr.green, polyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = higherVal(dClr.blue, polyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = higherVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = higherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = higherVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 5 Then  ' XOR ' difference
-        applyBlend.red = diffVal(dClr.red, polyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = diffVal(dClr.green, polyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = diffVal(dClr.blue, polyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        applyBlend.red = diffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        applyBlend.green = diffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        applyBlend.blue = diffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     Else
         applyBlend.red = 0
         applyBlend.green = 0
@@ -11592,37 +11586,37 @@ ErrorHandler:
 
 End Sub
 
-' set polyclr when rgb modified
+' set gpolyclr when rgb modified
 Public Sub setPolyColor(Index As Integer, value As Byte)
 
     If Index = 0 Then
-        polyClr.red = value
+        gPolyClr.red = value
     ElseIf Index = 1 Then
-        polyClr.green = value
+        gPolyClr.green = value
     ElseIf Index = 2 Then
-        polyClr.blue = value
+        gPolyClr.blue = value
     ElseIf Index = 3 Then
         opacity = value / 100
     End If
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(opacity * 255, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
 
 End Sub
 
-' set polyclr when palette clicked
+' set gpolyclr when palette clicked
 Public Sub setPaletteColor(red As Byte, green As Byte, blue As Byte)
 
-    polyClr.red = red
-    polyClr.green = green
-    polyClr.blue = blue
+    gPolyClr.red = red
+    gPolyClr.green = green
+    gPolyClr.blue = blue
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(polyClr.blue, polyClr.green, polyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(Scenery(0).alpha, RGB(polyClr.blue, polyClr.green, polyClr.red))
+    Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
 
 End Sub
 
@@ -12050,7 +12044,7 @@ Private Sub saveSettings()
     saveSection "Display", iniString
 
     ' tool settings
-    currentColor = RGB(polyClr.blue, polyClr.green, polyClr.red)
+    currentColor = RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)
     iniString = _
         "CurrentTool=" & currentTool & sNull & _
         "SnapVertices=" & ohSnap & sNull & _
@@ -12173,227 +12167,6 @@ Private Sub saveWindow(sectionName As String, window As Form, collapsed As Boole
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
 
     saveSection sectionName, iniString, appPath & "\workspace\" & theFileName
-
-End Sub
-
-Private Function SetIdePath() As Boolean
-
-  appPath = appPath & "\pwinstall"
-  SetIdePath = True
-
-End Function
-
-Private Sub loadINI()
-
-    On Error GoTo ErrorHandler
-
-    appPath = App.path
-
-    Debug.Assert SetIdePath  ' workaround for debugging with ide
-
-    Dim i As Integer
-    Dim numRecent As Integer
-    Dim strTemp As String
-    Dim sgnTemp As Single
-    Dim errVal As String
-
-    errVal = "1"
-
-    soldatDir = loadString("Preferences", "Dir", , 1024)
-    uncompDir = loadString("Preferences", "Uncompiled", , 1024)
-    prefabDir = loadString("Preferences", "Prefabs", , 1024)
-
-    gridSpacing = loadInt("Preferences", "GridSpacing")
-    gridDivisions = loadInt("Preferences", "GridDiv")
-    gridColor1 = HexToLong(loadString("Preferences", "GridColor1"))
-    gridColor2 = HexToLong(loadString("Preferences", "GridColor2"))
-    gridOp1 = loadInt("Preferences", "GridAlpha1")
-    gridOp2 = loadInt("Preferences", "GridAlpha2")
-    polyBlendSrc = loadInt("Preferences", "PolySrc")
-    polyBlendDest = loadInt("Preferences", "PolyDest")
-    wireBlendSrc = loadInt("Preferences", "WireSrc")
-    wireBlendDest = loadInt("Preferences", "WireDest")
-    pointColor = HexToLong(loadString("Preferences", "PointColor"))
-    selectionColor = HexToLong(loadString("Preferences", "SelectionColor"))
-    backClr = HexToLong(loadString("Preferences", "BackColor"))
-    max_undo = loadInt("Preferences", "MaxUndo")
-    sceneryVerts = loadString("Preferences", "SceneryVerts")
-    topmost = loadString("Preferences", "Topmost")
-
-    strTemp = loadString("Preferences", "MinZoom")
-    If IsNumeric(strTemp) Then
-        gMinZoom = CSng(strTemp) / 100
-    Else
-       gMinZoom = DEFAULT_MIN_ZOOM
-    End If
-
-    strTemp = loadString("Preferences", "MaxZoom")
-    If IsNumeric(strTemp) Then
-        gMaxZoom = CSng(strTemp) / 100
-    Else
-        gMaxZoom = DEFAULT_MAX_ZOOM
-    End If
-    
-    If gMinZoom = gMaxZoom Then
-        gMinZoom = DEFAULT_MIN_ZOOM
-        gMaxZoom = DEFAULT_MAX_ZOOM
-    ElseIf gMinZoom > gMaxZoom Then
-       sgnTemp = gMaxZoom
-       gMaxZoom = gMinZoom
-       gMinZoom = sgnTemp
-    End If
-
-    strTemp = loadString("Preferences", "ResetZoom")
-    If IsNumeric(strTemp) Then
-        gResetZoom = CSng(strTemp) / 100
-    Else
-        gResetZoom = DEFAULT_RESET_ZOOM
-    End If
-
-    If gResetZoom > gMaxZoom Then
-        gResetZoom = gMaxZoom
-    ElseIf gResetZoom < gMinZoom Then
-        gResetZoom = gMinZoom
-    End If
-
-    errVal = "2"
-
-    showBG = loadString("Display", "Background")
-    showPolys = loadString("Display", "Polys")
-    showTexture = loadString("Display", "Texture")
-    showWireframe = loadString("Display", "Wireframe")
-    showPoints = loadString("Display", "Points")
-    showScenery = loadString("Display", "Scenery")
-    showObjects = loadString("Display", "Objects")
-    showWaypoints = loadString("Display", "Waypoints")
-    showGrid = loadString("Display", "Grid")
-    showLights = loadString("Display", "Lights")
-    showSketch = loadString("Display", "Sketch")
-    
-    mnuGrid.Checked = showGrid
-
-    errVal = "3"
-
-    currentTool = loadInt("ToolSettings", "CurrentTool")
-    ohSnap = loadString("ToolSettings", "SnapVertices")
-    snapToGrid = loadString("ToolSettings", "SnapToGrid")
-    fixedTexture = loadString("ToolSettings", "FixedTexture")
-    opacity = loadInt("ToolSettings", "Opacity") / 100
-    clrRadius = loadInt("ToolSettings", "ColorRadius")
-    polyClr = getRGB(HexToLong(loadString("ToolSettings", "CurrentColor")))
-    colorMode = loadInt("ToolSettings", "ColorMode")
-    blendMode = loadInt("ToolSettings", "BlendMode")
-    snapRadius = loadInt("ToolSettings", "SnapRadius")
-    frmScenery.rotateScenery = loadString("ToolSettings", "RotateScenery")
-    frmScenery.scaleScenery = loadString("ToolSettings", "ScaleScenery")
-    xTexture = loadInt("ToolSettings", "TextureWidth")
-    yTexture = loadInt("ToolSettings", "TextureHeight")
-    gTextureFile = loadString("ToolSettings", "Texture", , 1024)
-    mnuCustomX.Checked = loadString("ToolSettings", "CustomX")
-    mnuCustomY.Checked = loadString("ToolSettings", "CustomY")
-
-    errVal = "4"
-
-    frmTools.setHotKey 0, loadInt("HotKeys", "Move")
-    frmTools.setHotKey 1, loadInt("HotKeys", "Create")
-    frmTools.setHotKey 2, loadInt("HotKeys", "VertexSelection")
-    frmTools.setHotKey 3, loadInt("HotKeys", "PolySelection")
-    frmTools.setHotKey 4, loadInt("HotKeys", "VertexColor")
-    frmTools.setHotKey 5, loadInt("HotKeys", "PolyColor")
-    frmTools.setHotKey 6, loadInt("HotKeys", "Texture")
-    frmTools.setHotKey 7, loadInt("HotKeys", "Scenery")
-    frmTools.setHotKey 8, loadInt("HotKeys", "Waypoints")
-    frmTools.setHotKey 9, loadInt("HotKeys", "Objects")
-    frmTools.setHotKey 10, loadInt("HotKeys", "ColorPicker")
-    frmTools.setHotKey 11, loadInt("HotKeys", "Sketch")
-    frmTools.setHotKey 12, loadInt("HotKeys", "Lights")
-    frmTools.setHotKey 13, loadInt("HotKeys", "DepthMap")
-
-    errVal = "5"
-
-    frmWaypoints.setWayptKey 0, loadInt("WaypointKeys", "Left")
-    frmWaypoints.setWayptKey 1, loadInt("WaypointKeys", "Right")
-    frmWaypoints.setWayptKey 2, loadInt("WaypointKeys", "Up")
-    frmWaypoints.setWayptKey 3, loadInt("WaypointKeys", "Down")
-    frmWaypoints.setWayptKey 4, loadInt("WaypointKeys", "Fly")
-
-    errVal = "6"
-
-    frmDisplay.setLayerKey 0, loadInt("LayerKeys", "Background")
-    frmDisplay.setLayerKey 1, loadInt("LayerKeys", "Polys")
-    frmDisplay.setLayerKey 2, loadInt("LayerKeys", "Texture")
-    frmDisplay.setLayerKey 3, loadInt("LayerKeys", "Wireframe")
-    frmDisplay.setLayerKey 4, loadInt("LayerKeys", "Points")
-    frmDisplay.setLayerKey 5, loadInt("LayerKeys", "Scenery")
-    frmDisplay.setLayerKey 6, loadInt("LayerKeys", "Objects")
-    frmDisplay.setLayerKey 7, loadInt("LayerKeys", "Waypoints")
-
-    errVal = "7"
-
-    mnuRecent(0).Caption = loadString("RecentFiles", "01", , 1024)
-    mnuRecent(1).Caption = loadString("RecentFiles", "02", , 1024)
-    mnuRecent(2).Caption = loadString("RecentFiles", "03", , 1024)
-    mnuRecent(3).Caption = loadString("RecentFiles", "04", , 1024)
-    mnuRecent(4).Caption = loadString("RecentFiles", "05", , 1024)
-    mnuRecent(5).Caption = loadString("RecentFiles", "06", , 1024)
-    mnuRecent(6).Caption = loadString("RecentFiles", "07", , 1024)
-    mnuRecent(7).Caption = loadString("RecentFiles", "08", , 1024)
-    mnuRecent(8).Caption = loadString("RecentFiles", "09", , 1024)
-    mnuRecent(9).Caption = loadString("RecentFiles", "10", , 1024)
-
-    errVal = "8"
-
-    PolyTypeClrs(1) = CLng("&H" + (loadString("PolyTypeColors", "OnlyBullets")))
-    PolyTypeClrs(2) = CLng("&H" + (loadString("PolyTypeColors", "OnlyPlayer")))
-    PolyTypeClrs(3) = CLng("&H" + (loadString("PolyTypeColors", "DoesntCollide")))
-    PolyTypeClrs(4) = CLng("&H" + (loadString("PolyTypeColors", "Ice")))
-    PolyTypeClrs(5) = CLng("&H" + (loadString("PolyTypeColors", "Deadly")))
-    PolyTypeClrs(6) = CLng("&H" + (loadString("PolyTypeColors", "BloodyDeadly")))
-    PolyTypeClrs(7) = CLng("&H" + (loadString("PolyTypeColors", "Hurts")))
-    PolyTypeClrs(8) = CLng("&H" + (loadString("PolyTypeColors", "Regenerates")))
-    PolyTypeClrs(9) = CLng("&H" + (loadString("PolyTypeColors", "Lava")))
-    PolyTypeClrs(10) = CLng("&H" + (loadString("PolyTypeColors", "TeamBullets")))
-    PolyTypeClrs(11) = CLng("&H" + (loadString("PolyTypeColors", "TeamPlayers")))
-    PolyTypeClrs(12) = PolyTypeClrs(10)
-    PolyTypeClrs(13) = PolyTypeClrs(11)
-    PolyTypeClrs(14) = PolyTypeClrs(10)
-    PolyTypeClrs(15) = PolyTypeClrs(11)
-    PolyTypeClrs(16) = PolyTypeClrs(10)
-    PolyTypeClrs(17) = PolyTypeClrs(11)
-    PolyTypeClrs(18) = CLng("&H" + (loadString("PolyTypeColors", "Bouncy")))
-    PolyTypeClrs(19) = CLng("&H" + (loadString("PolyTypeColors", "Explosive")))
-    PolyTypeClrs(20) = CLng("&H" + (loadString("PolyTypeColors", "HurtFlaggers")))
-    PolyTypeClrs(21) = CLng("&H" + (loadString("PolyTypeColors", "OnlyFlagger")))
-    PolyTypeClrs(22) = CLng("&H" + (loadString("PolyTypeColors", "NonFlagger")))
-    PolyTypeClrs(23) = CLng("&H" + (loadString("PolyTypeColors", "FlagCollides")))
-    PolyTypeClrs(24) = CLng("&H" + (loadString("PolyTypeColors", "Back")))
-    PolyTypeClrs(25) = CLng("&H" + (loadString("PolyTypeColors", "BackTransition")))
-
-    errVal = "9"
-
-    gfxDir = loadString("gfx", "Dir", , 1024)
-
-    If gfxDir = "" Then gfxDir = "gfx"
-
-    errVal = "10"
-
-    For i = mnuRecent.LBound + 1 To mnuRecent.UBound
-        If mnuRecent(i).Caption = "" Then
-            numRecent = numRecent + 1
-            mnuRecent(i).Visible = False
-        Else
-            mnuRecent(i).Visible = True
-        End If
-    Next
-    If numRecent = mnuRecent.Count - 1 And mnuRecent(mnuRecent.LBound).Caption = "" Then
-        mnuRecentFiles.Enabled = False
-    End If
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "Error loading ini file" & vbNewLine & Error$ & vbNewLine & errVal
 
 End Sub
 
@@ -13430,7 +13203,7 @@ Private Sub mnuSelColor_Click()
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
             clrVal = getRGB(Polys(i).vertex(j).color)
-            If clrVal.red = polyClr.red And clrVal.green = polyClr.green And clrVal.blue = polyClr.blue Then
+            If clrVal.red = gPolyClr.red And clrVal.green = gPolyClr.green And clrVal.blue = gPolyClr.blue Then
                 addPoly = 1
                 vertexList(i).vertex(j) = 1
             End If
@@ -14135,7 +13908,7 @@ End Sub
 Private Sub mnuPreferences_Click()
 
     frmPreferences.Show 1
-    PolyTypeClrs(0) = frmSoldatMapEditor.selectionColor
+    gPolyTypeClrs(0) = frmSoldatMapEditor.selectionColor
 
 End Sub
 
