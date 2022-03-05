@@ -1,3 +1,17 @@
 *.exe
 *.vbw
 *.zip
+*.log
+
+/pwinstall/Workspace/
+!/pwinstall/Workspace/current.ini
+
+/pwinstall/undo/
+
+/pwinstall/Temp/
+!Temp/gif.tga
+
+/pwinstall/Prefabs/
+
+/pwinstall/skins/
+!/pwinstall/skins/default/
