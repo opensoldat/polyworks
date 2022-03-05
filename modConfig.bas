@@ -53,7 +53,7 @@ Public Sub loadSettings()
     frmSoldatMapEditor.pointColor = HexToLong(loadString("Preferences", "PointColor"))
     frmSoldatMapEditor.selectionColor = HexToLong(loadString("Preferences", "SelectionColor"))
     frmSoldatMapEditor.backClr = HexToLong(loadString("Preferences", "BackColor"))
-    frmSoldatMapEditor.max_undo = loadInt("Preferences", "MaxUndo")
+    frmSoldatMapEditor.maxUndo = loadInt("Preferences", "MaxUndo")
     frmSoldatMapEditor.sceneryVerts = loadString("Preferences", "SceneryVerts")
     frmSoldatMapEditor.topmost = loadString("Preferences", "Topmost")
 
@@ -266,7 +266,7 @@ Public Sub saveSettings()
         "PointColor=" & RGBtoHex(frmSoldatMapEditor.pointColor) & sNull & _
         "SelectionColor=" & RGBtoHex(frmSoldatMapEditor.selectionColor) & sNull & _
         "BackColor=" & RGBtoHex(frmSoldatMapEditor.backClr) & sNull & _
-        "MaxUndo=" & frmSoldatMapEditor.max_undo & sNull & _
+        "MaxUndo=" & frmSoldatMapEditor.maxUndo & sNull & _
         "SceneryVerts=" & frmSoldatMapEditor.sceneryVerts & sNull & _
         "Topmost=" & frmSoldatMapEditor.topmost & sNull & _
         "MinZoom=" & frmSoldatMapEditor.gMaxZoom * 100 & sNull & _

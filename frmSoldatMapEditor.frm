@@ -1534,7 +1534,7 @@ Private noneSelected As Boolean
 Private currentUndo As Integer
 Private numUndo As Integer
 Private numRedo As Integer
-Public max_undo As Integer
+Public maxUndo As Integer
 Private lastCompiled As String
 
 Private currentWaypoint As Integer
@@ -3537,11 +3537,11 @@ Private Sub SaveUndo()
 
     numRedo = 0
     numUndo = numUndo + 1
-    If numUndo > max_undo Then
-        numUndo = max_undo
+    If numUndo > maxUndo Then
+        numUndo = maxUndo
     End If
     currentUndo = currentUndo + 1
-    If currentUndo > max_undo Then
+    If currentUndo > maxUndo Then
         currentUndo = 0
     End If
 
@@ -3654,8 +3654,8 @@ Private Sub loadUndo(redo As Boolean)
         numRedo = numRedo + 1
     End If
     If currentUndo < 0 Then
-        currentUndo = max_undo
-    ElseIf currentUndo > max_undo Then
+        currentUndo = maxUndo
+    ElseIf currentUndo > maxUndo Then
         currentUndo = 0
     End If
 
