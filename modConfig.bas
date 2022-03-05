@@ -250,65 +250,65 @@ Public Sub saveSettings()
 
     ' preferences
     iniString = _
-        "Dir=" & soldatDir & sNull & _
-        "Uncompiled=" & uncompDir & sNull & _
-        "Prefabs=" & prefabDir & sNull & _
-        "GridSpacing=" & gridSpacing & sNull & _
-        "GridDiv=" & gridDivisions & sNull & _
-        "GridColor1=" & RGBtoHex(gridColor1) & sNull & _
-        "GridColor2=" & RGBtoHex(gridColor2) & sNull & _
-        "GridAlpha1=" & gridOp1 & sNull & _
-        "GridAlpha2=" & gridOp2 & sNull & _
-        "PolySrc=" & polyBlendSrc & sNull & _
-        "PolyDest=" & polyBlendDest & sNull & _
-        "WireSrc=" & wireBlendSrc & sNull & _
-        "WireDest=" & wireBlendDest & sNull & _
-        "PointColor=" & RGBtoHex(pointColor) & sNull & _
-        "SelectionColor=" & RGBtoHex(selectionColor) & sNull & _
-        "BackColor=" & RGBtoHex(backClr) & sNull & _
-        "MaxUndo=" & max_undo & sNull & _
-        "SceneryVerts=" & sceneryVerts & sNull & _
-        "Topmost=" & topmost & sNull & _
-        "MinZoom=" & gMaxZoom * 100 & sNull & _
-        "MaxZoom=" & gMinZoom * 100 & sNull & _
-        "ResetZoom=" & gResetZoom * 100 & sNull & sNull
+        "Dir=" & frmSoldatMapEditor.soldatDir & sNull & _
+        "Uncompiled=" & frmSoldatMapEditor.uncompDir & sNull & _
+        "Prefabs=" & frmSoldatMapEditor.prefabDir & sNull & _
+        "GridSpacing=" & frmSoldatMapEditor.gridSpacing & sNull & _
+        "GridDiv=" & frmSoldatMapEditor.gridDivisions & sNull & _
+        "GridColor1=" & RGBtoHex(frmSoldatMapEditor.gridColor1) & sNull & _
+        "GridColor2=" & RGBtoHex(frmSoldatMapEditor.gridColor2) & sNull & _
+        "GridAlpha1=" & frmSoldatMapEditor.gridOp1 & sNull & _
+        "GridAlpha2=" & frmSoldatMapEditor.gridOp2 & sNull & _
+        "PolySrc=" & frmSoldatMapEditor.polyBlendSrc & sNull & _
+        "PolyDest=" & frmSoldatMapEditor.polyBlendDest & sNull & _
+        "WireSrc=" & frmSoldatMapEditor.wireBlendSrc & sNull & _
+        "WireDest=" & frmSoldatMapEditor.wireBlendDest & sNull & _
+        "PointColor=" & RGBtoHex(frmSoldatMapEditor.pointColor) & sNull & _
+        "SelectionColor=" & RGBtoHex(frmSoldatMapEditor.selectionColor) & sNull & _
+        "BackColor=" & RGBtoHex(frmSoldatMapEditor.backClr) & sNull & _
+        "MaxUndo=" & frmSoldatMapEditor.max_undo & sNull & _
+        "SceneryVerts=" & frmSoldatMapEditor.sceneryVerts & sNull & _
+        "Topmost=" & frmSoldatMapEditor.topmost & sNull & _
+        "MinZoom=" & frmSoldatMapEditor.gMaxZoom * 100 & sNull & _
+        "MaxZoom=" & frmSoldatMapEditor.gMinZoom * 100 & sNull & _
+        "ResetZoom=" & frmSoldatMapEditor.gResetZoom * 100 & sNull & sNull
     saveSection "Preferences", iniString
 
     ' display
     iniString = _
-        "Background=" & showBG & sNull & _
-        "Polys=" & showPolys & sNull & _
-        "Texture=" & showTexture & sNull & _
-        "Wireframe=" & showWireframe & sNull & _
-        "Points=" & showPoints & sNull & _
-        "Scenery=" & showScenery & sNull & _
-        "Objects=" & showObjects & sNull & _
-        "Waypoints=" & showWaypoints & sNull & _
-        "Grid=" & showGrid & sNull & _
-        "Lights=" & showLights & sNull & _
-        "Sketch=" & showSketch & sNull & sNull
+        "Background=" & frmSoldatMapEditor.showBG & sNull & _
+        "Polys=" & frmSoldatMapEditor.showPolys & sNull & _
+        "Texture=" & frmSoldatMapEditor.showTexture & sNull & _
+        "Wireframe=" & frmSoldatMapEditor.showWireframe & sNull & _
+        "Points=" & frmSoldatMapEditor.showPoints & sNull & _
+        "Scenery=" & frmSoldatMapEditor.showScenery & sNull & _
+        "Objects=" & frmSoldatMapEditor.showObjects & sNull & _
+        "Waypoints=" & frmSoldatMapEditor.showWaypoints & sNull & _
+        "Grid=" & frmSoldatMapEditor.showGrid & sNull & _
+        "Lights=" & frmSoldatMapEditor.showLights & sNull & _
+        "Sketch=" & frmSoldatMapEditor.showSketch & sNull & sNull
     saveSection "Display", iniString
 
     ' tool settings
     currentColor = RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)
     iniString = _
-        "CurrentTool=" & currentTool & sNull & _
-        "SnapVertices=" & ohSnap & sNull & _
-        "SnapToGrid=" & snapToGrid & sNull & _
-        "FixedTexture=" & fixedTexture & sNull & _
-        "Opacity=" & (opacity * 100) & sNull & _
-        "ColorRadius=" & clrRadius & sNull & _
+        "CurrentTool=" & frmSoldatMapEditor.currentTool & sNull & _
+        "SnapVertices=" & frmSoldatMapEditor.ohSnap & sNull & _
+        "SnapToGrid=" & frmSoldatMapEditor.snapToGrid & sNull & _
+        "FixedTexture=" & frmSoldatMapEditor.fixedTexture & sNull & _
+        "Opacity=" & (frmSoldatMapEditor.opacity * 100) & sNull & _
+        "ColorRadius=" & frmSoldatMapEditor.clrRadius & sNull & _
         "CurrentColor=" & RGBtoHex(currentColor) & sNull & _
-        "ColorMode=" & colorMode & sNull & _
-        "BlendMode=" & blendMode & sNull & _
-        "SnapRadius=" & snapRadius & sNull & _
+        "ColorMode=" & frmSoldatMapEditor.colorMode & sNull & _
+        "BlendMode=" & frmSoldatMapEditor.blendMode & sNull & _
+        "SnapRadius=" & frmSoldatMapEditor.snapRadius & sNull & _
         "RotateScenery=" & frmScenery.rotateScenery & sNull & _
         "ScaleScenery=" & frmScenery.scaleScenery & sNull & _
-        "TextureWidth=" & xTexture & sNull & _
-        "TextureHeight=" & yTexture & sNull & _
-        "Texture=" & gTextureFile & sNull & _
-        "CustomX=" & mnuCustomX.Checked & sNull & _
-        "CustomY=" & mnuCustomY.Checked & sNull & sNull
+        "TextureWidth=" & frmSoldatMapEditor.xTexture & sNull & _
+        "TextureHeight=" & frmSoldatMapEditor.yTexture & sNull & _
+        "Texture=" & frmSoldatMapEditor.gTextureFile & sNull & _
+        "CustomX=" & frmSoldatMapEditor.mnuCustomX.Checked & sNull & _
+        "CustomY=" & frmSoldatMapEditor.mnuCustomY.Checked & sNull & sNull
     saveSection "ToolSettings", iniString
 
     ' hotkeys
@@ -357,34 +357,34 @@ Public Sub saveSettings()
     isNewFile = Not FileExists(appPath & "\workspace\current.ini")
 
     iniString = _
-        "WindowState=" & Me.Tag & sNull & _
-        "Width=" & formWidth & sNull & _
-        "Height=" & formHeight & sNull & _
-        "Left=" & formLeft & sNull & _
-        "Top=" & formTop & _
+        "WindowState=" & frmSoldatMapEditor.Tag & sNull & _
+        "Width=" & frmSoldatMapEditor.formWidth & sNull & _
+        "Height=" & frmSoldatMapEditor.formHeight & sNull & _
+        "Left=" & frmSoldatMapEditor.formLeft & sNull & _
+        "Top=" & frmSoldatMapEditor.formTop & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
-    saveWindow "Tools", frmTools, False, isNewFile
-    saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
-    saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
-    saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
-    saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
-    saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
-    saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Tools", frmTools, False, isNewFile
+    frmSoldatMapEditor.saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
+    frmSoldatMapEditor.saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
 
     ' recent files
     iniString = _
-        "01=" & mnuRecent(0).Caption & sNull & _
-        "02=" & mnuRecent(1).Caption & sNull & _
-        "03=" & mnuRecent(2).Caption & sNull & _
-        "04=" & mnuRecent(3).Caption & sNull & _
-        "05=" & mnuRecent(4).Caption & sNull & _
-        "06=" & mnuRecent(5).Caption & sNull & _
-        "07=" & mnuRecent(6).Caption & sNull & _
-        "08=" & mnuRecent(7).Caption & sNull & _
-        "09=" & mnuRecent(8).Caption & sNull & _
-        "10=" & mnuRecent(9).Caption & sNull & sNull
+        "01=" & frmSoldatMapEditor.mnuRecent(0).Caption & sNull & _
+        "02=" & frmSoldatMapEditor.mnuRecent(1).Caption & sNull & _
+        "03=" & frmSoldatMapEditor.mnuRecent(2).Caption & sNull & _
+        "04=" & frmSoldatMapEditor.mnuRecent(3).Caption & sNull & _
+        "05=" & frmSoldatMapEditor.mnuRecent(4).Caption & sNull & _
+        "06=" & frmSoldatMapEditor.mnuRecent(5).Caption & sNull & _
+        "07=" & frmSoldatMapEditor.mnuRecent(6).Caption & sNull & _
+        "08=" & frmSoldatMapEditor.mnuRecent(7).Caption & sNull & _
+        "09=" & frmSoldatMapEditor.mnuRecent(8).Caption & sNull & _
+        "10=" & frmSoldatMapEditor.mnuRecent(9).Caption & sNull & sNull
     saveSection "RecentFiles", iniString
 
     ' gfx dir
