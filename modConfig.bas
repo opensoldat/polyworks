@@ -20,7 +20,7 @@ Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
 Private Const DEFAULT_RESET_ZOOM As Single = 1
 
 
-Public Sub loadINI()
+Public Sub loadSettings()
 
     On Error GoTo ErrorHandler
 

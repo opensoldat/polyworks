@@ -1603,7 +1603,7 @@ Private Sub Form_Load()
 
     initialized = False
 
-    modConfig.loadINI
+    modConfig.loadSettings
     loadColors
 
 
