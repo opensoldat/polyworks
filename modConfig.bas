@@ -399,3 +399,85 @@ Private Function SetIdePath() As Boolean
   SetIdePath = True
 
 End Function
+
+Public Sub loadWorkspace(Optional theFileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
+
+    On Error GoTo ErrorHandler
+
+    frmSoldatMapEditor.Tag = loadInt("Main", "WindowState", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.formWidth = loadInt("Main", "Width", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.formHeight = loadInt("Main", "Height", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.formLeft = loadInt("Main", "Left", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.formTop = loadInt("Main", "Top", appPath & "\workspace\" & theFileName)
+
+    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.formHeight - frmSoldatMapEditor.picResize.Height
+    frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.formWidth - frmSoldatMapEditor.picResize.Width
+    
+    If frmSoldatMapEditor.Tag = vbNormal Then
+        frmSoldatMapEditor.Width = frmSoldatMapEditor.formWidth * Screen.TwipsPerPixelX
+        frmSoldatMapEditor.Height = frmSoldatMapEditor.formHeight * Screen.TwipsPerPixelY
+        frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+        frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
+    Else
+        frmSoldatMapEditor.Tag = vbNormal
+        frmSoldatMapEditor.Width = frmSoldatMapEditor.formWidth * Screen.TwipsPerPixelX
+        frmSoldatMapEditor.Height = frmSoldatMapEditor.formHeight * Screen.TwipsPerPixelY
+        frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+        frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
+        frmSoldatMapEditor.MaximizeBorderLessForm
+        frmSoldatMapEditor.picResize.Visible = False
+    End If
+
+    frmSoldatMapEditor.tvwScenery.Height = frmSoldatMapEditor.formHeight - 41 - 20
+
+    frmSoldatMapEditor.mnuTools.Checked = loadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
+    frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & theFileName)
+    frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & theFileName)
+    frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTools.Tag = IIf(loadString("Tools", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    frmSoldatMapEditor.mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & theFileName)
+    frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & theFileName)
+    frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & theFileName)
+    frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmDisplay.Tag = IIf(loadString("Display", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    frmSoldatMapEditor.mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
+    frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & theFileName)
+    frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & theFileName)
+    frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmInfo.Tag = IIf(loadString("Properties", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    frmSoldatMapEditor.mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
+    frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & theFileName)
+    frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & theFileName)
+    frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmPalette.Tag = IIf(loadString("Palette", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    If Not bSkipScenery Then
+        frmSoldatMapEditor.mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
+        frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & theFileName)
+        frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & theFileName)
+        frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & theFileName)
+        frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    End If
+
+    frmSoldatMapEditor.mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
+    frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & theFileName)
+    frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & theFileName)
+    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmWaypoints.Tag = IIf(loadString("Waypoints", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    frmSoldatMapEditor.mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
+    frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & theFileName)
+    frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & theFileName)
+    frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTexture.Tag = IIf(loadString("Texture", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error loading workspace" & vbNewLine & Error$
+
+End Sub
