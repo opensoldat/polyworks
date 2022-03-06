@@ -365,13 +365,13 @@ Public Sub saveSettings()
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     saveSection "Main", iniString, appPath & "\workspace\current.ini"
 
-    frmSoldatMapEditor.saveWindow "Tools", frmTools, False, isNewFile
-    frmSoldatMapEditor.saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
-    frmSoldatMapEditor.saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
-    frmSoldatMapEditor.saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
-    frmSoldatMapEditor.saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
-    frmSoldatMapEditor.saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
-    frmSoldatMapEditor.saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
+    saveWindow "Tools", frmTools, False, isNewFile
+    saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
+    saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
+    saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
+    saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
+    saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
+    saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
 
     ' recent files
     iniString = _
@@ -481,3 +481,27 @@ ErrorHandler:
     MsgBox "Error loading workspace" & vbNewLine & Error$
 
 End Sub
+
+Public Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional theFileName As String = "current.ini")
+
+    Dim leftVal As Integer
+    Dim topVal As Integer
+    Dim iniString As String
+    Dim sNull As String
+    sNull = Chr$(0)
+
+    leftVal = window.Left / Screen.TwipsPerPixelX
+    topVal = window.Top / Screen.TwipsPerPixelY
+
+    iniString = _
+        "Visible=" & window.Visible & sNull & _
+        "Left=" & leftVal & sNull & _
+        "Top=" & topVal & sNull & _
+        "Collapsed=" & collapsed & sNull & _
+        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
+
+    saveSection sectionName, iniString, appPath & "\workspace\" & theFileName
+
+End Sub
+

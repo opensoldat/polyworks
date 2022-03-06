@@ -11988,29 +11988,6 @@ ErrorHandler:
 
 End Sub
 
-Public Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional theFileName As String = "current.ini")
-
-    Dim leftVal As Integer
-    Dim topVal As Integer
-    Dim iniString As String
-    Dim sNull As String
-    sNull = Chr$(0)
-
-    leftVal = window.Left / Screen.TwipsPerPixelX
-    topVal = window.Top / Screen.TwipsPerPixelY
-
-    iniString = _
-        "Visible=" & window.Visible & sNull & _
-        "Left=" & leftVal & sNull & _
-        "Top=" & topVal & sNull & _
-        "Collapsed=" & collapsed & sNull & _
-        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
-        IIf(isNewFile, vbNewLine, "") & sNull & sNull
-
-    saveSection sectionName, iniString, appPath & "\workspace\" & theFileName
-
-End Sub
-
 Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) As String
 
     Dim nIndex As Integer
