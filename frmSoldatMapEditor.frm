@@ -11771,7 +11771,7 @@ Private Sub MouseHelper_MouseWheel(ctrl As Variant, Direction As MBMouseHelper.m
 
 End Sub
 
-Public Sub setPreferences()
+Public Sub SetPreferences()
 
     inc = (gridSpacing / gridDivisions)
     tvwScenery.Height = formHeight - 41 - 20

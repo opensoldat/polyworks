@@ -2132,7 +2132,7 @@ Private Function applyPreferences() As Boolean
         frmDisplay.refreshButtons
     End If
 
-    frmSoldatMapEditor.setPreferences
+    frmSoldatMapEditor.SetPreferences
 
     applyPreferences = True
 
