@@ -697,7 +697,7 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
     mNonModal = True
 
     mLastTool = frmSoldatMapEditor.setTempTool(10)
-    frmSoldatMapEditor.setCurrentTool 10
+    frmSoldatMapEditor.SetCurrentTool 10
 
     frmSoldatMapEditor.picMenuBar.Enabled = False
     frmTools.Enabled = False
@@ -733,7 +733,7 @@ Private Sub HideColor(apply As Boolean)
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
 
-        frmSoldatMapEditor.setCurrentTool mLastTool
+        frmSoldatMapEditor.SetCurrentTool mLastTool
         mLastTool = 0
     End If
 

@@ -5369,7 +5369,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             End If
         Else
             If hotKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' hotkey
-                setCurrentTool hotKeyPressed
+                SetCurrentTool hotKeyPressed
                 frmTools.picTools_MouseDown hotKeyPressed, 1, 0, 1, 1
             ElseIf wayptKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' waypoint key
                 frmWaypoints.picType_MouseUp wayptKeyPressed, 1, 0, 0, 0
@@ -5419,16 +5419,16 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 mnuExit_Click
             ElseIf (DIState.Key(DIK_LBRACKET) = 128) Then  ' [
                 If currentTool = 0 Then
-                    setCurrentTool TOOL_DEPTHMAP
+                    SetCurrentTool TOOL_DEPTHMAP
                 Else
-                    setCurrentTool currentTool - 1
+                    SetCurrentTool currentTool - 1
                 End If
                 frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
             ElseIf (DIState.Key(DIK_RBRACKET) = 128) Then  ' ]
                 If currentTool = TOOL_DEPTHMAP Then
-                    setCurrentTool TOOL_MOVE
+                    SetCurrentTool TOOL_MOVE
                 Else
-                    setCurrentTool currentTool + 1
+                    SetCurrentTool currentTool + 1
                 End If
                 frmTools.picTools_MouseDown CInt(currentTool), 1, 0, 1, 1
             ElseIf (DIState.Key(DIK_LEFT) = 128 Or DIState.Key(DIK_UP) = 128 _
@@ -11483,7 +11483,7 @@ Public Sub SetColorMode(ByVal clrVal As Byte)
 
 End Sub
 
-Public Sub setCurrentTool(ByVal Index As Integer)
+Public Sub SetCurrentTool(ByVal Index As Integer)
 
     Dim i As Integer
 
@@ -13642,7 +13642,7 @@ Private Sub mnuMap_Click()
 
     frmMap.Show 1
     ctrlDown = False
-    setCurrentTool currentTool
+    SetCurrentTool currentTool
 
 End Sub
 

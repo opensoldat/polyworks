@@ -436,7 +436,7 @@ End Sub
 
 Private Sub picTools_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    frmSoldatMapEditor.setCurrentTool curTool
+    frmSoldatMapEditor.SetCurrentTool curTool
     frmSoldatMapEditor.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(curTool + 1).Picture
     frmSoldatMapEditor.RegainFocus
 
