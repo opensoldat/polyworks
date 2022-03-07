@@ -11544,9 +11544,9 @@ Public Sub SetCurrentTool(ByVal Index As Integer)
 
 End Sub
 
-Public Function setTempTool(toolNum As Byte) As Byte
+Public Function SetTempTool(toolNum As Byte) As Byte
 
-    setTempTool = currentTool
+    SetTempTool = currentTool
     currentTool = toolNum
 
 End Function
@@ -11846,10 +11846,10 @@ Public Sub SetRadius(R As Integer)
 
 End Sub
 
-Public Function setWayType(Index As Integer, tehValue As Boolean) As Boolean
+Public Function SetWayType(Index As Integer, tehValue As Boolean) As Boolean
 
     If numSelWaypoints = 0 Then
-        setWayType = False
+        SetWayType = False
         Exit Function
     End If
 
@@ -11870,7 +11870,7 @@ Public Function setWayType(Index As Integer, tehValue As Boolean) As Boolean
         End If
     Next
 
-    setWayType = True
+    SetWayType = True
 
     Render
 

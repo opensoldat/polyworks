@@ -724,7 +724,7 @@ End Sub
 
 Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Not frmSoldatMapEditor.setWayType(Index, Not wayptType(Index)) Then Exit Sub
+    If Not frmSoldatMapEditor.SetWayType(Index, Not wayptType(Index)) Then Exit Sub
 
     wayptType(Index) = Not wayptType(Index)
     mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
