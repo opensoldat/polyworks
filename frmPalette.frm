@@ -1006,7 +1006,7 @@ End Sub
 
 Private Sub cboBlendMode_Click()
 
-    frmSoldatMapEditor.setBlendMode cboBlendMode.ListIndex
+    frmSoldatMapEditor.SetBlendMode cboBlendMode.ListIndex
 
 End Sub
 

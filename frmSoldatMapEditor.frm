@@ -11610,7 +11610,7 @@ Public Sub setPaletteColor(red As Byte, green As Byte, blue As Byte)
 
 End Sub
 
-Public Sub setBlendMode(Index As Integer)
+Public Sub SetBlendMode(Index As Integer)
 
     blendMode = Index
 
