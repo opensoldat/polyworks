@@ -4111,7 +4111,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub setGrid()
+Private Sub SetGrid()
 
     Dim xGridOffset As Single
     Dim yGridOffset As Single
@@ -4663,7 +4663,7 @@ Public Sub Render()
     If showGrid Then
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
 
-        setGrid
+        SetGrid
 
         For i = 0 To (Int((Me.ScaleWidth / gridSpacing) / zoomFactor) + 1)
             If inc * zoomFactor >= 8 Then
