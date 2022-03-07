@@ -2867,7 +2867,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub setCurrentTexture(sceneryName As String)
+Public Sub SetCurrentTexture(sceneryName As String)
 
     On Error GoTo ErrorHandler
 
@@ -11144,7 +11144,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             Next
 
             If Not isInList Then
-                frmSoldatMapEditor.setCurrentTexture currentScenery
+                frmSoldatMapEditor.SetCurrentTexture currentScenery
             End If
         End If
 
