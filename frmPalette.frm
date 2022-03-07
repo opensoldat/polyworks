@@ -1067,7 +1067,7 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
         End If
     Next
 
-    frmSoldatMapEditor.setColorMode clrMode
+    frmSoldatMapEditor.SetColorMode clrMode
     frmSoldatMapEditor.RegainFocus
 
 End Sub
