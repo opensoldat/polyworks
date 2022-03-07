@@ -11451,7 +11451,7 @@ Public Sub SetDispOptions(layerNum As Integer, value As Boolean)
         mnuGrid.Checked = value
     ElseIf layerNum = 9 Then
         showLights = value
-        setLightsMode showLights
+        SetLightsMode showLights
     ElseIf layerNum = 10 Then
         showSketch = value
     End If
@@ -11460,7 +11460,7 @@ Public Sub SetDispOptions(layerNum As Integer, value As Boolean)
 
 End Sub
 
-Private Sub setLightsMode(lightsOn As Boolean)
+Private Sub SetLightsMode(lightsOn As Boolean)
 
     Dim i As Integer
     Dim j As Integer
