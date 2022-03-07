@@ -11876,7 +11876,7 @@ Public Function setWayType(Index As Integer, tehValue As Boolean) As Boolean
 
 End Function
 
-Public Sub setPathNum(tehValue As Byte)
+Public Sub SetPathNum(tehValue As Byte)
 
     Dim i As Integer
 

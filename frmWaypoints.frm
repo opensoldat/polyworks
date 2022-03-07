@@ -706,7 +706,7 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
         End If
     Next
 
-    frmSoldatMapEditor.setPathNum Index + 1
+    frmSoldatMapEditor.SetPathNum Index + 1
 
 End Sub
 
