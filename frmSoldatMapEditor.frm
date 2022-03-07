@@ -11597,7 +11597,7 @@ Public Sub setPolyColor(Index As Integer, value As Byte)
 End Sub
 
 ' set gpolyclr when palette clicked
-Public Sub setPaletteColor(red As Byte, green As Byte, blue As Byte)
+Public Sub SetPaletteColor(red As Byte, green As Byte, blue As Byte)
 
     gPolyClr.red = red
     gPolyClr.green = green

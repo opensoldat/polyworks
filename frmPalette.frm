@@ -854,7 +854,7 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
     If Button = 1 Then  ' select color
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
-        frmSoldatMapEditor.setPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
+        frmSoldatMapEditor.SetPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
 
         txtRGB(0).Text = clrPalette(xVal, yVal).red
         txtRGB(1).Text = clrPalette(xVal, yVal).green
