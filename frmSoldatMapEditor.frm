@@ -11637,7 +11637,7 @@ Public Sub getOptions()
 
 End Sub
 
-Public Sub setOptions()
+Public Sub SetOptions()
 
     Options.GrenadePacks = frmMap.cboGrenades.ListIndex
     Options.Medikits = frmMap.cboMedikits.ListIndex

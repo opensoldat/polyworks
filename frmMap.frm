@@ -729,7 +729,7 @@ End Sub
 
 Private Sub picOK_Click()
 
-    frmSoldatMapEditor.setOptions
+    frmSoldatMapEditor.SetOptions
     Unload Me
     frmSoldatMapEditor.RegainFocus
 
@@ -768,7 +768,7 @@ End Sub
 
 Private Sub picHide_Click()
 
-    frmSoldatMapEditor.setOptions
+    frmSoldatMapEditor.SetOptions
     frmSoldatMapEditor.mnuMap.Checked = False
     Unload Me
 
