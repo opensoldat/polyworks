@@ -2259,7 +2259,7 @@ Public Sub newMap()
     sceneryElements = 0
     ReDim Preserve SceneryTextures(0)
     frmScenery.lstScenery.Clear
-    setCurrentScenery 0
+    SetCurrentScenery 0
     tvwScenery.Nodes.Remove "In Use"
     tvwScenery.Nodes.Add "Master List", tvwFirst, "In Use", "In Use"
 
@@ -2681,7 +2681,7 @@ Public Sub LoadFile(theFileName As String)
 
     errorVal = "Error setting map data"
 
-    setCurrentScenery 0
+    SetCurrentScenery 0
     If sceneryElements > 0 Then
         frmScenery.lstScenery.ListIndex = 0
     End If
@@ -2838,7 +2838,7 @@ Public Sub setMapData()
 
 End Sub
 
-Public Sub setCurrentScenery(Optional styleVal As Integer = -1, Optional sceneryName As String = "")
+Public Sub SetCurrentScenery(Optional styleVal As Integer = -1, Optional sceneryName As String = "")
 
     On Error GoTo ErrorHandler
 
@@ -2903,7 +2903,7 @@ Public Sub setCurrentTexture(sceneryName As String)
         SceneryTextures(0).reScale.Y = 1
     End If
 
-    setCurrentScenery 0
+    SetCurrentScenery 0
     Scenery(0).Style = 0
 
     Exit Sub
@@ -8569,7 +8569,7 @@ Private Sub CreateScenery(X As Single, Y As Single)
             frmScenery.notClicked = True
         End If
 
-        setCurrentScenery
+        SetCurrentScenery
         frmInfo.lblCount(1).Caption = sceneryCount & "/500 (" & sceneryElements & ")"
         numCorners = 0
 
@@ -11118,7 +11118,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
 
         For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
             If currentScenery = tempNode.Text Then
-                frmSoldatMapEditor.setCurrentScenery i
+                frmSoldatMapEditor.SetCurrentScenery i
                 frmScenery.lstScenery.ListIndex = i - 1
             End If
             Set tempNode = tempNode.Next
@@ -11138,7 +11138,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
                 If currentScenery = tempNode.Text Then
                     isInList = True
-                    frmSoldatMapEditor.setCurrentScenery i
+                    frmSoldatMapEditor.SetCurrentScenery i
                 End If
                 Set tempNode = tempNode.Next
             Next

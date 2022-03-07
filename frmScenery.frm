@@ -496,9 +496,9 @@ Public Sub lstScenery_Click()
         token = InitGDIPlus
         picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
         FreeGDIPlus token
-        frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
+        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
     Else
-        frmSoldatMapEditor.setCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
+        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
         picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
         frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
     End If
