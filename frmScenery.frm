@@ -681,7 +681,7 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
         End If
     Next
 
-    frmSoldatMapEditor.setSceneryLevel level
+    frmSoldatMapEditor.SetSceneryLevel level
     frmSoldatMapEditor.RegainFocus
 
 End Sub

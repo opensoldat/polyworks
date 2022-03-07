@@ -567,7 +567,7 @@ End Sub
 Private Sub cboSpecial_Click()
 
     If noChange = False And cboSpecial.ListIndex > -1 Then
-        If Not frmSoldatMapEditor.setSpecial(cboSpecial.ListIndex) Then
+        If Not frmSoldatMapEditor.SetSpecial(cboSpecial.ListIndex) Then
             cboSpecial.ListIndex = -1
         End If
     End If
@@ -769,7 +769,7 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
         End If
     Next
 
-    frmSoldatMapEditor.setShowPaths
+    frmSoldatMapEditor.SetShowPaths
 
 End Sub
 

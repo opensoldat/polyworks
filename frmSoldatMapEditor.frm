@@ -2914,7 +2914,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub setSceneryLevel(ByVal level As Byte)
+Public Sub SetSceneryLevel(ByVal level As Byte)
 
     Scenery(0).level = level
 
@@ -11890,12 +11890,12 @@ Public Sub SetPathNum(tehValue As Byte)
 
 End Sub
 
-Public Function setSpecial(tehValue As Byte) As Boolean
+Public Function SetSpecial(tehValue As Byte) As Boolean
 
     Dim i As Integer
 
     If numSelWaypoints = 0 Then
-        setSpecial = False
+        SetSpecial = False
         Exit Function
     End If
 
@@ -11905,11 +11905,11 @@ Public Function setSpecial(tehValue As Byte) As Boolean
         End If
     Next
 
-    setSpecial = True
+    SetSpecial = True
 
 End Function
 
-Public Sub setShowPaths()
+Public Sub SetShowPaths()
 
     Render
 
