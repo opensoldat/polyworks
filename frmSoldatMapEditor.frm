@@ -4072,16 +4072,6 @@ Private Function SegXSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
 
 End Function
 
-Private Function isBetween(p1, p2, p3) As Boolean
-
-    isBetween = False
-
-    If (p1 >= p2 And p2 >= p3) Or (p3 >= p2 And p2 >= p1) Then
-        isBetween = True
-    End If
-
-End Function
-
 Private Sub initGrid()
 
     On Error GoTo ErrorHandler

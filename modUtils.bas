@@ -174,3 +174,13 @@ Public Function Midpoint(ByVal p1 As Single, ByVal p2 As Single) As Single
     End If
 
 End Function
+
+Public Function isBetween(p1, p2, p3) As Boolean
+
+    isBetween = False
+
+    If (p1 >= p2 And p2 >= p3) Or (p3 >= p2 And p2 >= p1) Then
+        isBetween = True
+    End If
+
+End Function
