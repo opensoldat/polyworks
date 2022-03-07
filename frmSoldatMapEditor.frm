@@ -8143,7 +8143,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
                 For i = 1 To colliderCount
                     If Colliders(i).active = 1 Then
                         frmPalette.txtRadius.Text = LTrim$(Str$(Colliders(i).radius))
-                        setRadius CInt(Colliders(i).radius)
+                        SetRadius CInt(Colliders(i).radius)
                     End If
                 Next
             End If
@@ -11828,7 +11828,7 @@ Public Sub SetLightColor()
 
 End Sub
 
-Public Sub setRadius(R As Integer)
+Public Sub SetRadius(R As Integer)
 
     Dim i As Integer
 

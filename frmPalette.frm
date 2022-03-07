@@ -925,12 +925,12 @@ Private Sub txtradius_LostFocus()
     ElseIf txtRadius.Text >= 4 And txtRadius.Text <= 128 Then
         radius = Int(txtRadius.Text)
         txtRadius.Text = radius
-        frmSoldatMapEditor.setRadius radius
+        frmSoldatMapEditor.SetRadius radius
     Else
         If txtRadius.Text < 4 Then radius = 4
         If txtRadius.Text > 128 Then radius = 128
         txtRadius.Text = radius
-        frmSoldatMapEditor.setRadius radius
+        frmSoldatMapEditor.SetRadius radius
     End If
 
 End Sub
