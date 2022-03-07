@@ -11799,7 +11799,7 @@ Public Function SetBGColor(Index As Integer) As Long
 
 End Function
 
-Public Sub setLightColor()
+Public Sub SetLightColor()
 
     Dim i As Integer
     Dim Index As Integer
