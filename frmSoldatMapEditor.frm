@@ -2304,7 +2304,7 @@ Public Sub newMap()
     scrollCoords(2).Y = -Me.ScaleHeight / 2 - 1
     zoomFactor = 1
 
-    setMapData
+    SetMapData
 
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
@@ -2743,7 +2743,7 @@ Public Sub LoadFile(theFileName As String)
 
     Colliders(0).radius = clrRadius
 
-    setMapData
+    SetMapData
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
     centerView
@@ -2826,7 +2826,7 @@ Private Function getMapArea() As Long
 
 End Function
 
-Public Sub setMapData()
+Public Sub SetMapData()
 
     frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(1).Caption = sceneryCount & "/500 (" & sceneryElements & ")"
@@ -3761,7 +3761,7 @@ Private Sub loadUndo(redo As Boolean)
 
     errorVal = "Error loading undo state"
 
-    setMapData
+    SetMapData
 
     getRCenter
 
@@ -10188,7 +10188,7 @@ Private Sub deletePolys()
         ReDim Preserve vertexList(mPolyCount)
     End If
 
-    setMapData
+    SetMapData
 
     SaveUndo
     Render
@@ -12637,7 +12637,7 @@ Private Sub loadPrefab(theFileName As String)
 
     Close #1
 
-    setMapData
+    SetMapData
 
     getInfo
     getRCenter
@@ -12798,7 +12798,7 @@ Private Sub mnuDuplicate_Click()
         Next
     End If
 
-    setMapData
+    SetMapData
 
     getRCenter
 
