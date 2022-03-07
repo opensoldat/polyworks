@@ -595,7 +595,7 @@ Private Sub cboTexture_Click()
     On Error GoTo ErrorHandler
 
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-        frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
+        frmSoldatMapEditor.SetMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
 
         Dim token As Long

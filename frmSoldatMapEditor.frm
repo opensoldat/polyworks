@@ -2182,7 +2182,7 @@ Public Sub resetDevice()
         RefreshSceneryTextures i
     Next
 
-    setMapTexture gTextureFile
+    SetMapTexture gTextureFile
 
     initGrid
 
@@ -2309,7 +2309,7 @@ Public Sub newMap()
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
     If Len(Dir(soldatDir & "Textures\" & gTextureFile)) <> 0 Then
-        setMapTexture gTextureFile
+        SetMapTexture gTextureFile
         frmTexture.setTexture gTextureFile
     Else
         Set mapTexture = Nothing
@@ -2737,7 +2737,7 @@ Public Sub LoadFile(theFileName As String)
     Next
 
     If Len(Dir$(soldatDir & "textures\" & gTextureFile)) <> 0 Then
-        setMapTexture gTextureFile
+        SetMapTexture gTextureFile
         frmTexture.setTexture gTextureFile
     End If
 
@@ -11551,7 +11551,7 @@ Public Function setTempTool(toolNum As Byte) As Byte
 
 End Function
 
-Public Sub setMapTexture(texturePath As String)
+Public Sub SetMapTexture(texturePath As String)
 
     On Error GoTo ErrorHandler
 
