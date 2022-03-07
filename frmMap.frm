@@ -717,7 +717,7 @@ End Sub
 
 Private Sub picBackClr_Click(Index As Integer)
 
-    picBackClr(Index).BackColor = frmSoldatMapEditor.setBGColor(Index + 1)
+    picBackClr(Index).BackColor = frmSoldatMapEditor.SetBGColor(Index + 1)
 
 End Sub
 

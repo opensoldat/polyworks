@@ -11780,7 +11780,7 @@ Public Sub setPreferences()
 
 End Sub
 
-Public Function setBGColor(Index As Integer) As Long
+Public Function SetBGColor(Index As Integer) As Long
 
     frmColor.InitColor bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue
     frmColor.Show 1
@@ -11793,7 +11793,7 @@ Public Function setBGColor(Index As Integer) As Long
     bgPolys(3).color = RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red)
     bgPolys(4).color = RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red)
 
-    setBGColor = RGB(bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue)
+    SetBGColor = RGB(bgColors(Index).red, bgColors(Index).green, bgColors(Index).blue)
 
     Render
 
