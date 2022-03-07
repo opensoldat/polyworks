@@ -942,7 +942,7 @@ Private Sub txtRGB_Change(Index As Integer)
         ' no op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         picColor.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
-        frmSoldatMapEditor.setPolyColor Index, txtRGB(Index).Text
+        frmSoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
     End If
 
 End Sub
@@ -965,7 +965,7 @@ Private Sub txtRGB_LostFocus(Index As Integer)
     ElseIf txtRGB(Index).Text = "" Then
         txtRGB(Index).Text = tempVal
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
-        frmSoldatMapEditor.setPolyColor Index, txtRGB(Index).Text
+        frmSoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
     Else
         txtRGB(Index).Text = tempVal
     End If
@@ -981,7 +981,7 @@ Private Sub txtOpacity_Change()
     ElseIf txtOpacity.Text = "" Then
         ' no-op
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
-        frmSoldatMapEditor.setPolyColor 3, txtOpacity.Text
+        frmSoldatMapEditor.SetPolyColor 3, txtOpacity.Text
     End If
 
 End Sub

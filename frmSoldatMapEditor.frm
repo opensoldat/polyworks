@@ -11577,7 +11577,7 @@ ErrorHandler:
 End Sub
 
 ' set gpolyclr when rgb modified
-Public Sub setPolyColor(Index As Integer, value As Byte)
+Public Sub SetPolyColor(Index As Integer, value As Byte)
 
     If Index = 0 Then
         gPolyClr.red = value
