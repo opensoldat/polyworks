@@ -2155,7 +2155,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub resetDevice()
+Public Sub ResetDevice()
 
     On Error GoTo ErrorHandler
     Dim i As Integer
@@ -4224,7 +4224,7 @@ Public Sub Render()
     If ExModeActive Then  ' check if in focus
         initialized = True
     Else
-        resetDevice
+        ResetDevice
         initialized = True
     End If
 
@@ -10957,7 +10957,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
         picResize.Visible = True
         noRedraw = False
         If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
-            resetDevice
+            ResetDevice
         Else
             Render
         End If
@@ -11775,7 +11775,7 @@ Public Sub SetPreferences()
 
     inc = (gridSpacing / gridDivisions)
     tvwScenery.Height = formHeight - 41 - 20
-    resetDevice
+    ResetDevice
     Render
 
 End Sub
@@ -13676,7 +13676,7 @@ End Sub
 
 Private Sub mnuRefresh_Click()
 
-    resetDevice
+    ResetDevice
 
 End Sub
 
@@ -13777,7 +13777,7 @@ Private Sub mnuLoadSpace_Click()
             frmScenery.setForm
             frmTexture.setForm
             frmWaypoints.setForm
-            resetDevice
+            ResetDevice
         End If
     End If
 
@@ -13872,7 +13872,7 @@ Private Sub mnuResetWindows_Click()
         frmTexture.Top = frmPalette.Top
         frmTexture.Left = frmPalette.Left - frmTexture.Width + Screen.TwipsPerPixelX
 
-        resetDevice
+        ResetDevice
     Else
         frmTools.Left = Me.Left
         frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
@@ -14436,7 +14436,7 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
 
     mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
 
-    resetDevice
+    ResetDevice
 
 End Sub
 
@@ -14511,7 +14511,7 @@ Private Sub picTitle_DblClick()
 
     picResize.Visible = Me.Tag = vbNormal
 
-    resetDevice
+    ResetDevice
 
 End Sub
 
