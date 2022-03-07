@@ -604,7 +604,7 @@ End Sub
 Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     layers(Index) = Not layers(Index)
-    frmSoldatMapEditor.setDispOptions Index, layers(Index)
+    frmSoldatMapEditor.SetDispOptions Index, layers(Index)
     mouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
 
 End Sub

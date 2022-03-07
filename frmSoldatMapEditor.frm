@@ -11428,7 +11428,7 @@ Private Function isCW(ByVal i As Integer) As Boolean
 
 End Function
 
-Public Sub setDispOptions(layerNum As Integer, value As Boolean)
+Public Sub SetDispOptions(layerNum As Integer, value As Boolean)
 
     If layerNum = 0 Then
         showBG = value
