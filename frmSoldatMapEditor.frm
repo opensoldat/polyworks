@@ -14295,7 +14295,7 @@ End Sub
 Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If selectionChanged Then
         SaveUndo
@@ -14309,9 +14309,9 @@ Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
             ElseIf Index = 1 Then  ' y scale
                 Scenery(i).Scaling.Y = tehValue
             ElseIf Index = 2 Then  ' alpha
-                tempClr = getRGB(Scenery(i).color)
+                tempColor = getRGB(Scenery(i).color)
                 Scenery(i).alpha = tehValue
-                Scenery(i).color = ARGB(tehValue, RGB(tempClr.blue, tempClr.green, tempClr.red))
+                Scenery(i).color = ARGB(tehValue, RGB(tempColor.blue, tempColor.green, tempColor.red))
             ElseIf Index = 3 Then  ' rotation
                 Scenery(i).rotation = tehValue
             ElseIf Index = 4 Then  ' level
