@@ -696,7 +696,7 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
 
     mNonModal = True
 
-    mLastTool = frmSoldatMapEditor.setTempTool(10)
+    mLastTool = frmSoldatMapEditor.SetTempTool(10)
     frmSoldatMapEditor.SetCurrentTool 10
 
     frmSoldatMapEditor.picMenuBar.Enabled = False

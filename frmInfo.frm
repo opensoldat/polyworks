@@ -1798,7 +1798,7 @@ End Sub
 
 Private Sub picLight_Click()
 
-    frmSoldatMapEditor.setLightColor
+    frmSoldatMapEditor.SetLightColor
 
 End Sub
 
