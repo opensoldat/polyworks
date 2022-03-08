@@ -13,7 +13,7 @@ Public gfxDir As String
 
 Public appPath As String
 Public bgColor As Long
-Public lblBackClr As Long
+Public lblBackColor As Long
 Public lblTextClr As Long
 Public txtBackClr As Long
 Public txtTextClr As Long

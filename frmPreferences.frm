@@ -2851,7 +2851,7 @@ Public Sub SetColors()
     Me.BackColor = bgColor
 
     For Each c In lblPref
-        c.BackColor = lblBackClr
+        c.BackColor = lblBackColor
         c.ForeColor = lblTextClr
     Next
 

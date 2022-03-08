@@ -690,7 +690,7 @@ Public Sub SetColors()
     Me.BackColor = bgColor
 
     For Each c In lblLayer
-        c.BackColor = lblBackClr
+        c.BackColor = lblBackColor
         c.ForeColor = lblTextClr
     Next
 

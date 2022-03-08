@@ -2103,7 +2103,7 @@ Public Sub SetColors()
 
     Me.BackColor = bgColor
     For Each c In lblInfo
-        c.BackColor = lblBackClr
+        c.BackColor = lblBackColor
         c.ForeColor = lblTextClr
     Next
     For Each c In picProp
@@ -2131,7 +2131,7 @@ Public Sub SetColors()
         c.ForeColor = txtTextClr
     Next
     For Each c In lblCount
-        c.BackColor = lblBackClr
+        c.BackColor = lblBackColor
         c.ForeColor = lblTextClr
     Next
     
@@ -2140,7 +2140,7 @@ Public Sub SetColors()
     txtBounciness.BackColor = txtBackClr
     txtBounciness.ForeColor = txtTextClr
 
-    lblDimensions.BackColor = lblBackClr
+    lblDimensions.BackColor = lblBackColor
     lblDimensions.ForeColor = lblTextClr
 
     txtRotate.BackColor = txtBackClr

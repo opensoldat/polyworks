@@ -11993,7 +11993,7 @@ Public Sub loadColors()
     On Error GoTo ErrorHandler
 
     bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    lblBackClr = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblBackColor = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
     lblTextClr = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtTextClr = CLng("&H" + loadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
@@ -14397,13 +14397,13 @@ Public Sub SetColors()
     txtZoom.BackColor = bgColor
     txtZoom.ForeColor = lblTextClr
     picProgress.BackColor = bgColor
-    lblFileName.BackColor = lblBackClr
+    lblFileName.BackColor = lblBackColor
     lblFileName.ForeColor = lblTextClr
-    lblZoom.BackColor = lblBackClr
+    lblZoom.BackColor = lblBackColor
     lblZoom.ForeColor = lblTextClr
-    lblCurrentTool.BackColor = lblBackClr
+    lblCurrentTool.BackColor = lblBackColor
     lblCurrentTool.ForeColor = lblTextClr
-    lblMousePosition.BackColor = lblBackClr
+    lblMousePosition.BackColor = lblBackColor
     lblMousePosition.ForeColor = lblTextClr
 
     SetFormFonts Me
