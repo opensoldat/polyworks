@@ -2104,7 +2104,7 @@ Public Sub SetColors()
     Me.BackColor = bgColor
     For Each c In lblInfo
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     For Each c In picProp
         c.BackColor = bgColor
@@ -2116,11 +2116,11 @@ Public Sub SetColors()
     Next
     For Each c In txtQuadX
         c.BackColor = bgColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     For Each c In txtQuadY
         c.BackColor = bgColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     For Each c In txtScale
         c.BackColor = txtBackClr
@@ -2132,7 +2132,7 @@ Public Sub SetColors()
     Next
     For Each c In lblCount
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     
     txtVertexAlpha.BackColor = txtBackClr
@@ -2141,7 +2141,7 @@ Public Sub SetColors()
     txtBounciness.ForeColor = txtTextClr
 
     lblDimensions.BackColor = lblBackColor
-    lblDimensions.ForeColor = lblTextClr
+    lblDimensions.ForeColor = lblTextColor
 
     txtRotate.BackColor = txtBackClr
     txtRotate.ForeColor = txtTextClr
@@ -2155,8 +2155,8 @@ Public Sub SetColors()
         c.ForeColor = txtTextClr
     Next
 
-    square.BorderColor = lblTextClr
-    diagonal.BorderColor = lblTextClr
+    square.BorderColor = lblTextColor
+    diagonal.BorderColor = lblTextColor
 
     SetFormFonts Me
 

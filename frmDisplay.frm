@@ -691,7 +691,7 @@ Public Sub SetColors()
 
     For Each c In lblLayer
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     SetFormFonts Me

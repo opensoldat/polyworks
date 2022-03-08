@@ -800,27 +800,27 @@ Public Sub SetColors()
 
     For Each c In lblType
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     For Each c In lblPath
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     For Each c In lblShow
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     lblWaypoints.BackColor = lblBackColor
-    lblWaypoints.ForeColor = lblTextClr
+    lblWaypoints.ForeColor = lblTextColor
 
     cboSpecial.BackColor = txtBackClr
     cboSpecial.ForeColor = txtTextClr
 
     lblNumCon.BackColor = lblBackColor
-    lblNumCon.ForeColor = lblTextClr
+    lblNumCon.ForeColor = lblTextColor
 
     SetFormFonts Me
 

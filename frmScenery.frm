@@ -709,15 +709,15 @@ Public Sub SetColors()
 
     Me.BackColor = bgColor
     lblLvl.BackColor = lblBackColor
-    lblLvl.ForeColor = lblTextClr
+    lblLvl.ForeColor = lblTextColor
     For Each c In lblLevel
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     lblRotate.BackColor = lblBackColor
-    lblRotate.ForeColor = lblTextClr
+    lblRotate.ForeColor = lblTextColor
     lblScale.BackColor = lblBackColor
-    lblScale.ForeColor = lblTextClr
+    lblScale.ForeColor = lblTextColor
     lstScenery.BackColor = txtBackClr
     lstScenery.ForeColor = txtTextClr
     picScenery.BackColor = bgColor

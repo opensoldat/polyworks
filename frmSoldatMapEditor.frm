@@ -11994,7 +11994,7 @@ Public Sub loadColors()
 
     bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\skins\" & gfxDir & "\colors.ini"))
     lblBackColor = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    lblTextClr = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblTextColor = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtTextClr = CLng("&H" + loadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
     frameClr = CLng("&H" + loadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
@@ -14395,16 +14395,16 @@ Public Sub SetColors()
     frmSoldatMapEditor.picStatus.BackColor = bgColor
     frmSoldatMapEditor.picResize.BackColor = bgColor
     txtZoom.BackColor = bgColor
-    txtZoom.ForeColor = lblTextClr
+    txtZoom.ForeColor = lblTextColor
     picProgress.BackColor = bgColor
     lblFileName.BackColor = lblBackColor
-    lblFileName.ForeColor = lblTextClr
+    lblFileName.ForeColor = lblTextColor
     lblZoom.BackColor = lblBackColor
-    lblZoom.ForeColor = lblTextClr
+    lblZoom.ForeColor = lblTextColor
     lblCurrentTool.BackColor = lblBackColor
-    lblCurrentTool.ForeColor = lblTextClr
+    lblCurrentTool.ForeColor = lblTextColor
     lblMousePosition.BackColor = lblBackColor
-    lblMousePosition.ForeColor = lblTextClr
+    lblMousePosition.ForeColor = lblTextColor
 
     SetFormFonts Me
 

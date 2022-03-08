@@ -818,7 +818,7 @@ Public Sub SetColors()
 
     For Each c In lblMap
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     txtDesc.BackColor = txtBackClr

@@ -2852,30 +2852,30 @@ Public Sub SetColors()
 
     For Each c In lblPref
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     lblDisplay.BackColor = bgColor
-    lblDisplay.ForeColor = lblTextClr
+    lblDisplay.ForeColor = lblTextColor
     lblHotkeys.BackColor = bgColor
-    lblHotkeys.ForeColor = lblTextClr
+    lblHotkeys.ForeColor = lblTextColor
     lblDirs.BackColor = bgColor
-    lblDirs.ForeColor = lblTextClr
+    lblDirs.ForeColor = lblTextColor
     lblWayKeys.BackColor = bgColor
-    lblWayKeys.ForeColor = lblTextClr
+    lblWayKeys.ForeColor = lblTextColor
     lblBlending.BackColor = bgColor
-    lblBlending.ForeColor = lblTextClr
+    lblBlending.ForeColor = lblTextColor
     lblOther.BackColor = bgColor
-    lblOther.ForeColor = lblTextClr
+    lblOther.ForeColor = lblTextColor
 
     For Each c In txtHotkey
         c.BackColor = bgColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     For Each c In txtWayptKey
         c.BackColor = bgColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
     
     For Each c In fraPref

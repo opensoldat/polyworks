@@ -1471,7 +1471,7 @@ Public Sub SetColors()
 
     For Each c In lblColor
         c.BackColor = lblBackColor
-        c.ForeColor = lblTextClr
+        c.ForeColor = lblTextColor
     Next
 
     For Each c In txtRGB
@@ -1489,7 +1489,7 @@ Public Sub SetColors()
     txtBright.ForeColor = txtTextClr
 
     txtHexCode.BackColor = bgColor
-    txtHexCode.ForeColor = lblTextClr
+    txtHexCode.ForeColor = lblTextColor
 
     SetFormFonts Me
 
