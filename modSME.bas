@@ -650,7 +650,7 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 End Function
 
 
-Public Function getFileDate(FileName As String) As Long
+Public Function GetFileDate(FileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -678,7 +678,7 @@ Public Function getFileDate(FileName As String) As Long
         timeString = String$(4 - Len(timeString), "0") & timeString
     End If
 
-    getFileDate = CLng("&H" & Hex$(dosDate) & timeString)
+    GetFileDate = CLng("&H" & Hex$(dosDate) & timeString)
 
     Exit Function
 

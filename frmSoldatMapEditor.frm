@@ -3154,7 +3154,7 @@ Private Sub SaveFile(theFileName As String)
             For j = 1 To Scenery_New.sceneryName(0)
                 Scenery_New.sceneryName(j) = Asc(Mid(sceneryName, j, 1))
             Next
-            Scenery_New.Date = getFileDate(sceneryName)
+            Scenery_New.Date = GetFileDate(sceneryName)
             Put #1, , Scenery_New
         Next
 
@@ -3450,7 +3450,7 @@ Public Sub SaveAndCompile(theFileName As String)
             For j = 1 To Scenery_New.sceneryName(0)
                 Scenery_New.sceneryName(j) = Asc(Mid(sceneryName, j, 1))
             Next
-            Scenery_New.Date = getFileDate(sceneryName)
+            Scenery_New.Date = GetFileDate(sceneryName)
             Put #1, , Scenery_New
         Next
 
