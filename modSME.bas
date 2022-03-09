@@ -720,7 +720,7 @@ Public Function LoadString(section As String, Entry As String, Optional FileName
 
 End Function
 
-Public Function loadInt(section As String, Entry As String, Optional FileName As String) As Long
+Public Function LoadInt(section As String, Entry As String, Optional FileName As String) As Long
 
     Dim lReturn As Long
 
@@ -730,7 +730,7 @@ Public Function loadInt(section As String, Entry As String, Optional FileName As
 
     lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
 
-    loadInt = lReturn
+    LoadInt = lReturn
 
 End Function
 
