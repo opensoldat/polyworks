@@ -700,7 +700,7 @@ Public Sub SaveSection(sectionName As String, sectionData As String, Optional Fi
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
+Public Function LoadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
 
     Dim sString  As String
     Dim lSize    As Long
@@ -716,7 +716,7 @@ Public Function loadString(section As String, Entry As String, Optional FileName
     lSize = Len(sString)
     lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
 
-    loadString = Left(sString, lReturn)
+    LoadString = Left(sString, lReturn)
 
 End Function
 

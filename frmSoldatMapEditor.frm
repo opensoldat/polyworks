@@ -11992,14 +11992,14 @@ Public Sub loadColors()
 
     On Error GoTo ErrorHandler
 
-    bgColor = CLng("&H" + loadString("GUIColors", "Background", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    lblBackColor = CLng("&H" + loadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    lblTextColor = CLng("&H" + loadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    txtBackClr = CLng("&H" + loadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    txtTextClr = CLng("&H" + loadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    frameClr = CLng("&H" + loadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    font1 = loadString("GUIColors", "font1", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
-    font2 = loadString("GUIColors", "font2", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
+    bgColor = CLng("&H" + LoadString("GUIColors", "Background", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblBackColor = CLng("&H" + LoadString("GUIColors", "LabelBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    lblTextColor = CLng("&H" + LoadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    txtBackClr = CLng("&H" + LoadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    txtTextClr = CLng("&H" + LoadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    frameClr = CLng("&H" + LoadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    font1 = LoadString("GUIColors", "font1", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
+    font2 = LoadString("GUIColors", "font2", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
 
     If font1 = "" Then font1 = "Arial"
     If font2 = "" Then font2 = "Arial"

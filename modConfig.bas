@@ -36,35 +36,35 @@ Public Sub loadSettings()
 
     errVal = "1"
 
-    frmSoldatMapEditor.soldatDir = loadString("Preferences", "Dir", , 1024)
-    frmSoldatMapEditor.uncompDir = loadString("Preferences", "Uncompiled", , 1024)
-    frmSoldatMapEditor.prefabDir = loadString("Preferences", "Prefabs", , 1024)
+    frmSoldatMapEditor.soldatDir = LoadString("Preferences", "Dir", , 1024)
+    frmSoldatMapEditor.uncompDir = LoadString("Preferences", "Uncompiled", , 1024)
+    frmSoldatMapEditor.prefabDir = LoadString("Preferences", "Prefabs", , 1024)
 
     frmSoldatMapEditor.gridSpacing = loadInt("Preferences", "GridSpacing")
     frmSoldatMapEditor.gridDivisions = loadInt("Preferences", "GridDiv")
-    frmSoldatMapEditor.gridColor1 = HexToLong(loadString("Preferences", "GridColor1"))
-    frmSoldatMapEditor.gridColor2 = HexToLong(loadString("Preferences", "GridColor2"))
+    frmSoldatMapEditor.gridColor1 = HexToLong(LoadString("Preferences", "GridColor1"))
+    frmSoldatMapEditor.gridColor2 = HexToLong(LoadString("Preferences", "GridColor2"))
     frmSoldatMapEditor.gridOp1 = loadInt("Preferences", "GridAlpha1")
     frmSoldatMapEditor.gridOp2 = loadInt("Preferences", "GridAlpha2")
     frmSoldatMapEditor.polyBlendSrc = loadInt("Preferences", "PolySrc")
     frmSoldatMapEditor.polyBlendDest = loadInt("Preferences", "PolyDest")
     frmSoldatMapEditor.wireBlendSrc = loadInt("Preferences", "WireSrc")
     frmSoldatMapEditor.wireBlendDest = loadInt("Preferences", "WireDest")
-    frmSoldatMapEditor.pointColor = HexToLong(loadString("Preferences", "PointColor"))
-    frmSoldatMapEditor.selectionColor = HexToLong(loadString("Preferences", "SelectionColor"))
-    frmSoldatMapEditor.backClr = HexToLong(loadString("Preferences", "BackColor"))
+    frmSoldatMapEditor.pointColor = HexToLong(LoadString("Preferences", "PointColor"))
+    frmSoldatMapEditor.selectionColor = HexToLong(LoadString("Preferences", "SelectionColor"))
+    frmSoldatMapEditor.backClr = HexToLong(LoadString("Preferences", "BackColor"))
     frmSoldatMapEditor.maxUndo = loadInt("Preferences", "MaxUndo")
-    frmSoldatMapEditor.sceneryVerts = loadString("Preferences", "SceneryVerts")
-    frmSoldatMapEditor.topmost = loadString("Preferences", "Topmost")
+    frmSoldatMapEditor.sceneryVerts = LoadString("Preferences", "SceneryVerts")
+    frmSoldatMapEditor.topmost = LoadString("Preferences", "Topmost")
 
-    strTemp = loadString("Preferences", "MinZoom")
+    strTemp = LoadString("Preferences", "MinZoom")
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gMinZoom = CSng(strTemp) / 100
     Else
        frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
     End If
 
-    strTemp = loadString("Preferences", "MaxZoom")
+    strTemp = LoadString("Preferences", "MaxZoom")
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gMaxZoom = CSng(strTemp) / 100
     Else
@@ -80,7 +80,7 @@ Public Sub loadSettings()
        frmSoldatMapEditor.gMinZoom = sgnTemp
     End If
 
-    strTemp = loadString("Preferences", "ResetZoom")
+    strTemp = LoadString("Preferences", "ResetZoom")
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gResetZoom = CSng(strTemp) / 100
     Else
@@ -95,39 +95,39 @@ Public Sub loadSettings()
 
     errVal = "2"
 
-    frmSoldatMapEditor.showBG = loadString("Display", "Background")
-    frmSoldatMapEditor.showPolys = loadString("Display", "Polys")
-    frmSoldatMapEditor.showTexture = loadString("Display", "Texture")
-    frmSoldatMapEditor.showWireframe = loadString("Display", "Wireframe")
-    frmSoldatMapEditor.showPoints = loadString("Display", "Points")
-    frmSoldatMapEditor.showScenery = loadString("Display", "Scenery")
-    frmSoldatMapEditor.showObjects = loadString("Display", "Objects")
-    frmSoldatMapEditor.showWaypoints = loadString("Display", "Waypoints")
-    frmSoldatMapEditor.showGrid = loadString("Display", "Grid")
-    frmSoldatMapEditor.showLights = loadString("Display", "Lights")
-    frmSoldatMapEditor.showSketch = loadString("Display", "Sketch")
+    frmSoldatMapEditor.showBG = LoadString("Display", "Background")
+    frmSoldatMapEditor.showPolys = LoadString("Display", "Polys")
+    frmSoldatMapEditor.showTexture = LoadString("Display", "Texture")
+    frmSoldatMapEditor.showWireframe = LoadString("Display", "Wireframe")
+    frmSoldatMapEditor.showPoints = LoadString("Display", "Points")
+    frmSoldatMapEditor.showScenery = LoadString("Display", "Scenery")
+    frmSoldatMapEditor.showObjects = LoadString("Display", "Objects")
+    frmSoldatMapEditor.showWaypoints = LoadString("Display", "Waypoints")
+    frmSoldatMapEditor.showGrid = LoadString("Display", "Grid")
+    frmSoldatMapEditor.showLights = LoadString("Display", "Lights")
+    frmSoldatMapEditor.showSketch = LoadString("Display", "Sketch")
     
     frmSoldatMapEditor.mnuGrid.Checked = frmSoldatMapEditor.showGrid
 
     errVal = "3"
 
     frmSoldatMapEditor.currentTool = loadInt("ToolSettings", "CurrentTool")
-    frmSoldatMapEditor.ohSnap = loadString("ToolSettings", "SnapVertices")
-    frmSoldatMapEditor.snapToGrid = loadString("ToolSettings", "SnapToGrid")
-    frmSoldatMapEditor.fixedTexture = loadString("ToolSettings", "FixedTexture")
+    frmSoldatMapEditor.ohSnap = LoadString("ToolSettings", "SnapVertices")
+    frmSoldatMapEditor.snapToGrid = LoadString("ToolSettings", "SnapToGrid")
+    frmSoldatMapEditor.fixedTexture = LoadString("ToolSettings", "FixedTexture")
     frmSoldatMapEditor.opacity = loadInt("ToolSettings", "Opacity") / 100
     frmSoldatMapEditor.clrRadius = loadInt("ToolSettings", "ColorRadius")
-    gPolyClr = getRGB(HexToLong(loadString("ToolSettings", "CurrentColor")))
+    gPolyClr = getRGB(HexToLong(LoadString("ToolSettings", "CurrentColor")))
     frmSoldatMapEditor.colorMode = loadInt("ToolSettings", "ColorMode")
     frmSoldatMapEditor.blendMode = loadInt("ToolSettings", "BlendMode")
     frmSoldatMapEditor.snapRadius = loadInt("ToolSettings", "SnapRadius")
-    frmScenery.rotateScenery = loadString("ToolSettings", "RotateScenery")
-    frmScenery.scaleScenery = loadString("ToolSettings", "ScaleScenery")
+    frmScenery.rotateScenery = LoadString("ToolSettings", "RotateScenery")
+    frmScenery.scaleScenery = LoadString("ToolSettings", "ScaleScenery")
     frmSoldatMapEditor.xTexture = loadInt("ToolSettings", "TextureWidth")
     frmSoldatMapEditor.yTexture = loadInt("ToolSettings", "TextureHeight")
-    frmSoldatMapEditor.gTextureFile = loadString("ToolSettings", "Texture", , 1024)
-    frmSoldatMapEditor.mnuCustomX.Checked = loadString("ToolSettings", "CustomX")
-    frmSoldatMapEditor.mnuCustomY.Checked = loadString("ToolSettings", "CustomY")
+    frmSoldatMapEditor.gTextureFile = LoadString("ToolSettings", "Texture", , 1024)
+    frmSoldatMapEditor.mnuCustomX.Checked = LoadString("ToolSettings", "CustomX")
+    frmSoldatMapEditor.mnuCustomY.Checked = LoadString("ToolSettings", "CustomY")
 
     errVal = "4"
 
@@ -167,48 +167,48 @@ Public Sub loadSettings()
 
     errVal = "7"
 
-    frmSoldatMapEditor.mnuRecent(0).Caption = loadString("RecentFiles", "01", , 1024)
-    frmSoldatMapEditor.mnuRecent(1).Caption = loadString("RecentFiles", "02", , 1024)
-    frmSoldatMapEditor.mnuRecent(2).Caption = loadString("RecentFiles", "03", , 1024)
-    frmSoldatMapEditor.mnuRecent(3).Caption = loadString("RecentFiles", "04", , 1024)
-    frmSoldatMapEditor.mnuRecent(4).Caption = loadString("RecentFiles", "05", , 1024)
-    frmSoldatMapEditor.mnuRecent(5).Caption = loadString("RecentFiles", "06", , 1024)
-    frmSoldatMapEditor.mnuRecent(6).Caption = loadString("RecentFiles", "07", , 1024)
-    frmSoldatMapEditor.mnuRecent(7).Caption = loadString("RecentFiles", "08", , 1024)
-    frmSoldatMapEditor.mnuRecent(8).Caption = loadString("RecentFiles", "09", , 1024)
-    frmSoldatMapEditor.mnuRecent(9).Caption = loadString("RecentFiles", "10", , 1024)
+    frmSoldatMapEditor.mnuRecent(0).Caption = LoadString("RecentFiles", "01", , 1024)
+    frmSoldatMapEditor.mnuRecent(1).Caption = LoadString("RecentFiles", "02", , 1024)
+    frmSoldatMapEditor.mnuRecent(2).Caption = LoadString("RecentFiles", "03", , 1024)
+    frmSoldatMapEditor.mnuRecent(3).Caption = LoadString("RecentFiles", "04", , 1024)
+    frmSoldatMapEditor.mnuRecent(4).Caption = LoadString("RecentFiles", "05", , 1024)
+    frmSoldatMapEditor.mnuRecent(5).Caption = LoadString("RecentFiles", "06", , 1024)
+    frmSoldatMapEditor.mnuRecent(6).Caption = LoadString("RecentFiles", "07", , 1024)
+    frmSoldatMapEditor.mnuRecent(7).Caption = LoadString("RecentFiles", "08", , 1024)
+    frmSoldatMapEditor.mnuRecent(8).Caption = LoadString("RecentFiles", "09", , 1024)
+    frmSoldatMapEditor.mnuRecent(9).Caption = LoadString("RecentFiles", "10", , 1024)
 
     errVal = "8"
 
-    gPolyTypeClrs(1) = CLng("&H" + (loadString("PolyTypeColors", "OnlyBullets")))
-    gPolyTypeClrs(2) = CLng("&H" + (loadString("PolyTypeColors", "OnlyPlayer")))
-    gPolyTypeClrs(3) = CLng("&H" + (loadString("PolyTypeColors", "DoesntCollide")))
-    gPolyTypeClrs(4) = CLng("&H" + (loadString("PolyTypeColors", "Ice")))
-    gPolyTypeClrs(5) = CLng("&H" + (loadString("PolyTypeColors", "Deadly")))
-    gPolyTypeClrs(6) = CLng("&H" + (loadString("PolyTypeColors", "BloodyDeadly")))
-    gPolyTypeClrs(7) = CLng("&H" + (loadString("PolyTypeColors", "Hurts")))
-    gPolyTypeClrs(8) = CLng("&H" + (loadString("PolyTypeColors", "Regenerates")))
-    gPolyTypeClrs(9) = CLng("&H" + (loadString("PolyTypeColors", "Lava")))
-    gPolyTypeClrs(10) = CLng("&H" + (loadString("PolyTypeColors", "TeamBullets")))
-    gPolyTypeClrs(11) = CLng("&H" + (loadString("PolyTypeColors", "TeamPlayers")))
+    gPolyTypeClrs(1) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyBullets")))
+    gPolyTypeClrs(2) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyPlayer")))
+    gPolyTypeClrs(3) = CLng("&H" + (LoadString("PolyTypeColors", "DoesntCollide")))
+    gPolyTypeClrs(4) = CLng("&H" + (LoadString("PolyTypeColors", "Ice")))
+    gPolyTypeClrs(5) = CLng("&H" + (LoadString("PolyTypeColors", "Deadly")))
+    gPolyTypeClrs(6) = CLng("&H" + (LoadString("PolyTypeColors", "BloodyDeadly")))
+    gPolyTypeClrs(7) = CLng("&H" + (LoadString("PolyTypeColors", "Hurts")))
+    gPolyTypeClrs(8) = CLng("&H" + (LoadString("PolyTypeColors", "Regenerates")))
+    gPolyTypeClrs(9) = CLng("&H" + (LoadString("PolyTypeColors", "Lava")))
+    gPolyTypeClrs(10) = CLng("&H" + (LoadString("PolyTypeColors", "TeamBullets")))
+    gPolyTypeClrs(11) = CLng("&H" + (LoadString("PolyTypeColors", "TeamPlayers")))
     gPolyTypeClrs(12) = gPolyTypeClrs(10)
     gPolyTypeClrs(13) = gPolyTypeClrs(11)
     gPolyTypeClrs(14) = gPolyTypeClrs(10)
     gPolyTypeClrs(15) = gPolyTypeClrs(11)
     gPolyTypeClrs(16) = gPolyTypeClrs(10)
     gPolyTypeClrs(17) = gPolyTypeClrs(11)
-    gPolyTypeClrs(18) = CLng("&H" + (loadString("PolyTypeColors", "Bouncy")))
-    gPolyTypeClrs(19) = CLng("&H" + (loadString("PolyTypeColors", "Explosive")))
-    gPolyTypeClrs(20) = CLng("&H" + (loadString("PolyTypeColors", "HurtFlaggers")))
-    gPolyTypeClrs(21) = CLng("&H" + (loadString("PolyTypeColors", "OnlyFlagger")))
-    gPolyTypeClrs(22) = CLng("&H" + (loadString("PolyTypeColors", "NonFlagger")))
-    gPolyTypeClrs(23) = CLng("&H" + (loadString("PolyTypeColors", "FlagCollides")))
-    gPolyTypeClrs(24) = CLng("&H" + (loadString("PolyTypeColors", "Back")))
-    gPolyTypeClrs(25) = CLng("&H" + (loadString("PolyTypeColors", "BackTransition")))
+    gPolyTypeClrs(18) = CLng("&H" + (LoadString("PolyTypeColors", "Bouncy")))
+    gPolyTypeClrs(19) = CLng("&H" + (LoadString("PolyTypeColors", "Explosive")))
+    gPolyTypeClrs(20) = CLng("&H" + (LoadString("PolyTypeColors", "HurtFlaggers")))
+    gPolyTypeClrs(21) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyFlagger")))
+    gPolyTypeClrs(22) = CLng("&H" + (LoadString("PolyTypeColors", "NonFlagger")))
+    gPolyTypeClrs(23) = CLng("&H" + (LoadString("PolyTypeColors", "FlagCollides")))
+    gPolyTypeClrs(24) = CLng("&H" + (LoadString("PolyTypeColors", "Back")))
+    gPolyTypeClrs(25) = CLng("&H" + (LoadString("PolyTypeColors", "BackTransition")))
 
     errVal = "9"
 
-    gfxDir = loadString("gfx", "Dir", , 1024)
+    gfxDir = LoadString("gfx", "Dir", , 1024)
 
     If gfxDir = "" Then gfxDir = "gfx"
 
@@ -430,49 +430,49 @@ Public Sub loadWorkspace(Optional theFileName As String = "current.ini", Optiona
 
     frmSoldatMapEditor.tvwScenery.Height = frmSoldatMapEditor.formHeight - 41 - 20
 
-    frmSoldatMapEditor.mnuTools.Checked = loadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuTools.Checked = LoadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
     frmTools.xPos = loadInt("Tools", "Left", appPath & "\workspace\" & theFileName)
     frmTools.yPos = loadInt("Tools", "Top", appPath & "\workspace\" & theFileName)
-    frmTools.collapsed = loadString("Tools", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmTools.Tag = IIf(loadString("Tools", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmTools.collapsed = LoadString("Tools", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTools.Tag = IIf(LoadString("Tools", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuDisplay.Checked = loadString("Display", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuDisplay.Checked = LoadString("Display", "Visible", appPath & "\workspace\" & theFileName)
     frmDisplay.xPos = loadInt("Display", "Left", appPath & "\workspace\" & theFileName)
     frmDisplay.yPos = loadInt("Display", "Top", appPath & "\workspace\" & theFileName)
-    frmDisplay.collapsed = loadString("Display", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmDisplay.Tag = IIf(loadString("Display", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmDisplay.collapsed = LoadString("Display", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmDisplay.Tag = IIf(LoadString("Display", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuInfo.Checked = loadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuInfo.Checked = LoadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
     frmInfo.xPos = loadInt("Properties", "Left", appPath & "\workspace\" & theFileName)
     frmInfo.yPos = loadInt("Properties", "Top", appPath & "\workspace\" & theFileName)
-    frmInfo.collapsed = loadString("Properties", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmInfo.Tag = IIf(loadString("Properties", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmInfo.collapsed = LoadString("Properties", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmInfo.Tag = IIf(LoadString("Properties", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuPalette.Checked = loadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuPalette.Checked = LoadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
     frmPalette.xPos = loadInt("Palette", "Left", appPath & "\workspace\" & theFileName)
     frmPalette.yPos = loadInt("Palette", "Top", appPath & "\workspace\" & theFileName)
-    frmPalette.collapsed = loadString("Palette", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmPalette.Tag = IIf(loadString("Palette", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmPalette.collapsed = LoadString("Palette", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmPalette.Tag = IIf(LoadString("Palette", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
     If Not bSkipScenery Then
-        frmSoldatMapEditor.mnuScenery.Checked = loadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
+        frmSoldatMapEditor.mnuScenery.Checked = LoadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
         frmScenery.xPos = loadInt("Scenery", "Left", appPath & "\workspace\" & theFileName)
         frmScenery.yPos = loadInt("Scenery", "Top", appPath & "\workspace\" & theFileName)
-        frmScenery.collapsed = loadString("Scenery", "Collapsed", appPath & "\workspace\" & theFileName)
-        frmScenery.Tag = IIf(loadString("Scenery", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+        frmScenery.collapsed = LoadString("Scenery", "Collapsed", appPath & "\workspace\" & theFileName)
+        frmScenery.Tag = IIf(LoadString("Scenery", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
     End If
 
-    frmSoldatMapEditor.mnuWaypoints.Checked = loadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuWaypoints.Checked = LoadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
     frmWaypoints.xPos = loadInt("Waypoints", "Left", appPath & "\workspace\" & theFileName)
     frmWaypoints.yPos = loadInt("Waypoints", "Top", appPath & "\workspace\" & theFileName)
-    frmWaypoints.collapsed = loadString("Waypoints", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmWaypoints.Tag = IIf(loadString("Waypoints", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmWaypoints.collapsed = LoadString("Waypoints", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmWaypoints.Tag = IIf(LoadString("Waypoints", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuTexture.Checked = loadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
+    frmSoldatMapEditor.mnuTexture.Checked = LoadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
     frmTexture.xPos = loadInt("Texture", "Left", appPath & "\workspace\" & theFileName)
     frmTexture.yPos = loadInt("Texture", "Top", appPath & "\workspace\" & theFileName)
-    frmTexture.collapsed = loadString("Texture", "Collapsed", appPath & "\workspace\" & theFileName)
-    frmTexture.Tag = IIf(loadString("Texture", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
+    frmTexture.collapsed = LoadString("Texture", "Collapsed", appPath & "\workspace\" & theFileName)
+    frmTexture.Tag = IIf(LoadString("Texture", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
     Exit Sub
 
