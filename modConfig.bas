@@ -272,7 +272,7 @@ Public Sub saveSettings()
         "MinZoom=" & frmSoldatMapEditor.gMaxZoom * 100 & sNull & _
         "MaxZoom=" & frmSoldatMapEditor.gMinZoom * 100 & sNull & _
         "ResetZoom=" & frmSoldatMapEditor.gResetZoom * 100 & sNull & sNull
-    saveSection "Preferences", iniString
+    SaveSection "Preferences", iniString
 
     ' display
     iniString = _
@@ -287,7 +287,7 @@ Public Sub saveSettings()
         "Grid=" & frmSoldatMapEditor.showGrid & sNull & _
         "Lights=" & frmSoldatMapEditor.showLights & sNull & _
         "Sketch=" & frmSoldatMapEditor.showSketch & sNull & sNull
-    saveSection "Display", iniString
+    SaveSection "Display", iniString
 
     ' tool settings
     currentColor = RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)
@@ -309,7 +309,7 @@ Public Sub saveSettings()
         "Texture=" & frmSoldatMapEditor.gTextureFile & sNull & _
         "CustomX=" & frmSoldatMapEditor.mnuCustomX.Checked & sNull & _
         "CustomY=" & frmSoldatMapEditor.mnuCustomY.Checked & sNull & sNull
-    saveSection "ToolSettings", iniString
+    SaveSection "ToolSettings", iniString
 
     ' hotkeys
     iniString = _
@@ -327,7 +327,7 @@ Public Sub saveSettings()
         "Sketch=" & frmTools.getHotKey(11) & sNull & _
         "Lights=" & frmTools.getHotKey(12) & sNull & _
         "Depthmap=" & frmTools.getHotKey(13) & sNull & sNull
-    saveSection "HotKeys", iniString
+    SaveSection "HotKeys", iniString
 
     ' waypoint keys
     iniString = _
@@ -336,7 +336,7 @@ Public Sub saveSettings()
         "Up=" & frmWaypoints.getWayptKey(2) & sNull & _
         "Down=" & frmWaypoints.getWayptKey(3) & sNull & _
         "Fly=" & frmWaypoints.getWayptKey(4) & sNull & sNull
-    saveSection "WaypointKeys", iniString
+    SaveSection "WaypointKeys", iniString
 
     ' layer keys
     iniString = _
@@ -348,7 +348,7 @@ Public Sub saveSettings()
         "Scenery=" & frmDisplay.getLayerKey(5) & sNull & _
         "Objects=" & frmDisplay.getLayerKey(6) & sNull & _
         "Waypoints=" & frmDisplay.getLayerKey(7) & sNull & sNull
-    saveSection "LayerKeys", iniString
+    SaveSection "LayerKeys", iniString
 
     ' palette
     frmPalette.savePalette appPath & "\palettes\current.txt"
@@ -363,7 +363,7 @@ Public Sub saveSettings()
         "Left=" & frmSoldatMapEditor.formLeft & sNull & _
         "Top=" & frmSoldatMapEditor.formTop & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
-    saveSection "Main", iniString, appPath & "\workspace\current.ini"
+    SaveSection "Main", iniString, appPath & "\workspace\current.ini"
 
     saveWindow "Tools", frmTools, False, isNewFile
     saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
@@ -385,11 +385,11 @@ Public Sub saveSettings()
         "08=" & frmSoldatMapEditor.mnuRecent(7).Caption & sNull & _
         "09=" & frmSoldatMapEditor.mnuRecent(8).Caption & sNull & _
         "10=" & frmSoldatMapEditor.mnuRecent(9).Caption & sNull & sNull
-    saveSection "RecentFiles", iniString
+    SaveSection "RecentFiles", iniString
 
     ' gfx dir
     iniString = "Dir=" & gfxDir & sNull & sNull
-    saveSection "gfx", iniString
+    SaveSection "gfx", iniString
 
 End Sub
 
@@ -501,7 +501,7 @@ Public Sub saveWindow(sectionName As String, window As Form, collapsed As Boolea
         "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
 
-    saveSection sectionName, iniString, appPath & "\workspace\" & theFileName
+    SaveSection sectionName, iniString, appPath & "\workspace\" & theFileName
 
 End Sub
 

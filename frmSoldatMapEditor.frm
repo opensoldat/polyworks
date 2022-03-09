@@ -13818,7 +13818,7 @@ Private Sub mnuSaveSpace_Click()
             "Left=" & formLeft & sNull & _
             "Top=" & formTop & _
             IIf(isNewFile, vbNewLine, "") & sNull & sNull
-        saveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
+        SaveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
         saveWindow "Tools", frmTools, False, isNewFile, commonDialog.FileTitle
         saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile, commonDialog.FileTitle

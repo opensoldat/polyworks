@@ -688,7 +688,7 @@ ErrorHandler:
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional FileName As String)
+Public Sub SaveSection(sectionName As String, sectionData As String, Optional FileName As String)
 
     Dim lReturn  As Long
 
