@@ -620,16 +620,6 @@ ErrorHandler:
 End Function
 
 
-Private Function DirExists(DirName As String) As Boolean
-
-    On Error GoTo ErrorHandler
-    DirExists = GetAttr(DirName) And vbDirectory
-
-ErrorHandler:
-
-End Function
-
-
 Private Function OpenRegKey(ByVal hKey As Long, ByVal lpSubKey As String) As Long
 
     Dim hSubKey As Long

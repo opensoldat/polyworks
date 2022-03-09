@@ -184,3 +184,12 @@ Public Function isBetween(p1, p2, p3) As Boolean
     End If
 
 End Function
+
+Public Function DirExists(DirName As String) As Boolean
+
+    On Error GoTo ErrorHandler
+    DirExists = GetAttr(DirName) And vbDirectory
+
+ErrorHandler:
+
+End Function
