@@ -6118,7 +6118,7 @@ Private Sub ApplyLights(Optional toSel As Boolean = False)
 
 End Sub
 
-Private Sub applyLightsToVert(pIndex As Integer, vIndex As Integer)
+Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
 
     On Error GoTo ErrorHandler
 
@@ -7776,7 +7776,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                             vertexList(pNum).color(j).red = destClr.red
                             vertexList(pNum).color(j).green = destClr.green
                             vertexList(pNum).color(j).blue = destClr.blue
-                            If lightCount > 0 Then applyLightsToVert pNum, j
+                            If lightCount > 0 Then ApplyLightsToVert pNum, j
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
                             colored = True
                         End If
@@ -7796,7 +7796,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                             vertexList(i).color(j).red = destClr.red
                             vertexList(i).color(j).green = destClr.green
                             vertexList(i).color(j).blue = destClr.blue
-                            If lightCount > 0 Then applyLightsToVert i, j
+                            If lightCount > 0 Then ApplyLightsToVert i, j
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
                             colored = True
                         End If
@@ -8388,9 +8388,9 @@ Private Sub CreatePolys(X As Single, Y As Single)
         frmInfo.lblCount(0).Caption = mPolyCount
         frmInfo.lblCount(6).Caption = getMapDimensions
 
-        applyLightsToVert CInt(mPolyCount), 1
-        applyLightsToVert CInt(mPolyCount), 2
-        applyLightsToVert CInt(mPolyCount), 3
+        ApplyLightsToVert CInt(mPolyCount), 1
+        ApplyLightsToVert CInt(mPolyCount), 2
+        ApplyLightsToVert CInt(mPolyCount), 3
 
         Polys(mPolyCount).Perp.vertex(1).Z = 2
         Polys(mPolyCount).Perp.vertex(2).Z = 2
@@ -9914,7 +9914,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         vertexList(PolyNum).color(j).red = destClr.red
                         vertexList(PolyNum).color(j).green = destClr.green
                         vertexList(PolyNum).color(j).blue = destClr.blue
-                        applyLightsToVert PolyNum, j
+                        ApplyLightsToVert PolyNum, j
                         polyColored = True
                     End If
                 Next
@@ -9954,7 +9954,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         vertexList(i).color(j).red = destClr.red
                         vertexList(i).color(j).green = destClr.green
                         vertexList(i).color(j).blue = destClr.blue
-                        applyLightsToVert i, j
+                        ApplyLightsToVert i, j
                         polyColored = True
                     Next
                 End If
