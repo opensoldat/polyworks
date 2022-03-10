@@ -11677,7 +11677,7 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
         End If
         DoEvents
 
-        recentFiles Data.Files.Item(1)
+        RecentFiles Data.Files.Item(1)
 
         prevMousePointer = Me.MousePointer
         Me.MousePointer = vbHourglass
@@ -12064,7 +12064,7 @@ Private Sub mnuOpen_Click()
 
     If commonDialog.FileName <> "" Then
         prompt = False
-        recentFiles commonDialog.FileName
+        RecentFiles commonDialog.FileName
         mPolyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
@@ -12125,7 +12125,7 @@ Private Sub mnuOpenCompiled_Click()
 
     If commonDialog.FileName <> "" Then
         prompt = False
-        recentFiles commonDialog.FileName
+        RecentFiles commonDialog.FileName
         mPolyCount = 0
         numSelectedPolys = 0
         ReDim selectedPolys(0)
@@ -12172,7 +12172,7 @@ Private Sub mnuSave_Click()
         commonDialog.ShowSave
 
         If commonDialog.FileName <> "" Then
-            recentFiles commonDialog.FileName
+            RecentFiles commonDialog.FileName
 
             DoEvents
             SaveFile commonDialog.FileName
@@ -12209,7 +12209,7 @@ Private Sub mnuSaveAs_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-        recentFiles commonDialog.FileName
+        RecentFiles commonDialog.FileName
 
         DoEvents
         SaveFile commonDialog.FileName
@@ -12320,7 +12320,7 @@ ErrorHandler:
 
 End Sub
 
-Private Function recentFiles(theFileName As String) As Boolean
+Private Function RecentFiles(theFileName As String) As Boolean
 
     Dim i As Integer
     Dim inRecent As Boolean
