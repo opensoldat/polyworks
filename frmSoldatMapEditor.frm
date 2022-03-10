@@ -10236,7 +10236,7 @@ End Sub
 
 Private Sub mnuCopy_Click()
 
-    savePrefab appPath & "\Temp\copy.PFB"
+    SavePrefab appPath & "\Temp\copy.PFB"
 
 End Sub
 
@@ -12354,7 +12354,7 @@ Private Sub mnuExport_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-        savePrefab commonDialog.FileName
+        SavePrefab commonDialog.FileName
     End If
 
     RegainFocus
@@ -12397,7 +12397,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub savePrefab(theFileName As String)
+Private Sub SavePrefab(theFileName As String)
 
     On Error GoTo ErrorHandler
 
