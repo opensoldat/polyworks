@@ -11616,7 +11616,7 @@ Public Sub SetBlendMode(Index As Integer)
 
 End Sub
 
-Public Sub getOptions()
+Public Sub GetOptions()
 
     Dim i As Integer
 

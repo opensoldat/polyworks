@@ -579,7 +579,7 @@ Public Sub Form_Load()
 
     Me.SetColors
     loadTextures2
-    frmSoldatMapEditor.getOptions
+    frmSoldatMapEditor.GetOptions
     getJets
 
     Exit Sub
