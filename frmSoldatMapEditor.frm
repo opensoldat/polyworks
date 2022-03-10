@@ -14200,7 +14200,7 @@ End Sub
 
 ' apply scale/rotate
 
-Public Sub applyPolyType(ByVal Index As Integer)
+Public Sub ApplyPolyType(ByVal Index As Integer)
 
     Dim i As Integer
 

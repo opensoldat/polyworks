@@ -1755,7 +1755,7 @@ End Sub
 Private Sub cboPolyType_Click()
 
     If Not noChange Then
-        frmSoldatMapEditor.applyPolyType cboPolyType.ListIndex
+        frmSoldatMapEditor.ApplyPolyType cboPolyType.ListIndex
     End If
 
     If cboPolyType.ListIndex = 18 Then
