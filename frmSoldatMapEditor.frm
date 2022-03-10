@@ -2754,7 +2754,7 @@ Public Sub LoadFile(theFileName As String)
 
     If lightCount > 0 Then
         frmDisplay.setLayer 9, showLights
-        applyLights
+        ApplyLights
     End If
 
     SaveUndo
@@ -6000,13 +6000,13 @@ Private Sub CreateLight(X As Single, Y As Single)
         Lights(lightCount).Y = Int((Lights(lightCount).Y + inc / 2) / inc) * inc
     End If
 
-    applyLights
+    ApplyLights
     SaveUndo
     Render
 
 End Sub
 
-Private Sub applyLights(Optional toSel As Boolean = False)
+Private Sub ApplyLights(Optional toSel As Boolean = False)
 
     Dim i As Integer
     Dim j As Integer
@@ -6393,7 +6393,7 @@ Private Sub AverageVertices()
             vertexList(i).vertex(3) = 0
         Next
 
-        applyLights
+        ApplyLights
     Else
         For i = 1 To mPolyCount
             For j = 1 To 3
@@ -6449,7 +6449,7 @@ Private Sub AverageVertices()
             Next
         Next
 
-        applyLights True
+        ApplyLights True
     End If
 
     Me.MousePointer = vbCustom
@@ -8095,10 +8095,10 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
 
         If lightCount > 0 And showLights Then
             If numSelLights > 0 Then
-                applyLights
+                ApplyLights
                 Render
             ElseIf numSelectedPolys > 0 Then
-                applyLights True
+                ApplyLights True
                 Render
             End If
         End If
@@ -10141,7 +10141,7 @@ Private Sub deletePolys()
         Next
         ReDim Preserve Lights(lightCount)
         If lightCount > 0 Then
-            applyLights
+            ApplyLights
         ElseIf lightCount = 0 Then
             For i = 1 To mPolyCount
                 For j = 1 To 3
@@ -11472,7 +11472,7 @@ Private Sub SetLightsMode(lightsOn As Boolean)
             Next
         Next
     Else
-        applyLights
+        ApplyLights
     End If
 
 End Sub
@@ -11824,7 +11824,7 @@ Public Sub SetLightColor()
 
     frmInfo.picLight.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
 
-    applyLights
+    ApplyLights
 
 End Sub
 
@@ -14346,7 +14346,7 @@ Public Sub ApplyLightProp(ByVal tehValue As Single, Index As Integer)
         End If
     Next
     SaveUndo
-    applyLights
+    ApplyLights
     Render
 
 End Sub
