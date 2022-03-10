@@ -7404,7 +7404,7 @@ Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
 
 End Sub
 
-Public Sub applyRotate(tehValue As Single)
+Public Sub ApplyRotate(tehValue As Single)
 
     Dim R As Single
     Dim theta As Single

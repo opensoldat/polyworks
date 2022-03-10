@@ -1857,7 +1857,7 @@ End Sub
 Private Sub txtRotate_LostFocus()
 
     If IsNumeric(txtRotate.Text) And applyChange Then
-        frmSoldatMapEditor.applyRotate (txtRotate.Text / 180 * PI)
+        frmSoldatMapEditor.ApplyRotate (txtRotate.Text / 180 * PI)
     Else
         txtRotate.Text = tempVal
     End If
