@@ -1515,7 +1515,7 @@ Private eraseLines As Boolean
 Private polyType As Byte
 
 Private rCenter As D3DVECTOR2
-Private selRect(3) As D3DVECTOR2 ' RECT
+Private selRect(3) As D3DVECTOR2  ' RECT
 
 Private xGridLines() As TLine
 Private yGridLines() As TLine

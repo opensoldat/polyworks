@@ -578,7 +578,7 @@ Public Sub Form_Load()
     On Error GoTo ErrorHandler
 
     Me.SetColors
-    loadTextures2
+    LoadTextures2
     frmSoldatMapEditor.GetOptions
     GetJets
 
@@ -612,7 +612,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub loadTextures()
+Public Sub LoadTextures()
 
     On Error GoTo ErrorHandler
 
@@ -648,7 +648,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub loadTextures2()
+Public Sub LoadTextures2()
 
     On Error GoTo ErrorHandler
 
@@ -705,7 +705,7 @@ Public Sub mnuRefresh_Click()
 
     Dim i As Integer
 
-    loadTextures2
+    LoadTextures2
 
     For i = 0 To cboTexture.ListCount - 1
         If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
