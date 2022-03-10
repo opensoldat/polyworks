@@ -7714,7 +7714,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
 
         If closestPoly > 0 And closestVert > 0 Then
             destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
-            destClr = applyBlend(destClr)
+            destClr = ApplyBlend(destClr)
             Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
@@ -7738,7 +7738,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
 
         If closestPoly > 0 And closestVert > 0 Then
             destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
-            destClr = applyBlend(destClr)
+            destClr = ApplyBlend(destClr)
             Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
@@ -7771,7 +7771,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                     If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(pNum).vertex(j).color)
-                            destClr = applyBlend(destClr)
+                            destClr = ApplyBlend(destClr)
                             Polys(pNum).vertex(j).color = ARGB(getAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(pNum).color(j).red = destClr.red
                             vertexList(pNum).color(j).green = destClr.green
@@ -7791,7 +7791,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(i).vertex(j).color)
-                            destClr = applyBlend(destClr)
+                            destClr = ApplyBlend(destClr)
                             Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(i).color(j).red = destClr.red
                             vertexList(i).color(j).green = destClr.green
@@ -7812,7 +7812,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
                         destClr = getRGB(Scenery(i).color)
-                        destClr = applyBlend(destClr)
+                        destClr = ApplyBlend(destClr)
                         Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 3
                         colored = True
@@ -7826,7 +7826,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
                         destClr = getRGB(Scenery(i).color)
-                        destClr = applyBlend(destClr)
+                        destClr = ApplyBlend(destClr)
                         Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 2
                         colored = True
@@ -9909,7 +9909,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             selectionChanged = False
                         End If
                         destClr = getRGB(Polys(PolyNum).vertex(j).color)
-                        destClr = applyBlend(destClr)
+                        destClr = ApplyBlend(destClr)
                         Polys(PolyNum).vertex(j).color = ARGB(getAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(PolyNum).color(j).red = destClr.red
                         vertexList(PolyNum).color(j).green = destClr.green
@@ -9929,7 +9929,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         selectionChanged = False
                     End If
                     destClr = getRGB(Scenery(i).color)
-                    destClr = applyBlend(destClr)
+                    destClr = ApplyBlend(destClr)
                     Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
                 End If
@@ -9949,7 +9949,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             selectionChanged = False
                         End If
                         destClr = getRGB(Polys(i).vertex(j).color)  ' get clr of poly
-                        destClr = applyBlend(destClr)
+                        destClr = ApplyBlend(destClr)
                         Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
                         vertexList(i).color(j).green = destClr.green
@@ -9969,7 +9969,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         selectionChanged = False
                     End If
                     destClr = getRGB(Scenery(i).color)
-                    destClr = applyBlend(destClr)
+                    destClr = ApplyBlend(destClr)
                     Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
                 End If
@@ -9987,36 +9987,36 @@ Private Sub ColorFill(X As Single, Y As Single)
 
 End Sub
 
-Private Function applyBlend(dClr As TColor) As TColor
+Private Function ApplyBlend(dClr As TColor) As TColor
 
     If blendMode = 0 Then  ' normal
-        applyBlend.red = gPolyClr.red * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = gPolyClr.green * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = gPolyClr.blue * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = gPolyClr.red * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = gPolyClr.green * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = gPolyClr.blue * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 1 Then  ' multiply
-        applyBlend.red = (dClr.red / 255 * gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = (dClr.green / 255 * gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = (dClr.blue / 255 * gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dClr.red / 255 * gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = (dClr.green / 255 * gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = (dClr.blue / 255 * gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 2 Then  ' screen
-        applyBlend.red = (dClr.red - dClr.red / 255 * gPolyClr.red + gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = (dClr.green - dClr.green / 255 * gPolyClr.green + gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyClr.blue + gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dClr.red - dClr.red / 255 * gPolyClr.red + gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = (dClr.green - dClr.green / 255 * gPolyClr.green + gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyClr.blue + gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 3 Then  ' AND ' darken
-        applyBlend.red = lowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = lowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = lowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = lowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = lowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = lowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 4 Then  ' OR ' lighten
-        applyBlend.red = higherVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = higherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = higherVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = higherVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = higherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = higherVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 5 Then  ' XOR ' difference
-        applyBlend.red = diffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        applyBlend.green = diffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        applyBlend.blue = diffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = diffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = diffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = diffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     Else
-        applyBlend.red = 0
-        applyBlend.green = 0
-        applyBlend.blue = 0
+        ApplyBlend.red = 0
+        ApplyBlend.green = 0
+        ApplyBlend.blue = 0
     End If
 
 End Function
