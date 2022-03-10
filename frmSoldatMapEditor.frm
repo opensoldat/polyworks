@@ -10529,7 +10529,7 @@ Private Sub mnuPaste_Click()
     On Error GoTo ErrorHandler
 
     If (GetAttr(appPath & "\Temp\copy.PFB") And vbDirectory) = 0 Then
-        loadPrefab appPath & "\Temp\copy.PFB"
+        LoadPrefab appPath & "\Temp\copy.PFB"
     End If
 
 ErrorHandler:
@@ -12381,7 +12381,7 @@ Private Sub mnuImport_Click()
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
-        loadPrefab commonDialog.FileName
+        LoadPrefab commonDialog.FileName
     End If
 
     RegainFocus
@@ -12497,7 +12497,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub loadPrefab(theFileName As String)
+Private Sub LoadPrefab(theFileName As String)
 
     On Error GoTo ErrorHandler
 
