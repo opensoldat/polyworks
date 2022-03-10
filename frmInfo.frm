@@ -1779,9 +1779,9 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtLightProp(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
+            frmSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then
-            frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
+            frmSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 And txtLightProp(Index).Text <= 100 Then
            ' no op
         Else

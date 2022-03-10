@@ -14327,7 +14327,7 @@ Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
 
 End Sub
 
-Public Sub applyLightProp(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplyLightProp(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
 
