@@ -7196,7 +7196,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
             If (scaleDiff.X * scaleDiff.Y < 0) Then
                 ' make sure polys are cw
-                If Not isCW(pNum) Then  ' switch to make cw
+                If Not IsCW(pNum) Then  ' switch to make cw
                     temp = PolyCoords(pNum).vertex(3)
                     PolyCoords(pNum).vertex(3) = PolyCoords(pNum).vertex(2)
                     PolyCoords(pNum).vertex(2) = temp
@@ -7315,7 +7315,7 @@ Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
             Next
 
             ' make sure polys are cw
-            If Not isCW(PolyNum) Then  ' switch to make cw
+            If Not IsCW(PolyNum) Then  ' switch to make cw
                 temp = PolyCoords(PolyNum).vertex(3)
                 PolyCoords(PolyNum).vertex(3) = PolyCoords(PolyNum).vertex(2)
                 PolyCoords(PolyNum).vertex(2) = temp
@@ -8375,7 +8375,7 @@ Private Sub CreatePolys(X As Single, Y As Single)
     ElseIf numVerts = 3 Then
         numVerts = 0
         mPolyCount = mPolyCount + 1
-        If Not isCW(mPolyCount) Then  ' switch to make cw
+        If Not IsCW(mPolyCount) Then  ' switch to make cw
             temp = PolyCoords(mPolyCount).vertex(3)
             PolyCoords(mPolyCount).vertex(3) = PolyCoords(mPolyCount).vertex(2)
             PolyCoords(mPolyCount).vertex(2) = temp
@@ -8601,7 +8601,7 @@ Private Sub snapSelected(X As Single, Y As Single)
 
     ' make sure polys are cw
     For i = 1 To numSelectedPolys
-        If Not isCW(selectedPolys(i)) Then  ' switch to make cw
+        If Not IsCW(selectedPolys(i)) Then  ' switch to make cw
             temp = PolyCoords(selectedPolys(i)).vertex(3)
             PolyCoords(selectedPolys(i)).vertex(3) = PolyCoords(selectedPolys(i)).vertex(2)
             PolyCoords(selectedPolys(i)).vertex(2) = temp
@@ -10301,7 +10301,7 @@ Private Sub mnuFlip_Click(Index As Integer)
             Next
 
             ' make sure polys are cw
-            If Not isCW(PolyNum) Then  ' switch to make cw
+            If Not IsCW(PolyNum) Then  ' switch to make cw
                 temp = PolyCoords(PolyNum).vertex(3)
                 PolyCoords(PolyNum).vertex(3) = PolyCoords(PolyNum).vertex(2)
                 PolyCoords(PolyNum).vertex(2) = temp
@@ -11416,7 +11416,7 @@ Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As In
 
 End Function
 
-Private Function isCW(ByVal i As Integer) As Boolean
+Private Function IsCW(ByVal i As Integer) As Boolean
 
     Dim xVal As Single
     Dim yVal As Single
@@ -11424,7 +11424,7 @@ Private Function isCW(ByVal i As Integer) As Boolean
     xVal = Midpoint(Polys(i).vertex(1).X, Midpoint(Polys(i).vertex(2).X, Polys(i).vertex(3).X))
     yVal = Midpoint(Polys(i).vertex(1).Y, Midpoint(Polys(i).vertex(2).Y, Polys(i).vertex(3).Y))
 
-    isCW = pointInPoly(xVal, yVal, i)
+    IsCW = pointInPoly(xVal, yVal, i)
 
 End Function
 
@@ -13504,7 +13504,7 @@ Private Sub mnuCreate_Click()
         mPolyCount = mPolyCount + 1
     End If
 
-    If Not isCW(mPolyCount) Then  ' switch to make cw
+    If Not IsCW(mPolyCount) Then  ' switch to make cw
         temp = PolyCoords(mPolyCount).vertex(3)
         PolyCoords(mPolyCount).vertex(3) = PolyCoords(mPolyCount).vertex(2)
         PolyCoords(mPolyCount).vertex(2) = temp
