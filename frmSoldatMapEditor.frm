@@ -3806,16 +3806,16 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
 
     ' check if sector corner is in poly
     If Not isInSector Then
-        If pointInPoly(X, Y, Index) Then
+        If PointInPoly(X, Y, Index) Then
             isInSector = True
             Exit Function
-        ElseIf pointInPoly(X + div, Y, Index) Then
+        ElseIf PointInPoly(X + div, Y, Index) Then
             isInSector = True
             Exit Function
-        ElseIf pointInPoly(X, Y + div, Index) Then
+        ElseIf PointInPoly(X, Y + div, Index) Then
             isInSector = True
             Exit Function
-        ElseIf pointInPoly(X + div, Y + div, Index) Then
+        ElseIf PointInPoly(X + div, Y + div, Index) Then
             isInSector = True
             Exit Function
         End If
@@ -6516,7 +6516,7 @@ Private Sub SelNearest(X As Single, Y As Single)
                 addPoly = i
             End If
         Next
-        If (pointInPoly(X, Y, i)) And addPoly = 0 Then
+        If (PointInPoly(X, Y, i)) And addPoly = 0 Then
             For j = 1 To 3
                 If nearCoord(X, Polys(i).vertex(j).X, 64) And nearCoord(Y, Polys(i).vertex(j).Y, 64) Then  ' move by region
                     currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
@@ -7698,7 +7698,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
 
         For i = 1 To numSelectedPolys  ' find closest
             PolyNum = selectedPolys(i)
-            If pointInPoly(X, Y, i) Then
+            If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(PolyNum).vertex(j).X, R) And nearCoord(Y, Polys(PolyNum).vertex(j).Y, R) Then
                         currentDist = (Polys(PolyNum).vertex(j).X - X) ^ 2 + (Polys(PolyNum).vertex(j).Y - Y) ^ 2
@@ -7722,7 +7722,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         End If
     Else
         For i = 1 To mPolyCount  ' find closest
-            If pointInPoly(X, Y, i) Then
+            If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
@@ -7905,7 +7905,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
-            If pointInPoly(X, Y, i) Then
+            If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
@@ -7966,7 +7966,7 @@ Private Sub depthPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
-            If pointInPoly(X, Y, i) Then
+            If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
@@ -8011,7 +8011,7 @@ Private Sub lightPicker(X As Single, Y As Single)
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
         For i = 1 To mPolyCount
-            If pointInPoly(X, Y, i) Then
+            If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
                     If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
@@ -8874,7 +8874,7 @@ Private Function RegionSelPolys(X As Single, Y As Single) As Boolean
             vertexList(i).vertex(3) = 0
         End If
 
-        If (pointInPoly(X, Y, i)) Then
+        If (PointInPoly(X, Y, i)) Then
             shortestDist = 64 ^ 2 + 1
             For j = 1 To 3
                 currentDist = (PolyCoords(i).vertex(j).X - xVal) ^ 2 + (PolyCoords(i).vertex(j).Y - yVal) ^ 2
@@ -9698,7 +9698,7 @@ Private Sub polySelection(X As Single, Y As Single)
         If showPolys Or showWireframe Or showPoints Then
             shortestDist = 16 ^ 2 + 1
             For i = 1 To mPolyCount
-                If (pointInPoly(X, Y, i)) And addPoly = 0 Then  ' if in poly and no other poly selected
+                If (PointInPoly(X, Y, i)) And addPoly = 0 Then  ' if in poly and no other poly selected
                     If firstClicked = 0 Then
                         firstClicked = i
                     End If
@@ -9782,7 +9782,7 @@ Private Sub polySelection(X As Single, Y As Single)
         addPoly = 0
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To mPolyCount
-                If pointInPoly(X, Y, i) And vertexList(i).vertex(1) = 0 And addPoly = 0 Then  ' if in poly and not already selected
+                If PointInPoly(X, Y, i) And vertexList(i).vertex(1) = 0 And addPoly = 0 Then  ' if in poly and not already selected
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
                     selectedPolys(numSelectedPolys) = i
@@ -9812,7 +9812,7 @@ Private Sub polySelection(X As Single, Y As Single)
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To mPolyCount
                 If vertexList(i).vertex(1) = 1 Then  ' if poly already selected
-                    If (pointInPoly(X, Y, i)) And addPoly = 0 Then  ' if poly clicked
+                    If (PointInPoly(X, Y, i)) And addPoly = 0 Then  ' if poly clicked
                         vertexList(i).vertex(1) = 0
                         vertexList(i).vertex(2) = 0
                         vertexList(i).vertex(3) = 0
@@ -9942,7 +9942,7 @@ Private Sub ColorFill(X As Single, Y As Single)
     Else
         If showPolys Or showWireframe Or showPoints Then
             For i = 1 To mPolyCount
-                If (pointInPoly(X, Y, i)) Then
+                If (PointInPoly(X, Y, i)) Then
                     For j = 1 To 3
                         If selectionChanged Then
                             SaveUndo
@@ -11367,7 +11367,7 @@ Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
 
 End Sub
 
-Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As Integer) As Boolean
+Private Function PointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As Integer) As Boolean
 
     Dim xDist As Single
     Dim yDist As Single
@@ -11376,7 +11376,7 @@ Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As In
     Dim length As Single
     Dim D As Single
 
-    pointInPoly = True
+    PointInPoly = True
 
     xDist = X - Polys(i).vertex(1).X
     yDist = Y - Polys(i).vertex(1).Y
@@ -11388,7 +11388,7 @@ Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As In
         length = Sqr(xDiff ^ 2 + yDiff ^ 2)
     End If
     D = (yDiff / length) * xDist + (xDiff / length) * yDist
-    If D < 0 Then pointInPoly = False
+    If D < 0 Then PointInPoly = False
 
     xDist = X - Polys(i).vertex(2).X
     yDist = Y - Polys(i).vertex(2).Y
@@ -11400,7 +11400,7 @@ Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As In
         length = Sqr(xDiff ^ 2 + yDiff ^ 2)
     End If
     D = (yDiff / length) * xDist + (xDiff / length) * yDist
-    If D < 0 Then pointInPoly = False
+    If D < 0 Then PointInPoly = False
 
     xDist = X - Polys(i).vertex(3).X
     yDist = Y - Polys(i).vertex(3).Y
@@ -11412,7 +11412,7 @@ Private Function pointInPoly(ByVal X As Single, ByVal Y As Single, ByVal i As In
         length = Sqr(xDiff ^ 2 + yDiff ^ 2)
     End If
     D = (yDiff / length) * xDist + (xDiff / length) * yDist
-    If D < 0 Then pointInPoly = False
+    If D < 0 Then PointInPoly = False
 
 End Function
 
@@ -11424,7 +11424,7 @@ Private Function IsCW(ByVal i As Integer) As Boolean
     xVal = Midpoint(Polys(i).vertex(1).X, Midpoint(Polys(i).vertex(2).X, Polys(i).vertex(3).X))
     yVal = Midpoint(Polys(i).vertex(1).Y, Midpoint(Polys(i).vertex(2).Y, Polys(i).vertex(3).Y))
 
-    IsCW = pointInPoly(xVal, yVal, i)
+    IsCW = PointInPoly(xVal, yVal, i)
 
 End Function
 
