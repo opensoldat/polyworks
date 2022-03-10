@@ -14271,7 +14271,7 @@ Public Sub applyVertexAlpha(tehValue As Single)
 
 End Sub
 
-Public Sub applyBounciness(tehValue As Single)
+Public Sub ApplyBounciness(tehValue As Single)
 
     Dim i As Integer
     Dim j As Integer

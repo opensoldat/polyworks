@@ -1987,7 +1987,7 @@ Private Sub txtBounciness_LostFocus()
     ElseIf txtBounciness.Text < 0 Then
         txtBounciness.Text = tempVal
     ElseIf applyChange Then
-        frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
+        frmSoldatMapEditor.ApplyBounciness 1 + (txtBounciness.Text / 100)
     End If
 
     tempVal = 0
