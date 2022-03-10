@@ -548,7 +548,7 @@ Private Sub cboJet_Click()
 
 End Sub
 
-Private Sub getJets()
+Private Sub GetJets()
 
     Select Case txtJet.Text
         Case 0  ' none
@@ -580,7 +580,7 @@ Public Sub Form_Load()
     Me.SetColors
     loadTextures2
     frmSoldatMapEditor.GetOptions
-    getJets
+    GetJets
 
     Exit Sub
 
