@@ -11302,7 +11302,7 @@ Public Sub Zoom(zoomDir As Single)
 
 End Sub
 
-Public Sub zoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
+Public Sub ZoomScroll(zoomDir As Single, ByVal X As Integer, ByVal Y As Integer)
 
     Dim i As Integer
     Dim j As Integer
@@ -11764,9 +11764,9 @@ Private Sub MouseHelper_MouseWheel(ctrl As Variant, Direction As MBMouseHelper.m
     Dim zoomVal As Single
 
     If Direction = mbBackward Then
-        zoomScroll 0.8, mouseCoords.X, mouseCoords.Y
+        ZoomScroll 0.8, mouseCoords.X, mouseCoords.Y
     ElseIf Direction = mbForward Then
-        zoomScroll 1.25, mouseCoords.X, mouseCoords.Y
+        ZoomScroll 1.25, mouseCoords.X, mouseCoords.Y
     End If
 
 End Sub
