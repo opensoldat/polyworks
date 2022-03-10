@@ -1604,7 +1604,7 @@ Private Sub Form_Load()
     initialized = False
 
     modConfig.loadSettings
-    loadColors
+    LoadColors
 
 
     err = "Error setting colors"
@@ -11988,7 +11988,7 @@ Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) 
 
 End Function
 
-Public Sub loadColors()
+Public Sub LoadColors()
 
     On Error GoTo ErrorHandler
 
