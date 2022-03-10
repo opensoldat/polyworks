@@ -11978,13 +11978,13 @@ ErrorHandler:
 
 End Sub
 
-Private Function getNextValue(sectionString As String, ByRef eIndex As Integer) As String
+Private Function GetNextValue(sectionString As String, ByRef eIndex As Integer) As String
 
     Dim nIndex As Integer
 
     eIndex = InStr(eIndex, sectionString, "=") + 1
     nIndex = InStr(eIndex, sectionString, vbNullChar)
-    getNextValue = Mid$(sectionString, eIndex, nIndex)
+    GetNextValue = Mid$(sectionString, eIndex, nIndex)
 
 End Function
 
