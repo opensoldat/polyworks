@@ -7278,7 +7278,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
 End Sub
 
-Public Sub applyScale(tehXvalue As Single, tehYvalue As Single)
+Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
 
     Dim i As Integer
     Dim j As Integer

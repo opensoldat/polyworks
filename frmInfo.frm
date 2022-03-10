@@ -1877,9 +1877,9 @@ Private Sub txtScale_LostFocus(Index As Integer)
 
     If IsNumeric(txtScale(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmSoldatMapEditor.applyScale (txtScale(Index).Text / 100), 1
+            frmSoldatMapEditor.ApplyScale (txtScale(Index).Text / 100), 1
         ElseIf Index = 1 Then
-            frmSoldatMapEditor.applyScale 1, (txtScale(Index).Text / 100)
+            frmSoldatMapEditor.ApplyScale 1, (txtScale(Index).Text / 100)
         End If
     Else
         txtScale(Index).Text = tempVal
