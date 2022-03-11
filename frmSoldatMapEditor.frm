@@ -1929,7 +1929,7 @@ Public Sub initGfx()
 
 End Sub
 
-Private Sub centerView()
+Private Sub CenterView()
 
     Dim i As Integer
 
@@ -2318,7 +2318,7 @@ Public Sub newMap()
     currentFileName = "Untitled.pms"
     lblFileName.Caption = "Untitled.pms"
 
-    centerView
+    CenterView
 
     numUndo = 0
     numRedo = 0
@@ -2746,7 +2746,7 @@ Public Sub LoadFile(theFileName As String)
     SetMapData
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
-    centerView
+    CenterView
 
     numUndo = 0
     numRedo = 0
