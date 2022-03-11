@@ -1964,7 +1964,7 @@ Private Sub txtVertexAlpha_LostFocus()
     ElseIf txtVertexAlpha.Text < 0 Or txtVertexAlpha.Text > 100 Then
         txtVertexAlpha.Text = tempVal
     ElseIf applyChange Then
-        frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
+        frmSoldatMapEditor.ApplyVertexAlpha txtVertexAlpha.Text / 100
     End If
 
     tempVal = 0

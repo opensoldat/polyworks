@@ -14247,7 +14247,7 @@ Public Sub ApplyTextureCoords(ByVal tehValue As Single, Index As Integer)
 
 End Sub
 
-Public Sub applyVertexAlpha(tehValue As Single)
+Public Sub ApplyVertexAlpha(tehValue As Single)
 
     Dim i As Integer
     Dim j As Integer
