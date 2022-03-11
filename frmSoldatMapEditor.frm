@@ -10577,7 +10577,7 @@ Private Sub mnuRecent_Click(Index As Integer)
 End Sub
 
 ' put in recent files if it isn't already
-Private Sub updateRecent(theFileName As String)
+Private Sub UpdateRecent(theFileName As String)
 
     Dim i As Integer
 
@@ -12333,7 +12333,7 @@ Private Function RecentFiles(theFileName As String) As Boolean
         End If
     Next
     If Not inRecent Then
-        updateRecent theFileName
+        UpdateRecent theFileName
     Else
         For i = Index To 1 Step -1
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
