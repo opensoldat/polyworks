@@ -2535,7 +2535,7 @@ Public Sub LoadFile(theFileName As String)
 
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, , tempString
-                ElseIf confirmExists(tempString) Then  ' if scenery texture is in master list
+                ElseIf ConfirmExists(tempString) Then  ' if scenery texture is in master list
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
@@ -11159,7 +11159,7 @@ ErrorHandler:
 
 End Sub
 
-Private Function confirmExists(theFileName As String) As Boolean
+Private Function ConfirmExists(theFileName As String) As Boolean
 
     Dim tempNode As Node
     Dim i As Integer
@@ -11168,7 +11168,7 @@ Private Function confirmExists(theFileName As String) As Boolean
 
     For i = 1 To (tvwScenery.Nodes.Item("Master List").Children)
         If LCase$(theFileName) = LCase$(tempNode.Text) Then
-            confirmExists = True
+            ConfirmExists = True
         End If
         Set tempNode = tempNode.Next
     Next
