@@ -5844,7 +5844,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf currentFunction = TOOL_LITPICKER Then
-        lightPicker X, Y
+        LightPicker X, Y
     ElseIf currentFunction = TOOL_OBJECTS Then  ' objects
         If selectionChanged Then
             SaveUndo
@@ -7998,7 +7998,7 @@ Private Sub DepthPicker(X As Single, Y As Single)
 
 End Sub
 
-Private Sub lightPicker(X As Single, Y As Single)
+Private Sub LightPicker(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
