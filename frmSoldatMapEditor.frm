@@ -5956,7 +5956,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             frmDisplay.setLayer 10, showSketch
         End If
     ElseIf currentFunction = TOOL_ERASER Then
-        If eraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
+        If EraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
             Render
         End If
         toolAction = True
@@ -6839,7 +6839,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             Render
         End If
     ElseIf currentFunction = TOOL_ERASER And toolAction Then
-        If eraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
+        If EraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
             Render
         End If
     ElseIf currentFunction = TOOL_SMUDGE And toolAction Then
@@ -9079,7 +9079,7 @@ Private Function RegionSelWaypoints(xVal As Single, yVal As Single, skipSel As B
 
 End Function
 
-Private Function eraseSketch(X As Single, Y As Single) As Byte
+Private Function EraseSketch(X As Single, Y As Single) As Byte
 
     Dim i As Integer
     Dim j As Integer
@@ -9089,7 +9089,7 @@ Private Function eraseSketch(X As Single, Y As Single) As Byte
 
     On Error GoTo ErrorHandler
 
-    eraseSketch = 0
+    EraseSketch = 0
 
     shortestDist = clrRadius ^ 2 + 1
     For i = 1 To sketchLines
@@ -9107,7 +9107,7 @@ Private Function eraseSketch(X As Single, Y As Single) As Byte
         sketchLines = sketchLines - 1
         ReDim Preserve sketch(sketchLines)
         Render
-        eraseSketch = 1
+        EraseSketch = 1
     End If
 
     Exit Function
