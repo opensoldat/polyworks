@@ -2167,7 +2167,7 @@ Public Sub ResetDevice()
     End If
     SaveUndo
     mnuSelectAll_Click
-    deletePolys
+    DeletePolys
 
     Set mapTexture = Nothing
     Set particleTexture = Nothing
@@ -5382,7 +5382,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             ElseIf DIState.Key(DIK_NUMPADSTAR) = 128 Then  ' *
                 Zoom 1 / zoomFactor
             ElseIf DIState.Key(DIK_DELETE) = 128 Then  ' delete
-                deletePolys
+                DeletePolys
             ElseIf DIState.Key(DIK_TAB) = 128 Then  ' tab
                 TabPressed
             ElseIf (DIState.Key(DIK_ESCAPE) = 128) Then  ' esc
@@ -10038,7 +10038,7 @@ Private Function snapVertexToGrid(ByVal coord As Single, offset As Single) As Si
 
 End Function
 
-Private Sub deletePolys()
+Private Sub DeletePolys()
 
     Dim i As Integer
     Dim j As Integer
@@ -12818,7 +12818,7 @@ End Sub
 
 Private Sub mnuClear_Click()
 
-    deletePolys
+    DeletePolys
 
 End Sub
 
