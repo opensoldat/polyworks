@@ -6224,8 +6224,8 @@ Private Sub SnapSelection()
                 Polys(PolyNum).vertex(j).X = GetVertSnapCoord(PolyNum, j, 1)
                 Polys(PolyNum).vertex(j).Y = GetVertSnapCoord(PolyNum, j, 0)
                 If snapToGrid And showGrid Then
-                    Polys(PolyNum).vertex(j).X = snapVertexToGrid(Polys(PolyNum).vertex(j).X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-                    Polys(PolyNum).vertex(j).Y = snapVertexToGrid(Polys(PolyNum).vertex(j).Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+                    Polys(PolyNum).vertex(j).X = SnapVertexToGrid(Polys(PolyNum).vertex(j).X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+                    Polys(PolyNum).vertex(j).Y = SnapVertexToGrid(Polys(PolyNum).vertex(j).Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
                 End If
                 PolyCoords(PolyNum).vertex(j).X = Polys(PolyNum).vertex(j).X / zoomFactor + scrollCoords(2).X
                 PolyCoords(PolyNum).vertex(j).Y = Polys(PolyNum).vertex(j).Y / zoomFactor + scrollCoords(2).Y
@@ -6476,8 +6476,8 @@ Private Sub MouseDownMove(X As Single, Y As Single)
         SelNearest X, Y
     End If
     If snapToGrid And showGrid Then
-        X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        Y = snapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        X = SnapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        Y = SnapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
     moveCoords(1).X = X
     moveCoords(1).Y = Y
@@ -6627,8 +6627,8 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
     End If
 
     If snapToGrid And showGrid Then
-        xVal = snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        xVal = SnapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        yVal = SnapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
 
     Polys(mPolyCount + 1).vertex(numVerts + 1).X = xVal
@@ -6868,8 +6868,8 @@ Private Sub CreatingScenery(Shift As Integer, X As Single, Y As Single)
     yVal = Y
 
     If snapToGrid And showGrid Then
-        xVal = Int(snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor) + 0.5)
-        yVal = Int(snapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor) + 0.5)
+        xVal = Int(SnapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor) + 0.5)
+        yVal = Int(SnapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor) + 0.5)
     End If
 
     If numCorners = 0 Then
@@ -7012,8 +7012,8 @@ Private Sub Moving(ByVal X As Single, ByVal Y As Single)
     Dim yVal As Single
 
     If snapToGrid And showGrid And toolAction Then
-        X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        Y = snapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        X = SnapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        Y = SnapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
 
     xVal = X - moveCoords(1).X
@@ -7109,8 +7109,8 @@ Private Sub Scaling(ByVal X As Single, ByVal Y As Single, constrained As Boolean
     yCenter = (rCenter.Y - scrollCoords(2).Y) * zoomFactor
 
     If snapToGrid And showGrid Then
-        X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        Y = snapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        X = SnapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        Y = SnapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
 
     If Not constrained Then
@@ -7554,8 +7554,8 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
     Dim theta As Single
 
     If snapToGrid And showGrid Then
-        X = snapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        Y = snapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        X = SnapVertexToGrid(X, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        Y = SnapVertexToGrid(Y, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
     End If
 
     xCenter = (rCenter.X - scrollCoords(2).X) * zoomFactor
@@ -8307,8 +8307,8 @@ Private Sub CreatePolys(X As Single, Y As Single)
     yVal = Y
 
     If snapToGrid And showGrid Then
-        xVal = snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        xVal = SnapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        yVal = SnapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
         PolyCoords(mPolyCount + 1).vertex(numVerts).X = Int(xVal / zoomFactor + scrollCoords(2).X + 0.5)
         PolyCoords(mPolyCount + 1).vertex(numVerts).Y = Int(yVal / zoomFactor + scrollCoords(2).Y + 0.5)
     ElseIf ohSnap Then  ' snap
@@ -8541,8 +8541,8 @@ Private Sub CreateScenery(X As Single, Y As Single)
     yVal = (Scenery(0).screenTr.Y)
 
     If snapToGrid And showGrid Then
-        xVal = snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        yVal = snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        xVal = SnapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        yVal = SnapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
 
         If numCorners = 1 Then
             Scenery(0).screenTr.X = xVal
@@ -8648,8 +8648,8 @@ Private Sub SnapSelected(X As Single, Y As Single)
     End If
 
     If snapToGrid And showGrid Then
-        xDiff = xVal - snapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
-        yDiff = yVal - snapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
+        xDiff = xVal - SnapVertexToGrid(xVal, (scrollCoords(2).X - Int(scrollCoords(2).X / inc) * inc) * zoomFactor)
+        yDiff = yVal - SnapVertexToGrid(yVal, (scrollCoords(2).Y - Int(scrollCoords(2).Y / inc) * inc) * zoomFactor)
 
         If numSelectedPolys > 0 Then
             For i = 1 To numSelectedPolys
@@ -10021,7 +10021,7 @@ Private Function ApplyBlend(dClr As TColor) As TColor
 
 End Function
 
-Private Function snapVertexToGrid(ByVal coord As Single, offset As Single) As Single
+Private Function SnapVertexToGrid(ByVal coord As Single, offset As Single) As Single
 
     Dim target As Single
 
@@ -10031,9 +10031,9 @@ Private Function snapVertexToGrid(ByVal coord As Single, offset As Single) As Si
     If target > coord Then target = target - inc * zoomFactor
 
     If (coord - target) < ((inc * zoomFactor) / 2) Then
-        snapVertexToGrid = target
+        SnapVertexToGrid = target
     Else
-        snapVertexToGrid = target + inc * zoomFactor
+        SnapVertexToGrid = target + inc * zoomFactor
     End If
 
 End Function
