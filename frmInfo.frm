@@ -1893,7 +1893,7 @@ End Sub
 Private Sub cboLevel_Click()
 
     If Not noChange Then
-        frmSoldatMapEditor.applySceneryProp cboLevel.ListIndex, 4
+        frmSoldatMapEditor.ApplySceneryProp cboLevel.ListIndex, 4
     End If
 
 End Sub
@@ -1911,11 +1911,11 @@ Private Sub txtScenProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtScenProp(Index).Text) And applyChange Then
         If Index = 0 Or Index = 1 Then
-            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 100, Index
+            frmSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 100, Index
         ElseIf Index = 2 And txtScenProp(Index).Text >= 0 And txtScenProp(Index).Text <= 100 Then
-            frmSoldatMapEditor.applySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
+            frmSoldatMapEditor.ApplySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
         ElseIf Index = 3 And txtScenProp(Index).Text >= -360 And txtScenProp(Index).Text <= 360 Then
-            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 180 * PI, Index
+            frmSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 180 * PI, Index
         Else
             txtScenProp(Index).Text = tempVal
         End If

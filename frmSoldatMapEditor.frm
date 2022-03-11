@@ -14292,7 +14292,7 @@ Public Sub ApplyBounciness(tehValue As Single)
 
 End Sub
 
-Public Sub applySceneryProp(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
     Dim tempColor As TColor
