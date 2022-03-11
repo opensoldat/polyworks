@@ -5826,7 +5826,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         toolAction = True
     ElseIf currentFunction = TOOL_COLORPICKER Then  ' color picker
         If currentTool = TOOL_DEPTHMAP Then
-            depthPicker X, Y
+            DepthPicker X, Y
         ElseIf currentTool = TOOL_SCENERY Then
         Else
             ColorPicker X, Y
@@ -6793,7 +6793,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
     ElseIf currentFunction = TOOL_COLORPICKER Then  ' color picker
 
         If currentTool = TOOL_DEPTHMAP Then
-            depthPicker X, Y
+            DepthPicker X, Y
         ElseIf currentTool = TOOL_SCENERY Then
 
         Else
@@ -7954,7 +7954,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
 
 End Sub
 
-Private Sub depthPicker(X As Single, Y As Single)
+Private Sub DepthPicker(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
