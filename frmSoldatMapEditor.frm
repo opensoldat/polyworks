@@ -2791,13 +2791,13 @@ ErrorHandler:
 
 End Function
 
-Private Function getMapDimensions() As String
+Private Function GetMapDimensions() As String
 
-    getMapDimensions = Int(maxX - minX) & "x" & Int(maxY - minY)
+    GetMapDimensions = Int(maxX - minX) & "x" & Int(maxY - minY)
 
 End Function
 
-Private Function getMapArea() As Long
+Private Function GetMapArea() As Long  ' Unused?
 
     Dim i As Integer
     Dim area As Double
@@ -2834,7 +2834,7 @@ Public Sub SetMapData()
     frmInfo.lblCount(3).Caption = colliderCount & "/128"
     frmInfo.lblCount(4).Caption = waypointCount & "/500"
     frmInfo.lblCount(5).Caption = conCount
-    frmInfo.lblCount(6).Caption = getMapDimensions
+    frmInfo.lblCount(6).Caption = GetMapDimensions
 
 End Sub
 
@@ -8386,7 +8386,7 @@ Private Sub CreatePolys(X As Single, Y As Single)
         End If
         toolAction = False
         frmInfo.lblCount(0).Caption = mPolyCount
-        frmInfo.lblCount(6).Caption = getMapDimensions
+        frmInfo.lblCount(6).Caption = GetMapDimensions
 
         ApplyLightsToVert CInt(mPolyCount), 1
         ApplyLightsToVert CInt(mPolyCount), 2
@@ -13424,7 +13424,7 @@ Private Sub mnuSplit_Click()
     GetInfo
 
     frmInfo.lblCount(0).Caption = mPolyCount
-    frmInfo.lblCount(6).Caption = getMapDimensions
+    frmInfo.lblCount(6).Caption = GetMapDimensions
 
 End Sub
 
@@ -13523,7 +13523,7 @@ Private Sub mnuCreate_Click()
     Polys(mPolyCount).Perp.vertex(3).Z = 2
 
     frmInfo.lblCount(0).Caption = mPolyCount
-    frmInfo.lblCount(6).Caption = getMapDimensions
+    frmInfo.lblCount(6).Caption = GetMapDimensions
 
     SaveUndo
     Render
@@ -13625,7 +13625,7 @@ Private Sub mnuRefreshBG_Click()
         bgPolys(i).Y = (bgPolyCoords(i).Y - scrollCoords(2).Y) * zoomFactor
     Next
 
-    frmInfo.lblCount(6).Caption = getMapDimensions
+    frmInfo.lblCount(6).Caption = GetMapDimensions
 
     Render
 
