@@ -9270,7 +9270,7 @@ Private Sub VertexSelPolys()
         For i = 1 To mPolyCount
             For j = 1 To 3
                 vertexList(i).vertex(j) = 0
-                If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
+                If InSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
                     addPoly = 1
                     vertexList(i).vertex(j) = 1
                 End If
@@ -9288,7 +9288,7 @@ Private Sub VertexSelPolys()
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
                     notSel = notSel + 1
-                    If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
+                    If InSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
                         addPoly = 1
                         vertexList(i).vertex(j) = 1
                     End If
@@ -9306,7 +9306,7 @@ Private Sub VertexSelPolys()
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 1 Then  ' if already selected and if in range
-                    If inSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
+                    If InSelRect(Polys(i).vertex(j).X, Polys(i).vertex(j).Y) Then
                         notSel = notSel + 1
                         vertexList(i).vertex(j) = 0
                     Else  ' if already selected but not in range
@@ -9345,11 +9345,11 @@ Private Sub VertexSelScenery()
         sceneryCoords(2).X = sceneryCoords(3).X + sceneryCoords(1).X - sceneryCoords(0).X
         sceneryCoords(2).Y = sceneryCoords(3).Y + sceneryCoords(1).Y - sceneryCoords(0).Y
 
-        selected(0) = inSelRect(sceneryCoords(0).X, sceneryCoords(0).Y)
+        selected(0) = InSelRect(sceneryCoords(0).X, sceneryCoords(0).Y)
         If sceneryVerts Then
-            selected(1) = inSelRect(sceneryCoords(1).X, sceneryCoords(1).Y)
-            selected(2) = inSelRect(sceneryCoords(2).X, sceneryCoords(2).Y)
-            selected(3) = inSelRect(sceneryCoords(3).X, sceneryCoords(3).Y)
+            selected(1) = InSelRect(sceneryCoords(1).X, sceneryCoords(1).Y)
+            selected(2) = InSelRect(sceneryCoords(2).X, sceneryCoords(2).Y)
+            selected(3) = InSelRect(sceneryCoords(3).X, sceneryCoords(3).Y)
         Else
             selected(1) = False
             selected(2) = False
@@ -9393,7 +9393,7 @@ Private Sub VertexSelObjects()
         xCoord = (Spawns(i).X - scrollCoords(2).X) * zoomFactor
         yCoord = (Spawns(i).Y - scrollCoords(2).Y) * zoomFactor
         If currentFunction = TOOL_VSELECT Then Spawns(i).active = 0
-        If inSelRect(xCoord, yCoord) Then
+        If InSelRect(xCoord, yCoord) Then
             If currentFunction = TOOL_VSELECT Then
                 Spawns(i).active = 1
                 numSelSpawns = numSelSpawns + 1
@@ -9411,7 +9411,7 @@ Private Sub VertexSelObjects()
         xCoord = (Colliders(i).X - scrollCoords(2).X) * zoomFactor
         yCoord = (Colliders(i).Y - scrollCoords(2).Y) * zoomFactor
         If currentFunction = TOOL_VSELECT Then Colliders(i).active = 0
-        If inSelRect(xCoord, yCoord) Then
+        If InSelRect(xCoord, yCoord) Then
             If currentFunction = TOOL_VSELECT Then
                 numSelColliders = numSelColliders + 1
                 Colliders(i).active = 1
@@ -9438,7 +9438,7 @@ Private Sub VertexSelLights()
         xCoord = (Lights(i).X - scrollCoords(2).X) * zoomFactor
         yCoord = (Lights(i).Y - scrollCoords(2).Y) * zoomFactor
         If currentFunction = TOOL_VSELECT Then Lights(i).selected = 0
-        If inSelRect(xCoord, yCoord) Then
+        If InSelRect(xCoord, yCoord) Then
             If currentFunction = TOOL_VSELECT Then
                 Lights(i).selected = 1
                 numSelLights = numSelLights + 1
@@ -9466,7 +9466,7 @@ Private Sub VertexSelWaypoints()
             xCoord = (Waypoints(i).X - scrollCoords(2).X) * zoomFactor
             yCoord = (Waypoints(i).Y - scrollCoords(2).Y) * zoomFactor
             If currentFunction = TOOL_VSELECT Then Waypoints(i).selected = False
-            If inSelRect(xCoord, yCoord) Then
+            If InSelRect(xCoord, yCoord) Then
                 If currentFunction = TOOL_VSELECT Then
                     Waypoints(i).selected = True
                     numSelWaypoints = numSelWaypoints + 1
@@ -10210,11 +10210,11 @@ Private Function nearCoord(ByVal mouseCoord As Single, ByVal polyCoord As Single
 
 End Function
 
-Private Function inSelRect(ByVal X As Single, ByVal Y As Single) As Boolean
+Private Function InSelRect(ByVal X As Single, ByVal Y As Single) As Boolean
 
     If (X > selectedCoords(1).X And X < selectedCoords(2).X) Or (X > selectedCoords(2).X And X < selectedCoords(1).X) Then
         If (Y > selectedCoords(1).Y And Y < selectedCoords(2).Y) Or (Y > selectedCoords(2).Y And Y < selectedCoords(1).Y) Then
-            inSelRect = True
+            InSelRect = True
         End If
     End If
 
