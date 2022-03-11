@@ -3763,7 +3763,7 @@ Private Sub loadUndo(redo As Boolean)
 
     SetMapData
 
-    getRCenter
+    GetRCenter
 
     Render
 
@@ -7268,7 +7268,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
     rDiff = 0
 
-    getRCenter
+    GetRCenter
 
     SaveUndo
 
@@ -7397,7 +7397,7 @@ Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
     scaleDiff.X = 1
     scaleDiff.Y = 1
 
-    getRCenter
+    GetRCenter
     GetInfo
     SaveUndo
     Render
@@ -7532,7 +7532,7 @@ Public Sub ApplyRotate(tehValue As Single)
     rCenter.Y = selRect(0).Y
     rDiff = 0
 
-    getRCenter
+    GetRCenter
     GetInfo
     SaveUndo
     Render
@@ -8844,7 +8844,7 @@ Private Sub regionSelection(X As Single, Y As Single)
     selectedCoords(2).X = 0
     selectedCoords(2).Y = 0
 
-    getRCenter
+    GetRCenter
     GetInfo
     selectionChanged = True
     Render
@@ -9246,7 +9246,7 @@ Private Sub VertexSelection(X As Single, Y As Single)
     selectedCoords(2).X = X
     selectedCoords(2).Y = Y
 
-    getRCenter
+    GetRCenter
     GetInfo
     selectionChanged = True
     Render
@@ -9483,7 +9483,7 @@ Private Sub VertexSelWaypoints()
 
 End Sub
 
-Private Sub getRCenter()
+Private Sub GetRCenter()
 
     Dim i As Integer
     Dim j As Integer
@@ -9839,7 +9839,7 @@ Private Sub polySelection(X As Single, Y As Single)
         End If
     End If
 
-    getRCenter
+    GetRCenter
     GetInfo
     selectionChanged = True
     Render
@@ -10517,7 +10517,7 @@ Private Sub mnuInvertSel_Click()
         Next
     End If
 
-    getRCenter
+    GetRCenter
     GetInfo
 
     Render
@@ -10703,7 +10703,7 @@ Private Sub mnuRotate_Click(Index As Integer)
     rCenter.Y = selRect(0).Y
     rDiff = 0
 
-    getRCenter
+    GetRCenter
     GetInfo
 
     SaveUndo
@@ -10788,7 +10788,7 @@ Private Sub mnuRotateTexture_Click(Index As Integer)
     rCenter.Y = selRect(0).Y
     rDiff = 0
 
-    getRCenter
+    GetRCenter
     GetInfo
 
     SaveUndo
@@ -11512,7 +11512,7 @@ Public Sub SetCurrentTool(ByVal Index As Integer)
             vertexList(selectedPolys(i)).vertex(2) = 1
             vertexList(selectedPolys(i)).vertex(3) = 1
         Next
-        getRCenter
+        GetRCenter
     ElseIf currentTool = TOOL_MOVE Then
         If numSelectedPolys = 0 And numSelectedScenery = 1 Then
             frmInfo.mnuProp_Click 1
@@ -12640,7 +12640,7 @@ Private Sub LoadPrefab(theFileName As String)
     SetMapData
 
     GetInfo
-    getRCenter
+    GetRCenter
 
     Exit Sub
 
@@ -12800,7 +12800,7 @@ Private Sub mnuDuplicate_Click()
 
     SetMapData
 
-    getRCenter
+    GetRCenter
 
     SaveUndo
     Render
@@ -12873,7 +12873,7 @@ Private Sub mnuSelectAll_Click()
         numSelWaypoints = waypointCount
     End If
 
-    getRCenter
+    GetRCenter
     GetInfo
 
     Render
@@ -14320,7 +14320,7 @@ Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
         End If
     Next
     If Index = 0 Or Index = 1 Or Index = 3 Then
-        getRCenter
+        GetRCenter
     End If
     SaveUndo
     Render
