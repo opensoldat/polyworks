@@ -1633,7 +1633,7 @@ Private Sub Form_Load()
 
     frmTools.initTool currentTool
 
-    initGfx
+    InitGfx
 
 
     err = "Error loading cursors"
@@ -1901,7 +1901,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub initGfx()
+Public Sub InitGfx()
 
     Dim i As Integer
     Dim c As Control

@@ -2117,7 +2117,7 @@ Private Function applyPreferences() As Boolean
         gfxDir = cboSkin.List(cboSkin.ListIndex)
         frmSoldatMapEditor.LoadColors
         frmSoldatMapEditor.SetColors
-        frmSoldatMapEditor.initGfx
+        frmSoldatMapEditor.InitGfx
         frmColor.SetColors
         frmDisplay.SetColors
         frmInfo.SetColors
