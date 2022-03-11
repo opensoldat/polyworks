@@ -8830,7 +8830,7 @@ Private Sub RegionSelection(X As Single, Y As Single)
         Next
     End If
     If showLights Then
-        isSelected = regionSelLights(xVal, yVal, isSelected)
+        isSelected = RegionSelLights(xVal, yVal, isSelected)
     ElseIf currentFunction = TOOL_VSELECT Then
         For i = 1 To lightCount
             Lights(i).selected = 0
@@ -9002,7 +9002,7 @@ Private Function RegionSelObjects(xVal As Single, yVal As Single, skipSel As Boo
 
 End Function
 
-Private Function regionSelLights(xVal As Single, yVal As Single, skipSel As Boolean) As Boolean
+Private Function RegionSelLights(xVal As Single, yVal As Single, skipSel As Boolean) As Boolean
 
     Dim i As Integer
     Dim j As Integer
@@ -9038,7 +9038,7 @@ Private Function regionSelLights(xVal As Single, yVal As Single, skipSel As Bool
         End If
     End If
 
-    regionSelLights = skipSel
+    RegionSelLights = skipSel
 
 End Function
 
