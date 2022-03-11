@@ -5312,9 +5312,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
         If ctrlDown Then  ' shortcuts
             If DIState.Key(DIK_EQUALS) = 128 Then  ' ctrl++
-                Zoom getZoomDir(2)
+                Zoom GetZoomDir(2)
             ElseIf DIState.Key(DIK_MINUS) = 128 Then  ' ctrl+-
-                Zoom getZoomDir(0.5)
+                Zoom GetZoomDir(0.5)
             ElseIf DIState.Key(DIK_0) = 128 Then  ' ctrl+0
                 zoomFactor = 1
                 scrollCoords(2).X = -ScaleWidth / 2
@@ -5376,9 +5376,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             ElseIf layerKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' layer key
                 frmDisplay.picLayer_MouseUp layerKeyPressed, 1, 0, 0, 0
             ElseIf DIState.Key(DIK_NUMPADPLUS) = 128 Then  ' +
-                Zoom getZoomDir(2)
+                Zoom GetZoomDir(2)
             ElseIf DIState.Key(DIK_NUMPADMINUS) = 128 Then  ' -
-                Zoom getZoomDir(0.5)
+                Zoom GetZoomDir(0.5)
             ElseIf DIState.Key(DIK_NUMPADSTAR) = 128 Then  ' *
                 Zoom 1 / zoomFactor
             ElseIf DIState.Key(DIK_DELETE) = 128 Then  ' delete
@@ -11213,23 +11213,23 @@ Private Sub txtZoom_LostFocus()
 
 End Sub
 
-Private Function getZoomDir(zoomDir As Single) As Single
+Private Function GetZoomDir(zoomDir As Single) As Single
 
     Dim zoomVal As Single
     Dim i As Integer
 
-    getZoomDir = zoomDir
+    GetZoomDir = zoomDir
 
     zoomVal = gMinZoom
     For i = 1 To 8
         If zoomDir > 1 Then  ' zooming in
             If (zoomFactor) > zoomVal And (zoomFactor) < (zoomVal * 2) Then
-                getZoomDir = (zoomVal * 2) / zoomFactor
+                GetZoomDir = (zoomVal * 2) / zoomFactor
                 Exit For
             End If
         ElseIf zoomDir < 1 Then  ' zooming out
             If (zoomFactor) < zoomVal And (zoomFactor) > (zoomVal * 0.5) Then
-                getZoomDir = (zoomVal * 0.5) / zoomFactor
+                GetZoomDir = (zoomVal * 0.5) / zoomFactor
                 Exit For
             End If
         End If
