@@ -8191,7 +8191,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             sketch(0).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
         End If
 
-        deleteSmallLines
+        DeleteSmallLines
     ElseIf currentFunction = TOOL_ERASER Then
         toolAction = False
     ElseIf currentFunction = TOOL_DEPTHMAP Then
@@ -9150,7 +9150,7 @@ ErrorHandler:
 
 End Function
 
-Private Sub deleteSmallLines()
+Private Sub DeleteSmallLines()
 
     Dim i As Integer
 
