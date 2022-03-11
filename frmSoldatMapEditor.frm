@@ -5626,27 +5626,27 @@ Private Sub findDragPoint2(X As Single, Y As Single)
     Dim k As Integer
     Dim midCoords As D3DVECTOR2
 
-    toolAction = checkDragPoint(selRect(0).X, selRect(0).Y, selRect(2).X, selRect(2).Y)
-    If Not toolAction Then toolAction = checkDragPoint(selRect(1).X, selRect(1).Y, selRect(3).X, selRect(3).Y)
-    If Not toolAction Then toolAction = checkDragPoint(selRect(2).X, selRect(2).Y, selRect(0).X, selRect(0).Y)
-    If Not toolAction Then toolAction = checkDragPoint(selRect(3).X, selRect(3).Y, selRect(1).X, selRect(1).Y)
+    toolAction = CheckDragPoint(selRect(0).X, selRect(0).Y, selRect(2).X, selRect(2).Y)
+    If Not toolAction Then toolAction = CheckDragPoint(selRect(1).X, selRect(1).Y, selRect(3).X, selRect(3).Y)
+    If Not toolAction Then toolAction = CheckDragPoint(selRect(2).X, selRect(2).Y, selRect(0).X, selRect(0).Y)
+    If Not toolAction Then toolAction = CheckDragPoint(selRect(3).X, selRect(3).Y, selRect(1).X, selRect(1).Y)
 
     midCoords.X = Midpoint(selRect(0).X, selRect(1).X)
     midCoords.Y = Midpoint(selRect(0).Y, selRect(1).Y)
-    If Not toolAction Then toolAction = checkDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(2).X, selRect(3).X), Midpoint(selRect(2).Y, selRect(3).Y))
+    If Not toolAction Then toolAction = CheckDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(2).X, selRect(3).X), Midpoint(selRect(2).Y, selRect(3).Y))
     midCoords.X = Midpoint(selRect(1).X, selRect(2).X)
     midCoords.Y = Midpoint(selRect(1).Y, selRect(2).Y)
-    If Not toolAction Then toolAction = checkDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(3).X, selRect(0).X), Midpoint(selRect(3).Y, selRect(0).Y))
+    If Not toolAction Then toolAction = CheckDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(3).X, selRect(0).X), Midpoint(selRect(3).Y, selRect(0).Y))
     midCoords.X = Midpoint(selRect(2).X, selRect(3).X)
     midCoords.Y = Midpoint(selRect(2).Y, selRect(3).Y)
-    If Not toolAction Then toolAction = checkDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(0).X, selRect(1).X), Midpoint(selRect(0).Y, selRect(1).Y))
+    If Not toolAction Then toolAction = CheckDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(0).X, selRect(1).X), Midpoint(selRect(0).Y, selRect(1).Y))
     midCoords.X = Midpoint(selRect(3).X, selRect(0).X)
     midCoords.Y = Midpoint(selRect(3).Y, selRect(0).Y)
-    If Not toolAction Then toolAction = checkDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(1).X, selRect(2).X), Midpoint(selRect(1).Y, selRect(2).Y))
+    If Not toolAction Then toolAction = CheckDragPoint(midCoords.X, midCoords.Y, Midpoint(selRect(1).X, selRect(2).X), Midpoint(selRect(1).Y, selRect(2).Y))
 
 End Sub
 
-Private Function checkDragPoint(x1 As Single, y1 As Single, x2 As Single, y2 As Single) As Boolean
+Private Function CheckDragPoint(x1 As Single, y1 As Single, x2 As Single, y2 As Single) As Boolean
 
     If nearCoord((x1 - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And nearCoord((y1 - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
         If mnuFixedRCenter.Checked Then
@@ -5655,7 +5655,7 @@ Private Function checkDragPoint(x1 As Single, y1 As Single, x2 As Single, y2 As 
         End If
         moveCoords(1).X = (x1 - scrollCoords(2).X) * zoomFactor
         moveCoords(1).Y = (y1 - scrollCoords(2).Y) * zoomFactor
-        checkDragPoint = True
+        CheckDragPoint = True
     End If
 
 End Function
