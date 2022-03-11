@@ -2515,7 +2515,7 @@ Public Sub LoadFile(theFileName As String)
                             D3DX_FILTER_POINT, COLOR_KEY, imageInfo, ByVal 0)
                     frmScenery.lstScenery.AddItem tempString
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
-                ElseIf checkLoaded(tempString) > -1 Then
+                ElseIf CheckLoaded(tempString) > -1 Then
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
