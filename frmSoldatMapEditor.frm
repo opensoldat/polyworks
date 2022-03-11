@@ -2188,8 +2188,8 @@ Public Sub ResetDevice()
 
     initialized = True
 
-    loadUndo False
-    loadUndo False
+    LoadUndo False
+    LoadUndo False
 
     noRedraw = False
 
@@ -3619,7 +3619,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub loadUndo(redo As Boolean)
+Private Sub LoadUndo(redo As Boolean)
 
     Dim i As Integer
     Dim j As Integer
@@ -5337,9 +5337,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             ElseIf DIState.Key(MapVirtualKey(67, 0)) = 128 Then  ' ctrl+c
                 mnuCopy_Click
             ElseIf DIState.Key(MapVirtualKey(90, 0)) = 128 Then  ' ctrl+z
-                loadUndo False
+                LoadUndo False
             ElseIf DIState.Key(MapVirtualKey(89, 0)) = 128 Then  ' ctrl+y
-                loadUndo True
+                LoadUndo True
             ElseIf DIState.Key(MapVirtualKey(65, 0)) = 128 Then  ' ctrl+a
                 mnuSelectAll_Click
             ElseIf DIState.Key(MapVirtualKey(68, 0)) = 128 Then  ' ctrl+d
@@ -12668,13 +12668,13 @@ End Sub
 
 Private Sub mnuUndo_Click()
 
-    loadUndo False
+    LoadUndo False
 
 End Sub
 
 Private Sub mnuRedo_Click()
 
-    loadUndo True
+    LoadUndo True
 
 End Sub
 
