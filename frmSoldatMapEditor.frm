@@ -9629,7 +9629,7 @@ Private Sub CompareRect(ByVal xVal As Single, ByVal yVal As Single)
 
 End Sub
 
-Private Sub vertexSelAlt(X As Single, Y As Single)
+Private Sub VertexSelAlt(X As Single, Y As Single)  ' unused?
 
     Dim i As Integer
     Dim j As Integer
