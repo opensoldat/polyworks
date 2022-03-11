@@ -5558,7 +5558,7 @@ Private Sub TabPressed()
 
 End Sub
 
-Private Sub findDragPoint(X As Single, Y As Single)
+Private Sub FindDragPoint(X As Single, Y As Single)  ' Unused?
 
     Dim i As Integer
     Dim j As Integer
@@ -5619,7 +5619,7 @@ Private Sub findDragPoint(X As Single, Y As Single)
 
 End Sub
 
-Private Sub findDragPoint2(X As Single, Y As Single)
+Private Sub FindDragPoint2(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
@@ -5751,7 +5751,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         moveCoords(2).X = X
         moveCoords(2).Y = Y
 
-        findDragPoint2 X, Y
+        FindDragPoint2 X, Y
     ElseIf (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then  ' poly creation
         If selectionChanged Then
             SaveUndo
