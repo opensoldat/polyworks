@@ -6843,7 +6843,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             Render
         End If
     ElseIf currentFunction = TOOL_SMUDGE And toolAction Then
-        If moveLines(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y, X - moveCoords(2).X, Y - moveCoords(2).Y) = 1 Then
+        If MoveLines(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y, X - moveCoords(2).X, Y - moveCoords(2).Y) = 1 Then
             Render
         End If
         moveCoords(2).X = X
@@ -9118,7 +9118,7 @@ ErrorHandler:
 
 End Function
 
-Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As Single) As Byte
+Private Function MoveLines(X As Single, Y As Single, xDiff As Single, yDiff As Single) As Byte
 
     Dim i As Integer
     Dim j As Integer
@@ -9129,7 +9129,7 @@ Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
     xDiff = xDiff / zoomFactor
     yDiff = yDiff / zoomFactor
 
-    moveLines = 0
+    MoveLines = 0
 
     For i = 1 To sketchLines
         For j = 1 To 2
@@ -9137,7 +9137,7 @@ Private Function moveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
             If dist < clrRadius ^ 2 Then
                 sketch(i).vertex(j).X = sketch(i).vertex(j).X + xDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
                 sketch(i).vertex(j).Y = sketch(i).vertex(j).Y + yDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
-                moveLines = 1
+                MoveLines = 1
             End If
         Next
     Next
