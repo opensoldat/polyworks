@@ -8131,7 +8131,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             eraseLines = False
             noRedraw = True
             If selectedCoords(2).X = selectedCoords(1).X And selectedCoords(2).Y = selectedCoords(1).Y Then
-                regionSelection X, Y
+                RegionSelection X, Y
             Else
                 VertexSelection X, Y
             End If
@@ -8779,7 +8779,7 @@ Private Sub snapSelected(X As Single, Y As Single)
 
 End Sub
 
-Private Sub regionSelection(X As Single, Y As Single)
+Private Sub RegionSelection(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
