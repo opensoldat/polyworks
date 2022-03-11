@@ -1681,7 +1681,7 @@ Private Sub Form_Load()
 
 
     err = "Error initializing grid"
-    initGrid
+    InitGrid
 
 
     err = "Error initializing D3D"
@@ -1697,7 +1697,7 @@ Private Sub Form_Load()
     err = "Error setting up palette windows"
 
     loadWorkspace
-    initGrid
+    InitGrid
 
     ' show windows
     frmTaskBar.Show
@@ -2184,7 +2184,7 @@ Public Sub ResetDevice()
 
     SetMapTexture gTextureFile
 
-    initGrid
+    InitGrid
 
     initialized = True
 
@@ -4072,7 +4072,7 @@ Private Function SegXSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
 
 End Function
 
-Private Sub initGrid()
+Private Sub InitGrid()
 
     On Error GoTo ErrorHandler
 
