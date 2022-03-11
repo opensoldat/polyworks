@@ -1637,7 +1637,7 @@ Private Sub Form_Load()
 
 
     err = "Error loading cursors"
-    loadCursors
+    LoadCursors
 
 
     err = "Error initializing values"
@@ -1828,7 +1828,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub loadCursors()
+Public Sub LoadCursors()
 
     On Error GoTo ErrorHandler
 
