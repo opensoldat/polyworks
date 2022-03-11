@@ -1939,7 +1939,7 @@ End Sub
 Private Sub txtTexture_LostFocus(Index As Integer)
 
     If IsNumeric(txtTexture(Index).Text) And applyChange Then
-        frmSoldatMapEditor.applyTextureCoords txtTexture(Index).Text, Index
+        frmSoldatMapEditor.ApplyTextureCoords txtTexture(Index).Text, Index
     Else
         txtTexture(Index).Text = tempVal
     End If

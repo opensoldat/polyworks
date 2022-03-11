@@ -14219,7 +14219,7 @@ Public Sub ApplyPolyType(ByVal Index As Integer)
 
 End Sub
 
-Public Sub applyTextureCoords(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplyTextureCoords(ByVal tehValue As Single, Index As Integer)
 
     Dim i As Integer
     Dim j As Integer
