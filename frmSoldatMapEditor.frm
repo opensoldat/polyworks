@@ -5777,7 +5777,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         selectedCoords(2).X = X
         selectedCoords(2).Y = Y
     ElseIf currentFunction = TOOL_PSELECT Or currentFunction = TOOL_PSELADD Or currentFunction = TOOL_PSELSUB Then ' poly selection
-        polySelection X, Y
+        PolySelection X, Y
     ElseIf currentFunction = TOOL_VCOLOR Then  ' vertex color
         If selectionChanged Then
             SaveUndo
@@ -9680,7 +9680,7 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
 
 End Sub
 
-Private Sub polySelection(X As Single, Y As Single)
+Private Sub PolySelection(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
