@@ -5949,7 +5949,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         CreateLight X, Y
     ElseIf currentFunction = TOOL_SKETCH Then
         If Shift = 0 Then  ' freeform
-            startSketch X, Y
+            StartSketch X, Y
             toolAction = True
         ElseIf Shift = 1 Then
             showSketch = True
@@ -8423,7 +8423,7 @@ Private Sub CreatePolys(X As Single, Y As Single)
 
 End Sub
 
-Private Sub startSketch(X As Single, Y As Single)
+Private Sub StartSketch(X As Single, Y As Single)
 
     On Error GoTo ErrorHandler
 
