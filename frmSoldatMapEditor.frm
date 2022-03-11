@@ -5554,7 +5554,7 @@ Private Sub TabPressed()
         Render
     End If
 
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -5926,7 +5926,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             Waypoints(waypointCount).numConnections = Waypoints(waypointCount).numConnections + 1
             currentWaypoint = waypointCount
         End If
-        getInfo
+        GetInfo
         Render
         toolAction = True
     ElseIf currentFunction = TOOL_CONNECT Then
@@ -7086,7 +7086,7 @@ Private Sub Moving(ByVal X As Single, ByVal Y As Single)
     moveCoords(1).X = X
     moveCoords(1).Y = Y
 
-    getInfo
+    GetInfo
 
     prompt = True
 
@@ -7272,7 +7272,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
     SaveUndo
 
-    getInfo
+    GetInfo
 
     Render
 
@@ -7398,7 +7398,7 @@ Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
     scaleDiff.Y = 1
 
     getRCenter
-    getInfo
+    GetInfo
     SaveUndo
     Render
 
@@ -7533,7 +7533,7 @@ Public Sub ApplyRotate(tehValue As Single)
     rDiff = 0
 
     getRCenter
-    getInfo
+    GetInfo
     SaveUndo
     Render
 
@@ -8062,7 +8062,7 @@ Private Sub StretchingTexture(X As Single, Y As Single)
         prompt = True
     End If
 
-    getInfo
+    GetInfo
 
     Render
 
@@ -8279,7 +8279,7 @@ Private Sub CreateConnection(X As Single, Y As Single)
         numSelWaypoints = 0
     End If
 
-    getInfo
+    GetInfo
     Render
 
 End Sub
@@ -8773,7 +8773,7 @@ Private Sub snapSelected(X As Single, Y As Single)
         PolyNum = 0
     End If
 
-    getInfo
+    GetInfo
 
     Render
 
@@ -8845,7 +8845,7 @@ Private Sub regionSelection(X As Single, Y As Single)
     selectedCoords(2).Y = 0
 
     getRCenter
-    getInfo
+    GetInfo
     selectionChanged = True
     Render
 
@@ -9247,7 +9247,7 @@ Private Sub VertexSelection(X As Single, Y As Single)
     selectedCoords(2).Y = Y
 
     getRCenter
-    getInfo
+    GetInfo
     selectionChanged = True
     Render
 
@@ -9840,7 +9840,7 @@ Private Sub polySelection(X As Single, Y As Single)
     End If
 
     getRCenter
-    getInfo
+    GetInfo
     selectionChanged = True
     Render
 
@@ -10192,7 +10192,7 @@ Private Sub DeletePolys()
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
     Exit Sub
 
@@ -10363,7 +10363,7 @@ Private Sub mnuFlip_Click(Index As Integer)
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -10419,7 +10419,7 @@ Private Sub mnuFlipTexture_Click(Index As Integer)
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -10518,7 +10518,7 @@ Private Sub mnuInvertSel_Click()
     End If
 
     getRCenter
-    getInfo
+    GetInfo
 
     Render
 
@@ -10704,7 +10704,7 @@ Private Sub mnuRotate_Click(Index As Integer)
     rDiff = 0
 
     getRCenter
-    getInfo
+    GetInfo
 
     SaveUndo
     Render
@@ -10789,7 +10789,7 @@ Private Sub mnuRotateTexture_Click(Index As Integer)
     rDiff = 0
 
     getRCenter
-    getInfo
+    GetInfo
 
     SaveUndo
     Render
@@ -12639,7 +12639,7 @@ Private Sub LoadPrefab(theFileName As String)
 
     SetMapData
 
-    getInfo
+    GetInfo
     getRCenter
 
     Exit Sub
@@ -12804,7 +12804,7 @@ Private Sub mnuDuplicate_Click()
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
     prompt = True
 
@@ -12874,7 +12874,7 @@ Private Sub mnuSelectAll_Click()
     End If
 
     getRCenter
-    getInfo
+    GetInfo
 
     Render
 
@@ -12911,7 +12911,7 @@ Private Sub mnuDeselect_Click()
     Next
 
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13000,7 +13000,7 @@ Private Sub mnuBringToFront_Click()
     prompt = True
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13058,7 +13058,7 @@ Private Sub mnuSendToBack_Click()
     prompt = True
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13122,7 +13122,7 @@ Private Sub mnuBringForward_Click()
     prompt = True
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13186,7 +13186,7 @@ Private Sub mnuSendBackward_Click()
     prompt = True
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13216,7 +13216,7 @@ Private Sub mnuFixTexture_Click()
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13244,7 +13244,7 @@ Private Sub mnuUntexture_Click()
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -13421,7 +13421,7 @@ Private Sub mnuSplit_Click()
     numSelectedPolys = numSelectedPolys + newPolys
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
     frmInfo.lblCount(0).Caption = mPolyCount
     frmInfo.lblCount(6).Caption = getMapDimensions
@@ -13462,7 +13462,7 @@ Private Sub mnuJoinVertices_Click()
 
     SaveUndo
     Render
-    getInfo
+    GetInfo
 
 End Sub
 
@@ -14058,7 +14058,7 @@ Private Sub mnuScenTrans_Click(Index As Integer)
 
 End Sub
 
-Public Sub getInfo()
+Public Sub GetInfo()
 
     Dim i As Integer
     Dim j As Integer
@@ -14194,7 +14194,7 @@ Public Sub getInfo()
 
 ErrorHandler:
 
-    MsgBox "getInfo() error" & vbNewLine & Error$
+    MsgBox "GetInfo() error" & vbNewLine & Error$
 
 End Sub
 
