@@ -8181,7 +8181,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             toolAction = False
         ElseIf Shift = 1 Then  ' lines
             If toolAction Then
-                lineSketch X, Y
+                LineSketch X, Y
             Else
                 toolAction = True
             End If
@@ -8451,7 +8451,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub lineSketch(X As Single, Y As Single)
+Private Sub LineSketch(X As Single, Y As Single)
 
     On Error GoTo ErrorHandler
 
