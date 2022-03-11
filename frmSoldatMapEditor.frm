@@ -2771,16 +2771,16 @@ ErrorHandler:
 
 End Sub
 
-Private Function checkLoaded(sceneryName As String) As Integer
+Private Function CheckLoaded(sceneryName As String) As Integer
 
     Dim i As Integer
 
     On Error GoTo ErrorHandler
 
-    checkLoaded = -1
+    CheckLoaded = -1
 
     For i = 0 To frmScenery.lstScenery.ListCount - 1
-        If frmScenery.lstScenery.List(i) = sceneryName Then checkLoaded = i
+        If frmScenery.lstScenery.List(i) = sceneryName Then CheckLoaded = i
     Next
 
     Exit Function
@@ -9507,7 +9507,7 @@ Private Sub getRCenter()
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                    compareRect PolyCoords(selectedPolys(i)).vertex(j).X, PolyCoords(selectedPolys(i)).vertex(j).Y
+                    CompareRect PolyCoords(selectedPolys(i)).vertex(j).X, PolyCoords(selectedPolys(i)).vertex(j).Y
                 End If
             Next
         Next
@@ -9524,7 +9524,7 @@ Private Sub getRCenter()
                     selRect(2).X = Scenery(i).Translation.X
                     selRect(2).Y = Scenery(i).Translation.Y
                 End If
-                compareRect Scenery(i).Translation.X, Scenery(i).Translation.Y
+                CompareRect Scenery(i).Translation.X, Scenery(i).Translation.Y
 
                 Width = SceneryTextures(Scenery(i).Style).Width * Scenery(i).Scaling.X
                 Height = SceneryTextures(Scenery(i).Style).Height * Scenery(i).Scaling.Y
@@ -9532,7 +9532,7 @@ Private Sub getRCenter()
                 xVal = Scenery(i).Translation.X + (Cos(Scenery(i).rotation) * Width) + (Sin(Scenery(i).rotation) * Height)
                 yVal = Scenery(i).Translation.Y - (Sin(Scenery(i).rotation) * Width) + (Cos(Scenery(i).rotation) * Height)
 
-                compareRect xVal, yVal
+                CompareRect xVal, yVal
 
             End If
         Next
@@ -9549,7 +9549,7 @@ Private Sub getRCenter()
                     selRect(2).X = Waypoints(i).X
                     selRect(2).Y = Waypoints(i).Y
                 End If
-                compareRect Waypoints(i).X, Waypoints(i).Y
+                CompareRect Waypoints(i).X, Waypoints(i).Y
             End If
         Next
     End If
@@ -9565,7 +9565,7 @@ Private Sub getRCenter()
                     selRect(2).X = Colliders(i).X
                     selRect(2).Y = Colliders(i).Y
                 End If
-                compareRect Colliders(i).X, Colliders(i).Y
+                CompareRect Colliders(i).X, Colliders(i).Y
             End If
         Next
     End If
@@ -9581,7 +9581,7 @@ Private Sub getRCenter()
                     selRect(2).X = Spawns(i).X
                     selRect(2).Y = Spawns(i).Y
                 End If
-                compareRect Spawns(i).X, Spawns(i).Y
+                CompareRect Spawns(i).X, Spawns(i).Y
             End If
         Next
     End If
@@ -9597,7 +9597,7 @@ Private Sub getRCenter()
                     selRect(2).X = Lights(i).X
                     selRect(2).Y = Lights(i).Y
                 End If
-                compareRect Lights(i).X, Lights(i).Y
+                CompareRect Lights(i).X, Lights(i).Y
             End If
         Next
     End If
@@ -9620,7 +9620,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub compareRect(ByVal xVal As Single, ByVal yVal As Single)
+Private Sub CompareRect(ByVal xVal As Single, ByVal yVal As Single)
 
     If xVal < selRect(0).X Then selRect(0).X = xVal
     If xVal > selRect(2).X Then selRect(2).X = xVal
