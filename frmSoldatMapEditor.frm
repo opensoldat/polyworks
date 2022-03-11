@@ -1750,7 +1750,7 @@ Private Sub Form_Load()
         temp = Right(temp, Len(temp) - 1)
     End If
 
-    newMap
+    NewMap
     If LCase$(Right(temp, 4)) = ".pms" Then
     
         prevMousePointer = Me.MousePointer
@@ -2217,7 +2217,7 @@ Public Sub RegainFocus()
 
 End Sub
 
-Public Sub newMap()
+Public Sub NewMap()
 
     Dim i As Integer
 
@@ -12032,7 +12032,7 @@ Private Sub mnuNew_Click()
             If prompt Then Exit Sub
         End If
     End If
-    newMap
+    NewMap
 
 End Sub
 
