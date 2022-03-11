@@ -3393,7 +3393,7 @@ Public Sub SaveAndCompile(theFileName As String)
                 If X >= -xSecNum And X <= xSecNum And Y >= -ySecNum And Y <= ySecNum Then  ' if sectors within range
                     For i = 1 To mPolyCount
                         If vertexList(i).polyType <> 3 Then
-                        If isInSector(i, sectorsDivision * (X - 0.5) + xOffset - 1, sectorsDivision * (Y - 0.5) + yOffset - 1, sectorsDivision + 2) Then
+                        If IsInSector(i, sectorsDivision * (X - 0.5) + xOffset - 1, sectorsDivision * (Y - 0.5) + yOffset - 1, sectorsDivision + 2) Then
                             polysInSector = polysInSector + 1
                             If polysInSector > 256 Then
                                 polysInSector = 256
@@ -3775,11 +3775,11 @@ ErrorHandler:
 
 End Sub
 
-Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal div As Long) As Boolean
+Private Function IsInSector(Index As Integer, X As Integer, Y As Integer, ByVal div As Long) As Boolean
 
     On Error GoTo ErrorHandler
 
-    isInSector = False
+    IsInSector = False
 
     ' is poly outside of sector for sure
     If (PolyCoords(Index).vertex(1).X < X) And (PolyCoords(Index).vertex(2).X < X) And (PolyCoords(Index).vertex(3).X < X) Then
@@ -3794,29 +3794,29 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
 
     ' is vertex in sector
     If isBetween(X, PolyCoords(Index).vertex(1).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(1).Y, Y + div) Then
-        isInSector = True
+        IsInSector = True
         Exit Function
     ElseIf isBetween(X, PolyCoords(Index).vertex(2).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(2).Y, Y + div) Then
-        isInSector = True
+        IsInSector = True
         Exit Function
     ElseIf isBetween(X, PolyCoords(Index).vertex(3).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(3).Y, Y + div) Then
-        isInSector = True
+        IsInSector = True
         Exit Function
     End If
 
     ' check if sector corner is in poly
-    If Not isInSector Then
+    If Not IsInSector Then
         If PointInPoly(X, Y, Index) Then
-            isInSector = True
+            IsInSector = True
             Exit Function
         ElseIf PointInPoly(X + div, Y, Index) Then
-            isInSector = True
+            IsInSector = True
             Exit Function
         ElseIf PointInPoly(X, Y + div, Index) Then
-            isInSector = True
+            IsInSector = True
             Exit Function
         ElseIf PointInPoly(X + div, Y + div, Index) Then
-            isInSector = True
+            IsInSector = True
             Exit Function
         End If
     End If
@@ -3842,7 +3842,7 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
         B2.X = X + div
         B2.Y = Y
         If SegXSeg(A1, B1, A2, B2) Then  ' top
-            isInSector = True
+            IsInSector = True
             Exit Function
         End If
         A2.X = X
@@ -3850,7 +3850,7 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
         B2.X = X + div
         B2.Y = Y + div
         If SegXSeg(A1, B1, A2, B2) Then  ' bottom
-            isInSector = True
+            IsInSector = True
             Exit Function
         End If
         A2.X = X
@@ -3858,7 +3858,7 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
         B2.X = X
         B2.Y = Y + div
         If SegXSeg(A1, B1, A2, B2) Then  ' left
-            isInSector = True
+            IsInSector = True
             Exit Function
         End If
         A2.X = X + div
@@ -3866,7 +3866,7 @@ Private Function isInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
         B2.X = X + div
         B2.Y = Y + div
         If SegXSeg(A1, B1, A2, B2) Then  ' right
-            isInSector = True
+            IsInSector = True
             Exit Function
         End If
     Next
