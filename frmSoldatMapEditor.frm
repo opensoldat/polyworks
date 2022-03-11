@@ -8086,7 +8086,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
     ElseIf currentFunction = TOOL_MOVE And toolAction Then  ' snap selected vertex
         If Shift = KEY_SHIFT Then  ' constrained, don't snap
         Else
-            snapSelected X, Y
+            SnapSelected X, Y
             If noneSelected Then
                 mnuDeselect_Click
                 noneSelected = False
@@ -8585,7 +8585,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub snapSelected(X As Single, Y As Single)
+Private Sub SnapSelected(X As Single, Y As Single)
 
     Dim i As Integer
     Dim j As Integer
