@@ -6829,7 +6829,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         EditDepthMap X, Y
     ElseIf currentFunction = TOOL_SKETCH And toolAction Then  ' sketch
         If Shift = 0 Then  ' freeform
-            linkSketch X, Y
+            LinkSketch X, Y
             sketch(sketchLines).vertex(2).X = X / zoomFactor + scrollCoords(2).X
             sketch(sketchLines).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
             Render
@@ -8474,7 +8474,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub linkSketch(X As Single, Y As Single)
+Private Sub LinkSketch(X As Single, Y As Single)
 
     Dim xVal As Single
     Dim yVal As Single
