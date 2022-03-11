@@ -8177,7 +8177,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
         CreateConnection X, Y
     ElseIf currentFunction = TOOL_SKETCH Then
         If Shift = 0 And toolAction Then  ' freeform
-            endSketch X, Y
+            EndSketch X, Y
             toolAction = False
         ElseIf Shift = 1 Then  ' lines
             If toolAction Then
@@ -8508,7 +8508,7 @@ ErrorHandler:
 
 End Sub
 
-Private Sub endSketch(X As Single, Y As Single)
+Private Sub EndSketch(X As Single, Y As Single)
 
     sketch(sketchLines).vertex(2).X = X / zoomFactor + scrollCoords(2).X
     sketch(sketchLines).vertex(2).Y = Y / zoomFactor + scrollCoords(2).Y
