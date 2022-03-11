@@ -5571,8 +5571,8 @@ Private Sub FindDragPoint(X As Single, Y As Single)  ' Unused?
         If j > 3 Then
             j = i - 2
         End If
-        If nearCoord((selRect(i).X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
-                nearCoord((selRect(i).Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
+        If NearCoord((selRect(i).X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
+                NearCoord((selRect(i).Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
             If mnuFixedRCenter.Checked Then
                 rCenter.X = selRect(j).X
                 rCenter.Y = selRect(j).Y
@@ -5601,8 +5601,8 @@ Private Sub FindDragPoint(X As Single, Y As Single)  ' Unused?
             If k < 0 Then
                 k = 3
             End If
-            If nearCoord((midCoords.X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
-                    nearCoord((midCoords.Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
+            If NearCoord((midCoords.X - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And _
+                    NearCoord((midCoords.Y - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
                 If mnuFixedRCenter.Checked Then
                     rCenter.X = Midpoint(selRect(j).X, selRect(k).X)
                     rCenter.Y = Midpoint(selRect(j).Y, selRect(k).Y)
@@ -5648,7 +5648,7 @@ End Sub
 
 Private Function CheckDragPoint(x1 As Single, y1 As Single, x2 As Single, y2 As Single) As Boolean
 
-    If nearCoord((x1 - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And nearCoord((y1 - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
+    If NearCoord((x1 - scrollCoords(2).X) * zoomFactor, moveCoords(1).X, 8) And NearCoord((y1 - scrollCoords(2).Y) * zoomFactor, moveCoords(1).Y, 8) Then
         If mnuFixedRCenter.Checked Then
             rCenter.X = x2
             rCenter.Y = y2
@@ -6352,7 +6352,7 @@ Private Sub AverageVertices()
                     finalB = 0
                     For P = 1 To mPolyCount
                         For V = 1 To 3
-                            If nearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And nearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
+                            If NearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And NearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 vertexList(P).vertex(V) = 1
                                 tehClr.red = vertexList(P).color(V).red
                                 tehClr.green = vertexList(P).color(V).green
@@ -6405,7 +6405,7 @@ Private Sub AverageVertices()
                     finalB = 0
                     For P = 1 To mPolyCount
                         For V = 1 To 3
-                            If nearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And nearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
+                            If NearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And NearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 If vertexList(P).vertex(V) = 1 Then
                                     vertexList(P).vertex(V) = 2
                                     tehClr.red = vertexList(P).color(V).red
@@ -6506,7 +6506,7 @@ Private Sub SelNearest(X As Single, Y As Single)
     If showPolys Then
     For i = 1 To mPolyCount
         For j = 1 To 3
-            If nearCoord(X, Polys(i).vertex(j).X, 8) And nearCoord(Y, Polys(i).vertex(j).Y, 8) Then  ' move by vertex
+            If NearCoord(X, Polys(i).vertex(j).X, 8) And NearCoord(Y, Polys(i).vertex(j).Y, 8) Then  ' move by vertex
                 If addPoly <> i Then
                     numSelectedPolys = numSelectedPolys + 1
                     ReDim Preserve selectedPolys(numSelectedPolys)
@@ -6518,7 +6518,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         Next
         If (PointInPoly(X, Y, i)) And addPoly = 0 Then
             For j = 1 To 3
-                If nearCoord(X, Polys(i).vertex(j).X, 64) And nearCoord(Y, Polys(i).vertex(j).Y, 64) Then  ' move by region
+                If NearCoord(X, Polys(i).vertex(j).X, 64) And NearCoord(Y, Polys(i).vertex(j).Y, 64) Then  ' move by region
                     currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                     If currentDist < shortestDist Then
                         shortestDist = currentDist
@@ -6553,7 +6553,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         shortestDist = (8 ^ 2 + 1)
         For i = 1 To spawnPoints
             Spawns(i).active = 0
-            If nearCoord(xVal, Spawns(i).X, 8 / zoomFactor) And nearCoord(yVal, Spawns(i).Y, 8 / zoomFactor) Then
+            If NearCoord(xVal, Spawns(i).X, 8 / zoomFactor) And NearCoord(yVal, Spawns(i).Y, 8 / zoomFactor) Then
                 currentDist = (Spawns(i).X - xVal) ^ 2 + (Spawns(i).Y - yVal) ^ 2
                 If currentDist < shortestDist Then
                     shortestDist = currentDist
@@ -6573,7 +6573,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         shortestDist = 64 ^ 2 + 1
         For i = 1 To colliderCount
             Colliders(i).active = 0
-            If nearCoord(xVal, Colliders(i).X, Colliders(i).radius / 2) And nearCoord(yVal, Colliders(i).Y, Colliders(i).radius / 2) Then
+            If NearCoord(xVal, Colliders(i).X, Colliders(i).radius / 2) And NearCoord(yVal, Colliders(i).Y, Colliders(i).radius / 2) Then
                 currentDist = (Colliders(i).X - xVal) ^ 2 + (Colliders(i).Y - yVal) ^ 2
                 If currentDist < shortestDist Then
                     shortestDist = currentDist
@@ -6593,7 +6593,7 @@ Private Sub SelNearest(X As Single, Y As Single)
         shortestDist = (8 ^ 2 + 1)
         For i = 1 To waypointCount
             Waypoints(i).selected = False
-            If nearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And nearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
+            If NearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And NearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
                 currentDist = (Waypoints(i).X - xVal) ^ 2 + (Waypoints(i).Y - yVal) ^ 2
                 If currentDist < shortestDist Then
                     shortestDist = currentDist
@@ -7700,7 +7700,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
             PolyNum = selectedPolys(i)
             If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
-                    If nearCoord(X, Polys(PolyNum).vertex(j).X, R) And nearCoord(Y, Polys(PolyNum).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(PolyNum).vertex(j).X, R) And NearCoord(Y, Polys(PolyNum).vertex(j).Y, R) Then
                         currentDist = (Polys(PolyNum).vertex(j).X - X) ^ 2 + (Polys(PolyNum).vertex(j).Y - Y) ^ 2
                         If currentDist < shortestDist Then
                             shortestDist = currentDist
@@ -7724,7 +7724,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         For i = 1 To mPolyCount  ' find closest
             If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
-                    If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                         If currentDist < shortestDist Then
                             shortestDist = currentDist
@@ -7768,7 +7768,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
             pNum = selectedPolys(i)
             For j = 1 To 3
                 If vertexList(pNum).vertex(j) = 1 Then
-                    If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(pNum).vertex(j).X, R) And NearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(pNum).vertex(j).color)
                             destClr = ApplyBlend(destClr)
@@ -7788,7 +7788,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
-                    If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(i).vertex(j).color)
                             destClr = ApplyBlend(destClr)
@@ -7809,7 +7809,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
     If numSelectedScenery > 0 And showScenery Then
         For i = 1 To sceneryCount
             If Scenery(i).selected = 1 Then
-                If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
+                If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
                         destClr = getRGB(Scenery(i).color)
                         destClr = ApplyBlend(destClr)
@@ -7823,7 +7823,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
     ElseIf showScenery And numSelectedPolys = 0 Then
         For i = 1 To sceneryCount
             If Scenery(i).selected = 0 Then
-                If nearCoord(X, Scenery(i).screenTr.X, R) And nearCoord(Y, Scenery(i).screenTr.Y, R) Then
+                If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
                         destClr = getRGB(Scenery(i).color)
                         destClr = ApplyBlend(destClr)
@@ -7859,7 +7859,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
             pNum = selectedPolys(i)
             For j = 1 To 3
                 If vertexList(pNum).vertex(j) = 1 Then
-                    If nearCoord(X, Polys(pNum).vertex(j).X, R) And nearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(pNum).vertex(j).X, R) And NearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
@@ -7873,7 +7873,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
         For i = 1 To mPolyCount
             For j = 1 To 3
                 If vertexList(i).vertex(j) = 0 Then
-                    If nearCoord(X, Polys(i).vertex(j).X, R) And nearCoord(Y, Polys(i).vertex(j).Y, R) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
@@ -7907,7 +7907,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
         For i = 1 To mPolyCount
             If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
-                    If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, 32) And NearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                         If currentDist < shortestDist Then
                             shortestDist = currentDist
@@ -7968,7 +7968,7 @@ Private Sub DepthPicker(X As Single, Y As Single)
         For i = 1 To mPolyCount
             If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
-                    If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, 32) And NearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                         If currentDist < shortestDist Then
                             shortestDist = currentDist
@@ -8013,7 +8013,7 @@ Private Sub LightPicker(X As Single, Y As Single)
         For i = 1 To mPolyCount
             If PointInPoly(X, Y, i) Then
                 For j = 1 To 3
-                    If nearCoord(X, Polys(i).vertex(j).X, 32) And nearCoord(Y, Polys(i).vertex(j).Y, 32) Then
+                    If NearCoord(X, Polys(i).vertex(j).X, 32) And NearCoord(Y, Polys(i).vertex(j).Y, 32) Then
                         currentDist = (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2
                         If currentDist < shortestDist Then
                             shortestDist = currentDist
@@ -8246,7 +8246,7 @@ Private Sub CreateConnection(X As Single, Y As Single)
     shortestDist = (8 ^ 2 + 1)
     For i = 1 To waypointCount
         If (Waypoints(i).pathNum = 1 And frmWaypoints.showPaths <> 2) Or (Waypoints(i).pathNum = 2 And frmWaypoints.showPaths <> 1) Then
-            If nearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And nearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
+            If NearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And NearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
                 currentDist = (Waypoints(i).X - xVal) ^ 2 + (Waypoints(i).Y - yVal) ^ 2
                 If currentDist < shortestDist Then
                     shortestDist = currentDist
@@ -8315,7 +8315,7 @@ Private Sub CreatePolys(X As Single, Y As Single)
         shortestDist = snapRadius ^ 2 + 1
         For i = 1 To mPolyCount
             For j = 1 To 3
-                If nearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And nearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
+                If NearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And NearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
                     currentDist = ((Polys(i).vertex(j).X - xVal) ^ 2 + (Polys(i).vertex(j).Y - yVal) ^ 2)
                     If currentDist < shortestDist Then
                         shortestDist = currentDist
@@ -8735,7 +8735,7 @@ Private Sub snapSelected(X As Single, Y As Single)
         shortestDist = snapRadius ^ 2 + 1
         For i = 1 To mPolyCount
             For j = 1 To 3
-                If nearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And nearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
+                If NearCoord(xVal, Polys(i).vertex(j).X, shortestDist) And NearCoord(yVal, Polys(i).vertex(j).Y, shortestDist) Then
                     currentDist = (Polys(i).vertex(j).X - xVal) ^ 2 + (Polys(i).vertex(j).Y - yVal) ^ 2
                     If currentDist <= shortestDist And vertexList(i).vertex(j) = 0 Then
                         shortestDist = currentDist
@@ -8945,7 +8945,7 @@ Private Function RegionSelObjects(xVal As Single, yVal As Single, skipSel As Boo
     shortestDist = (8 ^ 2 + 1)
     For i = 1 To spawnPoints
         If currentFunction = TOOL_VSELECT Then Spawns(i).active = 0
-        If nearCoord(xVal, Spawns(i).X, 8 / zoomFactor) And nearCoord(yVal, Spawns(i).Y, 8 / zoomFactor) Then
+        If NearCoord(xVal, Spawns(i).X, 8 / zoomFactor) And NearCoord(yVal, Spawns(i).Y, 8 / zoomFactor) Then
             currentDist = (Spawns(i).X - xVal) ^ 2 + (Spawns(i).Y - yVal) ^ 2
             If currentDist < shortestDist Then
                 shortestDist = currentDist
@@ -8973,7 +8973,7 @@ Private Function RegionSelObjects(xVal As Single, yVal As Single, skipSel As Boo
     shortestDist = 64 ^ 2 + 1
     For i = 1 To colliderCount
         If currentFunction = TOOL_VSELECT Then Colliders(i).active = 0
-        If nearCoord(xVal, Colliders(i).X, Colliders(i).radius / 2) And nearCoord(yVal, Colliders(i).Y, Colliders(i).radius / 2) Then
+        If NearCoord(xVal, Colliders(i).X, Colliders(i).radius / 2) And NearCoord(yVal, Colliders(i).Y, Colliders(i).radius / 2) Then
             currentDist = (Colliders(i).X - xVal) ^ 2 + (Colliders(i).Y - yVal) ^ 2
             If currentDist < shortestDist Then
                 shortestDist = currentDist
@@ -9013,7 +9013,7 @@ Private Function regionSelLights(xVal As Single, yVal As Single, skipSel As Bool
     shortestDist = (8 ^ 2 + 1)
     For i = 1 To lightCount
         If currentFunction = TOOL_VSELECT Then Lights(i).selected = 0
-        If nearCoord(xVal, Lights(i).X, 8 / zoomFactor) And nearCoord(yVal, Lights(i).Y, 8 / zoomFactor) Then
+        If NearCoord(xVal, Lights(i).X, 8 / zoomFactor) And NearCoord(yVal, Lights(i).Y, 8 / zoomFactor) Then
             currentDist = (Lights(i).X - xVal) ^ 2 + (Lights(i).Y - yVal) ^ 2
             If currentDist < shortestDist Then
                 shortestDist = currentDist
@@ -9054,7 +9054,7 @@ Private Function RegionSelWaypoints(xVal As Single, yVal As Single, skipSel As B
     For i = 1 To waypointCount
         If currentFunction = TOOL_VSELECT Then Waypoints(i).selected = False
         If (frmWaypoints.showPaths = Waypoints(i).pathNum) Or frmWaypoints.showPaths = 0 Then
-            If nearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And nearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
+            If NearCoord(xVal, Waypoints(i).X, 8 / zoomFactor) And NearCoord(yVal, Waypoints(i).Y, 8 / zoomFactor) Then
                 currentDist = (Waypoints(i).X - xVal) ^ 2 + (Waypoints(i).Y - yVal) ^ 2
                 If currentDist < shortestDist Then
                     shortestDist = currentDist
@@ -9652,7 +9652,7 @@ Private Sub vertexSelAlt(X As Single, Y As Single)
     For i = 1 To mPolyCount
         For j = 1 To 3
             ' if in range
-            If nearCoord(xCenter, Polys(i).vertex(j).X, Abs(xDist)) And nearCoord(yCenter, Polys(i).vertex(j).Y, Abs(yDist)) Then
+            If NearCoord(xCenter, Polys(i).vertex(j).X, Abs(xDist)) And NearCoord(yCenter, Polys(i).vertex(j).Y, Abs(yDist)) Then
                 If vertexList(i).vertex(j) = 0 Then
                     vertexList(i).vertex(j) = 1
                     addPoly = 1
@@ -10202,10 +10202,10 @@ ErrorHandler:
 
 End Sub
 
-Private Function nearCoord(ByVal mouseCoord As Single, ByVal polyCoord As Single, ByVal range As Single) As Boolean
+Private Function NearCoord(ByVal mouseCoord As Single, ByVal polyCoord As Single, ByVal range As Single) As Boolean
 
     If mouseCoord <= (polyCoord + range) And mouseCoord >= (polyCoord - range) Then
-        nearCoord = True
+        NearCoord = True
     End If
 
 End Function
