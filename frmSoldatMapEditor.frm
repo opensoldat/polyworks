@@ -3902,13 +3902,13 @@ Private Function IsInSector2(Index As Integer, X As Integer, Y As Integer, div A
         y1 = PolyCoords(Index).vertex(j).Y
         y2 = PolyCoords(Index).vertex(VertNum).Y
 
-        If segmentsIntersect(x1, y1, x2, y2, X, Y, X + div, Y) Then
+        If SegmentsIntersect(x1, y1, x2, y2, X, Y, X + div, Y) Then
             IsInSector2 = True
-        ElseIf segmentsIntersect(x1, y1, x2, y2, X, Y, X, Y + div) Then
+        ElseIf SegmentsIntersect(x1, y1, x2, y2, X, Y, X, Y + div) Then
             IsInSector2 = True
-        ElseIf segmentsIntersect(x1, y1, x2, y2, X + div, Y, X + div, Y + div) Then
+        ElseIf SegmentsIntersect(x1, y1, x2, y2, X + div, Y, X + div, Y + div) Then
             IsInSector2 = True
-        ElseIf segmentsIntersect(x1, y1, x2, y2, X, Y + div, X + div, Y + div) Then
+        ElseIf SegmentsIntersect(x1, y1, x2, y2, X, Y + div, X + div, Y + div) Then
             IsInSector2 = True
         End If
     Next
@@ -3997,7 +3997,7 @@ Private Function SegXVertSeg(ByRef A1 As D3DVECTOR2, ByRef B1 As D3DVECTOR2, _
 
 End Function
 
-Private Function segmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByVal x2 As Integer, ByVal y2 As Integer, _
+Private Function SegmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByVal x2 As Integer, ByVal y2 As Integer, _
         ByVal A1 As Integer, ByVal B1 As Integer, ByVal A2 As Integer, ByVal B2 As Integer) As Boolean
 
     On Error GoTo ErrorHandler
@@ -4016,13 +4016,13 @@ Private Function segmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
 
     If (da * dy - db * DX) = 0 Then
         ' the segments are parallel
-        segmentsIntersect = False
+        SegmentsIntersect = False
         Exit Function
     End If
 
     s = (DX * (B1 - y1) + dy * (x1 - A1)) / (da * dy - db * DX)
     T = (da * (y1 - B1) + db * (A1 - x1)) / (db * DX - da * dy)
-    segmentsIntersect = (s >= 0 And s <= 1 And T >= 0 And T <= 1)
+    SegmentsIntersect = (s >= 0 And s <= 1 And T >= 0 And T <= 1)
 
     Exit Function
 
