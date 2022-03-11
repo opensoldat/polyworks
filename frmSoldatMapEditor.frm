@@ -3879,7 +3879,7 @@ ErrorHandler:
 
 End Function
 
-Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div As Long) As Integer
+Private Function IsInSector2(Index As Integer, X As Integer, Y As Integer, div As Long) As Integer  ' unused?
 
     Dim i As Integer
     Dim j As Integer
@@ -3892,7 +3892,7 @@ Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div A
 
     On Error GoTo ErrorHandler
 
-    isInSector2 = False
+    IsInSector2 = False
 
     For j = 1 To 3
         VertNum = j + 1
@@ -3903,13 +3903,13 @@ Private Function isInSector2(Index As Integer, X As Integer, Y As Integer, div A
         y2 = PolyCoords(Index).vertex(VertNum).Y
 
         If segmentsIntersect(x1, y1, x2, y2, X, Y, X + div, Y) Then
-            isInSector2 = True
+            IsInSector2 = True
         ElseIf segmentsIntersect(x1, y1, x2, y2, X, Y, X, Y + div) Then
-            isInSector2 = True
+            IsInSector2 = True
         ElseIf segmentsIntersect(x1, y1, x2, y2, X + div, Y, X + div, Y + div) Then
-            isInSector2 = True
+            IsInSector2 = True
         ElseIf segmentsIntersect(x1, y1, x2, y2, X, Y + div, X + div, Y + div) Then
-            isInSector2 = True
+            IsInSector2 = True
         End If
     Next
 
