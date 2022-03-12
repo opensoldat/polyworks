@@ -1917,14 +1917,14 @@ Public Sub InitGfx()
     picButtonGfx.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\button_gfx.bmp")
 
     ' draw control box buttons
-    mouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
-    mouseEvent2 picMinimize, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
+    MouseEvent2 picMinimize, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHelp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     ' draw menu buttons
     For Each c In picMenu
-        mouseEvent2 c, 0, 0, BUTTON_MENU, 0, BUTTON_UP
+        MouseEvent2 c, 0, 0, BUTTON_MENU, 0, BUTTON_UP
     Next
 
 End Sub
@@ -5898,7 +5898,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
         If frmWaypoints.showPaths = 1 And frmWaypoints.wayptPath = 1 Or frmWaypoints.showPaths = 2 And frmWaypoints.wayptPath = 0 Then
             frmWaypoints.picShow_MouseUp 0, 1, 0, 0, 0
-            mouseEvent2 frmWaypoints.picShow(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
+            MouseEvent2 frmWaypoints.picShow(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
         End If
 
         mnuDeselect_Click
@@ -14050,10 +14050,10 @@ Private Sub mnuScenTrans_Click(Index As Integer)
 
     If Index = 0 Then  ' rotate
         frmScenery.rotateScenery = mnuScenTrans(Index).Checked
-        mouseEvent2 frmScenery.picRotate, 0, 0, BUTTON_SMALL, frmScenery.rotateScenery, BUTTON_UP
+        MouseEvent2 frmScenery.picRotate, 0, 0, BUTTON_SMALL, frmScenery.rotateScenery, BUTTON_UP
     ElseIf Index = 1 Then
         frmScenery.scaleScenery = mnuScenTrans(Index).Checked
-        mouseEvent2 frmScenery.picScale, 0, 0, BUTTON_SMALL, frmScenery.scaleScenery, BUTTON_UP
+        MouseEvent2 frmScenery.picScale, 0, 0, BUTTON_SMALL, frmScenery.scaleScenery, BUTTON_UP
     End If
 
 End Sub
@@ -14353,27 +14353,27 @@ End Sub
 
 Private Sub picMenu_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_DOWN
+    MouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_DOWN
     PopupMenu mnuMenu(Index), , Index * MENU_WIDTH, 41
-    mouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_UP
+    MouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picMenu_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_MOVE
+    MouseEvent2 picMenu(Index), X, Y, BUTTON_MENU, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHelp_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHelp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
@@ -14381,7 +14381,7 @@ Private Sub picHelp_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
     RunHelp
 
-    mouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHelp, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -14412,13 +14412,13 @@ End Sub
 
 Private Sub picMaximize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_DOWN
+    MouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_DOWN
 
 End Sub
 
 Private Sub picMaximize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_MOVE
+    MouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_MOVE
 
 End Sub
 
@@ -14434,7 +14434,7 @@ Private Sub picMaximize_MouseUp(Button As Integer, Shift As Integer, X As Single
 
     picResize.Visible = Me.Tag = vbNormal
 
-    mouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
+    MouseEvent2 picMaximize, X, Y, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
 
     ResetDevice
 
@@ -14442,19 +14442,19 @@ End Sub
 
 Private Sub picMinimize_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picMinimize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Public Sub picMinimize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_UP
     If mnuDisplay.Checked Then frmDisplay.Hide
     If mnuWaypoints.Checked Then frmWaypoints.Hide
     If mnuTools.Checked Then frmTools.Hide
@@ -14469,19 +14469,19 @@ End Sub
 
 Private Sub picExit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picExit_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picExit_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picExit, X, Y, BUTTON_SMALL, 0, BUTTON_UP
     Terminate
 
 End Sub
@@ -14507,7 +14507,7 @@ Private Sub picTitle_DblClick()
         MaximizeBorderLessForm
     End If
 
-    mouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
+    MouseEvent2 picMaximize, 0, 0, BUTTON_SMALL, (Me.Tag = vbNormal), BUTTON_UP
 
     picResize.Visible = Me.Tag = vbNormal
 

@@ -2058,35 +2058,35 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPropMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
     PopupMenu mnuProperties, , picPropMenu.Left + 32, picPropMenu.Top + 16
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
@@ -2098,8 +2098,8 @@ Public Sub SetColors()
     Dim c As Control
 
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_properties.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgColor
     For Each c In lblInfo

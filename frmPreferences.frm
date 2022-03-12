@@ -2013,12 +2013,12 @@ Private Function applyPreferences() As Boolean
 
     On Error GoTo ErrorHandler
 
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     If Right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
 
@@ -2315,7 +2315,7 @@ Private Sub picFolder_Click()
         txtDir.Text = folder
     End If
 
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2331,7 +2331,7 @@ Private Sub picUncomp_Click()
         txtUncomp.Text = folder
     End If
 
-    mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2347,7 +2347,7 @@ Private Sub picPrefabs_Click()
         txtPrefabs.Text = folder
     End If
 
-    mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2671,141 +2671,141 @@ End Sub
 
 Private Sub picSekrit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picSekrit_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picCancel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picOK_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picApply_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picApply_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picfolder_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picfolder_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picUncomp_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picUncomp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picPrefabs_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picPrefabs_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picScenery_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_DOWN
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_DOWN
 
 End Sub
 
 Private Sub picScenery_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_MOVE
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_MOVE
 
 End Sub
 
 Private Sub picScenery_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     sceneryVerts = Not sceneryVerts
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_UP
 
 End Sub
 
 Private Sub picTopmost_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_DOWN
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_DOWN
 
 End Sub
 
 Private Sub picTopmost_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_MOVE
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_MOVE
 
 End Sub
 
 Private Sub picTopmost_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     topmost = Not topmost
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_UP
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_UP
 
 End Sub
 
@@ -2820,16 +2820,16 @@ Public Sub SetColors()
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_preferences.bmp")
     picHotkeys.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tools.bmp")
 
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
-    mouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    MouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
 
 
     Me.BackColor = bgColor

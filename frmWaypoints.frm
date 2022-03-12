@@ -579,7 +579,7 @@ Public Sub getPathNum(value As Byte)
     Dim i As Integer
 
     For i = picPath.LBound To picPath.UBound
-        mouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, value = i + 1, BUTTON_UP
+        MouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, value = i + 1, BUTTON_UP
     Next
     wayptPath = value - 1
 
@@ -588,7 +588,7 @@ End Sub
 Public Sub getWayType(Index As Integer, value As Boolean)
 
     wayptType(Index) = value
-    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, value, BUTTON_UP
+    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, value, BUTTON_UP
 
 End Sub
 
@@ -618,7 +618,7 @@ Public Sub ClearWaypt()
     Debug.Assert picType.UBound = UBound(wayptType)
 
     For i = picType.LBound To picType.UBound
-        mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
         wayptType(i) = False
     Next
 
@@ -666,31 +666,31 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPath_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_DOWN
+    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_DOWN
 
 End Sub
 
 Private Sub picPath_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_MOVE, lblPath(Index).Width + 16
+    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_MOVE, lblPath(Index).Width + 16
 
 End Sub
 
@@ -702,7 +702,7 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
     For i = picPath.LBound To picPath.UBound
         If i <> Index Then
-            mouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
+            MouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
         End If
     Next
 
@@ -712,13 +712,13 @@ End Sub
 
 Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_DOWN
+    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_DOWN
 
 End Sub
 
 Private Sub picType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_MOVE, lblType(Index).Width + 16
+    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_MOVE, lblType(Index).Width + 16
 
 End Sub
 
@@ -727,33 +727,33 @@ Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer
     If Not frmSoldatMapEditor.SetWayType(Index, Not wayptType(Index)) Then Exit Sub
 
     wayptType(Index) = Not wayptType(Index)
-    mouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
+    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
 
     If Index = 0 Then
         wayptType(1) = False
-        mouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 1 Then
         wayptType(0) = False
-        mouseEvent2 picType(0), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(0), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 2 Then
         wayptType(3) = False
-        mouseEvent2 picType(3), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(3), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 3 Then
         wayptType(2) = False
-        mouseEvent2 picType(2), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(2), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     End If
 
 End Sub
 
 Private Sub picShow_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picShow(Index), X, Y, BUTTON_SMALL, (Index = showPaths), BUTTON_DOWN
+    MouseEvent2 picShow(Index), X, Y, BUTTON_SMALL, (Index = showPaths), BUTTON_DOWN
 
 End Sub
 
 Private Sub picShow_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picShow(Index), X, Y, BUTTON_SMALL, (Index = showPaths), BUTTON_MOVE, lblShow(Index).Width + 16
+    MouseEvent2 picShow(Index), X, Y, BUTTON_SMALL, (Index = showPaths), BUTTON_MOVE, lblShow(Index).Width + 16
 
 End Sub
 
@@ -765,7 +765,7 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
 
     For i = picShow.LBound To picShow.UBound
         If i <> Index Then
-            mouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
+            MouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
         End If
     Next
 
@@ -782,17 +782,17 @@ Public Sub SetColors()
 
 
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_waypoints.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    mouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
-    mouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
+    MouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
+    MouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
 
     For i = picType.LBound To picType.UBound
-        mouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+        MouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     Next
 
     For i = picShow.LBound To picShow.UBound
-        mouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
+        MouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
     Next
 
 

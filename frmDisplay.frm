@@ -579,7 +579,7 @@ End Sub
 Public Sub setLayer(Index As Integer, value As Boolean)
 
     layers(Index) = value
-    mouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+    MouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
 
 End Sub
 
@@ -591,13 +591,13 @@ End Sub
 
 Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
+    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
 
 End Sub
 
 Private Sub picLayer_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
+    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
 
 End Sub
 
@@ -605,7 +605,7 @@ Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
     layers(Index) = Not layers(Index)
     frmSoldatMapEditor.SetDispOptions Index, layers(Index)
-    mouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+    MouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
 
 End Sub
 
@@ -648,19 +648,19 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -672,7 +672,7 @@ Public Sub refreshButtons()
     Debug.Assert picLayer.UBound = UBound(layers)
 
     For i = picLayer.LBound To picLayer.UBound
-        mouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
+        MouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
     Next
 
 End Sub
@@ -685,7 +685,7 @@ Public Sub SetColors()
     Dim c As Control
 
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_display.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     Me.BackColor = bgColor
 

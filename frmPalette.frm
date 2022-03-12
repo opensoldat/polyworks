@@ -602,7 +602,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
     Next
 
     For i = 0 To 2
-        mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
+        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
 
 End Sub
@@ -1027,13 +1027,13 @@ End Function
 
 Public Sub picClrMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_DOWN
+    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_DOWN
 
 End Sub
 
 Private Sub picClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_MOVE, lblClrMode(Index).Width + 16
+    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_MOVE, lblClrMode(Index).Width + 16
 
 End Sub
 
@@ -1045,7 +1045,7 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
 
     For i = picClrMode.LBound To picClrMode.UBound
         If i <> Index Then
-            mouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = clrMode), BUTTON_UP
+            MouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = clrMode), BUTTON_UP
         End If
     Next
 
@@ -1086,35 +1086,35 @@ End Sub
 
 Private Sub picPaletteMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
     PopupMenu mnuPalette, , picPaletteMenu.Left + 32, picPaletteMenu.Top + 16
 
-    mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPaletteMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picPaletteMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -1127,11 +1127,11 @@ Public Sub SetColors()
 
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_palette.bmp")
 
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     For i = picClrMode.LBound To picClrMode.UBound
-        mouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
+        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
     Next
 
     Me.BackColor = bgColor

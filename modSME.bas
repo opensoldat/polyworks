@@ -401,7 +401,7 @@ Public Function MouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal
 End Function
 
 ' mouse event
-Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
+Public Function MouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
 
     Dim xSrc As Integer
     Dim ySrc As Integer
@@ -432,18 +432,18 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
     If exWidth = 0 Then exWidth = Width
 
     If action = BUTTON_UP Or action = BUTTON_DOWN Then
-        mouseEvent2 = True
+        MouseEvent2 = True
     ElseIf (xVal < 0) Or (xVal > exWidth) Or (yVal < 0) Or (yVal > Height) Then  ' the MOUSELEAVE pseudo-event
         ReleaseCapture
-        mouseEvent2 = True
+        MouseEvent2 = True
         action = BUTTON_UP
     ElseIf GetCapture() <> pic.hWnd Then  ' the MOUSEENTER pseudo-event
         SetCapture pic.hWnd
-        mouseEvent2 = True
+        MouseEvent2 = True
         action = BUTTON_MOVE
     End If
 
-    If mouseEvent2 = True Then
+    If MouseEvent2 = True Then
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picButtonGfx.hDC, xSrc + Width * action, ySrc + active * Height, vbSrcCopy
         pic.Refresh
     End If

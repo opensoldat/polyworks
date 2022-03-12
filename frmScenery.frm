@@ -551,19 +551,19 @@ End Sub
 
 Private Sub picSceneryMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picSceneryMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picSceneryMenu_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picSceneryMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -605,31 +605,31 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picRotate_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picRotate, X, Y, BUTTON_SMALL, rotateScenery, BUTTON_DOWN
+    MouseEvent2 picRotate, X, Y, BUTTON_SMALL, rotateScenery, BUTTON_DOWN
 
 End Sub
 
 Private Sub picRotate_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picRotate, X, Y, BUTTON_SMALL, rotateScenery, BUTTON_MOVE, lblRotate.Width + 16
+    MouseEvent2 picRotate, X, Y, BUTTON_SMALL, rotateScenery, BUTTON_MOVE, lblRotate.Width + 16
 
 End Sub
 
@@ -641,13 +641,13 @@ End Sub
 
 Private Sub picScale_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScale, X, Y, BUTTON_SMALL, scaleScenery, BUTTON_DOWN
+    MouseEvent2 picScale, X, Y, BUTTON_SMALL, scaleScenery, BUTTON_DOWN
 
 End Sub
 
 Private Sub picScale_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScale, X, Y, BUTTON_SMALL, scaleScenery, BUTTON_MOVE, lblScale.Width + 16
+    MouseEvent2 picScale, X, Y, BUTTON_SMALL, scaleScenery, BUTTON_MOVE, lblScale.Width + 16
 
 End Sub
 
@@ -659,13 +659,13 @@ End Sub
 
 Public Sub picLevel_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_DOWN
+    MouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_DOWN
 
 End Sub
 
 Private Sub picLevel_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_MOVE, lblLevel(Index).Width + 16
+    MouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_MOVE, lblLevel(Index).Width + 16
 
 End Sub
 
@@ -677,7 +677,7 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
 
     For i = picLevel.LBound To picLevel.UBound
         If i <> Index Then
-            mouseEvent2 picLevel(i), X, Y, BUTTON_SMALL, (i = level), BUTTON_UP
+            MouseEvent2 picLevel(i), X, Y, BUTTON_SMALL, (i = level), BUTTON_UP
         End If
     Next
 
@@ -696,15 +696,15 @@ Public Sub SetColors()
 
     picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_scenery.bmp")
 
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     For i = picLevel.LBound To picLevel.UBound
-        mouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
+        MouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
     Next
 
-    mouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
-    mouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
+    MouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
+    MouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
 
 
     Me.BackColor = bgColor
