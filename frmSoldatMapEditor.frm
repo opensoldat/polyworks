@@ -13820,13 +13820,13 @@ Private Sub mnuSaveSpace_Click()
             IIf(isNewFile, vbNewLine, "") & sNull & sNull
         SaveSection "Main", iniString, appPath & "\workspace\" & commonDialog.FileTitle
 
-        saveWindow "Tools", frmTools, False, isNewFile, commonDialog.FileTitle
-        saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile, commonDialog.FileTitle
-        saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile, commonDialog.FileTitle
-        saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile, commonDialog.FileTitle
-        saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile, commonDialog.FileTitle
-        saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile, commonDialog.FileTitle
-        saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Tools", frmTools, False, isNewFile, commonDialog.FileTitle
+        SaveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile, commonDialog.FileTitle
+        SaveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile, commonDialog.FileTitle
     End If
 
     RegainFocus

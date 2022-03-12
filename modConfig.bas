@@ -365,13 +365,13 @@ Public Sub SaveSettings()
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Main", iniString, appPath & "\workspace\current.ini"
 
-    saveWindow "Tools", frmTools, False, isNewFile
-    saveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
-    saveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
-    saveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
-    saveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
-    saveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
-    saveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
+    SaveWindow "Tools", frmTools, False, isNewFile
+    SaveWindow "Display", frmDisplay, frmDisplay.collapsed, isNewFile
+    SaveWindow "Properties", frmInfo, frmInfo.collapsed, isNewFile
+    SaveWindow "Palette", frmPalette, frmPalette.collapsed, isNewFile
+    SaveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
+    SaveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
+    SaveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
 
     ' recent files
     iniString = _
@@ -482,7 +482,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub saveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional theFileName As String = "current.ini")
+Public Sub SaveWindow(sectionName As String, window As Form, collapsed As Boolean, isNewFile As Boolean, Optional theFileName As String = "current.ini")
 
     Dim leftVal As Integer
     Dim topVal As Integer
