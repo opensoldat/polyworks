@@ -10002,9 +10002,9 @@ Private Function ApplyBlend(dClr As TColor) As TColor
         ApplyBlend.green = (dClr.green - dClr.green / 255 * gPolyClr.green + gPolyClr.green) * opacity + dClr.green * (1 - opacity)
         ApplyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyClr.blue + gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 3 Then  ' AND ' darken
-        ApplyBlend.red = lowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = lowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = lowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = LowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = LowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = LowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 4 Then  ' OR ' lighten
         ApplyBlend.red = HigherVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
         ApplyBlend.green = HigherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)

@@ -91,12 +91,12 @@ Public Function DiffVal(val1 As Byte, val2 As Byte) As Byte
 
 End Function
 
-Public Function lowerVal(val1 As Byte, val2 As Byte) As Byte
+Public Function LowerVal(val1 As Byte, val2 As Byte) As Byte
 
     If val1 < val2 Then
-        lowerVal = val1
+        LowerVal = val1
     Else
-        lowerVal = val2
+        LowerVal = val2
     End If
 
 End Function
