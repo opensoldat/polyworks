@@ -10010,9 +10010,9 @@ Private Function ApplyBlend(dClr As TColor) As TColor
         ApplyBlend.green = higherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
         ApplyBlend.blue = higherVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 5 Then  ' XOR ' difference
-        ApplyBlend.red = diffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = diffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = diffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = DiffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = DiffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = DiffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
     Else
         ApplyBlend.red = 0
         ApplyBlend.green = 0
