@@ -1603,7 +1603,7 @@ Private Sub Form_Load()
 
     initialized = False
 
-    modConfig.loadSettings
+    modConfig.LoadSettings
     LoadColors
 
 
