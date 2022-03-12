@@ -607,24 +607,6 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
 End Sub
 
-Private Function GetRGB(DecValue As Long) As TColor
-
-    Dim hexValue As String
-
-    hexValue = Hex$(Val(DecValue))
-
-    If Len(hexValue) < 6 Then
-        hexValue = String$(6 - Len(hexValue), "0") + hexValue
-    End If
-
-    GetRGB.blue = CLng("&H" + Right(hexValue, 2))
-    hexValue = Left(hexValue, Len(hexValue) - 2)
-    GetRGB.green = CLng("&H" + Right(hexValue, 2))
-    hexValue = Left(hexValue, Len(hexValue) - 2)
-    GetRGB.red = CLng("&H" + Right(hexValue, 2))
-
-End Function
-
 Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
 
     Dim X As Integer

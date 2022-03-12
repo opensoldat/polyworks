@@ -2669,22 +2669,6 @@ Private Sub txtHeight_LostFocus()
 
 End Sub
 
-Private Function GetRGB(DecValue As Long) As TColor
-
-    Dim hexValue As String
-
-    hexValue = Hex(Val(DecValue))
-
-    If Len(hexValue) < 6 Then
-        hexValue = String(6 - Len(hexValue), "0") + hexValue
-    End If
-
-    GetRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
-    GetRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
-    GetRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
-
-End Function
-
 Private Sub picSekrit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN

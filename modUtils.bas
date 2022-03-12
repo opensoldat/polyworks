@@ -19,17 +19,15 @@ Public Function GetRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
-    hexValue = Hex$(Val(DecValue))
+    hexValue = Hex(Val(DecValue))
 
     If Len(hexValue) < 6 Then
-        hexValue = String$(6 - Len(hexValue), "0") + hexValue
+        hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
-    GetRGB.blue = CLng("&H" + Right$(hexValue, 2))
-    hexValue = Left$(hexValue, Len(hexValue) - 2)
-    GetRGB.green = CLng("&H" + Right$(hexValue, 2))
-    hexValue = Left$(hexValue, Len(hexValue) - 2)
-    GetRGB.red = CLng("&H" + Right$(hexValue, 2))
+    GetRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
+    GetRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
+    GetRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
 
 End Function
 
