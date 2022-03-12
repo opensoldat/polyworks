@@ -2175,11 +2175,11 @@ Private Sub Form_Load()
     blendModes(6) = 5
     blendModes(7) = 6
 
-    backClr = getRGB(frmSoldatMapEditor.backClr)
-    pointColor = getRGB(frmSoldatMapEditor.pointColor)
-    selectionColor = getRGB(frmSoldatMapEditor.selectionColor)
-    gridColor1 = getRGB(frmSoldatMapEditor.gridColor1)
-    gridColor2 = getRGB(frmSoldatMapEditor.gridColor2)
+    backClr = GetRGB(frmSoldatMapEditor.backClr)
+    pointColor = GetRGB(frmSoldatMapEditor.pointColor)
+    selectionColor = GetRGB(frmSoldatMapEditor.selectionColor)
+    gridColor1 = GetRGB(frmSoldatMapEditor.gridColor1)
+    gridColor2 = GetRGB(frmSoldatMapEditor.gridColor2)
 
     For i = LBound(blendModes) To UBound(blendModes)
         If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
@@ -2669,7 +2669,7 @@ Private Sub txtHeight_LostFocus()
 
 End Sub
 
-Private Function getRGB(DecValue As Long) As TColor
+Private Function GetRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
@@ -2679,9 +2679,9 @@ Private Function getRGB(DecValue As Long) As TColor
         hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
-    getRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
-    getRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
-    getRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
+    GetRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
+    GetRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
+    GetRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
 
 End Function
 

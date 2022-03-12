@@ -572,7 +572,7 @@ End Function
 
 Public Sub setPalClr(X As Integer, Y As Integer, clrVal As Long)
 
-    clrPalette(X, Y) = getRGB(clrVal)
+    clrPalette(X, Y) = GetRGB(clrVal)
 
 End Sub
 
@@ -607,7 +607,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
 End Sub
 
-Private Function getRGB(DecValue As Long) As TColor
+Private Function GetRGB(DecValue As Long) As TColor
 
     Dim hexValue As String
 
@@ -617,11 +617,11 @@ Private Function getRGB(DecValue As Long) As TColor
         hexValue = String$(6 - Len(hexValue), "0") + hexValue
     End If
 
-    getRGB.blue = CLng("&H" + Right(hexValue, 2))
+    GetRGB.blue = CLng("&H" + Right(hexValue, 2))
     hexValue = Left(hexValue, Len(hexValue) - 2)
-    getRGB.green = CLng("&H" + Right(hexValue, 2))
+    GetRGB.green = CLng("&H" + Right(hexValue, 2))
     hexValue = Left(hexValue, Len(hexValue) - 2)
-    getRGB.red = CLng("&H" + Right(hexValue, 2))
+    GetRGB.red = CLng("&H" + Right(hexValue, 2))
 
 End Function
 

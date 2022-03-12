@@ -2413,7 +2413,7 @@ Public Sub LoadFile(theFileName As String)
             For j = 1 To 3
                 PolyCoords(i).vertex(j).X = Polys(i).vertex(j).X
                 PolyCoords(i).vertex(j).Y = Polys(i).vertex(j).Y
-                vertexList(i).color(j) = getRGB(Polys(i).vertex(j).color)
+                vertexList(i).color(j) = GetRGB(Polys(i).vertex(j).color)
                 If PolyCoords(i).vertex(j).X > maxX Then maxX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).X < minX Then minX = PolyCoords(i).vertex(j).X
                 If PolyCoords(i).vertex(j).Y > maxY Then maxY = PolyCoords(i).vertex(j).Y
@@ -2702,8 +2702,8 @@ Public Sub LoadFile(theFileName As String)
     Next
 
     ' get background colors
-    bgColors(1) = getRGB(Options.BackgroundColor)
-    bgColors(2) = getRGB(Options.BackgroundColor2)
+    bgColors(1) = GetRGB(Options.BackgroundColor)
+    bgColors(2) = GetRGB(Options.BackgroundColor2)
 
     ' set background poly colors
     bgPolys(1) = CreateCustomVertex(-maxX - 640, -maxX - 640, 1, 1, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red), 0, 0)
@@ -3131,7 +3131,7 @@ Private Sub SaveFile(theFileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = getRGB(Scenery(i).color)
+            tempClr = GetRGB(Scenery(i).color)
             Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
@@ -3427,7 +3427,7 @@ Public Sub SaveAndCompile(theFileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = getRGB(Scenery(i).color)
+            tempClr = GetRGB(Scenery(i).color)
             Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
@@ -5833,7 +5833,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         End If
     ElseIf currentFunction = TOOL_PIXPICKER Then
         Dim tempClr As TColor
-        tempClr = getRGB(GetPixel(Me.hDC, X, Y))
+        tempClr = GetRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
@@ -6293,7 +6293,7 @@ Private Sub AverageVerts()
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).color)
+                tehClr = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
                 finalR = finalR + tehClr.red
                 finalG = finalG + tehClr.green
                 finalB = finalB + tehClr.blue
@@ -6801,7 +6801,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         End If
     ElseIf currentFunction = TOOL_PIXPICKER Then  ' pixel picker
         Dim tempClr As TColor
-        tempClr = getRGB(GetPixel(Me.hDC, X, Y))
+        tempClr = GetRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
         Else
@@ -7713,7 +7713,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
+            destClr = GetRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = ApplyBlend(destClr)
             Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
@@ -7737,7 +7737,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
+            destClr = GetRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = ApplyBlend(destClr)
             Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
@@ -7770,7 +7770,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If NearCoord(X, Polys(pNum).vertex(j).X, R) And NearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = getRGB(Polys(pNum).vertex(j).color)
+                            destClr = GetRGB(Polys(pNum).vertex(j).color)
                             destClr = ApplyBlend(destClr)
                             Polys(pNum).vertex(j).color = ARGB(GetAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(pNum).color(j).red = destClr.red
@@ -7790,7 +7790,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = getRGB(Polys(i).vertex(j).color)
+                            destClr = GetRGB(Polys(i).vertex(j).color)
                             destClr = ApplyBlend(destClr)
                             Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(i).color(j).red = destClr.red
@@ -7811,7 +7811,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 1 Then
                 If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = getRGB(Scenery(i).color)
+                        destClr = GetRGB(Scenery(i).color)
                         destClr = ApplyBlend(destClr)
                         Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 3
@@ -7825,7 +7825,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 0 Then
                 If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = getRGB(Scenery(i).color)
+                        destClr = GetRGB(Scenery(i).color)
                         destClr = ApplyBlend(destClr)
                         Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                         If colorMode = 1 Then Scenery(i).selected = 2
@@ -7938,7 +7938,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             End If
         Next
         If vNum > 0 Then
-            tempClr = getRGB(Scenery(vNum).color)
+            tempClr = GetRGB(Scenery(vNum).color)
             If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
 
             ElseIf frmPalette.Enabled = False Then  ' non modal
@@ -8027,7 +8027,7 @@ Private Sub LightPicker(X As Single, Y As Single)
     End If
 
     If vNum > 0 Then  ' poly color absorbed
-        tempClr = getRGB(Polys(pNum).vertex(vNum).color)
+        tempClr = GetRGB(Polys(pNum).vertex(vNum).color)
         If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
             frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
@@ -9908,7 +9908,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = getRGB(Polys(PolyNum).vertex(j).color)
+                        destClr = GetRGB(Polys(PolyNum).vertex(j).color)
                         destClr = ApplyBlend(destClr)
                         Polys(PolyNum).vertex(j).color = ARGB(GetAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(PolyNum).color(j).red = destClr.red
@@ -9928,7 +9928,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = getRGB(Scenery(i).color)
+                    destClr = GetRGB(Scenery(i).color)
                     destClr = ApplyBlend(destClr)
                     Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
@@ -9948,7 +9948,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = getRGB(Polys(i).vertex(j).color)  ' get clr of poly
+                        destClr = GetRGB(Polys(i).vertex(j).color)  ' get clr of poly
                         destClr = ApplyBlend(destClr)
                         Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
@@ -9968,7 +9968,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = getRGB(Scenery(i).color)
+                    destClr = GetRGB(Scenery(i).color)
                     destClr = ApplyBlend(destClr)
                     Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
                     polyColored = True
@@ -12539,7 +12539,7 @@ Private Sub LoadPrefab(theFileName As String)
                     PolyCoords(tehValue).vertex(j).Y = Polys(tehValue).vertex(j).Y
                     Polys(tehValue).vertex(j).X = (PolyCoords(tehValue).vertex(j).X - scrollCoords(2).X) * zoomFactor
                     Polys(tehValue).vertex(j).Y = (PolyCoords(tehValue).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
-                    tempClr = getRGB(Polys(tehValue).vertex(j).color)
+                    tempClr = GetRGB(Polys(tehValue).vertex(j).color)
                     vertexList(tehValue).color(j).red = tempClr.red
                     vertexList(tehValue).color(j).green = tempClr.green
                     vertexList(tehValue).color(j).blue = tempClr.blue
@@ -12928,7 +12928,7 @@ Private Sub mnuSelColor_Click()
     For i = 1 To mPolyCount
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
-            clrVal = getRGB(Polys(i).vertex(j).color)
+            clrVal = GetRGB(Polys(i).vertex(j).color)
             If clrVal.red = gPolyClr.red And clrVal.green = gPolyClr.green And clrVal.blue = gPolyClr.blue Then
                 addPoly = 1
                 vertexList(i).vertex(j) = 1
@@ -13302,7 +13302,7 @@ Private Sub mnuApplyLight_Click()
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 ' apply poly color to base color
-                tehClr = getRGB(Polys(selectedPolys(i)).vertex(j).color)
+                tehClr = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
                 vertexList(selectedPolys(i)).color(j).red = tehClr.red
                 vertexList(selectedPolys(i)).color(j).green = tehClr.green
                 vertexList(selectedPolys(i)).color(j).blue = tehClr.blue
@@ -13312,7 +13312,7 @@ Private Sub mnuApplyLight_Click()
         For i = 1 To mPolyCount
             For j = 1 To 3
                 ' apply poly color to base color
-                tehClr = getRGB(Polys(i).vertex(j).color)
+                tehClr = GetRGB(Polys(i).vertex(j).color)
                 vertexList(i).color(j).red = tehClr.red
                 vertexList(i).color(j).green = tehClr.green
                 vertexList(i).color(j).blue = tehClr.blue
@@ -13405,8 +13405,8 @@ Private Sub mnuSplit_Click()
 
                 vertexList(selectedPolys(i)).color(Left) = vertexList(mPolyCount).color(Right)
 
-                clr1 = getRGB(Polys(selectedPolys(i)).vertex(Right).color)
-                clr2 = getRGB(Polys(mPolyCount).vertex(Left).color)
+                clr1 = GetRGB(Polys(selectedPolys(i)).vertex(Right).color)
+                clr2 = GetRGB(Polys(mPolyCount).vertex(Left).color)
                 alpha1 = GetAlpha(Polys(selectedPolys(i)).vertex(Right).color)
                 alpha2 = GetAlpha(Polys(mPolyCount).vertex(Left).color)
                 Polys(mPolyCount).vertex(Right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
@@ -14309,7 +14309,7 @@ Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
             ElseIf Index = 1 Then  ' y scale
                 Scenery(i).Scaling.Y = tehValue
             ElseIf Index = 2 Then  ' alpha
-                tempColor = getRGB(Scenery(i).color)
+                tempColor = GetRGB(Scenery(i).color)
                 Scenery(i).alpha = tehValue
                 Scenery(i).color = ARGB(tehValue, RGB(tempColor.blue, tempColor.green, tempColor.red))
             ElseIf Index = 3 Then  ' rotation
