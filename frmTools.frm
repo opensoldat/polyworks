@@ -429,7 +429,7 @@ End Sub
 Private Sub picTools_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If curTool <> Index Then
-        mouseEvent picTools(Index), (picTools(Index).ScaleWidth - X), (picTools(Index).ScaleHeight - Y), 0, Index * 32, 32, 32
+        MouseEvent picTools(Index), (picTools(Index).ScaleWidth - X), (picTools(Index).ScaleHeight - Y), 0, Index * 32, 32, 32
     End If
 
 End Sub

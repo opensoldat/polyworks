@@ -384,18 +384,18 @@ Public Function GifToBmp(ByVal src As String, ByVal dest As String) As Long
 End Function
 
 ' mouse event
-Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
+Public Function MouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
 
     If (xVal < 0) Or (xVal > Width) Or (yVal < 0) Or (yVal > Height) Then  ' the MOUSELEAVE pseudo-event
         ReleaseCapture
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
         pic.Refresh
-        mouseEvent = True
+        MouseEvent = True
     ElseIf GetCapture() <> pic.hWnd Then  ' the MOUSEENTER pseudo-event
         SetCapture pic.hWnd
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc + Width, ySrc, vbSrcCopy
         pic.Refresh
-        mouseEvent = True
+        MouseEvent = True
     End If
 
 End Function
