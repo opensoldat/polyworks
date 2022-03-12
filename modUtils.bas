@@ -101,12 +101,12 @@ Public Function lowerVal(val1 As Byte, val2 As Byte) As Byte
 
 End Function
 
-Public Function higherVal(val1 As Byte, val2 As Byte) As Byte
+Public Function HigherVal(val1 As Byte, val2 As Byte) As Byte
 
     If val1 > val2 Then
-        higherVal = val1
+        HigherVal = val1
     Else
-        higherVal = val2
+        HigherVal = val2
     End If
 
 End Function
