@@ -33,19 +33,19 @@ Public Function getRGB(DecValue As Long) As TColor
 
 End Function
 
-Public Function getAlpha(tehColor As Long) As Byte
+Public Function GetAlpha(tehColor As Long) As Byte
 
     Dim hexValue As String
 
     hexValue = Hex$(Val(tehColor))
 
     If Len(hexValue) <= 6 Then
-        getAlpha = 0
+        GetAlpha = 0
     Else
         If Len(hexValue) < 8 Then
             hexValue = String$(8 - Len(hexValue), "0") + hexValue
         End If
-        getAlpha = CLng("&H" + Left$(hexValue, 2))
+        GetAlpha = CLng("&H" + Left$(hexValue, 2))
     End If
 
 End Function

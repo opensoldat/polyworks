@@ -3095,7 +3095,7 @@ Private Sub SaveFile(theFileName As String)
                 Polygon.Poly.vertex(j).X = PolyCoords(i).vertex(j).X
                 Polygon.Poly.vertex(j).Y = PolyCoords(i).vertex(j).Y
 
-                Polygon.Poly.vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                Polygon.Poly.vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
 
                 VertNum = j + 1
                 If VertNum > 3 Then VertNum = 1
@@ -6103,7 +6103,7 @@ Private Sub ApplyLights(Optional toSel As Boolean = False)
                 If gVal > 255 Then gVal = 255
                 If bVal > 255 Then bVal = 255
 
-                Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
+                Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
 
                 rVal = 0
                 gVal = 0
@@ -6194,7 +6194,7 @@ Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
     If gVal > 255 Then gVal = 255
     If bVal > 255 Then bVal = 255
 
-    Polys(pIndex).vertex(vIndex).color = ARGB(getAlpha(Polys(pIndex).vertex(vIndex).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
+    Polys(pIndex).vertex(vIndex).color = ARGB(GetAlpha(Polys(pIndex).vertex(vIndex).color), RGB(Int(bVal), Int(gVal), Int(rVal)))
 
     rVal = 0
     gVal = 0
@@ -6308,7 +6308,7 @@ Private Sub AverageVerts()
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                Polys(selectedPolys(i)).vertex(j).color = ARGB(getAlpha(Polys(selectedPolys(i)).vertex(j).color), RGB(finalR, finalG, finalB))
+                Polys(selectedPolys(i)).vertex(j).color = ARGB(GetAlpha(Polys(selectedPolys(i)).vertex(j).color), RGB(finalR, finalG, finalB))
             End If
         Next
     Next
@@ -6377,7 +6377,7 @@ Private Sub AverageVertices()
                                 vertexList(connectedPolys(P)).color(V).red = finalR
                                 vertexList(connectedPolys(P)).color(V).green = finalG
                                 vertexList(connectedPolys(P)).color(V).blue = finalB
-                                Polys(connectedPolys(P)).vertex(V).color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
+                                Polys(connectedPolys(P)).vertex(V).color = ARGB(GetAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
                             End If
                         Next
                     Next
@@ -6431,7 +6431,7 @@ Private Sub AverageVertices()
                                 vertexList(connectedPolys(P)).color(V).red = finalR
                                 vertexList(connectedPolys(P)).color(V).green = finalG
                                 vertexList(connectedPolys(P)).color(V).blue = finalB
-                                Polys(connectedPolys(P)).vertex(V).color = ARGB(getAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
+                                Polys(connectedPolys(P)).vertex(V).color = ARGB(GetAlpha(Polys(connectedPolys(P)).vertex(V).color), RGB(finalB, finalG, finalR))
                             End If
                         Next
                     Next
@@ -7715,7 +7715,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         If closestPoly > 0 And closestVert > 0 Then
             destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = ApplyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
+            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
@@ -7739,7 +7739,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         If closestPoly > 0 And closestVert > 0 Then
             destClr = getRGB(Polys(closestPoly).vertex(closestVert).color)
             destClr = ApplyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).color = ARGB(getAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
+            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
             vertexList(closestPoly).color(closestVert).red = destClr.red
             vertexList(closestPoly).color(closestVert).green = destClr.green
             vertexList(closestPoly).color(closestVert).blue = destClr.blue
@@ -7772,7 +7772,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(pNum).vertex(j).color)
                             destClr = ApplyBlend(destClr)
-                            Polys(pNum).vertex(j).color = ARGB(getAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
+                            Polys(pNum).vertex(j).color = ARGB(GetAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(pNum).color(j).red = destClr.red
                             vertexList(pNum).color(j).green = destClr.green
                             vertexList(pNum).color(j).blue = destClr.blue
@@ -7792,7 +7792,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
                             destClr = getRGB(Polys(i).vertex(j).color)
                             destClr = ApplyBlend(destClr)
-                            Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
+                            Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                             vertexList(i).color(j).red = destClr.red
                             vertexList(i).color(j).green = destClr.green
                             vertexList(i).color(j).blue = destClr.blue
@@ -9910,7 +9910,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         End If
                         destClr = getRGB(Polys(PolyNum).vertex(j).color)
                         destClr = ApplyBlend(destClr)
-                        Polys(PolyNum).vertex(j).color = ARGB(getAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
+                        Polys(PolyNum).vertex(j).color = ARGB(GetAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(PolyNum).color(j).red = destClr.red
                         vertexList(PolyNum).color(j).green = destClr.green
                         vertexList(PolyNum).color(j).blue = destClr.blue
@@ -9950,7 +9950,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                         End If
                         destClr = getRGB(Polys(i).vertex(j).color)  ' get clr of poly
                         destClr = ApplyBlend(destClr)
-                        Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
+                        Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
                         vertexList(i).color(j).green = destClr.green
                         vertexList(i).color(j).blue = destClr.blue
@@ -10145,7 +10145,7 @@ Private Sub DeletePolys()
         ElseIf lightCount = 0 Then
             For i = 1 To mPolyCount
                 For j = 1 To 3
-                    Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                    Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
                 Next
             Next
         End If
@@ -11468,7 +11468,7 @@ Private Sub SetLightsMode(lightsOn As Boolean)
     If Not lightsOn Then
         For i = 1 To mPolyCount
             For j = 1 To 3
-                Polys(i).vertex(j).color = ARGB(getAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
+                Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(vertexList(i).color(j).blue, vertexList(i).color(j).green, vertexList(i).color(j).red))
             Next
         Next
     Else
@@ -12420,7 +12420,7 @@ Private Sub SavePrefab(theFileName As String)
                 Polygon.vertex(j).X = PolyCoords(selectedPolys(i)).vertex(j).X
                 Polygon.vertex(j).Y = PolyCoords(selectedPolys(i)).vertex(j).Y
                 vertexList(selectedPolys(i)).vertex(j) = 1
-                alpha = getAlpha(Polys(selectedPolys(i)).vertex(j).color)
+                alpha = GetAlpha(Polys(selectedPolys(i)).vertex(j).color)
                 Polygon.vertex(j).color = ARGB(alpha, RGB(vertexList(selectedPolys(i)).color(j).blue, vertexList(selectedPolys(i)).color(j).green, vertexList(selectedPolys(i)).color(j).red))
             Next
             Put #1, , Polygon
@@ -13407,8 +13407,8 @@ Private Sub mnuSplit_Click()
 
                 clr1 = getRGB(Polys(selectedPolys(i)).vertex(Right).color)
                 clr2 = getRGB(Polys(mPolyCount).vertex(Left).color)
-                alpha1 = getAlpha(Polys(selectedPolys(i)).vertex(Right).color)
-                alpha2 = getAlpha(Polys(mPolyCount).vertex(Left).color)
+                alpha1 = GetAlpha(Polys(selectedPolys(i)).vertex(Right).color)
+                alpha2 = GetAlpha(Polys(mPolyCount).vertex(Left).color)
                 Polys(mPolyCount).vertex(Right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
 
                 Polys(selectedPolys(i)).vertex(Left) = Polys(mPolyCount).vertex(Right)
@@ -14118,7 +14118,7 @@ Public Sub GetInfo()
                 End If
                 frmInfo.txtTexture(0).Text = Int(Polys(selectedPolys(1)).vertex(j).tu * 10000 + 0.5) / 10000
                 frmInfo.txtTexture(1).Text = Int(Polys(selectedPolys(1)).vertex(j).tv * 10000 + 0.5) / 10000
-                frmInfo.txtVertexAlpha.Text = Int((getAlpha(Polys(selectedPolys(1)).vertex(j).color) / 255 * 100) * 100 + 0.5) / 100
+                frmInfo.txtVertexAlpha.Text = Int((GetAlpha(Polys(selectedPolys(1)).vertex(j).color) / 255 * 100) * 100 + 0.5) / 100
                 frmInfo.lblCoords.Caption = Int(PolyCoords(selectedPolys(1)).vertex(j).X * 100 + 0.5) / 100 & ", " & Int(PolyCoords(selectedPolys(1)).vertex(j).Y * 100) / 100
                 Exit For
             End If
