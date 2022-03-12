@@ -234,7 +234,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub saveSettings()
+Public Sub SaveSettings()
 
     Dim X As Integer
     Dim Y As Integer

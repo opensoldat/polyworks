@@ -11713,7 +11713,7 @@ Public Sub Terminate()  ' You are on the way to destruction.
     End If
     DoEvents
 
-    saveSettings
+    SaveSettings
 
     Set mapTexture = Nothing
     Set particleTexture = Nothing
