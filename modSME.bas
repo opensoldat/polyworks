@@ -734,7 +734,7 @@ Public Function LoadInt(section As String, Entry As String, Optional FileName As
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String
+Public Function LoadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String  ' unused?
 
     If FileName = "" Then
         FileName = appPath & "\polyworks.ini"
@@ -742,7 +742,7 @@ Public Function loadSection(section As String, ByRef lReturn As String, length A
 
     GetPrivateProfileSection section, lReturn, length, FileName
 
-    loadSection = lReturn
+    LoadSection = lReturn
 
 End Function
 
