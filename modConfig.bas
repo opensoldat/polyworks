@@ -400,7 +400,7 @@ Private Function SetIdePath() As Boolean
 
 End Function
 
-Public Sub loadWorkspace(Optional theFileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
+Public Sub LoadWorkspace(Optional theFileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
 
     On Error GoTo ErrorHandler
 

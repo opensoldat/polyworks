@@ -1686,7 +1686,7 @@ Private Sub Form_Load()
 
     err = "Error initializing D3D"
     initialized2 = False
-    loadWorkspace "current.ini", True
+    LoadWorkspace "current.ini", True
     Init
 
 
@@ -1696,7 +1696,7 @@ Private Sub Form_Load()
 
     err = "Error setting up palette windows"
 
-    loadWorkspace
+    LoadWorkspace
     InitGrid
 
     ' show windows
@@ -13769,7 +13769,7 @@ Private Sub mnuLoadSpace_Click()
 
     If commonDialog.FileName <> "" Then
         If Len(Dir$(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
-            loadWorkspace commonDialog.FileTitle
+            LoadWorkspace commonDialog.FileTitle
             frmTools.setForm
             frmDisplay.setForm
             frmInfo.setForm
