@@ -72,11 +72,11 @@ Public Function ARGB(ByVal alphaVal As Byte, clrVal As Long) As Long
 
 End Function
 
-Public Function makeColor(red As Byte, green As Byte, blue As Byte) As TColor
+Public Function MakeColor(red As Byte, green As Byte, blue As Byte) As TColor
 
-    makeColor.red = red
-    makeColor.green = green
-    makeColor.blue = blue
+    MakeColor.red = red
+    MakeColor.green = green
+    MakeColor.blue = blue
 
 End Function
 

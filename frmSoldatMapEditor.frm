@@ -2280,8 +2280,8 @@ Public Sub NewMap()
     sketchLines = 0
     ReDim Preserve sketch(0)
 
-    bgColors(1) = makeColor(224, 224, 224)
-    bgColors(2) = makeColor(32, 32, 32)
+    bgColors(1) = MakeColor(224, 224, 224)
+    bgColors(2) = MakeColor(32, 32, 32)
 
     maxX = 0
     maxY = 0
