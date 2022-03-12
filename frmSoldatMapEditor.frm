@@ -3793,13 +3793,13 @@ Private Function IsInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
     End If
 
     ' is vertex in sector
-    If isBetween(X, PolyCoords(Index).vertex(1).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(1).Y, Y + div) Then
+    If IsBetween(X, PolyCoords(Index).vertex(1).X, X + div) And IsBetween(Y, PolyCoords(Index).vertex(1).Y, Y + div) Then
         IsInSector = True
         Exit Function
-    ElseIf isBetween(X, PolyCoords(Index).vertex(2).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(2).Y, Y + div) Then
+    ElseIf IsBetween(X, PolyCoords(Index).vertex(2).X, X + div) And IsBetween(Y, PolyCoords(Index).vertex(2).Y, Y + div) Then
         IsInSector = True
         Exit Function
-    ElseIf isBetween(X, PolyCoords(Index).vertex(3).X, X + div) And isBetween(Y, PolyCoords(Index).vertex(3).Y, Y + div) Then
+    ElseIf IsBetween(X, PolyCoords(Index).vertex(3).X, X + div) And IsBetween(Y, PolyCoords(Index).vertex(3).Y, Y + div) Then
         IsInSector = True
         Exit Function
     End If
@@ -9876,8 +9876,8 @@ Private Function PointInProp(ByVal X As Single, ByVal Y As Single, Index As Inte
     X = R * Cos(theta)
     Y = R * Sin(theta)
 
-    If isBetween(0, X, SceneryTextures(Scenery(Index).Style).Width * Scenery(Index).Scaling.X * zoomFactor) Then
-        If isBetween(0, Y, SceneryTextures(Scenery(Index).Style).Height * Scenery(Index).Scaling.Y * zoomFactor) Then
+    If IsBetween(0, X, SceneryTextures(Scenery(Index).Style).Width * Scenery(Index).Scaling.X * zoomFactor) Then
+        If IsBetween(0, Y, SceneryTextures(Scenery(Index).Style).Height * Scenery(Index).Scaling.Y * zoomFactor) Then
             PointInProp = True
         End If
     End If
