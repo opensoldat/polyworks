@@ -679,7 +679,7 @@ Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     picColor.BackColor = RGB(mColor(R), mColor(B), mColor(G))
 
-    updateAll
+    UpdateAll
     updateRGB
     updateHSB
     updateHex
@@ -811,7 +811,7 @@ Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Sing
         ChangeRGB
         txtSat.Text = Int(mSat * 100 + 0.5)
         txtHue.Text = Int(mHue + 0.5)
-        updateAll
+        UpdateAll
         updateRGB
         updateHex
 
@@ -836,7 +836,7 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
         mColor(Index) = X
         ChangeRGB
         txtRGB(Index).Text = mColor(Index)
-        updateAll
+        UpdateAll
         updateHSB
         updateHex
 
@@ -864,7 +864,7 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         ChangeHue
 
         txtHue.Text = Int(mHue + 0.5)
-        updateAll
+        UpdateAll
         updateRGB
         updateHex
 
@@ -931,7 +931,7 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
             mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
             mColor(mHigh) = mPureColor(mHigh) * mBright
         End If
-        updateAll
+        UpdateAll
         txtSat.Text = Int(mSat * 100 + 0.5)
         updateRGB
         updateHex
@@ -957,7 +957,7 @@ Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single
         mColor(mLow) = ((1 - mSat) * 255) * mBright
         mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
         mColor(mHigh) = mPureColor(mHigh) * mBright
-        updateAll
+        UpdateAll
         txtBright.Text = Int(mBright * 100 + 0.5)
         updateRGB
         updateHex
@@ -1074,7 +1074,7 @@ Private Sub ChangeHue()
 
 End Sub
 
-Private Sub updateAll()
+Private Sub UpdateAll()
 
     picColor.BackColor = RGB(mColor(R), mColor(G), mColor(B))
 
@@ -1193,7 +1193,7 @@ Private Sub txtHexCode_Change()
         tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
         mColor(R) = CLng("&H" + Right(tempHexVal, 2))
         ChangeRGB
-        updateAll
+        UpdateAll
         updateRGB
         updateHSB
     End If
@@ -1210,7 +1210,7 @@ Private Sub txtHexCode_LostFocus()
         mHexValue = Left(mHexValue, Len(mHexValue) - 2)
         mColor(R) = CLng("&H" + Right(mHexValue, 2))
         ChangeRGB
-        updateAll
+        UpdateAll
         updateRGB
         updateHSB
     Else
@@ -1234,7 +1234,7 @@ Private Sub txtRGB_Change(Index As Integer)
         If mColor(Index) <> txtRGB(Index).Text Then
             mColor(Index) = txtRGB(Index).Text
             ChangeRGB
-            updateAll
+            UpdateAll
             updateHSB
             updateHex
         End If
@@ -1267,7 +1267,7 @@ Private Sub txtHue_Change()
                 CalculateHue
             End If
             ChangeHue
-            updateAll
+            UpdateAll
             updateRGB
             updateHex
 
@@ -1303,7 +1303,7 @@ Private Sub txtSat_Change()
             mColor(mLow) = ((1 - mSat) * 255) * mBright
             mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
             mColor(mHigh) = mPureColor(mHigh) * mBright
-            updateAll
+            UpdateAll
             updateRGB
             updateHex
 
@@ -1339,7 +1339,7 @@ Private Sub txtBright_Change()
             mColor(mLow) = ((1 - mSat) * 255) * mBright
             mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
             mColor(mHigh) = mPureColor(mHigh) * mBright
-            updateAll
+            UpdateAll
             updateRGB
             updateHex
         End If
