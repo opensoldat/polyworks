@@ -670,7 +670,7 @@ Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
     green = mColor(G)
     blue = mColor(B)
 
-    changeRGB
+    ChangeRGB
 
     picSpectrum.Cls
     mOldX = (mHue / 360 * 256)
@@ -808,7 +808,7 @@ Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Sing
         mSat = (255 - Y) / 255
         mHue = X / 255 * 359
         CalculateHue
-        changeRGB
+        ChangeRGB
         txtSat.Text = Int(mSat * 100 + 0.5)
         txtHue.Text = Int(mHue + 0.5)
         updateAll
@@ -834,7 +834,7 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
     If Button = 1 Then
         X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
         mColor(Index) = X
-        changeRGB
+        ChangeRGB
         txtRGB(Index).Text = mColor(Index)
         updateAll
         updateHSB
@@ -965,7 +965,7 @@ Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single
 
 End Sub
 
-Private Sub changeRGB()  ' when rgb modified by user
+Private Sub ChangeRGB()  ' when rgb modified by user
 
     If mColor(R) = mColor(G) And mColor(R) = mColor(B) Then
         mBright = mColor(R) / 255
@@ -1192,7 +1192,7 @@ Private Sub txtHexCode_Change()
         mColor(G) = CLng("&H" + Right(tempHexVal, 2))
         tempHexVal = Left(tempHexVal, Len(tempHexVal) - 2)
         mColor(R) = CLng("&H" + Right(tempHexVal, 2))
-        changeRGB
+        ChangeRGB
         updateAll
         updateRGB
         updateHSB
@@ -1209,7 +1209,7 @@ Private Sub txtHexCode_LostFocus()
         mColor(G) = CLng("&H" + Right(mHexValue, 2))
         mHexValue = Left(mHexValue, Len(mHexValue) - 2)
         mColor(R) = CLng("&H" + Right(mHexValue, 2))
-        changeRGB
+        ChangeRGB
         updateAll
         updateRGB
         updateHSB
@@ -1233,7 +1233,7 @@ Private Sub txtRGB_Change(Index As Integer)
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         If mColor(Index) <> txtRGB(Index).Text Then
             mColor(Index) = txtRGB(Index).Text
-            changeRGB
+            ChangeRGB
             updateAll
             updateHSB
             updateHex
