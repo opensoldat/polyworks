@@ -682,7 +682,7 @@ Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
     UpdateAll
     updateRGB
     updateHSB
-    updateHex
+    UpdateHex
 
     Exit Sub
 
@@ -813,7 +813,7 @@ Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Sing
         txtHue.Text = Int(mHue + 0.5)
         UpdateAll
         updateRGB
-        updateHex
+        UpdateHex
 
         picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = X
@@ -838,7 +838,7 @@ Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integ
         txtRGB(Index).Text = mColor(Index)
         UpdateAll
         updateHSB
-        updateHex
+        UpdateHex
 
         picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = mHue / 360 * 255
@@ -866,7 +866,7 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         txtHue.Text = Int(mHue + 0.5)
         UpdateAll
         updateRGB
-        updateHex
+        UpdateHex
 
         picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldX = X
@@ -934,7 +934,7 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         UpdateAll
         txtSat.Text = Int(mSat * 100 + 0.5)
         updateRGB
-        updateHex
+        UpdateHex
 
         picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
         mOldY = 255 - X
@@ -960,7 +960,7 @@ Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single
         UpdateAll
         txtBright.Text = Int(mBright * 100 + 0.5)
         updateRGB
-        updateHex
+        UpdateHex
     End If
 
 End Sub
@@ -1106,7 +1106,7 @@ Private Sub updateHSB()
 
 End Sub
 
-Private Sub updateHex()
+Private Sub UpdateHex()
 
     mHexValue = RGBtoHex(RGB(mColor(B), mColor(G), mColor(R)))
     txtHexCode.Text = RGBtoHex(RGB(mColor(B), mColor(G), mColor(R)))
@@ -1236,7 +1236,7 @@ Private Sub txtRGB_Change(Index As Integer)
             ChangeRGB
             UpdateAll
             updateHSB
-            updateHex
+            UpdateHex
         End If
     End If
 
@@ -1269,7 +1269,7 @@ Private Sub txtHue_Change()
             ChangeHue
             UpdateAll
             updateRGB
-            updateHex
+            UpdateHex
 
             picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
             mOldX = mHue / 360 * 256
@@ -1305,7 +1305,7 @@ Private Sub txtSat_Change()
             mColor(mHigh) = mPureColor(mHigh) * mBright
             UpdateAll
             updateRGB
-            updateHex
+            UpdateHex
 
             picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
             mOldY = 255 - mSat * 255
@@ -1341,7 +1341,7 @@ Private Sub txtBright_Change()
             mColor(mHigh) = mPureColor(mHigh) * mBright
             UpdateAll
             updateRGB
-            updateHex
+            UpdateHex
         End If
     End If
 
