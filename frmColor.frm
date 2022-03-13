@@ -861,7 +861,7 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         mHue = X / 255 * 359
 
         CalculateHue
-        changeHue
+        ChangeHue
 
         txtHue.Text = Int(mHue + 0.5)
         updateAll
@@ -1019,14 +1019,14 @@ Private Sub changeRGB()  ' when rgb modified by user
         End If
     End If
 
-    changeHue
+    ChangeHue
 
     mSat = 1 - (mColor(mLow) / mColor(mHigh))
     mBright = mColor(mHigh) / 255
 
 End Sub
 
-Private Sub changeHue()
+Private Sub ChangeHue()
 
     If mHue < 60 Then
         mHigh = R
@@ -1266,7 +1266,7 @@ Private Sub txtHue_Change()
             If Not (mColor(R) = mColor(G) And mColor(R) = mColor(B)) Then
                 CalculateHue
             End If
-            changeHue
+            ChangeHue
             updateAll
             updateRGB
             updateHex
