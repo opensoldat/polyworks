@@ -807,7 +807,7 @@ Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Sing
         Y = Clamp(Y, 0, 255)
         mSat = (255 - Y) / 255
         mHue = X / 255 * 359
-        calculateHue
+        CalculateHue
         changeRGB
         txtSat.Text = Int(mSat * 100 + 0.5)
         txtHue.Text = Int(mHue + 0.5)
@@ -860,7 +860,7 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
         mHue = X / 255 * 359
 
-        calculateHue
+        CalculateHue
         changeHue
 
         txtHue.Text = Int(mHue + 0.5)
@@ -875,7 +875,7 @@ Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
 
 End Sub
 
-Private Sub calculateHue()
+Private Sub CalculateHue()
 
     On Error GoTo ErrorHandler
 
@@ -925,7 +925,7 @@ Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
         X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
         mSat = X / 255
         If mColor(R) = mColor(G) And mColor(R) = mColor(B) And mSat > 0 Then ' determine rgb based on hue
-            calculateHue
+            CalculateHue
         Else
             mColor(mLow) = ((1 - mSat) * 255) * mBright
             mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
@@ -1264,7 +1264,7 @@ Private Sub txtHue_Change()
         If Int(mHue + 0.5) <> txtHue.Text Then
             mHue = txtHue.Text
             If Not (mColor(R) = mColor(G) And mColor(R) = mColor(B)) Then
-                calculateHue
+                CalculateHue
             End If
             changeHue
             updateAll
