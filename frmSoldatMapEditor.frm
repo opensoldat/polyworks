@@ -6679,7 +6679,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
     If Screen.ActiveForm Is Nothing Then
         Exit Sub
     ElseIf Screen.ActiveForm.hWnd <> Me.hWnd And Screen.ActiveForm.hWnd <> frmInfo.hWnd Then
-        If Not (Screen.ActiveForm.hWnd = frmPalette.hWnd And frmPalette.textControl) Then
+        If Not (Screen.ActiveForm.hWnd = frmPalette.hWnd And frmPalette.TextControl) Then
             RegainFocus
         End If
     End If

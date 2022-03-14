@@ -1005,21 +1005,21 @@ Public Sub setValues(R As Byte, G As Byte, B As Byte)
 
 End Sub
 
-Public Function textControl() As Boolean
+Public Function TextControl() As Boolean
 
     Dim c As Control
 
-    textControl = False
+    TextControl = False
 
     For Each c In txtRGB
         If Me.ActiveControl = c Then
-            textControl = True
+            TextControl = True
         End If
     Next
     If Me.ActiveControl = txtOpacity Then
-        textControl = True
+        TextControl = True
     ElseIf Me.ActiveControl = txtRadius Then
-        textControl = True
+        TextControl = True
     End If
 
 End Function
