@@ -676,7 +676,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub loadFromList()
+Public Sub LoadFromList()  ' unused?
 
     On Error GoTo ErrorHandler
 
