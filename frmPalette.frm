@@ -647,7 +647,7 @@ Private Sub Form_Load()
 
     Me.SetColors
 
-    frmPalette.loadPalette appPath & "\palettes\current.txt"
+    frmPalette.LoadPalette appPath & "\palettes\current.txt"
 
     SetValues frmColor.red, frmColor.green, frmColor.blue
 
@@ -680,7 +680,7 @@ Public Sub SetForm()
 
 End Sub
 
-Public Sub loadPalette(FileName As String)
+Public Sub LoadPalette(FileName As String)
 
     On Error GoTo ErrorHandler
 
@@ -744,7 +744,7 @@ Private Sub mnuLoadPalette_Click()
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
-        loadPalette commonDialog.FileName
+        LoadPalette commonDialog.FileName
     End If
 
     Exit Sub
