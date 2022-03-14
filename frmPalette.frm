@@ -649,7 +649,7 @@ Private Sub Form_Load()
 
     frmPalette.loadPalette appPath & "\palettes\current.txt"
 
-    setValues frmColor.red, frmColor.green, frmColor.blue
+    SetValues frmColor.red, frmColor.green, frmColor.blue
 
     shpSel1.Left = picPalette.ScaleWidth + 2
     shpSel1.Top = picPalette.ScaleHeight + 2
@@ -992,7 +992,7 @@ Private Sub cboBlendMode_Click()
 
 End Sub
 
-Public Sub setValues(R As Byte, G As Byte, B As Byte)
+Public Sub SetValues(R As Byte, G As Byte, B As Byte)
 
     txtRGB(0).Text = R
     txtRGB(1).Text = G

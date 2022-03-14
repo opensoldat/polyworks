@@ -1719,7 +1719,7 @@ Private Sub Form_Load()
     frmTexture.Visible = mnuTexture.Checked
 
     frmPalette.refreshPalette clrRadius, opacity, blendMode, colorMode
-    frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+    frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
     frmDisplay.SetLayer 0, showBG
     frmDisplay.SetLayer 1, showPolys
     frmDisplay.SetLayer 2, showTexture
@@ -5841,7 +5841,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             gPolyClr.green = tempClr.green
             gPolyClr.blue = tempClr.red
             Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
-            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf currentFunction = TOOL_LITPICKER Then
         LightPicker X, Y
@@ -6809,7 +6809,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             gPolyClr.green = tempClr.green
             gPolyClr.blue = tempClr.red
             Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
-            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
 
         Render
@@ -7928,7 +7928,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
         Else
             gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
             frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf showScenery Then  ' no poly clrs absorbed, do scenery
@@ -7946,7 +7946,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             Else
                 gPolyClr = tempClr
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
-                frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+                frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
                 frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
             End If
         End If
@@ -7992,7 +7992,7 @@ Private Sub DepthPicker(X As Single, Y As Single)
         gPolyClr.green = gPolyClr.red
         gPolyClr.blue = gPolyClr.red
         Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-        frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+        frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
     End If
 
@@ -8034,7 +8034,7 @@ Private Sub LightPicker(X As Single, Y As Single)
         Else
             gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
             frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     End If
