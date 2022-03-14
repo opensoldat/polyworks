@@ -2129,7 +2129,7 @@ Private Function applyPreferences() As Boolean
         frmTexture.SetColors
         frmTools.SetColors
         frmWaypoints.SetColors
-        frmDisplay.refreshButtons
+        frmDisplay.RefreshButtons
     End If
 
     frmSoldatMapEditor.SetPreferences

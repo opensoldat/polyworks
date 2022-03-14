@@ -664,7 +664,7 @@ Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y 
 
 End Sub
 
-Public Sub refreshButtons()
+Public Sub RefreshButtons()
 
     Dim i As Integer
 
