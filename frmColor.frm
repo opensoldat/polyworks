@@ -719,7 +719,7 @@ Private Sub HideColor(apply As Boolean)
     If mNonModal Then
         If apply Then
             frmPalette.setValues red, green, blue
-            frmPalette.checkPalette red, green, blue
+            frmPalette.CheckPalette red, green, blue
         End If
 
         mNonModal = False

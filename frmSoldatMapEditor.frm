@@ -7929,7 +7929,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-            frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     ElseIf showScenery Then  ' no poly clrs absorbed, do scenery
         For i = 1 To sceneryCount
@@ -7947,7 +7947,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
                 gPolyClr = tempClr
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
                 frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-                frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+                frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
             End If
         End If
     End If
@@ -7993,7 +7993,7 @@ Private Sub DepthPicker(X As Single, Y As Single)
         gPolyClr.blue = gPolyClr.red
         Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
         frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-        frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+        frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
     End If
 
 End Sub
@@ -8035,7 +8035,7 @@ Private Sub LightPicker(X As Single, Y As Single)
             gPolyClr = tempClr
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-            frmPalette.checkPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
     End If
 

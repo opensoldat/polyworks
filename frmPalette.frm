@@ -607,7 +607,7 @@ Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
 End Sub
 
-Public Sub checkPalette(red As Byte, green As Byte, blue As Byte)
+Public Sub CheckPalette(red As Byte, green As Byte, blue As Byte)
 
     Dim X As Integer
     Dim Y As Integer
