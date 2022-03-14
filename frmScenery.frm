@@ -363,7 +363,7 @@ Private Sub Form_Load()
     Me.SetColors
     formHeight = Me.ScaleHeight
     SetForm
-    listScenery
+    ListScenery
 
     Exit Sub
 
@@ -385,7 +385,7 @@ Public Sub SetForm()
 
 End Sub
 
-Public Sub listScenery()
+Public Sub ListScenery()
 
     On Error GoTo ErrorHandler
 
@@ -524,7 +524,7 @@ Private Sub mnuReload_Click()
 
     Dim i As Integer
 
-    listScenery
+    ListScenery
 
     For i = 0 To lstScenery.ListCount - 1
         frmSoldatMapEditor.tvwScenery.Nodes.Add "In Use", tvwChild, lstScenery.List(i), lstScenery.List(i)
