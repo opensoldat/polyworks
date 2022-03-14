@@ -857,7 +857,7 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
 
 End Sub
 
-Public Sub newPaletteColor()
+Public Sub NewPaletteColor()
 
     clrPalette(xVal, yVal).red = txtRGB(0).Text
     clrPalette(xVal, yVal).green = txtRGB(1).Text
@@ -872,7 +872,7 @@ End Sub
 
 Private Sub mnuAddToPalette_Click()
 
-    newPaletteColor
+    NewPaletteColor
 
 End Sub
 
