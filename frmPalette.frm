@@ -564,9 +564,9 @@ Private yVal As Integer
 Private tempVal As Integer
 
 
-Public Function getPalClr(X As Integer, Y As Integer) As Long
+Public Function GetPalColor(X As Integer, Y As Integer) As Long  ' unused?
 
-    getPalClr = RGB(clrPalette(X, Y).blue, clrPalette(X, Y).green, clrPalette(X, Y).red)
+    GetPalColor = RGB(clrPalette(X, Y).blue, clrPalette(X, Y).green, clrPalette(X, Y).red)
 
 End Function
 
