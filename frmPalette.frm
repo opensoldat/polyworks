@@ -753,7 +753,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub savePalette(FileName As String)
+Public Sub SavePalette(FileName As String)
 
     Dim X As Integer
     Dim Y As Integer
@@ -794,7 +794,7 @@ Private Sub mnuSavePalette_Click()
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
-        savePalette commonDialog.FileName
+        SavePalette commonDialog.FileName
     End If
 
     Exit Sub

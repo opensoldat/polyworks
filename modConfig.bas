@@ -351,7 +351,7 @@ Public Sub SaveSettings()
     SaveSection "LayerKeys", iniString
 
     ' palette
-    frmPalette.savePalette appPath & "\palettes\current.txt"
+    frmPalette.SavePalette appPath & "\palettes\current.txt"
 
     ' workspace
     isNewFile = Not FileExists(appPath & "\workspace\current.ini")
