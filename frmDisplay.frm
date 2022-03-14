@@ -531,7 +531,7 @@ Public Function GetLayerKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setLayerKey(Index As Integer, ByVal value As Byte)
+Public Sub SetLayerKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         layerKeys(Index) = value

@@ -156,14 +156,14 @@ Public Sub LoadSettings()
 
     errVal = "6"
 
-    frmDisplay.setLayerKey 0, LoadInt("LayerKeys", "Background")
-    frmDisplay.setLayerKey 1, LoadInt("LayerKeys", "Polys")
-    frmDisplay.setLayerKey 2, LoadInt("LayerKeys", "Texture")
-    frmDisplay.setLayerKey 3, LoadInt("LayerKeys", "Wireframe")
-    frmDisplay.setLayerKey 4, LoadInt("LayerKeys", "Points")
-    frmDisplay.setLayerKey 5, LoadInt("LayerKeys", "Scenery")
-    frmDisplay.setLayerKey 6, LoadInt("LayerKeys", "Objects")
-    frmDisplay.setLayerKey 7, LoadInt("LayerKeys", "Waypoints")
+    frmDisplay.SetLayerKey 0, LoadInt("LayerKeys", "Background")
+    frmDisplay.SetLayerKey 1, LoadInt("LayerKeys", "Polys")
+    frmDisplay.SetLayerKey 2, LoadInt("LayerKeys", "Texture")
+    frmDisplay.SetLayerKey 3, LoadInt("LayerKeys", "Wireframe")
+    frmDisplay.SetLayerKey 4, LoadInt("LayerKeys", "Points")
+    frmDisplay.SetLayerKey 5, LoadInt("LayerKeys", "Scenery")
+    frmDisplay.SetLayerKey 6, LoadInt("LayerKeys", "Objects")
+    frmDisplay.SetLayerKey 7, LoadInt("LayerKeys", "Waypoints")
 
     errVal = "7"
 
