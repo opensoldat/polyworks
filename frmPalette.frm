@@ -576,7 +576,7 @@ Public Sub SetPalColor(X As Integer, Y As Integer, clrVal As Long)  ' unused?
 
 End Sub
 
-Public Sub refreshPalette(R As Integer, op As Single, blend As Integer, mode As Byte)
+Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As Byte)
 
     Dim X As Integer, Y As Integer, i As Integer
 

@@ -1718,7 +1718,7 @@ Private Sub Form_Load()
     frmInfo.Visible = mnuInfo.Checked
     frmTexture.Visible = mnuTexture.Checked
 
-    frmPalette.refreshPalette clrRadius, opacity, blendMode, colorMode
+    frmPalette.RefreshPalette clrRadius, opacity, blendMode, colorMode
     frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
     frmDisplay.SetLayer 0, showBG
     frmDisplay.SetLayer 1, showPolys
