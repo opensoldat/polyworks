@@ -1720,17 +1720,17 @@ Private Sub Form_Load()
 
     frmPalette.refreshPalette clrRadius, opacity, blendMode, colorMode
     frmPalette.setValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-    frmDisplay.setLayer 0, showBG
-    frmDisplay.setLayer 1, showPolys
-    frmDisplay.setLayer 2, showTexture
-    frmDisplay.setLayer 3, showWireframe
-    frmDisplay.setLayer 4, showPoints
-    frmDisplay.setLayer 5, showScenery
-    frmDisplay.setLayer 6, showObjects
-    frmDisplay.setLayer 7, showWaypoints
-    frmDisplay.setLayer 8, showGrid
-    frmDisplay.setLayer 9, showLights
-    frmDisplay.setLayer 10, showSketch
+    frmDisplay.SetLayer 0, showBG
+    frmDisplay.SetLayer 1, showPolys
+    frmDisplay.SetLayer 2, showTexture
+    frmDisplay.SetLayer 3, showWireframe
+    frmDisplay.SetLayer 4, showPoints
+    frmDisplay.SetLayer 5, showScenery
+    frmDisplay.SetLayer 6, showObjects
+    frmDisplay.SetLayer 7, showWaypoints
+    frmDisplay.SetLayer 8, showGrid
+    frmDisplay.SetLayer 9, showLights
+    frmDisplay.SetLayer 10, showSketch
 
     mnuFixedTexture.Checked = fixedTexture
     mnuSnapToGrid.Checked = snapToGrid
@@ -2753,7 +2753,7 @@ Public Sub LoadFile(theFileName As String)
     currentUndo = 0
 
     If lightCount > 0 Then
-        frmDisplay.setLayer 9, showLights
+        frmDisplay.SetLayer 9, showLights
         ApplyLights
     End If
 
@@ -5761,7 +5761,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         If Shift = 0 Then
             If Not (showPolys Or showWireframe Or showPoints) Then
                 showPolys = True
-                frmDisplay.setLayer 1, True
+                frmDisplay.SetLayer 1, True
             End If
             toolAction = True
         ElseIf Shift = KEY_SHIFT Then  ' constrained
@@ -5821,7 +5821,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
         If Not showScenery Then
             showScenery = True
-            frmDisplay.setLayer 5, showScenery
+            frmDisplay.SetLayer 5, showScenery
         End If
         toolAction = True
     ElseIf currentFunction = TOOL_COLORPICKER Then  ' color picker
@@ -5853,7 +5853,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
         If Not showObjects And Not mnuGostek.Checked Then
             showObjects = True
-            frmDisplay.setLayer 6, showObjects
+            frmDisplay.SetLayer 6, showObjects
         End If
         If mnuGostek.Checked Then
             gostek.X = X / zoomFactor + scrollCoords(2).X
@@ -5893,7 +5893,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
         If Not showWaypoints Then
             showWaypoints = True
-            frmDisplay.setLayer 7, showWaypoints
+            frmDisplay.SetLayer 7, showWaypoints
         End If
 
         If frmWaypoints.showPaths = 1 And frmWaypoints.wayptPath = 1 Or frmWaypoints.showPaths = 2 And frmWaypoints.wayptPath = 0 Then
@@ -5953,7 +5953,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             toolAction = True
         ElseIf Shift = 1 Then
             showSketch = True
-            frmDisplay.setLayer 10, showSketch
+            frmDisplay.SetLayer 10, showSketch
         End If
     ElseIf currentFunction = TOOL_ERASER Then
         If EraseSketch(X / zoomFactor + scrollCoords(2).X, Y / zoomFactor + scrollCoords(2).Y) = 1 Then
@@ -5984,7 +5984,7 @@ Private Sub CreateLight(X As Single, Y As Single)
     End If
 
     showLights = True
-    frmDisplay.setLayer 9, showLights
+    frmDisplay.SetLayer 9, showLights
 
     lightCount = lightCount + 1
     ReDim Preserve Lights(lightCount)
@@ -8428,7 +8428,7 @@ Private Sub StartSketch(X As Single, Y As Single)
     On Error GoTo ErrorHandler
 
     showSketch = True
-    frmDisplay.setLayer 10, showSketch
+    frmDisplay.SetLayer 10, showSketch
 
     sketchLines = sketchLines + 1
     ReDim Preserve sketch(sketchLines)
@@ -12553,7 +12553,7 @@ Private Sub LoadPrefab(theFileName As String)
         If newScenery > 0 Then
             If Not showScenery Then
                 showScenery = True
-                frmDisplay.setLayer 5, showScenery
+                frmDisplay.SetLayer 5, showScenery
             End If
             numSelectedScenery = newScenery
             ReDim Preserve Scenery(sceneryCount + newScenery)
@@ -12633,7 +12633,7 @@ Private Sub LoadPrefab(theFileName As String)
             Next
         End If
 
-        frmDisplay.setLayer 6, showObjects
+        frmDisplay.SetLayer 6, showObjects
 
     Close #1
 
@@ -13662,7 +13662,7 @@ Private Sub mnuGrid_Click()
 
     mnuGrid.Checked = Not mnuGrid.Checked
     showGrid = mnuGrid.Checked
-    frmDisplay.setLayer 8, mnuGrid.Checked
+    frmDisplay.SetLayer 8, mnuGrid.Checked
     Render
 
 End Sub

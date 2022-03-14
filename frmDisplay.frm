@@ -576,7 +576,7 @@ Public Sub SetForm()
 
 End Sub
 
-Public Sub setLayer(Index As Integer, value As Boolean)
+Public Sub SetLayer(Index As Integer, value As Boolean)
 
     layers(Index) = value
     MouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
