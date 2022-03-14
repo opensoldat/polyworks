@@ -13770,13 +13770,13 @@ Private Sub mnuLoadSpace_Click()
     If commonDialog.FileName <> "" Then
         If Len(Dir$(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
             LoadWorkspace commonDialog.FileTitle
-            frmTools.setForm
-            frmDisplay.setForm
-            frmInfo.setForm
-            frmPalette.setForm
-            frmScenery.setForm
-            frmTexture.setForm
-            frmWaypoints.setForm
+            frmTools.SetForm
+            frmDisplay.SetForm
+            frmInfo.SetForm
+            frmPalette.SetForm
+            frmScenery.SetForm
+            frmTexture.SetForm
+            frmWaypoints.SetForm
             ResetDevice
         End If
     End If

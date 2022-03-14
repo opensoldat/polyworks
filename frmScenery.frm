@@ -362,7 +362,7 @@ Private Sub Form_Load()
 
     Me.SetColors
     formHeight = Me.ScaleHeight
-    setForm
+    SetForm
     listScenery
 
     Exit Sub
@@ -373,7 +373,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub setForm()
+Public Sub SetForm()
 
     Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY

@@ -1723,7 +1723,7 @@ Private Sub Form_Load()
 
     formHeight = Me.ScaleHeight
 
-    setForm
+    SetForm
 
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
@@ -1740,7 +1740,7 @@ ErrorHandler:
 
 End Sub
 
-Public Sub setForm()
+Public Sub SetForm()
 
     Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
