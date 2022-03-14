@@ -5240,7 +5240,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
         Next
         layerKeyPressed = -1
         For i = 0 To 7
-            If (DIState.Key(frmDisplay.getLayerKey(i))) Then layerKeyPressed = i
+            If (DIState.Key(frmDisplay.GetLayerKey(i))) Then layerKeyPressed = i
         Next
 
         ' key up

@@ -525,9 +525,9 @@ Private layerKeys(0 To 7) As Byte
 Private formHeight As Integer
 
 
-Public Function getLayerKey(ByVal Index As Byte) As Byte
+Public Function GetLayerKey(ByVal Index As Byte) As Byte
 
-    getLayerKey = layerKeys(Index)
+    GetLayerKey = layerKeys(Index)
 
 End Function
 

@@ -340,14 +340,14 @@ Public Sub SaveSettings()
 
     ' layer keys
     iniString = _
-        "Background=" & frmDisplay.getLayerKey(0) & sNull & _
-        "Polys=" & frmDisplay.getLayerKey(1) & sNull & _
-        "Texture=" & frmDisplay.getLayerKey(2) & sNull & _
-        "Wireframe=" & frmDisplay.getLayerKey(3) & sNull & _
-        "Points=" & frmDisplay.getLayerKey(4) & sNull & _
-        "Scenery=" & frmDisplay.getLayerKey(5) & sNull & _
-        "Objects=" & frmDisplay.getLayerKey(6) & sNull & _
-        "Waypoints=" & frmDisplay.getLayerKey(7) & sNull & sNull
+        "Background=" & frmDisplay.GetLayerKey(0) & sNull & _
+        "Polys=" & frmDisplay.GetLayerKey(1) & sNull & _
+        "Texture=" & frmDisplay.GetLayerKey(2) & sNull & _
+        "Wireframe=" & frmDisplay.GetLayerKey(3) & sNull & _
+        "Points=" & frmDisplay.GetLayerKey(4) & sNull & _
+        "Scenery=" & frmDisplay.GetLayerKey(5) & sNull & _
+        "Objects=" & frmDisplay.GetLayerKey(6) & sNull & _
+        "Waypoints=" & frmDisplay.GetLayerKey(7) & sNull & sNull
     SaveSection "LayerKeys", iniString
 
     ' palette
