@@ -148,11 +148,11 @@ Public Sub LoadSettings()
 
     errVal = "5"
 
-    frmWaypoints.setWayptKey 0, LoadInt("WaypointKeys", "Left")
-    frmWaypoints.setWayptKey 1, LoadInt("WaypointKeys", "Right")
-    frmWaypoints.setWayptKey 2, LoadInt("WaypointKeys", "Up")
-    frmWaypoints.setWayptKey 3, LoadInt("WaypointKeys", "Down")
-    frmWaypoints.setWayptKey 4, LoadInt("WaypointKeys", "Fly")
+    frmWaypoints.SetWayptKey 0, LoadInt("WaypointKeys", "Left")
+    frmWaypoints.SetWayptKey 1, LoadInt("WaypointKeys", "Right")
+    frmWaypoints.SetWayptKey 2, LoadInt("WaypointKeys", "Up")
+    frmWaypoints.SetWayptKey 3, LoadInt("WaypointKeys", "Down")
+    frmWaypoints.SetWayptKey 4, LoadInt("WaypointKeys", "Fly")
 
     errVal = "6"
 

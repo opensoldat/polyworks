@@ -528,7 +528,7 @@ Public Function GetWayptKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setWayptKey(Index As Integer, ByVal value As Byte)
+Public Sub SetWayptKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         wayptKeys(Index) = value
