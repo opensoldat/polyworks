@@ -574,7 +574,7 @@ Private Sub cboSpecial_Click()
 
 End Sub
 
-Public Sub getPathNum(value As Byte)
+Public Sub GetPathNum(value As Byte)
 
     Dim i As Integer
 

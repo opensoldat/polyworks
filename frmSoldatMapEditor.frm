@@ -14071,7 +14071,7 @@ Public Sub GetInfo()
 
     For i = 1 To waypointCount
         If Waypoints(i).selected Then
-            frmWaypoints.getPathNum Waypoints(i).pathNum
+            frmWaypoints.GetPathNum Waypoints(i).pathNum
             For j = 0 To 4
                 frmWaypoints.getWayType j, Waypoints(i).wayType(j)
             Next
