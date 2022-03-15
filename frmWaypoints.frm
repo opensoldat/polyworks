@@ -522,9 +522,9 @@ Private wayptKeys(0 To 4) As Byte
 Private Const COLLAPSED_HEIGHT = 19
 
 
-Public Function getWayptKey(ByVal Index As Byte) As Byte
+Public Function GetWayptKey(ByVal Index As Byte) As Byte
 
-    getWayptKey = wayptKeys(Index)
+    GetWayptKey = wayptKeys(Index)
 
 End Function
 

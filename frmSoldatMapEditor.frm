@@ -5236,7 +5236,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
         Next
         wayptKeyPressed = -1
         For i = 0 To 4
-            If (DIState.Key(frmWaypoints.getWayptKey(i))) Then wayptKeyPressed = i
+            If (DIState.Key(frmWaypoints.GetWayptKey(i))) Then wayptKeyPressed = i
         Next
         layerKeyPressed = -1
         For i = 0 To 7
