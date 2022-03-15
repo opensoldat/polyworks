@@ -341,7 +341,7 @@ Public Sub setHotKey(Index As Integer, ByVal value As Byte)
 
 End Sub
 
-Public Sub initTool(value As Byte)
+Public Sub InitTool(value As Byte)
 
     curTool = value
 

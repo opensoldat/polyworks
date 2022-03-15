@@ -1631,7 +1631,7 @@ Private Sub Form_Load()
         End If
     End If
 
-    frmTools.initTool currentTool
+    frmTools.InitTool currentTool
 
     InitGfx
 
