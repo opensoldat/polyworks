@@ -210,7 +210,7 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
 
 End Sub
 
-Public Sub setTexture(texturePath As String)
+Public Sub SetTexture(texturePath As String)
 
     On Error GoTo ErrorHandler
 

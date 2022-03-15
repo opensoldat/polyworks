@@ -2310,7 +2310,7 @@ Public Sub NewMap()
 
     If Len(Dir(soldatDir & "Textures\" & gTextureFile)) <> 0 Then
         SetMapTexture gTextureFile
-        frmTexture.setTexture gTextureFile
+        frmTexture.SetTexture gTextureFile
     Else
         Set mapTexture = Nothing
     End If
@@ -2738,7 +2738,7 @@ Public Sub LoadFile(theFileName As String)
 
     If Len(Dir$(soldatDir & "textures\" & gTextureFile)) <> 0 Then
         SetMapTexture gTextureFile
-        frmTexture.setTexture gTextureFile
+        frmTexture.SetTexture gTextureFile
     End If
 
     Colliders(0).radius = clrRadius
@@ -4239,7 +4239,7 @@ Public Sub Render()
     D3DDevice.BeginScene
     ' ----
 
-    D3DDevice.setTexture 0, Nothing
+    D3DDevice.SetTexture 0, Nothing
 
     ' draw background
     If showBG Then
@@ -4249,7 +4249,7 @@ Public Sub Render()
     ' draw Polys
     If showPolys And numPolys > 0 Then
         If showTexture Then  ' set texture
-            D3DDevice.setTexture 0, mapTexture
+            D3DDevice.SetTexture 0, mapTexture
         End If
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
@@ -4374,7 +4374,7 @@ Public Sub Render()
     ' draw Polys
     If showPolys And numPolys > 0 Then
         If showTexture Then  ' set texture
-            D3DDevice.setTexture 0, mapTexture
+            D3DDevice.SetTexture 0, mapTexture
         End If
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
@@ -4413,7 +4413,7 @@ Public Sub Render()
 
     ' draw selected polys
     If numSelectedPolys > 0 And showPolys And Not (currentTool = TOOL_TEXTURE Or currentTool = TOOL_VCOLOR Or currentTool = TOOL_PCOLOR) Then
-        D3DDevice.setTexture 0, patternTexture
+        D3DDevice.SetTexture 0, patternTexture
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_ONE
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_ONE
 
@@ -4465,7 +4465,7 @@ Public Sub Render()
         lineCoords(2).rhw = 1
         lineCoords(3).rhw = 1
 
-        D3DDevice.setTexture 0, Nothing
+        D3DDevice.SetTexture 0, Nothing
 
         For i = 1 To mPolyCount
             lineCoords(1) = Polys(i).vertex(1)
@@ -4657,7 +4657,7 @@ Public Sub Render()
 
     D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
     D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
-    D3DDevice.setTexture 0, Nothing
+    D3DDevice.SetTexture 0, Nothing
 
     ' draw grid
     If showGrid Then
@@ -4799,7 +4799,7 @@ Public Sub Render()
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_SOLID
     End If
 
-    D3DDevice.setTexture 0, particleTexture
+    D3DDevice.SetTexture 0, particleTexture
 
     ' draw points
     If showPoints And numPolys > 0 Then
@@ -4838,7 +4838,7 @@ Public Sub Render()
     End If
 
     ' draw selected poly wireframes
-    D3DDevice.setTexture 0, Nothing
+    D3DDevice.SetTexture 0, Nothing
     If numSelectedPolys > 0 Then
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_WIREFRAME
         For i = 1 To numSelectedPolys
@@ -4866,9 +4866,9 @@ Public Sub Render()
                 If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = pointColor
                 If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = pointColor
                 If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = pointColor
-                D3DDevice.setTexture 0, particleTexture
+                D3DDevice.SetTexture 0, particleTexture
                 D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 3, lineCoords(1), Len(lineCoords(1))
-                D3DDevice.setTexture 0, Nothing
+                D3DDevice.SetTexture 0, Nothing
             End If
         Next
         D3DDevice.SetRenderState D3DRS_FILLMODE, D3DFILL_SOLID
@@ -4883,7 +4883,7 @@ Public Sub Render()
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
 
-        D3DDevice.setTexture 0, lineTexture
+        D3DDevice.SetTexture 0, lineTexture
 
         sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
         sceneryCoords(1) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
@@ -4923,7 +4923,7 @@ Public Sub Render()
         sceneryCoords(4) = sceneryCoords(0)
 
         D3DDevice.DrawPrimitiveUP D3DPT_LINESTRIP, 4, sceneryCoords(0), Len(sceneryCoords(0))
-        D3DDevice.setTexture 0, Nothing
+        D3DDevice.SetTexture 0, Nothing
         D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 4, sceneryCoords(0), Len(sceneryCoords(0))
 
         For i = 0 To 3
@@ -4935,7 +4935,7 @@ Public Sub Render()
         If Not mnuFixedRCenter.Checked Then
             sceneryCoords(0).X = (rCenter.X - scrollCoords(2).X) * zoomFactor
             sceneryCoords(0).Y = (rCenter.Y - scrollCoords(2).Y) * zoomFactor
-            D3DDevice.setTexture 0, rCenterTexture
+            D3DDevice.SetTexture 0, rCenterTexture
             D3DDevice.DrawPrimitiveUP D3DPT_POINTLIST, 1, sceneryCoords(0), Len(sceneryCoords(0))
         End If
 
@@ -4971,7 +4971,7 @@ Public Sub Render()
         Next
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, True
-        D3DDevice.setTexture 0, pathTexture
+        D3DDevice.SetTexture 0, pathTexture
         For i = 1 To conCount
             If (Waypoints(Connections(i).point1).pathNum = 1 And frmWaypoints.showPaths <> 2) _
                     Or (Waypoints(Connections(i).point1).pathNum = 2 And frmWaypoints.showPaths <> 1) _
@@ -5046,7 +5046,7 @@ Public Sub Render()
 
     If showSketch Then
         D3DDevice.SetVertexShader FVF2
-        D3DDevice.setTexture 0, sketchTexture
+        D3DDevice.SetTexture 0, sketchTexture
         If sketchLines > 0 Then
             D3DDevice.DrawPrimitiveUP D3DPT_LINELIST, sketchLines, sketch(1).vertex(1), Len(sketch(1).vertex(1))
         End If

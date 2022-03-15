@@ -596,7 +596,7 @@ Private Sub cboTexture_Click()
 
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
         frmSoldatMapEditor.SetMapTexture cboTexture.List(cboTexture.ListIndex)
-        frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
+        frmTexture.SetTexture cboTexture.List(cboTexture.ListIndex)
 
         Dim token As Long
         token = InitGDIPlus
