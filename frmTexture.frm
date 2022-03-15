@@ -124,7 +124,7 @@ Public Sub SetForm()
 
 End Sub
 
-Public Sub setTexCoords(tehValue As Single, Index As Integer)
+Public Sub SetTexCoords(tehValue As Single, Index As Integer)
 
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
     If Index = 0 Then

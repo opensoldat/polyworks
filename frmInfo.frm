@@ -1818,7 +1818,7 @@ Private Sub txtQuadX_LostFocus(Index As Integer)
     ElseIf txtQuadX(Index).Text < 0 Or txtQuadX(Index).Text > frmSoldatMapEditor.xTexture Then
         txtQuadX(Index).Text = tempVal
     Else
-        frmTexture.setTexCoords txtQuadX(Index).Text, Index
+        frmTexture.SetTexCoords txtQuadX(Index).Text, Index
     End If
     tempVal = 0
 
@@ -1840,7 +1840,7 @@ Private Sub txtQuadY_LostFocus(Index As Integer)
     ElseIf txtQuadY(Index).Text < 0 Or txtQuadY(Index).Text > frmSoldatMapEditor.yTexture Then
         txtQuadY(Index).Text = tempVal
     Else
-        frmTexture.setTexCoords txtQuadY(Index).Text, Index + 2
+        frmTexture.SetTexCoords txtQuadY(Index).Text, Index + 2
     End If
     tempVal = 0
 
