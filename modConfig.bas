@@ -313,20 +313,20 @@ Public Sub SaveSettings()
 
     ' hotkeys
     iniString = _
-        "Move=" & frmTools.getHotKey(0) & sNull & _
-        "Create=" & frmTools.getHotKey(1) & sNull & _
-        "VertexSelection=" & frmTools.getHotKey(2) & sNull & _
-        "PolySelection=" & frmTools.getHotKey(3) & sNull & _
-        "VertexColor=" & frmTools.getHotKey(4) & sNull & _
-        "PolyColor=" & frmTools.getHotKey(5) & sNull & _
-        "Texture=" & frmTools.getHotKey(6) & sNull & _
-        "Scenery=" & frmTools.getHotKey(7) & sNull & _
-        "Waypoints=" & frmTools.getHotKey(8) & sNull & _
-        "Objects=" & frmTools.getHotKey(9) & sNull & _
-        "ColorPicker=" & frmTools.getHotKey(10) & sNull & _
-        "Sketch=" & frmTools.getHotKey(11) & sNull & _
-        "Lights=" & frmTools.getHotKey(12) & sNull & _
-        "Depthmap=" & frmTools.getHotKey(13) & sNull & sNull
+        "Move=" & frmTools.GetHotKey(0) & sNull & _
+        "Create=" & frmTools.GetHotKey(1) & sNull & _
+        "VertexSelection=" & frmTools.GetHotKey(2) & sNull & _
+        "PolySelection=" & frmTools.GetHotKey(3) & sNull & _
+        "VertexColor=" & frmTools.GetHotKey(4) & sNull & _
+        "PolyColor=" & frmTools.GetHotKey(5) & sNull & _
+        "Texture=" & frmTools.GetHotKey(6) & sNull & _
+        "Scenery=" & frmTools.GetHotKey(7) & sNull & _
+        "Waypoints=" & frmTools.GetHotKey(8) & sNull & _
+        "Objects=" & frmTools.GetHotKey(9) & sNull & _
+        "ColorPicker=" & frmTools.GetHotKey(10) & sNull & _
+        "Sketch=" & frmTools.GetHotKey(11) & sNull & _
+        "Lights=" & frmTools.GetHotKey(12) & sNull & _
+        "Depthmap=" & frmTools.GetHotKey(13) & sNull & sNull
     SaveSection "HotKeys", iniString
 
     ' waypoint keys

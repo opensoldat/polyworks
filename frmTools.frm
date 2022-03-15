@@ -327,9 +327,9 @@ Private formHeight As Integer
 Private hotKeys(0 To 13) As Byte
 
 
-Public Function getHotKey(ByVal Index As Byte) As Byte
+Public Function GetHotKey(ByVal Index As Byte) As Byte
 
-    getHotKey = hotKeys(Index)
+    GetHotKey = hotKeys(Index)
 
 End Function
 

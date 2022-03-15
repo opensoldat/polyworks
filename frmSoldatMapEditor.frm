@@ -5232,7 +5232,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
         hotKeyPressed = -1
         For i = 0 To 13
-            If (DIState.Key(frmTools.getHotKey(i))) Then hotKeyPressed = i
+            If (DIState.Key(frmTools.GetHotKey(i))) Then hotKeyPressed = i
         Next
         wayptKeyPressed = -1
         For i = 0 To 4

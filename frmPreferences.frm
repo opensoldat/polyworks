@@ -2216,7 +2216,7 @@ Private Sub Form_Load()
     formResetZoom = txtResetZoom.Text
 
     For i = txtHotkey.LBound To txtHotkey.UBound
-        txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.getHotKey(i), 1))
+        txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.GetHotKey(i), 1))
         txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
     Next
 
