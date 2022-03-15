@@ -14073,7 +14073,7 @@ Public Sub GetInfo()
         If Waypoints(i).selected Then
             frmWaypoints.GetPathNum Waypoints(i).pathNum
             For j = 0 To 4
-                frmWaypoints.getWayType j, Waypoints(i).wayType(j)
+                frmWaypoints.GetWayType j, Waypoints(i).wayType(j)
             Next
             frmWaypoints.cboSpecial.ListIndex = Waypoints(i).special
             frmWaypoints.lblNumCon = Waypoints(i).numConnections

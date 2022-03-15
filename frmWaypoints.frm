@@ -585,7 +585,7 @@ Public Sub GetPathNum(value As Byte)
 
 End Sub
 
-Public Sub getWayType(Index As Integer, value As Boolean)
+Public Sub GetWayType(Index As Integer, value As Boolean)
 
     wayptType(Index) = value
     MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, value, BUTTON_UP
