@@ -2098,7 +2098,7 @@ Private Function applyPreferences() As Boolean
     Debug.Assert txtHotkey.UBound = frmTools.picTools.UBound
 
     For i = txtHotkey.LBound To txtHotkey.UBound
-        frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
+        frmTools.SetHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
     Next
 

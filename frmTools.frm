@@ -333,7 +333,7 @@ Public Function GetHotKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub setHotKey(Index As Integer, ByVal value As Byte)
+Public Sub SetHotKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         hotKeys(Index) = value
