@@ -2108,7 +2108,7 @@ Private Function applyPreferences() As Boolean
     Debug.Assert txtWayptKey.UBound = frmWaypoints.lblType.UBound
 
     For i = txtWayptKey.LBound To txtWayptKey.UBound
-        frmWaypoints.SetWayptKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
+        frmWaypoints.SetWaypointKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
         frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
         frmWaypoints.lblType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
     Next

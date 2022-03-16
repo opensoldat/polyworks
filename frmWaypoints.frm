@@ -528,7 +528,7 @@ Public Function GetWaypointKey(ByVal Index As Byte) As Byte
 
 End Function
 
-Public Sub SetWayptKey(Index As Integer, ByVal value As Byte)
+Public Sub SetWaypointKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         waypointKeys(Index) = value
