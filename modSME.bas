@@ -317,7 +317,6 @@ Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
     Call GdipGetImageEncoders(num, Size, pImageCodecInfo(0))
 
     For j = 0 To num - 1
-
         buffer = Space$(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
 
         Call lstrcpyW(ByVal StrPtr(buffer), _

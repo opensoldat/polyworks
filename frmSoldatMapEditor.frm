@@ -14126,7 +14126,6 @@ Public Sub GetInfo()
     End If
 
     If numSelectedScenery > 0 Then
-
         For i = 1 To sceneryCount
             If Scenery(i).selected = 1 Then
                 scenNum = i
