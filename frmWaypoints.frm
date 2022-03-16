@@ -517,21 +517,21 @@ Public showPaths As Byte
 Private formHeight As Integer
 
 Private waypointType(0 To 4) As Boolean
-Private wayptKeys(0 To 4) As Byte
+Private waypointKeys(0 To 4) As Byte
 
 Private Const COLLAPSED_HEIGHT = 19
 
 
 Public Function GetWaypointKey(ByVal Index As Byte) As Byte
 
-    GetWaypointKey = wayptKeys(Index)
+    GetWaypointKey = waypointKeys(Index)
 
 End Function
 
 Public Sub SetWayptKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
-        wayptKeys(Index) = value
+        waypointKeys(Index) = value
     End If
 
 End Sub
