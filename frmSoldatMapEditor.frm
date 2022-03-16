@@ -5126,7 +5126,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
 
     Dim i As Long
     Dim hotKeyPressed As Integer
-    Dim wayptKeyPressed As Integer
+    Dim waypointKeyPressed As Integer
     Dim layerKeyPressed As Integer
     Dim pBuffer(0 To BUFFER_SIZE) As DIDEVICEOBJECTDATA
     Static tempFunction As Byte
@@ -5234,9 +5234,9 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
         For i = 0 To 13
             If (DIState.Key(frmTools.GetHotKey(i))) Then hotKeyPressed = i
         Next
-        wayptKeyPressed = -1
+        waypointKeyPressed = -1
         For i = 0 To 4
-            If (DIState.Key(frmWaypoints.GetWaypointKey(i))) Then wayptKeyPressed = i
+            If (DIState.Key(frmWaypoints.GetWaypointKey(i))) Then waypointKeyPressed = i
         Next
         layerKeyPressed = -1
         For i = 0 To 7
@@ -5371,8 +5371,8 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             If hotKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' hotkey
                 SetCurrentTool hotKeyPressed
                 frmTools.picTools_MouseDown hotKeyPressed, 1, 0, 1, 1
-            ElseIf wayptKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' waypoint key
-                frmWaypoints.picType_MouseUp wayptKeyPressed, 1, 0, 0, 0
+            ElseIf waypointKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' waypoint key
+                frmWaypoints.picType_MouseUp waypointKeyPressed, 1, 0, 0, 0
             ElseIf layerKeyPressed > -1 And Not (shiftDown Or ctrlDown Or altDown) Then  ' layer key
                 frmDisplay.picLayer_MouseUp layerKeyPressed, 1, 0, 0, 0
             ElseIf DIState.Key(DIK_NUMPADPLUS) = 128 Then  ' +
