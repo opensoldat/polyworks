@@ -610,7 +610,7 @@ Private Sub lblType_MouseMove(Index As Integer, Button As Integer, Shift As Inte
 
 End Sub
 
-Public Sub ClearWaypt()
+Public Sub ClearWaypoint()
 
     Dim i As Integer
 

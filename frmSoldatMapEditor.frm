@@ -8220,7 +8220,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
     End If
 
     If numSelWaypoints = 0 And frmWaypoints.Visible = True Then
-        frmWaypoints.ClearWaypt
+        frmWaypoints.ClearWaypoint
     End If
 
     selectedCoords(1).X = 0
@@ -14183,7 +14183,7 @@ Public Sub GetInfo()
     End If
 
     If numSelWaypoints = 0 Then
-        frmWaypoints.ClearWaypt
+        frmWaypoints.ClearWaypoint
     End If
 
     frmInfo.noChange = False
