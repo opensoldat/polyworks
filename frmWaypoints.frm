@@ -516,7 +516,7 @@ Public showPaths As Byte
 
 Private formHeight As Integer
 
-Private wayptType(0 To 4) As Boolean
+Private waypointType(0 To 4) As Boolean
 Private wayptKeys(0 To 4) As Byte
 
 Private Const COLLAPSED_HEIGHT = 19
@@ -587,7 +587,7 @@ End Sub
 
 Public Sub GetWayType(Index As Integer, value As Boolean)
 
-    wayptType(Index) = value
+    waypointType(Index) = value
     MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, value, BUTTON_UP
 
 End Sub
@@ -614,12 +614,12 @@ Public Sub ClearWaypoint()
 
     Dim i As Integer
 
-    Debug.Assert picType.LBound = LBound(wayptType)
-    Debug.Assert picType.UBound = UBound(wayptType)
+    Debug.Assert picType.LBound = LBound(waypointType)
+    Debug.Assert picType.UBound = UBound(waypointType)
 
     For i = picType.LBound To picType.UBound
         MouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-        wayptType(i) = False
+        waypointType(i) = False
     Next
 
     cboSpecial.ListIndex = -1
@@ -712,34 +712,34 @@ End Sub
 
 Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_DOWN
+    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, waypointType(Index), BUTTON_DOWN
 
 End Sub
 
 Private Sub picType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, wayptType(Index), BUTTON_MOVE, lblType(Index).Width + 16
+    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, waypointType(Index), BUTTON_MOVE, lblType(Index).Width + 16
 
 End Sub
 
 Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Not frmSoldatMapEditor.SetWayType(Index, Not wayptType(Index)) Then Exit Sub
+    If Not frmSoldatMapEditor.SetWayType(Index, Not waypointType(Index)) Then Exit Sub
 
-    wayptType(Index) = Not wayptType(Index)
-    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, wayptType(Index), BUTTON_UP
+    waypointType(Index) = Not waypointType(Index)
+    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, waypointType(Index), BUTTON_UP
 
     If Index = 0 Then
-        wayptType(1) = False
+        waypointType(1) = False
         MouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 1 Then
-        wayptType(0) = False
+        waypointType(0) = False
         MouseEvent2 picType(0), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 2 Then
-        wayptType(3) = False
+        waypointType(3) = False
         MouseEvent2 picType(3), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     ElseIf Index = 3 Then
-        wayptType(2) = False
+        waypointType(2) = False
         MouseEvent2 picType(2), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     End If
 
