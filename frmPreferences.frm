@@ -2221,7 +2221,7 @@ Private Sub Form_Load()
     Next
 
     For i = txtWayptKey.LBound To txtWayptKey.UBound
-        txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.GetWayptKey(i), 1))
+        txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.GetWaypointKey(i), 1))
         txtWayptKey(i).Tag = Asc(txtWayptKey(i).Text)
     Next
 

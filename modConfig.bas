@@ -331,11 +331,11 @@ Public Sub SaveSettings()
 
     ' waypoint keys
     iniString = _
-        "Left=" & frmWaypoints.GetWayptKey(0) & sNull & _
-        "Right=" & frmWaypoints.GetWayptKey(1) & sNull & _
-        "Up=" & frmWaypoints.GetWayptKey(2) & sNull & _
-        "Down=" & frmWaypoints.GetWayptKey(3) & sNull & _
-        "Fly=" & frmWaypoints.GetWayptKey(4) & sNull & sNull
+        "Left=" & frmWaypoints.GetWaypointKey(0) & sNull & _
+        "Right=" & frmWaypoints.GetWaypointKey(1) & sNull & _
+        "Up=" & frmWaypoints.GetWaypointKey(2) & sNull & _
+        "Down=" & frmWaypoints.GetWaypointKey(3) & sNull & _
+        "Fly=" & frmWaypoints.GetWaypointKey(4) & sNull & sNull
     SaveSection "WaypointKeys", iniString
 
     ' layer keys
