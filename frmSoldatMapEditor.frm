@@ -5896,7 +5896,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             frmDisplay.SetLayer 7, showWaypoints
         End If
 
-        If frmWaypoints.showPaths = 1 And frmWaypoints.wayptPath = 1 Or frmWaypoints.showPaths = 2 And frmWaypoints.wayptPath = 0 Then
+        If frmWaypoints.showPaths = 1 And frmWaypoints.waypointPath = 1 Or frmWaypoints.showPaths = 2 And frmWaypoints.waypointPath = 0 Then
             frmWaypoints.picShow_MouseUp 0, 1, 0, 0, 0
             MouseEvent2 frmWaypoints.picShow(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
         End If
@@ -5912,7 +5912,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         Waypoints(waypointCount).X = X / zoomFactor + scrollCoords(2).X
         Waypoints(waypointCount).Y = Y / zoomFactor + scrollCoords(2).Y
 
-        Waypoints(waypointCount).pathNum = frmWaypoints.wayptPath + 1
+        Waypoints(waypointCount).pathNum = frmWaypoints.waypointPath + 1
 
         For i = 0 To 4
             Waypoints(waypointCount).wayType(i) = mnuWayType(i).Checked

@@ -510,7 +510,7 @@ Public collapsed As Boolean
 
 Public noChange As Boolean
 
-Public wayptPath As Byte
+Public waypointPath As Byte
 Public showPaths As Byte
 
 
@@ -581,7 +581,7 @@ Public Sub GetPathNum(value As Byte)
     For i = picPath.LBound To picPath.UBound
         MouseEvent2 picPath(i), 0, 0, BUTTON_SMALL, value = i + 1, BUTTON_UP
     Next
-    wayptPath = value - 1
+    waypointPath = value - 1
 
 End Sub
 
@@ -684,13 +684,13 @@ End Sub
 
 Private Sub picPath_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_DOWN
+    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = waypointPath), BUTTON_DOWN
 
 End Sub
 
 Private Sub picPath_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = wayptPath), BUTTON_MOVE, lblPath(Index).Width + 16
+    MouseEvent2 picPath(Index), X, Y, BUTTON_SMALL, (Index = waypointPath), BUTTON_MOVE, lblPath(Index).Width + 16
 
 End Sub
 
@@ -698,11 +698,11 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
     Dim i As Integer
 
-    wayptPath = Index
+    waypointPath = Index
 
     For i = picPath.LBound To picPath.UBound
         If i <> Index Then
-            MouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = wayptPath), BUTTON_UP
+            MouseEvent2 picPath(i), X, Y, BUTTON_SMALL, (i = waypointPath), BUTTON_UP
         End If
     Next
 
