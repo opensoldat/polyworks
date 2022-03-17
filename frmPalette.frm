@@ -611,16 +611,16 @@ Public Sub CheckPalette(red As Byte, green As Byte, blue As Byte)
 
     Dim X As Integer
     Dim Y As Integer
-    Dim foundClr As Boolean
+    Dim foundColor As Boolean
 
     For Y = 0 To 5
         For X = 0 To 11
-            If red = colorPalette(X, Y).red And green = colorPalette(X, Y).green And blue = colorPalette(X, Y).blue And Not foundClr Then
+            If red = colorPalette(X, Y).red And green = colorPalette(X, Y).green And blue = colorPalette(X, Y).blue And Not foundColor Then
                 shpSel1.Left = X * 16 + 1
                 shpSel1.Top = Y * 16 + 1
                 shpSel2.Left = X * 16
                 shpSel2.Top = Y * 16
-                foundClr = True
+                foundColor = True
             End If
         Next
     Next
