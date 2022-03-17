@@ -289,7 +289,6 @@ Private Const PATCOPY = &HF00021     ' (DWORD) dest = pattern
 Private Const PICTYPE_BITMAP = 1     ' Bitmap type
 Private Const InterpolationModeHighQualityBicubic = 7
 Private Const GDIP_WMF_PLACEABLEKEY = &H9AC6CDD7
-Private Const UnitPixel = 2
 
 Public Sub SelectAllText(tb As TextBox)
 
