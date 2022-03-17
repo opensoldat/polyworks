@@ -1945,7 +1945,7 @@ Option Explicit
 #End If
 
 
-Private Const MinHeight = 440
+Private Const MIN_HEIGHT = 440
 Private Const MaxHeight = 547
 
 Private blendModes(0 To 7) As Integer
@@ -1982,7 +1982,7 @@ Private Sub picSekrit_Click()
     If Me.ScaleHeight < MaxHeight - 20 Then
         Me.Height = MaxHeight * Screen.TwipsPerPixelY
     Else
-        Me.Height = MinHeight * Screen.TwipsPerPixelY
+        Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
     End If
 
 End Sub
@@ -2159,7 +2159,7 @@ Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
     
-    Me.Height = MinHeight * Screen.TwipsPerPixelY
+    Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts
     topmost = frmSoldatMapEditor.topmost
