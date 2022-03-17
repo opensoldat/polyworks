@@ -556,7 +556,7 @@ Private clrPalette(0 To 11, 0 To 5) As TColor
 Private formHeight As Integer
 
 Private radius As Integer
-Private clrMode As Byte
+Private colorMode As Byte
 
 Private xVal As Integer
 Private yVal As Integer
@@ -590,10 +590,10 @@ Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As 
     txtRadius.Text = R
     txtOpacity.Text = op * 100
     cboBlendMode.ListIndex = blend
-    clrMode = mode
+    colorMode = mode
 
     For i = 0 To 2
-        If i = clrMode Then
+        If i = colorMode Then
             BitBlt picClrMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
         Else
             BitBlt picClrMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 96, vbSrcCopy
@@ -602,7 +602,7 @@ Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As 
     Next
 
     For i = 0 To 2
-        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
+        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
     Next
 
 End Sub
@@ -1027,13 +1027,13 @@ End Function
 
 Public Sub picClrMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_DOWN
+    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
 
 End Sub
 
 Private Sub picClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = clrMode), BUTTON_MOVE, lblClrMode(Index).Width + 16
+    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_MOVE, lblClrMode(Index).Width + 16
 
 End Sub
 
@@ -1041,15 +1041,15 @@ Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Int
 
     Dim i As Integer
 
-    clrMode = Index
+    colorMode = Index
 
     For i = picClrMode.LBound To picClrMode.UBound
         If i <> Index Then
-            MouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = clrMode), BUTTON_UP
+            MouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = colorMode), BUTTON_UP
         End If
     Next
 
-    frmSoldatMapEditor.SetColorMode clrMode
+    frmSoldatMapEditor.SetColorMode colorMode
     frmSoldatMapEditor.RegainFocus
 
 End Sub
@@ -1131,7 +1131,7 @@ Public Sub SetColors()
     MouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     For i = picClrMode.LBound To picClrMode.UBound
-        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (clrMode = i), BUTTON_UP
+        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
     Next
 
     Me.BackColor = bgColor
