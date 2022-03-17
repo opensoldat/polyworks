@@ -1946,7 +1946,7 @@ Option Explicit
 
 
 Private Const MIN_HEIGHT = 440
-Private Const MaxHeight = 547
+Private Const MAX_HEIGHT = 547
 
 Private blendModes(0 To 7) As Integer
 
@@ -1979,8 +1979,8 @@ End Sub
 
 Private Sub picSekrit_Click()
 
-    If Me.ScaleHeight < MaxHeight - 20 Then
-        Me.Height = MaxHeight * Screen.TwipsPerPixelY
+    If Me.ScaleHeight < MAX_HEIGHT - 20 Then
+        Me.Height = MAX_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
     End If
