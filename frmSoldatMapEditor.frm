@@ -11477,9 +11477,9 @@ Private Sub SetLightsMode(lightsOn As Boolean)
 
 End Sub
 
-Public Sub SetColorMode(ByVal clrVal As Byte)
+Public Sub SetColorMode(ByVal colorVal As Byte)
 
-    colorMode = clrVal
+    colorMode = colorVal
 
 End Sub
 
