@@ -570,9 +570,9 @@ Public Function GetPalColor(X As Integer, Y As Integer) As Long  ' unused?
 
 End Function
 
-Public Sub SetPalColor(X As Integer, Y As Integer, clrVal As Long)  ' unused?
+Public Sub SetPalColor(X As Integer, Y As Integer, colorVal As Long)  ' unused?
 
-    colorPalette(X, Y) = GetRGB(clrVal)
+    colorPalette(X, Y) = GetRGB(colorVal)
 
 End Sub
 
