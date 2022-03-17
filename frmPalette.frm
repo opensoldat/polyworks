@@ -551,7 +551,7 @@ Public yPos As Integer
 Public collapsed As Boolean
 
 
-Private clrPalette(0 To 11, 0 To 5) As TColor
+Private colorPalette(0 To 11, 0 To 5) As TColor
 
 Private formHeight As Integer
 
@@ -566,13 +566,13 @@ Private tempVal As Integer
 
 Public Function GetPalColor(X As Integer, Y As Integer) As Long  ' unused?
 
-    GetPalColor = RGB(clrPalette(X, Y).blue, clrPalette(X, Y).green, clrPalette(X, Y).red)
+    GetPalColor = RGB(colorPalette(X, Y).blue, colorPalette(X, Y).green, colorPalette(X, Y).red)
 
 End Function
 
 Public Sub SetPalColor(X As Integer, Y As Integer, clrVal As Long)  ' unused?
 
-    clrPalette(X, Y) = GetRGB(clrVal)
+    colorPalette(X, Y) = GetRGB(clrVal)
 
 End Sub
 
@@ -582,7 +582,7 @@ Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
     For Y = 0 To 5
         For X = 0 To 11
-            picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
+            picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(colorPalette(X, Y).red, colorPalette(X, Y).green, colorPalette(X, Y).blue), BF
         Next
     Next
 
@@ -615,7 +615,7 @@ Public Sub CheckPalette(red As Byte, green As Byte, blue As Byte)
 
     For Y = 0 To 5
         For X = 0 To 11
-            If red = clrPalette(X, Y).red And green = clrPalette(X, Y).green And blue = clrPalette(X, Y).blue And Not foundClr Then
+            If red = colorPalette(X, Y).red And green = colorPalette(X, Y).green And blue = colorPalette(X, Y).blue And Not foundClr Then
                 shpSel1.Left = X * 16 + 1
                 shpSel1.Top = Y * 16 + 1
                 shpSel2.Left = X * 16
@@ -695,10 +695,10 @@ Public Sub LoadPalette(FileName As String)
 
         For Y = 0 To 5
             For X = 0 To 11
-                Input #1, clrPalette(X, Y).red
-                Input #1, clrPalette(X, Y).green
-                Input #1, clrPalette(X, Y).blue
-                frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(clrPalette(X, Y).red, clrPalette(X, Y).green, clrPalette(X, Y).blue), BF
+                Input #1, colorPalette(X, Y).red
+                Input #1, colorPalette(X, Y).green
+                Input #1, colorPalette(X, Y).blue
+                frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), RGB(colorPalette(X, Y).red, colorPalette(X, Y).green, colorPalette(X, Y).blue), BF
             Next
         Next
 
@@ -768,7 +768,7 @@ Public Sub SavePalette(FileName As String)
 
         For Y = 0 To 5
             For X = 0 To 11
-                Print #1, clrPalette(X, Y).red & ", " & clrPalette(X, Y).green & ", " & clrPalette(X, Y).blue
+                Print #1, colorPalette(X, Y).red & ", " & colorPalette(X, Y).green & ", " & colorPalette(X, Y).blue
             Next
         Next
 
@@ -810,9 +810,9 @@ Private Sub mnuClearPalette_Click()
 
     For Y = 0 To 5
         For X = 0 To 11
-            clrPalette(X, Y).red = 0
-            clrPalette(X, Y).green = 0
-            clrPalette(X, Y).blue = 0
+            colorPalette(X, Y).red = 0
+            colorPalette(X, Y).green = 0
+            colorPalette(X, Y).blue = 0
             frmPalette.picPalette.Line (X * 16, Y * 16)-(X * 16 + 16, 16 * 16 + 16), 0, BF
         Next
     Next
@@ -836,12 +836,12 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
     If Button = 1 Then  ' select color
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
-        frmSoldatMapEditor.SetPaletteColor clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue
+        frmSoldatMapEditor.SetPaletteColor colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue
 
-        txtRGB(0).Text = clrPalette(xVal, yVal).red
-        txtRGB(1).Text = clrPalette(xVal, yVal).green
-        txtRGB(2).Text = clrPalette(xVal, yVal).blue
-        picColor.BackColor = RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue)
+        txtRGB(0).Text = colorPalette(xVal, yVal).red
+        txtRGB(1).Text = colorPalette(xVal, yVal).green
+        txtRGB(2).Text = colorPalette(xVal, yVal).blue
+        picColor.BackColor = RGB(colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue)
 
         shpSel1.Left = Int(X / 16) * 16 + 1
         shpSel1.Top = Int(Y / 16) * 16 + 1
@@ -859,10 +859,10 @@ End Sub
 
 Public Sub NewPaletteColor()
 
-    clrPalette(xVal, yVal).red = txtRGB(0).Text
-    clrPalette(xVal, yVal).green = txtRGB(1).Text
-    clrPalette(xVal, yVal).blue = txtRGB(2).Text
-    picPalette.Line (xVal * 16, yVal * 16)-(xVal * 16 + 15, yVal * 16 + 15), RGB(clrPalette(xVal, yVal).red, clrPalette(xVal, yVal).green, clrPalette(xVal, yVal).blue), BF
+    colorPalette(xVal, yVal).red = txtRGB(0).Text
+    colorPalette(xVal, yVal).green = txtRGB(1).Text
+    colorPalette(xVal, yVal).blue = txtRGB(2).Text
+    picPalette.Line (xVal * 16, yVal * 16)-(xVal * 16 + 15, yVal * 16 + 15), RGB(colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue), BF
     shpSel1.Left = xVal * 16 + 1
     shpSel1.Top = yVal * 16 + 1
     shpSel2.Left = xVal * 16
