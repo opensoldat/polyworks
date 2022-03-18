@@ -7404,7 +7404,7 @@ Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
 
 End Sub
 
-Public Sub ApplyRotate(tehValue As Single)
+Public Sub ApplyRotate(theValue As Single)
 
     Dim R As Single
     Dim theta As Single
@@ -7419,7 +7419,7 @@ Public Sub ApplyRotate(tehValue As Single)
         selectionChanged = False
     End If
 
-    rDiff = tehValue
+    rDiff = theValue
 
     rCenter.X = Midpoint(selRect(0).X, selRect(2).X)
     rCenter.Y = Midpoint(selRect(0).Y, selRect(2).Y)
@@ -11849,7 +11849,7 @@ Public Sub SetRadius(R As Integer)
 
 End Sub
 
-Public Function SetWayType(Index As Integer, tehValue As Boolean) As Boolean
+Public Function SetWayType(Index As Integer, theValue As Boolean) As Boolean
 
     If numSelWaypoints = 0 Then
         SetWayType = False
@@ -11860,7 +11860,7 @@ Public Function SetWayType(Index As Integer, tehValue As Boolean) As Boolean
 
     For i = 1 To waypointCount
         If Waypoints(i).selected Then
-            Waypoints(i).wayType(Index) = tehValue
+            Waypoints(i).wayType(Index) = theValue
             If Index = 0 Then
                 Waypoints(i).wayType(1) = False
             ElseIf Index = 1 Then
@@ -11879,13 +11879,13 @@ Public Function SetWayType(Index As Integer, tehValue As Boolean) As Boolean
 
 End Function
 
-Public Sub SetPathNum(tehValue As Byte)
+Public Sub SetPathNum(theValue As Byte)
 
     Dim i As Integer
 
     For i = 1 To waypointCount
         If Waypoints(i).selected Then
-            Waypoints(i).pathNum = tehValue
+            Waypoints(i).pathNum = theValue
         End If
     Next
 
@@ -11893,7 +11893,7 @@ Public Sub SetPathNum(tehValue As Byte)
 
 End Sub
 
-Public Function SetSpecial(tehValue As Byte) As Boolean
+Public Function SetSpecial(theValue As Byte) As Boolean
 
     Dim i As Integer
 
@@ -11904,7 +11904,7 @@ Public Function SetSpecial(tehValue As Byte) As Boolean
 
     For i = 1 To waypointCount
         If Waypoints(i).selected Then
-            Waypoints(i).special = tehValue
+            Waypoints(i).special = theValue
         End If
     Next
 
@@ -12515,7 +12515,7 @@ Private Sub LoadPrefab(theFileName As String)
     Dim newConnections As Integer
     Dim i As Integer
     Dim j As Integer
-    Dim tehValue As Integer
+    Dim theValue As Integer
     Dim tempClr As TColor
 
     mnuDeselect_Click
@@ -12531,23 +12531,23 @@ Private Sub LoadPrefab(theFileName As String)
             ReDim selectedPolys(newPolys)
 
             For i = 1 To newPolys
-                tehValue = mPolyCount + i
-                Get #1, , Polys(tehValue)
-                Get #1, , vertexList(tehValue).vertex(1)
-                Get #1, , vertexList(tehValue).vertex(2)
-                Get #1, , vertexList(tehValue).vertex(3)
-                Get #1, , vertexList(tehValue).polyType
+                theValue = mPolyCount + i
+                Get #1, , Polys(theValue)
+                Get #1, , vertexList(theValue).vertex(1)
+                Get #1, , vertexList(theValue).vertex(2)
+                Get #1, , vertexList(theValue).vertex(3)
+                Get #1, , vertexList(theValue).polyType
                 For j = 1 To 3
-                    PolyCoords(tehValue).vertex(j).X = Polys(tehValue).vertex(j).X
-                    PolyCoords(tehValue).vertex(j).Y = Polys(tehValue).vertex(j).Y
-                    Polys(tehValue).vertex(j).X = (PolyCoords(tehValue).vertex(j).X - scrollCoords(2).X) * zoomFactor
-                    Polys(tehValue).vertex(j).Y = (PolyCoords(tehValue).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
-                    tempClr = GetRGB(Polys(tehValue).vertex(j).color)
-                    vertexList(tehValue).color(j).red = tempClr.red
-                    vertexList(tehValue).color(j).green = tempClr.green
-                    vertexList(tehValue).color(j).blue = tempClr.blue
+                    PolyCoords(theValue).vertex(j).X = Polys(theValue).vertex(j).X
+                    PolyCoords(theValue).vertex(j).Y = Polys(theValue).vertex(j).Y
+                    Polys(theValue).vertex(j).X = (PolyCoords(theValue).vertex(j).X - scrollCoords(2).X) * zoomFactor
+                    Polys(theValue).vertex(j).Y = (PolyCoords(theValue).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
+                    tempClr = GetRGB(Polys(theValue).vertex(j).color)
+                    vertexList(theValue).color(j).red = tempClr.red
+                    vertexList(theValue).color(j).green = tempClr.green
+                    vertexList(theValue).color(j).blue = tempClr.blue
                 Next
-                selectedPolys(i) = tehValue
+                selectedPolys(i) = theValue
             Next
             mPolyCount = mPolyCount + newPolys
         End If
@@ -12562,11 +12562,11 @@ Private Sub LoadPrefab(theFileName As String)
             ReDim Preserve Scenery(sceneryCount + newScenery)
             If newScenery > 0 Then
                 For i = 1 To newScenery
-                    tehValue = sceneryCount + i
-                    Get #1, , Scenery(tehValue)
-                    Scenery(tehValue).screenTr.X = (Scenery(tehValue).Translation.X - scrollCoords(2).X) * zoomFactor
-                    Scenery(tehValue).screenTr.Y = (Scenery(tehValue).Translation.Y - scrollCoords(2).Y) * zoomFactor
-                    Scenery(tehValue).Style = 0
+                    theValue = sceneryCount + i
+                    Get #1, , Scenery(theValue)
+                    Scenery(theValue).screenTr.X = (Scenery(theValue).Translation.X - scrollCoords(2).X) * zoomFactor
+                    Scenery(theValue).screenTr.Y = (Scenery(theValue).Translation.Y - scrollCoords(2).Y) * zoomFactor
+                    Scenery(theValue).Style = 0
 
                     Get #1, , elementName
                     ' get scenery name
@@ -12577,13 +12577,13 @@ Private Sub LoadPrefab(theFileName As String)
                     ' find scenery in list
                     For j = 1 To sceneryElements
                         If frmScenery.lstScenery.List(j - 1) = elementString Then
-                            Scenery(tehValue).Style = j
+                            Scenery(theValue).Style = j
                         End If
                     Next
                     ' scenery not in list, so load it
-                    If Scenery(tehValue).Style = 0 Then
+                    If Scenery(theValue).Style = 0 Then
                         CreateSceneryTexture elementString
-                        Scenery(tehValue).Style = sceneryElements
+                        Scenery(theValue).Style = sceneryElements
                     End If
                 Next
             End If
@@ -14221,7 +14221,7 @@ Public Sub ApplyPolyType(ByVal Index As Integer)
 
 End Sub
 
-Public Sub ApplyTextureCoords(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplyTextureCoords(ByVal theValue As Single, Index As Integer)
 
     Dim i As Integer
     Dim j As Integer
@@ -14236,9 +14236,9 @@ Public Sub ApplyTextureCoords(ByVal tehValue As Single, Index As Integer)
             For j = 1 To 3
                 If vertexList(selectedPolys(i)).vertex(j) = 1 Then
                     If Index = 0 Then
-                        Polys(selectedPolys(i)).vertex(j).tu = tehValue
+                        Polys(selectedPolys(i)).vertex(j).tu = theValue
                     Else
-                        Polys(selectedPolys(i)).vertex(j).tv = tehValue
+                        Polys(selectedPolys(i)).vertex(j).tv = theValue
                     End If
                 End If
             Next
@@ -14249,7 +14249,7 @@ Public Sub ApplyTextureCoords(ByVal tehValue As Single, Index As Integer)
 
 End Sub
 
-Public Sub ApplyVertexAlpha(tehValue As Single)
+Public Sub ApplyVertexAlpha(theValue As Single)
 
     Dim i As Integer
     Dim j As Integer
@@ -14263,7 +14263,7 @@ Public Sub ApplyVertexAlpha(tehValue As Single)
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                    Polys(selectedPolys(i)).vertex(j).color = ARGB(tehValue * 255, Polys(selectedPolys(i)).vertex(j).color)
+                    Polys(selectedPolys(i)).vertex(j).color = ARGB(theValue * 255, Polys(selectedPolys(i)).vertex(j).color)
                 End If
             Next
         Next
@@ -14273,7 +14273,7 @@ Public Sub ApplyVertexAlpha(tehValue As Single)
 
 End Sub
 
-Public Sub ApplyBounciness(tehValue As Single)
+Public Sub ApplyBounciness(theValue As Single)
 
     Dim i As Integer
     Dim j As Integer
@@ -14286,7 +14286,7 @@ Public Sub ApplyBounciness(tehValue As Single)
     If numSelectedPolys > 0 Then
         For i = 1 To numSelectedPolys
             For j = 1 To 3
-                Polys(selectedPolys(i)).Perp.vertex(j).Z = tehValue
+                Polys(selectedPolys(i)).Perp.vertex(j).Z = theValue
             Next
         Next
     End If
@@ -14294,7 +14294,7 @@ Public Sub ApplyBounciness(tehValue As Single)
 
 End Sub
 
-Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplySceneryProp(ByVal theValue As Single, Index As Integer)
 
     Dim i As Integer
     Dim tempColor As TColor
@@ -14307,17 +14307,17 @@ Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
     For i = 1 To sceneryCount
         If Scenery(i).selected = 1 Then
             If Index = 0 Then  ' x scale
-                Scenery(i).Scaling.X = tehValue
+                Scenery(i).Scaling.X = theValue
             ElseIf Index = 1 Then  ' y scale
-                Scenery(i).Scaling.Y = tehValue
+                Scenery(i).Scaling.Y = theValue
             ElseIf Index = 2 Then  ' alpha
                 tempColor = GetRGB(Scenery(i).color)
-                Scenery(i).alpha = tehValue
-                Scenery(i).color = ARGB(tehValue, RGB(tempColor.blue, tempColor.green, tempColor.red))
+                Scenery(i).alpha = theValue
+                Scenery(i).color = ARGB(theValue, RGB(tempColor.blue, tempColor.green, tempColor.red))
             ElseIf Index = 3 Then  ' rotation
-                Scenery(i).rotation = tehValue
+                Scenery(i).rotation = theValue
             ElseIf Index = 4 Then  ' level
-                Scenery(i).level = tehValue
+                Scenery(i).level = theValue
             End If
         End If
     Next
@@ -14329,7 +14329,7 @@ Public Sub ApplySceneryProp(ByVal tehValue As Single, Index As Integer)
 
 End Sub
 
-Public Sub ApplyLightProp(ByVal tehValue As Single, Index As Integer)
+Public Sub ApplyLightProp(ByVal theValue As Single, Index As Integer)
 
     Dim i As Integer
 
@@ -14341,9 +14341,9 @@ Public Sub ApplyLightProp(ByVal tehValue As Single, Index As Integer)
     For i = 1 To lightCount
         If Lights(i).selected = 1 Then
             If Index = 0 Then  ' z-coord
-                Lights(i).Z = tehValue
+                Lights(i).Z = theValue
             ElseIf Index = 1 Then
-                Lights(i).range = tehValue
+                Lights(i).range = theValue
             End If
         End If
     Next
