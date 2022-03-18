@@ -3044,7 +3044,7 @@ Private Sub SaveFile(theFileName As String)
     Dim sceneryName As String
     Dim Prop As TProp
     Dim spawn As TSaveSpawnPoint
-    Dim tempClr As TColor
+    Dim tempColor As TColor
     Dim connectedNum As Integer
 
     Dim fileOpen As Boolean
@@ -3131,8 +3131,8 @@ Private Sub SaveFile(theFileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = GetRGB(Scenery(i).color)
-            Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
+            tempColor = GetRGB(Scenery(i).color)
+            Prop.color = ARGB(255, RGB(tempColor.blue, tempColor.green, tempColor.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
             Prop.level = Scenery(i).level
@@ -3275,7 +3275,7 @@ Public Sub SaveAndCompile(theFileName As String)
     Dim newWaypoint As TNewWaypoint
     Dim sceneryName As String
     Dim Prop As TProp
-    Dim tempClr As TColor
+    Dim tempColor As TColor
     Dim connectedNum As Integer
 
     Dim newSpawnPoint As TSaveSpawnPoint
@@ -3427,8 +3427,8 @@ Public Sub SaveAndCompile(theFileName As String)
         For i = 1 To sceneryCount
             Prop.active = True
             Prop.alpha = Scenery(i).alpha
-            tempClr = GetRGB(Scenery(i).color)
-            Prop.color = ARGB(255, RGB(tempClr.blue, tempClr.green, tempClr.red))
+            tempColor = GetRGB(Scenery(i).color)
+            Prop.color = ARGB(255, RGB(tempColor.blue, tempColor.green, tempColor.red))
             Prop.Width = SceneryTextures(Scenery(i).Style).Width
             Prop.Height = SceneryTextures(Scenery(i).Style).Height
             Prop.level = Scenery(i).level
@@ -5832,14 +5832,14 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
             ColorPicker X, Y
         End If
     ElseIf currentFunction = TOOL_PIXPICKER Then
-        Dim tempClr As TColor
-        tempClr = GetRGB(GetPixel(Me.hDC, X, Y))
+        Dim tempColor As TColor
+        tempColor = GetRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
-            frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
+            frmColor.InitColor tempColor.blue, tempColor.green, tempColor.red
         Else
-            gPolyClr.red = tempClr.blue
-            gPolyClr.green = tempClr.green
-            gPolyClr.blue = tempClr.red
+            gPolyClr.red = tempColor.blue
+            gPolyClr.green = tempColor.green
+            gPolyClr.blue = tempColor.red
             Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
             frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
@@ -6800,14 +6800,14 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
             ColorPicker X, Y
         End If
     ElseIf currentFunction = TOOL_PIXPICKER Then  ' pixel picker
-        Dim tempClr As TColor
-        tempClr = GetRGB(GetPixel(Me.hDC, X, Y))
+        Dim tempColor As TColor
+        tempColor = GetRGB(GetPixel(Me.hDC, X, Y))
         If frmPalette.Enabled = False Then
-            frmColor.InitColor tempClr.blue, tempClr.green, tempClr.red
+            frmColor.InitColor tempColor.blue, tempColor.green, tempColor.red
         Else
-            gPolyClr.red = tempClr.blue
-            gPolyClr.green = tempClr.green
-            gPolyClr.blue = tempClr.red
+            gPolyClr.red = tempColor.blue
+            gPolyClr.green = tempColor.green
+            gPolyClr.blue = tempColor.red
             Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
             frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
         End If
@@ -7181,7 +7181,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
     Dim angle As Single
     Dim theta As Single
     Dim R As Single
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If selectionChanged Then
         SaveUndo
@@ -7209,9 +7209,9 @@ Private Sub ApplyTransform(Rotating As Boolean)
                     vertexList(pNum).vertex(3) = vertexList(pNum).vertex(2)
                     vertexList(pNum).vertex(2) = vertSel
 
-                    tempClr = vertexList(pNum).color(3)
+                    tempColor = vertexList(pNum).color(3)
                     vertexList(pNum).color(3) = vertexList(pNum).color(2)
-                    vertexList(pNum).color(2) = tempClr
+                    vertexList(pNum).color(2) = tempColor
                 End If
             End If
         Next
@@ -7900,7 +7900,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
     Dim currentDist As Integer
     Dim pNum As Integer
     Dim vNum As Integer
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
@@ -7921,12 +7921,12 @@ Private Sub ColorPicker(X As Single, Y As Single)
     End If
 
     If vNum > 0 Then  ' poly color absorbed
-        tempClr = vertexList(pNum).color(vNum)
-        If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
+        tempColor = vertexList(pNum).color(vNum)
+        If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
-            frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
+            frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
         Else
-            gPolyClr = tempClr
+            gPolyClr = tempColor
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
             frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
@@ -7938,13 +7938,13 @@ Private Sub ColorPicker(X As Single, Y As Single)
             End If
         Next
         If vNum > 0 Then
-            tempClr = GetRGB(Scenery(vNum).color)
-            If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
+            tempColor = GetRGB(Scenery(vNum).color)
+            If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
 
             ElseIf frmPalette.Enabled = False Then  ' non modal
-                frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
+                frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
             Else
-                gPolyClr = tempClr
+                gPolyClr = tempColor
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
                 frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
                 frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
@@ -8006,7 +8006,7 @@ Private Sub LightPicker(X As Single, Y As Single)
     Dim currentDist As Integer
     Dim pNum As Integer
     Dim vNum As Integer
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If showPolys Or showWireframe Or showPoints Then
         shortestDist = 32 ^ 2 + 1
@@ -8027,12 +8027,12 @@ Private Sub LightPicker(X As Single, Y As Single)
     End If
 
     If vNum > 0 Then  ' poly color absorbed
-        tempClr = GetRGB(Polys(pNum).vertex(vNum).color)
-        If tempClr.red = gPolyClr.red And tempClr.green = gPolyClr.green And tempClr.blue = gPolyClr.blue Then
+        tempColor = GetRGB(Polys(pNum).vertex(vNum).color)
+        If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
-            frmColor.InitColor tempClr.red, tempClr.green, tempClr.blue
+            frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
         Else
-            gPolyClr = tempClr
+            gPolyClr = tempColor
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
             frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
             frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
@@ -10272,7 +10272,7 @@ Private Sub mnuFlip_Click(Index As Integer)
     Dim vertSel As Byte
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If selectionChanged Then
         SaveUndo
@@ -10314,9 +10314,9 @@ Private Sub mnuFlip_Click(Index As Integer)
                 vertexList(PolyNum).vertex(3) = vertexList(PolyNum).vertex(2)
                 vertexList(PolyNum).vertex(2) = vertSel
 
-                tempClr = vertexList(PolyNum).color(3)
+                tempColor = vertexList(PolyNum).color(3)
                 vertexList(PolyNum).color(3) = vertexList(PolyNum).color(2)
-                vertexList(PolyNum).color(2) = tempClr
+                vertexList(PolyNum).color(2) = tempColor
             End If
         Next
     End If
@@ -12516,7 +12516,7 @@ Private Sub LoadPrefab(theFileName As String)
     Dim i As Integer
     Dim j As Integer
     Dim theValue As Integer
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     mnuDeselect_Click
 
@@ -12542,10 +12542,10 @@ Private Sub LoadPrefab(theFileName As String)
                     PolyCoords(theValue).vertex(j).Y = Polys(theValue).vertex(j).Y
                     Polys(theValue).vertex(j).X = (PolyCoords(theValue).vertex(j).X - scrollCoords(2).X) * zoomFactor
                     Polys(theValue).vertex(j).Y = (PolyCoords(theValue).vertex(j).Y - scrollCoords(2).Y) * zoomFactor
-                    tempClr = GetRGB(Polys(theValue).vertex(j).color)
-                    vertexList(theValue).color(j).red = tempClr.red
-                    vertexList(theValue).color(j).green = tempClr.green
-                    vertexList(theValue).color(j).blue = tempClr.blue
+                    tempColor = GetRGB(Polys(theValue).vertex(j).color)
+                    vertexList(theValue).color(j).red = tempColor.red
+                    vertexList(theValue).color(j).green = tempColor.green
+                    vertexList(theValue).color(j).blue = tempColor.blue
                 Next
                 selectedPolys(i) = theValue
             Next
@@ -13478,7 +13478,7 @@ Private Sub mnuCreate_Click()
     Dim numSelVerts As Integer
     Dim temp As D3DVECTOR2
     Dim tempVertex As TCustomVertex
-    Dim tempClr As TColor
+    Dim tempColor As TColor
 
     If selectionChanged Then
         SaveUndo
@@ -13516,9 +13516,9 @@ Private Sub mnuCreate_Click()
         Polys(mPolyCount).vertex(3) = Polys(mPolyCount).vertex(2)
         Polys(mPolyCount).vertex(2) = tempVertex
 
-        tempClr = vertexList(mPolyCount).color(3)
+        tempColor = vertexList(mPolyCount).color(3)
         vertexList(mPolyCount).color(3) = vertexList(mPolyCount).color(2)
-        vertexList(mPolyCount).color(2) = tempClr
+        vertexList(mPolyCount).color(2) = tempColor
     End If
 
     Polys(mPolyCount).Perp.vertex(1).Z = 2
