@@ -13297,7 +13297,7 @@ Private Sub mnuApplyLight_Click()
 
     Dim i As Integer
     Dim j As Integer
-    Dim tehClr As TColor
+    Dim theColor As TColor
 
     If lightCount = 0 Then Exit Sub
 
@@ -13305,20 +13305,20 @@ Private Sub mnuApplyLight_Click()
         For i = 1 To numSelectedPolys
             For j = 1 To 3
                 ' apply poly color to base color
-                tehClr = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
-                vertexList(selectedPolys(i)).color(j).red = tehClr.red
-                vertexList(selectedPolys(i)).color(j).green = tehClr.green
-                vertexList(selectedPolys(i)).color(j).blue = tehClr.blue
+                theColor = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
+                vertexList(selectedPolys(i)).color(j).red = theColor.red
+                vertexList(selectedPolys(i)).color(j).green = theColor.green
+                vertexList(selectedPolys(i)).color(j).blue = theColor.blue
             Next
         Next
     Else
         For i = 1 To mPolyCount
             For j = 1 To 3
                 ' apply poly color to base color
-                tehClr = GetRGB(Polys(i).vertex(j).color)
-                vertexList(i).color(j).red = tehClr.red
-                vertexList(i).color(j).green = tehClr.green
-                vertexList(i).color(j).blue = tehClr.blue
+                theColor = GetRGB(Polys(i).vertex(j).color)
+                vertexList(i).color(j).red = theColor.red
+                vertexList(i).color(j).green = theColor.green
+                vertexList(i).color(j).blue = theColor.blue
             Next
         Next
     End If
