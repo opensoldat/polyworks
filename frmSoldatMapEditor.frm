@@ -11773,8 +11773,11 @@ End Sub
 
 Public Sub SetPreferences()
 
+    Const HEADER = 41
+    Const FOOTER = 20
+
     inc = (gridSpacing / gridDivisions)
-    tvwScenery.Height = formHeight - 41 - 20
+    tvwScenery.Height = formHeight - HEADER - FOOTER
     ResetDevice
     Render
 
