@@ -9987,32 +9987,32 @@ Private Sub ColorFill(X As Single, Y As Single)
 
 End Sub
 
-Private Function ApplyBlend(dClr As TColor) As TColor
+Private Function ApplyBlend(dColor As TColor) As TColor
 
     If blendMode = 0 Then  ' normal
-        ApplyBlend.red = gPolyColor.red * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = gPolyColor.green * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = gPolyColor.blue * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = gPolyColor.red * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = gPolyColor.green * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = gPolyColor.blue * opacity + dColor.blue * (1 - opacity)
     ElseIf blendMode = 1 Then  ' multiply
-        ApplyBlend.red = (dClr.red / 255 * gPolyColor.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = (dClr.green / 255 * gPolyColor.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = (dClr.blue / 255 * gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dColor.red / 255 * gPolyColor.red) * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = (dColor.green / 255 * gPolyColor.green) * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = (dColor.blue / 255 * gPolyColor.blue) * opacity + dColor.blue * (1 - opacity)
     ElseIf blendMode = 2 Then  ' screen
-        ApplyBlend.red = (dClr.red - dClr.red / 255 * gPolyColor.red + gPolyColor.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = (dClr.green - dClr.green / 255 * gPolyColor.green + gPolyColor.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyColor.blue + gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dColor.red - dColor.red / 255 * gPolyColor.red + gPolyColor.red) * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = (dColor.green - dColor.green / 255 * gPolyColor.green + gPolyColor.green) * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = (dColor.blue - dColor.blue / 255 * gPolyColor.blue + gPolyColor.blue) * opacity + dColor.blue * (1 - opacity)
     ElseIf blendMode = 3 Then  ' AND ' darken
-        ApplyBlend.red = LowerVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = LowerVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = LowerVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = LowerVal(dColor.red, gPolyColor.red) * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = LowerVal(dColor.green, gPolyColor.green) * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = LowerVal(dColor.blue, gPolyColor.blue) * opacity + dColor.blue * (1 - opacity)
     ElseIf blendMode = 4 Then  ' OR ' lighten
-        ApplyBlend.red = HigherVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = HigherVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = HigherVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = HigherVal(dColor.red, gPolyColor.red) * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = HigherVal(dColor.green, gPolyColor.green) * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = HigherVal(dColor.blue, gPolyColor.blue) * opacity + dColor.blue * (1 - opacity)
     ElseIf blendMode = 5 Then  ' XOR ' difference
-        ApplyBlend.red = DiffVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = DiffVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = DiffVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = DiffVal(dColor.red, gPolyColor.red) * opacity + dColor.red * (1 - opacity)
+        ApplyBlend.green = DiffVal(dColor.green, gPolyColor.green) * opacity + dColor.green * (1 - opacity)
+        ApplyBlend.blue = DiffVal(dColor.blue, gPolyColor.blue) * opacity + dColor.blue * (1 - opacity)
     Else
         ApplyBlend.red = 0
         ApplyBlend.green = 0
