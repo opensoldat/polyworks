@@ -7687,7 +7687,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
     Dim currentDist As Long
     Dim shortestDist As Long
     Dim PolyNum As Integer
-    Dim destClr As TColor
+    Dim destColor As TColor
     Dim R As Integer
 
     R = clrRadius * zoomFactor
@@ -7712,12 +7712,12 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = GetRGB(Polys(closestPoly).vertex(closestVert).color)
-            destClr = ApplyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
-            vertexList(closestPoly).color(closestVert).red = destClr.red
-            vertexList(closestPoly).color(closestVert).green = destClr.green
-            vertexList(closestPoly).color(closestVert).blue = destClr.blue
+            destColor = GetRGB(Polys(closestPoly).vertex(closestVert).color)
+            destColor = ApplyBlend(destColor)
+            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destColor.blue, destColor.green, destColor.red))
+            vertexList(closestPoly).color(closestVert).red = destColor.red
+            vertexList(closestPoly).color(closestVert).green = destColor.green
+            vertexList(closestPoly).color(closestVert).blue = destColor.blue
         End If
     Else
         For i = 1 To mPolyCount  ' find closest
@@ -7736,12 +7736,12 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
         Next
 
         If closestPoly > 0 And closestVert > 0 Then
-            destClr = GetRGB(Polys(closestPoly).vertex(closestVert).color)
-            destClr = ApplyBlend(destClr)
-            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destClr.blue, destClr.green, destClr.red))
-            vertexList(closestPoly).color(closestVert).red = destClr.red
-            vertexList(closestPoly).color(closestVert).green = destClr.green
-            vertexList(closestPoly).color(closestVert).blue = destClr.blue
+            destColor = GetRGB(Polys(closestPoly).vertex(closestVert).color)
+            destColor = ApplyBlend(destColor)
+            Polys(closestPoly).vertex(closestVert).color = ARGB(GetAlpha(Polys(closestPoly).vertex(closestVert).color), RGB(destColor.blue, destColor.green, destColor.red))
+            vertexList(closestPoly).color(closestVert).red = destColor.red
+            vertexList(closestPoly).color(closestVert).green = destColor.green
+            vertexList(closestPoly).color(closestVert).blue = destColor.blue
         End If
     End If
 
@@ -7756,7 +7756,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
     Dim i As Integer
     Dim j As Integer
     Dim pNum As Integer
-    Dim destClr As TColor
+    Dim destColor As TColor
     Dim R As Integer
     Dim colored As Boolean
 
@@ -7769,12 +7769,12 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If NearCoord(X, Polys(pNum).vertex(j).X, R) And NearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = GetRGB(Polys(pNum).vertex(j).color)
-                            destClr = ApplyBlend(destClr)
-                            Polys(pNum).vertex(j).color = ARGB(GetAlpha(Polys(pNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
-                            vertexList(pNum).color(j).red = destClr.red
-                            vertexList(pNum).color(j).green = destClr.green
-                            vertexList(pNum).color(j).blue = destClr.blue
+                            destColor = GetRGB(Polys(pNum).vertex(j).color)
+                            destColor = ApplyBlend(destColor)
+                            Polys(pNum).vertex(j).color = ARGB(GetAlpha(Polys(pNum).vertex(j).color), RGB(destColor.blue, destColor.green, destColor.red))
+                            vertexList(pNum).color(j).red = destColor.red
+                            vertexList(pNum).color(j).green = destColor.green
+                            vertexList(pNum).color(j).blue = destColor.blue
                             If lightCount > 0 Then ApplyLightsToVert pNum, j
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
                             colored = True
@@ -7789,12 +7789,12 @@ Private Sub VertexColoring(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            destClr = GetRGB(Polys(i).vertex(j).color)
-                            destClr = ApplyBlend(destClr)
-                            Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
-                            vertexList(i).color(j).red = destClr.red
-                            vertexList(i).color(j).green = destClr.green
-                            vertexList(i).color(j).blue = destClr.blue
+                            destColor = GetRGB(Polys(i).vertex(j).color)
+                            destColor = ApplyBlend(destColor)
+                            Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destColor.blue, destColor.green, destColor.red))
+                            vertexList(i).color(j).red = destColor.red
+                            vertexList(i).color(j).green = destColor.green
+                            vertexList(i).color(j).blue = destColor.blue
                             If lightCount > 0 Then ApplyLightsToVert i, j
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
                             colored = True
@@ -7810,9 +7810,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 1 Then
                 If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = GetRGB(Scenery(i).color)
-                        destClr = ApplyBlend(destClr)
-                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                        destColor = GetRGB(Scenery(i).color)
+                        destColor = ApplyBlend(destColor)
+                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destColor.blue, destColor.green, destColor.red))
                         If colorMode = 1 Then Scenery(i).selected = 3
                         colored = True
                     End If
@@ -7824,9 +7824,9 @@ Private Sub VertexColoring(X As Single, Y As Single)
             If Scenery(i).selected = 0 Then
                 If NearCoord(X, Scenery(i).screenTr.X, R) And NearCoord(Y, Scenery(i).screenTr.Y, R) Then
                     If (Scenery(i).screenTr.X - X) ^ 2 + (Scenery(i).screenTr.Y - Y) ^ 2 <= R ^ 2 Then
-                        destClr = GetRGB(Scenery(i).color)
-                        destClr = ApplyBlend(destClr)
-                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                        destColor = GetRGB(Scenery(i).color)
+                        destColor = ApplyBlend(destColor)
+                        Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destColor.blue, destColor.green, destColor.red))
                         If colorMode = 1 Then Scenery(i).selected = 2
                         colored = True
                     End If
@@ -9894,7 +9894,7 @@ Private Sub ColorFill(X As Single, Y As Single)
     Dim i As Integer
     Dim j As Integer
     Dim PolyNum As Integer
-    Dim destClr As TColor
+    Dim destColor As TColor
     Dim polyColored As Boolean
 
     If numSelectedPolys > 0 Or numSelectedScenery > 0 Then
@@ -9907,12 +9907,12 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = GetRGB(Polys(PolyNum).vertex(j).color)
-                        destClr = ApplyBlend(destClr)
-                        Polys(PolyNum).vertex(j).color = ARGB(GetAlpha(Polys(PolyNum).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
-                        vertexList(PolyNum).color(j).red = destClr.red
-                        vertexList(PolyNum).color(j).green = destClr.green
-                        vertexList(PolyNum).color(j).blue = destClr.blue
+                        destColor = GetRGB(Polys(PolyNum).vertex(j).color)
+                        destColor = ApplyBlend(destColor)
+                        Polys(PolyNum).vertex(j).color = ARGB(GetAlpha(Polys(PolyNum).vertex(j).color), RGB(destColor.blue, destColor.green, destColor.red))
+                        vertexList(PolyNum).color(j).red = destColor.red
+                        vertexList(PolyNum).color(j).green = destColor.green
+                        vertexList(PolyNum).color(j).blue = destColor.blue
                         ApplyLightsToVert PolyNum, j
                         polyColored = True
                     End If
@@ -9927,9 +9927,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = GetRGB(Scenery(i).color)
-                    destClr = ApplyBlend(destClr)
-                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                    destColor = GetRGB(Scenery(i).color)
+                    destColor = ApplyBlend(destColor)
+                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destColor.blue, destColor.green, destColor.red))
                     polyColored = True
                 End If
             Next
@@ -9947,12 +9947,12 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = GetRGB(Polys(i).vertex(j).color)  ' get color of poly
-                        destClr = ApplyBlend(destClr)
-                        Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
-                        vertexList(i).color(j).red = destClr.red
-                        vertexList(i).color(j).green = destClr.green
-                        vertexList(i).color(j).blue = destClr.blue
+                        destColor = GetRGB(Polys(i).vertex(j).color)  ' get color of poly
+                        destColor = ApplyBlend(destColor)
+                        Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destColor.blue, destColor.green, destColor.red))
+                        vertexList(i).color(j).red = destColor.red
+                        vertexList(i).color(j).green = destColor.green
+                        vertexList(i).color(j).blue = destColor.blue
                         ApplyLightsToVert i, j
                         polyColored = True
                     Next
@@ -9967,9 +9967,9 @@ Private Sub ColorFill(X As Single, Y As Single)
                         SaveUndo
                         selectionChanged = False
                     End If
-                    destClr = GetRGB(Scenery(i).color)
-                    destClr = ApplyBlend(destClr)
-                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destClr.blue, destClr.green, destClr.red))
+                    destColor = GetRGB(Scenery(i).color)
+                    destColor = ApplyBlend(destColor)
+                    Scenery(i).color = ARGB(Scenery(i).alpha, RGB(destColor.blue, destColor.green, destColor.red))
                     polyColored = True
                 End If
             Next
