@@ -1950,7 +1950,7 @@ Private Const MAX_HEIGHT = 547
 
 Private blendModes(0 To 7) As Integer
 
-Private backClr As TColor
+Private backgroundColor As TColor
 Private pointColor As TColor
 Private selectionColor As TColor
 Private gridColor1 As TColor
@@ -2065,7 +2065,7 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
     frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
 
-    frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
+    frmSoldatMapEditor.backgroundColor = RGB(backgroundColor.blue, backgroundColor.green, backgroundColor.red)
     frmSoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
     frmSoldatMapEditor.selectionColor = RGB(selectionColor.blue, selectionColor.green, selectionColor.red)
     frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
@@ -2175,7 +2175,7 @@ Private Sub Form_Load()
     blendModes(6) = 5
     blendModes(7) = 6
 
-    backClr = GetRGB(frmSoldatMapEditor.backClr)
+    backgroundColor = GetRGB(frmSoldatMapEditor.backgroundColor)
     pointColor = GetRGB(frmSoldatMapEditor.pointColor)
     selectionColor = GetRGB(frmSoldatMapEditor.selectionColor)
     gridColor1 = GetRGB(frmSoldatMapEditor.gridColor1)
@@ -2188,7 +2188,7 @@ Private Sub Form_Load()
         If frmSoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
     Next
 
-    Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
+    Me.picBackClr.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
     Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
     Me.picSelectionClr.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
     Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
@@ -2272,12 +2272,12 @@ End Sub
 
 Private Sub picBackClr_Click()
 
-    frmColor.InitColor backClr.red, backClr.green, backClr.blue
+    frmColor.InitColor backgroundColor.red, backgroundColor.green, backgroundColor.blue
     frmColor.Show 1
     picBackClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    backClr.red = frmColor.red
-    backClr.green = frmColor.green
-    backClr.blue = frmColor.blue
+    backgroundColor.red = frmColor.red
+    backgroundColor.green = frmColor.green
+    backgroundColor.blue = frmColor.blue
 
 End Sub
 

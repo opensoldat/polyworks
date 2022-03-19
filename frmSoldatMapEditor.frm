@@ -1293,7 +1293,7 @@ Option Explicit
 #End If
 
 
-Public backClr As Long
+Public backgroundColor As Long
 Public pointColor As Long
 Public selectionColor As Long
 Public gridColor1 As Long
@@ -2234,7 +2234,7 @@ Public Sub NewMap()
 
     mapTitle = "New Soldat Map"
 
-    Options.BackgroundColor = ARGB(255, RGB(224, 224, 224))
+    Options.backgroundColor = ARGB(255, RGB(224, 224, 224))
     Options.BackgroundColor2 = ARGB(255, RGB(32, 32, 32))
 
     Options.textureName(0) = 0
@@ -2702,7 +2702,7 @@ Public Sub LoadFile(theFileName As String)
     Next
 
     ' get background colors
-    bgColors(1) = GetRGB(Options.BackgroundColor)
+    bgColors(1) = GetRGB(Options.backgroundColor)
     bgColors(2) = GetRGB(Options.BackgroundColor2)
 
     ' set background poly colors
@@ -3057,7 +3057,7 @@ Private Sub SaveFile(theFileName As String)
     mapWidth = maxX - minX
     mapHeight = maxY - minY
 
-    Options.BackgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
+    Options.backgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
     Options.BackgroundColor2 = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
     ' set texture name
     Options.textureName(0) = Len(gTextureFile)
@@ -3306,7 +3306,7 @@ Public Sub SaveAndCompile(theFileName As String)
     mapWidth = maxX - xOffset
     mapHeight = maxY - yOffset
 
-    Options.BackgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
+    Options.backgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
     Options.BackgroundColor2 = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
     ' set texture name
     Options.textureName(0) = Len(gTextureFile)
@@ -4233,7 +4233,7 @@ Public Sub Render()
         numPolys = mPolyCount
     End If
 
-    D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, backClr, 1#, 0
+    D3DDevice.Clear 0, ByVal 0, D3DCLEAR_TARGET, backgroundColor, 1#, 0
 
     D3DDevice.BeginScene
     ' ----
@@ -11643,8 +11643,8 @@ Public Sub SetOptions()
     Options.StartJet = frmMap.txtJet.Text
     Options.Steps = frmMap.cboSteps.ListIndex
     Options.Weather = frmMap.cboWeather.ListIndex
-    Options.BackgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
-    Options.BackgroundColor = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
+    Options.backgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
+    Options.backgroundColor = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
 
     mapTitle = frmMap.txtDesc.Text
 

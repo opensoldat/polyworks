@@ -52,7 +52,7 @@ Public Sub LoadSettings()
     frmSoldatMapEditor.wireBlendDest = LoadInt("Preferences", "WireDest")
     frmSoldatMapEditor.pointColor = HexToLong(LoadString("Preferences", "PointColor"))
     frmSoldatMapEditor.selectionColor = HexToLong(LoadString("Preferences", "SelectionColor"))
-    frmSoldatMapEditor.backClr = HexToLong(LoadString("Preferences", "BackColor"))
+    frmSoldatMapEditor.backgroundColor = HexToLong(LoadString("Preferences", "BackColor"))
     frmSoldatMapEditor.maxUndo = LoadInt("Preferences", "MaxUndo")
     frmSoldatMapEditor.sceneryVerts = LoadString("Preferences", "SceneryVerts")
     frmSoldatMapEditor.topmost = LoadString("Preferences", "Topmost")
@@ -265,7 +265,7 @@ Public Sub SaveSettings()
         "WireDest=" & frmSoldatMapEditor.wireBlendDest & sNull & _
         "PointColor=" & RGBtoHex(frmSoldatMapEditor.pointColor) & sNull & _
         "SelectionColor=" & RGBtoHex(frmSoldatMapEditor.selectionColor) & sNull & _
-        "BackColor=" & RGBtoHex(frmSoldatMapEditor.backClr) & sNull & _
+        "BackColor=" & RGBtoHex(frmSoldatMapEditor.backgroundColor) & sNull & _
         "MaxUndo=" & frmSoldatMapEditor.maxUndo & sNull & _
         "SceneryVerts=" & frmSoldatMapEditor.sceneryVerts & sNull & _
         "Topmost=" & frmSoldatMapEditor.topmost & sNull & _
