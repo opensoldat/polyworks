@@ -11644,7 +11644,7 @@ Public Sub SetOptions()
     Options.Steps = frmMap.cboSteps.ListIndex
     Options.Weather = frmMap.cboWeather.ListIndex
     Options.backgroundColor = ARGB(255, RGB(bgColors(1).blue, bgColors(1).green, bgColors(1).red))
-    Options.backgroundColor = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
+    Options.backgroundColor2 = ARGB(255, RGB(bgColors(2).blue, bgColors(2).green, bgColors(2).red))
 
     mapTitle = frmMap.txtDesc.Text
 
