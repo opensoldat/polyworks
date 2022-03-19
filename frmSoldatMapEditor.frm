@@ -4184,7 +4184,7 @@ Public Sub Render()
     Dim sc As D3DVECTOR2
     Dim tr As D3DVECTOR2
     Dim sVal As Integer
-    Dim objClr As Long
+    Dim objColor As Long
 
 
     Dim matView As D3DMATRIX
@@ -4418,7 +4418,7 @@ Public Sub Render()
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         For i = 1 To numSelectedPolys
-            objClr = gPolyTypeClrs(vertexList(selectedPolys(i)).polyType)
+            objColor = gPolyTypeClrs(vertexList(selectedPolys(i)).polyType)
             lineCoords(1) = Polys(selectedPolys(i)).vertex(1)
             lineCoords(2) = Polys(selectedPolys(i)).vertex(2)
             lineCoords(3) = Polys(selectedPolys(i)).vertex(3)
@@ -4440,9 +4440,9 @@ Public Sub Render()
             lineCoords(1).rhw = 1
             lineCoords(2).rhw = 1
             lineCoords(3).rhw = 1
-            If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = objClr
-            If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = objClr
-            If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = objClr
+            If vertexList(selectedPolys(i)).vertex(1) = 1 Then lineCoords(1).color = objColor
+            If vertexList(selectedPolys(i)).vertex(2) = 1 Then lineCoords(2).color = objColor
+            If vertexList(selectedPolys(i)).vertex(3) = 1 Then lineCoords(3).color = objColor
 
             D3DDevice.DrawPrimitiveUP D3DPT_TRIANGLELIST, 1, lineCoords(1), Len(lineCoords(1))
         Next
@@ -4532,7 +4532,7 @@ Public Sub Render()
     End If
 
     ' draw objects
-    objClr = ARGB(255, RGB(255, 255, 255))
+    objColor = ARGB(255, RGB(255, 255, 255))
     sc.X = 32 / (objTexSize.X / 8)
     sc.Y = 32 / (objTexSize.Y / 4)
     rc.X = (objTexSize.X / 8) / 2
@@ -4549,12 +4549,12 @@ Public Sub Render()
                 If Spawns(i).active = 1 Then
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionColor)
                 Else
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
                 End If
             Next
         End If
         If colliderCount > 0 Then
-            objClr = ARGB(128, RGB(255, 255, 255))
+            objColor = ARGB(128, RGB(255, 255, 255))
             For i = 1 To colliderCount
                 sc.X = Colliders(i).radius / (objTexSize.X / 8) * zoomFactor
                 sc.Y = Colliders(i).radius / (objTexSize.Y / 4) * zoomFactor
@@ -4565,20 +4565,20 @@ Public Sub Render()
                     srcRect.Top = (objTexSize.Y / 4) * 3
                     srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
                 Else
                     srcRect.Left = (objTexSize.X / 8)
                     srcRect.Top = (objTexSize.Y / 4) * 2
                     srcRect.Right = srcRect.Left + (objTexSize.X / 8)
                     srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
                 End If
             Next
         End If
     End If
 
     If showLights Then
-        objClr = ARGB(255, RGB(255, 255, 255))
+        objColor = ARGB(255, RGB(255, 255, 255))
         sc.X = 32 / (objTexSize.X / 8)
         sc.Y = 32 / (objTexSize.Y / 4)
         rc.X = (objTexSize.X / 8) / 2
@@ -4589,7 +4589,7 @@ Public Sub Render()
             srcRect.Right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             For i = 1 To lightCount
-                objClr = ARGB(255, RGB(Lights(i).color.blue, Lights(i).color.green, Lights(i).color.red))
+                objColor = ARGB(255, RGB(Lights(i).color.blue, Lights(i).color.green, Lights(i).color.red))
                 sc.X = 32 / (objTexSize.X / 8)
                 sc.Y = 32 / (objTexSize.Y / 4)
                 tr.X = Int((Lights(i).X - scrollCoords(2).X) * zoomFactor - 16 * sc.X + 0.5)
@@ -4597,7 +4597,7 @@ Public Sub Render()
                 If Lights(i).selected = 1 Then
                     scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, ARGB(255, selectionColor)
                 Else
-                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+                    scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
                 End If
             Next
         End If
@@ -4605,7 +4605,7 @@ Public Sub Render()
 
     ' draw current object
     If currentTool = TOOL_OBJECTS And Not (ctrlDown Or altDown) Then
-        objClr = ARGB(128, RGB(255, 255, 255))
+        objColor = ARGB(128, RGB(255, 255, 255))
         If mnuGostek.Checked Then  ' gostek
             sc.X = 32 / (objTexSize.X / 8) * zoomFactor
             sc.Y = 32 / (objTexSize.Y / 4) * zoomFactor
@@ -4615,7 +4615,7 @@ Public Sub Render()
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
             tr.X = mouseCoords.X - 16 * zoomFactor
             tr.Y = mouseCoords.Y - 16 * zoomFactor
-            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
         ElseIf mnuCollider.Checked = True Then  ' collider
             srcRect.Left = (objTexSize.X / 8)
             srcRect.Top = (objTexSize.Y / 4) * 2
@@ -4625,7 +4625,7 @@ Public Sub Render()
             sc.Y = Colliders(0).radius / (objTexSize.Y / 4) * zoomFactor
             tr.X = Colliders(0).X - (objTexSize.X / 8) / 2 * sc.X
             tr.Y = Colliders(0).Y - (objTexSize.Y / 4) / 2 * sc.Y
-            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
         Else  ' spawn
             sc.X = 32 / (objTexSize.X / 8)
             sc.Y = 32 / (objTexSize.Y / 4)
@@ -4635,7 +4635,7 @@ Public Sub Render()
             srcRect.Left = (Spawns(0).Team - (Int(Spawns(0).Team / 8) * 8)) * (objTexSize.X / 8)
             srcRect.Right = srcRect.Left + (objTexSize.X / 8)
             srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
-            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+            scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
         End If
     End If
 
@@ -4876,7 +4876,7 @@ Public Sub Render()
 
     ' draw selection rect
     If currentTool = TOOL_MOVE And (numSelectedPolys > 0 Or numSelectedScenery > 0) And noneSelected = False Then
-        objClr = &H80FFFFFF
+        objColor = &H80FFFFFF
 
         D3DDevice.SetRenderState D3DRS_SRCBLEND, D3DBLEND_SRCALPHA
         D3DDevice.SetRenderState D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA
@@ -4884,10 +4884,10 @@ Public Sub Render()
 
         D3DDevice.SetTexture 0, lineTexture
 
-        sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
-        sceneryCoords(1) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
-        sceneryCoords(2) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
-        sceneryCoords(3) = CreateCustomVertex(0, 0, 1, 1, objClr, 0, 0)
+        sceneryCoords(0) = CreateCustomVertex(0, 0, 1, 1, objColor, 0, 0)
+        sceneryCoords(1) = CreateCustomVertex(0, 0, 1, 1, objColor, 0, 0)
+        sceneryCoords(2) = CreateCustomVertex(0, 0, 1, 1, objColor, 0, 0)
+        sceneryCoords(3) = CreateCustomVertex(0, 0, 1, 1, objColor, 0, 0)
 
         If rDiff <> 0 Then
             For i = 0 To 3
@@ -4942,7 +4942,7 @@ Public Sub Render()
     End If
 
     If showWaypoints Then
-        objClr = &HFFFFFFFF
+        objColor = &HFFFFFFFF
         For i = 1 To waypointCount
             If (Waypoints(i).pathNum = 1 And frmWaypoints.showPaths <> 2) Or (Waypoints(i).pathNum = 2 And frmWaypoints.showPaths <> 1) Then
                 If Waypoints(i).selected = True Then
@@ -4965,7 +4965,7 @@ Public Sub Render()
                 srcRect.bottom = srcRect.Top + (objTexSize.Y / 4)
                 tr.X = Int((Waypoints(i).X - scrollCoords(2).X) * zoomFactor - 15 + 0.5)
                 tr.Y = Int((Waypoints(i).Y - scrollCoords(2).Y) * zoomFactor - 15 + 0.5)
-                scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objClr
+                scenerySprite.Draw objectsTexture, srcRect, sc, rc, 0, tr, objColor
             End If
         Next
 
