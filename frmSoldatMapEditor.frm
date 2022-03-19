@@ -4078,26 +4078,26 @@ Private Sub InitGrid()
 
     Dim i As Integer
 
-    Dim clr1 As Long
-    Dim clr2 As Long
+    Dim color1 As Long
+    Dim color2 As Long
 
-    clr1 = ARGB(gridOp1, gridColor1)
-    clr2 = ARGB(gridOp2, gridColor2)
+    color1 = ARGB(gridOp1, gridColor1)
+    color2 = ARGB(gridOp2, gridColor2)
 
     ReDim xGridLines(gridDivisions)
     ReDim yGridLines(gridDivisions)
 
-    xGridLines(1).vertex(1) = CreateCustomVertex(0, 0, 1, 1, clr1, 0, 0)
-    xGridLines(1).vertex(2) = CreateCustomVertex(Me.ScaleWidth, 0, 1, 1, clr1, 0, 0)
+    xGridLines(1).vertex(1) = CreateCustomVertex(0, 0, 1, 1, color1, 0, 0)
+    xGridLines(1).vertex(2) = CreateCustomVertex(Me.ScaleWidth, 0, 1, 1, color1, 0, 0)
 
-    yGridLines(1).vertex(1) = CreateCustomVertex(0, 0, 1, 1, clr1, 0, 0)
-    yGridLines(1).vertex(2) = CreateCustomVertex(0, Me.ScaleHeight, 1, 1, clr1, 0, 0)
+    yGridLines(1).vertex(1) = CreateCustomVertex(0, 0, 1, 1, color1, 0, 0)
+    yGridLines(1).vertex(2) = CreateCustomVertex(0, Me.ScaleHeight, 1, 1, color1, 0, 0)
 
     For i = 2 To gridDivisions
-        xGridLines(i).vertex(1) = CreateCustomVertex(0, 0, 1, 1, clr2, 0, 0)
-        xGridLines(i).vertex(2) = CreateCustomVertex(Me.ScaleWidth, 0, 1, 1, clr2, 0, 0)
-        yGridLines(i).vertex(1) = CreateCustomVertex(0, 0, 1, 1, clr2, 0, 0)
-        yGridLines(i).vertex(2) = CreateCustomVertex(0, Me.ScaleHeight, 1, 1, clr2, 0, 0)
+        xGridLines(i).vertex(1) = CreateCustomVertex(0, 0, 1, 1, color2, 0, 0)
+        xGridLines(i).vertex(2) = CreateCustomVertex(Me.ScaleWidth, 0, 1, 1, color2, 0, 0)
+        yGridLines(i).vertex(1) = CreateCustomVertex(0, 0, 1, 1, color2, 0, 0)
+        yGridLines(i).vertex(2) = CreateCustomVertex(0, Me.ScaleHeight, 1, 1, color2, 0, 0)
     Next
 
     inc = (gridSpacing / gridDivisions)
