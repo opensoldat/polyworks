@@ -1654,7 +1654,7 @@ Private Sub Form_Load()
     sslMid = True
     sslFront = True
 
-    gPolyTypeClrs(0) = selectionColor
+    gPolyTypeColors(0) = selectionColor
 
     ReDim Scenery(0)
     ReDim Preserve SceneryTextures(0)
@@ -4418,7 +4418,7 @@ Public Sub Render()
 
         D3DDevice.SetRenderState D3DRS_ALPHABLENDENABLE, 1
         For i = 1 To numSelectedPolys
-            objColor = gPolyTypeClrs(vertexList(selectedPolys(i)).polyType)
+            objColor = gPolyTypeColors(vertexList(selectedPolys(i)).polyType)
             lineCoords(1) = Polys(selectedPolys(i)).vertex(1)
             lineCoords(2) = Polys(selectedPolys(i)).vertex(2)
             lineCoords(3) = Polys(selectedPolys(i)).vertex(3)
@@ -13636,7 +13636,7 @@ End Sub
 Private Sub mnuPreferences_Click()
 
     frmPreferences.Show 1
-    gPolyTypeClrs(0) = frmSoldatMapEditor.selectionColor
+    gPolyTypeColors(0) = frmSoldatMapEditor.selectionColor
 
 End Sub
 

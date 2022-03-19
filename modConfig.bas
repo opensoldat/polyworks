@@ -12,7 +12,7 @@ Option Explicit
 
 Public gPolyColor As TColor
 
-Public gPolyTypeClrs(0 To 25) As Long
+Public gPolyTypeColors(0 To 25) As Long
 
 
 Private Const DEFAULT_MAX_ZOOM As Single = 512
@@ -180,31 +180,31 @@ Public Sub LoadSettings()
 
     errVal = "8"
 
-    gPolyTypeClrs(1) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyBullets")))
-    gPolyTypeClrs(2) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyPlayer")))
-    gPolyTypeClrs(3) = CLng("&H" + (LoadString("PolyTypeColors", "DoesntCollide")))
-    gPolyTypeClrs(4) = CLng("&H" + (LoadString("PolyTypeColors", "Ice")))
-    gPolyTypeClrs(5) = CLng("&H" + (LoadString("PolyTypeColors", "Deadly")))
-    gPolyTypeClrs(6) = CLng("&H" + (LoadString("PolyTypeColors", "BloodyDeadly")))
-    gPolyTypeClrs(7) = CLng("&H" + (LoadString("PolyTypeColors", "Hurts")))
-    gPolyTypeClrs(8) = CLng("&H" + (LoadString("PolyTypeColors", "Regenerates")))
-    gPolyTypeClrs(9) = CLng("&H" + (LoadString("PolyTypeColors", "Lava")))
-    gPolyTypeClrs(10) = CLng("&H" + (LoadString("PolyTypeColors", "TeamBullets")))
-    gPolyTypeClrs(11) = CLng("&H" + (LoadString("PolyTypeColors", "TeamPlayers")))
-    gPolyTypeClrs(12) = gPolyTypeClrs(10)
-    gPolyTypeClrs(13) = gPolyTypeClrs(11)
-    gPolyTypeClrs(14) = gPolyTypeClrs(10)
-    gPolyTypeClrs(15) = gPolyTypeClrs(11)
-    gPolyTypeClrs(16) = gPolyTypeClrs(10)
-    gPolyTypeClrs(17) = gPolyTypeClrs(11)
-    gPolyTypeClrs(18) = CLng("&H" + (LoadString("PolyTypeColors", "Bouncy")))
-    gPolyTypeClrs(19) = CLng("&H" + (LoadString("PolyTypeColors", "Explosive")))
-    gPolyTypeClrs(20) = CLng("&H" + (LoadString("PolyTypeColors", "HurtFlaggers")))
-    gPolyTypeClrs(21) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyFlagger")))
-    gPolyTypeClrs(22) = CLng("&H" + (LoadString("PolyTypeColors", "NonFlagger")))
-    gPolyTypeClrs(23) = CLng("&H" + (LoadString("PolyTypeColors", "FlagCollides")))
-    gPolyTypeClrs(24) = CLng("&H" + (LoadString("PolyTypeColors", "Back")))
-    gPolyTypeClrs(25) = CLng("&H" + (LoadString("PolyTypeColors", "BackTransition")))
+    gPolyTypeColors(1) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyBullets")))
+    gPolyTypeColors(2) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyPlayer")))
+    gPolyTypeColors(3) = CLng("&H" + (LoadString("PolyTypeColors", "DoesntCollide")))
+    gPolyTypeColors(4) = CLng("&H" + (LoadString("PolyTypeColors", "Ice")))
+    gPolyTypeColors(5) = CLng("&H" + (LoadString("PolyTypeColors", "Deadly")))
+    gPolyTypeColors(6) = CLng("&H" + (LoadString("PolyTypeColors", "BloodyDeadly")))
+    gPolyTypeColors(7) = CLng("&H" + (LoadString("PolyTypeColors", "Hurts")))
+    gPolyTypeColors(8) = CLng("&H" + (LoadString("PolyTypeColors", "Regenerates")))
+    gPolyTypeColors(9) = CLng("&H" + (LoadString("PolyTypeColors", "Lava")))
+    gPolyTypeColors(10) = CLng("&H" + (LoadString("PolyTypeColors", "TeamBullets")))
+    gPolyTypeColors(11) = CLng("&H" + (LoadString("PolyTypeColors", "TeamPlayers")))
+    gPolyTypeColors(12) = gPolyTypeColors(10)
+    gPolyTypeColors(13) = gPolyTypeColors(11)
+    gPolyTypeColors(14) = gPolyTypeColors(10)
+    gPolyTypeColors(15) = gPolyTypeColors(11)
+    gPolyTypeColors(16) = gPolyTypeColors(10)
+    gPolyTypeColors(17) = gPolyTypeColors(11)
+    gPolyTypeColors(18) = CLng("&H" + (LoadString("PolyTypeColors", "Bouncy")))
+    gPolyTypeColors(19) = CLng("&H" + (LoadString("PolyTypeColors", "Explosive")))
+    gPolyTypeColors(20) = CLng("&H" + (LoadString("PolyTypeColors", "HurtFlaggers")))
+    gPolyTypeColors(21) = CLng("&H" + (LoadString("PolyTypeColors", "OnlyFlagger")))
+    gPolyTypeColors(22) = CLng("&H" + (LoadString("PolyTypeColors", "NonFlagger")))
+    gPolyTypeColors(23) = CLng("&H" + (LoadString("PolyTypeColors", "FlagCollides")))
+    gPolyTypeColors(24) = CLng("&H" + (LoadString("PolyTypeColors", "Back")))
+    gPolyTypeColors(25) = CLng("&H" + (LoadString("PolyTypeColors", "BackTransition")))
 
     errVal = "9"
 
