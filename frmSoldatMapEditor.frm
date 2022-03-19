@@ -7847,7 +7847,6 @@ Private Sub EditDepthMap(X As Single, Y As Single)
     Dim i As Integer
     Dim j As Integer
     Dim pNum As Integer
-    Dim destClr As TColor
     Dim R As Integer
     Dim edited As Boolean
 
