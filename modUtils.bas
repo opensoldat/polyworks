@@ -48,25 +48,25 @@ Public Function GetAlpha(tehColor As Long) As Byte
 
 End Function
 
-Public Function ARGB(ByVal alphaVal As Byte, clrVal As Long) As Long
+Public Function ARGB(ByVal alphaVal As Byte, colorVal As Long) As Long
 
-    Dim clrString As String
+    Dim colorString As String
 
-    clrString = Hex$(clrVal)
+    colorString = Hex$(colorVal)
 
-    If Len(clrString) < 6 Then
-        clrString = String$(6 - Len(clrString), "0") & clrString
-    ElseIf Len(clrString) > 6 Then
-        clrString = Right$(clrString, 6)
+    If Len(colorString) < 6 Then
+        colorString = String$(6 - Len(colorString), "0") & colorString
+    ElseIf Len(colorString) > 6 Then
+        colorString = Right$(colorString, 6)
     End If
 
     If Len(Hex$(alphaVal)) = 1 Then
-        clrString = "0" + Hex$(alphaVal) & clrString
+        colorString = "0" + Hex$(alphaVal) & colorString
     ElseIf Len(Hex$(alphaVal)) = 2 Then
-        clrString = Hex$(alphaVal) & clrString
+        colorString = Hex$(alphaVal) & colorString
     End If
 
-    ARGB = CLng("&H" & clrString)
+    ARGB = CLng("&H" & colorString)
 
 End Function
 

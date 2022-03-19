@@ -4078,7 +4078,6 @@ Private Sub InitGrid()
 
     Dim i As Integer
 
-    Dim clrString As String
     Dim clr1 As Long
     Dim clr2 As Long
 
