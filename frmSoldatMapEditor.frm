@@ -6287,15 +6287,15 @@ Private Sub AverageVerts()
     Dim finalR As Integer
     Dim finalG As Integer
     Dim finalB As Integer
-    Dim tehClr As TColor
+    Dim theColor As TColor
 
     For i = 1 To numSelectedPolys
         For j = 1 To 3
             If vertexList(selectedPolys(i)).vertex(j) = 1 Then
-                tehClr = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
-                finalR = finalR + tehClr.red
-                finalG = finalG + tehClr.green
-                finalB = finalB + tehClr.blue
+                theColor = GetRGB(Polys(selectedPolys(i)).vertex(j).color)
+                finalR = finalR + theColor.red
+                finalG = finalG + theColor.green
+                finalB = finalB + theColor.blue
             End If
         Next
     Next
@@ -6323,7 +6323,7 @@ Private Sub AverageVertices()
     Dim finalR As Integer
     Dim finalG As Integer
     Dim finalB As Integer
-    Dim tehClr As TColor
+    Dim theColor As TColor
     Dim vertexClr As TColor
     Dim numVertices As Integer
     Dim xVal As Single
@@ -6353,12 +6353,12 @@ Private Sub AverageVertices()
                         For V = 1 To 3
                             If NearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And NearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 vertexList(P).vertex(V) = 1
-                                tehClr.red = vertexList(P).color(V).red
-                                tehClr.green = vertexList(P).color(V).green
-                                tehClr.blue = vertexList(P).color(V).blue
-                                finalR = finalR + tehClr.red
-                                finalG = finalG + tehClr.green
-                                finalB = finalB + tehClr.blue
+                                theColor.red = vertexList(P).color(V).red
+                                theColor.green = vertexList(P).color(V).green
+                                theColor.blue = vertexList(P).color(V).blue
+                                finalR = finalR + theColor.red
+                                finalG = finalG + theColor.green
+                                finalB = finalB + theColor.blue
                                 numConnectedPolys = numConnectedPolys + 1
                                 ReDim Preserve connectedPolys(numConnectedPolys)
                                 connectedPolys(numConnectedPolys) = P
@@ -6407,12 +6407,12 @@ Private Sub AverageVertices()
                             If NearCoord(xVal, PolyCoords(P).vertex(V).X, 2) And NearCoord(yVal, PolyCoords(P).vertex(V).Y, 2) Then
                                 If vertexList(P).vertex(V) = 1 Then
                                     vertexList(P).vertex(V) = 2
-                                    tehClr.red = vertexList(P).color(V).red
-                                    tehClr.green = vertexList(P).color(V).green
-                                    tehClr.blue = vertexList(P).color(V).blue
-                                    finalR = finalR + tehClr.red
-                                    finalG = finalG + tehClr.green
-                                    finalB = finalB + tehClr.blue
+                                    theColor.red = vertexList(P).color(V).red
+                                    theColor.green = vertexList(P).color(V).green
+                                    theColor.blue = vertexList(P).color(V).blue
+                                    finalR = finalR + theColor.red
+                                    finalG = finalG + theColor.green
+                                    finalB = finalB + theColor.blue
                                     numConnectedPolys = numConnectedPolys + 1
                                     ReDim Preserve connectedPolys(numConnectedPolys)
                                     connectedPolys(numConnectedPolys) = P
