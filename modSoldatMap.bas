@@ -131,8 +131,8 @@ End Type
 Public Type TOptions
     mapName(0 To 38)        As Byte ' String * 39
     textureName(0 To 24)    As Byte ' String * 25
-    BackgroundColor         As Long
-    BackgroundColor2        As Long
+    backgroundColor1        As Long
+    backgroundColor2        As Long
     StartJet                As Long
     GrenadePacks            As Byte
     Medikits                As Byte
