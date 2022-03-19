@@ -1672,7 +1672,7 @@ Private Sub Form_Load()
     err = "Error initializing color picker"
 
     frmColor.picSpectrum.Cls
-    frmColor.InitColor gPolyClr.red, gPolyClr.green, gPolyClr.blue
+    frmColor.InitColor gPolyColor.red, gPolyColor.green, gPolyColor.blue
 
 
     err = "Error setting current tool icon (" & currentTool & ")"
@@ -1719,7 +1719,7 @@ Private Sub Form_Load()
     frmTexture.Visible = mnuTexture.Checked
 
     frmPalette.RefreshPalette clrRadius, opacity, blendMode, colorMode
-    frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+    frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
     frmDisplay.SetLayer 0, showBG
     frmDisplay.SetLayer 1, showPolys
     frmDisplay.SetLayer 2, showTexture
@@ -2851,7 +2851,7 @@ Public Sub SetCurrentScenery(Optional styleVal As Integer = -1, Optional scenery
     End If
 
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
     Scenery(0).level = frmScenery.level
     Scenery(0).Scaling.X = 1
     Scenery(0).Scaling.Y = 1
@@ -5837,11 +5837,11 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempColor.blue, tempColor.green, tempColor.red
         Else
-            gPolyClr.red = tempColor.blue
-            gPolyClr.green = tempColor.green
-            gPolyClr.blue = tempColor.red
-            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
-            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            gPolyColor.red = tempColor.blue
+            gPolyColor.green = tempColor.green
+            gPolyColor.blue = tempColor.red
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
+            frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
         End If
     ElseIf currentFunction = TOOL_LITPICKER Then
         LightPicker X, Y
@@ -5991,7 +5991,7 @@ Private Sub CreateLight(X As Single, Y As Single)
     Lights(lightCount).X = X / zoomFactor + scrollCoords(2).X
     Lights(lightCount).Y = Y / zoomFactor + scrollCoords(2).Y
     Lights(lightCount).Z = 255
-    Lights(lightCount).color = gPolyClr
+    Lights(lightCount).color = gPolyColor
     Lights(lightCount).intensity = opacity
     Lights(lightCount).range = 0
 
@@ -6665,7 +6665,7 @@ Private Sub CreatingPoly(Shift As Integer, X As Single, Y As Single)
         Polys(mPolyCount + 1).vertex(numVerts + 1).tv = (yVal / zoomFactor + scrollCoords(2).Y) / yTexture
     End If
 
-    Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+    Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
 
     Render
 
@@ -6805,11 +6805,11 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         If frmPalette.Enabled = False Then
             frmColor.InitColor tempColor.blue, tempColor.green, tempColor.red
         Else
-            gPolyClr.red = tempColor.blue
-            gPolyClr.green = tempColor.green
-            gPolyClr.blue = tempColor.red
-            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
-            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            gPolyColor.red = tempColor.blue
+            gPolyColor.green = tempColor.green
+            gPolyColor.blue = tempColor.red
+            Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
+            frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
         End If
 
         Render
@@ -7861,7 +7861,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(pNum).vertex(j) = 1 Then
                     If NearCoord(X, Polys(pNum).vertex(j).X, R) And NearCoord(Y, Polys(pNum).vertex(j).Y, R) Then
                         If (Polys(pNum).vertex(j).X - X) ^ 2 + (Polys(pNum).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
+                            Polys(pNum).vertex(j).Z = Polys(pNum).vertex(j).Z * (1 - opacity) + gPolyColor.red * opacity
                             If colorMode = 1 Then vertexList(pNum).vertex(j) = 3
                             edited = True
                         End If
@@ -7875,7 +7875,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
                 If vertexList(i).vertex(j) = 0 Then
                     If NearCoord(X, Polys(i).vertex(j).X, R) And NearCoord(Y, Polys(i).vertex(j).Y, R) Then
                         If (Polys(i).vertex(j).X - X) ^ 2 + (Polys(i).vertex(j).Y - Y) ^ 2 <= R ^ 2 Then
-                            Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + gPolyClr.red * opacity
+                            Polys(i).vertex(j).Z = Polys(i).vertex(j).Z * (1 - opacity) + gPolyColor.red * opacity
                             If colorMode = 1 Then vertexList(i).vertex(j) = 2
                             edited = True
                         End If
@@ -7922,14 +7922,14 @@ Private Sub ColorPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         tempColor = vertexList(pNum).color(vNum)
-        If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
+        If tempColor.red = gPolyColor.red And tempColor.green = gPolyColor.green And tempColor.blue = gPolyColor.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
             frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
         Else
-            gPolyClr = tempColor
+            gPolyColor = tempColor
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-            frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
+            frmPalette.CheckPalette gPolyColor.red, gPolyColor.green, gPolyColor.blue
         End If
     ElseIf showScenery Then  ' no poly clrs absorbed, do scenery
         For i = 1 To sceneryCount
@@ -7939,15 +7939,15 @@ Private Sub ColorPicker(X As Single, Y As Single)
         Next
         If vNum > 0 Then
             tempColor = GetRGB(Scenery(vNum).color)
-            If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
+            If tempColor.red = gPolyColor.red And tempColor.green = gPolyColor.green And tempColor.blue = gPolyColor.blue Then
 
             ElseIf frmPalette.Enabled = False Then  ' non modal
                 frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
             Else
-                gPolyClr = tempColor
+                gPolyColor = tempColor
                 Scenery(0).color = ARGB(Scenery(0).alpha, Scenery(vNum).color)
-                frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-                frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+                frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
+                frmPalette.CheckPalette gPolyColor.red, gPolyColor.green, gPolyColor.blue
             End If
         End If
     End If
@@ -7983,17 +7983,17 @@ Private Sub DepthPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         If Polys(pNum).vertex(vNum).Z >= 0 And Polys(pNum).vertex(vNum).Z <= 255 Then
-            gPolyClr.red = Polys(pNum).vertex(vNum).Z
+            gPolyColor.red = Polys(pNum).vertex(vNum).Z
         ElseIf Polys(pNum).vertex(vNum).Z < 0 Then
-            gPolyClr.red = 0
+            gPolyColor.red = 0
         ElseIf Polys(pNum).vertex(vNum).Z > 255 Then
-            gPolyClr.red = 255
+            gPolyColor.red = 255
         End If
-        gPolyClr.green = gPolyClr.red
-        gPolyClr.blue = gPolyClr.red
+        gPolyColor.green = gPolyColor.red
+        gPolyColor.blue = gPolyColor.red
         Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-        frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-        frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+        frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
+        frmPalette.CheckPalette gPolyColor.red, gPolyColor.green, gPolyColor.blue
     End If
 
 End Sub
@@ -8028,14 +8028,14 @@ Private Sub LightPicker(X As Single, Y As Single)
 
     If vNum > 0 Then  ' poly color absorbed
         tempColor = GetRGB(Polys(pNum).vertex(vNum).color)
-        If tempColor.red = gPolyClr.red And tempColor.green = gPolyClr.green And tempColor.blue = gPolyClr.blue Then
+        If tempColor.red = gPolyColor.red And tempColor.green = gPolyColor.green And tempColor.blue = gPolyColor.blue Then
         ElseIf frmPalette.Enabled = False Then  ' non modal
             frmColor.InitColor tempColor.red, tempColor.green, tempColor.blue
         Else
-            gPolyClr = tempColor
+            gPolyColor = tempColor
             Scenery(0).color = ARGB(Scenery(0).alpha, Polys(pNum).vertex(vNum).color)
-            frmPalette.SetValues gPolyClr.red, gPolyClr.green, gPolyClr.blue
-            frmPalette.CheckPalette gPolyClr.red, gPolyClr.green, gPolyClr.blue
+            frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
+            frmPalette.CheckPalette gPolyColor.red, gPolyColor.green, gPolyColor.blue
         End If
     End If
 
@@ -8335,11 +8335,11 @@ Private Sub CreatePolys(X As Single, Y As Single)
     End If
 
     Polys(mPolyCount + 1).vertex(numVerts) = CreateCustomVertex(xVal, yVal, _
-            0, 1, ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)), _
+            0, 1, ARGB(255 * opacity, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red)), _
             (xVal / zoomFactor + scrollCoords(2).X) / xTexture, (yVal / zoomFactor + scrollCoords(2).Y) / yTexture)
-    vertexList(mPolyCount + 1).color(numVerts).red = gPolyClr.red
-    vertexList(mPolyCount + 1).color(numVerts).green = gPolyClr.green
-    vertexList(mPolyCount + 1).color(numVerts).blue = gPolyClr.blue
+    vertexList(mPolyCount + 1).color(numVerts).red = gPolyColor.red
+    vertexList(mPolyCount + 1).color(numVerts).green = gPolyColor.green
+    vertexList(mPolyCount + 1).color(numVerts).blue = gPolyColor.blue
 
     If mnuQuad.Checked And mnuCustomX.Checked Then
         If creatingQuad Then
@@ -9990,29 +9990,29 @@ End Sub
 Private Function ApplyBlend(dClr As TColor) As TColor
 
     If blendMode = 0 Then  ' normal
-        ApplyBlend.red = gPolyClr.red * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = gPolyClr.green * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = gPolyClr.blue * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = gPolyColor.red * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = gPolyColor.green * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = gPolyColor.blue * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 1 Then  ' multiply
-        ApplyBlend.red = (dClr.red / 255 * gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = (dClr.green / 255 * gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = (dClr.blue / 255 * gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dClr.red / 255 * gPolyColor.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = (dClr.green / 255 * gPolyColor.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = (dClr.blue / 255 * gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 2 Then  ' screen
-        ApplyBlend.red = (dClr.red - dClr.red / 255 * gPolyClr.red + gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = (dClr.green - dClr.green / 255 * gPolyClr.green + gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyClr.blue + gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = (dClr.red - dClr.red / 255 * gPolyColor.red + gPolyColor.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = (dClr.green - dClr.green / 255 * gPolyColor.green + gPolyColor.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = (dClr.blue - dClr.blue / 255 * gPolyColor.blue + gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 3 Then  ' AND ' darken
-        ApplyBlend.red = LowerVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = LowerVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = LowerVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = LowerVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = LowerVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = LowerVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 4 Then  ' OR ' lighten
-        ApplyBlend.red = HigherVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = HigherVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = HigherVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = HigherVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = HigherVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = HigherVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
     ElseIf blendMode = 5 Then  ' XOR ' difference
-        ApplyBlend.red = DiffVal(dClr.red, gPolyClr.red) * opacity + dClr.red * (1 - opacity)
-        ApplyBlend.green = DiffVal(dClr.green, gPolyClr.green) * opacity + dClr.green * (1 - opacity)
-        ApplyBlend.blue = DiffVal(dClr.blue, gPolyClr.blue) * opacity + dClr.blue * (1 - opacity)
+        ApplyBlend.red = DiffVal(dClr.red, gPolyColor.red) * opacity + dClr.red * (1 - opacity)
+        ApplyBlend.green = DiffVal(dClr.green, gPolyColor.green) * opacity + dClr.green * (1 - opacity)
+        ApplyBlend.blue = DiffVal(dClr.blue, gPolyColor.blue) * opacity + dClr.blue * (1 - opacity)
     Else
         ApplyBlend.red = 0
         ApplyBlend.green = 0
@@ -11576,37 +11576,37 @@ ErrorHandler:
 
 End Sub
 
-' set gpolyclr when rgb modified
+' set gPolyColor when rgb modified
 Public Sub SetPolyColor(Index As Integer, value As Byte)
 
     If Index = 0 Then
-        gPolyClr.red = value
+        gPolyColor.red = value
     ElseIf Index = 1 Then
-        gPolyClr.green = value
+        gPolyColor.green = value
     ElseIf Index = 2 Then
-        gPolyClr.blue = value
+        gPolyColor.blue = value
     ElseIf Index = 3 Then
         opacity = value / 100
     End If
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+    Scenery(0).color = ARGB(opacity * 255, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
 
 End Sub
 
-' set gpolyclr when palette clicked
+' set gPolyColor when palette clicked
 Public Sub SetPaletteColor(red As Byte, green As Byte, blue As Byte)
 
-    gPolyClr.red = red
-    gPolyClr.green = green
-    gPolyClr.blue = blue
+    gPolyColor.red = red
+    gPolyColor.green = green
+    gPolyColor.blue = blue
     If numVerts > 0 And (currentFunction = TOOL_CREATE Or currentFunction = TOOL_QUAD) Then
-        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+        Polys(mPolyCount + 1).vertex(numVerts + 1).color = ARGB(255 * opacity, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
     End If
     Scenery(0).alpha = opacity * 255
-    Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red))
+    Scenery(0).color = ARGB(Scenery(0).alpha, RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red))
 
 End Sub
 
@@ -12932,7 +12932,7 @@ Private Sub mnuSelColor_Click()
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
             clrVal = GetRGB(Polys(i).vertex(j).color)
-            If clrVal.red = gPolyClr.red And clrVal.green = gPolyClr.green And clrVal.blue = gPolyClr.blue Then
+            If clrVal.red = gPolyColor.red And clrVal.green = gPolyColor.green And clrVal.blue = gPolyColor.blue Then
                 addPoly = 1
                 vertexList(i).vertex(j) = 1
             End If

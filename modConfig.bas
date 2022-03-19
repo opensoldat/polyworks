@@ -10,7 +10,7 @@ Option Explicit
 ' loading and saving config files, workspaces, skins goes here
 
 
-Public gPolyClr As TColor
+Public gPolyColor As TColor
 
 Public gPolyTypeClrs(0 To 25) As Long
 
@@ -117,7 +117,7 @@ Public Sub LoadSettings()
     frmSoldatMapEditor.fixedTexture = LoadString("ToolSettings", "FixedTexture")
     frmSoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity") / 100
     frmSoldatMapEditor.clrRadius = LoadInt("ToolSettings", "ColorRadius")
-    gPolyClr = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor")))
+    gPolyColor = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor")))
     frmSoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode")
     frmSoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode")
     frmSoldatMapEditor.snapRadius = LoadInt("ToolSettings", "SnapRadius")
@@ -290,7 +290,7 @@ Public Sub SaveSettings()
     SaveSection "Display", iniString
 
     ' tool settings
-    currentColor = RGB(gPolyClr.blue, gPolyClr.green, gPolyClr.red)
+    currentColor = RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red)
     iniString = _
         "CurrentTool=" & frmSoldatMapEditor.currentTool & sNull & _
         "SnapVertices=" & frmSoldatMapEditor.ohSnap & sNull & _
