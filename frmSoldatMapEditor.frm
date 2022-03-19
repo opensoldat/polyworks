@@ -6020,7 +6020,7 @@ Private Sub ApplyLights(Optional toSel As Boolean = False)
     Dim diffuseFactor As Single
     Dim totalDiffuse As Single
 
-    Dim clr As TColor
+    Dim color As TColor
 
     Dim rVal As Integer
     Dim gVal As Integer
@@ -6094,10 +6094,10 @@ Private Sub ApplyLights(Optional toSel As Boolean = False)
 
                 totalDiffuse = totalDiffuse / lightCount
 
-                clr = vertexList(i).color(j)
-                rVal = rVal + clr.red
-                gVal = gVal + clr.green
-                bVal = bVal + clr.blue
+                color = vertexList(i).color(j)
+                rVal = rVal + color.red
+                gVal = gVal + color.green
+                bVal = bVal + color.blue
 
                 If rVal > 255 Then rVal = 255
                 If gVal > 255 Then gVal = 255
@@ -6132,7 +6132,7 @@ Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
     Dim mag As Single
     Dim diffuseFactor As Single
     Dim totalDiffuse As Single
-    Dim clr As TColor
+    Dim color As TColor
     Dim rVal As Integer
     Dim gVal As Integer
     Dim bVal As Integer
@@ -6185,10 +6185,10 @@ Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
 
     totalDiffuse = totalDiffuse / lightCount
 
-    clr = vertexList(pIndex).color(vIndex)
-    rVal = rVal + clr.red
-    gVal = gVal + clr.green
-    bVal = bVal + clr.blue
+    color = vertexList(pIndex).color(vIndex)
+    rVal = rVal + color.red
+    gVal = gVal + color.green
+    bVal = bVal + color.blue
 
     If rVal > 255 Then rVal = 255
     If gVal > 255 Then gVal = 255
@@ -9948,7 +9948,7 @@ Private Sub ColorFill(X As Single, Y As Single)
                             SaveUndo
                             selectionChanged = False
                         End If
-                        destClr = GetRGB(Polys(i).vertex(j).color)  ' get clr of poly
+                        destClr = GetRGB(Polys(i).vertex(j).color)  ' get color of poly
                         destClr = ApplyBlend(destClr)
                         Polys(i).vertex(j).color = ARGB(GetAlpha(Polys(i).vertex(j).color), RGB(destClr.blue, destClr.green, destClr.red))
                         vertexList(i).color(j).red = destClr.red
