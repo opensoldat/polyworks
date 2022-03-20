@@ -6324,7 +6324,6 @@ Private Sub AverageVertices()
     Dim finalG As Integer
     Dim finalB As Integer
     Dim theColor As TColor
-    Dim vertexClr As TColor
     Dim numVertices As Integer
     Dim xVal As Single
     Dim yVal As Single
