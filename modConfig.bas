@@ -116,7 +116,7 @@ Public Sub LoadSettings()
     frmSoldatMapEditor.snapToGrid = LoadString("ToolSettings", "SnapToGrid")
     frmSoldatMapEditor.fixedTexture = LoadString("ToolSettings", "FixedTexture")
     frmSoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity") / 100
-    frmSoldatMapEditor.clrRadius = LoadInt("ToolSettings", "ColorRadius")
+    frmSoldatMapEditor.colorRadius = LoadInt("ToolSettings", "ColorRadius")
     gPolyColor = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor")))
     frmSoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode")
     frmSoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode")
@@ -297,7 +297,7 @@ Public Sub SaveSettings()
         "SnapToGrid=" & frmSoldatMapEditor.snapToGrid & sNull & _
         "FixedTexture=" & frmSoldatMapEditor.fixedTexture & sNull & _
         "Opacity=" & (frmSoldatMapEditor.opacity * 100) & sNull & _
-        "ColorRadius=" & frmSoldatMapEditor.clrRadius & sNull & _
+        "ColorRadius=" & frmSoldatMapEditor.colorRadius & sNull & _
         "CurrentColor=" & RGBtoHex(currentColor) & sNull & _
         "ColorMode=" & frmSoldatMapEditor.colorMode & sNull & _
         "BlendMode=" & frmSoldatMapEditor.blendMode & sNull & _

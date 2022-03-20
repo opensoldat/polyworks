@@ -1488,7 +1488,7 @@ Private currentScenery As String
 Private zoomFactor As Single
 Private pointRadius As Integer
 Public snapRadius As Integer
-Public clrRadius As Integer
+Public colorRadius As Integer
 Public ohSnap As Boolean
 Public snapToGrid As Boolean
 Public fixedTexture As Boolean
@@ -1666,7 +1666,7 @@ Private Sub Form_Load()
     sketch(0).vertex(1).Z = 1
     sketch(0).vertex(2).Z = 1
 
-    Colliders(0).radius = clrRadius
+    Colliders(0).radius = colorRadius
 
 
     err = "Error initializing color picker"
@@ -1718,7 +1718,7 @@ Private Sub Form_Load()
     frmInfo.Visible = mnuInfo.Checked
     frmTexture.Visible = mnuTexture.Checked
 
-    frmPalette.RefreshPalette clrRadius, opacity, blendMode, colorMode
+    frmPalette.RefreshPalette colorRadius, opacity, blendMode, colorMode
     frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
     frmDisplay.SetLayer 0, showBG
     frmDisplay.SetLayer 1, showPolys
@@ -2267,7 +2267,7 @@ Public Sub NewMap()
     colliderCount = 0
     ReDim Spawns(0)
     ReDim Colliders(0)
-    Colliders(0).radius = clrRadius
+    Colliders(0).radius = colorRadius
 
     waypointCount = 0
     ReDim Waypoints(0)
@@ -2741,7 +2741,7 @@ Public Sub LoadFile(theFileName As String)
         frmTexture.SetTexture gTextureFile
     End If
 
-    Colliders(0).radius = clrRadius
+    Colliders(0).radius = colorRadius
 
     SetMapData
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
@@ -5064,8 +5064,8 @@ Public Sub Render()
     If circleOn Then
         For i = 0 To 32
             circleCoords(i).color = ARGB(255, RGB(255, 255, 255))
-            circleCoords(i).X = mouseCoords.X + zoomFactor * clrRadius * Math.Cos(PI * i / 16)
-            circleCoords(i).Y = mouseCoords.Y + zoomFactor * clrRadius * Math.Sin(PI * i / 16)
+            circleCoords(i).X = mouseCoords.X + zoomFactor * colorRadius * Math.Cos(PI * i / 16)
+            circleCoords(i).Y = mouseCoords.Y + zoomFactor * colorRadius * Math.Sin(PI * i / 16)
         Next
         D3DDevice.DrawPrimitiveUP D3DPT_LINESTRIP, 32, circleCoords(0), Len(circleCoords(0))
     End If
@@ -7690,7 +7690,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
     Dim destColor As TColor
     Dim R As Integer
 
-    R = clrRadius * zoomFactor
+    R = colorRadius * zoomFactor
 
     shortestDist = R ^ 2 + 1
     If numSelectedPolys > 0 Then
@@ -7760,7 +7760,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
     Dim R As Integer
     Dim colored As Boolean
 
-    R = clrRadius * zoomFactor
+    R = colorRadius * zoomFactor
 
     If numSelectedPolys > 0 And (showPolys Or showWireframe Or showPoints) Then
         For i = 1 To numSelectedPolys
@@ -7850,7 +7850,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
     Dim R As Integer
     Dim edited As Boolean
 
-    R = clrRadius * zoomFactor
+    R = colorRadius * zoomFactor
 
     If numSelectedPolys > 0 And (showPolys Or showWireframe Or showPoints) Then
         For i = 1 To numSelectedPolys
@@ -9089,7 +9089,7 @@ Private Function EraseSketch(X As Single, Y As Single) As Byte
 
     EraseSketch = 0
 
-    shortestDist = clrRadius ^ 2 + 1
+    shortestDist = colorRadius ^ 2 + 1
     For i = 1 To sketchLines
         For j = 1 To 2
             currentDist = (X - sketch(i).vertex(j).X) ^ 2 + (Y - sketch(i).vertex(j).Y) ^ 2
@@ -9132,9 +9132,9 @@ Private Function MoveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
     For i = 1 To sketchLines
         For j = 1 To 2
             dist = (X - sketch(i).vertex(j).X) ^ 2 + (Y - sketch(i).vertex(j).Y) ^ 2
-            If dist < clrRadius ^ 2 Then
-                sketch(i).vertex(j).X = sketch(i).vertex(j).X + xDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
-                sketch(i).vertex(j).Y = sketch(i).vertex(j).Y + yDiff * Cos((dist / (clrRadius ^ 2)) * PI / 2)
+            If dist < colorRadius ^ 2 Then
+                sketch(i).vertex(j).X = sketch(i).vertex(j).X + xDiff * Cos((dist / (colorRadius ^ 2)) * PI / 2)
+                sketch(i).vertex(j).Y = sketch(i).vertex(j).Y + yDiff * Cos((dist / (colorRadius ^ 2)) * PI / 2)
                 MoveLines = 1
             End If
         Next
@@ -11833,7 +11833,7 @@ Public Sub SetRadius(R As Integer)
 
     Dim i As Integer
 
-    clrRadius = R
+    colorRadius = R
     Colliders(0).radius = R
 
     If numSelColliders > 0 Then
@@ -13962,7 +13962,7 @@ Private Sub mnuCollider_Click()
     mnuCollider.Checked = True
     mnuSpawn(Spawns(0).Team).Checked = False
     mnuGostek.Checked = False
-    Colliders(0).radius = clrRadius
+    Colliders(0).radius = colorRadius
 End Sub
 
 Private Sub mnuSpawn_Click(Index As Integer)
