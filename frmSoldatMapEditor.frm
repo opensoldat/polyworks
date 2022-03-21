@@ -7276,7 +7276,7 @@ Private Sub ApplyTransform(Rotating As Boolean)
 
 End Sub
 
-Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
+Public Sub ApplyScale(theXValue As Single, theYValue As Single)
 
     Dim i As Integer
     Dim j As Integer
@@ -7294,8 +7294,8 @@ Public Sub ApplyScale(tehXvalue As Single, tehYvalue As Single)
         selectionChanged = False
     End If
 
-    scaleDiff.X = tehXvalue
-    scaleDiff.Y = tehYvalue
+    scaleDiff.X = theXValue
+    scaleDiff.Y = theYValue
 
     rCenter.X = Midpoint(selRect(0).X, selRect(2).X)
     rCenter.Y = Midpoint(selRect(0).Y, selRect(2).Y)
