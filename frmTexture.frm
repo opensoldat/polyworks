@@ -124,17 +124,17 @@ Public Sub SetForm()
 
 End Sub
 
-Public Sub SetTexCoords(tehValue As Single, Index As Integer)
+Public Sub SetTexCoords(theValue As Single, Index As Integer)
 
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
     If Index = 0 Then
-        x1tex = tehValue / 2
+        x1tex = theValue / 2
     ElseIf Index = 1 Then
-        x2tex = tehValue / 2
+        x2tex = theValue / 2
     ElseIf Index = 2 Then
-        y1tex = tehValue / 2
+        y1tex = theValue / 2
     ElseIf Index = 3 Then
-        y2tex = tehValue / 2
+        y2tex = theValue / 2
     End If
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
 
