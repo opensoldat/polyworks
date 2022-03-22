@@ -728,7 +728,7 @@ Private Sub Form_LostFocus()
 
 End Sub
 
-Private Sub lblClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblColorMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     picColorMode_MouseMove Index, 1, 0, 0, 0
 
