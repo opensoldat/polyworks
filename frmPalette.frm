@@ -17,7 +17,7 @@ Begin VB.Form frmPalette
    ScaleWidth      =   208
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
-   Begin VB.PictureBox picClrMode 
+   Begin VB.PictureBox picColorMode 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -34,7 +34,7 @@ Begin VB.Form frmPalette
       Top             =   1080
       Width           =   240
    End
-   Begin VB.PictureBox picClrMode 
+   Begin VB.PictureBox picColorMode 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -51,7 +51,7 @@ Begin VB.Form frmPalette
       Top             =   840
       Width           =   240
    End
-   Begin VB.PictureBox picClrMode 
+   Begin VB.PictureBox picColorMode 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -594,15 +594,15 @@ Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
     For i = 0 To 2
         If i = colorMode Then
-            BitBlt picClrMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
+            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
         Else
-            BitBlt picClrMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 96, vbSrcCopy
+            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 96, vbSrcCopy
         End If
-        picClrMode(i).Refresh
+        picColorMode(i).Refresh
     Next
 
     For i = 0 To 2
-        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
+        MouseEvent2 picColorMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
     Next
 
 End Sub
@@ -730,7 +730,7 @@ End Sub
 
 Private Sub lblClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    picClrMode_MouseMove Index, 1, 0, 0, 0
+    picColorMode_MouseMove Index, 1, 0, 0, 0
 
 End Sub
 
@@ -1025,27 +1025,27 @@ Public Function TextControl() As Boolean
 End Function
 
 
-Public Sub picClrMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Public Sub picColorMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
-
-End Sub
-
-Private Sub picClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_MOVE, lblColorMode(Index).Width + 16
+    MouseEvent2 picColorMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
 
 End Sub
 
-Private Sub picClrMode_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picColorMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picColorMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_MOVE, lblColorMode(Index).Width + 16
+
+End Sub
+
+Private Sub picColorMode_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     Dim i As Integer
 
     colorMode = Index
 
-    For i = picClrMode.LBound To picClrMode.UBound
+    For i = picColorMode.LBound To picColorMode.UBound
         If i <> Index Then
-            MouseEvent2 picClrMode(i), X, Y, BUTTON_SMALL, (i = colorMode), BUTTON_UP
+            MouseEvent2 picColorMode(i), X, Y, BUTTON_SMALL, (i = colorMode), BUTTON_UP
         End If
     Next
 
@@ -1130,8 +1130,8 @@ Public Sub SetColors()
     MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     MouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
-    For i = picClrMode.LBound To picClrMode.UBound
-        MouseEvent2 picClrMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
+    For i = picColorMode.LBound To picColorMode.UBound
+        MouseEvent2 picColorMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
     Next
 
     Me.BackColor = bgColor
