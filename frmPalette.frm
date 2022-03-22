@@ -319,7 +319,7 @@ Begin VB.Form frmPalette
       Top             =   360
       Width           =   1695
    End
-   Begin VB.Label lblClrMode 
+   Begin VB.Label lblColorMode 
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
       Caption         =   " Dynamic"
@@ -341,7 +341,7 @@ Begin VB.Form frmPalette
       Top             =   1080
       Width           =   1095
    End
-   Begin VB.Label lblClrMode 
+   Begin VB.Label lblColorMode 
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
       Caption         =   " Normal"
@@ -363,7 +363,7 @@ Begin VB.Form frmPalette
       Top             =   840
       Width           =   1095
    End
-   Begin VB.Label lblClrMode 
+   Begin VB.Label lblColorMode 
       BackColor       =   &H00614B3D&
       BackStyle       =   0  'Transparent
       Caption         =   " Precision"
@@ -1033,7 +1033,7 @@ End Sub
 
 Private Sub picClrMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_MOVE, lblClrMode(Index).Width + 16
+    MouseEvent2 picClrMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_MOVE, lblColorMode(Index).Width + 16
 
 End Sub
 
@@ -1141,7 +1141,7 @@ Public Sub SetColors()
         c.ForeColor = lblTextColor
     Next
 
-    For Each c In lblClrMode
+    For Each c In lblColorMode
         c.BackColor = lblBackColor
         c.ForeColor = lblTextColor
     Next
