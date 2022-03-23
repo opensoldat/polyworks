@@ -1568,15 +1568,6 @@ Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParamet
     ByVal uParam As Long, lpvParam As Any, _
     ByVal fuWinIni As Long)
 
-' Global constants
-Property Get MIN_FORM_WIDTH() As Integer
-    MIN_FORM_WIDTH = 300
-End Property
-
-Property Get MIN_FORM_HEIGHT() As Integer
-    MIN_FORM_HEIGHT = 200
-End Property
-
 
 Private Function QuickHide(ByRef myWindow As Form)
     MoveWindow myWindow.hWnd, _
