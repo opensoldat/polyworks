@@ -118,7 +118,7 @@ Begin VB.Form frmMap
       Top             =   480
       Width           =   3135
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H00000000&
@@ -134,7 +134,7 @@ Begin VB.Form frmMap
       Top             =   3240
       Width           =   495
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H00000000&
@@ -715,9 +715,9 @@ Public Sub mnuRefresh_Click()
 
 End Sub
 
-Private Sub picBackClr_Click(Index As Integer)
+Private Sub picBackColor_Click(Index As Integer)
 
-    picBackClr(Index).BackColor = frmSoldatMapEditor.SetBGColor(Index + 1)
+    picBackColor(Index).BackColor = frmSoldatMapEditor.SetBGColor(Index + 1)
 
 End Sub
 

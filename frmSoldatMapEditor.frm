@@ -11623,8 +11623,8 @@ Public Sub GetOptions()
     frmMap.cboMedikits.ListIndex = Options.Medikits
     frmMap.cboSteps.ListIndex = Options.Steps
     frmMap.cboWeather.ListIndex = Options.Weather
-    frmMap.picBackClr(0).BackColor = RGB(bgColors(1).red, bgColors(1).green, bgColors(1).blue)
-    frmMap.picBackClr(1).BackColor = RGB(bgColors(2).red, bgColors(2).green, bgColors(2).blue)
+    frmMap.picBackColor(0).BackColor = RGB(bgColors(1).red, bgColors(1).green, bgColors(1).blue)
+    frmMap.picBackColor(1).BackColor = RGB(bgColors(2).red, bgColors(2).green, bgColors(2).blue)
 
     For i = 0 To frmMap.cboTexture.ListCount - 1
         If frmMap.cboTexture.List(i) = gTextureFile Then

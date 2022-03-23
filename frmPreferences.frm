@@ -927,7 +927,7 @@ Begin VB.Form frmPreferences
       Top             =   6120
       Width           =   960
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
@@ -2188,7 +2188,7 @@ Private Sub Form_Load()
         If frmSoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
     Next
 
-    Me.picBackClr.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
+    Me.picBackColor.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
     Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
     Me.picSelectionClr.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
     Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
@@ -2270,11 +2270,11 @@ Private Sub picSelectionClr_Click()
 
 End Sub
 
-Private Sub picBackClr_Click()
+Private Sub picBackColor_Click()
 
     frmColor.InitColor backgroundColor.red, backgroundColor.green, backgroundColor.blue
     frmColor.Show 1
-    picBackClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    picBackColor.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     backgroundColor.red = frmColor.red
     backgroundColor.green = frmColor.green
     backgroundColor.blue = frmColor.blue
