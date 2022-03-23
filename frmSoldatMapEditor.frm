@@ -10920,11 +10920,11 @@ Private Sub picResize_MouseMove(Button As Integer, Shift As Integer, X As Single
        newWidth = mInitialWindowWidth + (X - mMouseStartPosX) * Screen.TwipsPerPixelX
        newHeight = mInitialWindowHeight + (Y - mMouseStartPosY) * Screen.TwipsPerPixelY
 
-       If newHeight > MIN_FORM_HEIGHT * Screen.TwipsPerPixelY Then
+       If newHeight > MAINFORM_MIN_HEIGHT * Screen.TwipsPerPixelY Then
            Me.Height = newHeight
        End If
 
-       If newWidth > MIN_FORM_WIDTH * Screen.TwipsPerPixelX Then
+       If newWidth > MAINFORM_MIN_WIDTH * Screen.TwipsPerPixelX Then
            Me.Width = newWidth
        End If
    End If
