@@ -2112,7 +2112,7 @@ Public Sub SetColors()
 
     For Each c In txtScenProp
         c.BackColor = txtBackColor
-        c.ForeColor = txtTextClr
+        c.ForeColor = txtTextColor
     Next
     For Each c In txtQuadX
         c.BackColor = bgColor
@@ -2124,11 +2124,11 @@ Public Sub SetColors()
     Next
     For Each c In txtScale
         c.BackColor = txtBackColor
-        c.ForeColor = txtTextClr
+        c.ForeColor = txtTextColor
     Next
     For Each c In txtTexture
         c.BackColor = txtBackColor
-        c.ForeColor = txtTextClr
+        c.ForeColor = txtTextColor
     Next
     For Each c In lblCount
         c.BackColor = lblBackColor
@@ -2136,23 +2136,23 @@ Public Sub SetColors()
     Next
     
     txtVertexAlpha.BackColor = txtBackColor
-    txtVertexAlpha.ForeColor = txtTextClr
+    txtVertexAlpha.ForeColor = txtTextColor
     txtBounciness.BackColor = txtBackColor
-    txtBounciness.ForeColor = txtTextClr
+    txtBounciness.ForeColor = txtTextColor
 
     lblDimensions.BackColor = lblBackColor
     lblDimensions.ForeColor = lblTextColor
 
     txtRotate.BackColor = txtBackColor
-    txtRotate.ForeColor = txtTextClr
+    txtRotate.ForeColor = txtTextColor
     cboLevel.BackColor = txtBackColor
-    cboLevel.ForeColor = txtTextClr
+    cboLevel.ForeColor = txtTextColor
     cboPolyType.BackColor = txtBackColor
-    cboPolyType.ForeColor = txtTextClr
+    cboPolyType.ForeColor = txtTextColor
 
     For Each c In txtLightProp
         c.BackColor = txtBackColor
-        c.ForeColor = txtTextClr
+        c.ForeColor = txtTextColor
     Next
 
     square.BorderColor = lblTextColor

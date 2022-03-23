@@ -817,7 +817,7 @@ Public Sub SetColors()
     lblWaypoints.ForeColor = lblTextColor
 
     cboSpecial.BackColor = txtBackColor
-    cboSpecial.ForeColor = txtTextClr
+    cboSpecial.ForeColor = txtTextColor
 
     lblNumCon.BackColor = lblBackColor
     lblNumCon.ForeColor = lblTextColor

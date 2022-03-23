@@ -16,7 +16,7 @@ Public bgColor As Long
 Public lblBackColor As Long
 Public lblTextColor As Long
 Public txtBackColor As Long
-Public txtTextClr As Long
+Public txtTextColor As Long
 Public frameColor As Long
 
 Public font1 As String

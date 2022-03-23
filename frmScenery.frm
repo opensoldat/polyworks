@@ -718,7 +718,7 @@ Public Sub SetColors()
     lblScale.BackColor = lblBackColor
     lblScale.ForeColor = lblTextColor
     lstScenery.BackColor = txtBackColor
-    lstScenery.ForeColor = txtTextClr
+    lstScenery.ForeColor = txtTextColor
     picScenery.BackColor = bgColor
 
     SetFormFonts Me

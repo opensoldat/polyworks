@@ -822,22 +822,22 @@ Public Sub SetColors()
     Next
 
     txtDesc.BackColor = txtBackColor
-    txtDesc.ForeColor = txtTextClr
+    txtDesc.ForeColor = txtTextColor
     txtJet.BackColor = txtBackColor
-    txtJet.ForeColor = txtTextClr
+    txtJet.ForeColor = txtTextColor
 
     cboWeather.BackColor = txtBackColor
-    cboWeather.ForeColor = txtTextClr
+    cboWeather.ForeColor = txtTextColor
     cboSteps.BackColor = txtBackColor
-    cboSteps.ForeColor = txtTextClr
+    cboSteps.ForeColor = txtTextColor
     cboJet.BackColor = txtBackColor
-    cboJet.ForeColor = txtTextClr
+    cboJet.ForeColor = txtTextColor
     cboGrenades.BackColor = txtBackColor
-    cboGrenades.ForeColor = txtTextClr
+    cboGrenades.ForeColor = txtTextColor
     cboMedikits.BackColor = txtBackColor
-    cboMedikits.ForeColor = txtTextClr
+    cboMedikits.ForeColor = txtTextColor
     cboTexture.BackColor = txtBackColor
-    cboTexture.ForeColor = txtTextClr
+    cboTexture.ForeColor = txtTextColor
 
     For Each c In fraMap
         c.BorderColor = frameColor
