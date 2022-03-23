@@ -714,7 +714,7 @@ Begin VB.Form frmPreferences
       Top             =   2280
       Width           =   495
    End
-   Begin VB.PictureBox picGridClr2 
+   Begin VB.PictureBox picGridColor2 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
@@ -836,7 +836,7 @@ Begin VB.Form frmPreferences
       Top             =   2280
       Width           =   495
    End
-   Begin VB.PictureBox picGridClr 
+   Begin VB.PictureBox picGridColor1 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
@@ -2191,8 +2191,8 @@ Private Sub Form_Load()
     Me.picBackColor.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
     Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
     Me.picSelectionColor.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
-    Me.picGridClr.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
-    Me.picGridClr2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
+    Me.picGridColor1.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
+    Me.picGridColor2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
 
     txtWidth.Text = frmSoldatMapEditor.formWidth
     txtHeight.Text = frmSoldatMapEditor.formHeight
@@ -2281,22 +2281,22 @@ Private Sub picBackColor_Click()
 
 End Sub
 
-Private Sub picGridClr_Click()
+Private Sub picGridColor1_Click()
 
     frmColor.InitColor gridColor1.red, gridColor1.green, gridColor1.blue
     frmColor.Show 1
-    picGridClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    picGridColor1.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     gridColor1.red = frmColor.red
     gridColor1.green = frmColor.green
     gridColor1.blue = frmColor.blue
 
 End Sub
 
-Private Sub picGridClr2_Click()
+Private Sub picGridColor2_Click()
 
     frmColor.InitColor gridColor2.red, gridColor2.green, gridColor2.blue
     frmColor.Show 1
-    picGridClr2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    picGridColor2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     gridColor2.red = frmColor.red
     gridColor2.green = frmColor.green
     gridColor2.blue = frmColor.blue
