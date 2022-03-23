@@ -1475,17 +1475,17 @@ Public Sub SetColors()
     Next
 
     For Each c In txtRGB
-        c.BackColor = txtBackClr
+        c.BackColor = txtBackColor
         c.ForeColor = txtTextClr
     Next
 
-    txtHue.BackColor = txtBackClr
+    txtHue.BackColor = txtBackColor
     txtHue.ForeColor = txtTextClr
 
-    txtSat.BackColor = txtBackClr
+    txtSat.BackColor = txtBackColor
     txtSat.ForeColor = txtTextClr
 
-    txtBright.BackColor = txtBackClr
+    txtBright.BackColor = txtBackColor
     txtBright.ForeColor = txtTextClr
 
     txtHexCode.BackColor = bgColor

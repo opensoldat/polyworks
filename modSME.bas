@@ -15,7 +15,7 @@ Public appPath As String
 Public bgColor As Long
 Public lblBackColor As Long
 Public lblTextColor As Long
-Public txtBackClr As Long
+Public txtBackColor As Long
 Public txtTextClr As Long
 Public frameClr As Long
 

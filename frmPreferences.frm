@@ -2866,44 +2866,44 @@ Public Sub SetColors()
         c.BorderColor = frameClr
     Next
 
-    txtWidth.BackColor = txtBackClr
+    txtWidth.BackColor = txtBackColor
     txtWidth.ForeColor = txtTextClr
-    txtHeight.BackColor = txtBackClr
+    txtHeight.BackColor = txtBackColor
     txtHeight.ForeColor = txtTextClr
 
-    txtSpacing.BackColor = txtBackClr
+    txtSpacing.BackColor = txtBackColor
     txtSpacing.ForeColor = txtTextClr
-    txtDivisions.BackColor = txtBackClr
+    txtDivisions.BackColor = txtBackColor
     txtDivisions.ForeColor = txtTextClr
-    txtOpacity1.BackColor = txtBackClr
+    txtOpacity1.BackColor = txtBackColor
     txtOpacity1.ForeColor = txtTextClr
-    txtOpacity2.BackColor = txtBackClr
+    txtOpacity2.BackColor = txtBackColor
     txtOpacity2.ForeColor = txtTextClr
 
-    txtMinZoom.BackColor = txtBackClr
+    txtMinZoom.BackColor = txtBackColor
     txtMinZoom.ForeColor = txtTextClr
-    txtMaxZoom.BackColor = txtBackClr
+    txtMaxZoom.BackColor = txtBackColor
     txtMaxZoom.ForeColor = txtTextClr
-    txtResetZoom.BackColor = txtBackClr
+    txtResetZoom.BackColor = txtBackColor
     txtResetZoom.ForeColor = txtTextClr
 
-    txtDir.BackColor = txtBackClr
+    txtDir.BackColor = txtBackColor
     txtDir.ForeColor = txtTextClr
-    txtUncomp.BackColor = txtBackClr
+    txtUncomp.BackColor = txtBackColor
     txtUncomp.ForeColor = txtTextClr
-    txtPrefabs.BackColor = txtBackClr
+    txtPrefabs.BackColor = txtBackColor
     txtPrefabs.ForeColor = txtTextClr
 
-    cboWireSrc.BackColor = txtBackClr
+    cboWireSrc.BackColor = txtBackColor
     cboWireSrc.ForeColor = txtTextClr
-    cboWireDest.BackColor = txtBackClr
+    cboWireDest.BackColor = txtBackColor
     cboWireDest.ForeColor = txtTextClr
-    cboPolySrc.BackColor = txtBackClr
+    cboPolySrc.BackColor = txtBackColor
     cboPolySrc.ForeColor = txtTextClr
-    cboPolyDest.BackColor = txtBackClr
+    cboPolyDest.BackColor = txtBackColor
     cboPolyDest.ForeColor = txtTextClr
 
-    cboSkin.BackColor = txtBackClr
+    cboSkin.BackColor = txtBackColor
     cboSkin.ForeColor = txtTextClr
 
     SetFormFonts Me

@@ -717,7 +717,7 @@ Public Sub SetColors()
     lblRotate.ForeColor = lblTextColor
     lblScale.BackColor = lblBackColor
     lblScale.ForeColor = lblTextColor
-    lstScenery.BackColor = txtBackClr
+    lstScenery.BackColor = txtBackColor
     lstScenery.ForeColor = txtTextClr
     picScenery.BackColor = bgColor
 

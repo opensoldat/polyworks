@@ -1147,15 +1147,15 @@ Public Sub SetColors()
     Next
 
     For Each c In txtRGB
-        c.BackColor = txtBackClr
+        c.BackColor = txtBackColor
         c.ForeColor = txtTextClr
     Next
 
-    txtOpacity.BackColor = txtBackClr
+    txtOpacity.BackColor = txtBackColor
     txtOpacity.ForeColor = txtTextClr
-    txtRadius.BackColor = txtBackClr
+    txtRadius.BackColor = txtBackColor
     txtRadius.ForeColor = txtTextClr
-    cboBlendMode.BackColor = txtBackClr
+    cboBlendMode.BackColor = txtBackColor
     cboBlendMode.ForeColor = txtTextClr
 
     SetFormFonts Me
