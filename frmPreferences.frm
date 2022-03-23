@@ -2863,7 +2863,7 @@ Public Sub SetColors()
     Next
     
     For Each c In fraPref
-        c.BorderColor = frameClr
+        c.BorderColor = frameColor
     Next
 
     txtWidth.BackColor = txtBackColor

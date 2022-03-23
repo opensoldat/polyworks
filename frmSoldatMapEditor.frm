@@ -11988,7 +11988,7 @@ Public Sub LoadColors()
     lblTextColor = CLng("&H" + LoadString("GUIColors", "LabelText", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtBackColor = CLng("&H" + LoadString("GUIColors", "TextBoxBack", appPath & "\skins\" & gfxDir & "\colors.ini"))
     txtTextClr = CLng("&H" + LoadString("GUIColors", "TextBoxText", appPath & "\skins\" & gfxDir & "\colors.ini"))
-    frameClr = CLng("&H" + LoadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
+    frameColor = CLng("&H" + LoadString("GUIColors", "Frame", appPath & "\skins\" & gfxDir & "\colors.ini"))
     font1 = LoadString("GUIColors", "font1", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
     font2 = LoadString("GUIColors", "font2", appPath & "\skins\" & gfxDir & "\colors.ini", 40)
 

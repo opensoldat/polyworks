@@ -840,7 +840,7 @@ Public Sub SetColors()
     cboTexture.ForeColor = txtTextClr
 
     For Each c In fraMap
-        c.BorderColor = frameClr
+        c.BorderColor = frameColor
     Next
 
     SetFormFonts Me
