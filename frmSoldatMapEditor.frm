@@ -749,7 +749,7 @@ Begin VB.Form frmSoldatMapEditor
       Begin VB.Menu mnuSep16 
          Caption         =   "-"
       End
-      Begin VB.Menu mnuClrSketch 
+      Begin VB.Menu mnuColorSketch 
          Caption         =   "Clear sketch"
       End
       Begin VB.Menu mnuSep30 
@@ -10224,7 +10224,7 @@ Private Sub lblMousePosition_Click()
     formTop = Me.Top / Screen.TwipsPerPixelY
 End Sub
 
-Private Sub mnuClrSketch_Click()
+Private Sub mnuColorSketch_Click()
 
     sketchLines = 0
     ReDim Preserve sketch(0)
