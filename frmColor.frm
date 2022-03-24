@@ -659,6 +659,8 @@ Private mNonModal As Boolean
 Private mLastTool As Byte
 
 
+' functions
+
 Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
     On Error GoTo ErrorHandler
@@ -747,220 +749,54 @@ ErrorHandler:
 
 End Sub
 
-Private Sub Form_KeyPress(KeyAscii As Integer)
+Public Sub SetColors()
 
-    Const ESCAPE = 27
-    Const ENTER = 13
+    On Error Resume Next
 
-    If KeyAscii = ESCAPE Then
-        picColor.SetFocus
-        picCancel_Click
-    ElseIf KeyAscii = ENTER Then
-        picColor.SetFocus
-        picOK_Click
-    End If
+    Dim c As Control
 
-End Sub
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_colorpicker.bmp")
+    picSpectrum.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\color_picker.bmp")
 
-Private Sub Form_Load()
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
 
-    On Error GoTo ErrorHandler
+    For Each c In imgRGB
+        c.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
+    Next
+    imgHue.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
+    imgBright.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
+    imgSat.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
 
-    Me.SetColors
+    picSpectrum.MouseIcon = LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\color_picker.cur")
 
-    mOldX = -16
-    mOldY = -16
-    ok = False
-    mHue = 0
-    mSat = 0
-    mBright = 0
-    mLow = B
-    mMid = G
-    mHigh = R
-    mPureColor(0) = 255
-    mPureColor(1) = 255
-    mPureColor(2) = 255
 
-    Exit Sub
+    Me.BackColor = bgColor
 
-ErrorHandler:
+    For Each c In lblColor
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
 
-    MsgBox Error$ & vbNewLine & "Error loading Color Picker form"
+    For Each c In txtRGB
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
 
-End Sub
+    txtHue.BackColor = txtBackColor
+    txtHue.ForeColor = txtTextColor
 
-Private Sub lblRGB_Click(Index As Integer)
+    txtSat.BackColor = txtBackColor
+    txtSat.ForeColor = txtTextColor
 
-End Sub
+    txtBright.BackColor = txtBackColor
+    txtBright.ForeColor = txtTextColor
 
-Private Sub picSpectrum_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    txtHexCode.BackColor = bgColor
+    txtHexCode.ForeColor = lblTextColor
 
-    picSpectrum_MouseMove Button, Shift, X, Y
-
-End Sub
-
-Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = 1 Then
-        X = Clamp(X, 0, 255)
-        Y = Clamp(Y, 0, 255)
-        mSat = (255 - Y) / 255
-        mHue = X / 255 * 359
-        CalculateHue
-        ChangeRGB
-        txtSat.Text = Int(mSat * 100 + 0.5)
-        txtHue.Text = Int(mHue + 0.5)
-        UpdateAll
-        UpdateRGB
-        UpdateHex
-
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-        mOldX = X
-        mOldY = Y
-        picSpectrum.Circle (X, Y), 5.5, RGB(0, 0, 0)
-    End If
-
-End Sub
-
-Private Sub picRGB_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picRGB_MouseMove Index, Button, Shift, X, Y
-
-End Sub
-
-Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
-        mColor(Index) = X
-        ChangeRGB
-        txtRGB(Index).Text = mColor(Index)
-        UpdateAll
-        UpdateHSB
-        UpdateHex
-
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-        mOldX = mHue / 360 * 255
-        mOldY = 255 - mSat * 255
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-    End If
-
-End Sub
-
-Private Sub picHue_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picHue_MouseMove Button, Shift, X, Y
-
-End Sub
-
-Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
-        mHue = X / 255 * 359
-
-        CalculateHue
-        ChangeHue
-
-        txtHue.Text = Int(mHue + 0.5)
-        UpdateAll
-        UpdateRGB
-        UpdateHex
-
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-        mOldX = X
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-    End If
-
-End Sub
-
-Private Sub CalculateHue()
-
-    On Error GoTo ErrorHandler
-
-    If mHue < 60 Then
-        mColor(R) = mBright * 255
-        mColor(G) = ((255 - (mHue / 60 * 255)) * (1 - mSat) + (mHue / 60 * 255)) * mBright
-        mColor(B) = 255 * (1 - mSat) * mBright
-    ElseIf mHue < 120 Then
-        mColor(R) = ((255 - ((120 - mHue) / 60 * 255)) * (1 - mSat) + ((120 - mHue) / 60 * 255)) * mBright
-        mColor(G) = mBright * 255
-        mColor(B) = 255 * (1 - mSat) * mBright
-    ElseIf mHue < 180 Then
-        mColor(R) = 255 * (1 - mSat) * mBright
-        mColor(G) = mBright * 255
-        mColor(B) = ((255 - ((mHue - 120) / 60 * 255)) * (1 - mSat) + ((mHue - 120) / 60 * 255)) * mBright
-    ElseIf mHue < 240 Then
-        mColor(R) = 255 * (1 - mSat) * mBright
-        mColor(G) = ((255 - ((240 - mHue) / 60 * 255)) * (1 - mSat) + ((240 - mHue) / 60 * 255)) * mBright
-        mColor(B) = mBright * 255
-    ElseIf mHue < 300 Then
-        mColor(R) = ((255 - ((mHue - 240) / 60 * 255)) * (1 - mSat) + ((mHue - 240) / 60 * 255)) * mBright
-        mColor(G) = 255 * (1 - mSat) * mBright
-        mColor(B) = mBright * 255
-    ElseIf mHue < 360 Then
-        mColor(R) = mBright * 255
-        mColor(G) = 255 * (1 - mSat) * mBright
-        mColor(B) = ((255 - ((360 - mHue) / 60 * 255)) * (1 - mSat) + ((360 - mHue) / 60 * 255)) * mBright
-    End If
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$
-
-End Sub
-
-Private Sub picSat_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picSat_MouseMove Button, Shift, X, Y
-
-End Sub
-
-Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
-        mSat = X / 255
-        If mColor(R) = mColor(G) And mColor(R) = mColor(B) And mSat > 0 Then ' determine rgb based on hue
-            CalculateHue
-        Else
-            mColor(mLow) = ((1 - mSat) * 255) * mBright
-            mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
-            mColor(mHigh) = mPureColor(mHigh) * mBright
-        End If
-        UpdateAll
-        txtSat.Text = Int(mSat * 100 + 0.5)
-        UpdateRGB
-        UpdateHex
-
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-        mOldY = 255 - X
-        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
-    End If
-
-End Sub
-
-Private Sub picBright_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picBright_MouseMove Button, Shift, X, Y
-
-End Sub
-
-Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Button = 1 Then
-        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
-        mBright = X / 255
-        mColor(mLow) = ((1 - mSat) * 255) * mBright
-        mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
-        mColor(mHigh) = mPureColor(mHigh) * mBright
-        UpdateAll
-        txtBright.Text = Int(mBright * 100 + 0.5)
-        UpdateRGB
-        UpdateHex
-    End If
+    SetFormFonts Me
 
 End Sub
 
@@ -1169,6 +1005,226 @@ Private Sub Render()
     picHue.Refresh
     picSat.Refresh
     picBright.Refresh
+
+End Sub
+
+Private Sub CalculateHue()
+
+    On Error GoTo ErrorHandler
+
+    If mHue < 60 Then
+        mColor(R) = mBright * 255
+        mColor(G) = ((255 - (mHue / 60 * 255)) * (1 - mSat) + (mHue / 60 * 255)) * mBright
+        mColor(B) = 255 * (1 - mSat) * mBright
+    ElseIf mHue < 120 Then
+        mColor(R) = ((255 - ((120 - mHue) / 60 * 255)) * (1 - mSat) + ((120 - mHue) / 60 * 255)) * mBright
+        mColor(G) = mBright * 255
+        mColor(B) = 255 * (1 - mSat) * mBright
+    ElseIf mHue < 180 Then
+        mColor(R) = 255 * (1 - mSat) * mBright
+        mColor(G) = mBright * 255
+        mColor(B) = ((255 - ((mHue - 120) / 60 * 255)) * (1 - mSat) + ((mHue - 120) / 60 * 255)) * mBright
+    ElseIf mHue < 240 Then
+        mColor(R) = 255 * (1 - mSat) * mBright
+        mColor(G) = ((255 - ((240 - mHue) / 60 * 255)) * (1 - mSat) + ((240 - mHue) / 60 * 255)) * mBright
+        mColor(B) = mBright * 255
+    ElseIf mHue < 300 Then
+        mColor(R) = ((255 - ((mHue - 240) / 60 * 255)) * (1 - mSat) + ((mHue - 240) / 60 * 255)) * mBright
+        mColor(G) = 255 * (1 - mSat) * mBright
+        mColor(B) = mBright * 255
+    ElseIf mHue < 360 Then
+        mColor(R) = mBright * 255
+        mColor(G) = 255 * (1 - mSat) * mBright
+        mColor(B) = ((255 - ((360 - mHue) / 60 * 255)) * (1 - mSat) + ((360 - mHue) / 60 * 255)) * mBright
+    End If
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$
+
+End Sub
+
+
+' events
+
+Private Sub Form_KeyPress(KeyAscii As Integer)
+
+    Const ESCAPE = 27
+    Const ENTER = 13
+
+    If KeyAscii = ESCAPE Then
+        picColor.SetFocus
+        picCancel_Click
+    ElseIf KeyAscii = ENTER Then
+        picColor.SetFocus
+        picOK_Click
+    End If
+
+End Sub
+
+Private Sub Form_Load()
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+
+    mOldX = -16
+    mOldY = -16
+    ok = False
+    mHue = 0
+    mSat = 0
+    mBright = 0
+    mLow = B
+    mMid = G
+    mHigh = R
+    mPureColor(0) = 255
+    mPureColor(1) = 255
+    mPureColor(2) = 255
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$ & vbNewLine & "Error loading Color Picker form"
+
+End Sub
+
+Private Sub lblRGB_Click(Index As Integer)
+
+End Sub
+
+Private Sub picSpectrum_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picSpectrum_MouseMove Button, Shift, X, Y
+
+End Sub
+
+Private Sub picSpectrum_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Button = 1 Then
+        X = Clamp(X, 0, 255)
+        Y = Clamp(Y, 0, 255)
+        mSat = (255 - Y) / 255
+        mHue = X / 255 * 359
+        CalculateHue
+        ChangeRGB
+        txtSat.Text = Int(mSat * 100 + 0.5)
+        txtHue.Text = Int(mHue + 0.5)
+        UpdateAll
+        UpdateRGB
+        UpdateHex
+
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = X
+        mOldY = Y
+        picSpectrum.Circle (X, Y), 5.5, RGB(0, 0, 0)
+    End If
+
+End Sub
+
+Private Sub picRGB_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picRGB_MouseMove Index, Button, Shift, X, Y
+
+End Sub
+
+Private Sub picRGB_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
+        mColor(Index) = X
+        ChangeRGB
+        txtRGB(Index).Text = mColor(Index)
+        UpdateAll
+        UpdateHSB
+        UpdateHex
+
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = mHue / 360 * 255
+        mOldY = 255 - mSat * 255
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+    End If
+
+End Sub
+
+Private Sub picHue_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picHue_MouseMove Button, Shift, X, Y
+
+End Sub
+
+Private Sub picHue_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
+        mHue = X / 255 * 359
+
+        CalculateHue
+        ChangeHue
+
+        txtHue.Text = Int(mHue + 0.5)
+        UpdateAll
+        UpdateRGB
+        UpdateHex
+
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldX = X
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+    End If
+
+End Sub
+
+Private Sub picSat_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picSat_MouseMove Button, Shift, X, Y
+
+End Sub
+
+Private Sub picSat_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
+        mSat = X / 255
+        If mColor(R) = mColor(G) And mColor(R) = mColor(B) And mSat > 0 Then ' determine rgb based on hue
+            CalculateHue
+        Else
+            mColor(mLow) = ((1 - mSat) * 255) * mBright
+            mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+            mColor(mHigh) = mPureColor(mHigh) * mBright
+        End If
+        UpdateAll
+        txtSat.Text = Int(mSat * 100 + 0.5)
+        UpdateRGB
+        UpdateHex
+
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+        mOldY = 255 - X
+        picSpectrum.Circle (mOldX, mOldY), 5.5, RGB(0, 0, 0)
+    End If
+
+End Sub
+
+Private Sub picBright_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picBright_MouseMove Button, Shift, X, Y
+
+End Sub
+
+Private Sub picBright_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Button = 1 Then
+        X = 255 - Clamp(Y, 0, 255)  ' grab y pos as it's a vertical bar
+        mBright = X / 255
+        mColor(mLow) = ((1 - mSat) * 255) * mBright
+        mColor(mMid) = ((255 - mPureColor(mMid)) * (1 - mSat) + mPureColor(mMid)) * mBright
+        mColor(mHigh) = mPureColor(mHigh) * mBright
+        UpdateAll
+        txtBright.Text = Int(mBright * 100 + 0.5)
+        UpdateRGB
+        UpdateHex
+    End If
 
 End Sub
 
@@ -1440,56 +1496,5 @@ End Sub
 Private Sub picOK_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_colorpicker.bmp")
-    picSpectrum.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\color_picker.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-
-    For Each c In imgRGB
-        c.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
-    Next
-    imgHue.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
-    imgBright.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
-    imgSat.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\slider_arrow.bmp")
-
-    picSpectrum.MouseIcon = LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\color_picker.cur")
-
-
-    Me.BackColor = bgColor
-
-    For Each c In lblColor
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In txtRGB
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-
-    txtHue.BackColor = txtBackColor
-    txtHue.ForeColor = txtTextColor
-
-    txtSat.BackColor = txtBackColor
-    txtSat.ForeColor = txtTextColor
-
-    txtBright.BackColor = txtBackColor
-    txtBright.ForeColor = txtTextColor
-
-    txtHexCode.BackColor = bgColor
-    txtHexCode.ForeColor = lblTextColor
-
-    SetFormFonts Me
 
 End Sub
