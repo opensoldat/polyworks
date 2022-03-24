@@ -1570,16 +1570,20 @@ Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParamet
 
 
 Private Function QuickHide(ByRef myWindow As Form)
+
     MoveWindow myWindow.hWnd, _
         (myWindow.Left - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelX, _
         (myWindow.Top - QUICK_MOVE_DELTA) / Screen.TwipsPerPixelY, _
         myWindow.Width / Screen.TwipsPerPixelX, _
         myWindow.Height / Screen.TwipsPerPixelY, _
         False
+
 End Function
 
 Private Function QuickMoveAndShow(ByRef myWindow As Form, nLeft, nTop)
+
     myWindow.Move nLeft + QUICK_MOVE_DELTA, nTop + QUICK_MOVE_DELTA
+
 End Function
 
 Private Sub Form_Load()
@@ -1676,12 +1680,14 @@ Private Sub Form_Load()
 
 
     err = "Error initializing D3D"
+
     initialized2 = False
     LoadWorkspace "current.ini", True
     Init
 
 
     err = "Error initializing DInput"
+
     InitDInput
 
 
@@ -1743,7 +1749,6 @@ Private Sub Form_Load()
 
     NewMap
     If LCase$(Right(temp, 4)) = ".pms" Then
-    
         prevMousePointer = Me.MousePointer
         Me.MousePointer = vbHourglass
 
@@ -14445,6 +14450,7 @@ End Sub
 Public Sub picMinimize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+
     If mnuDisplay.Checked Then frmDisplay.Hide
     If mnuWaypoints.Checked Then frmWaypoints.Hide
     If mnuTools.Checked Then frmTools.Hide
@@ -14452,7 +14458,9 @@ Public Sub picMinimize_MouseUp(Button As Integer, Shift As Integer, X As Single,
     If mnuScenery.Checked Then frmScenery.Hide
     If mnuInfo.Checked Then frmInfo.Hide
     If mnuTexture.Checked Then frmTexture.Hide
+
     Me.Hide
+
     frmTaskBar.WindowState = vbMinimized
 
 End Sub

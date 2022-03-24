@@ -711,7 +711,6 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
 
 End Sub
 
-
 Private Sub HideColor(apply As Boolean)
 
     On Error GoTo ErrorHandler
