@@ -22,6 +22,7 @@ Module=modRender; modRender.bas
 Module=modConfig; modConfig.bas
 Module=modSoldatMap; modSoldatMap.bas
 Module=modUtils; modUtils.bas
+Module=modGlobals; modGlobals.bas
 IconForm="frmSoldatMapEditor"
 Startup="frmSoldatMapEditor"
 HelpFile=""
