@@ -525,6 +525,8 @@ Private layerKeys(0 To 7) As Byte
 Private formHeight As Integer
 
 
+' functions
+
 Public Function GetLayerKey(ByVal Index As Byte) As Byte
 
     GetLayerKey = layerKeys(Index)
@@ -538,6 +540,63 @@ Public Sub SetLayerKey(Index As Integer, ByVal value As Byte)
     End If
 
 End Sub
+
+Public Sub RefreshButtons()
+
+    Dim i As Integer
+
+    Debug.Assert picLayer.LBound = LBound(layers)
+    Debug.Assert picLayer.UBound = UBound(layers)
+
+    For i = picLayer.LBound To picLayer.UBound
+        MouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
+    Next
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_display.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+
+    For Each c In lblLayer
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    SetFormFonts Me
+
+End Sub
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetLayer(Index As Integer, value As Boolean)
+
+    layers(Index) = value
+    MouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+
+End Sub
+
+
+' events
 
 Private Sub Form_GotFocus()
 
@@ -560,26 +619,6 @@ Private Sub Form_Load()
 ErrorHandler:
 
     MsgBox Error$ & vbNewLine & "Error loading Display form"
-
-End Sub
-
-Public Sub SetForm()
-
-    Me.Left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
-
-End Sub
-
-Public Sub SetLayer(Index As Integer, value As Boolean)
-
-    layers(Index) = value
-    MouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
 
 End Sub
 
@@ -661,39 +700,5 @@ End Sub
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub RefreshButtons()
-
-    Dim i As Integer
-
-    Debug.Assert picLayer.LBound = LBound(layers)
-    Debug.Assert picLayer.UBound = UBound(layers)
-
-    For i = picLayer.LBound To picLayer.UBound
-        MouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
-    Next
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_display.bmp")
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    Me.BackColor = bgColor
-
-    For Each c In lblLayer
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    SetFormFonts Me
 
 End Sub
