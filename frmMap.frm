@@ -635,7 +635,10 @@ Public Sub LoadTextures()
     Set objFiles = objFSO.GetFolder(strPath).Files
 
     For Each objFile In objFiles
-        If Right(objFile.Name, 3) = "bmp" Then
+        If (Right(objFile.Name, 4) = ".bmp") Or _
+          (Right(objFile.Name, 4) = ".jpg") Or _
+          (Right(objFile.Name, 5) = ".jpeg") Or _
+          (Right(objFile.Name, 4) = ".png") Then
             cboTexture.AddItem objFile.Name
         End If
     Next
@@ -657,6 +660,18 @@ Public Sub LoadTextures2()
     cboTexture.Clear
 
     file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
+    Do While Len(file)
+        cboTexture.AddItem file
+        file = Dir$
+    Loop
+    
+    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpg", vbDirectory)
+    Do While Len(file)
+        cboTexture.AddItem file
+        file = Dir$
+    Loop
+
+    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpeg", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
         file = Dir$
