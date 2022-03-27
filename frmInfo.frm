@@ -1715,6 +1715,95 @@ Private tempVal As Single
 Private applyChange As Boolean
 
 
+' functions
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_properties.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+    For Each c In lblInfo
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In picProp
+        c.BackColor = bgColor
+    Next
+
+    For Each c In txtScenProp
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In txtQuadX
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In txtQuadY
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In txtScale
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In txtTexture
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In lblCount
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+    
+    txtVertexAlpha.BackColor = txtBackColor
+    txtVertexAlpha.ForeColor = txtTextColor
+    txtBounciness.BackColor = txtBackColor
+    txtBounciness.ForeColor = txtTextColor
+
+    lblDimensions.BackColor = lblBackColor
+    lblDimensions.ForeColor = lblTextColor
+
+    txtRotate.BackColor = txtBackColor
+    txtRotate.ForeColor = txtTextColor
+    cboLevel.BackColor = txtBackColor
+    cboLevel.ForeColor = txtTextColor
+    cboPolyType.BackColor = txtBackColor
+    cboPolyType.ForeColor = txtTextColor
+
+    For Each c In txtLightProp
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+
+    square.BorderColor = lblTextColor
+    diagonal.BorderColor = lblTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' events
+
 Private Sub Form_Load()
 
     On Error GoTo ErrorHandler
@@ -1737,18 +1826,6 @@ Private Sub Form_Load()
 ErrorHandler:
 
     MsgBox Error$ & vbNewLine & "Error loading Properties form"
-
-End Sub
-
-Public Sub SetForm()
-
-    Me.Left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
 
 End Sub
 
@@ -2087,77 +2164,5 @@ End Sub
 Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_properties.bmp")
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    Me.BackColor = bgColor
-    For Each c In lblInfo
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-    For Each c In picProp
-        c.BackColor = bgColor
-    Next
-
-    For Each c In txtScenProp
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-    For Each c In txtQuadX
-        c.BackColor = bgColor
-        c.ForeColor = lblTextColor
-    Next
-    For Each c In txtQuadY
-        c.BackColor = bgColor
-        c.ForeColor = lblTextColor
-    Next
-    For Each c In txtScale
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-    For Each c In txtTexture
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-    For Each c In lblCount
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-    
-    txtVertexAlpha.BackColor = txtBackColor
-    txtVertexAlpha.ForeColor = txtTextColor
-    txtBounciness.BackColor = txtBackColor
-    txtBounciness.ForeColor = txtTextColor
-
-    lblDimensions.BackColor = lblBackColor
-    lblDimensions.ForeColor = lblTextColor
-
-    txtRotate.BackColor = txtBackColor
-    txtRotate.ForeColor = txtTextColor
-    cboLevel.BackColor = txtBackColor
-    cboLevel.ForeColor = txtTextColor
-    cboPolyType.BackColor = txtBackColor
-    cboPolyType.ForeColor = txtTextColor
-
-    For Each c In txtLightProp
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-
-    square.BorderColor = lblTextColor
-    diagonal.BorderColor = lblTextColor
-
-    SetFormFonts Me
 
 End Sub
