@@ -518,6 +518,146 @@ Option Explicit
 #End If
 
 
+' function
+
+Public Sub LoadTextures()
+
+    On Error GoTo ErrorHandler
+
+    Dim strParent As String
+    Dim strPath As String
+
+    Dim objFSO As FileSystemObject
+    Dim objFiles As Files
+    Dim objFile As file
+
+    cboTexture.Clear
+
+    strParent = frmSoldatMapEditor.soldatDir
+    strPath = frmSoldatMapEditor.soldatDir & "textures\"
+
+    Set objFSO = New FileSystemObject
+
+    If Not objFSO.FolderExists(strPath) Then Exit Sub
+
+    Set objFiles = objFSO.GetFolder(strPath).Files
+
+    For Each objFile In objFiles
+        If Right(objFile.Name, 3) = "bmp" Then
+            cboTexture.AddItem objFile.Name
+        End If
+    Next
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "loading textures failed" & vbNewLine & Error$
+
+End Sub
+
+Public Sub LoadTextures2()
+
+    On Error GoTo ErrorHandler
+
+    Dim file As String
+
+    cboTexture.Clear
+
+    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
+    Do While Len(file)
+        cboTexture.AddItem file
+        file = Dir$
+    Loop
+
+    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
+    Do While Len(file)
+        cboTexture.AddItem file
+        file = Dir$
+    Loop
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "loading textures failed" & vbNewLine & Error$
+
+End Sub
+
+Public Sub LoadFromList()  ' unused?
+
+    On Error GoTo ErrorHandler
+
+    Dim textureName As String
+
+    cboTexture.Clear
+
+    Open appPath & "\texture_list.txt" For Input As #1
+
+        Do While Not EOF(1)
+            Input #1, textureName
+            cboTexture.AddItem textureName
+        Loop
+
+    Close #1
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_map.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+
+    For Each c In lblMap
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    txtDesc.BackColor = txtBackColor
+    txtDesc.ForeColor = txtTextColor
+    txtJet.BackColor = txtBackColor
+    txtJet.ForeColor = txtTextColor
+
+    cboWeather.BackColor = txtBackColor
+    cboWeather.ForeColor = txtTextColor
+    cboSteps.BackColor = txtBackColor
+    cboSteps.ForeColor = txtTextColor
+    cboJet.BackColor = txtBackColor
+    cboJet.ForeColor = txtTextColor
+    cboGrenades.BackColor = txtBackColor
+    cboGrenades.ForeColor = txtTextColor
+    cboMedikits.BackColor = txtBackColor
+    cboMedikits.ForeColor = txtTextColor
+    cboTexture.BackColor = txtBackColor
+    cboTexture.ForeColor = txtTextColor
+
+    For Each c In fraMap
+        c.BorderColor = frameColor
+    Next
+
+    SetFormFonts Me
+
+End Sub
+
+
+' events
+
 Private Sub cboJet_Click()
 
     Select Case cboJet.ListIndex
@@ -609,110 +749,6 @@ Private Sub cboTexture_Click()
 ErrorHandler:
 
     MsgBox "Error showing texture" & vbNewLine & Error$
-
-End Sub
-
-Public Sub LoadTextures()
-
-    On Error GoTo ErrorHandler
-
-    Dim strParent As String
-    Dim strPath As String
-
-    Dim objFSO As FileSystemObject
-    Dim objFiles As Files
-    Dim objFile As file
-
-    cboTexture.Clear
-
-    strParent = frmSoldatMapEditor.soldatDir
-    strPath = frmSoldatMapEditor.soldatDir & "textures\"
-
-    Set objFSO = New FileSystemObject
-
-    If Not objFSO.FolderExists(strPath) Then Exit Sub
-
-    Set objFiles = objFSO.GetFolder(strPath).Files
-
-    For Each objFile In objFiles
-        If (Right(objFile.Name, 4) = ".bmp") Or _
-          (Right(objFile.Name, 4) = ".jpg") Or _
-          (Right(objFile.Name, 5) = ".jpeg") Or _
-          (Right(objFile.Name, 4) = ".png") Then
-            cboTexture.AddItem objFile.Name
-        End If
-    Next
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "loading textures failed" & vbNewLine & Error$
-
-End Sub
-
-Public Sub LoadTextures2()
-
-    On Error GoTo ErrorHandler
-
-    Dim file As String
-
-    cboTexture.Clear
-
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
-    Do While Len(file)
-        cboTexture.AddItem file
-        file = Dir$
-    Loop
-    
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpg", vbDirectory)
-    Do While Len(file)
-        cboTexture.AddItem file
-        file = Dir$
-    Loop
-
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.jpeg", vbDirectory)
-    Do While Len(file)
-        cboTexture.AddItem file
-        file = Dir$
-    Loop
-
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
-    Do While Len(file)
-        cboTexture.AddItem file
-        file = Dir$
-    Loop
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "loading textures failed" & vbNewLine & Error$
-
-End Sub
-
-Public Sub LoadFromList()  ' unused?
-
-    On Error GoTo ErrorHandler
-
-    Dim textureName As String
-
-    cboTexture.Clear
-
-    Open appPath & "\texture_list.txt" For Input As #1
-
-        Do While Not EOF(1)
-            Input #1, textureName
-            cboTexture.AddItem textureName
-        Loop
-
-    Close #1
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$
 
 End Sub
 
@@ -813,51 +849,5 @@ Private Sub txtJet_KeyPress(KeyAscii As Integer)
     Else
         KeyAscii = 0
     End If
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_map.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-
-    Me.BackColor = bgColor
-
-    For Each c In lblMap
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    txtDesc.BackColor = txtBackColor
-    txtDesc.ForeColor = txtTextColor
-    txtJet.BackColor = txtBackColor
-    txtJet.ForeColor = txtTextColor
-
-    cboWeather.BackColor = txtBackColor
-    cboWeather.ForeColor = txtTextColor
-    cboSteps.BackColor = txtBackColor
-    cboSteps.ForeColor = txtTextColor
-    cboJet.BackColor = txtBackColor
-    cboJet.ForeColor = txtTextColor
-    cboGrenades.BackColor = txtBackColor
-    cboGrenades.ForeColor = txtTextColor
-    cboMedikits.BackColor = txtBackColor
-    cboMedikits.ForeColor = txtTextColor
-    cboTexture.BackColor = txtBackColor
-    cboTexture.ForeColor = txtTextColor
-
-    For Each c In fraMap
-        c.BorderColor = frameColor
-    Next
-
-    SetFormFonts Me
 
 End Sub
