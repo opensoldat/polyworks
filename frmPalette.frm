@@ -564,6 +564,8 @@ Private yVal As Integer
 Private tempVal As Integer
 
 
+' functions
+
 Public Function GetPalColor(X As Integer, Y As Integer) As Long  ' unused?
 
     GetPalColor = RGB(colorPalette(X, Y).blue, colorPalette(X, Y).green, colorPalette(X, Y).red)
@@ -627,47 +629,6 @@ Public Sub CheckPalette(red As Byte, green As Byte, blue As Byte)
 
 End Sub
 
-Private Sub cmdDefault_Click()
-
-    cmdDefault.SetFocus
-
-End Sub
-
-Private Sub Form_Click()
-
-    cmdDefault.SetFocus
-
-End Sub
-
-Private Sub Form_Load()
-
-    Dim i As Integer
-
-    On Error GoTo ErrorHandler
-
-    Me.SetColors
-
-    frmPalette.LoadPalette appPath & "\palettes\current.txt"
-
-    SetValues frmColor.red, frmColor.green, frmColor.blue
-
-    shpSel1.Left = picPalette.ScaleWidth + 2
-    shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.Left = picPalette.ScaleWidth + 2
-    shpSel2.Top = picPalette.ScaleHeight + 2
-
-    formHeight = Me.ScaleHeight
-
-    SetForm
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$ & vbNewLine & "Error loading Palette form"
-
-End Sub
-
 Public Sub SetForm()
 
     Me.Left = xPos * Screen.TwipsPerPixelX
@@ -722,37 +683,6 @@ ErrorHandler:
 
 End Sub
 
-Private Sub Form_LostFocus()
-
-    cmdDefault.SetFocus
-
-End Sub
-
-Private Sub lblColorMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picColorMode_MouseMove Index, 1, 0, 0, 0
-
-End Sub
-
-Private Sub mnuLoadPalette_Click()
-
-    On Error GoTo ErrorHandler
-
-    commonDialog.InitDir = appPath & "\palettes\"
-    commonDialog.DialogTitle = "Load Palette"
-    commonDialog.Filter = "Text Documents (*.txt)|*.txt"
-    commonDialog.ShowOpen
-
-    If commonDialog.FileName <> "" Then
-        LoadPalette commonDialog.FileName
-    End If
-
-    Exit Sub
-
-ErrorHandler:
-
-End Sub
-
 Public Sub SavePalette(FileName As String)
 
     Dim X As Integer
@@ -781,6 +711,171 @@ ErrorHandler:
 
     If fileOpen Then Close #1
     MsgBox "Error saving palette" & vbNewLine & Error$
+
+End Sub
+
+
+Public Sub NewPaletteColor()
+
+    colorPalette(xVal, yVal).red = txtRGB(0).Text
+    colorPalette(xVal, yVal).green = txtRGB(1).Text
+    colorPalette(xVal, yVal).blue = txtRGB(2).Text
+    picPalette.Line (xVal * 16, yVal * 16)-(xVal * 16 + 15, yVal * 16 + 15), RGB(colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue), BF
+    shpSel1.Left = xVal * 16 + 1
+    shpSel1.Top = yVal * 16 + 1
+    shpSel2.Left = xVal * 16
+    shpSel2.Top = yVal * 16
+
+End Sub
+
+Public Function TextControl() As Boolean
+
+    Dim c As Control
+
+    TextControl = False
+
+    For Each c In txtRGB
+        If Me.ActiveControl = c Then
+            TextControl = True
+        End If
+    Next
+    If Me.ActiveControl = txtOpacity Then
+        TextControl = True
+    ElseIf Me.ActiveControl = txtRadius Then
+        TextControl = True
+    End If
+
+End Function
+
+Public Sub SetValues(R As Byte, G As Byte, B As Byte)
+
+    txtRGB(0).Text = R
+    txtRGB(1).Text = G
+    txtRGB(2).Text = B
+    picColor.BackColor = RGB(R, G, B)
+    shpSel1.Left = picPalette.ScaleWidth + 2
+    shpSel1.Top = picPalette.ScaleHeight + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
+    shpSel2.Top = picPalette.ScaleHeight + 2
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_palette.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    For i = picColorMode.LBound To picColorMode.UBound
+        MouseEvent2 picColorMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
+    Next
+
+    Me.BackColor = bgColor
+
+    For Each c In lblPal
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In lblColorMode
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In txtRGB
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+
+    txtOpacity.BackColor = txtBackColor
+    txtOpacity.ForeColor = txtTextColor
+    txtRadius.BackColor = txtBackColor
+    txtRadius.ForeColor = txtTextColor
+    cboBlendMode.BackColor = txtBackColor
+    cboBlendMode.ForeColor = txtTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' events
+
+Private Sub cmdDefault_Click()
+
+    cmdDefault.SetFocus
+
+End Sub
+
+Private Sub Form_Click()
+
+    cmdDefault.SetFocus
+
+End Sub
+
+Private Sub Form_Load()
+
+    Dim i As Integer
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+
+    frmPalette.LoadPalette appPath & "\palettes\current.txt"
+
+    SetValues frmColor.red, frmColor.green, frmColor.blue
+
+    shpSel1.Left = picPalette.ScaleWidth + 2
+    shpSel1.Top = picPalette.ScaleHeight + 2
+    shpSel2.Left = picPalette.ScaleWidth + 2
+    shpSel2.Top = picPalette.ScaleHeight + 2
+
+    formHeight = Me.ScaleHeight
+
+    SetForm
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$ & vbNewLine & "Error loading Palette form"
+
+End Sub
+
+Private Sub Form_LostFocus()
+
+    cmdDefault.SetFocus
+
+End Sub
+
+Private Sub lblColorMode_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picColorMode_MouseMove Index, 1, 0, 0, 0
+
+End Sub
+
+Private Sub mnuLoadPalette_Click()
+
+    On Error GoTo ErrorHandler
+
+    commonDialog.InitDir = appPath & "\palettes\"
+    commonDialog.DialogTitle = "Load Palette"
+    commonDialog.Filter = "Text Documents (*.txt)|*.txt"
+    commonDialog.ShowOpen
+
+    If commonDialog.FileName <> "" Then
+        LoadPalette commonDialog.FileName
+    End If
+
+    Exit Sub
+
+ErrorHandler:
 
 End Sub
 
@@ -854,19 +949,6 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
     End If
 
     cmdDefault.SetFocus
-
-End Sub
-
-Public Sub NewPaletteColor()
-
-    colorPalette(xVal, yVal).red = txtRGB(0).Text
-    colorPalette(xVal, yVal).green = txtRGB(1).Text
-    colorPalette(xVal, yVal).blue = txtRGB(2).Text
-    picPalette.Line (xVal * 16, yVal * 16)-(xVal * 16 + 15, yVal * 16 + 15), RGB(colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue), BF
-    shpSel1.Left = xVal * 16 + 1
-    shpSel1.Top = yVal * 16 + 1
-    shpSel2.Left = xVal * 16
-    shpSel2.Top = yVal * 16
 
 End Sub
 
@@ -992,39 +1074,6 @@ Private Sub cboBlendMode_Click()
 
 End Sub
 
-Public Sub SetValues(R As Byte, G As Byte, B As Byte)
-
-    txtRGB(0).Text = R
-    txtRGB(1).Text = G
-    txtRGB(2).Text = B
-    picColor.BackColor = RGB(R, G, B)
-    shpSel1.Left = picPalette.ScaleWidth + 2
-    shpSel1.Top = picPalette.ScaleHeight + 2
-    shpSel2.Left = picPalette.ScaleWidth + 2
-    shpSel2.Top = picPalette.ScaleHeight + 2
-
-End Sub
-
-Public Function TextControl() As Boolean
-
-    Dim c As Control
-
-    TextControl = False
-
-    For Each c In txtRGB
-        If Me.ActiveControl = c Then
-            TextControl = True
-        End If
-    Next
-    If Me.ActiveControl = txtOpacity Then
-        TextControl = True
-    ElseIf Me.ActiveControl = txtRadius Then
-        TextControl = True
-    End If
-
-End Function
-
-
 Public Sub picColorMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picColorMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
@@ -1115,49 +1164,5 @@ End Sub
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_palette.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picPaletteMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    For i = picColorMode.LBound To picColorMode.UBound
-        MouseEvent2 picColorMode(i), 0, 0, BUTTON_SMALL, (colorMode = i), BUTTON_UP
-    Next
-
-    Me.BackColor = bgColor
-
-    For Each c In lblPal
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In lblColorMode
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In txtRGB
-        c.BackColor = txtBackColor
-        c.ForeColor = txtTextColor
-    Next
-
-    txtOpacity.BackColor = txtBackColor
-    txtOpacity.ForeColor = txtTextColor
-    txtRadius.BackColor = txtBackColor
-    txtRadius.ForeColor = txtTextColor
-    cboBlendMode.BackColor = txtBackColor
-    cboBlendMode.ForeColor = txtTextColor
-
-    SetFormFonts Me
 
 End Sub
