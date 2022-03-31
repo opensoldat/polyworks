@@ -354,36 +354,7 @@ Private checkVal As Boolean
 Private selNode As Node
 
 
-Private Sub Form_Load()
-
-    Dim i As Integer
-
-    On Error GoTo ErrorHandler
-
-    Me.SetColors
-    formHeight = Me.ScaleHeight
-    SetForm
-    ListScenery
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$ & vbNewLine & "Error loading Scenery form"
-
-End Sub
-
-Public Sub SetForm()
-
-    Me.Left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
-
-End Sub
+' functions
 
 Public Sub ListScenery()
 
@@ -459,6 +430,80 @@ ErrorHandler:
 
     MsgBox "loading scenery tree failed" & vbNewLine & Error$ & vbNewLine & sceneryName
     If fileOpen Then Close #1
+
+End Sub
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_scenery.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    For i = picLevel.LBound To picLevel.UBound
+        MouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
+    Next
+
+    MouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
+    MouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
+
+
+    Me.BackColor = bgColor
+    lblLvl.BackColor = lblBackColor
+    lblLvl.ForeColor = lblTextColor
+    For Each c In lblLevel
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+    lblRotate.BackColor = lblBackColor
+    lblRotate.ForeColor = lblTextColor
+    lblScale.BackColor = lblBackColor
+    lblScale.ForeColor = lblTextColor
+    lstScenery.BackColor = txtBackColor
+    lstScenery.ForeColor = txtTextColor
+    picScenery.BackColor = bgColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' events
+
+Private Sub Form_Load()
+
+    Dim i As Integer
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+    formHeight = Me.ScaleHeight
+    SetForm
+    ListScenery
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$ & vbNewLine & "Error loading Scenery form"
 
 End Sub
 
@@ -682,45 +727,5 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
 
     frmSoldatMapEditor.SetSceneryLevel level
     frmSoldatMapEditor.RegainFocus
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_scenery.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picSceneryMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    For i = picLevel.LBound To picLevel.UBound
-        MouseEvent2 picLevel(i), 0, 0, BUTTON_SMALL, (i = level), BUTTON_UP
-    Next
-
-    MouseEvent2 picScale, 0, 0, BUTTON_SMALL, scaleScenery, BUTTON_UP
-    MouseEvent2 picRotate, 0, 0, BUTTON_SMALL, rotateScenery, BUTTON_UP
-
-
-    Me.BackColor = bgColor
-    lblLvl.BackColor = lblBackColor
-    lblLvl.ForeColor = lblTextColor
-    For Each c In lblLevel
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-    lblRotate.BackColor = lblBackColor
-    lblRotate.ForeColor = lblTextColor
-    lblScale.BackColor = lblBackColor
-    lblScale.ForeColor = lblTextColor
-    lstScenery.BackColor = txtBackColor
-    lstScenery.ForeColor = txtTextColor
-    picScenery.BackColor = bgColor
-
-    SetFormFonts Me
 
 End Sub
