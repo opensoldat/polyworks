@@ -27,6 +27,8 @@ Option Explicit
 #End If
 
 
+' events
+
 Private Sub Form_GotFocus()
 
     If frmSoldatMapEditor.Visible Then
