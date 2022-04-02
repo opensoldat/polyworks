@@ -549,10 +549,14 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos As Integer
 Public collapsed As Boolean
 
+
+' vars private
 
 Private colorPalette(0 To 11, 0 To 5) As TColor
 

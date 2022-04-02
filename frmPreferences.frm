@@ -1948,6 +1948,11 @@ Option Explicit
 #End If
 
 
+' vars - public
+
+
+' vars - private
+
 Private Const MIN_HEIGHT = 440
 Private Const MAX_HEIGHT = 547
 

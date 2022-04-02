@@ -1704,12 +1704,16 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean
 
 Public noChange As Boolean
 
+
+' vars - private
 
 Private formHeight As Integer
 

@@ -507,6 +507,8 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean
@@ -516,6 +518,8 @@ Public noChange As Boolean
 Public waypointPath As Byte
 Public showPaths As Byte
 
+
+' vars - private
 
 Private formHeight As Integer
 

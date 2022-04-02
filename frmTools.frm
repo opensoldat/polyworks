@@ -319,10 +319,14 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean
 
+
+' vars - private
 
 Private curTool As Byte
 Private curButton As Byte

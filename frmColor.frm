@@ -630,12 +630,16 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public red As Byte
 Public green As Byte
 Public blue As Byte
 
 Public ok As Boolean
 
+
+' vars - private
 
 Private mHue As Single
 Private mSat As Single

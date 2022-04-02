@@ -521,7 +521,11 @@ Option Explicit
 #End If
 
 
-' function
+' vars - public
+
+
+' vars - private
+
 
 Public Sub LoadTextures()
 

@@ -507,10 +507,14 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos As Integer
 Public collapsed As Boolean
 
+
+' vars - private
 
 Private Const LAYER_BG As Byte = 0
 Private Const LAYER_POLYS As Byte = 1

@@ -30,7 +30,11 @@ Option Explicit
 #End If
 
 
-' events
+' vars - public
+
+
+' vars - private
+
 
 Private Sub Form_GotFocus()
 

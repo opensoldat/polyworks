@@ -85,6 +85,8 @@ Option Explicit
 #End If
 
 
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
 Public collapsed As Boolean
@@ -95,6 +97,8 @@ Public y1tex As Single
 Public x2tex As Single
 Public y2tex As Single
 
+
+' vars - private
 
 Private formHeight As Integer
 
