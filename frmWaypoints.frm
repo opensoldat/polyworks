@@ -522,6 +522,8 @@ Private waypointKeys(0 To 4) As Byte
 Private Const COLLAPSED_HEIGHT = 19
 
 
+' functions
+
 Public Function GetWaypointKey(ByVal Index As Byte) As Byte
 
     GetWaypointKey = waypointKeys(Index)
@@ -536,22 +538,6 @@ Public Sub SetWaypointKey(Index As Integer, ByVal value As Byte)
 
 End Sub
 
-Private Sub Form_Load()
-
-    On Error GoTo ErrorHandler
-
-    Me.SetColors
-    formHeight = Me.ScaleHeight
-    SetForm
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$ & vbNewLine & "Error loading Waypoints form"
-
-End Sub
-
 Public Sub SetForm()
 
     Me.Left = xPos * Screen.TwipsPerPixelX
@@ -560,16 +546,6 @@ Public Sub SetForm()
         Me.Height = COLLAPSED_HEIGHT * Screen.TwipsPerPixelY
     Else
         Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
-
-End Sub
-
-Private Sub cboSpecial_Click()
-
-    If noChange = False And cboSpecial.ListIndex > -1 Then
-        If Not frmSoldatMapEditor.SetSpecial(cboSpecial.ListIndex) Then
-            cboSpecial.ListIndex = -1
-        End If
     End If
 
 End Sub
@@ -592,24 +568,6 @@ Public Sub GetWayType(Index As Integer, value As Boolean)
 
 End Sub
 
-Private Sub lblPath_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picPath_MouseMove Index, 1, 0, 0, 0
-
-End Sub
-
-Private Sub lblShow_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picShow_MouseMove Index, Button, 0, 0, 0
-
-End Sub
-
-Private Sub lblType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    picType_MouseMove Index, Button, 0, 0, 0
-
-End Sub
-
 Public Sub ClearWaypoint()
 
     Dim i As Integer
@@ -627,6 +585,105 @@ Public Sub ClearWaypoint()
 
 End Sub
 
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_waypoints.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    MouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
+    MouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
+
+    For i = picType.LBound To picType.UBound
+        MouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    Next
+
+    For i = picShow.LBound To picShow.UBound
+        MouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
+    Next
+
+
+    Me.BackColor = bgColor
+
+    For Each c In lblType
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In lblPath
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In lblShow
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    lblWaypoints.BackColor = lblBackColor
+    lblWaypoints.ForeColor = lblTextColor
+
+    cboSpecial.BackColor = txtBackColor
+    cboSpecial.ForeColor = txtTextColor
+
+    lblNumCon.BackColor = lblBackColor
+    lblNumCon.ForeColor = lblTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' events
+
+Private Sub Form_Load()
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+    formHeight = Me.ScaleHeight
+    SetForm
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$ & vbNewLine & "Error loading Waypoints form"
+
+End Sub
+
+Private Sub cboSpecial_Click()
+
+    If noChange = False And cboSpecial.ListIndex > -1 Then
+        If Not frmSoldatMapEditor.SetSpecial(cboSpecial.ListIndex) Then
+            cboSpecial.ListIndex = -1
+        End If
+    End If
+
+End Sub
+
+Private Sub lblPath_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picPath_MouseMove Index, 1, 0, 0, 0
+
+End Sub
+
+Private Sub lblShow_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picShow_MouseMove Index, Button, 0, 0, 0
+
+End Sub
+
+Private Sub lblType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    picType_MouseMove Index, Button, 0, 0, 0
+
+End Sub
 
 Private Sub picTitle_DblClick()
 
@@ -770,58 +827,5 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
     Next
 
     frmSoldatMapEditor.SetShowPaths
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_waypoints.bmp")
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    MouseEvent2 picPath(0), 0, 0, BUTTON_SMALL, True, BUTTON_UP
-    MouseEvent2 picPath(1), 0, 0, BUTTON_SMALL, False, BUTTON_UP
-
-    For i = picType.LBound To picType.UBound
-        MouseEvent2 picType(i), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    Next
-
-    For i = picShow.LBound To picShow.UBound
-        MouseEvent2 picShow(i), 0, 0, BUTTON_SMALL, i = showPaths, BUTTON_UP
-    Next
-
-
-    Me.BackColor = bgColor
-
-    For Each c In lblType
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In lblPath
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In lblShow
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    lblWaypoints.BackColor = lblBackColor
-    lblWaypoints.ForeColor = lblTextColor
-
-    cboSpecial.BackColor = txtBackColor
-    cboSpecial.ForeColor = txtTextColor
-
-    lblNumCon.BackColor = lblBackColor
-    lblNumCon.ForeColor = lblTextColor
-
-    SetFormFonts Me
 
 End Sub
