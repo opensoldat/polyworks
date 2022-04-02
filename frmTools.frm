@@ -327,6 +327,8 @@ Private formHeight As Integer
 Private hotKeys(0 To 13) As Byte
 
 
+' functions
+
 Public Function GetHotKey(ByVal Index As Byte) As Byte
 
     GetHotKey = hotKeys(Index)
@@ -347,6 +349,41 @@ Public Sub InitTool(value As Byte)
 
 End Sub
 
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_tools.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    For i = picTools.LBound To picTools.UBound
+        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+        picTools(i).Refresh
+        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr$(MapVirtualKey(hotKeys(i), 1)) & ")"
+    Next
+    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
+    picTools(curTool).Refresh
+
+End Sub
+
+
+' events
+
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
     MsgBox KeyCode
@@ -366,18 +403,6 @@ Private Sub Form_Load()
 ErrorHandler:
 
     MsgBox Error$ & vbNewLine & "Error loading Tools form"
-
-End Sub
-
-Public Sub SetForm()
-
-    Me.Left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
 
 End Sub
 
@@ -464,25 +489,5 @@ End Sub
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_tools.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    For i = picTools.LBound To picTools.UBound
-        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
-        picTools(i).Refresh
-        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr$(MapVirtualKey(hotKeys(i), 1)) & ")"
-    Next
-    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
-    picTools(curTool).Refresh
 
 End Sub
