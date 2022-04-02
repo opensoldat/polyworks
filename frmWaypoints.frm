@@ -529,7 +529,7 @@ Private waypointKeys(0 To 4) As Byte
 Private Const COLLAPSED_HEIGHT = 19
 
 
-' functions
+' functions - public
 
 Public Function GetWaypointKey(ByVal Index As Byte) As Byte
 
@@ -646,7 +646,58 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, waypointType(Index), BUTTON_DOWN
+
+End Sub
+
+Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    If Not frmSoldatMapEditor.SetWayType(Index, Not waypointType(Index)) Then Exit Sub
+
+    waypointType(Index) = Not waypointType(Index)
+    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, waypointType(Index), BUTTON_UP
+
+    If Index = 0 Then
+        waypointType(1) = False
+        MouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    ElseIf Index = 1 Then
+        waypointType(0) = False
+        MouseEvent2 picType(0), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    ElseIf Index = 2 Then
+        waypointType(3) = False
+        MouseEvent2 picType(3), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    ElseIf Index = 3 Then
+        waypointType(2) = False
+        MouseEvent2 picType(2), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    End If
+
+End Sub
+
+Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    Dim i As Integer
+
+    showPaths = Index
+
+    For i = picShow.LBound To picShow.UBound
+        If i <> Index Then
+            MouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
+        End If
+    Next
+
+    frmSoldatMapEditor.SetShowPaths
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_Load()
 
@@ -774,38 +825,9 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
 
 End Sub
 
-Public Sub picType_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, waypointType(Index), BUTTON_DOWN
-
-End Sub
-
 Private Sub picType_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picType(Index), X, Y, BUTTON_SMALL, waypointType(Index), BUTTON_MOVE, lblType(Index).Width + 16
-
-End Sub
-
-Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    If Not frmSoldatMapEditor.SetWayType(Index, Not waypointType(Index)) Then Exit Sub
-
-    waypointType(Index) = Not waypointType(Index)
-    MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, waypointType(Index), BUTTON_UP
-
-    If Index = 0 Then
-        waypointType(1) = False
-        MouseEvent2 picType(1), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    ElseIf Index = 1 Then
-        waypointType(0) = False
-        MouseEvent2 picType(0), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    ElseIf Index = 2 Then
-        waypointType(3) = False
-        MouseEvent2 picType(3), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    ElseIf Index = 3 Then
-        waypointType(2) = False
-        MouseEvent2 picType(2), 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    End If
 
 End Sub
 
@@ -818,21 +840,5 @@ End Sub
 Private Sub picShow_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picShow(Index), X, Y, BUTTON_SMALL, (Index = showPaths), BUTTON_MOVE, lblShow(Index).Width + 16
-
-End Sub
-
-Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    Dim i As Integer
-
-    showPaths = Index
-
-    For i = picShow.LBound To picShow.UBound
-        If i <> Index Then
-            MouseEvent2 picShow(i), X, Y, BUTTON_SMALL, (i = showPaths), BUTTON_UP
-        End If
-    Next
-
-    frmSoldatMapEditor.SetShowPaths
 
 End Sub

@@ -36,6 +36,17 @@ Option Explicit
 ' vars - private
 
 
+' functions - public
+
+
+' functions - private
+
+
+' events - public
+
+
+' events - private
+
 Private Sub Form_GotFocus()
 
     If frmSoldatMapEditor.Visible Then

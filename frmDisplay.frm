@@ -532,7 +532,7 @@ Private layerKeys(0 To 7) As Byte
 Private formHeight As Integer
 
 
-' functions
+' functions - public
 
 Public Function GetLayerKey(ByVal Index As Byte) As Byte
 
@@ -603,7 +603,27 @@ Public Sub SetLayer(Index As Integer, value As Boolean)
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
+
+End Sub
+
+Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    layers(Index) = Not layers(Index)
+    frmSoldatMapEditor.SetDispOptions Index, layers(Index)
+    MouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_GotFocus()
 
@@ -635,26 +655,11 @@ Private Sub lblLayer_MouseMove(Index As Integer, Button As Integer, Shift As Int
 
 End Sub
 
-Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
-
-End Sub
-
 Private Sub picLayer_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
 
 End Sub
-
-Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    layers(Index) = Not layers(Index)
-    frmSoldatMapEditor.SetDispOptions Index, layers(Index)
-    MouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
-
-End Sub
-
 
 Private Sub picTitle_DblClick()
 

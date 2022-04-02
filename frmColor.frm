@@ -666,7 +666,7 @@ Private mNonModal As Boolean
 Private mLastTool As Byte
 
 
-' functions
+' functions - public
 
 Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
@@ -720,42 +720,6 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
 
 End Sub
 
-Private Sub HideColor(apply As Boolean)
-
-    On Error GoTo ErrorHandler
-
-    If mNonModal Then
-        If apply Then
-            frmPalette.SetValues red, green, blue
-            frmPalette.CheckPalette red, green, blue
-        End If
-
-        mNonModal = False
-
-        frmSoldatMapEditor.picMenuBar.Enabled = True
-
-        frmTools.Enabled = True
-        frmPalette.Enabled = True
-        frmScenery.Enabled = True
-        frmInfo.Enabled = True
-        frmWaypoints.Enabled = True
-        frmDisplay.picTitle.Enabled = True
-
-        frmSoldatMapEditor.SetCurrentTool mLastTool
-        mLastTool = 0
-    End If
-
-    Me.Hide
-    frmSoldatMapEditor.RegainFocus
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$
-
-End Sub
-
 Public Sub SetColors()
 
     On Error Resume Next
@@ -804,6 +768,45 @@ Public Sub SetColors()
     txtHexCode.ForeColor = lblTextColor
 
     SetFormFonts Me
+
+End Sub
+
+
+' functions - private
+
+Private Sub HideColor(apply As Boolean)
+
+    On Error GoTo ErrorHandler
+
+    If mNonModal Then
+        If apply Then
+            frmPalette.SetValues red, green, blue
+            frmPalette.CheckPalette red, green, blue
+        End If
+
+        mNonModal = False
+
+        frmSoldatMapEditor.picMenuBar.Enabled = True
+
+        frmTools.Enabled = True
+        frmPalette.Enabled = True
+        frmScenery.Enabled = True
+        frmInfo.Enabled = True
+        frmWaypoints.Enabled = True
+        frmDisplay.picTitle.Enabled = True
+
+        frmSoldatMapEditor.SetCurrentTool mLastTool
+        mLastTool = 0
+    End If
+
+    Me.Hide
+    frmSoldatMapEditor.RegainFocus
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$
 
 End Sub
 
@@ -1054,7 +1057,10 @@ ErrorHandler:
 End Sub
 
 
-' events
+' events - public
+
+
+' events - private
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
 

@@ -527,6 +527,8 @@ Option Explicit
 ' vars - private
 
 
+' functions - public
+
 Public Sub LoadTextures()
 
     On Error GoTo ErrorHandler
@@ -663,7 +665,44 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub Form_Load()
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+    LoadTextures2
+    frmSoldatMapEditor.GetOptions
+    GetJets
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox Error$ & vbNewLine & "Error loading Map form"
+
+End Sub
+
+Public Sub mnuRefresh_Click()
+
+    Dim i As Integer
+
+    LoadTextures2
+
+    For i = 0 To cboTexture.ListCount - 1
+        If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
+            cboTexture.ListIndex = i
+        End If
+    Next
+
+End Sub
+
+
+' events - private
 
 Private Sub cboJet_Click()
 
@@ -720,23 +759,6 @@ Private Sub GetJets()
 
 End Sub
 
-Public Sub Form_Load()
-
-    On Error GoTo ErrorHandler
-
-    Me.SetColors
-    LoadTextures2
-    frmSoldatMapEditor.GetOptions
-    GetJets
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$ & vbNewLine & "Error loading Map form"
-
-End Sub
-
 Private Sub cboTexture_Click()
 
     On Error GoTo ErrorHandler
@@ -756,20 +778,6 @@ Private Sub cboTexture_Click()
 ErrorHandler:
 
     MsgBox "Error showing texture" & vbNewLine & Error$
-
-End Sub
-
-Public Sub mnuRefresh_Click()
-
-    Dim i As Integer
-
-    LoadTextures2
-
-    For i = 0 To cboTexture.ListCount - 1
-        If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
-            cboTexture.ListIndex = i
-        End If
-    Next
 
 End Sub
 

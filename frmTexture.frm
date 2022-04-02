@@ -103,7 +103,7 @@ Public y2tex As Single
 Private formHeight As Integer
 
 
-' functions
+' functions - public
 
 Public Sub SetForm()
 
@@ -204,7 +204,13 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+
+' events - private
 
 Private Sub Form_Load()
 

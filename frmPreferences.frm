@@ -1978,7 +1978,111 @@ Private formMaxZoom As Single
 Private formResetZoom As Single
 
 
-' functions
+' functions - public
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_preferences.bmp")
+    picHotkeys.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tools.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    MouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
+
+
+    Me.BackColor = bgColor
+
+    For Each c In lblPref
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    lblDisplay.BackColor = bgColor
+    lblDisplay.ForeColor = lblTextColor
+    lblHotkeys.BackColor = bgColor
+    lblHotkeys.ForeColor = lblTextColor
+    lblDirs.BackColor = bgColor
+    lblDirs.ForeColor = lblTextColor
+    lblWayKeys.BackColor = bgColor
+    lblWayKeys.ForeColor = lblTextColor
+    lblBlending.BackColor = bgColor
+    lblBlending.ForeColor = lblTextColor
+    lblOther.BackColor = bgColor
+    lblOther.ForeColor = lblTextColor
+
+    For Each c In txtHotkey
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In txtWayptKey
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+    
+    For Each c In fraPref
+        c.BorderColor = frameColor
+    Next
+
+    txtWidth.BackColor = txtBackColor
+    txtWidth.ForeColor = txtTextColor
+    txtHeight.BackColor = txtBackColor
+    txtHeight.ForeColor = txtTextColor
+
+    txtSpacing.BackColor = txtBackColor
+    txtSpacing.ForeColor = txtTextColor
+    txtDivisions.BackColor = txtBackColor
+    txtDivisions.ForeColor = txtTextColor
+    txtOpacity1.BackColor = txtBackColor
+    txtOpacity1.ForeColor = txtTextColor
+    txtOpacity2.BackColor = txtBackColor
+    txtOpacity2.ForeColor = txtTextColor
+
+    txtMinZoom.BackColor = txtBackColor
+    txtMinZoom.ForeColor = txtTextColor
+    txtMaxZoom.BackColor = txtBackColor
+    txtMaxZoom.ForeColor = txtTextColor
+    txtResetZoom.BackColor = txtBackColor
+    txtResetZoom.ForeColor = txtTextColor
+
+    txtDir.BackColor = txtBackColor
+    txtDir.ForeColor = txtTextColor
+    txtUncomp.BackColor = txtBackColor
+    txtUncomp.ForeColor = txtTextColor
+    txtPrefabs.BackColor = txtBackColor
+    txtPrefabs.ForeColor = txtTextColor
+
+    cboWireSrc.BackColor = txtBackColor
+    cboWireSrc.ForeColor = txtTextColor
+    cboWireDest.BackColor = txtBackColor
+    cboWireDest.ForeColor = txtTextColor
+    cboPolySrc.BackColor = txtBackColor
+    cboPolySrc.ForeColor = txtTextColor
+    cboPolyDest.BackColor = txtBackColor
+    cboPolyDest.ForeColor = txtTextColor
+
+    cboSkin.BackColor = txtBackColor
+    cboSkin.ForeColor = txtTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' functions - private
 
 Private Function applyPreferences() As Boolean
 
@@ -2117,109 +2221,11 @@ ErrorHandler:
 
 End Function
 
-Public Sub SetColors()
 
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
+' events - public
 
 
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_preferences.bmp")
-    picHotkeys.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tools.bmp")
-
-    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    MouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
-    MouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
-
-
-    Me.BackColor = bgColor
-
-    For Each c In lblPref
-        c.BackColor = lblBackColor
-        c.ForeColor = lblTextColor
-    Next
-
-    lblDisplay.BackColor = bgColor
-    lblDisplay.ForeColor = lblTextColor
-    lblHotkeys.BackColor = bgColor
-    lblHotkeys.ForeColor = lblTextColor
-    lblDirs.BackColor = bgColor
-    lblDirs.ForeColor = lblTextColor
-    lblWayKeys.BackColor = bgColor
-    lblWayKeys.ForeColor = lblTextColor
-    lblBlending.BackColor = bgColor
-    lblBlending.ForeColor = lblTextColor
-    lblOther.BackColor = bgColor
-    lblOther.ForeColor = lblTextColor
-
-    For Each c In txtHotkey
-        c.BackColor = bgColor
-        c.ForeColor = lblTextColor
-    Next
-
-    For Each c In txtWayptKey
-        c.BackColor = bgColor
-        c.ForeColor = lblTextColor
-    Next
-    
-    For Each c In fraPref
-        c.BorderColor = frameColor
-    Next
-
-    txtWidth.BackColor = txtBackColor
-    txtWidth.ForeColor = txtTextColor
-    txtHeight.BackColor = txtBackColor
-    txtHeight.ForeColor = txtTextColor
-
-    txtSpacing.BackColor = txtBackColor
-    txtSpacing.ForeColor = txtTextColor
-    txtDivisions.BackColor = txtBackColor
-    txtDivisions.ForeColor = txtTextColor
-    txtOpacity1.BackColor = txtBackColor
-    txtOpacity1.ForeColor = txtTextColor
-    txtOpacity2.BackColor = txtBackColor
-    txtOpacity2.ForeColor = txtTextColor
-
-    txtMinZoom.BackColor = txtBackColor
-    txtMinZoom.ForeColor = txtTextColor
-    txtMaxZoom.BackColor = txtBackColor
-    txtMaxZoom.ForeColor = txtTextColor
-    txtResetZoom.BackColor = txtBackColor
-    txtResetZoom.ForeColor = txtTextColor
-
-    txtDir.BackColor = txtBackColor
-    txtDir.ForeColor = txtTextColor
-    txtUncomp.BackColor = txtBackColor
-    txtUncomp.ForeColor = txtTextColor
-    txtPrefabs.BackColor = txtBackColor
-    txtPrefabs.ForeColor = txtTextColor
-
-    cboWireSrc.BackColor = txtBackColor
-    cboWireSrc.ForeColor = txtTextColor
-    cboWireDest.BackColor = txtBackColor
-    cboWireDest.ForeColor = txtTextColor
-    cboPolySrc.BackColor = txtBackColor
-    cboPolySrc.ForeColor = txtTextColor
-    cboPolyDest.BackColor = txtBackColor
-    cboPolyDest.ForeColor = txtTextColor
-
-    cboSkin.BackColor = txtBackColor
-    cboSkin.ForeColor = txtTextColor
-
-    SetFormFonts Me
-
-End Sub
-
-
-' events
+' events - private
 
 Private Sub picHide_Click()
 

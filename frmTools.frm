@@ -334,7 +334,7 @@ Private formHeight As Integer
 Private hotKeys(0 To 13) As Byte
 
 
-' functions
+' functions - public
 
 Public Function GetHotKey(ByVal Index As Byte) As Byte
 
@@ -389,7 +389,29 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    Dim i As Integer
+
+    If curTool <> Index Then
+        For i = picTools.LBound To picTools.UBound
+            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+            picTools(i).Refresh
+        Next
+        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
+        picTools(Index).Refresh
+    End If
+    curTool = Index
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
@@ -439,22 +461,6 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
-
-End Sub
-
-Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    Dim i As Integer
-
-    If curTool <> Index Then
-        For i = picTools.LBound To picTools.UBound
-            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
-            picTools(i).Refresh
-        Next
-        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
-        picTools(Index).Refresh
-    End If
-    curTool = Index
 
 End Sub
 

@@ -571,7 +571,7 @@ Private yVal As Integer
 Private tempVal As Integer
 
 
-' functions
+' functions - public
 
 Public Function GetPalColor(X As Integer, Y As Integer) As Long  ' unused?
 
@@ -812,7 +812,19 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub picColorMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picColorMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
+
+End Sub
+
+
+' events - private
 
 Private Sub cmdDefault_Click()
 
@@ -1078,12 +1090,6 @@ End Sub
 Private Sub cboBlendMode_Click()
 
     frmSoldatMapEditor.SetBlendMode cboBlendMode.ListIndex
-
-End Sub
-
-Public Sub picColorMode_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picColorMode(Index), X, Y, BUTTON_SMALL, (Index = colorMode), BUTTON_DOWN
 
 End Sub
 

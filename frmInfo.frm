@@ -1722,7 +1722,7 @@ Private tempVal As Single
 Private applyChange As Boolean
 
 
-' functions
+' functions - public
 
 Public Sub SetForm()
 
@@ -1809,7 +1809,30 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub mnuProp_Click(Index As Integer)
+
+    Dim i As Integer
+
+    For i = mnuProp.LBound To mnuProp.UBound
+        mnuProp(i).Checked = False
+    Next
+    For i = picProp.LBound To picProp.UBound
+        picProp(i).Visible = False
+    Next
+
+    mnuProp(Index).Checked = True
+
+    picProp(Index).Visible = True
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_Load()
 
@@ -2084,23 +2107,6 @@ Private Sub cmdDefault_Click()
     applyChange = True
     cmdDefault.SetFocus
     frmSoldatMapEditor.RegainFocus
-
-End Sub
-
-Public Sub mnuProp_Click(Index As Integer)
-
-    Dim i As Integer
-
-    For i = mnuProp.LBound To mnuProp.UBound
-        mnuProp(i).Checked = False
-    Next
-    For i = picProp.LBound To picProp.UBound
-        picProp(i).Visible = False
-    Next
-
-    mnuProp(Index).Checked = True
-
-    picProp(Index).Visible = True
 
 End Sub
 
