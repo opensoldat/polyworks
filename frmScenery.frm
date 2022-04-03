@@ -332,12 +332,17 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' scenery dialog
+
+
 ' Fix vb6 ide casing changes
 #If False Then
     Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
     'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
 
+
+' vars - public
 
 Public xPos As Integer
 Public yPos As Integer
@@ -349,12 +354,14 @@ Public scaleScenery As Boolean
 Public notClicked As Boolean
 
 
+' vars - private
+
 Private formHeight As Integer
 Private checkVal As Boolean
 Private selNode As Node
 
 
-' functions
+' functions - public
 
 Public Sub ListScenery()
 
@@ -486,7 +493,52 @@ Public Sub SetColors()
 End Sub
 
 
-' events
+' functions - private
+
+
+' events - public
+
+Public Sub lstScenery_Click()
+
+    Dim token As Long
+
+    On Error GoTo ErrorHandler
+
+    If lstScenery.List(lstScenery.ListIndex) = "" Then
+        lstScenery.ListIndex = -1
+        Exit Sub
+    End If
+
+    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
+        token = InitGDIPlus
+        picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
+        FreeGDIPlus token
+        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
+    Else
+        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
+        picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
+        frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
+    End If
+
+    lstScenery.ToolTipText = lstScenery.List(lstScenery.ListIndex)
+    frmSoldatMapEditor.tvwScenery.Nodes(lstScenery.List(lstScenery.ListIndex)).selected = True
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error clicking scenery" & vbNewLine & Error$
+
+End Sub
+
+Public Sub picLevel_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_DOWN
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_Load()
 
@@ -522,39 +574,6 @@ End Sub
 Private Sub lblScale_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     picScale_MouseMove 1, 0, 0, 0
-
-End Sub
-
-Public Sub lstScenery_Click()
-
-    Dim token As Long
-
-    On Error GoTo ErrorHandler
-
-    If lstScenery.List(lstScenery.ListIndex) = "" Then
-        lstScenery.ListIndex = -1
-        Exit Sub
-    End If
-
-    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
-        token = InitGDIPlus
-        picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
-        FreeGDIPlus token
-        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
-    Else
-        frmSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
-        picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
-        frmSoldatMapEditor.tvwScenery.SelectedItem = Nothing
-    End If
-
-    lstScenery.ToolTipText = lstScenery.List(lstScenery.ListIndex)
-    frmSoldatMapEditor.tvwScenery.Nodes(lstScenery.List(lstScenery.ListIndex)).selected = True
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "Error clicking scenery" & vbNewLine & Error$
 
 End Sub
 
@@ -698,12 +717,6 @@ End Sub
 Private Sub picScale_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     scaleScenery = Not scaleScenery
-
-End Sub
-
-Public Sub picLevel_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picLevel(Index), X, Y, BUTTON_SMALL, (Index = level), BUTTON_DOWN
 
 End Sub
 
