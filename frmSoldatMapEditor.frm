@@ -1286,12 +1286,20 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' main dialog
+
+
 ' Fix vb6 ide casing changes
 #If False Then
     Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor, bottom
     'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
 
+
+Implements DirectXEvent8
+
+
+' vars - public
 
 Public backgroundColor As Long
 Public pointColor As Long
@@ -1331,6 +1339,32 @@ Public shiftDown As Boolean
 Public ctrlDown As Boolean
 Public altDown As Boolean
 
+Public opacity As Single
+Public blendMode As Integer
+
+Public snapRadius As Integer
+Public colorRadius As Integer
+Public ohSnap As Boolean
+Public snapToGrid As Boolean
+Public fixedTexture As Boolean
+Public showBG As Boolean
+Public showPolys As Boolean
+Public showTexture As Boolean
+Public showWireframe As Boolean
+Public showPoints As Boolean
+Public showScenery As Boolean
+Public showObjects As Boolean
+Public showGrid As Boolean
+Public showWaypoints As Boolean
+Public showSketch As Boolean
+Public showLights As Boolean
+Public currentTool As Byte
+Public colorMode As Byte
+
+Public maxUndo As Integer
+
+
+' vars - private
 
 Private noRedraw As Boolean
 
@@ -1344,7 +1378,6 @@ Private DIState As DIKEYBOARDSTATE
 Private Const BUFFER_SIZE As Long = 10
 
 Private hEvent As Long
-Implements DirectXEvent8
 
 Private D3DX As D3DX8
 Private mapTexture As Direct3DTexture8
@@ -1456,9 +1489,6 @@ Private sslBack As Boolean
 Private sslMid As Boolean
 Private sslFront As Boolean
 
-Public opacity As Single
-Public blendMode As Integer
-
 Private scrollCoords(1 To 2) As D3DVECTOR2    ' coordinates for scrolling
 Private mouseCoords As D3DVECTOR2             ' coordinates of mouse
 Private moveCoords(1 To 2) As D3DVECTOR2      ' coordinates for moving vertices
@@ -1487,28 +1517,11 @@ Private currentScenery As String
 
 Private zoomFactor As Single
 Private pointRadius As Integer
-Public snapRadius As Integer
-Public colorRadius As Integer
-Public ohSnap As Boolean
-Public snapToGrid As Boolean
-Public fixedTexture As Boolean
-Public showBG As Boolean
-Public showPolys As Boolean
-Public showTexture As Boolean
-Public showWireframe As Boolean
-Public showPoints As Boolean
-Public showScenery As Boolean
-Public showObjects As Boolean
-Public showGrid As Boolean
-Public showWaypoints As Boolean
+
 Private showPath1 As Boolean
 Private showPath2 As Boolean
-Public showSketch As Boolean
-Public showLights As Boolean
-Public currentTool As Byte
 Private currentFunction As Byte
 Private particleSize As Single
-Public colorMode As Byte
 Private eraseCircle As Boolean
 Private eraseLines As Boolean
 
@@ -1534,7 +1547,6 @@ Private noneSelected As Boolean
 Private currentUndo As Integer
 Private numUndo As Integer
 Private numRedo As Integer
-Public maxUndo As Integer
 Private lastCompiled As String
 
 Private currentWaypoint As Integer
@@ -1554,6 +1566,14 @@ Private mPrevTop As Long
 
 Private Const QUICK_MOVE_DELTA = 90000
 
+Private Const SPI_GETWORKAREA = 48
+
+
+' external functions - public
+
+
+' external functions - private
+
 Private Declare Function MoveWindow Lib "user32" ( _
     ByVal hWnd As Long, _
     ByVal X As Long, _
@@ -1562,11 +1582,16 @@ Private Declare Function MoveWindow Lib "user32" ( _
     ByVal nHeight As Long, _
     ByVal bRepaint As Long) As Long
 
-Private Const SPI_GETWORKAREA = 48
 Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParametersInfoA" ( _
     ByVal uAction As Long, _
     ByVal uParam As Long, lpvParam As Any, _
     ByVal fuWinIni As Long)
+
+
+' functions - public
+
+
+' functions - private
 
 
 ' functions
@@ -10430,6 +10455,12 @@ Private Sub SetTextureCoords(X As Single, Y As Single, Z As Single, tu As Single
     ' call this routine on them
 
 End Sub
+
+
+' events - public
+
+
+' events - private
 
 
 ' events
