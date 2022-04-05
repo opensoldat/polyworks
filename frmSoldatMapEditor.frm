@@ -10457,11 +10457,101 @@ End Sub
 
 ' events - public
 
+Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
+
+    Dim i As Integer
+    Dim isInList As Boolean
+    Dim token As Long
+    Dim tempNode As Node
+
+    On Error GoTo ErrorHandler
+
+    ' if there is no parent
+    If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
+
+    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
+        frmScenery.picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
+        Exit Sub
+    End If
+
+    If tvwScenery.SelectedItem.Parent.Key = "In Use" Then
+        currentScenery = tvwScenery.SelectedItem.Text
+
+        token = InitGDIPlus
+        frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
+        FreeGDIPlus token
+
+        Set tempNode = tvwScenery.Nodes.Item("In Use").Child
+
+        For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
+            If currentScenery = tempNode.Text Then
+                frmSoldatMapEditor.SetCurrentScenery i
+                frmScenery.lstScenery.ListIndex = i - 1
+            End If
+            Set tempNode = tempNode.Next
+        Next
+    Else
+        If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
+
+            currentScenery = tvwScenery.SelectedItem.Text
+
+            token = InitGDIPlus
+            frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
+            FreeGDIPlus token
+
+            ' check if already in list
+            Set tempNode = tvwScenery.Nodes.Item("In Use").Child
+
+            For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
+                If currentScenery = tempNode.Text Then
+                    isInList = True
+                    frmSoldatMapEditor.SetCurrentScenery i
+                End If
+                Set tempNode = tempNode.Next
+            Next
+
+            If Not isInList Then
+                frmSoldatMapEditor.SetCurrentTexture currentScenery
+            End If
+        End If
+
+        frmScenery.lstScenery.ListIndex = -1
+    End If
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error clicking scenery tree" & vbNewLine & Error$
+
+End Sub
+
+Public Sub Form_Paint()
+
+    Render
+
+End Sub
+
+Public Sub picMinimize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+
+    If mnuDisplay.Checked Then frmDisplay.Hide
+    If mnuWaypoints.Checked Then frmWaypoints.Hide
+    If mnuTools.Checked Then frmTools.Hide
+    If mnuPalette.Checked Then frmPalette.Hide
+    If mnuScenery.Checked Then frmScenery.Hide
+    If mnuInfo.Checked Then frmInfo.Hide
+    If mnuTexture.Checked Then frmTexture.Hide
+
+    Me.Hide
+
+    frmTaskBar.WindowState = vbMinimized
+
+End Sub
+
 
 ' events - private
-
-
-' events
 
 Private Sub Form_Load()
 
@@ -12542,75 +12632,6 @@ Private Sub mnuScenRemove_Click()
 
 End Sub
 
-Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
-
-    Dim i As Integer
-    Dim isInList As Boolean
-    Dim token As Long
-    Dim tempNode As Node
-
-    On Error GoTo ErrorHandler
-
-    ' if there is no parent
-    If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
-
-    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
-        frmScenery.picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
-        Exit Sub
-    End If
-
-    If tvwScenery.SelectedItem.Parent.Key = "In Use" Then
-        currentScenery = tvwScenery.SelectedItem.Text
-
-        token = InitGDIPlus
-        frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
-        FreeGDIPlus token
-
-        Set tempNode = tvwScenery.Nodes.Item("In Use").Child
-
-        For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
-            If currentScenery = tempNode.Text Then
-                frmSoldatMapEditor.SetCurrentScenery i
-                frmScenery.lstScenery.ListIndex = i - 1
-            End If
-            Set tempNode = tempNode.Next
-        Next
-    Else
-        If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
-
-            currentScenery = tvwScenery.SelectedItem.Text
-
-            token = InitGDIPlus
-            frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
-            FreeGDIPlus token
-
-            ' check if already in list
-            Set tempNode = tvwScenery.Nodes.Item("In Use").Child
-
-            For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
-                If currentScenery = tempNode.Text Then
-                    isInList = True
-                    frmSoldatMapEditor.SetCurrentScenery i
-                End If
-                Set tempNode = tempNode.Next
-            Next
-
-            If Not isInList Then
-                frmSoldatMapEditor.SetCurrentTexture currentScenery
-            End If
-        End If
-
-        frmScenery.lstScenery.ListIndex = -1
-    End If
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "Error clicking scenery tree" & vbNewLine & Error$
-
-End Sub
-
 Private Sub lblZoom_Click()
     txtZoom.Text = gResetZoom * 100 & "%"
     txtZoom_LostFocus
@@ -12684,12 +12705,6 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
 
         Me.MousePointer = prevMousePointer
     End If
-
-End Sub
-
-Public Sub Form_Paint()
-
-    Render
 
 End Sub
 
@@ -14529,24 +14544,6 @@ End Sub
 Private Sub picMinimize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-
-End Sub
-
-Public Sub picMinimize_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    MouseEvent2 picMinimize, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-    If mnuDisplay.Checked Then frmDisplay.Hide
-    If mnuWaypoints.Checked Then frmWaypoints.Hide
-    If mnuTools.Checked Then frmTools.Hide
-    If mnuPalette.Checked Then frmPalette.Hide
-    If mnuScenery.Checked Then frmScenery.Hide
-    If mnuInfo.Checked Then frmInfo.Hide
-    If mnuTexture.Checked Then frmTexture.Hide
-
-    Me.Hide
-
-    frmTaskBar.WindowState = vbMinimized
 
 End Sub
 
