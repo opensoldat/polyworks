@@ -1,24 +1,31 @@
 Attribute VB_Name = "modConfig"
 Option Explicit
 
+' loading and saving config files, workspaces, skins goes here
+
+
 ' Fix vb6 ide casing changes
 #If False Then
     Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
     'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
 
-' loading and saving config files, workspaces, skins goes here
 
+' vars - public
 
 Public gPolyColor As TColor
 
 Public gPolyTypeColors(0 To 25) As Long
 
 
+' vars - private
+
 Private Const DEFAULT_MAX_ZOOM As Single = 512
 Private Const DEFAULT_MIN_ZOOM As Single = 0.03125
 Private Const DEFAULT_RESET_ZOOM As Single = 1
 
+
+' functions - public
 
 Public Sub LoadSettings()
 
@@ -393,13 +400,6 @@ Public Sub SaveSettings()
 
 End Sub
 
-Private Function SetIdePath() As Boolean
-
-  appPath = appPath & "\pwinstall"
-  SetIdePath = True
-
-End Function
-
 Public Sub LoadWorkspace(Optional theFileName As String = "current.ini", Optional bSkipScenery As Boolean = False)
 
     On Error GoTo ErrorHandler
@@ -505,3 +505,12 @@ Public Sub SaveWindow(sectionName As String, window As Form, collapsed As Boolea
 
 End Sub
 
+
+' functions - private
+
+Private Function SetIdePath() As Boolean
+
+  appPath = appPath & "\pwinstall"
+  SetIdePath = True
+
+End Function

@@ -1,6 +1,9 @@
 Attribute VB_Name = "modUtils"
 Option Explicit
 
+' helper functions
+
+
 ' Fix vb6 ide casing changes
 #If False Then
     Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
@@ -14,6 +17,8 @@ Public Type TColor
     blue    As Byte
 End Type
 
+
+' functions - public
 
 Public Function GetRGB(DecValue As Long) As TColor
 

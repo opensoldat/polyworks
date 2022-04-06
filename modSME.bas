@@ -1,11 +1,17 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
+' misc stuff
+
+
 ' Fix vb6 ide casing changes
 #If False Then
     Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
     'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
+
+
+' vars - public
 
 Public Const PI As Single = 3.14159265358979  ' mmm... PI
 
@@ -79,6 +85,9 @@ Public Const HWND_NOTOPMOST = -2
 
 ' get pixel
 Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
+
+
+' vars - private
 
 ' browse
 Private Type BROWSEINFO
