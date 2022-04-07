@@ -7821,7 +7821,7 @@ Private Sub ColorPicker(X As Single, Y As Single)
             frmPalette.SetValues gPolyColor.red, gPolyColor.green, gPolyColor.blue
             frmPalette.CheckPalette gPolyColor.red, gPolyColor.green, gPolyColor.blue
         End If
-    ElseIf showScenery Then  ' no poly clrs absorbed, do scenery
+    ElseIf showScenery Then  ' no poly colors absorbed, do scenery
         For i = 1 To sceneryCount
             If PointInProp(X, Y, i) And vNum = 0 Then
                 vNum = i
@@ -13355,7 +13355,7 @@ Private Sub mnuSelColor_Click()
     Dim i As Integer
     Dim j As Integer
     Dim addPoly As Byte
-    Dim clrVal As TColor
+    Dim colorVal As TColor
 
     numSelectedPolys = 0
     ReDim selectedPolys(0)
@@ -13363,8 +13363,8 @@ Private Sub mnuSelColor_Click()
     For i = 1 To mPolyCount
         For j = 1 To 3
             vertexList(i).vertex(j) = 0
-            clrVal = GetRGB(Polys(i).vertex(j).color)
-            If clrVal.red = gPolyColor.red And clrVal.green = gPolyColor.green And clrVal.blue = gPolyColor.blue Then
+            colorVal = GetRGB(Polys(i).vertex(j).color)
+            If colorVal.red = gPolyColor.red And colorVal.green = gPolyColor.green And colorVal.blue = gPolyColor.blue Then
                 addPoly = 1
                 vertexList(i).vertex(j) = 1
             End If
@@ -13770,8 +13770,8 @@ Private Sub mnuSplit_Click()
     Dim j As Integer
     Dim Left As Byte
     Dim Right As Byte
-    Dim clr1 As TColor
-    Dim clr2 As TColor
+    Dim color1 As TColor
+    Dim color2 As TColor
     Dim alpha1 As Byte
     Dim alpha2 As Byte
     Dim newPolys As Integer
@@ -13832,19 +13832,19 @@ Private Sub mnuSplit_Click()
                 vertexList(mPolyCount).color(Left) = vertexList(selectedPolys(i)).color(Left)
 
                 ' colors
-                clr1 = vertexList(selectedPolys(i)).color(Right)
-                clr2 = vertexList(mPolyCount).color(Left)
-                vertexList(mPolyCount).color(Right).red = clr1.red * 0.5 + clr2.red * 0.5
-                vertexList(mPolyCount).color(Right).green = clr1.green * 0.5 + clr2.green * 0.5
-                vertexList(mPolyCount).color(Right).blue = clr1.blue * 0.5 + clr2.blue * 0.5
+                color1 = vertexList(selectedPolys(i)).color(Right)
+                color2 = vertexList(mPolyCount).color(Left)
+                vertexList(mPolyCount).color(Right).red = color1.red * 0.5 + color2.red * 0.5
+                vertexList(mPolyCount).color(Right).green = color1.green * 0.5 + color2.green * 0.5
+                vertexList(mPolyCount).color(Right).blue = color1.blue * 0.5 + color2.blue * 0.5
 
                 vertexList(selectedPolys(i)).color(Left) = vertexList(mPolyCount).color(Right)
 
-                clr1 = GetRGB(Polys(selectedPolys(i)).vertex(Right).color)
-                clr2 = GetRGB(Polys(mPolyCount).vertex(Left).color)
+                color1 = GetRGB(Polys(selectedPolys(i)).vertex(Right).color)
+                color2 = GetRGB(Polys(mPolyCount).vertex(Left).color)
                 alpha1 = GetAlpha(Polys(selectedPolys(i)).vertex(Right).color)
                 alpha2 = GetAlpha(Polys(mPolyCount).vertex(Left).color)
-                Polys(mPolyCount).vertex(Right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((clr1.blue * 0.5 + clr2.blue * 0.5), (clr1.green * 0.5 + clr2.green * 0.5), (clr1.red * 0.5 + clr2.red * 0.5)))
+                Polys(mPolyCount).vertex(Right).color = ARGB((alpha1 * 0.5 + alpha2 * 0.5), RGB((color1.blue * 0.5 + color2.blue * 0.5), (color1.green * 0.5 + color2.green * 0.5), (color1.red * 0.5 + color2.red * 0.5)))
 
                 Polys(selectedPolys(i)).vertex(Left) = Polys(mPolyCount).vertex(Right)
 
