@@ -14324,14 +14324,14 @@ Private Sub mnuResetWindows_Click()
         frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
 
-        frmWaypoints.Left = Me.Left
-        frmWaypoints.Top = Me.Top + Me.Height - frmWaypoints.Height - 19 * Screen.TwipsPerPixelY
-
         frmScenery.Left = Me.Left + Me.Width - frmScenery.Width
         frmScenery.Top = frmDisplay.Top + frmDisplay.Height - Screen.TwipsPerPixelY
 
         frmInfo.Left = Me.Left
         frmInfo.Top = frmWaypoints.Top - frmInfo.Height + Screen.TwipsPerPixelY
+
+        frmWaypoints.Left = Me.Left
+        frmWaypoints.Top = Me.Top + Me.Height - frmWaypoints.Height - 19 * Screen.TwipsPerPixelY
 
         frmTexture.Top = frmPalette.Top
         frmTexture.Left = frmPalette.Left - frmTexture.Width + Screen.TwipsPerPixelX
