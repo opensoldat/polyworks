@@ -14279,17 +14279,29 @@ Private Sub mnuResetWindows_Click()
     Const FOOTER_HEIGHT = 20
 
     If Me.Tag = vbNormal Then
-        formWidth = Screen.Width / Screen.TwipsPerPixelX - (64 + 208 + 208)
+        Dim ScreenWidth&, ScreenHeight&, ScreenLeft&, ScreenTop&
+        Dim DesktopArea As RECT
+        Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
+
+        ScreenHeight = (DesktopArea.bottom - DesktopArea.Top)
+        ScreenWidth = (DesktopArea.Right - DesktopArea.Left)
+        ScreenLeft = DesktopArea.Left
+        ScreenTop = DesktopArea.Top
+
+        formWidth = ScreenWidth - (64 + 208 + 208)
         formHeight = formWidth * 3 / 4
-        formLeft = Screen.Width / Screen.TwipsPerPixelX / 2 - formWidth / 2 - 1
-        formTop = Screen.Height / Screen.TwipsPerPixelY / 2 - formHeight / 2 - 1
+        If formHeight > ScreenHeight Then
+          formHeight = ScreenHeight
+        End If
+        formLeft = ScreenLeft + (ScreenWidth - formWidth) / 2
+        formTop = ScreenTop + (ScreenHeight - formHeight) / 2
 
         tvwScenery.Height = formHeight - HEADER_HEIGHT - FOOTER_HEIGHT
 
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
-        Me.Left = Screen.Width / 2 - Me.Width / 2 - Screen.TwipsPerPixelX
-        Me.Top = Screen.Height / 2 - Me.Height / 2 - Screen.TwipsPerPixelY
+        Me.Left = formLeft * Screen.TwipsPerPixelX
+        Me.Top = formTop * Screen.TwipsPerPixelY
 
         picResize.Top = formHeight - picResize.Height
         picResize.Left = formWidth - picResize.Width
