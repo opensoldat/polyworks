@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.6.0.1
+Soldat Polyworks 1.7.0.0
 
 
-updated 2022-02-04
+updated 2022-04-09
 
 
 
