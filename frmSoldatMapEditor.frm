@@ -14275,6 +14275,8 @@ ErrorHandler:
 End Sub
 
 Private Sub mnuResetWindows_Click()
+    Const HEADER_HEIGHT = 41
+    Const FOOTER_HEIGHT = 20
 
     If Me.Tag = vbNormal Then
         formWidth = Screen.Width / Screen.TwipsPerPixelX - (64 + 208 + 208)
@@ -14282,7 +14284,7 @@ Private Sub mnuResetWindows_Click()
         formLeft = Screen.Width / Screen.TwipsPerPixelX / 2 - formWidth / 2 - 1
         formTop = Screen.Height / Screen.TwipsPerPixelY / 2 - formHeight / 2 - 1
 
-        tvwScenery.Height = formHeight - 41 - 20
+        tvwScenery.Height = formHeight - HEADER_HEIGHT - FOOTER_HEIGHT
 
         Me.Width = formWidth * Screen.TwipsPerPixelX
         Me.Height = formHeight * Screen.TwipsPerPixelY
@@ -14293,10 +14295,10 @@ Private Sub mnuResetWindows_Click()
         picResize.Left = formWidth - picResize.Width
 
         frmTools.Left = Me.Left - frmTools.Width + Screen.TwipsPerPixelX
-        frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
+        frmTools.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
 
         frmPalette.Left = Me.Left + Me.Width - Screen.TwipsPerPixelX
-        frmPalette.Top = Me.Top + 41 * Screen.TwipsPerPixelY
+        frmPalette.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
 
         frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
@@ -14316,10 +14318,10 @@ Private Sub mnuResetWindows_Click()
         ResetDevice
     Else
         frmTools.Left = Me.Left
-        frmTools.Top = Me.Top + 41 * Screen.TwipsPerPixelY
+        frmTools.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
 
         frmPalette.Left = Me.Left + Me.Width - frmPalette.Width
-        frmPalette.Top = Me.Top + 41 * Screen.TwipsPerPixelY
+        frmPalette.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
 
         frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
