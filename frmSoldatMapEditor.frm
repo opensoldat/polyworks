@@ -14296,24 +14296,31 @@ Private Sub mnuResetWindows_Click()
 
         frmTools.Left = Me.Left - frmTools.Width + Screen.TwipsPerPixelX
         frmTools.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
+        frmTools.Tag = "snap"
 
         frmPalette.Left = Me.Left + Me.Width - Screen.TwipsPerPixelX
         frmPalette.Top = Me.Top + HEADER_HEIGHT * Screen.TwipsPerPixelY
+        frmPalette.Tag = "snap"
 
         frmDisplay.Left = frmPalette.Left
         frmDisplay.Top = frmPalette.Top + frmPalette.Height - Screen.TwipsPerPixelY
+        frmDisplay.Tag = "snap"
 
         frmScenery.Left = Me.Left + Me.Width - Screen.TwipsPerPixelX
         frmScenery.Top = frmDisplay.Top + frmDisplay.Height - Screen.TwipsPerPixelY
+        frmScenery.Tag = "snap"
 
         frmInfo.Left = Me.Left - frmInfo.Width + Screen.TwipsPerPixelX
         frmInfo.Top = frmTools.Top + frmTools.Height - Screen.TwipsPerPixelY
+        frmInfo.Tag = "snap"
 
         frmWaypoints.Left = Me.Left - frmWaypoints.Width + Screen.TwipsPerPixelX
         frmWaypoints.Top = frmInfo.Top + frmInfo.Height - Screen.TwipsPerPixelY
+        frmWaypoints.Tag = "snap"
 
         frmTexture.Top = frmPalette.Top
         frmTexture.Left = frmPalette.Left - frmTexture.Width + Screen.TwipsPerPixelX
+        frmTexture.Tag = "snap"
 
         ResetDevice
     Else
