@@ -10454,6 +10454,28 @@ Private Sub SetTextureCoords(X As Single, Y As Single, Z As Single, tu As Single
 
 End Sub
 
+Private Function getLeftSnapDelta(mainForm As Form, snapForm As Form, initialWidth, currentWidth)
+
+    If snapForm.Left - mainForm.Left - initialWidth = -15 Or _
+        snapForm.Left + snapForm.Width - mainForm.Left - initialWidth = 0 Then
+        getLeftSnapDelta = (currentWidth * Screen.TwipsPerPixelX - initialWidth)
+    Else
+        getLeftSnapDelta = 0
+    End If
+
+End Function
+
+Private Function getTopSnapDelta(mainForm As Form, snapForm As Form, initialHeight, currentHeight)
+
+    If snapForm.Top - mainForm.Top - initialHeight = -15 Or _
+        snapForm.Top + snapForm.Height - mainForm.Top - initialHeight = 0 Then
+        getTopSnapDelta = (currentHeight * Screen.TwipsPerPixelY - initialHeight)
+    Else
+        getTopSnapDelta = 0
+    End If
+
+End Function
+
 
 ' events - public
 
@@ -12490,14 +12512,54 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
     mIsResizingWindow = False
 
     If Me.Tag = vbNormal Then
+        Dim deltaLeft As Long
+        Dim deltaTop As Long
+        
         formHeight = Me.Height / Screen.TwipsPerPixelY
         formWidth = Me.Width / Screen.TwipsPerPixelX
 
         picResize.Top = formHeight - picResize.Height
         picResize.Left = formWidth - picResize.Width
 
+        If Len(frmDisplay.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmDisplay, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmDisplay, mInitialWindowHeight, formHeight)
+            frmDisplay.Move (frmDisplay.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmInfo.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmInfo, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmInfo, mInitialWindowHeight, formHeight)
+            frmInfo.Move (frmInfo.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmPalette.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmPalette, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmPalette, mInitialWindowHeight, formHeight)
+            frmPalette.Move (frmPalette.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmScenery.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmScenery, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmScenery, mInitialWindowHeight, formHeight)
+            frmScenery.Move (frmScenery.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTexture.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmTexture, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmTexture, mInitialWindowHeight, formHeight)
+            frmTexture.Move (frmTexture.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTools.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmTools, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmTools, mInitialWindowHeight, formHeight)
+            frmTools.Move (frmTools.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmWaypoints.Tag) <> 0 Then
+            deltaLeft = getLeftSnapDelta(Me, frmWaypoints, mInitialWindowWidth, formWidth)
+            deltaTop = getTopSnapDelta(Me, frmWaypoints, mInitialWindowHeight, formHeight)
+            frmWaypoints.Move (frmWaypoints.Left + deltaLeft + (Me.Left - (formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + deltaTop + (Me.Top - (formTop * Screen.TwipsPerPixelY)))
+        End If
+
         picResize.Visible = True
         noRedraw = False
+
         If mInitialWindowWidth <> Me.Width Or mInitialWindowHeight <> Me.Height Then
             ResetDevice
         Else
