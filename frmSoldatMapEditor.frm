@@ -10582,7 +10582,7 @@ Private Sub Form_Load()
     Dim i As Integer
     Dim temp As String
     Dim err As String
-    
+
     Dim prevMousePointer As Integer
 
     initialized = False
@@ -12124,7 +12124,7 @@ Private Sub mnuRecent_Click(Index As Integer)
     Dim i As Integer
     Dim Result As VbMsgBoxResult
     Dim theFileName As String
-    
+
     Dim prevMousePointer As Integer
 
     theFileName = mnuRecent(Index).Caption
@@ -12514,7 +12514,7 @@ Private Sub picResize_MouseUp(Button As Integer, Shift As Integer, X As Single, 
     If Me.Tag = vbNormal Then
         Dim deltaLeft As Long
         Dim deltaTop As Long
-        
+
         formHeight = Me.Height / Screen.TwipsPerPixelY
         formWidth = Me.Width / Screen.TwipsPerPixelX
 
@@ -12736,7 +12736,7 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
 
     Dim Result As VbMsgBoxResult
     Dim temp As String
-    
+
     Dim prevMousePointer As Integer
 
     temp = Data.Files.Item(1)
@@ -12822,7 +12822,7 @@ Private Sub mnuOpen_Click()
     On Error GoTo ErrorHandler
 
     Dim Result As VbMsgBoxResult
-    
+
     Dim prevMousePointer As Integer
 
     If prompt Then
@@ -12884,7 +12884,7 @@ Private Sub mnuOpenCompiled_Click()
     Dim Result As VbMsgBoxResult
 
     Dim prevMousePointer As Integer
-    
+
 
     If prompt Then
         Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)

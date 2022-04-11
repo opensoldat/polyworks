@@ -2032,7 +2032,7 @@ Public Sub SetColors()
         c.BackColor = bgColor
         c.ForeColor = lblTextColor
     Next
-    
+
     For Each c In fraPref
         c.BorderColor = frameColor
     Next
@@ -2162,8 +2162,8 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.gridDivisions = divisions
     frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
     frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
-    
-    
+
+
     frmSoldatMapEditor.gMinZoom = formMinZoom / 100
     frmSoldatMapEditor.gMaxZoom = formMaxZoom / 100
     frmSoldatMapEditor.gResetZoom = formResetZoom / 100
@@ -2278,7 +2278,7 @@ Private Sub Form_Load()
     Dim i As Integer
 
     On Error GoTo ErrorHandler
-    
+
     Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts

@@ -77,7 +77,7 @@ Public Sub LoadSettings()
     Else
         frmSoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
     End If
-    
+
     If frmSoldatMapEditor.gMinZoom = frmSoldatMapEditor.gMaxZoom Then
         frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
         frmSoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
@@ -113,7 +113,7 @@ Public Sub LoadSettings()
     frmSoldatMapEditor.showGrid = LoadString("Display", "Grid")
     frmSoldatMapEditor.showLights = LoadString("Display", "Lights")
     frmSoldatMapEditor.showSketch = LoadString("Display", "Sketch")
-    
+
     frmSoldatMapEditor.mnuGrid.Checked = frmSoldatMapEditor.showGrid
 
     errVal = "3"
@@ -412,7 +412,7 @@ Public Sub LoadWorkspace(Optional theFileName As String = "current.ini", Optiona
 
     frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.formHeight - frmSoldatMapEditor.picResize.Height
     frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.formWidth - frmSoldatMapEditor.picResize.Width
-    
+
     If frmSoldatMapEditor.Tag = vbNormal Then
         frmSoldatMapEditor.Width = frmSoldatMapEditor.formWidth * Screen.TwipsPerPixelX
         frmSoldatMapEditor.Height = frmSoldatMapEditor.formHeight * Screen.TwipsPerPixelY
