@@ -2087,6 +2087,10 @@ End Sub
 Private Function applyPreferences() As Boolean
 
     Dim i As Integer
+    Dim mInitialWindowWidth As Long
+    Dim mInitialWindowHeight As Long
+    Dim deltaLeft As Long
+    Dim deltaTop As Long
 
     On Error GoTo ErrorHandler
 
@@ -2148,12 +2152,53 @@ Private Function applyPreferences() As Boolean
     frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
     frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
 
-    frmSoldatMapEditor.formWidth = formWidth
-    frmSoldatMapEditor.formHeight = formHeight
+    mInitialWindowWidth = frmSoldatMapEditor.Width
+    mInitialWindowHeight = frmSoldatMapEditor.Height
+
     If frmSoldatMapEditor.Tag = vbNormal Then
         frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
         frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
+
+        ' TODO: move to function
+        If Len(frmDisplay.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowHeight, formHeight)
+            frmDisplay.Move (frmDisplay.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmInfo.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowHeight, formHeight)
+            frmInfo.Move (frmInfo.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmPalette.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowHeight, formHeight)
+            frmPalette.Move (frmPalette.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmScenery.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowHeight, formHeight)
+            frmScenery.Move (frmScenery.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTexture.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowHeight, formHeight)
+            frmTexture.Move (frmTexture.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTools.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowHeight, formHeight)
+            frmTools.Move (frmTools.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmWaypoints.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowHeight, formHeight)
+            frmWaypoints.Move (frmWaypoints.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
     End If
+
+    frmSoldatMapEditor.formWidth = formWidth
+    frmSoldatMapEditor.formHeight = formHeight
 
     frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
     frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
@@ -2278,7 +2323,7 @@ Private Sub Form_Load()
     Dim i As Integer
 
     On Error GoTo ErrorHandler
-
+    
     Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts

@@ -5101,6 +5101,28 @@ Public Sub SetColors()
 
 End Sub
 
+Public Function getLeftSnapDelta(mainForm As Form, SnapForm As Form, initialWidth, currentWidth)
+
+    If SnapForm.Left - mainForm.Left - initialWidth = -15 Or _
+        SnapForm.Left + SnapForm.Width - mainForm.Left - initialWidth = 0 Then
+        getLeftSnapDelta = (currentWidth * Screen.TwipsPerPixelX - initialWidth)
+    Else
+        getLeftSnapDelta = 0
+    End If
+
+End Function
+
+Public Function getTopSnapDelta(mainForm As Form, SnapForm As Form, initialHeight, currentHeight)
+
+    If SnapForm.Top - mainForm.Top - initialHeight = -15 Or _
+        SnapForm.Top + SnapForm.Height - mainForm.Top - initialHeight = 0 Then
+        getTopSnapDelta = (currentHeight * Screen.TwipsPerPixelY - initialHeight)
+    Else
+        getTopSnapDelta = 0
+    End If
+
+End Function
+
 
 ' functions - private
 
@@ -10453,28 +10475,6 @@ Private Sub SetTextureCoords(X As Single, Y As Single, Z As Single, tu As Single
     ' call this routine on them
 
 End Sub
-
-Private Function getLeftSnapDelta(mainForm As Form, snapForm As Form, initialWidth, currentWidth)
-
-    If snapForm.Left - mainForm.Left - initialWidth = -15 Or _
-        snapForm.Left + snapForm.Width - mainForm.Left - initialWidth = 0 Then
-        getLeftSnapDelta = (currentWidth * Screen.TwipsPerPixelX - initialWidth)
-    Else
-        getLeftSnapDelta = 0
-    End If
-
-End Function
-
-Private Function getTopSnapDelta(mainForm As Form, snapForm As Form, initialHeight, currentHeight)
-
-    If snapForm.Top - mainForm.Top - initialHeight = -15 Or _
-        snapForm.Top + snapForm.Height - mainForm.Top - initialHeight = 0 Then
-        getTopSnapDelta = (currentHeight * Screen.TwipsPerPixelY - initialHeight)
-    Else
-        getTopSnapDelta = 0
-    End If
-
-End Function
 
 
 ' events - public
