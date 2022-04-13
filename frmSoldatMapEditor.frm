@@ -7263,6 +7263,7 @@ Private Sub Moving(ByVal X As Single, ByVal Y As Single)
     GetInfo
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Render
 
@@ -7337,6 +7338,7 @@ Private Sub Scaling(ByVal X As Single, ByVal Y As Single, constrained As Boolean
     frmInfo.txtScale(1).Text = Int(scaleDiff.Y * 1000) / 10
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Render
 
@@ -7587,6 +7589,7 @@ Private Sub Rotating(X As Single, Y As Single, constrained As Boolean)
     frmInfo.txtRotate.Text = Int(rDiff / PI * 180 * 100) / 100
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Render
 
@@ -7660,6 +7663,7 @@ Private Sub PrecisionColoring(X As Single, Y As Single)
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Render
 
@@ -7751,6 +7755,7 @@ Private Sub VertexColoring(X As Single, Y As Single)
 
     If colored Then
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
         Render
     End If
 
@@ -7799,6 +7804,7 @@ Private Sub EditDepthMap(X As Single, Y As Single)
 
     If edited Then
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
         Render
     End If
 
@@ -7972,6 +7978,7 @@ Private Sub StretchingTexture(X As Single, Y As Single)
         moveCoords(1).X = X
         moveCoords(1).Y = Y
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
     End If
 
     GetInfo
@@ -8167,6 +8174,7 @@ Private Sub CreatePolys(X As Single, Y As Single)
             creatingQuad = False
         End If
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
     End If
 
     Render
@@ -8324,6 +8332,7 @@ Private Sub CreateScenery(X As Single, Y As Single)
         numCorners = 0
 
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
         SaveUndo
     End If
 
@@ -9732,6 +9741,7 @@ Private Sub ColorFill(X As Single, Y As Single)
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Render
 
@@ -9802,6 +9812,7 @@ Private Sub DeletePolys()
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     If numSelectedScenery > 0 Then
         offset = 1
@@ -12845,6 +12856,7 @@ Private Sub mnuOpen_Click()
 
     If commonDialog.FileName <> "" Then
         prompt = False
+        lblFileName.Caption = currentFileName
         RecentFiles commonDialog.FileName
         mPolyCount = 0
         numSelectedPolys = 0
@@ -12906,6 +12918,7 @@ Private Sub mnuOpenCompiled_Click()
 
     If commonDialog.FileName <> "" Then
         prompt = False
+        lblFileName.Caption = currentFileName
         RecentFiles commonDialog.FileName
         mPolyCount = 0
         numSelectedPolys = 0
@@ -12949,7 +12962,7 @@ Private Sub mnuSave_Click()
     commonDialog.FileName = uncompDir & currentFileName
     commonDialog.InitDir = uncompDir
 
-    If lblFileName.Caption = "Untitled.pms" Then
+    If currentFileName = "Untitled.pms" Then
         commonDialog.ShowSave
 
         If commonDialog.FileName <> "" Then
@@ -12958,10 +12971,12 @@ Private Sub mnuSave_Click()
             DoEvents
             SaveFile commonDialog.FileName
             prompt = False
+            lblFileName.Caption = currentFileName
         End If
     Else
         SaveFile commonDialog.FileName
         prompt = False
+        lblFileName.Caption = currentFileName
     End If
 
     RegainFocus
@@ -12995,6 +13010,7 @@ Private Sub mnuSaveAs_Click()
         DoEvents
         SaveFile commonDialog.FileName
         prompt = False
+        lblFileName.Caption = currentFileName
     End If
 
     RegainFocus
@@ -13022,13 +13038,14 @@ Private Sub mnuCompile_Click()
     commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
     frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
 
-    If lblFileName.Caption = "Untitled.pms" Then
+    If currentFileName = "Untitled.pms" Then
         commonDialog.ShowSave
         DoEvents
 
         If commonDialog.FileName <> "" Then
             SaveAndCompile commonDialog.FileName
             prompt = False
+            lblFileName.Caption = currentFileName
 
             For i = 1 To Len(commonDialog.FileName)
                 If Mid(commonDialog.FileName, i, 1) = "\" Then
@@ -13040,6 +13057,7 @@ Private Sub mnuCompile_Click()
     Else
         SaveAndCompile commonDialog.FileName
         prompt = False
+        lblFileName.Caption = currentFileName
 
         For i = 1 To Len(commonDialog.FileName)
             If Mid(commonDialog.FileName, i, 1) = "\" Then
@@ -13079,6 +13097,7 @@ Private Sub mnuCompileAs_Click()
         DoEvents
         SaveAndCompile commonDialog.FileName
         prompt = False
+        lblFileName.Caption = currentFileName
 
         For i = 1 To Len(commonDialog.FileName)
             If Mid(commonDialog.FileName, i, 1) = "\" Then
@@ -13304,6 +13323,7 @@ Private Sub mnuDuplicate_Click()
     GetInfo
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
 
     Exit Sub
 
@@ -13495,6 +13515,7 @@ Private Sub mnuBringToFront_Click()
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
     SaveUndo
     Render
     GetInfo
@@ -13553,6 +13574,7 @@ Private Sub mnuSendToBack_Click()
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
     SaveUndo
     Render
     GetInfo
@@ -13617,6 +13639,7 @@ Private Sub mnuBringForward_Click()
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
     SaveUndo
     Render
     GetInfo
@@ -13681,6 +13704,7 @@ Private Sub mnuSendBackward_Click()
     End If
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
     SaveUndo
     Render
     GetInfo
@@ -13709,6 +13733,7 @@ Private Sub mnuFixTexture_Click()
             Next
         Next
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
     End If
 
     SaveUndo
@@ -13737,6 +13762,7 @@ Private Sub mnuUntexture_Click()
             Next
         Next
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
     End If
 
     SaveUndo
@@ -13770,6 +13796,7 @@ Private Sub mnuVisible_Click()
     Next
 
     prompt = True
+    lblFileName.Caption = currentFileName + "*"
     SaveUndo
     Render
 
@@ -13955,6 +13982,7 @@ Private Sub mnuJoinVertices_Click()
         Next
 
         prompt = True
+        lblFileName.Caption = currentFileName + "*"
     End If
 
     SaveUndo
