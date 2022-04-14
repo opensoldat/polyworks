@@ -30,9 +30,9 @@ Public Function GetRGB(DecValue As Long) As TColor
         hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
-    GetRGB.red = CLng("&H" + Mid(hexValue, 1, 2))
-    GetRGB.green = CLng("&H" + Mid(hexValue, 3, 2))
-    GetRGB.blue = CLng("&H" + Mid(hexValue, 5, 2))
+    GetRGB.red = CLng("&H" + Mid(hexValue, Len(hexValue) - 5, 2))
+    GetRGB.green = CLng("&H" + Mid(hexValue, Len(hexValue) - 3, 2))
+    GetRGB.blue = CLng("&H" + Mid(hexValue, Len(hexValue) - 1, 2))
 
 End Function
 
