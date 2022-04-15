@@ -940,7 +940,7 @@ Begin VB.Form frmPreferences
       Top             =   1680
       Width           =   255
    End
-   Begin VB.PictureBox picPointClr 
+   Begin VB.PictureBox picPointColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
@@ -2354,7 +2354,7 @@ Private Sub Form_Load()
     Next
 
     Me.picBackColor.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
-    Me.picPointClr.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
+    Me.picPointColor.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
     Me.picSelectionColor.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
     Me.picGridColor1.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
     Me.picGridColor2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
@@ -2413,11 +2413,11 @@ ErrorHandler:
 
 End Sub
 
-Private Sub picPointClr_Click()
+Private Sub picPointColor_Click()
 
     frmColor.InitColor pointColor.red, pointColor.green, pointColor.blue
     frmColor.Show 1
-    picPointClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    picPointColor.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
     pointColor.red = frmColor.red
     pointColor.green = frmColor.green
     pointColor.blue = frmColor.blue
