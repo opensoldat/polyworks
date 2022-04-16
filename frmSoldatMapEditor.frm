@@ -10695,6 +10695,7 @@ Private Sub Form_Load()
 
     LoadWorkspace
     InitGrid
+    InitGfx
 
     ' show windows
     frmTaskBar.Show
