@@ -196,3 +196,14 @@ Public Function DirExists(DirName As String) As Boolean
 ErrorHandler:
 
 End Function
+
+Public Function AscDef(charCodeStr As String, defaultCode As Integer) As Integer
+
+    On Error GoTo ErrorHandler
+    AscDef = Asc(charCodeStr)
+
+ErrorHandler:
+
+    AscDef = defaultCode
+
+End Function

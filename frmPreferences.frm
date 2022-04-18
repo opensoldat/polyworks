@@ -2382,7 +2382,7 @@ Private Sub Form_Load()
 
     For i = txtHotkey.LBound To txtHotkey.UBound
         txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.GetHotKey(i), 1))
-        txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
+        txtHotkey(i).Tag = AscDef(txtHotkey(i).Text, 0)
     Next
 
     For i = txtWayptKey.LBound To txtWayptKey.UBound
