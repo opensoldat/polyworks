@@ -344,7 +344,7 @@ End Function
 
 Public Sub SetHotKey(Index As Integer, ByVal value As Byte)
 
-    If value > 0 Then
+    If value > 0 And Index >= LBound(hotKeys) And Index <= UBound(hotKeys) Then
         hotKeys(Index) = value
     End If
 
