@@ -324,8 +324,8 @@ changes in v1.0
 
 Credits:
 
-programmed by Anna Zajaczkowski in Visual Basic 6
-updated version by Jacob Lindberg (Fryer)
+created by Anna Zajaczkowski in Visual Basic 6
+updated version by Jacob Lindberg (Fryer) and Gregor A. Cieslak (Shoozza)
 original PolyWorks concept and ideas by Michal Zajaczkowski
 graphics by Michal Zajaczkowski and Anna Zajaczkowski, based on Soldat style
 new icon by VirtualTT
