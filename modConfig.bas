@@ -69,7 +69,7 @@ Public Sub LoadSettings()
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gMinZoom = Val(strTemp) / 100
     Else
-       frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
+        frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
     End If
 
     strTemp = LoadString("Preferences", "MaxZoom")
@@ -84,9 +84,9 @@ Public Sub LoadSettings()
         frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
         frmSoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
     ElseIf frmSoldatMapEditor.gMinZoom > frmSoldatMapEditor.gMaxZoom Then
-       sgnTemp = frmSoldatMapEditor.gMaxZoom
-       frmSoldatMapEditor.gMaxZoom = frmSoldatMapEditor.gMinZoom
-       frmSoldatMapEditor.gMinZoom = sgnTemp
+        sgnTemp = frmSoldatMapEditor.gMaxZoom
+        frmSoldatMapEditor.gMaxZoom = frmSoldatMapEditor.gMinZoom
+        frmSoldatMapEditor.gMinZoom = sgnTemp
     End If
 
     strTemp = LoadString("Preferences", "ResetZoom")
@@ -513,7 +513,7 @@ End Sub
 
 Private Function SetIdePath() As Boolean
 
-  appPath = appPath & "\pwinstall"
-  SetIdePath = True
+    appPath = appPath & "\pwinstall"
+    SetIdePath = True
 
 End Function

@@ -221,18 +221,18 @@ Public Declare Function MapVirtualKey Lib "user32" Alias "MapVirtualKeyA" _
 
 ' GDI+
 Private Type GUID
-   Data1    As Long
-   Data2    As Integer
-   Data3    As Integer
-   Data4(7) As Byte
+    Data1    As Long
+    Data2    As Integer
+    Data3    As Integer
+    Data4(7) As Byte
 End Type
 
 Private Type PICTDESC
-   Size     As Long
-   Type     As Long
-   hBmp     As Long
-   hpal     As Long
-   Reserved As Long
+    Size     As Long
+    Type     As Long
+    hBmp     As Long
+    hpal     As Long
+    Reserved As Long
 End Type
 
 Private Type GdiplusStartupInput
@@ -373,9 +373,9 @@ Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
     token = InitGDIPlus
 
     If SaveImageAsPNG(src, dest) Then
-      GifToPng = -1
+        GifToPng = -1
     Else
-      GifToPng = 5
+        GifToPng = 5
     End If
 
 ErrorHandler:
@@ -564,7 +564,7 @@ Public Function SnapForm(currentForm As Form, otherForm As Form) As String
     If Abs(currentForm.Left - otherForm.Left) <= SNAP_DELTA_X Then
         If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
             currentForm.Left = otherForm.Left
-           SnapForm = "snap"
+            SnapForm = "snap"
         End If
     ' snap left to right
     ElseIf Abs(currentForm.Left - otherFormRight) <= SNAP_DELTA_X Then
