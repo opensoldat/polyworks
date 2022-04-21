@@ -2323,7 +2323,7 @@ Private Sub Form_Load()
     Dim i As Integer
 
     On Error GoTo ErrorHandler
-    
+
     Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts

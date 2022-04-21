@@ -5546,7 +5546,7 @@ Private Sub SaveUndo()
     theFileName = appPath & "\undo\undo" & currentUndo & ".pwn"
 
     If Dir(appPath & "\undo\", vbDirectory) = "" Then
-         MkDir (appPath & "\undo\")
+        MkDir (appPath & "\undo\")
     End If
 
     Open theFileName For Binary Access Write Lock Write As #1
@@ -12502,20 +12502,20 @@ End Sub
 Private Sub picResize_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Me.Tag = vbNormal And mIsResizingWindow = True Then
-       Dim newWidth As Long
-       Dim newHeight As Long
+        Dim newWidth As Long
+        Dim newHeight As Long
 
        newWidth = mInitialWindowWidth + (X - mMouseStartPosX) * Screen.TwipsPerPixelX
        newHeight = mInitialWindowHeight + (Y - mMouseStartPosY) * Screen.TwipsPerPixelY
 
-       If newHeight > MAINFORM_MIN_HEIGHT * Screen.TwipsPerPixelY Then
-           Me.Height = newHeight
-       End If
+        If newHeight > MAINFORM_MIN_HEIGHT * Screen.TwipsPerPixelY Then
+            Me.Height = newHeight
+        End If
 
-       If newWidth > MAINFORM_MIN_WIDTH * Screen.TwipsPerPixelX Then
-           Me.Width = newWidth
-       End If
-   End If
+        If newWidth > MAINFORM_MIN_WIDTH * Screen.TwipsPerPixelX Then
+            Me.Width = newWidth
+        End If
+    End If
 
 End Sub
 
@@ -14382,7 +14382,7 @@ Private Sub mnuResetWindows_Click()
         formWidth = ScreenWidth - (64 + 208 + 208)
         formHeight = formWidth * 3 / 4
         If formHeight > ScreenHeight Then
-          formHeight = ScreenHeight
+            formHeight = ScreenHeight
         End If
         formLeft = ScreenLeft + (ScreenWidth - formWidth) / 2
         formTop = ScreenTop + (ScreenHeight - formHeight) / 2
