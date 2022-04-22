@@ -1780,7 +1780,7 @@ Public Sub SetColors()
         c.BackColor = lblBackColor
         c.ForeColor = lblTextColor
     Next
-    
+
     txtVertexAlpha.BackColor = txtBackColor
     txtVertexAlpha.ForeColor = txtTextColor
     txtBounciness.BackColor = txtBackColor

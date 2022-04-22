@@ -137,6 +137,7 @@ Public Function Clamp(value As Single, min As Single, max As Single) As Single
 End Function
 
 Public Sub SetFormFonts(theForm As Form)
+
     Dim c As Control
 
     For Each c In theForm.Controls
@@ -146,6 +147,7 @@ Public Sub SetFormFonts(theForm As Form)
             c.Font.Name = font2
         End If
     Next
+
 End Sub
 
 Public Function GetAngle(ByVal xVal As Single, ByVal yVal As Single) As Single

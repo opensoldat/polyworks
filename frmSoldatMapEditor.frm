@@ -11816,10 +11816,12 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
 End Sub
 
 Private Sub lblMousePosition_Click()
+
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
     formLeft = Me.Left / Screen.TwipsPerPixelX
     formTop = Me.Top / Screen.TwipsPerPixelY
+
 End Sub
 
 Private Sub mnuColorSketch_Click()
@@ -12707,8 +12709,10 @@ Private Sub mnuScenRemove_Click()
 End Sub
 
 Private Sub lblZoom_Click()
+
     txtZoom.Text = gResetZoom * 100 & "%"
     txtZoom_LostFocus
+
 End Sub
 
 Private Sub txtZoom_KeyPress(KeyAscii As Integer)
@@ -14366,6 +14370,7 @@ ErrorHandler:
 End Sub
 
 Private Sub mnuResetWindows_Click()
+
     Const HEADER_HEIGHT = 41
     Const FOOTER_HEIGHT = 20
 
