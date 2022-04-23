@@ -116,12 +116,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   1320
+      Left            =   1560
       Style           =   2  'Dropdown List
       TabIndex        =   6
       Tag             =   "font1"
       Top             =   3600
-      Width           =   4455
+      Width           =   4215
    End
    Begin VB.TextBox txtHotkey 
       Appearance      =   0  'Flat
@@ -1299,9 +1299,8 @@ Begin VB.Form frmPreferences
       Width           =   2175
    End
    Begin VB.Label lblPref 
-      BackColor       =   &H004A3C31&
-      BackStyle       =   0  'Transparent
-      Caption         =   "Skin"
+      BackColor       =   &H00614B3D&
+      Caption         =   "Skin:"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -1318,7 +1317,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   75
       Tag             =   "font2"
       Top             =   3600
-      Width           =   975
+      Width           =   1095
    End
    Begin VB.Label lblWayKeys 
       AutoSize        =   -1  'True
