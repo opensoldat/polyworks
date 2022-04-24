@@ -2473,9 +2473,7 @@ Private Sub picFolder_Click()
 
     folder = SelectFolder(Me)
 
-    If Right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtDir.Text = folder
     End If
 
@@ -2489,9 +2487,7 @@ Private Sub picUncomp_Click()
 
     folder = SelectFolder(Me)
 
-    If Right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtUncomp.Text = folder
     End If
 
@@ -2505,9 +2501,7 @@ Private Sub picPrefabs_Click()
 
     folder = SelectFolder(Me)
 
-    If Right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtPrefabs.Text = folder
     End If
 
