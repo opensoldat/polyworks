@@ -483,7 +483,7 @@ Public Function SelectFolder(ownerForm As Form) As String
 
     If SHGetPathFromIDList(ByVal pidl, ByVal path) Then
         pos = InStr(path, Chr$(0))
-        SelectFolder = LCase$(Left(path, pos - 1))
+        SelectFolder = Left(path, pos - 1)
 
         If Right(SelectFolder, 1) <> "\" Then
             SelectFolder = SelectFolder & "\"
