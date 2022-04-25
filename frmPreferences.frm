@@ -168,7 +168,7 @@ Begin VB.Form frmPreferences
       Top             =   3720
       Width           =   255
    End
-   Begin VB.PictureBox picSekrit 
+   Begin VB.PictureBox picMore 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -1993,7 +1993,7 @@ Public Sub SetColors()
     MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picMore, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
@@ -2096,7 +2096,7 @@ Private Function applyPreferences() As Boolean
     MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
     MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    MouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picMore, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
     MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
@@ -2278,7 +2278,7 @@ Private Sub picHide_Click()
 
 End Sub
 
-Private Sub picSekrit_Click()
+Private Sub picMore_Click()
 
     If Me.ScaleHeight < MAX_HEIGHT - 20 Then
         Me.Height = MAX_HEIGHT * Screen.TwipsPerPixelY
@@ -2827,15 +2827,15 @@ Private Sub txtHeight_LostFocus()
 
 End Sub
 
-Private Sub picSekrit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picMore_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picMore, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
-Private Sub picSekrit_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picMore_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    MouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picMore, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
