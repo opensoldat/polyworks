@@ -1249,7 +1249,7 @@ Private Sub txtHexCode_Change()
         ' no-op
     ElseIf mHexValue <> txtHexCode.Text Then
         If Len(txtHexCode.Text) < 6 Then
-            tempHexVal = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
+            tempHexVal = String(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         ElseIf Len(txtHexCode.Text) > 6 Then
             tempHexVal = Right(txtHexCode.Text, 6)
         Else
@@ -1285,7 +1285,7 @@ Private Sub txtHexCode_LostFocus()
         If Len(txtHexCode.Text) > 6 Then
             txtHexCode.Text = Right(txtHexCode.Text, 6)
         ElseIf Len(txtHexCode.Text) < 6 Then
-            txtHexCode = String$(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
+            txtHexCode = String(6 - Len(txtHexCode.Text), "0") & txtHexCode.Text
         End If
         mHexValue = txtHexCode.Text
     End If

@@ -2218,7 +2218,7 @@ Public Sub LoadFile(theFileName As String)
                 Get #1, , Scenery_New
 
                 For j = 1 To Scenery_New.sceneryName(0)
-                    tempString = tempString & Chr$(Scenery_New.sceneryName(j))
+                    tempString = tempString & Chr(Scenery_New.sceneryName(j))
                 Next
 
                 Dim loadName As String
@@ -2233,7 +2233,7 @@ Public Sub LoadFile(theFileName As String)
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-                    If Right$(loadName, 4) = ".gif" Then
+                    If Right(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
                     End If
 
@@ -2253,7 +2253,7 @@ Public Sub LoadFile(theFileName As String)
 
                     loadName = soldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-                    If Right$(loadName, 4) = ".gif" Then
+                    If Right(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
                     End If
 
@@ -2403,16 +2403,16 @@ Public Sub LoadFile(theFileName As String)
     ' get map title and texture
     mapTitle = ""
     For i = 1 To Options.mapName(0)
-        mapTitle = mapTitle + Chr$(Options.mapName(i))
+        mapTitle = mapTitle + Chr(Options.mapName(i))
     Next
     gTextureFile = ""
     For i = 1 To Options.textureName(0)
-        gTextureFile = gTextureFile + Chr$(Options.textureName(i))
+        gTextureFile = gTextureFile + Chr(Options.textureName(i))
     Next
 
     mapTitle = ""
     For i = 1 To Options.mapName(0)
-        mapTitle = mapTitle + Chr$(Options.mapName(i))
+        mapTitle = mapTitle + Chr(Options.mapName(i))
     Next
 
     ' get background colors
@@ -2450,7 +2450,7 @@ Public Sub LoadFile(theFileName As String)
         bgPolyCoords(i).Y = bgPolys(i).Y
     Next
 
-    If Len(Dir$(soldatDir & "textures\" & gTextureFile)) <> 0 Then
+    If Len(Dir(soldatDir & "textures\" & gTextureFile)) <> 0 Then
         SetMapTexture gTextureFile
         frmTexture.SetTexture gTextureFile
     End If
@@ -2535,7 +2535,7 @@ Public Sub SetCurrentTexture(sceneryName As String)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If Right$(loadName, 4) = ".gif" Then
+    If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -2591,7 +2591,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If Right$(loadName, 4) = ".gif" Then
+    If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -2644,7 +2644,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
 
     loadName = soldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
-    If Right$(loadName, 4) = ".gif" Then
+    If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
     End If
 
@@ -10008,7 +10008,7 @@ Private Function ConfirmExists(theFileName As String) As Boolean
     Set tempNode = tvwScenery.Nodes.Item("Master List").Child
 
     For i = 1 To (tvwScenery.Nodes.Item("Master List").Children)
-        If LCase$(theFileName) = LCase$(tempNode.Text) Then
+        If LCase(theFileName) = LCase(tempNode.Text) Then
             ConfirmExists = True
         End If
         Set tempNode = tempNode.Next
@@ -10125,7 +10125,7 @@ Private Function GetNextValue(sectionString As String, ByRef eIndex As Integer) 
 
     eIndex = InStr(eIndex, sectionString, "=") + 1
     nIndex = InStr(eIndex, sectionString, vbNullChar)
-    GetNextValue = Mid$(sectionString, eIndex, nIndex)
+    GetNextValue = Mid(sectionString, eIndex, nIndex)
 
 End Function
 
@@ -10324,7 +10324,7 @@ Private Sub LoadPrefab(theFileName As String)
                     ' get scenery name
                     elementString = ""
                     For j = 1 To elementName(0)
-                        elementString = elementString + Chr$(elementName(j))
+                        elementString = elementString + Chr(elementName(j))
                     Next
                     ' find scenery in list
                     For j = 1 To sceneryElements
@@ -10502,7 +10502,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
     ' if there is no parent
     If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
 
-    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
+    If Len(Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
         frmScenery.picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
         Exit Sub
     End If
@@ -10524,7 +10524,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             Set tempNode = tempNode.Next
         Next
     Else
-        If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
+        If Len(Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
 
             currentScenery = tvwScenery.SelectedItem.Text
 
@@ -10609,16 +10609,16 @@ Private Sub Form_Load()
 
 
     err = "Error setting directories"
-    If Len(Dir$(uncompDir, vbDirectory)) = 0 Or uncompDir = "" Then
+    If Len(Dir(uncompDir, vbDirectory)) = 0 Or uncompDir = "" Then
         uncompDir = appPath & "\Maps\"
     End If
 
-    If Len(Dir$(prefabDir, vbDirectory)) = 0 Or prefabDir = "" Then
+    If Len(Dir(prefabDir, vbDirectory)) = 0 Or prefabDir = "" Then
         prefabDir = appPath & "\Prefabs\"
     End If
 
     ' if given directory doesn't exist, change to default
-    If Len(Dir$(soldatDir & "Textures\", vbDirectory)) = 0 Or soldatDir = "" Then
+    If Len(Dir(soldatDir & "Textures\", vbDirectory)) = 0 Or soldatDir = "" Then
         temp = GetSoldatDir
         If temp <> "" Then
             soldatDir = temp
@@ -10742,22 +10742,22 @@ Private Sub Form_Load()
 
     err = "Error parsing command line args"
 
-    temp = Command$
+    temp = Command
     If Right(temp, 1) = """" Then
         temp = Left(temp, Len(temp) - 1)
         temp = Right(temp, Len(temp) - 1)
     End If
 
     NewMap
-    If LCase$(Right(temp, 4)) = ".pms" Then
+    If LCase(Right(temp, 4)) = ".pms" Then
         prevMousePointer = Me.MousePointer
         Me.MousePointer = vbHourglass
 
-        If Dir$(temp) <> "" Then
+        If Dir(temp) <> "" Then
             LoadFile temp
-        ElseIf Dir$(appPath & "\Maps\" & temp) <> "" Then
+        ElseIf Dir(appPath & "\Maps\" & temp) <> "" Then
             LoadFile appPath & "\Maps\" & temp
-        ElseIf Dir$(soldatDir & "Maps\" & temp) <> "" Then
+        ElseIf Dir(soldatDir & "Maps\" & temp) <> "" Then
             LoadFile soldatDir & "Maps\" & temp
         End If
 
@@ -11727,7 +11727,7 @@ Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As 
             If numSelectedPolys = 0 And numSelectedScenery = 0 And numSelLights = 0 And numSelSpawns = 0 And numSelWaypoints = 0 And numSelColliders = 1 Then
                 For i = 1 To colliderCount
                     If Colliders(i).active = 1 Then
-                        frmPalette.txtRadius.Text = LTrim$(Str$(Colliders(i).radius))
+                        frmPalette.txtRadius.Text = LTrim(Str(Colliders(i).radius))
                         SetRadius CInt(Colliders(i).radius)
                     End If
                 Next
@@ -12143,7 +12143,7 @@ Private Sub mnuRecent_Click(Index As Integer)
 
     theFileName = mnuRecent(Index).Caption
 
-    If Len(Dir$(theFileName)) <> 0 And theFileName <> "" Then
+    If Len(Dir(theFileName)) <> 0 And theFileName <> "" Then
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -12167,7 +12167,7 @@ Private Sub mnuRecent_Click(Index As Integer)
             mnuRecent(i).Caption = mnuRecent(i - 1).Caption
         Next
         mnuRecent(0).Caption = theFileName
-    ElseIf Len(Dir$(theFileName)) = 0 Then
+    ElseIf Len(Dir(theFileName)) = 0 Then
         MsgBox "File not found: " & theFileName
     End If
 
@@ -12733,8 +12733,8 @@ Private Sub txtZoom_LostFocus()
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     ElseIf IsNumeric(txtZoom.Text) Then
         zoomInput = txtZoom.Text
-    ElseIf IsNumeric(Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And Right$(txtZoom.Text, 1) = "%" Then
-        zoomInput = Mid$(txtZoom.Text, 1, Len(txtZoom.Text) - 1)
+    ElseIf IsNumeric(Mid(txtZoom.Text, 1, Len(txtZoom.Text) - 1)) And Right(txtZoom.Text, 1) = "%" Then
+        zoomInput = Mid(txtZoom.Text, 1, Len(txtZoom.Text) - 1)
     Else
         txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
     End If
@@ -12761,7 +12761,7 @@ Private Sub Form_OLEDragDrop(Data As DataObject, Effect As Long, Button As Integ
         temp = Right(temp, Len(temp) - 1)
     End If
 
-    If LCase$(Right(temp, 4)) = ".pms" Then
+    If LCase(Right(temp, 4)) = ".pms" Then
         If prompt Then
             Result = MsgBox("Save changes to " & currentFileName & "?", vbYesNoCancel)
             DoEvents
@@ -14298,7 +14298,7 @@ Private Sub mnuLoadSpace_Click()
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
-        If Len(Dir$(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
+        If Len(Dir(appPath & "\Workspace\" & commonDialog.FileTitle)) <> 0 Then
             LoadWorkspace commonDialog.FileTitle
             frmTools.SetForm
             frmDisplay.SetForm
@@ -14329,7 +14329,7 @@ Private Sub mnuSaveSpace_Click()
     Dim sNull As String
     Dim isNewFile As Boolean
 
-    sNull = Chr$(0)
+    sNull = Chr(0)
     isNewFile = False
 
     frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"

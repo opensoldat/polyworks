@@ -381,7 +381,7 @@ Public Sub SetColors()
     For i = picTools.LBound To picTools.UBound
         BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
         picTools(i).Refresh
-        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr$(MapVirtualKey(hotKeys(i), 1)) & ")"
+        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr(MapVirtualKey(hotKeys(i), 1)) & ")"
     Next
     BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
     picTools(curTool).Refresh

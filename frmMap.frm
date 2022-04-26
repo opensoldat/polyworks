@@ -573,16 +573,16 @@ Public Sub LoadTextures2()
 
     cboTexture.Clear
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
-        file = Dir$
+        file = Dir
     Loop
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
-        file = Dir$
+        file = Dir
     Loop
 
     Exit Sub

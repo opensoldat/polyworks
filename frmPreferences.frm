@@ -2380,24 +2380,24 @@ Private Sub Form_Load()
     formResetZoom = txtResetZoom.Text
 
     For i = txtHotkey.LBound To txtHotkey.UBound
-        txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.GetHotKey(i), 1))
+        txtHotkey(i).Text = Chr(MapVirtualKey(frmTools.GetHotKey(i), 1))
         txtHotkey(i).Tag = AscDef(txtHotkey(i).Text, 0)
     Next
 
     For i = txtWayptKey.LBound To txtWayptKey.UBound
-        txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.GetWaypointKey(i), 1))
+        txtWayptKey(i).Text = Chr(MapVirtualKey(frmWaypoints.GetWaypointKey(i), 1))
         txtWayptKey(i).Tag = Asc(txtWayptKey(i).Text)
     Next
 
     Dim file As Variant
 
-    file = Dir$(appPath & "\skins\*.*", vbDirectory)
+    file = Dir(appPath & "\skins\*.*", vbDirectory)
     Do While Len(file)
         If FileExists(appPath & "\skins\" & file & "\colors.ini") Then
             cboSkin.AddItem file
             If file = gfxDir Then cboSkin.ListIndex = cboSkin.ListCount - 1
         End If
-        file = Dir$
+        file = Dir
     Loop
 
     txtDir.Text = frmSoldatMapEditor.soldatDir
@@ -2524,7 +2524,7 @@ End Sub
 
 Private Sub txtHotkey_KeyPress(Index As Integer, KeyAscii As Integer)
 
-    txtHotkey(Index).Text = UCase$(Chr$(KeyAscii))
+    txtHotkey(Index).Text = UCase(Chr(KeyAscii))
     KeyAscii = 0
 
 End Sub
@@ -2634,7 +2634,7 @@ End Sub
 
 Private Sub txtWayptKey_KeyPress(Index As Integer, KeyAscii As Integer)
 
-    txtWayptKey(Index).Text = UCase$(Chr$(KeyAscii))
+    txtWayptKey(Index).Text = UCase(Chr(KeyAscii))
     KeyAscii = 0
 
 End Sub

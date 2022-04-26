@@ -381,28 +381,28 @@ Public Sub ListScenery()
     ' load all scenery
     frmSoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        file = Dir$
+        file = Dir
     Loop
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.png", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.png", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        file = Dir$
+        file = Dir
     Loop
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        file = Dir$
+        file = Dir
     Loop
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
         frmSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
-        file = Dir$
+        file = Dir
     Loop
 
     frmSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
@@ -413,7 +413,7 @@ Public Sub ListScenery()
 
     ' load lists
 
-    file = Dir$(appPath & "\lists\" & "*.txt", vbDirectory)
+    file = Dir(appPath & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file)  ' for every txt file in lists
         file = Left(file, Len(file) - 4)
         frmSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
@@ -428,7 +428,7 @@ Public Sub ListScenery()
         Close #1
 
         fileOpen = False
-        file = Dir$
+        file = Dir
     Loop
 
     Exit Sub
@@ -509,7 +509,7 @@ Public Sub lstScenery_Click()
         Exit Sub
     End If
 
-    If Len(Dir$(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
+    If Len(Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
         token = InitGDIPlus
         picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
         FreeGDIPlus token

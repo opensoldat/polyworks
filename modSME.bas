@@ -325,7 +325,7 @@ Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
     Call GdipGetImageEncoders(num, Size, pImageCodecInfo(0))
 
     For j = 0 To num - 1
-        buffer = Space$(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
+        buffer = Space(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
 
         Call lstrcpyW(ByVal StrPtr(buffer), _
         ByVal pImageCodecInfo(j).MimeTypePtr)
@@ -479,10 +479,10 @@ Public Function SelectFolder(ownerForm As Form) As String
     End With
 
     pidl = SHBrowseForFolder(bi)
-    path = Space$(MAX_PATH)
+    path = Space(MAX_PATH)
 
     If SHGetPathFromIDList(ByVal pidl, ByVal path) Then
-        pos = InStr(path, Chr$(0))
+        pos = InStr(path, Chr(0))
         SelectFolder = Left(path, pos - 1)
 
         If Right(SelectFolder, 1) <> "\" Then
@@ -649,12 +649,12 @@ Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
     ' if valid
     If hSubKey <> 0 Then
-        lpValue = Space$(260)
+        lpValue = Space(260)
         lpcbData = Len(lpValue)
 
         ' find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-            GetRegValue = Left$(lpValue, lstrlenW(StrPtr(lpValue)))
+            GetRegValue = Left(lpValue, lstrlenW(StrPtr(lpValue)))
         End If
     End If
 
@@ -684,12 +684,12 @@ Public Function GetFileDate(FileName As String) As Long
     Call FileTimeToLocalFileTime(FT_WRITE, localFT)
     FT_WRITE = localFT
     Call FileTimeToDosDateTime(FT_WRITE, VarPtr(dosDate), VarPtr(dosTime))
-    timeString = Hex$(dosTime)
+    timeString = Hex(dosTime)
     If Len(timeString) < 4 Then
-        timeString = String$(4 - Len(timeString), "0") & timeString
+        timeString = String(4 - Len(timeString), "0") & timeString
     End If
 
-    GetFileDate = CLng("&H" & Hex$(dosDate) & timeString)
+    GetFileDate = CLng("&H" & Hex(dosDate) & timeString)
 
     Exit Function
 
@@ -723,7 +723,7 @@ Public Function LoadString(section As String, Entry As String, Optional FileName
 
     If length = 0 Then length = 10
 
-    sString = String$(length, "*")
+    sString = String(length, "*")
     lSize = Len(sString)
     lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
 
@@ -761,10 +761,10 @@ Public Function RGBtoHex(DecValue As Long) As String
 
     Dim hexValue As String
 
-    hexValue = Hex$(Val(DecValue))
+    hexValue = Hex(Val(DecValue))
 
     If Len(hexValue) < 6 Then
-        hexValue = String$(6 - Len(hexValue), "0") + hexValue
+        hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
     RGBtoHex = hexValue
@@ -776,7 +776,7 @@ Public Function HexToLong(hexValue As String) As Long
     On Error GoTo ErrorHandler
 
     If Len(hexValue) > 8 Then
-        hexValue = Right$(hexValue, 8)
+        hexValue = Right(hexValue, 8)
     End If
 
     HexToLong = CLng("&H" & hexValue)
@@ -876,7 +876,7 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     Dim IPic          As IPicture
 
     ' Load the image
-    If Len(Dir$(PicFile)) <> 0 Then
+    If Len(Dir(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
             Exit Function
         End If

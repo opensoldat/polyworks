@@ -254,7 +254,7 @@ Public Sub SaveSettings()
     Dim iniString As String
     Dim currentColor As Long
     Dim sNull As String
-    sNull = Chr$(0)
+    sNull = Chr(0)
     Dim isNewFile As Boolean
     isNewFile = False
 
@@ -491,7 +491,7 @@ Public Sub SaveWindow(sectionName As String, window As Form, collapsed As Boolea
     Dim topVal As Integer
     Dim iniString As String
     Dim sNull As String
-    sNull = Chr$(0)
+    sNull = Chr(0)
 
     leftVal = window.Left / Screen.TwipsPerPixelX
     topVal = window.Top / Screen.TwipsPerPixelY
