@@ -561,7 +561,7 @@ Public Sub LoadTextures()
 
 ErrorHandler:
 
-    MsgBox "loading textures failed" & vbNewLine & Error$
+    MsgBox "loading textures failed" & vbNewLine & Error
 
 End Sub
 
@@ -589,7 +589,7 @@ Public Sub LoadTextures2()
 
 ErrorHandler:
 
-    MsgBox "loading textures failed" & vbNewLine & Error$
+    MsgBox "loading textures failed" & vbNewLine & Error
 
 End Sub
 
@@ -614,7 +614,7 @@ Public Sub LoadFromList()  ' unused?
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -683,7 +683,7 @@ Public Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Map form"
+    MsgBox Error & vbNewLine & "Error loading Map form"
 
 End Sub
 
@@ -777,7 +777,7 @@ Private Sub cboTexture_Click()
 
 ErrorHandler:
 
-    MsgBox "Error showing texture" & vbNewLine & Error$
+    MsgBox "Error showing texture" & vbNewLine & Error
 
 End Sub
 

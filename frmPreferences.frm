@@ -2261,7 +2261,7 @@ Private Function applyPreferences() As Boolean
 
 ErrorHandler:
 
-    MsgBox "Error applying preferences" & vbNewLine & Error$
+    MsgBox "Error applying preferences" & vbNewLine & Error
 
 End Function
 
@@ -2408,7 +2408,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Preferences form"
+    MsgBox Error & vbNewLine & "Error loading Preferences form"
 
 End Sub
 

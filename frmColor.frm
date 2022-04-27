@@ -697,7 +697,7 @@ Public Sub InitColor(initRed As Byte, initGreen As Byte, initBlue As Byte)
 
 ErrorHandler:
 
-    MsgBox "Error initializing color picker" & vbNewLine & Error$
+    MsgBox "Error initializing color picker" & vbNewLine & Error
 
 End Sub
 
@@ -806,7 +806,7 @@ Private Sub HideColor(apply As Boolean)
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -1052,7 +1052,7 @@ Private Sub CalculateHue()
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -1100,7 +1100,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Color Picker form"
+    MsgBox Error & vbNewLine & "Error loading Color Picker form"
 
 End Sub
 

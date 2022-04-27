@@ -240,7 +240,7 @@ Public Sub LoadSettings()
 
 ErrorHandler:
 
-    MsgBox "Error loading ini file" & vbNewLine & Error$ & vbNewLine & errVal
+    MsgBox "Error loading ini file" & vbNewLine & Error & vbNewLine & errVal
 
 End Sub
 
@@ -481,7 +481,7 @@ Public Sub LoadWorkspace(Optional theFileName As String = "current.ini", Optiona
 
 ErrorHandler:
 
-    MsgBox "Error loading workspace" & vbNewLine & Error$
+    MsgBox "Error loading workspace" & vbNewLine & Error
 
 End Sub
 

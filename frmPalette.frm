@@ -686,7 +686,7 @@ ErrorHandler:
 
     mnuClearPalette_Click
     If fileOpen Then Close #1
-    MsgBox "Error loading palette" & vbNewLine & Error$
+    MsgBox "Error loading palette" & vbNewLine & Error
 
 End Sub
 
@@ -717,7 +717,7 @@ Public Sub SavePalette(FileName As String)
 ErrorHandler:
 
     If fileOpen Then Close #1
-    MsgBox "Error saving palette" & vbNewLine & Error$
+    MsgBox "Error saving palette" & vbNewLine & Error
 
 End Sub
 
@@ -863,7 +863,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Palette form"
+    MsgBox Error & vbNewLine & "Error loading Palette form"
 
 End Sub
 

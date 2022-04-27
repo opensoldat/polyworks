@@ -435,7 +435,7 @@ Public Sub ListScenery()
 
 ErrorHandler:
 
-    MsgBox "loading scenery tree failed" & vbNewLine & Error$ & vbNewLine & sceneryName
+    MsgBox "loading scenery tree failed" & vbNewLine & Error & vbNewLine & sceneryName
     If fileOpen Then Close #1
 
 End Sub
@@ -527,7 +527,7 @@ Public Sub lstScenery_Click()
 
 ErrorHandler:
 
-    MsgBox "Error clicking scenery" & vbNewLine & Error$
+    MsgBox "Error clicking scenery" & vbNewLine & Error
 
 End Sub
 
@@ -555,7 +555,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Scenery form"
+    MsgBox Error & vbNewLine & "Error loading Scenery form"
 
 End Sub
 

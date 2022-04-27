@@ -1691,7 +1691,7 @@ Public Sub LoadCursors()
 
 ErrorHandler:
 
-    MsgBox "Error loading cursors" & vbNewLine & Error$
+    MsgBox "Error loading cursors" & vbNewLine & Error
 
 End Sub
 
@@ -1862,7 +1862,7 @@ Public Sub Init()
 ErrorHandler:
 
     If D3DX Is Nothing Then
-        MsgBox "Direct3D initialization failed" & vbNewLine & debugVal & vbNewLine & Error$
+        MsgBox "Direct3D initialization failed" & vbNewLine & debugVal & vbNewLine & Error
     Else
         MsgBox "Direct3D initialization failed" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
     End If
@@ -2045,7 +2045,7 @@ Public Sub NewMap()
 
 ErrorHandler:
 
-    MsgBox "error creating new file" & vbNewLine & Error$
+    MsgBox "error creating new file" & vbNewLine & Error
 
 End Sub
 
@@ -2479,7 +2479,7 @@ Public Sub LoadFile(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox "error loading map" & vbNewLine & Error$ & vbNewLine & errorVal
+    MsgBox "error loading map" & vbNewLine & Error & vbNewLine & errorVal
     If fileOpen Then Close #1
     noRedraw = False
 
@@ -2522,7 +2522,7 @@ Public Sub SetCurrentScenery(Optional styleVal As Integer = -1, Optional scenery
 
 ErrorHandler:
 
-    MsgBox "Error setting current scenery" & vbNewLine & Error$
+    MsgBox "Error setting current scenery" & vbNewLine & Error
 
 End Sub
 
@@ -2569,7 +2569,7 @@ Public Sub SetCurrentTexture(sceneryName As String)
 
 ErrorHandler:
 
-    MsgBox "Error creating current scenery texture" & vbNewLine & Error$
+    MsgBox "Error creating current scenery texture" & vbNewLine & Error
 
 End Sub
 
@@ -2625,7 +2625,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
 
 ErrorHandler:
 
-    MsgBox "Error creating scenery texture: " & sceneryName & vbNewLine & Error$
+    MsgBox "Error creating scenery texture: " & sceneryName & vbNewLine & Error
     SceneryTextures(sceneryElements) = SceneryTextures(0)
 
 End Sub
@@ -2946,7 +2946,7 @@ Public Sub SaveAndCompile(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox "Error saving/compiling map: " & Error$
+    MsgBox "Error saving/compiling map: " & Error
     If fileOpen Then
         Close #1
     End If
@@ -4546,7 +4546,7 @@ Public Sub Terminate()  ' You are on the way to destruction.
 
 ErrorHandler:
 
-    MsgBox "Error terminating" & vbNewLine & Error$
+    MsgBox "Error terminating" & vbNewLine & Error
 
 End Sub
 
@@ -4756,7 +4756,7 @@ Public Sub ClearUnused()
 
 ErrorHandler:
 
-    MsgBox "Error clearing unused scenery" & vbNewLine & Error$
+    MsgBox "Error clearing unused scenery" & vbNewLine & Error
 
 End Sub
 
@@ -4780,7 +4780,7 @@ Public Sub LoadColors()
 
 ErrorHandler:
 
-    MsgBox "Error loading colors" & vbNewLine & Error$
+    MsgBox "Error loading colors" & vbNewLine & Error
 
 End Sub
 
@@ -4919,7 +4919,7 @@ Public Sub GetInfo()
 
 ErrorHandler:
 
-    MsgBox "GetInfo() error" & vbNewLine & Error$
+    MsgBox "GetInfo() error" & vbNewLine & Error
 
 End Sub
 
@@ -5153,7 +5153,7 @@ Private Sub SetCursor(Index As Integer)
 
 ErrorHandler:
 
-    MsgBox "Error setting cursor" & vbNewLine & Error$
+    MsgBox "Error setting cursor" & vbNewLine & Error
 
 End Sub
 
@@ -5253,7 +5253,7 @@ Private Function CheckLoaded(sceneryName As String) As Integer
 
 ErrorHandler:
 
-    MsgBox "error checking loaded scenery" & vbNewLine & Error$
+    MsgBox "error checking loaded scenery" & vbNewLine & Error
 
 End Function
 
@@ -5515,7 +5515,7 @@ Private Sub SaveFile(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox "Error saving map" & vbNewLine & Error$
+    MsgBox "Error saving map" & vbNewLine & Error
     If fileOpen Then
         Close #1
     End If
@@ -5613,7 +5613,7 @@ Private Sub SaveUndo()
 
 ErrorHandler:
 
-    MsgBox "Error saving undo" & vbNewLine & Error$
+    MsgBox "Error saving undo" & vbNewLine & Error
 
 End Sub
 
@@ -5769,7 +5769,7 @@ Private Sub LoadUndo(redo As Boolean)
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & errorVal
+    MsgBox Error & vbNewLine & errorVal
 
 End Sub
 
@@ -5873,7 +5873,7 @@ Private Function IsInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
 
 ErrorHandler:
 
-    MsgBox "Sector error, " & Error$
+    MsgBox "Sector error, " & Error
 
 End Function
 
@@ -5915,7 +5915,7 @@ Private Function IsInSector2(Index As Integer, X As Integer, Y As Integer, div A
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Function
 
@@ -6026,7 +6026,7 @@ Private Function SegmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Function
 
@@ -6567,7 +6567,7 @@ Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -6826,7 +6826,7 @@ Private Sub AverageVertices()
 
 ErrorHandler:
 
-    MsgBox "Error averaging colors" & vbNewLine & Error$
+    MsgBox "Error averaging colors" & vbNewLine & Error
 
 End Sub
 
@@ -8205,7 +8205,7 @@ Private Sub StartSketch(X As Single, Y As Single)
 
 ErrorHandler:
 
-    MsgBox "Error starting sketch" & vbNewLine & Error$
+    MsgBox "Error starting sketch" & vbNewLine & Error
 
 End Sub
 
@@ -8228,7 +8228,7 @@ Private Sub LineSketch(X As Single, Y As Single)
 
 ErrorHandler:
 
-    MsgBox "Error sketching line" & vbNewLine & Error$
+    MsgBox "Error sketching line" & vbNewLine & Error
 
 End Sub
 
@@ -8262,7 +8262,7 @@ Private Sub LinkSketch(X As Single, Y As Single)
 
 ErrorHandler:
 
-    MsgBox "Error linking sketch" & vbNewLine & Error$
+    MsgBox "Error linking sketch" & vbNewLine & Error
 
 End Sub
 
@@ -8276,7 +8276,7 @@ Private Sub EndSketch(X As Single, Y As Single)
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Error ending sketch" & vbNewLine & Error$
+    MsgBox "Error ending sketch" & vbNewLine & Error
 
 End Sub
 
@@ -8340,7 +8340,7 @@ Private Sub CreateScenery(X As Single, Y As Single)
 
 ErrorHandler:
 
-    MsgBox "Error creating scenery" & vbNewLine & Error$
+    MsgBox "Error creating scenery" & vbNewLine & Error
 
 End Sub
 
@@ -8873,7 +8873,7 @@ Private Function EraseSketch(X As Single, Y As Single) As Byte
 
 ErrorHandler:
 
-    MsgBox "Error erasing sketch" & vbNewLine & Error$
+    MsgBox "Error erasing sketch" & vbNewLine & Error
 
 End Function
 
@@ -8905,7 +8905,7 @@ Private Function MoveLines(X As Single, Y As Single, xDiff As Single, yDiff As S
 
 ErrorHandler:
 
-    MsgBox "Error moving sketch lines" & vbNewLine & Error$
+    MsgBox "Error moving sketch lines" & vbNewLine & Error
 
 End Function
 
@@ -8930,7 +8930,7 @@ Private Sub DeleteSmallLines()
 
 ErrorHandler:
 
-    MsgBox "Error deleting small sketch lines" & vbNewLine & Error$
+    MsgBox "Error deleting small sketch lines" & vbNewLine & Error
 
 End Sub
 
@@ -9014,7 +9014,7 @@ Private Sub VertexSelection(X As Single, Y As Single)
 
 ErrorHandler:
 
-    MsgBox "Error selecting vertices" & vbNewLine & Error$
+    MsgBox "Error selecting vertices" & vbNewLine & Error
 
 End Sub
 
@@ -9375,7 +9375,7 @@ Private Sub GetRCenter()
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -9645,7 +9645,7 @@ Private Function PointInProp(ByVal X As Single, ByVal Y As Single, Index As Inte
 
 ErrorHandler:
 
-    MsgBox "Error selecting scenery" & vbNewLine & Error$
+    MsgBox "Error selecting scenery" & vbNewLine & Error
 
 End Function
 
@@ -9959,7 +9959,7 @@ Private Sub DeletePolys()
 
 ErrorHandler:
 
-    MsgBox "Error deleting" & vbNewLine & Error$
+    MsgBox "Error deleting" & vbNewLine & Error
 
 End Sub
 
@@ -10248,7 +10248,7 @@ Private Sub SavePrefab(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -10401,7 +10401,7 @@ Private Sub LoadPrefab(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -10555,7 +10555,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
 
 ErrorHandler:
 
-    MsgBox "Error clicking scenery tree" & vbNewLine & Error$
+    MsgBox "Error clicking scenery tree" & vbNewLine & Error
 
 End Sub
 
@@ -10775,7 +10775,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox "Error loading" & vbNewLine & err & vbNewLine & Error$
+    MsgBox "Error loading" & vbNewLine & err & vbNewLine & Error
 
 End Sub
 
@@ -11462,7 +11462,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 
@@ -11649,7 +11649,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
 ErrorHandler:
 
-    MsgBox "form_mousemove error" & vbNewLine & Error$
+    MsgBox "form_mousemove error" & vbNewLine & Error
 
 End Sub
 
@@ -12887,8 +12887,8 @@ Private Sub mnuOpen_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error opening file" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error opening file" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -12949,8 +12949,8 @@ Private Sub mnuOpenCompiled_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error opening compiled map" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error opening compiled map" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -12990,8 +12990,8 @@ Private Sub mnuSave_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error saving file" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error saving file" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13024,8 +13024,8 @@ Private Sub mnuSaveAs_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error saving as" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error saving as" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13078,8 +13078,8 @@ Private Sub mnuCompile_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error compiling map" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error compiling map" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13118,8 +13118,8 @@ Private Sub mnuCompileAs_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error compiling map" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error compiling map" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13145,8 +13145,8 @@ Private Sub mnuExport_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error exporting" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error exporting" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13172,8 +13172,8 @@ Private Sub mnuImport_Click()
 
 ErrorHandler:
 
-    If Error$ <> "Cancel was selected." Then
-        MsgBox "Error importing" & vbNewLine & Error$
+    If Error <> "Cancel was selected." Then
+        MsgBox "Error importing" & vbNewLine & Error
     End If
     RegainFocus
 
@@ -13334,7 +13334,7 @@ Private Sub mnuDuplicate_Click()
 
 ErrorHandler:
 
-    MsgBox "Duplicate error" & vbNewLine & Error$
+    MsgBox "Duplicate error" & vbNewLine & Error
 
 End Sub
 
@@ -13809,7 +13809,7 @@ Private Sub mnuVisible_Click()
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox Error
 
 End Sub
 

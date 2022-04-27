@@ -1855,7 +1855,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Properties form"
+    MsgBox Error & vbNewLine & "Error loading Properties form"
 
 End Sub
 

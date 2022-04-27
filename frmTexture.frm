@@ -188,7 +188,7 @@ Public Sub SetTexture(texturePath As String)
 
 ErrorHandler:
 
-    MsgBox "Error setting texture" & vbNewLine & Error$
+    MsgBox "Error setting texture" & vbNewLine & Error
 
 End Sub
 
@@ -224,7 +224,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading texture form"
+    MsgBox Error & vbNewLine & "Error loading texture form"
 
 End Sub
 

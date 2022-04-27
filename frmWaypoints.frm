@@ -711,7 +711,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Waypoints form"
+    MsgBox Error & vbNewLine & "Error loading Waypoints form"
 
 End Sub
 
