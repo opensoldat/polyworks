@@ -863,7 +863,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading Palette form"
+    MsgBox "Error loading Palette form" & vbNewLine & Error
 
 End Sub
 

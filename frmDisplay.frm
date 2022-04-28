@@ -645,7 +645,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading Display form"
+    MsgBox "Error loading Display form" & vbNewLine & Error
 
 End Sub
 

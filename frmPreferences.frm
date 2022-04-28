@@ -2408,7 +2408,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading Preferences form"
+    MsgBox "Error loading Preferences form" & vbNewLine & Error
 
 End Sub
 

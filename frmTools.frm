@@ -431,7 +431,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading Tools form"
+    MsgBox "Error loading Tools form" & vbNewLine & Error
 
 End Sub
 

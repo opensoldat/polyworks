@@ -1862,9 +1862,9 @@ Public Sub Init()
 ErrorHandler:
 
     If D3DX Is Nothing Then
-        MsgBox "Direct3D initialization failed" & vbNewLine & debugVal & vbNewLine & Error
+        MsgBox "Error initializing Direct3D" & vbNewLine & debugVal & vbNewLine & Error
     Else
-        MsgBox "Direct3D initialization failed" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
+        MsgBox "Error initializing Direct3D" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
     End If
 
 End Sub
@@ -2045,7 +2045,7 @@ Public Sub NewMap()
 
 ErrorHandler:
 
-    MsgBox "error creating new file" & vbNewLine & Error
+    MsgBox "Error creating new file" & vbNewLine & Error
 
 End Sub
 
@@ -2479,7 +2479,7 @@ Public Sub LoadFile(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox "error loading map" & vbNewLine & Error & vbNewLine & errorVal
+    MsgBox "Error loading map" & vbNewLine & Error & vbNewLine & errorVal
     If fileOpen Then Close #1
     noRedraw = False
 
@@ -3897,7 +3897,7 @@ Public Sub Render()
 
 ErrorHandler:
 
-    MsgBox "Error Rendering with Direct3D" & vbNewLine & D3DX.GetErrorString(err.Number)
+    MsgBox "Error rendering with Direct3D" & vbNewLine & D3DX.GetErrorString(err.Number)
 
 End Sub
 
@@ -4919,7 +4919,7 @@ Public Sub GetInfo()
 
 ErrorHandler:
 
-    MsgBox "GetInfo() error" & vbNewLine & Error
+    MsgBox "Error calling GetInfo" & vbNewLine & Error
 
 End Sub
 
@@ -5232,7 +5232,7 @@ Private Sub InitDInput()
 ErrorHandler:
 
     If debugVal <> "Error acquiring device" Then
-        MsgBox "DirectInput initialization failed" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
+        MsgBox "Error initializing DirectInput" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
     End If
 
 End Sub
@@ -5253,7 +5253,7 @@ Private Function CheckLoaded(sceneryName As String) As Integer
 
 ErrorHandler:
 
-    MsgBox "error checking loaded scenery" & vbNewLine & Error
+    MsgBox "Error checking loaded scenery" & vbNewLine & Error
 
 End Function
 
@@ -5769,7 +5769,7 @@ Private Sub LoadUndo(redo As Boolean)
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & errorVal
+    MsgBox "Error loading undo file" & vbNewLine & Error & vbNewLine & errorVal
 
 End Sub
 
@@ -5873,7 +5873,7 @@ Private Function IsInSector(Index As Integer, X As Integer, Y As Integer, ByVal 
 
 ErrorHandler:
 
-    MsgBox "Sector error, " & Error
+    MsgBox "Error calling IsInSector" & vbNewLine & Error
 
 End Function
 
@@ -5915,7 +5915,7 @@ Private Function IsInSector2(Index As Integer, X As Integer, Y As Integer, div A
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error calling IsInSector2" & Error
 
 End Function
 
@@ -6026,7 +6026,7 @@ Private Function SegmentsIntersect(ByVal x1 As Integer, ByVal y1 As Integer, ByV
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error calling SeqmentsIntersect" & vbNewLine & Error
 
 End Function
 
@@ -6567,7 +6567,7 @@ Private Sub ApplyLightsToVert(pIndex As Integer, vIndex As Integer)
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error when applying lights to vertex" & vbNewLine & Error
 
 End Sub
 
@@ -9375,7 +9375,7 @@ Private Sub GetRCenter()
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error in GetRCenter call" & vbNewLine & Error
 
 End Sub
 
@@ -10248,7 +10248,7 @@ Private Sub SavePrefab(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error saving prefabs" & vbNewLine & Error
 
 End Sub
 
@@ -10401,7 +10401,7 @@ Private Sub LoadPrefab(theFileName As String)
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error loading prefabs" & vbNewLine & Error
 
 End Sub
 
@@ -11462,7 +11462,7 @@ Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y A
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error on mouse down" & vbNewLine & Error
 
 End Sub
 
@@ -11649,7 +11649,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 
 ErrorHandler:
 
-    MsgBox "form_mousemove error" & vbNewLine & Error
+    MsgBox "Error on mouse move" & vbNewLine & Error
 
 End Sub
 
@@ -13334,7 +13334,7 @@ Private Sub mnuDuplicate_Click()
 
 ErrorHandler:
 
-    MsgBox "Duplicate error" & vbNewLine & Error
+    MsgBox "Error while Duplicating" & vbNewLine & Error
 
 End Sub
 
@@ -13809,7 +13809,7 @@ Private Sub mnuVisible_Click()
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error on toggling visitibility" & vbNewLine & Error
 
 End Sub
 

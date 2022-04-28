@@ -224,7 +224,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading texture form"
+    MsgBox "Error loading Texture form" & vbNewLine & Error
 
 End Sub
 

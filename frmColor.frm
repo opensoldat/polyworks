@@ -806,7 +806,7 @@ Private Sub HideColor(apply As Boolean)
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error hiding Color Picker form" & vbNewLine & Error
 
 End Sub
 
@@ -1052,7 +1052,7 @@ Private Sub CalculateHue()
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error calculating hue" & vbNewLine & Error
 
 End Sub
 
@@ -1100,7 +1100,7 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading Color Picker form"
+    MsgBox "Error loading Color Picker form" & vbNewLine & Error
 
 End Sub
 

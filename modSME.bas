@@ -459,7 +459,7 @@ Public Function MouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
 
 ErrorHandler:
 
-    MsgBox Error
+    MsgBox "Error in mouse event (2)" & vbNewLine & Error
 
 End Function
 
@@ -695,7 +695,7 @@ Public Function GetFileDate(FileName As String) As Long
 
 ErrorHandler:
 
-    MsgBox "get file date" & vbNewLine & Error
+    MsgBox "Error getting file date" & vbNewLine & Error
 
 End Function
 
@@ -920,6 +920,6 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
 
 ErrorHandler:
 
-    MsgBox Error & vbNewLine & "Error loading picture"
+    MsgBox "Error loading picture" & vbNewLine & Error
 
 End Function
