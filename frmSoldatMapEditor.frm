@@ -8276,6 +8276,7 @@ Private Sub EndSketch(X As Single, Y As Single)
     Exit Sub
 
 ErrorHandler:
+
     MsgBox "Error ending sketch" & vbNewLine & Error
 
 End Sub
@@ -11828,6 +11829,7 @@ Private Sub mnuColorSketch_Click()
 
     sketchLines = 0
     ReDim Preserve sketch(0)
+    Render
 
 End Sub
 
