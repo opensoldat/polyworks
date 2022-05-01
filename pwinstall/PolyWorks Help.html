@@ -33,6 +33,10 @@
       margin-bottom: 0;
       padding-bottom: 0;
     }
+    .toolimgsize {
+      height: 32px;
+      width: 32px;
+    }
     </style>
   </head>
   <body>
@@ -55,86 +59,86 @@
 
 
     <h2>TOOLS</h2>
-    <p><img alt="tool move" src="Help/tool_move.gif">&nbsp;<b>TRANSFORM</b> [A]<br>
+    <p><img class="toolimgsize" alt="tool move" src="Help/tool_move.gif">&nbsp;<b>TRANSFORM</b> [A]<br>
     Click and drag to move the current selection, or if nothing is selected click and drag near a vertex to move it. Hold shift for vertical/horizontal movement.
     Hold ctrl to scale, ctrl+shift to scale proportionately.
     Hold alt to rotate, alt+shift to rotate in 15&deg; increments.
     </p>
 
-    <p><img alt="tool create" src="Help/tool_create.gif"> <b>POLY CREATION</b> [Q]<br>
+    <p><img class="toolimgsize" alt="tool create" src="Help/tool_create.gif"> <b>POLY CREATION</b> [Q]<br>
     Click to create polys using the current color. Right click to select the type of the poly to be created and to turn quad mode on or off.
     Hold shift to constrain the angle to 15&deg; increments relative to the last vertex placed.
     Hold alt for vertex selection. Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool vertext select" src="Help/tool_vselect.gif"> <b>VERTEX SELECTION</b> [S]<br>
+    <p><img class="toolimgsize" alt="tool vertext select" src="Help/tool_vselect.gif"> <b>VERTEX SELECTION</b> [S]<br>
     Click and drag to select vertices, or click on a poly near the vertex to select that vertex.
     Hold shift to select additional vertices and alt to deselect vertices.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool polygon select" src="Help/tool_pselect.gif"> <b>POLY SELECTION</b> [W]<br>
+    <p><img class="toolimgsize" alt="tool polygon select" src="Help/tool_pselect.gif"> <b>POLY SELECTION</b> [W]<br>
     Click in a poly or scenery to select it.
     Hold shift to select additional polys or scenery and alt to deselect them.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool vertext color" src="Help/tool_vcolor.gif"> <b>VERTEX COLOR</b> [D]<br>
+    <p><img class="toolimgsize" alt="tool vertext color" src="Help/tool_vcolor.gif"> <b>VERTEX COLOR</b> [D]<br>
     Click and drag to color vertices. If there are vertices selected only those will be affected.
     Hold alt to get a color from a vertex or scenery.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool polygon color" src="Help/tool_pcolor.gif"> <b>POLY COLOR</b> [E]<br>
+    <p><img class="toolimgsize" alt="tool polygon color" src="Help/tool_pcolor.gif"> <b>POLY COLOR</b> [E]<br>
     Click in a poly or scenery to color it. If there are vertices selected all of them will be affected.
     Hold alt to get a color from a vertex or scenery.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool texture" src="Help/tool_texture.gif"> <b>TEXTURE</b> [F]<br>
+    <p><img class="toolimgsize" alt="tool texture" src="Help/tool_texture.gif"> <b>TEXTURE</b> [F]<br>
     Click and drag to change the texture coordinates of vertices. If there are vertices selected only those will be affected.
     Hold alt for vertex selection.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool scenery" src="Help/tool_scenery.gif"> <b>SCENERY</b> [R]<br>
+    <p><img class="toolimgsize" alt="tool scenery" src="Help/tool_scenery.gif"> <b>SCENERY</b> [R]<br>
     Click to place scenery. Hold shift to constrain the angle to 15&deg; increments or scale proportionately. Right click to show the scenery lists.
     Hold alt for vertex selection.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool waypoint" src="Help/tool_waypoint.gif"> <b>WAYPOINTS</b> [G]<br>
+    <p><img class="toolimgsize" alt="tool waypoint" src="Help/tool_waypoint.gif"> <b>WAYPOINTS</b> [G]<br>
     Click to place waypoints. Hold shift and click to connect waypoints. Right click to select the movement type of the waypoints to be placed.
     Hold alt for vertex selection.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool objects" src="Help/tool_objects.gif"> <b>OBJECTS</b> [T]<br>
+    <p><img class="toolimgsize" alt="tool objects" src="Help/tool_objects.gif"> <b>OBJECTS</b> [T]<br>
     Click to place spawn points or colliders. Right click to select the type of object to be placed.
     Hold alt for vertex selection.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool color picker" src="Help/tool_colorpicker.gif"> <b>COLOR PICKER</b> [H]<br>
+    <p><img class="toolimgsize" alt="tool color picker" src="Help/tool_colorpicker.gif"> <b>COLOR PICKER</b> [H]<br>
     Click to get a color from a vertex or scenery.
     Hold shift to get a color directly from the screen.
     Hold alt to get a lit vertex color.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool sketch" src="Help/tool_sketch.gif"> <b>SKETCH</b> [Z]<br>
+    <p><img class="toolimgsize" alt="tool sketch" src="Help/tool_sketch.gif"> <b>SKETCH</b> [Z]<br>
     Click and drag to sketch. Hold shift to place lines.
     Hold alt to erase the sketch lines.
     Hold ctrl to move the sketch lines.
     </p>
 
-    <p><img alt="tool lights" src="Help/tool_lights.gif"> <b>LIGHTS</b> [J]<br>
+    <p><img class="toolimgsize" alt="tool lights" src="Help/tool_lights.gif"> <b>LIGHTS</b> [J]<br>
     Click to place a light source.
     Hold alt for vertex selection.
     Hold ctrl to move the current selection.
     </p>
 
-    <p><img alt="tool depth map" src="Help/tool_depthmap.gif"> <b>DEPTH MAP</b> [U]<br>
+    <p><img class="toolimgsize" alt="tool depth map" src="Help/tool_depthmap.gif"> <b>DEPTH MAP</b> [U]<br>
     Click and drag to edit the depth map (z-coordinates). If there are vertices selected only those will be affected.
     Hold alt to get a depth color from a vertex.
     Hold ctrl to move the current selection.
