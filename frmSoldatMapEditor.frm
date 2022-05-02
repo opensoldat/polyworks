@@ -1582,10 +1582,10 @@ Private Declare Function MoveWindow Lib "user32" ( _
     ByVal nHeight As Long, _
     ByVal bRepaint As Long) As Long
 
-Private Declare Function SystemParametersInfo& Lib "user32" Alias "SystemParametersInfoA" ( _
+Private Declare Function SystemParametersInfo Lib "user32" Alias "SystemParametersInfoA" ( _
     ByVal uAction As Long, _
     ByVal uParam As Long, lpvParam As Any, _
-    ByVal fuWinIni As Long)
+    ByVal fuWinIni As Long) As Long
 
 
 ' functions - public
@@ -1603,7 +1603,10 @@ Public Sub MaximizeBorderLessForm()
 
     If Me.Tag = vbMaximized Then Exit Sub
 
-    Dim ScreenWidth&, ScreenHeight&, ScreenLeft&, ScreenTop&
+    Dim ScreenWidth As Long
+    Dim ScreenHeight As Long
+    Dim ScreenLeft As Long
+    Dim ScreenTop As Long
     Dim DesktopArea As RECT
     Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
 
@@ -14377,7 +14380,10 @@ Private Sub mnuResetWindows_Click()
     Const FOOTER_HEIGHT = 20
 
     If Me.Tag = vbNormal Then
-        Dim ScreenWidth&, ScreenHeight&, ScreenLeft&, ScreenTop&
+        Dim ScreenWidth As Long
+        Dim ScreenHeight As Long
+        Dim ScreenLeft As Long
+        Dim ScreenTop As Long
         Dim DesktopArea As RECT
         Call SystemParametersInfo(SPI_GETWORKAREA, 0, DesktopArea, 0)
 
