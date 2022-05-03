@@ -1703,15 +1703,18 @@ Public Sub InitGfx()
     Dim i As Integer
     Dim c As Control
 
-    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_main.bmp")
-    If FileExists(appPath & "\skins\" & gfxDir & "\resize.bmp") Then
-        picResize.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\resize.bmp")
+    Dim fullGfxDir As String
+    fullGfxDir = appPath & "\skins\" & gfxDir & "\"
+
+    picTitle.Picture = LoadPicture(fullGfxDir & "titlebar_main.bmp")
+    If FileExists(fullGfxDir & "resize.bmp") Then
+        picResize.Picture = LoadPicture(fullGfxDir & "resize.bmp")
     Else
         picResize.Picture = Nothing
     End If
 
-    picGfx.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tool_gfx.bmp")
-    picButtonGfx.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\button_gfx.bmp")
+    picGfx.Picture = LoadPicture(fullGfxDir & "tool_gfx.bmp")
+    picButtonGfx.Picture = LoadPicture(fullGfxDir & "button_gfx.bmp")
 
     ' draw control box buttons
     MouseEvent2 picExit, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
