@@ -1104,10 +1104,6 @@ ErrorHandler:
 
 End Sub
 
-Private Sub lblRGB_Click(Index As Integer)
-
-End Sub
-
 Private Sub picSpectrum_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     picSpectrum_MouseMove Button, Shift, X, Y
