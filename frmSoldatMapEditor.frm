@@ -1628,38 +1628,41 @@ End Sub
 Public Sub LoadCursors()
 
     On Error GoTo ErrorHandler
+    
+    Dim cursorsDir As String
+    cursorsDir = appPath & "\skins\" & gfxDir & "\cursors\"
 
     ImageList.ListImages.Clear
 
     ' load cursors
-    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\move.cur")
-    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\create.cur")
-    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vselect.cur")
-    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pselect.cur")
-    ImageList.ListImages.Add TOOL_VCOLOR + 1, "vcolor", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vcolor.cur")
-    ImageList.ListImages.Add TOOL_PCOLOR + 1, "pcolor", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pcolor.cur")
-    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\texture.cur")
-    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\scenery.cur")
-    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\waypoint.cur")
-    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\objects.cur")
-    ImageList.ListImages.Add TOOL_COLORPICKER + 1, "colorpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\colorpicker.cur")
-    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\sketch.cur")
-    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\light.cur")
-    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\depthmap.cur")
+    ImageList.ListImages.Add TOOL_MOVE + 1, "move", LoadPicture(cursorsDir & "move.cur")
+    ImageList.ListImages.Add TOOL_CREATE + 1, "create", LoadPicture(cursorsDir & "create.cur")
+    ImageList.ListImages.Add TOOL_VSELECT + 1, "vselect", LoadPicture(cursorsDir & "vselect.cur")
+    ImageList.ListImages.Add TOOL_PSELECT + 1, "pselect", LoadPicture(cursorsDir & "pselect.cur")
+    ImageList.ListImages.Add TOOL_VCOLOR + 1, "vcolor", LoadPicture(cursorsDir & "vcolor.cur")
+    ImageList.ListImages.Add TOOL_PCOLOR + 1, "pcolor", LoadPicture(cursorsDir & "pcolor.cur")
+    ImageList.ListImages.Add TOOL_TEXTURE + 1, "texture", LoadPicture(cursorsDir & "texture.cur")
+    ImageList.ListImages.Add TOOL_SCENERY + 1, "scenery", LoadPicture(cursorsDir & "scenery.cur")
+    ImageList.ListImages.Add TOOL_WAYPOINT + 1, "waypoint", LoadPicture(cursorsDir & "waypoint.cur")
+    ImageList.ListImages.Add TOOL_OBJECTS + 1, "objects", LoadPicture(cursorsDir & "objects.cur")
+    ImageList.ListImages.Add TOOL_COLORPICKER + 1, "colorpicker", LoadPicture(cursorsDir & "colorpicker.cur")
+    ImageList.ListImages.Add TOOL_SKETCH + 1, "sketch", LoadPicture(cursorsDir & "sketch.cur")
+    ImageList.ListImages.Add TOOL_LIGHTS + 1, "lights", LoadPicture(cursorsDir & "light.cur")
+    ImageList.ListImages.Add TOOL_DEPTHMAP + 1, "depthmap", LoadPicture(cursorsDir & "depthmap.cur")
 
-    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\hand.cur")
-    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vseladd.cur")
-    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\vselsub.cur")
-    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pseladd.cur")
-    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pselsub.cur")
-    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\scale.cur")
-    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\rotate.cur")
-    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\connect.cur")
-    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\quad.cur")
-    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\pixpicker.cur")
-    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\litpicker.cur")
-    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\eraser.cur")
-    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(appPath & "\skins\" & gfxDir & "\cursors\smudge.cur")
+    ImageList.ListImages.Add TOOL_HAND + 1, "hand", LoadPicture(cursorsDir & "hand.cur")
+    ImageList.ListImages.Add TOOL_VSELADD + 1, "vseladd", LoadPicture(cursorsDir & "vseladd.cur")
+    ImageList.ListImages.Add TOOL_VSELSUB + 1, "vselsub", LoadPicture(cursorsDir & "vselsub.cur")
+    ImageList.ListImages.Add TOOL_PSELADD + 1, "pseladd", LoadPicture(cursorsDir & "pseladd.cur")
+    ImageList.ListImages.Add TOOL_PSELSUB + 1, "pselsub", LoadPicture(cursorsDir & "pselsub.cur")
+    ImageList.ListImages.Add TOOL_SCALE + 1, "scale", LoadPicture(cursorsDir & "scale.cur")
+    ImageList.ListImages.Add TOOL_ROTATE + 1, "rotate", LoadPicture(cursorsDir & "rotate.cur")
+    ImageList.ListImages.Add TOOL_CONNECT + 1, "connect", LoadPicture(cursorsDir & "connect.cur")
+    ImageList.ListImages.Add TOOL_QUAD + 1, "quad", LoadPicture(cursorsDir & "quad.cur")
+    ImageList.ListImages.Add TOOL_PIXPICKER + 1, "pixpicker", LoadPicture(cursorsDir & "pixpicker.cur")
+    ImageList.ListImages.Add TOOL_LITPICKER + 1, "litpicker", LoadPicture(cursorsDir & "litpicker.cur")
+    ImageList.ListImages.Add TOOL_ERASER + 1, "eraser", LoadPicture(cursorsDir & "eraser.cur")
+    ImageList.ListImages.Add TOOL_SMUDGE + 1, "smudge", LoadPicture(cursorsDir & "smudge.cur")
 
     ImageList.ListImages.Item(TOOL_MOVE + 1).Tag = "Move Selection"
     ImageList.ListImages.Item(TOOL_CREATE + 1).Tag = "Create Polygons"
