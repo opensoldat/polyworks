@@ -711,7 +711,7 @@ Public Sub SaveSection(sectionName As String, sectionData As String, Optional Fi
 
 End Sub
 
-Public Function LoadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer) As String
+Public Function LoadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer, Optional DefaultValue As String = "") As String
 
     Dim sString  As String
     Dim lSize    As Long
@@ -725,13 +725,13 @@ Public Function LoadString(section As String, Entry As String, Optional FileName
 
     sString = String(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, FileName)
+    lReturn = GetPrivateProfileString(section, Entry, DefaultValue, sString, lSize, FileName)
 
     LoadString = Left(sString, lReturn)
 
 End Function
 
-Public Function LoadInt(section As String, Entry As String, Optional FileName As String) As Long
+Public Function LoadInt(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Long = -1) As Long
 
     Dim lReturn As Long
 
@@ -739,7 +739,7 @@ Public Function LoadInt(section As String, Entry As String, Optional FileName As
         FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = GetPrivateProfileInt(section, Entry, -1, FileName)
+    lReturn = GetPrivateProfileInt(section, Entry, DefaultValue, FileName)
 
     LoadInt = lReturn
 
@@ -771,7 +771,7 @@ Public Function RGBtoHex(DecValue As Long) As String
 
 End Function
 
-Public Function HexToLong(hexValue As String) As Long
+Public Function HexToLong(hexValue As String, Optional DefaultValue As Long = -1) As Long
 
     On Error GoTo ErrorHandler
 
@@ -785,7 +785,7 @@ Public Function HexToLong(hexValue As String) As Long
 
 ErrorHandler:
 
-    HexToLong = -1
+    HexToLong = DefaultValue
 
 End Function
 
