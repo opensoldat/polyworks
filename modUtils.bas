@@ -17,6 +17,8 @@ Public Type TColor
     blue    As Byte
 End Type
 
+Private Declare Function GetFileAttributes Lib "kernel32" Alias "GetFileAttributesA" (ByVal lpFileName As String) As Long
+
 
 ' functions - public
 
@@ -116,11 +118,7 @@ End Function
 
 Public Function FileExists(theFileName As String) As Boolean
 
-    On Error GoTo ErrorHandler
-
-    FileExists = FileLen(theFileName) > 0
-
-ErrorHandler:
+    FileExists = GetFileAttributes(theFileName) <> -1
 
 End Function
 
