@@ -745,6 +745,20 @@ Public Function LoadInt(section As String, Entry As String, Optional FileName As
 
 End Function
 
+Public Function LoadByte(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Byte = 0) As Byte
+
+    Dim lReturn As Byte
+
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
+    End If
+
+    lReturn = GetPrivateProfileInt(section, Entry, DefaultValue, FileName)
+
+    LoadByte = lReturn
+
+End Function
+
 Public Function LoadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String  ' unused?
 
     If FileName = "" Then
