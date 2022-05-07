@@ -121,23 +121,23 @@ Public Sub LoadSettings()
 
     errVal = "3"
 
-    frmSoldatMapEditor.currentTool = LoadInt("ToolSettings", "CurrentTool")
-    frmSoldatMapEditor.ohSnap = LoadString("ToolSettings", "SnapVertices")
-    frmSoldatMapEditor.snapToGrid = LoadString("ToolSettings", "SnapToGrid")
-    frmSoldatMapEditor.fixedTexture = LoadString("ToolSettings", "FixedTexture")
-    frmSoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity") / 100
-    frmSoldatMapEditor.colorRadius = LoadInt("ToolSettings", "ColorRadius")
-    gPolyColor = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor")))
-    frmSoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode")
-    frmSoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode")
-    frmSoldatMapEditor.snapRadius = LoadInt("ToolSettings", "SnapRadius")
-    frmScenery.rotateScenery = LoadString("ToolSettings", "RotateScenery")
-    frmScenery.scaleScenery = LoadString("ToolSettings", "ScaleScenery")
-    frmSoldatMapEditor.xTexture = LoadInt("ToolSettings", "TextureWidth")
-    frmSoldatMapEditor.yTexture = LoadInt("ToolSettings", "TextureHeight")
-    frmSoldatMapEditor.gTextureFile = LoadString("ToolSettings", "Texture", , 1024)
-    frmSoldatMapEditor.mnuCustomX.Checked = LoadString("ToolSettings", "CustomX")
-    frmSoldatMapEditor.mnuCustomY.Checked = LoadString("ToolSettings", "CustomY")
+    frmSoldatMapEditor.currentTool = LoadByte("ToolSettings", "CurrentTool", , 1)
+    frmSoldatMapEditor.ohSnap = LoadBoolean("ToolSettings", "SnapVertices", , True)
+    frmSoldatMapEditor.snapToGrid = LoadBoolean("ToolSettings", "SnapToGrid", , True)
+    frmSoldatMapEditor.fixedTexture = LoadBoolean("ToolSettings", "FixedTexture", , False)
+    frmSoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity", , 100) / 100
+    frmSoldatMapEditor.colorRadius = LoadInt("ToolSettings", "ColorRadius", , 16)
+    gPolyColor = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor", , , "FFFFFF")))
+    frmSoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode", , 1)
+    frmSoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode", , 0)
+    frmSoldatMapEditor.snapRadius = LoadInt("ToolSettings", "SnapRadius", , 8)
+    frmScenery.rotateScenery = LoadBoolean("ToolSettings", "RotateScenery", , False)
+    frmScenery.scaleScenery = LoadBoolean("ToolSettings", "ScaleScenery", , False)
+    frmSoldatMapEditor.xTexture = LoadInt("ToolSettings", "TextureWidth", , 128)
+    frmSoldatMapEditor.yTexture = LoadInt("ToolSettings", "TextureHeight", , 128)
+    frmSoldatMapEditor.gTextureFile = LoadString("ToolSettings", "Texture", , 1024, "banana.bmp")
+    frmSoldatMapEditor.mnuCustomX.Checked = LoadBoolean("ToolSettings", "CustomX", , False)
+    frmSoldatMapEditor.mnuCustomY.Checked = LoadBoolean("ToolSettings", "CustomY", , False)
 
     errVal = "4"
 
