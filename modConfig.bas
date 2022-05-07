@@ -256,7 +256,8 @@ Public Sub SaveSettings()
     Dim sNull As String
     sNull = Chr(0)
     Dim isNewFile As Boolean
-    isNewFile = False
+    
+    isNewFile = Not FileExists(appPath & "\polyworks.ini")
 
     ' preferences
     iniString = _
@@ -281,7 +282,8 @@ Public Sub SaveSettings()
         "Topmost=" & frmSoldatMapEditor.topmost & sNull & _
         "MinZoom=" & Trim(Str(frmSoldatMapEditor.gMaxZoom * 100)) & sNull & _
         "MaxZoom=" & Trim(Str(frmSoldatMapEditor.gMinZoom * 100)) & sNull & _
-        "ResetZoom=" & Trim(Str(frmSoldatMapEditor.gResetZoom * 100)) & sNull & sNull
+        "ResetZoom=" & Trim(Str(frmSoldatMapEditor.gResetZoom * 100)) & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Preferences", iniString
 
     ' display
@@ -296,7 +298,8 @@ Public Sub SaveSettings()
         "Waypoints=" & frmSoldatMapEditor.showWaypoints & sNull & _
         "Grid=" & frmSoldatMapEditor.showGrid & sNull & _
         "Lights=" & frmSoldatMapEditor.showLights & sNull & _
-        "Sketch=" & frmSoldatMapEditor.showSketch & sNull & sNull
+        "Sketch=" & frmSoldatMapEditor.showSketch & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Display", iniString
 
     ' tool settings
@@ -318,7 +321,8 @@ Public Sub SaveSettings()
         "TextureHeight=" & frmSoldatMapEditor.yTexture & sNull & _
         "Texture=" & frmSoldatMapEditor.gTextureFile & sNull & _
         "CustomX=" & frmSoldatMapEditor.mnuCustomX.Checked & sNull & _
-        "CustomY=" & frmSoldatMapEditor.mnuCustomY.Checked & sNull & sNull
+        "CustomY=" & frmSoldatMapEditor.mnuCustomY.Checked & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "ToolSettings", iniString
 
     ' hotkeys
@@ -336,7 +340,8 @@ Public Sub SaveSettings()
         "ColorPicker=" & frmTools.GetHotKey(10) & sNull & _
         "Sketch=" & frmTools.GetHotKey(11) & sNull & _
         "Lights=" & frmTools.GetHotKey(12) & sNull & _
-        "Depthmap=" & frmTools.GetHotKey(13) & sNull & sNull
+        "Depthmap=" & frmTools.GetHotKey(13) & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "HotKeys", iniString
 
     ' waypoint keys
@@ -345,7 +350,8 @@ Public Sub SaveSettings()
         "Right=" & frmWaypoints.GetWaypointKey(1) & sNull & _
         "Up=" & frmWaypoints.GetWaypointKey(2) & sNull & _
         "Down=" & frmWaypoints.GetWaypointKey(3) & sNull & _
-        "Fly=" & frmWaypoints.GetWaypointKey(4) & sNull & sNull
+        "Fly=" & frmWaypoints.GetWaypointKey(4) & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "WaypointKeys", iniString
 
     ' layer keys
@@ -357,7 +363,8 @@ Public Sub SaveSettings()
         "Points=" & frmDisplay.GetLayerKey(4) & sNull & _
         "Scenery=" & frmDisplay.GetLayerKey(5) & sNull & _
         "Objects=" & frmDisplay.GetLayerKey(6) & sNull & _
-        "Waypoints=" & frmDisplay.GetLayerKey(7) & sNull & sNull
+        "Waypoints=" & frmDisplay.GetLayerKey(7) & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "LayerKeys", iniString
 
     ' palette
