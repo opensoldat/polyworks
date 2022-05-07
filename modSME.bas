@@ -759,6 +759,24 @@ Public Function LoadByte(section As String, Entry As String, Optional FileName A
 
 End Function
 
+Public Function LoadBoolean(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Boolean = False) As Boolean
+
+    Dim sString  As String
+    Dim lSize    As Long
+    Dim lReturn  As Long
+
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
+    End If
+
+    sString = String(10, "*")
+    lSize = Len(sString)
+    lReturn = GetPrivateProfileString(section, Entry, DefaultValue, sString, lSize, FileName)
+
+    LoadBoolean = Trim(LCase(Left(sString, lReturn))) = "true"
+
+End Function
+
 Public Function LoadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String  ' unused?
 
     If FileName = "" Then
