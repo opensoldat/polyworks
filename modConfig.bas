@@ -105,17 +105,17 @@ Public Sub LoadSettings()
 
     errVal = "2"
 
-    frmSoldatMapEditor.showBG = LoadString("Display", "Background")
-    frmSoldatMapEditor.showPolys = LoadString("Display", "Polys")
-    frmSoldatMapEditor.showTexture = LoadString("Display", "Texture")
-    frmSoldatMapEditor.showWireframe = LoadString("Display", "Wireframe")
-    frmSoldatMapEditor.showPoints = LoadString("Display", "Points")
-    frmSoldatMapEditor.showScenery = LoadString("Display", "Scenery")
-    frmSoldatMapEditor.showObjects = LoadString("Display", "Objects")
-    frmSoldatMapEditor.showWaypoints = LoadString("Display", "Waypoints")
-    frmSoldatMapEditor.showGrid = LoadString("Display", "Grid")
-    frmSoldatMapEditor.showLights = LoadString("Display", "Lights")
-    frmSoldatMapEditor.showSketch = LoadString("Display", "Sketch")
+    frmSoldatMapEditor.showBG = LoadBoolean("Display", "Background", , True)
+    frmSoldatMapEditor.showPolys = LoadBoolean("Display", "Polys", , True)
+    frmSoldatMapEditor.showTexture = LoadBoolean("Display", "Texture", , True)
+    frmSoldatMapEditor.showWireframe = LoadBoolean("Display", "Wireframe", , False)
+    frmSoldatMapEditor.showPoints = LoadBoolean("Display", "Points", , False)
+    frmSoldatMapEditor.showScenery = LoadBoolean("Display", "Scenery", , True)
+    frmSoldatMapEditor.showObjects = LoadBoolean("Display", "Objects", , True)
+    frmSoldatMapEditor.showWaypoints = LoadBoolean("Display", "Waypoints", , False)
+    frmSoldatMapEditor.showGrid = LoadBoolean("Display", "Grid", , False)
+    frmSoldatMapEditor.showLights = LoadBoolean("Display", "Lights", , True)
+    frmSoldatMapEditor.showSketch = LoadBoolean("Display", "Sketch", , True)
 
     frmSoldatMapEditor.mnuGrid.Checked = frmSoldatMapEditor.showGrid
 
