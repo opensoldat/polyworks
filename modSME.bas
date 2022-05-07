@@ -777,6 +777,9 @@ Public Function HexToLong(hexValue As String, Optional DefaultValue As Long = -1
 
     If Len(hexValue) > 8 Then
         hexValue = Right(hexValue, 8)
+    ElseIf Len(hexValue) = 0 Then
+        hexValue = DefaultValue
+        Exit Function
     End If
 
     HexToLong = CLng("&H" & hexValue)
