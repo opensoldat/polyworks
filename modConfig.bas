@@ -363,6 +363,25 @@ Public Sub SaveSettings()
     ' palette
     frmPalette.SavePalette appPath & "\palettes\current.txt"
 
+    ' recent files
+    iniString = _
+        "01=" & frmSoldatMapEditor.mnuRecent(0).Caption & sNull & _
+        "02=" & frmSoldatMapEditor.mnuRecent(1).Caption & sNull & _
+        "03=" & frmSoldatMapEditor.mnuRecent(2).Caption & sNull & _
+        "04=" & frmSoldatMapEditor.mnuRecent(3).Caption & sNull & _
+        "05=" & frmSoldatMapEditor.mnuRecent(4).Caption & sNull & _
+        "06=" & frmSoldatMapEditor.mnuRecent(5).Caption & sNull & _
+        "07=" & frmSoldatMapEditor.mnuRecent(6).Caption & sNull & _
+        "08=" & frmSoldatMapEditor.mnuRecent(7).Caption & sNull & _
+        "09=" & frmSoldatMapEditor.mnuRecent(8).Caption & sNull & _
+        "10=" & frmSoldatMapEditor.mnuRecent(9).Caption & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
+    SaveSection "RecentFiles", iniString
+
+    ' gfx dir
+    iniString = "Dir=" & gfxDir & sNull & sNull
+    SaveSection "gfx", iniString
+
     ' workspace
     isNewFile = Not FileExists(appPath & "\workspace\current.ini")
 
@@ -382,24 +401,6 @@ Public Sub SaveSettings()
     SaveWindow "Scenery", frmScenery, frmScenery.collapsed, isNewFile
     SaveWindow "Waypoints", frmWaypoints, frmWaypoints.collapsed, isNewFile
     SaveWindow "Texture", frmTexture, frmTexture.collapsed, isNewFile
-
-    ' recent files
-    iniString = _
-        "01=" & frmSoldatMapEditor.mnuRecent(0).Caption & sNull & _
-        "02=" & frmSoldatMapEditor.mnuRecent(1).Caption & sNull & _
-        "03=" & frmSoldatMapEditor.mnuRecent(2).Caption & sNull & _
-        "04=" & frmSoldatMapEditor.mnuRecent(3).Caption & sNull & _
-        "05=" & frmSoldatMapEditor.mnuRecent(4).Caption & sNull & _
-        "06=" & frmSoldatMapEditor.mnuRecent(5).Caption & sNull & _
-        "07=" & frmSoldatMapEditor.mnuRecent(6).Caption & sNull & _
-        "08=" & frmSoldatMapEditor.mnuRecent(7).Caption & sNull & _
-        "09=" & frmSoldatMapEditor.mnuRecent(8).Caption & sNull & _
-        "10=" & frmSoldatMapEditor.mnuRecent(9).Caption & sNull & sNull
-    SaveSection "RecentFiles", iniString
-
-    ' gfx dir
-    iniString = "Dir=" & gfxDir & sNull & sNull
-    SaveSection "gfx", iniString
 
 End Sub
 
