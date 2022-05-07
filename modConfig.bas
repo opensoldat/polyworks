@@ -218,9 +218,9 @@ Public Sub LoadSettings()
 
     errVal = "9"
 
-    gfxDir = LoadString("gfx", "Dir", , 1024)
+    gfxDir = LoadString("gfx", "Dir", , 1024, "default")
 
-    If gfxDir = "" Then gfxDir = "gfx"
+    If gfxDir = "" Then gfxDir = "default"
 
     errVal = "10"
 
