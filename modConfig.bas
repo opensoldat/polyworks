@@ -64,7 +64,7 @@ Public Sub LoadSettings()
     frmSoldatMapEditor.sceneryVerts = LoadString("Preferences", "SceneryVerts")
     frmSoldatMapEditor.topmost = LoadString("Preferences", "Topmost")
 
-    strTemp = LoadString("Preferences", "MinZoom")
+    strTemp = LoadString("Preferences", "MinZoom", , 1024, "51200")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gMinZoom = Val(strTemp) / 100
@@ -72,7 +72,7 @@ Public Sub LoadSettings()
         frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
     End If
 
-    strTemp = LoadString("Preferences", "MaxZoom")
+    strTemp = LoadString("Preferences", "MaxZoom", , 1024, "3.125")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gMaxZoom = Val(strTemp) / 100
@@ -89,7 +89,7 @@ Public Sub LoadSettings()
         frmSoldatMapEditor.gMinZoom = sgnTemp
     End If
 
-    strTemp = LoadString("Preferences", "ResetZoom")
+    strTemp = LoadString("Preferences", "ResetZoom", , 1024, "100")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
         frmSoldatMapEditor.gResetZoom = Val(strTemp) / 100
