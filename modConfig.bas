@@ -256,7 +256,7 @@ Public Sub SaveSettings()
     Dim sNull As String
     sNull = Chr(0)
     Dim isNewFile As Boolean
-    
+
     isNewFile = Not FileExists(appPath & "\polyworks.ini")
 
     ' preferences

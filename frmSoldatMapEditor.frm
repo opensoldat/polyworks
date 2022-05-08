@@ -1628,7 +1628,7 @@ End Sub
 Public Sub LoadCursors()
 
     On Error GoTo ErrorHandler
-    
+
     Dim cursorsDir As String
     cursorsDir = appPath & "\skins\" & gfxDir & "\cursors\"
 
