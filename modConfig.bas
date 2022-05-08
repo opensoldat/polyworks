@@ -385,6 +385,30 @@ Public Sub SaveSettings()
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "RecentFiles", iniString
 
+    ' polytype colors
+    iniString = _
+        "OnlyBullets=" & RGBtoHex(gPolyTypeColors(1)) & sNull & _
+        "OnlyPlayer=" & RGBtoHex(gPolyTypeColors(2)) & sNull & _
+        "DoesntCollide=" & RGBtoHex(gPolyTypeColors(3)) & sNull & _
+        "Ice=" & RGBtoHex(gPolyTypeColors(4)) & sNull & _
+        "Deadly=" & RGBtoHex(gPolyTypeColors(5)) & sNull & _
+        "BloodyDeadly=" & RGBtoHex(gPolyTypeColors(6)) & sNull & _
+        "Hurts=" & RGBtoHex(gPolyTypeColors(7)) & sNull & _
+        "Regenerates=" & RGBtoHex(gPolyTypeColors(8)) & sNull & _
+        "Lava=" & RGBtoHex(gPolyTypeColors(9)) & sNull & _
+        "TeamBullets=" & RGBtoHex(gPolyTypeColors(10)) & sNull & _
+        "TeamPlayers=" & RGBtoHex(gPolyTypeColors(11)) & sNull & _
+        "Bouncy=" & RGBtoHex(gPolyTypeColors(18)) & sNull & _
+        "Explosive=" & RGBtoHex(gPolyTypeColors(19)) & sNull & _
+        "HurtFlaggers=" & RGBtoHex(gPolyTypeColors(20)) & sNull & _
+        "OnlyFlagger=" & RGBtoHex(gPolyTypeColors(21)) & sNull & _
+        "NonFlagger=" & RGBtoHex(gPolyTypeColors(22)) & sNull & _
+        "FlagCollides=" & RGBtoHex(gPolyTypeColors(23)) & sNull & _
+        "Back=" & RGBtoHex(gPolyTypeColors(24)) & sNull & _
+        "BackTransition=" & RGBtoHex(gPolyTypeColors(25)) & _
+        IIf(isNewFile, vbNewLine, "") & sNull & sNull
+    SaveSection "PolyTypeColors", iniString
+
     ' gfx dir
     iniString = "Dir=" & gfxDir & sNull & sNull
     SaveSection "gfx", iniString
