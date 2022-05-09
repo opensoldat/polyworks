@@ -105,7 +105,7 @@ Changes in v1.5.0.13
 
 Changes in v1.5.0.12
 - added flagger collides and non-flagger collides polygon types
-- changed extension for saving from uppercase to lowercase
+- modified extension for saving from uppercase to lowercase
 
 Changes in v1.5.0.11
 - fixed bouncy polygons not being compiled correctly
@@ -129,61 +129,61 @@ Changes in v1.5.0.8
 
 Changes in v1.5.0.7
 - added mouse position label in status bar
-- fixed a small copy/paste bug
 - added right click menu on selection tools
-- changed keyboard shortcuts deselect (escape) and duplicate (ctrl+d)
+- modified keyboard shortcuts deselect (escape) and duplicate (ctrl+d)
+- modified selecting a single collider now gets its radius
 - fixed the cutting of file names in recent files menu
-- selecting a single collider now gets its radius
+- fixed a small copy/paste bug
 
 Changes in v1.5.0.6
-- copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)
-- invert selection (ctrl+i)
-- new polygon types for Soldat 1.5.1
-- manual type in transform works on everything
-- collider radius can be changed after it's placed
+- added copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)
+- added invert selection (ctrl+i)
+- added new polygon types for Soldat 1.5.1
+- modified manual type in transform works on everything
+- modified collider radius can be changed after it's placed
 - fixed a crash when loading corrupt scenery
 - fixed selection bug with hidden scenery layers
 - fixed keyboard shortcut for save as (ctrl+shift+s)
 
 Changes in v1.5.0.5
-- jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
-- fixed problems with drag and drop
-- fixed polygon blend enable/disable
-- new arrangement of the main menu
+- added new arrangement of the main menu
 - added basic texture transformation functions
 - added menu item to reset the view
-- possibility to show and hide individual scenery layers
+- added possibility to show and hide individual scenery layers
+- fixed jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
+- fixed problems with drag and drop
+- fixed polygon blend enable/disable
 
 Changes in v1.5.0.4
-- change how gif files are loaded
+- added associate pms files with polyworks on installation
+- added icons for pms and pfb files (Created by VirtualTT)
+- added more settings in preferences
+- added selection for all corners of scenery
+- modified how gif files are loaded
 - fixed undo selection
 - fixed saving of light and sketch display options
 - fixed selection rectangle bug
 - fixed command line argument bugs
-- associate pms files with polyworks on installation
-- icons for pms and pfb files (Created by VirtualTT)
-- more settings in preferences
-- selection for all corners of scenery
 - fixed transform tool
 
 Changes in v1.5.0.3
-- fixed window state errors
-- new icon is now visible in taskbar
-- fixed background color in preferences
-- wider scenery menu
+- added new icon is now visible in taskbar
 - added clear sketch function
+- modified wider scenery menu
+- fixed window state errors
+- fixed background color in preferences
 - fixed black trails in vista
 
 Changes in v1.5.0.2
+- added new icon (created by VirtualTT)
 - fixed light bugs
 - fixed avarage vertex colors not saving correctly
 - fixed opacity for the 4 first polys
 - fixed wireframe opacity bug
-- new icon (created by VirtualTT)
 
 Changes in v1.5.0.1
+- modified moved help button a bit away from minimize button
 - fixed error when switching to/from windowed mode
-- moved help button a bit away from minimize button
 
 Changes in v1.5.0.0
 - added snap selected vertices function
