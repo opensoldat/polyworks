@@ -185,55 +185,55 @@ Changes in v1.5.0.1
 - fixed error when switching to/from windowed mode
 - moved help button a bit away from minimize button
 
-changes in v1.5.0.0
+Changes in v1.5.0.0
 - added snap selected vertices function
 - fixed gif files now working correctly
 
-changes in v1.4.0.17
+Changes in v1.4.0.17
 - fixed connection severing
 - fixed vertex alpha saving in prefabs
 
 Changes in v1.4.0.16
 - more descriptive error codes
 
-changes in v1.4.0.10
+Changes in v1.4.0.10
 - fixed objects texture size bug
 - disabled undo after clear unused scenery
 
-changes in v1.4.0.9
+Changes in v1.4.0.9
 - extended path lengths from 80 to 260
 - suppressed "not acquired" DirectInput error
 - fixed loading maps with duplicates of the first scenery in the scenery list
 
-changes in v1.4.0.8
+Changes in v1.4.0.8
 - rewrote part of compile code
 - fixed scenery with wrong case not loading
 - added lights range
 
-changes in v1.4.0.6
+Changes in v1.4.0.6
 - opacity applied to polys on creation
 - added vertex alpha control in properties window
 
-changes in v1.4.0.5
+Changes in v1.4.0.5
 - fixed red/blue components of poly colors switched on export
 - fixed scenery filter bug
 
-changes in v1.4.0.4
+Changes in v1.4.0.4
 - changed ini loading code back to how it was before 1.4
 - fixed tool hotkey/circle drawing bug
 
-changes in v1.4.0.2
+Changes in v1.4.0.2
 - depth map works with opacity
 - fixed depth map tool causing crash if there are any invisible polygons
 - fixed right click menu not showing after quad checked
 
-changes in v1.4.0.1
+Changes in v1.4.0.1
 - max radius changed to 128
 - reload scenery bug fixed
 - scenery in master list sorted alphabetically
 - more error trapping
 
-changes in v1.4
+Changes in v1.4
 - sketch tool
 - lights tool
 - depthmap tool
@@ -246,7 +246,7 @@ changes in v1.4
 - introduced various new bugs
 - other stuff i am too lazy to list
 
-changes in v1.3
+Changes in v1.3
 - customizable fonts
 - texture window
 - changes to texture panel in properties window
@@ -258,7 +258,7 @@ changes in v1.3
 - save/load workspace
 - other bug fixes
 
-changes in v1.2
+Changes in v1.2
 - create poly with selected vertices function
 - better skin support
 - import function
@@ -284,7 +284,7 @@ changes in v1.2
 - turned off vsync
 - various bug fixes
 
-changes in v1.0
+Changes in v1.0
 - fast compile, no bouncy polys
 - [ and ] cycle through tools
 - custom hotkeys
