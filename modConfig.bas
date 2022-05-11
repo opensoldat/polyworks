@@ -253,10 +253,10 @@ Public Sub SaveSettings()
 
     Dim iniString As String
     Dim currentColor As Long
-    Dim sNull As String
-    sNull = Chr(0)
     Dim isNewFile As Boolean
+    Dim sNull As String
 
+    sNull = Chr(0)
     isNewFile = Not FileExists(appPath & "\polyworks.ini")
 
     ' preferences
