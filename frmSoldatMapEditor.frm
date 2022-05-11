@@ -1732,7 +1732,7 @@ Public Sub InitGfx()
 
 End Sub
 
-Public Sub Init()
+Public Sub InitDX8()
 
     On Error GoTo ErrorHandler
 
@@ -1900,7 +1900,7 @@ Public Sub ResetDevice()
     Set pathTexture = Nothing
     Set rCenterTexture = Nothing
     Set D3DDevice = Nothing
-    Init
+    InitDX8
     For i = 1 To frmScenery.lstScenery.ListCount
         RefreshSceneryTextures i
     Next
@@ -10693,7 +10693,7 @@ Private Sub Form_Load()
 
     initialized2 = False
     LoadWorkspace "current.ini", True
-    Init
+    InitDX8
 
 
     err = "Error initializing DInput"
