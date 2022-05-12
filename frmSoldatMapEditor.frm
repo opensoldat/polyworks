@@ -1365,12 +1365,6 @@ Public maxUndo As Integer
 
 
 ' vars - private
-
-Private noRedraw As Boolean
-
-Private DX As DirectX8
-Private D3D As Direct3D8
-Private D3DDevice As Direct3DDevice8
 Private DI As DirectInput8
 Private DIDevice As DirectInputDevice8
 Private DIState As DIKEYBOARDSTATE
@@ -1379,25 +1373,8 @@ Private Const BUFFER_SIZE As Long = 10
 
 Private hEvent As Long
 
-Private D3DX As D3DX8
 Private mapTexture As Direct3DTexture8
-Private particleTexture As Direct3DTexture8
-Private patternTexture As Direct3DTexture8
-Private objectsTexture As Direct3DTexture8
-Private lineTexture As Direct3DTexture8
-Private pathTexture As Direct3DTexture8
-Private rCenterTexture As Direct3DTexture8
-Private sketchTexture As Direct3DTexture8
 
-Private renderTarget As Direct3DTexture8
-Private renderSurface As Direct3DSurface8
-Private backBuffer As Direct3DSurface8
-
-Private scenerySprite As D3DXSprite
-
-Private Const COLOR_KEY As Long = &HFF00FF00
-
-Private Const FVF As Long = D3DFVF_XYZRHW Or D3DFVF_TEX1 Or D3DFVF_DIFFUSE
 Private Const FVF2 As Long = D3DFVF_XYZ
 
 Private Version As Long
@@ -1405,7 +1382,6 @@ Private Polys() As TPolygon
 Private PolyCoords() As TTriangle
 
 Private Scenery() As TScenery
-Private SceneryTextures() As TextureData
 
 Private Spawns() As TSpawnPoint
 Private Colliders() As TCollider
@@ -1478,10 +1454,7 @@ Private selectedSketch(1 To 2) As Integer
 Private circleOn As Boolean
 Private leftMouseDown As Boolean
 
-Private initialized As Boolean
-Private initialized2 As Boolean
 Private acquired As Boolean
-Private selectionChanged As Boolean
 
 Private clrPolys As Boolean
 Private clrWireframe As Boolean
@@ -1521,7 +1494,6 @@ Private pointRadius As Integer
 Private showPath1 As Boolean
 Private showPath2 As Boolean
 Private currentFunction As Byte
-Private particleSize As Single
 Private eraseCircle As Boolean
 Private eraseLines As Boolean
 
@@ -1539,9 +1511,6 @@ Private rDiff As Single
 
 Private gostek As D3DVECTOR2
 
-Private imageInfo As TImageInfo
-Private textureDesc As D3DSURFACE_DESC
-
 Private noneSelected As Boolean
 
 Private currentUndo As Integer
@@ -1551,7 +1520,6 @@ Private lastCompiled As String
 
 Private currentWaypoint As Integer
 
-Private objTexSize As D3DVECTOR2
 
 Private mIsResizingWindow As Boolean
 Private mMouseStartPosX As Long
@@ -1729,152 +1697,6 @@ Public Sub InitGfx()
     For Each c In picMenu
         MouseEvent2 c, 0, 0, BUTTON_MENU, 0, BUTTON_UP
     Next
-
-End Sub
-
-Public Sub InitDX8()
-
-    On Error GoTo ErrorHandler
-
-    initialized = False
-    noRedraw = False
-    selectionChanged = False
-
-    Dim DispMode As D3DDISPLAYMODE
-    Dim D3DWindow As D3DPRESENT_PARAMETERS
-    Dim debugVal As String
-
-
-    debugVal = "Error creating Direct3D objects"
-
-    If Not initialized2 Then
-        Set D3DX = New D3DX8
-        Set DX = New DirectX8
-        Set D3D = DX.Direct3DCreate()
-        initialized2 = True
-    End If
-
-
-    debugVal = "Error getting display mode"
-
-    D3D.GetAdapterDisplayMode D3DADAPTER_DEFAULT, DispMode
-    D3DWindow.Windowed = 1
-    D3DWindow.SwapEffect = D3DSWAPEFFECT_COPY
-    D3DWindow.BackBufferFormat = D3DFMT_A8R8G8B8
-
-
-    debugVal = "Error creating D3D device"
-
-    Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, Me.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) ' Main screen turn on.
-
-
-    debugVal = "Error setting render states"
-
-    D3DDevice.SetVertexShader FVF
-    D3DDevice.SetRenderState D3DRS_LIGHTING, False
-
-    D3DDevice.SetRenderState D3DRS_CULLMODE, D3DCULL_NONE  ' polys that are ccw
-
-    D3DDevice.SetRenderState D3DRS_POINTSPRITE_ENABLE, 1
-    D3DDevice.SetRenderState D3DRS_POINTSCALE_ENABLE, 0
-    D3DDevice.SetRenderState D3DRS_POINTSIZE, FtoDW(particleSize)
-
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE
-    D3DDevice.SetTextureStageState 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE
-
-    Set renderTarget = D3DX.CreateTexture(D3DDevice, 256, 256, D3DX_DEFAULT, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT)
-    Set renderSurface = renderTarget.GetSurfaceLevel(0)
-    Set backBuffer = D3DDevice.GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO)
-
-
-    debugVal = "Error creating pattern texture"
-
-    Set patternTexture = D3DX.CreateTextureFromFile(D3DDevice, appPath & "\skins\" & gfxDir & "\pattern.bmp")
-
-
-    debugVal = "Error creating objects texture"
-
-    Set objectsTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\objects.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_LINEAR, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-    objectsTexture.GetLevelDesc 0, textureDesc
-
-    objTexSize.X = textureDesc.Width
-    objTexSize.Y = textureDesc.Height
-
-
-    debugVal = "Error creating scenery not found texture"
-
-    Set SceneryTextures(0).Texture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\notfound.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-    SceneryTextures(0).Texture.GetLevelDesc 0, textureDesc
-
-    SceneryTextures(0).Width = imageInfo.Width
-    SceneryTextures(0).Height = imageInfo.Height
-
-    SceneryTextures(0).reScale.X = SceneryTextures(0).Width / textureDesc.Width
-    SceneryTextures(0).reScale.Y = SceneryTextures(0).Height / textureDesc.Height
-
-    If SceneryTextures(0).reScale.X = 0 Or SceneryTextures(0).reScale.Y = 0 Then
-        SceneryTextures(0).reScale.X = 1
-        SceneryTextures(0).reScale.Y = 1
-    End If
-
-
-    debugVal = "Error creating line texture"
-
-    Set lineTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\lines.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-
-    debugVal = "Error creating path texture"
-
-    Set pathTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\path.png", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-
-    debugVal = "Error creating rotation center texture"
-
-    Set rCenterTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\rcenter.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-
-    debugVal = "Error creating sketch texture"
-
-    Set sketchTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\sketch.bmp", D3DX_DEFAULT, D3DX_DEFAULT, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-
-    debugVal = "Error creating scenery sprite"
-
-    Set scenerySprite = D3DX.CreateSprite(D3DDevice)
-
-
-    debugVal = "Error creating particle texture"
-
-    Set particleTexture = D3DX.CreateTextureFromFileEx(D3DDevice, appPath & "\skins\" & gfxDir & "\vertex8x8.bmp", 8, 8, _
-            D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, _
-            D3DX_FILTER_POINT, COLOR_KEY, ByVal 0, ByVal 0)
-
-    initialized = True
-
-    Exit Sub
-
-ErrorHandler:
-
-    If D3DX Is Nothing Then
-        MsgBox "Error initializing Direct3D" & vbNewLine & debugVal & vbNewLine & Error
-    Else
-        MsgBox "Error initializing Direct3D" & vbNewLine & D3DX.GetErrorString(err.Number) & vbNewLine & debugVal
-    End If
 
 End Sub
 
@@ -6165,18 +5987,6 @@ Private Function ExModeActive() As Boolean
     Else
         ExModeActive = False
     End If
-
-End Function
-
-Private Function FtoDW(f As Single) As Long
-
-    Dim buf As D3DXBuffer
-    Dim l As Long
-
-    Set buf = D3DX.CreateBuffer(4)
-    D3DX.BufferSetData buf, 0, 4, 1, f
-    D3DX.BufferGetData buf, 0, 4, 1, l
-    FtoDW = l
 
 End Function
 
