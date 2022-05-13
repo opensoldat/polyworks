@@ -23,6 +23,7 @@ Module=modConfig; modConfig.bas
 Module=modSoldatMap; modSoldatMap.bas
 Module=modUtils; modUtils.bas
 Module=modGlobals; modGlobals.bas
+Module=modInput; modInput.bas
 IconForm="frmSoldatMapEditor"
 Startup="frmSoldatMapEditor"
 HelpFile=""
