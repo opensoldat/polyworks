@@ -1373,8 +1373,6 @@ Private Const BUFFER_SIZE As Long = 10
 
 Private hEvent As Long
 
-Private mapTexture As Direct3DTexture8
-
 Private Const FVF2 As Long = D3DFVF_XYZ
 
 Private Version As Long

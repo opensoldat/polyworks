@@ -28,6 +28,7 @@ Public D3DDevice As Direct3DDevice8
 Public D3DX As D3DX8
 
 
+Public mapTexture As Direct3DTexture8
 Public particleTexture As Direct3DTexture8
 Public patternTexture As Direct3DTexture8
 Public objectsTexture As Direct3DTexture8
