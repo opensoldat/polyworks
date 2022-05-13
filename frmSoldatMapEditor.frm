@@ -1701,6 +1701,7 @@ End Sub
 Public Sub ResetDevice()
 
     On Error GoTo ErrorHandler
+
     Dim i As Integer
 
     noRedraw = True
@@ -1716,10 +1717,13 @@ Public Sub ResetDevice()
     Set particleTexture = Nothing
     Set patternTexture = Nothing
     Set sketchTexture = Nothing
+    'Set objectsTexture = Nothing
     Set lineTexture = Nothing
     Set pathTexture = Nothing
     Set rCenterTexture = Nothing
+
     Set D3DDevice = Nothing
+
     InitDX8
     For i = 1 To frmScenery.lstScenery.ListCount
         RefreshSceneryTextures i
@@ -1751,6 +1755,7 @@ Public Sub RegainFocus()
     On Error Resume Next
 
     Me.SetFocus
+
     DIDevice.Acquire
     acquired = True
     ctrlDown = False
