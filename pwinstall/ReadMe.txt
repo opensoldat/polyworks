@@ -5,7 +5,7 @@
 Soldat Polyworks 1.7.0.0
 
 
-updated 2022-04-09
+updated 2022-05-13
 
 
 
@@ -60,6 +60,60 @@ Make sure your color setting is either 16-bit or 32-bit (control panel -> displa
 Right click with the scenery tool to bring up the main scenery list.
 
 
+
+Changes in v1.7.0.0
+- added support for resetting zoom by clicking zoom label
+- added optional skinning support for resize button
+- added custom MinZoom and MaxZoom (via ini settings)
+- added reset zoom ini-setting
+- added Min/Max/Reset Zoom inputs in preferences window
+- added MinZoom/MaxZoom/ResetZoom default ini settings to polyworks.ini
+- added default shortcut key info to help page
+- added support loading of jpeg and jpg textures in map dialog
+- added snapped tool windows stay snapped to window border on resize
+- added * to filename label if there will be a prompt on close/load
+- added default values for when polyworks.ini is missing to errors on startup
+- modified use I-Beam cursor for zoom percentage input
+- modified align preference labels consistently
+- modified use large titlebar for up to 5k resolutions
+- modified only hide tool windows when moving editor window instead on mouse down
+- modified increase height of scenery list
+- modified *clr ini settings into *color
+- modified improve readability of default tools window buttons
+- modified change skin folder to <polyworks_dir>\skins\*
+- modified move default "gfx" skin into skin folder under new name "default"
+- modified sync help tools naming with current naming in program
+- modified make help html pass html validator checks
+- modified rename clrpicker.cur into colorpicker.cur
+- modified center manual and limit width to improve readability
+- modified center copyright information in help file
+- modified adjust preferences positioning and labels for consistency
+- modified don't lowercase folder selection result in preferences dialog
+- modified use consistent error messages
+- modified remove layout jump due to missing image size info in help file
+- modified save poly type color config on close in polyworks.ini
+- fixed skin colors not applied to all controls
+- fixed preference window other section "use 4 verts for scenery" text cut off
+- fixed Maximized window overlaps taskbar
+- fixed uninstaller doesn't delete new resize.bmp file
+- fixed preferences dialog other section frame border skinning wasn't applied
+- fixed issue error terminating issue when colorpicker is open
+- fixed zoom info label cut off on large zoom numbers
+- fixed broken grid rendering for narrow window sizes
+- fixed menu setting is off initially even if grid is on
+- fixed initial grid rendering for narrow windows is broken before resize
+- fixed programm doesn't open in maximized mode
+- fixed error message when selecting using vertex selection tool while zoomed in
+- fixed maximized main window gets resized after applying preferences
+- fixed point render issues in Wine (and WineD3D for Windows)
+- fixed render error when loading workspace in windowed mode
+- fixed background color assignment for options not applied for second background color
+- fixed make tool windows all snap after workspace reset in non maximized state
+- fixed reset workspace doesn't handle different taskbar size/position and 16:9 screens correctly
+- fixed getting rgb color for AARRGGBB returns wrong value
+- fixed wrong maximize button icon if main window is maximized on start up
+- fixed loading/saving zoom* config setting should use "##.#" format only to work with initial settings
+- fixed clear sketch menu doesn't rerender canvas after clear
 
 Changes in v1.6.0.1
 - added resizing support for main window (bottom right corner)
