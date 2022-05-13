@@ -5,16 +5,70 @@ Begin VB.Form frmPreferences
    ClientHeight    =   8175
    ClientLeft      =   15
    ClientTop       =   15
-   ClientWidth     =   6840
+   ClientWidth     =   8775
    ControlBox      =   0   'False
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   545
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   456
+   ScaleWidth      =   585
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
+   Begin VB.TextBox txtResetZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   89
+      Tag             =   "font1"
+      Top             =   1680
+      Width           =   735
+   End
+   Begin VB.TextBox txtMinZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   82
+      Tag             =   "font1"
+      Top             =   960
+      Width           =   735
+   End
+   Begin VB.TextBox txtMaxZoom 
+      Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Left            =   5280
+      TabIndex        =   81
+      Tag             =   "font1"
+      Top             =   1320
+      Width           =   735
+   End
    Begin VB.PictureBox picTopmost 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
@@ -22,7 +76,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   4800
+      Left            =   6720
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -40,7 +94,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   4800
+      Left            =   6720
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -62,12 +116,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   1320
+      Left            =   1560
       Style           =   2  'Dropdown List
       TabIndex        =   6
       Tag             =   "font1"
       Top             =   3600
-      Width           =   2535
+      Width           =   4215
    End
    Begin VB.TextBox txtHotkey 
       Appearance      =   0  'Flat
@@ -85,7 +139,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   13
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   23
       Tag             =   "font1"
       Top             =   3720
@@ -108,13 +162,13 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   12
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   22
       Tag             =   "font1"
       Top             =   3720
       Width           =   255
    End
-   Begin VB.PictureBox picSekrit 
+   Begin VB.PictureBox picMore 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H004A3C31&
@@ -157,7 +211,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   4
-      Left            =   6120
+      Left            =   8040
       TabIndex        =   28
       Tag             =   "font1"
       Text            =   "X"
@@ -182,7 +236,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   3
-      Left            =   5400
+      Left            =   7320
       TabIndex        =   27
       Tag             =   "font1"
       Text            =   "Z"
@@ -207,7 +261,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   2
-      Left            =   5400
+      Left            =   7320
       TabIndex        =   24
       Tag             =   "font1"
       Text            =   "W"
@@ -232,7 +286,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   1
-      Left            =   5760
+      Left            =   7680
       TabIndex        =   26
       Tag             =   "font1"
       Text            =   "S"
@@ -257,7 +311,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   0
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   25
       Tag             =   "font1"
       Text            =   "A"
@@ -272,7 +326,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -300,7 +354,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   9
       Tag             =   "font1"
       Top             =   5520
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.TextBox txtUncomp 
       Appearance      =   0  'Flat
@@ -320,7 +374,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   8
       Tag             =   "font1"
       Top             =   4920
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.PictureBox picUncomp 
       Appearance      =   0  'Flat
@@ -329,7 +383,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -355,7 +409,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   11
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   21
       Tag             =   "font1"
       Top             =   3240
@@ -378,7 +432,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   10
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   20
       Tag             =   "font1"
       Top             =   3240
@@ -400,7 +454,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   9
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   19
       Tag             =   "font1"
       Top             =   2760
@@ -423,7 +477,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   8
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   18
       Tag             =   "font1"
       Top             =   2760
@@ -445,7 +499,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   7
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   17
       Tag             =   "font1"
       Top             =   2280
@@ -468,7 +522,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   6
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   16
       Tag             =   "font1"
       Top             =   2280
@@ -490,7 +544,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   5
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   15
       Tag             =   "font1"
       Top             =   1800
@@ -513,7 +567,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   4
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   14
       Tag             =   "font1"
       Top             =   1800
@@ -535,7 +589,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   3
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   13
       Tag             =   "font1"
       Top             =   1320
@@ -558,7 +612,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   2
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   12
       Tag             =   "font1"
       Top             =   1320
@@ -580,7 +634,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   1
-      Left            =   6240
+      Left            =   8160
       TabIndex        =   11
       Tag             =   "font1"
       Top             =   840
@@ -603,7 +657,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   0
-      Left            =   4800
+      Left            =   6720
       TabIndex        =   10
       Tag             =   "font1"
       Top             =   840
@@ -615,7 +669,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   3360
-      Left            =   5160
+      Left            =   7080
       ScaleHeight     =   224
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -636,7 +690,7 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   5
       Tag             =   "font1"
       Top             =   2640
@@ -654,18 +708,18 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       Height          =   285
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   4
       Tag             =   "font1"
       Top             =   2280
       Width           =   495
    End
-   Begin VB.PictureBox picGridClr2 
+   Begin VB.PictureBox picGridColor2 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   60
@@ -680,7 +734,7 @@ Begin VB.Form frmPreferences
       BorderStyle     =   0  'None
       ForeColor       =   &H80000008&
       Height          =   240
-      Left            =   3960
+      Left            =   5880
       ScaleHeight     =   16
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   16
@@ -744,7 +798,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   7
       Tag             =   "font1"
       Top             =   4320
-      Width           =   3495
+      Width           =   5415
    End
    Begin VB.TextBox txtDivisions 
       Appearance      =   0  'Flat
@@ -782,12 +836,12 @@ Begin VB.Form frmPreferences
       Top             =   2280
       Width           =   495
    End
-   Begin VB.PictureBox picGridClr 
+   Begin VB.PictureBox picGridColor1 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   53
@@ -811,7 +865,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   5760
+      Left            =   7680
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -837,7 +891,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   3600
+      Left            =   5520
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -863,7 +917,7 @@ Begin VB.Form frmPreferences
       EndProperty
       ForeColor       =   &H00FFFFFF&
       Height          =   360
-      Left            =   4680
+      Left            =   6600
       ScaleHeight     =   24
       ScaleMode       =   3  'Pixel
       ScaleWidth      =   64
@@ -873,12 +927,12 @@ Begin VB.Form frmPreferences
       Top             =   6120
       Width           =   960
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   38
@@ -886,12 +940,12 @@ Begin VB.Form frmPreferences
       Top             =   1680
       Width           =   255
    End
-   Begin VB.PictureBox picPointClr 
+   Begin VB.PictureBox picPointColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   37
@@ -899,12 +953,12 @@ Begin VB.Form frmPreferences
       Top             =   960
       Width           =   255
    End
-   Begin VB.PictureBox picSelectionClr 
+   Begin VB.PictureBox picSelectionColor 
       Appearance      =   0  'Flat
       BackColor       =   &H00000000&
       ForeColor       =   &H80000008&
       Height          =   255
-      Left            =   3960
+      Left            =   3840
       ScaleHeight     =   225
       ScaleWidth      =   225
       TabIndex        =   36
@@ -930,7 +984,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   29
       TabStop         =   0   'False
       Top             =   7230
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.ComboBox cboWireDest 
       BeginProperty Font 
@@ -950,7 +1004,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   30
       TabStop         =   0   'False
       Top             =   7590
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.ComboBox cboPolyDest 
       BeginProperty Font 
@@ -964,13 +1018,13 @@ Begin VB.Form frmPreferences
       EndProperty
       Height          =   360
       ItemData        =   "frmPreferences.frx":00E4
-      Left            =   2760
+      Left            =   3720
       List            =   "frmPreferences.frx":0100
       Style           =   2  'Dropdown List
       TabIndex        =   32
       TabStop         =   0   'False
       Top             =   7590
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.ComboBox cboPolySrc 
       BeginProperty Font 
@@ -984,13 +1038,13 @@ Begin VB.Form frmPreferences
       EndProperty
       Height          =   360
       ItemData        =   "frmPreferences.frx":0156
-      Left            =   2760
+      Left            =   3720
       List            =   "frmPreferences.frx":0172
       Style           =   2  'Dropdown List
       TabIndex        =   31
       TabStop         =   0   'False
       Top             =   7230
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.PictureBox picTitle 
       Align           =   1  'Align Top
@@ -1002,11 +1056,11 @@ Begin VB.Form frmPreferences
       Left            =   0
       ScaleHeight     =   17
       ScaleMode       =   3  'Pixel
-      ScaleWidth      =   456
+      ScaleWidth      =   585
       TabIndex        =   34
       TabStop         =   0   'False
       Top             =   0
-      Width           =   6840
+      Width           =   8775
       Begin VB.PictureBox picHide 
          Appearance      =   0  'Flat
          AutoRedraw      =   -1  'True
@@ -1014,7 +1068,7 @@ Begin VB.Form frmPreferences
          BorderStyle     =   0  'None
          ForeColor       =   &H80000008&
          Height          =   240
-         Left            =   6600
+         Left            =   8535
          ScaleHeight     =   16
          ScaleMode       =   3  'Pixel
          ScaleWidth      =   16
@@ -1024,6 +1078,154 @@ Begin VB.Form frmPreferences
          Top             =   0
          Width           =   240
       End
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   31
+      Left            =   6030
+      TabIndex        =   90
+      Tag             =   "font2"
+      Top             =   1680
+      Width           =   255
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Reset:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   28
+      Left            =   4440
+      TabIndex        =   88
+      Tag             =   "font2"
+      Top             =   1680
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Max:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   27
+      Left            =   4440
+      TabIndex        =   87
+      Tag             =   "font2"
+      Top             =   1320
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H00614B3D&
+      Caption         =   "Min:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   26
+      Left            =   4440
+      TabIndex        =   86
+      Tag             =   "font2"
+      Top             =   960
+      Width           =   735
+   End
+   Begin VB.Label lblPref 
+      BackColor       =   &H004A3C31&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Zoom"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   25
+      Left            =   4440
+      TabIndex        =   85
+      Tag             =   "font2"
+      Top             =   720
+      Width           =   1815
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   29
+      Left            =   6030
+      TabIndex        =   84
+      Tag             =   "font2"
+      Top             =   960
+      Width           =   255
+   End
+   Begin VB.Label lblPref 
+      BackStyle       =   0  'Transparent
+      Caption         =   "%"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   255
+      Index           =   30
+      Left            =   6030
+      TabIndex        =   83
+      Tag             =   "font2"
+      Top             =   1320
+      Width           =   255
    End
    Begin VB.Label lblPref 
       BackStyle       =   0  'Transparent
@@ -1038,9 +1240,9 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   450
+      Height          =   570
       Index           =   24
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   80
       Tag             =   "font2"
       Top             =   7515
@@ -1060,15 +1262,16 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   450
+      Height          =   570
       Index           =   23
-      Left            =   5040
+      Left            =   6960
       TabIndex        =   79
       Tag             =   "font2"
       Top             =   6960
       Width           =   1575
    End
    Begin VB.Label lblOther 
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Other"
       BeginProperty Font 
@@ -1081,24 +1284,23 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   76
       Top             =   6600
-      Width           =   735
+      Width           =   480
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   1365
       Index           =   5
-      Left            =   4560
+      Left            =   6480
       Top             =   6720
       Width           =   2175
    End
    Begin VB.Label lblPref 
-      BackColor       =   &H004A3C31&
-      BackStyle       =   0  'Transparent
-      Caption         =   "Skin"
+      BackColor       =   &H00614B3D&
+      Caption         =   "Skin:"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -1115,10 +1317,10 @@ Begin VB.Form frmPreferences
       TabIndex        =   75
       Tag             =   "font2"
       Top             =   3600
-      Width           =   975
+      Width           =   1095
    End
    Begin VB.Label lblWayKeys 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Waypoint Keys"
       BeginProperty Font 
@@ -1131,18 +1333,18 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   73
       Tag             =   "font2"
       Top             =   4440
-      Width           =   1575
+      Width           =   1365
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   1455
       Index           =   3
-      Left            =   4560
+      Left            =   6480
       Top             =   4560
       Width           =   2175
    End
@@ -1166,7 +1368,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   72
       Tag             =   "font2"
       Top             =   5280
-      Width           =   1335
+      Width           =   5415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1188,7 +1390,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   70
       Tag             =   "font2"
       Top             =   4680
-      Width           =   1335
+      Width           =   5415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1210,10 +1412,10 @@ Begin VB.Form frmPreferences
       TabIndex        =   69
       Tag             =   "font2"
       Top             =   4080
-      Width           =   975
+      Width           =   5415
    End
    Begin VB.Label lblHotkeys 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004F3D31&
       Caption         =   "HotKeys"
       BeginProperty Font 
@@ -1226,18 +1428,18 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Left            =   4800
+      Height          =   240
+      Left            =   6720
       TabIndex        =   66
       Tag             =   "font2"
       Top             =   360
-      Width           =   975
+      Width           =   765
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
       Height          =   3855
       Index           =   1
-      Left            =   4560
+      Left            =   6480
       Top             =   480
       Width           =   2175
    End
@@ -1256,7 +1458,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   12
-      Left            =   2280
+      Left            =   2190
       TabIndex        =   65
       Tag             =   "font2"
       Top             =   1320
@@ -1277,7 +1479,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   11
-      Left            =   2280
+      Left            =   2190
       TabIndex        =   64
       Tag             =   "font2"
       Top             =   960
@@ -1298,7 +1500,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   15
-      Left            =   3360
+      Left            =   3270
       TabIndex        =   63
       Tag             =   "font2"
       Top             =   2640
@@ -1319,14 +1521,13 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   14
-      Left            =   3360
+      Left            =   3270
       TabIndex        =   62
       Tag             =   "font2"
       Top             =   2280
       Width           =   255
    End
    Begin VB.Label lblPref 
-      Alignment       =   2  'Center
       BackColor       =   &H004A3C31&
       BackStyle       =   0  'Transparent
       Caption         =   "Colors"
@@ -1342,11 +1543,11 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   8
-      Left            =   3000
+      Left            =   2760
       TabIndex        =   61
       Tag             =   "font2"
       Top             =   720
-      Width           =   855
+      Width           =   1335
    End
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
@@ -1368,7 +1569,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   59
       Tag             =   "font2"
       Top             =   720
-      Width           =   855
+      Width           =   2175
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1427,7 +1628,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   13
-      Left            =   2160
+      Left            =   2070
       TabIndex        =   56
       Tag             =   "font2"
       Top             =   2280
@@ -1495,7 +1696,7 @@ Begin VB.Form frmPreferences
       TabIndex        =   52
       Tag             =   "font2"
       Top             =   2040
-      Width           =   615
+      Width           =   2055
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1516,7 +1717,7 @@ Begin VB.Form frmPreferences
       Left            =   1200
       TabIndex        =   51
       Top             =   6915
-      Width           =   1455
+      Width           =   2415
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1534,13 +1735,13 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   19
-      Left            =   2880
+      Left            =   3720
       TabIndex        =   50
       Top             =   6915
-      Width           =   1455
+      Width           =   2535
    End
    Begin VB.Label lblDirs 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Directories"
       BeginProperty Font 
@@ -1553,12 +1754,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   46
       Tag             =   "font2"
       Top             =   3240
-      Width           =   1335
+      Width           =   945
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1566,10 +1767,10 @@ Begin VB.Form frmPreferences
       Index           =   2
       Left            =   120
       Top             =   3360
-      Width           =   4335
+      Width           =   6255
    End
    Begin VB.Label lblDisplay 
-      Alignment       =   2  'Center
+      AutoSize        =   -1  'True
       BackColor       =   &H004F3D31&
       Caption         =   "Display"
       BeginProperty Font 
@@ -1582,12 +1783,12 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   45
       Tag             =   "font2"
       Top             =   360
-      Width           =   855
+      Width           =   675
    End
    Begin VB.Label lblPref 
       BackColor       =   &H00614B3D&
@@ -1604,7 +1805,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   3
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   44
       Tag             =   "font2"
       Top             =   1320
@@ -1665,7 +1866,7 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   4
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   41
       Tag             =   "font2"
       Top             =   1680
@@ -1686,13 +1887,14 @@ Begin VB.Form frmPreferences
       ForeColor       =   &H00FFFFFF&
       Height          =   255
       Index           =   2
-      Left            =   2880
+      Left            =   2760
       TabIndex        =   40
       Tag             =   "font2"
       Top             =   960
       Width           =   975
    End
    Begin VB.Label lblBlending 
+      AutoSize        =   -1  'True
       BackColor       =   &H004A3C31&
       Caption         =   "Blending"
       BeginProperty Font 
@@ -1705,11 +1907,11 @@ Begin VB.Form frmPreferences
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      Height          =   240
       Left            =   360
       TabIndex        =   39
       Top             =   6600
-      Width           =   975
+      Width           =   750
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1717,7 +1919,7 @@ Begin VB.Form frmPreferences
       Index           =   0
       Left            =   120
       Top             =   480
-      Width           =   4335
+      Width           =   6255
    End
    Begin VB.Shape fraPref 
       BorderColor     =   &H000B3C0D&
@@ -1725,7 +1927,7 @@ Begin VB.Form frmPreferences
       Index           =   4
       Left            =   120
       Top             =   6720
-      Width           =   4335
+      Width           =   6255
    End
 End
 Attribute VB_Name = "frmPreferences"
@@ -1735,28 +1937,31 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' preferences dialog - change application prefrences
+
+
 ' Fix vb6 ide casing changes
 #If False Then
-    Dim fileName, Val
-    'Dim fileName, Val
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
 
-Private Type TColor
-    red As Byte
-    green As Byte
-    blue As Byte
-End Type
 
-Private Const MinHeight = 440
-Private Const MaxHeight = 547
+' vars - public
+
+
+' vars - private
+
+Private Const MIN_HEIGHT = 440
+Private Const MAX_HEIGHT = 547
 
 Private blendModes(0 To 7) As Integer
 
-Private backClr As TColor
-Private pointClr As TColor
-Private selClr As TColor
-Private gridClr As TColor
-Private gridClr2 As TColor
+Private backgroundColor As TColor
+Private pointColor As TColor
+Private selectionColor As TColor
+Private gridColor1 As TColor
+Private gridColor2 As TColor
 
 Private spacing As Integer
 Private divisions As Integer
@@ -1767,6 +1972,305 @@ Private opacity2 As Integer
 Private sceneryVerts As Boolean
 Private topmost As Boolean
 
+Private formMinZoom As Single
+Private formMaxZoom As Single
+Private formResetZoom As Single
+
+
+' functions - public
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_preferences.bmp")
+    picHotkeys.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\tools.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picMore, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    MouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
+
+
+    Me.BackColor = bgColor
+
+    For Each c In lblPref
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    lblDisplay.BackColor = bgColor
+    lblDisplay.ForeColor = lblTextColor
+    lblHotkeys.BackColor = bgColor
+    lblHotkeys.ForeColor = lblTextColor
+    lblDirs.BackColor = bgColor
+    lblDirs.ForeColor = lblTextColor
+    lblWayKeys.BackColor = bgColor
+    lblWayKeys.ForeColor = lblTextColor
+    lblBlending.BackColor = bgColor
+    lblBlending.ForeColor = lblTextColor
+    lblOther.BackColor = bgColor
+    lblOther.ForeColor = lblTextColor
+
+    For Each c In txtHotkey
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In txtWayptKey
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+
+    For Each c In fraPref
+        c.BorderColor = frameColor
+    Next
+
+    txtWidth.BackColor = txtBackColor
+    txtWidth.ForeColor = txtTextColor
+    txtHeight.BackColor = txtBackColor
+    txtHeight.ForeColor = txtTextColor
+
+    txtSpacing.BackColor = txtBackColor
+    txtSpacing.ForeColor = txtTextColor
+    txtDivisions.BackColor = txtBackColor
+    txtDivisions.ForeColor = txtTextColor
+    txtOpacity1.BackColor = txtBackColor
+    txtOpacity1.ForeColor = txtTextColor
+    txtOpacity2.BackColor = txtBackColor
+    txtOpacity2.ForeColor = txtTextColor
+
+    txtMinZoom.BackColor = txtBackColor
+    txtMinZoom.ForeColor = txtTextColor
+    txtMaxZoom.BackColor = txtBackColor
+    txtMaxZoom.ForeColor = txtTextColor
+    txtResetZoom.BackColor = txtBackColor
+    txtResetZoom.ForeColor = txtTextColor
+
+    txtDir.BackColor = txtBackColor
+    txtDir.ForeColor = txtTextColor
+    txtUncomp.BackColor = txtBackColor
+    txtUncomp.ForeColor = txtTextColor
+    txtPrefabs.BackColor = txtBackColor
+    txtPrefabs.ForeColor = txtTextColor
+
+    cboWireSrc.BackColor = txtBackColor
+    cboWireSrc.ForeColor = txtTextColor
+    cboWireDest.BackColor = txtBackColor
+    cboWireDest.ForeColor = txtTextColor
+    cboPolySrc.BackColor = txtBackColor
+    cboPolySrc.ForeColor = txtTextColor
+    cboPolyDest.BackColor = txtBackColor
+    cboPolyDest.ForeColor = txtTextColor
+
+    cboSkin.BackColor = txtBackColor
+    cboSkin.ForeColor = txtTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' functions - private
+
+Private Function applyPreferences() As Boolean
+
+    Dim i As Integer
+    Dim mInitialWindowWidth As Long
+    Dim mInitialWindowHeight As Long
+    Dim deltaLeft As Long
+    Dim deltaTop As Long
+
+    On Error GoTo ErrorHandler
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picMore, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    If Right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
+
+    If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmSoldatMapEditor.soldatDir <> txtDir.Text Then
+        If Not Len(Dir(txtDir.Text & "Maps\", vbDirectory)) <> 0 Then
+            MsgBox "'Maps' folder does not exist in Soldat directory."
+            Exit Function
+        End If
+        If Not Len(Dir(txtDir.Text & "Textures\", vbDirectory)) <> 0 Then
+            MsgBox "'Textures' folder does not exist in Soldat directory."
+            Exit Function
+        End If
+        If Not Len(Dir(txtDir.Text & "Scenery-gfx\", vbDirectory)) <> 0 Then
+            MsgBox "'Scenery-gfx' folder does not exist in Soldat directory."
+            Exit Function
+        End If
+
+        frmSoldatMapEditor.soldatDir = txtDir.Text
+    ElseIf Len(Dir(txtDir.Text, vbDirectory)) = 0 Then
+        MsgBox "Soldat directory does not exist."
+        Exit Function
+    End If
+
+    If Right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
+
+    If Len(Dir(txtUncomp.Text, vbDirectory)) <> 0 Then
+        frmSoldatMapEditor.uncompDir = txtUncomp.Text
+    Else
+        MsgBox "Uncompiled Maps directory does not exist."
+        Exit Function
+    End If
+
+    If Right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
+
+    If Len(Dir(txtPrefabs.Text, vbDirectory)) <> 0 Then
+        frmSoldatMapEditor.prefabDir = txtPrefabs.Text
+    Else
+        MsgBox "Prefabs Maps directory does not exist."
+        Exit Function
+    End If
+
+    frmSoldatMapEditor.wireBlendSrc = blendModes(cboWireSrc.ListIndex)
+    frmSoldatMapEditor.wireBlendDest = blendModes(cboWireDest.ListIndex)
+    frmSoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
+    frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
+
+    frmSoldatMapEditor.backgroundColor = RGB(backgroundColor.blue, backgroundColor.green, backgroundColor.red)
+    frmSoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
+    frmSoldatMapEditor.selectionColor = RGB(selectionColor.blue, selectionColor.green, selectionColor.red)
+    frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
+    frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
+
+    mInitialWindowWidth = frmSoldatMapEditor.Width
+    mInitialWindowHeight = frmSoldatMapEditor.Height
+
+    If frmSoldatMapEditor.Tag = vbNormal Then
+        frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
+        frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
+
+        ' TODO: move to function
+        If Len(frmDisplay.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowHeight, formHeight)
+            frmDisplay.Move (frmDisplay.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmInfo.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowHeight, formHeight)
+            frmInfo.Move (frmInfo.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmPalette.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowHeight, formHeight)
+            frmPalette.Move (frmPalette.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmScenery.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowHeight, formHeight)
+            frmScenery.Move (frmScenery.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTexture.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowHeight, formHeight)
+            frmTexture.Move (frmTexture.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmTools.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowHeight, formHeight)
+            frmTools.Move (frmTools.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+        If Len(frmWaypoints.Tag) <> 0 Then
+            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowWidth, formWidth)
+            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowHeight, formHeight)
+            frmWaypoints.Move (frmWaypoints.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+        End If
+    End If
+
+    frmSoldatMapEditor.formWidth = formWidth
+    frmSoldatMapEditor.formHeight = formHeight
+
+    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
+    frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
+
+    frmSoldatMapEditor.gridSpacing = spacing
+    frmSoldatMapEditor.gridDivisions = divisions
+    frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
+    frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
+
+
+    frmSoldatMapEditor.gMinZoom = formMinZoom / 100
+    frmSoldatMapEditor.gMaxZoom = formMaxZoom / 100
+    frmSoldatMapEditor.gResetZoom = formResetZoom / 100
+
+    frmSoldatMapEditor.sceneryVerts = sceneryVerts
+    frmSoldatMapEditor.topmost = topmost
+
+    Debug.Assert txtHotkey.LBound = frmTools.picTools.LBound
+    Debug.Assert txtHotkey.UBound = frmTools.picTools.UBound
+
+    For i = txtHotkey.LBound To txtHotkey.UBound
+        frmTools.SetHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
+        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
+    Next
+
+    Debug.Assert txtWayptKey.LBound = frmWaypoints.picType.LBound
+    Debug.Assert txtWayptKey.UBound = frmWaypoints.picType.UBound
+    Debug.Assert txtWayptKey.LBound = frmWaypoints.lblType.LBound
+    Debug.Assert txtWayptKey.UBound = frmWaypoints.lblType.UBound
+
+    For i = txtWayptKey.LBound To txtWayptKey.UBound
+        frmWaypoints.SetWaypointKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
+        frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
+        frmWaypoints.lblType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
+    Next
+
+    If cboSkin.List(cboSkin.ListIndex) <> gfxDir Then
+        gfxDir = cboSkin.List(cboSkin.ListIndex)
+        frmSoldatMapEditor.LoadColors
+        frmSoldatMapEditor.SetColors
+        frmSoldatMapEditor.InitGfx
+        frmColor.SetColors
+        frmDisplay.SetColors
+        frmInfo.SetColors
+        frmMap.SetColors
+        frmPalette.SetColors
+        frmPreferences.SetColors
+        frmScenery.SetColors
+        frmSoldatMapEditor.SetColors
+        frmTexture.SetColors
+        frmTools.SetColors
+        frmWaypoints.SetColors
+        frmDisplay.RefreshButtons
+    End If
+
+    frmSoldatMapEditor.SetPreferences
+
+    applyPreferences = True
+
+    Exit Function
+
+ErrorHandler:
+
+    MsgBox "Error applying preferences" & vbNewLine & Error
+
+End Function
+
+
+' events - public
+
+
+' events - private
+
 Private Sub picHide_Click()
 
     Unload Me
@@ -1774,12 +2278,12 @@ Private Sub picHide_Click()
 
 End Sub
 
-Private Sub picSekrit_Click()
+Private Sub picMore_Click()
 
-    If Me.ScaleHeight < MaxHeight - 20 Then
-        Me.Height = MaxHeight * Screen.TwipsPerPixelY
+    If Me.ScaleHeight < MAX_HEIGHT - 20 Then
+        Me.Height = MAX_HEIGHT * Screen.TwipsPerPixelY
     Else
-        Me.Height = MinHeight * Screen.TwipsPerPixelY
+        Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
     End If
 
 End Sub
@@ -1804,135 +2308,6 @@ Private Sub picCancel_Click()
 
 End Sub
 
-Private Function applyPreferences() As Boolean
-
-    Dim i As Integer
-
-    On Error GoTo ErrorHandler
-
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    If right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
-
-    If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmSoldatMapEditor.soldatDir <> txtDir.Text Then
-        If Not Len(Dir(txtDir.Text & "Maps\", vbDirectory)) <> 0 Then
-            MsgBox "'Maps' folder does not exist in Soldat directory."
-            Exit Function
-        End If
-        If Not Len(Dir(txtDir.Text & "Textures\", vbDirectory)) <> 0 Then
-            MsgBox "'Textures' folder does not exist in Soldat directory."
-            Exit Function
-        End If
-        If Not Len(Dir(txtDir.Text & "Scenery-gfx\", vbDirectory)) <> 0 Then
-            MsgBox "'Scenery-gfx' folder does not exist in Soldat directory."
-            Exit Function
-        End If
-
-        frmSoldatMapEditor.soldatDir = txtDir.Text
-    ElseIf Len(Dir(txtDir.Text, vbDirectory)) = 0 Then
-        MsgBox "Soldat directory does not exist."
-        Exit Function
-    End If
-
-    If right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
-
-    If Len(Dir(txtUncomp.Text, vbDirectory)) <> 0 Then
-        frmSoldatMapEditor.uncompDir = txtUncomp.Text
-    Else
-        MsgBox "Uncompiled Maps directory does not exist."
-        Exit Function
-    End If
-
-    If right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
-
-    If Len(Dir(txtPrefabs.Text, vbDirectory)) <> 0 Then
-        frmSoldatMapEditor.prefabDir = txtPrefabs.Text
-    Else
-        MsgBox "Prefabs Maps directory does not exist."
-        Exit Function
-    End If
-
-    frmSoldatMapEditor.wireBlendSrc = blendModes(cboWireSrc.ListIndex)
-    frmSoldatMapEditor.wireBlendDest = blendModes(cboWireDest.ListIndex)
-    frmSoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
-    frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
-
-    frmSoldatMapEditor.backClr = RGB(backClr.blue, backClr.green, backClr.red)
-    frmSoldatMapEditor.pointClr = RGB(pointClr.blue, pointClr.green, pointClr.red)
-    frmSoldatMapEditor.selectionClr = RGB(selClr.blue, selClr.green, selClr.red)
-    frmSoldatMapEditor.gridClr = RGB(gridClr.blue, gridClr.green, gridClr.red)
-    frmSoldatMapEditor.gridClr2 = RGB(gridClr2.blue, gridClr2.green, gridClr2.red)
-
-    frmSoldatMapEditor.formWidth = formWidth
-    frmSoldatMapEditor.formHeight = formHeight
-    If frmSoldatMapEditor.WindowState = vbNormal Then
-        frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
-    ElseIf frmSoldatMapEditor.WindowState = vbMaximized Then
-        frmSoldatMapEditor.WindowState = vbNormal
-        frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
-        frmSoldatMapEditor.WindowState = vbMaximized
-    End If
-
-    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
-    frmSoldatMapEditor.picResize.left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
-
-    frmSoldatMapEditor.gridSpacing = spacing
-    frmSoldatMapEditor.gridDivisions = divisions
-    frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
-    frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
-
-    frmSoldatMapEditor.sceneryVerts = sceneryVerts
-    frmSoldatMapEditor.topmost = topmost
-
-    For i = 0 To 13
-        frmTools.setHotKey i, MapVirtualKey(CInt(txtHotkey(i).Tag), 0)
-        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & (txtHotkey(i).Text) & ")"
-    Next
-
-    For i = 0 To 4
-        frmWaypoints.setWayptKey i, MapVirtualKey(CInt(txtWayptKey(i).Tag), 0)
-        frmWaypoints.picType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
-        frmWaypoints.lblType(i).ToolTipText = " (" & (txtWayptKey(i).Text) & ")"
-    Next
-
-    If cboSkin.List(cboSkin.ListIndex) <> gfxDir Then
-        gfxDir = cboSkin.List(cboSkin.ListIndex)
-        frmSoldatMapEditor.loadColors
-        frmSoldatMapEditor.SetColors
-        frmSoldatMapEditor.initGfx
-        frmColor.SetColors
-        frmDisplay.SetColors
-        frmInfo.SetColors
-        frmMap.SetColors
-        frmPalette.SetColors
-        frmPreferences.SetColors
-        frmScenery.SetColors
-        frmSoldatMapEditor.SetColors
-        frmTexture.SetColors
-        frmTools.SetColors
-        frmWaypoints.SetColors
-        frmDisplay.refreshButtons
-    End If
-
-    frmSoldatMapEditor.setPreferences
-
-    applyPreferences = True
-
-    Exit Function
-
-ErrorHandler:
-
-    MsgBox "Error applying preferences" & vbNewLine & Error$
-
-End Function
-
 Private Sub picOK_Click()
 
     If applyPreferences Then
@@ -1947,8 +2322,8 @@ Private Sub Form_Load()
     Dim i As Integer
 
     On Error GoTo ErrorHandler
-    
-    Me.Height = MinHeight * Screen.TwipsPerPixelY
+
+    Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
     sceneryVerts = frmSoldatMapEditor.sceneryVerts
     topmost = frmSoldatMapEditor.topmost
@@ -1964,24 +2339,24 @@ Private Sub Form_Load()
     blendModes(6) = 5
     blendModes(7) = 6
 
-    backClr = getRGB(frmSoldatMapEditor.backClr)
-    pointClr = getRGB(frmSoldatMapEditor.pointClr)
-    selClr = getRGB(frmSoldatMapEditor.selectionClr)
-    gridClr = getRGB(frmSoldatMapEditor.gridClr)
-    gridClr2 = getRGB(frmSoldatMapEditor.gridClr2)
+    backgroundColor = GetRGB(frmSoldatMapEditor.backgroundColor)
+    pointColor = GetRGB(frmSoldatMapEditor.pointColor)
+    selectionColor = GetRGB(frmSoldatMapEditor.selectionColor)
+    gridColor1 = GetRGB(frmSoldatMapEditor.gridColor1)
+    gridColor2 = GetRGB(frmSoldatMapEditor.gridColor2)
 
-    For i = 0 To 7
+    For i = LBound(blendModes) To UBound(blendModes)
         If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
         If frmSoldatMapEditor.wireBlendDest = blendModes(i) Then cboWireDest.ListIndex = i
         If frmSoldatMapEditor.polyBlendSrc = blendModes(i) Then cboPolySrc.ListIndex = i
         If frmSoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
     Next
 
-    Me.picBackClr.BackColor = RGB(backClr.red, backClr.green, backClr.blue)
-    Me.picPointClr.BackColor = RGB(pointClr.red, pointClr.green, pointClr.blue)
-    Me.picSelectionClr.BackColor = RGB(selClr.red, selClr.green, selClr.blue)
-    Me.picGridClr.BackColor = RGB(gridClr.red, gridClr.green, gridClr.blue)
-    Me.picGridClr2.BackColor = RGB(gridClr2.red, gridClr2.green, gridClr2.blue)
+    Me.picBackColor.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
+    Me.picPointColor.BackColor = RGB(pointColor.red, pointColor.green, pointColor.blue)
+    Me.picSelectionColor.BackColor = RGB(selectionColor.red, selectionColor.green, selectionColor.blue)
+    Me.picGridColor1.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
+    Me.picGridColor2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
 
     txtWidth.Text = frmSoldatMapEditor.formWidth
     txtHeight.Text = frmSoldatMapEditor.formHeight
@@ -1997,25 +2372,32 @@ Private Sub Form_Load()
     opacity2 = frmSoldatMapEditor.gridOp2 / 255 * 100
     txtOpacity2.Text = opacity2
 
-    For i = 0 To 13
-        txtHotkey(i).Text = Chr$(MapVirtualKey(frmTools.getHotKey(i), 1))
-        txtHotkey(i).Tag = Asc(txtHotkey(i).Text)
+    txtMinZoom.Text = frmSoldatMapEditor.gMinZoom * 100
+    txtMaxZoom.Text = frmSoldatMapEditor.gMaxZoom * 100
+    txtResetZoom.Text = frmSoldatMapEditor.gResetZoom * 100
+    formMinZoom = txtMinZoom.Text
+    formMaxZoom = txtMaxZoom.Text
+    formResetZoom = txtResetZoom.Text
+
+    For i = txtHotkey.LBound To txtHotkey.UBound
+        txtHotkey(i).Text = Chr(MapVirtualKey(frmTools.GetHotKey(i), 1))
+        txtHotkey(i).Tag = AscDef(txtHotkey(i).Text, 0)
     Next
 
-    For i = 0 To 4
-        txtWayptKey(i).Text = Chr$(MapVirtualKey(frmWaypoints.getWayptKey(i), 1))
+    For i = txtWayptKey.LBound To txtWayptKey.UBound
+        txtWayptKey(i).Text = Chr(MapVirtualKey(frmWaypoints.GetWaypointKey(i), 1))
         txtWayptKey(i).Tag = Asc(txtWayptKey(i).Text)
     Next
 
     Dim file As Variant
 
-    file = Dir$(appPath & "\*.*", vbDirectory)
+    file = Dir(appPath & "\skins\*.*", vbDirectory)
     Do While Len(file)
-        If FileExists(appPath & "\" & file & "\colors.ini") Then
+        If FileExists(appPath & "\skins\" & file & "\colors.ini") Then
             cboSkin.AddItem file
             If file = gfxDir Then cboSkin.ListIndex = cboSkin.ListCount - 1
         End If
-        file = Dir$
+        file = Dir
     Loop
 
     txtDir.Text = frmSoldatMapEditor.soldatDir
@@ -2026,73 +2408,62 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Preferences form"
+    MsgBox "Error loading Preferences form" & vbNewLine & Error
 
 End Sub
 
-Private Function FileExists(fileName As String) As Boolean
+Private Sub picPointColor_Click()
 
-    On Error GoTo ErrorHandler
-
-    FileExists = FileLen(fileName) > 0
-
-ErrorHandler:
-
-End Function
-
-
-Private Sub picPointClr_Click()
-
-    frmColor.InitClr pointClr.red, pointClr.green, pointClr.blue
+    frmColor.InitColor pointColor.red, pointColor.green, pointColor.blue
     frmColor.Show 1
-    picPointClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    pointClr.red = frmColor.red
-    pointClr.green = frmColor.green
-    pointClr.blue = frmColor.blue
+    picPointColor.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    pointColor.red = frmColor.red
+    pointColor.green = frmColor.green
+    pointColor.blue = frmColor.blue
 
 End Sub
 
-Private Sub picSelectionClr_Click()
+Private Sub picSelectionColor_Click()
 
-    frmColor.InitClr selClr.red, selClr.green, selClr.blue
+    frmColor.InitColor selectionColor.red, selectionColor.green, selectionColor.blue
     frmColor.Show 1
-    picSelectionClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    selClr.red = frmColor.red
-    selClr.green = frmColor.green
-    selClr.blue = frmColor.blue
+    picSelectionColor.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    selectionColor.red = frmColor.red
+    selectionColor.green = frmColor.green
+    selectionColor.blue = frmColor.blue
 
 End Sub
 
-Private Sub picBackClr_Click()
+Private Sub picBackColor_Click()
 
-    frmColor.InitClr backClr.red, backClr.green, backClr.blue
+    frmColor.InitColor backgroundColor.red, backgroundColor.green, backgroundColor.blue
     frmColor.Show 1
-    picBackClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    backClr.red = frmColor.red
-    backClr.green = frmColor.green
-    backClr.blue = frmColor.blue
+    picBackColor.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    backgroundColor.red = frmColor.red
+    backgroundColor.green = frmColor.green
+    backgroundColor.blue = frmColor.blue
 
 End Sub
 
-Private Sub picGridClr_Click()
+Private Sub picGridColor1_Click()
 
-    frmColor.InitClr gridClr.red, gridClr.green, gridClr.blue
+    frmColor.InitColor gridColor1.red, gridColor1.green, gridColor1.blue
     frmColor.Show 1
-    picGridClr.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    gridClr.red = frmColor.red
-    gridClr.green = frmColor.green
-    gridClr.blue = frmColor.blue
+    picGridColor1.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    gridColor1.red = frmColor.red
+    gridColor1.green = frmColor.green
+    gridColor1.blue = frmColor.blue
 
 End Sub
 
-Private Sub picGridClr2_Click()
+Private Sub picGridColor2_Click()
 
-    frmColor.InitClr gridClr2.red, gridClr2.green, gridClr2.blue
+    frmColor.InitColor gridColor2.red, gridColor2.green, gridColor2.blue
     frmColor.Show 1
-    picGridClr2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
-    gridClr2.red = frmColor.red
-    gridClr2.green = frmColor.green
-    gridClr2.blue = frmColor.blue
+    picGridColor2.BackColor = RGB(frmColor.red, frmColor.green, frmColor.blue)
+    gridColor2.red = frmColor.red
+    gridColor2.green = frmColor.green
+    gridColor2.blue = frmColor.blue
 
 End Sub
 
@@ -2102,13 +2473,11 @@ Private Sub picFolder_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtDir.Text = folder
     End If
 
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2118,13 +2487,11 @@ Private Sub picUncomp_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtUncomp.Text = folder
     End If
 
-    mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2134,13 +2501,11 @@ Private Sub picPrefabs_Click()
 
     folder = SelectFolder(Me)
 
-    If right(folder, 1) <> "\" Then folder = folder & "\"
-
-    If Len(folder) > 1 Then
+    If Len(folder) > 0 Then
         txtPrefabs.Text = folder
     End If
 
-    mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -2159,8 +2524,98 @@ End Sub
 
 Private Sub txtHotkey_KeyPress(Index As Integer, KeyAscii As Integer)
 
-    txtHotkey(Index).Text = UCase$(Chr$(KeyAscii))
+    txtHotkey(Index).Text = UCase(Chr(KeyAscii))
     KeyAscii = 0
+
+End Sub
+
+Private Sub txtMaxZoom_Change()
+
+    If IsNumeric(txtMaxZoom.Text) = False And txtMaxZoom.Text <> "" Then
+        txtMaxZoom.Text = formMaxZoom
+    End If
+
+End Sub
+
+Private Sub txtMaxZoom_GotFocus()
+
+    txtMaxZoom.SelStart = 0
+    txtMaxZoom.SelLength = Len(txtMaxZoom.Text)
+
+End Sub
+
+Private Sub txtMaxZoom_LostFocus()
+
+    If IsNumeric(txtMaxZoom.Text) = False And txtMaxZoom.Text <> "" Then
+        txtMaxZoom.Text = formMaxZoom
+    ElseIf txtMaxZoom.Text = "" Then
+        txtMaxZoom.Text = formMaxZoom
+    ElseIf txtMaxZoom.Text > 0 And txtMaxZoom.Text < 10000000 Then
+        formMaxZoom = CSng(txtMaxZoom.Text)
+        txtMaxZoom.Text = formMaxZoom
+    Else
+        txtMaxZoom.Text = formMaxZoom
+    End If
+
+End Sub
+
+Private Sub txtMinZoom_Change()
+
+    If IsNumeric(txtMinZoom.Text) = False And txtMinZoom.Text <> "" Then
+        txtMinZoom.Text = formMinZoom
+    End If
+
+End Sub
+
+Private Sub txtMinZoom_GotFocus()
+
+    txtMinZoom.SelStart = 0
+    txtMinZoom.SelLength = Len(txtMinZoom.Text)
+
+End Sub
+
+Private Sub txtMinZoom_LostFocus()
+
+    If IsNumeric(txtMinZoom.Text) = False And txtMinZoom.Text <> "" Then
+        txtMinZoom.Text = formMinZoom
+    ElseIf txtMinZoom.Text = "" Then
+        txtMinZoom.Text = formMinZoom
+    ElseIf txtMinZoom.Text > 0 And txtMinZoom.Text < 10000000 Then
+        formMinZoom = CSng(txtMinZoom.Text)
+        txtMinZoom.Text = formMinZoom
+    Else
+        txtMinZoom.Text = formMinZoom
+    End If
+
+End Sub
+
+Private Sub txtResetZoom_Change()
+
+    If IsNumeric(txtResetZoom.Text) = False And txtResetZoom.Text <> "" Then
+        txtResetZoom.Text = formResetZoom
+    End If
+
+End Sub
+
+Private Sub txtResetZoom_GotFocus()
+
+    txtResetZoom.SelStart = 0
+    txtResetZoom.SelLength = Len(txtResetZoom.Text)
+
+End Sub
+
+Private Sub txtResetZoom_LostFocus()
+
+    If IsNumeric(txtResetZoom.Text) = False And txtResetZoom.Text <> "" Then
+        txtResetZoom.Text = formResetZoom
+    ElseIf txtResetZoom.Text = "" Then
+        txtResetZoom.Text = formResetZoom
+    ElseIf txtResetZoom.Text >= formMinZoom And txtResetZoom.Text <= formMaxZoom Then
+        formResetZoom = CSng(txtResetZoom.Text)
+        txtResetZoom.Text = formResetZoom
+    Else
+        txtResetZoom.Text = formResetZoom
+    End If
 
 End Sub
 
@@ -2179,7 +2634,7 @@ End Sub
 
 Private Sub txtWayptKey_KeyPress(Index As Integer, KeyAscii As Integer)
 
-    txtWayptKey(Index).Text = UCase$(Chr$(KeyAscii))
+    txtWayptKey(Index).Text = UCase(Chr(KeyAscii))
     KeyAscii = 0
 
 End Sub
@@ -2329,11 +2784,11 @@ Private Sub txtWidth_LostFocus()
         txtWidth.Text = formWidth
     ElseIf txtWidth.Text = "" Then
         txtWidth.Text = formWidth
-    ElseIf txtWidth.Text >= frmSoldatMapEditor.MIN_FORM_WIDTH And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
+    ElseIf txtWidth.Text >= MAINFORM_MIN_WIDTH And txtWidth.Text <= Screen.Width / Screen.TwipsPerPixelX Then
         formWidth = Int(txtWidth.Text)
         txtWidth.Text = formWidth
     Else
-        If txtWidth.Text < frmSoldatMapEditor.MIN_FORM_WIDTH Then formWidth = frmSoldatMapEditor.MIN_FORM_WIDTH
+        If txtWidth.Text < MAINFORM_MIN_WIDTH Then formWidth = MAINFORM_MIN_WIDTH
         If txtWidth.Text > (Screen.Width / Screen.TwipsPerPixelX) Then formWidth = (Screen.Width / Screen.TwipsPerPixelX)
         txtWidth.Text = formWidth
     End If
@@ -2361,262 +2816,153 @@ Private Sub txtHeight_LostFocus()
         txtHeight.Text = formHeight
     ElseIf txtHeight.Text = "" Then
         txtHeight.Text = formHeight
-    ElseIf txtHeight.Text >= frmSoldatMapEditor.MIN_FORM_HEIGHT And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
+    ElseIf txtHeight.Text >= MAINFORM_MIN_HEIGHT And txtHeight.Text <= Screen.Height / Screen.TwipsPerPixelY Then
         formHeight = Int(txtHeight.Text)
         txtHeight.Text = formHeight
     Else
-        If txtHeight.Text < frmSoldatMapEditor.MIN_FORM_HEIGHT Then formHeight = frmSoldatMapEditor.MIN_FORM_HEIGHT
+        If txtHeight.Text < MAINFORM_MIN_HEIGHT Then formHeight = MAINFORM_MIN_HEIGHT
         If txtHeight.Text > (Screen.Height / Screen.TwipsPerPixelY) Then formHeight = (Screen.Height / Screen.TwipsPerPixelY)
         txtHeight.Text = formHeight
     End If
 
 End Sub
 
-Private Function getRGB(DecValue As Long) As TColor
+Private Sub picMore_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    Dim hexValue As String
-
-    hexValue = Hex(Val(DecValue))
-
-    If Len(hexValue) < 6 Then
-        hexValue = String(6 - Len(hexValue), "0") + hexValue
-    End If
-
-    getRGB.red = CLng("&H" + mid(hexValue, 1, 2))
-    getRGB.green = CLng("&H" + mid(hexValue, 3, 2))
-    getRGB.blue = CLng("&H" + mid(hexValue, 5, 2))
-
-End Function
-
-Private Sub picSekrit_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picMore, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
-Private Sub picSekrit_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picMore_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picSekrit, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picMore, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picCancel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picOK_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picApply_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picApply_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picApply, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picfolder_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picfolder_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picFolder, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picUncomp_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picUncomp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picUncomp, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picPrefabs_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picPrefabs_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picPrefabs, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picScenery_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_DOWN
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_DOWN
 
 End Sub
 
 Private Sub picScenery_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_MOVE
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_MOVE
 
 End Sub
 
 Private Sub picScenery_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     sceneryVerts = Not sceneryVerts
-    mouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_UP
+    MouseEvent2 picScenery, X, Y, BUTTON_SMALL, sceneryVerts, BUTTON_UP
 
 End Sub
 
 Private Sub picTopmost_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_DOWN
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_DOWN
 
 End Sub
 
 Private Sub picTopmost_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_MOVE
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_MOVE
 
 End Sub
 
 Private Sub picTopmost_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     topmost = Not topmost
-    mouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_preferences.bmp")
-    picHotkeys.Picture = LoadPicture(appPath & "\" & gfxDir & "\tools.bmp")
-
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picSekrit, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picApply, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picFolder, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picUncomp, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picPrefabs, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picScenery, 0, 0, BUTTON_SMALL, sceneryVerts, BUTTON_UP
-    mouseEvent2 picTopmost, 0, 0, BUTTON_SMALL, topmost, BUTTON_UP
-
-
-    Me.BackColor = bgClr
-
-    For i = 0 To 22
-        lblPref(i).BackColor = lblBackClr
-        lblPref(i).ForeColor = lblTextClr
-    Next
-
-    lblDisplay.BackColor = bgClr
-    lblDisplay.ForeColor = lblTextClr
-    lblHotkeys.BackColor = bgClr
-    lblHotkeys.ForeColor = lblTextClr
-    lblDirs.BackColor = bgClr
-    lblDirs.ForeColor = lblTextClr
-    lblWayKeys.BackColor = bgClr
-    lblWayKeys.ForeColor = lblTextClr
-    lblBlending.BackColor = bgClr
-    lblBlending.ForeColor = lblTextClr
-
-    For i = 0 To 13
-        txtHotkey(i).BackColor = bgClr
-        txtHotkey(i).ForeColor = lblTextClr
-    Next
-
-    For i = 0 To 4
-        txtWayptKey(i).BackColor = bgClr
-        txtWayptKey(i).ForeColor = lblTextClr
-        fraPref(i).BorderColor = frameClr
-    Next
-
-    txtWidth.BackColor = txtBackClr
-    txtWidth.ForeColor = txtTextClr
-    txtHeight.BackColor = txtBackClr
-    txtHeight.ForeColor = txtTextClr
-    txtSpacing.BackColor = txtBackClr
-    txtSpacing.ForeColor = txtTextClr
-    txtDivisions.BackColor = txtBackClr
-    txtDivisions.ForeColor = txtTextClr
-    txtOpacity1.BackColor = txtBackClr
-    txtOpacity1.ForeColor = txtTextClr
-    txtOpacity2.BackColor = txtBackClr
-    txtOpacity2.ForeColor = txtTextClr
-    txtDir.BackColor = txtBackClr
-    txtDir.ForeColor = txtTextClr
-    txtUncomp.BackColor = txtBackClr
-    txtUncomp.ForeColor = txtTextClr
-    txtPrefabs.BackColor = txtBackClr
-    txtPrefabs.ForeColor = txtTextClr
-
-    cboWireSrc.BackColor = txtBackClr
-    cboWireSrc.ForeColor = txtTextClr
-    cboWireDest.BackColor = txtBackClr
-    cboWireDest.ForeColor = txtTextClr
-    cboPolySrc.BackColor = txtBackClr
-    cboPolySrc.ForeColor = txtTextClr
-    cboPolyDest.BackColor = txtBackClr
-    cboPolyDest.ForeColor = txtTextClr
-
-    cboSkin.BackColor = txtBackClr
-    cboSkin.ForeColor = txtTextClr
-
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
+    MouseEvent2 picTopmost, X, Y, BUTTON_SMALL, topmost, BUTTON_UP
 
 End Sub

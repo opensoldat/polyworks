@@ -1,25 +1,32 @@
 Attribute VB_Name = "modSME"
 Option Explicit
 
+' misc stuff
+
+
 ' Fix vb6 ide casing changes
 #If False Then
-    Private fileName, Token, X, Y, Val
-    'Private fileName, Token, X, Y, Val
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
 
-Global Const PI As Single = 3.14159265358979  'mmm... PI
 
-Global gfxDir As String
+' vars - public
 
-Global appPath As String
-Global bgClr As Long
-Global lblBackClr As Long
-Global lblTextClr As Long
-Global txtBackClr As Long
-Global txtTextClr As Long
-Global frameClr As Long
+Public Const PI As Single = 3.14159265358979  ' mmm... PI
 
-Global font1 As String, font2 As String
+Public gfxDir As String
+
+Public appPath As String
+Public bgColor As Long
+Public lblBackColor As Long
+Public lblTextColor As Long
+Public txtBackColor As Long
+Public txtTextColor As Long
+Public frameColor As Long
+
+Public font1 As String
+Public font2 As String
 
 Public Const BUTTON_WIDTH = 64
 Public Const BUTTON_HEIGHT = 24
@@ -42,27 +49,27 @@ Public Const BUTTON_UP = 0
 Public Const BUTTON_MOVE = 1
 Public Const BUTTON_DOWN = 2
 
-'bitblt
+' bitblt
 Public Declare Function BitBlt Lib "gdi32" (ByVal hDestDC As Long, ByVal X As Long, ByVal Y As Long, _
         ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, _
         ByVal xSrc As Long, ByVal ySrc As Long, ByVal dwRop As Long) As Long
-'stretchblit
+' stretchblit
 Public Declare Function StretchBlt Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, _
         ByVal nWidth As Long, ByVal nHeight As Long, ByVal hSrcDC As Long, _
         ByVal xSrc As Long, ByVal ySrc As Long, ByVal nSrcWidth As Long, ByVal nSrcHeight As Long, _
         ByVal dwRop As Long) As Long
 
-'mouse over
+' mouse over
 Public Declare Function SetCapture Lib "user32" (ByVal hWnd As Long) As Long
 Public Declare Function GetCapture Lib "user32" () As Long
 Public Declare Function ReleaseCapture Lib "user32" () As Long
-'dragging window
+' dragging window
 Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
         (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Public Const WM_NCLBUTTONDOWN = &HA1
 
-'taskbar
+' taskbar
 Public Declare Function SetWindowPos Lib "user32" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, _
         ByVal X As Long, ByVal Y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 Public Declare Function FindWindow Lib "user32" Alias "FindWindowA" _
@@ -76,10 +83,13 @@ Public Const SWP_NOMOVE = &H2
 Public Const HWND_TOPMOST = -1
 Public Const HWND_NOTOPMOST = -2
 
-'get pixel
+' get pixel
 Public Declare Function GetPixel Lib "gdi32" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long) As Long
 
-'browse
+
+' vars - private
+
+' browse
 Private Type BROWSEINFO
     hOwner            As Long
     pidlRoot          As Long
@@ -108,7 +118,7 @@ Private Declare Function SHBrowseForFolder Lib "shell32" Alias "SHBrowseForFolde
 Private Declare Sub CoTaskMemFree Lib "ole32" (ByVal pv As Long)
 
 
-'registry
+' registry
 Private Const HKEY_CLASSES_ROOT = &H80000000
 Private Const HKEY_LOCAL_MACHINE = &H80000002
 
@@ -134,7 +144,7 @@ Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As 
 Private Declare Function lstrlenW Lib "kernel32" (ByVal lpString As Long) As Long
 
 
-'file time
+' file time
 Public Const OFS_MAXPATHNAME = 128
 Public Const OF_READWRITE = &H2
 
@@ -144,7 +154,7 @@ Public Type OFSTRUCT
     nErrCode    As Integer
     Reserved1   As Integer
     Reserved2   As Integer
-    szPathName(0 To OFS_MAXPATHNAME - 1) As Byte '0-based
+    szPathName(0 To OFS_MAXPATHNAME - 1) As Byte  ' 0-based
 End Type
 
 Public Type FILETIME
@@ -180,7 +190,7 @@ Public Declare Function FileTimeToLocalFileTime Lib "kernel32" (lpFileTime As FI
 
 Public Declare Function FileTimeToSystemTime Lib "kernel32" (lpFileTime As FILETIME, lpSystemTime As SYSTEMTIME) As Long
 
-'ini file
+' ini file
 Private Declare Function GetPrivateProfileInt Lib "kernel32" Alias "GetPrivateProfileIntA" _
         (ByVal sSectionName As String, ByVal sKeyName As String, _
         ByVal lDefault As Long, ByVal sFileName As String) As Long
@@ -200,29 +210,29 @@ Private Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePr
         (ByVal sSectionName As String, ByVal sKeyName As String, _
         ByVal sString As String, ByVal sFileName As String) As Long
 
-'ShellExecute
+' ShellExecute
 Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, _
         ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, _
         ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
-'key mapping
+' key mapping
 Public Declare Function MapVirtualKey Lib "user32" Alias "MapVirtualKeyA" _
         (ByVal wCode As Long, ByVal wMapType As Long) As Long
 
-'GDI+
+' GDI+
 Private Type GUID
-   Data1    As Long
-   Data2    As Integer
-   Data3    As Integer
-   Data4(7) As Byte
+    Data1    As Long
+    Data2    As Integer
+    Data3    As Integer
+    Data4(7) As Byte
 End Type
 
 Private Type PICTDESC
-   Size     As Long
-   Type     As Long
-   hBmp     As Long
-   hpal     As Long
-   Reserved As Long
+    Size     As Long
+    Type     As Long
+    hBmp     As Long
+    hpal     As Long
+    Reserved As Long
 End Type
 
 Private Type GdiplusStartupInput
@@ -248,7 +258,7 @@ Private Type ImageCodecInfo
     SigMaskPtr As Long
 End Type
 
-'GDI Functions
+' GDI Functions
 Private Declare Function CreateCompatibleDC Lib "gdi32" (ByVal hDC As Long) As Long
 Private Declare Function OleCreatePictureIndirect Lib "olepro32.dll" (PicDesc As PICTDESC, RefIID As GUID, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
 Private Declare Function CreateCompatibleBitmap Lib "gdi32" (ByVal hDC As Long, ByVal nWidth As Long, ByVal nHeight As Long) As Long
@@ -260,9 +270,9 @@ Private Declare Function CreateSolidBrush Lib "gdi32" (ByVal crColor As Long) As
 Private Declare Function DeleteObject Lib "gdi32" (ByVal hObject As Long) As Long
 Private Declare Function DeleteDC Lib "gdi32" (ByVal hDC As Long) As Long
 
-'GDI+ functions
-Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal fileName As Long, GpImage As Long) As Long
-Private Declare Function GdiplusStartup Lib "gdiplus.dll" (Token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
+' GDI+ functions
+Private Declare Function GdipLoadImageFromFile Lib "gdiplus.dll" (ByVal FileName As Long, GpImage As Long) As Long
+Private Declare Function GdiplusStartup Lib "gdiplus.dll" (token As Long, gdipInput As GdiplusStartupInput, GdiplusStartupOutput As Long) As Long
 Private Declare Function GdipCreateFromHDC Lib "gdiplus.dll" (ByVal hDC As Long, GpGraphics As Long) As Long
 Private Declare Function GdipDrawImageRectI Lib "gdiplus.dll" (ByVal Graphics As Long, ByVal Img As Long, ByVal X As Long, ByVal Y As Long, ByVal Width As Long, ByVal Height As Long) As Long
 Private Declare Function GdipDeleteGraphics Lib "gdiplus.dll" (ByVal Graphics As Long) As Long
@@ -270,25 +280,24 @@ Private Declare Function GdipDisposeImage Lib "gdiplus.dll" (ByVal image As Long
 Private Declare Function GdipCreateBitmapFromHBITMAP Lib "gdiplus.dll" (ByVal hBmp As Long, ByVal hpal As Long, GpBitmap As Long) As Long
 Private Declare Function GdipGetImageWidth Lib "gdiplus.dll" (ByVal image As Long, Width As Long) As Long
 Private Declare Function GdipGetImageHeight Lib "gdiplus.dll" (ByVal image As Long, Height As Long) As Long
-Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal Token As Long)
+Private Declare Sub GdiplusShutdown Lib "gdiplus.dll" (ByVal token As Long)
 
-'functions for gif loading
-Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal fileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
-Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal fileName As Long, ByRef Bitmap As Long) As Long
+' functions for gif loading
+Private Declare Function GdipSaveImageToFile Lib "gdiplus.dll" (ByVal image As Long, ByVal FileName As Long, ByRef clsidEncoder As GUID, ByRef encoderParams As Any) As Long
+Private Declare Function GdipCreateBitmapFromFile Lib "gdiplus.dll" (ByVal FileName As Long, ByRef Bitmap As Long) As Long
 Private Declare Function GdipCreateHBITMAPFromBitmap Lib "gdiplus.dll" (ByVal Bitmap As Long, ByRef hbmReturn As Long, ByVal background As Long) As Long
 Private Declare Function GdipGetImageEncodersSize Lib "gdiplus.dll" (ByRef numEncoders As Long, ByRef Size As Long) As Long
 Private Declare Function GdipGetImageEncoders Lib "gdiplus.dll" (ByVal numEncoders As Long, ByVal Size As Long, ByRef Encoders As Any) As Long
 Private Declare Function lstrcpyW Lib "kernel32" (lpString1 As Any, lpString2 As Any) As Long
 
 
-'GDI and GDI+ constants
-Private Const PLANES = 14            'Number of planes
-Private Const BITSPIXEL = 12         'Number of bits per pixel
-Private Const PATCOPY = &HF00021     '(DWORD) dest = pattern
-Private Const PICTYPE_BITMAP = 1     'Bitmap type
+' GDI and GDI+ constants
+Private Const PLANES = 14            ' Number of planes
+Private Const BITSPIXEL = 12         ' Number of bits per pixel
+Private Const PATCOPY = &HF00021     ' (DWORD) dest = pattern
+Private Const PICTYPE_BITMAP = 1     ' Bitmap type
 Private Const InterpolationModeHighQualityBicubic = 7
 Private Const GDIP_WMF_PLACEABLEKEY = &H9AC6CDD7
-Private Const UnitPixel = 2
 
 Public Sub SelectAllText(tb As TextBox)
 
@@ -316,8 +325,7 @@ Private Function GetEncoderClsid(mimeType As String, pClsid As GUID) As Boolean
     Call GdipGetImageEncoders(num, Size, pImageCodecInfo(0))
 
     For j = 0 To num - 1
-
-        buffer = Space$(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
+        buffer = Space(lstrlenW(ByVal pImageCodecInfo(j).MimeTypePtr))
 
         Call lstrcpyW(ByVal StrPtr(buffer), _
         ByVal pImageCodecInfo(j).MimeTypePtr)
@@ -358,17 +366,21 @@ End Function
 
 Public Function GifToPng(ByVal src As String, ByVal dest As String) As Long
 
-    Dim Token As Long
+    Dim token As Long
 
-    Token = InitGDIPlus
+    On Error GoTo ErrorHandler
+
+    token = InitGDIPlus
 
     If SaveImageAsPNG(src, dest) Then
-      GifToPng = -1
+        GifToPng = -1
     Else
-      GifToPng = 5
+        GifToPng = 5
     End If
 
-    FreeGDIPlus Token
+ErrorHandler:
+
+    FreeGDIPlus token
 
 End Function
 
@@ -378,25 +390,25 @@ Public Function GifToBmp(ByVal src As String, ByVal dest As String) As Long
 
 End Function
 
-'mouse event
-Public Function mouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
+' mouse event
+Public Function MouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, xSrc As Integer, ySrc As Integer, Width As Integer, Height As Integer) As Boolean
 
-    If (xVal < 0) Or (xVal > Width) Or (yVal < 0) Or (yVal > Height) Then 'the MOUSELEAVE pseudo-event
+    If (xVal < 0) Or (xVal > Width) Or (yVal < 0) Or (yVal > Height) Then  ' the MOUSELEAVE pseudo-event
         ReleaseCapture
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
         pic.Refresh
-        mouseEvent = True
-    ElseIf GetCapture() <> pic.hWnd Then 'the MOUSEENTER pseudo-event
+        MouseEvent = True
+    ElseIf GetCapture() <> pic.hWnd Then  ' the MOUSEENTER pseudo-event
         SetCapture pic.hWnd
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picGfx.hDC, xSrc + Width, ySrc, vbSrcCopy
         pic.Refresh
-        mouseEvent = True
+        MouseEvent = True
     End If
 
 End Function
 
-'mouse event
-Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
+' mouse event
+Public Function MouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal yVal As Integer, ByVal buttonType As Byte, ByVal active As Byte, ByVal action As Byte, Optional exWidth As Integer) As Boolean
 
     Dim xSrc As Integer
     Dim ySrc As Integer
@@ -427,18 +439,18 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
     If exWidth = 0 Then exWidth = Width
 
     If action = BUTTON_UP Or action = BUTTON_DOWN Then
-        mouseEvent2 = True
-    ElseIf (xVal < 0) Or (xVal > exWidth) Or (yVal < 0) Or (yVal > Height) Then 'the MOUSELEAVE pseudo-event
+        MouseEvent2 = True
+    ElseIf (xVal < 0) Or (xVal > exWidth) Or (yVal < 0) Or (yVal > Height) Then  ' the MOUSELEAVE pseudo-event
         ReleaseCapture
-        mouseEvent2 = True
+        MouseEvent2 = True
         action = BUTTON_UP
-    ElseIf GetCapture() <> pic.hWnd Then 'the MOUSEENTER pseudo-event
+    ElseIf GetCapture() <> pic.hWnd Then  ' the MOUSEENTER pseudo-event
         SetCapture pic.hWnd
-        mouseEvent2 = True
+        MouseEvent2 = True
         action = BUTTON_MOVE
     End If
 
-    If mouseEvent2 = True Then
+    If MouseEvent2 = True Then
         BitBlt pic.hDC, 0, 0, Width, Height, frmSoldatMapEditor.picButtonGfx.hDC, xSrc + Width * action, ySrc + active * Height, vbSrcCopy
         pic.Refresh
     End If
@@ -447,12 +459,12 @@ Public Function mouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox "Error in mouse event (2)" & vbNewLine & Error
 
 End Function
 
 
-'browse
+' browse
 Public Function SelectFolder(ownerForm As Form) As String
 
     Dim bi As BROWSEINFO
@@ -467,11 +479,15 @@ Public Function SelectFolder(ownerForm As Form) As String
     End With
 
     pidl = SHBrowseForFolder(bi)
-    path = Space$(MAX_PATH)
+    path = Space(MAX_PATH)
 
     If SHGetPathFromIDList(ByVal pidl, ByVal path) Then
-        pos = InStr(path, Chr$(0))
-        SelectFolder = LCase$(left(path, pos - 1))
+        pos = InStr(path, Chr(0))
+        SelectFolder = Left(path, pos - 1)
+
+        If Right(SelectFolder, 1) <> "\" Then
+            SelectFolder = SelectFolder & "\"
+        End If
     End If
 
     Call CoTaskMemFree(pidl)
@@ -480,62 +496,85 @@ End Function
 
 
 
-Public Function snapForm(currentForm As Form, otherForm As Form) As String
+Public Function SnapForm(currentForm As Form, otherForm As Form) As String
 
-    snapForm = ""
+    Const SNAP_DELTA = 8
+    Dim SNAP_DELTA_X As Single
+    Dim SNAP_DELTA_Y As Single
 
-    'snap bottom to bottom
-    If Abs(currentForm.Top + currentForm.Height - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
-            currentForm.Top = otherForm.Top + otherForm.Height - currentForm.Height
-            snapForm = "snap"
+    Dim currentFormBottom As Single
+    Dim currentFormRight As Single
+    Dim otherFormBottom As Single
+    Dim otherFormRight As Single
+
+    SNAP_DELTA_X = SNAP_DELTA * Screen.TwipsPerPixelX
+    SNAP_DELTA_Y = SNAP_DELTA * Screen.TwipsPerPixelY
+
+    currentFormBottom = currentForm.Top + currentForm.Height
+    currentFormRight = currentForm.Left + currentForm.Width
+    otherFormBottom = otherForm.Top + otherForm.Height
+    otherFormRight = otherForm.Left + otherForm.Width
+
+    SnapForm = ""
+
+    ' snap bottom to bottom
+    If Abs(currentFormBottom - otherFormBottom) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+            currentForm.Top = otherFormBottom - currentForm.Height
+            SnapForm = "snap"
         End If
-    'snap bottom to top
-    ElseIf Abs(currentForm.Top + currentForm.Height - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+    ' snap bottom to top
+    ElseIf Abs(currentFormBottom - otherForm.Top) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherForm.Top - currentForm.Height + Screen.TwipsPerPixelY
-            snapForm = "snap"
+            SnapForm = "snap"
         End If
     End If
-    'snap right to right
-    If Abs(currentForm.left + currentForm.Width - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
-        If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left + otherForm.Width - currentForm.Width
-            snapForm = "snap"
+
+    ' snap right to right
+    If Abs(currentFormRight - otherFormRight) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+            currentForm.Left = otherFormRight - currentForm.Width
+            SnapForm = "snap"
         End If
-    'snap right to left
-    ElseIf Abs(currentForm.left + currentForm.Width - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
-        If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left - currentForm.Width + Screen.TwipsPerPixelX
-            snapForm = "snap"
+    ' snap right to left
+    ElseIf Abs(currentFormRight - otherForm.Left) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+            currentForm.Left = otherForm.Left - currentForm.Width + Screen.TwipsPerPixelX
+            SnapForm = "snap"
         End If
     End If
 
 
-    'snap top to top
-    If Abs(currentForm.Top - otherForm.Top) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
+    currentFormBottom = currentForm.Top + currentForm.Height
+    currentFormRight = currentForm.Left + currentForm.Width
+
+
+    ' snap top to top
+    If Abs(currentForm.Top - otherForm.Top) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
             currentForm.Top = otherForm.Top
-            snapForm = "snap"
+            SnapForm = "snap"
         End If
-    'snap top to bottom
-    ElseIf Abs(currentForm.Top - otherForm.Top - otherForm.Height) <= 8 * Screen.TwipsPerPixelY Then
-        If (currentForm.left + currentForm.Width + 8 * Screen.TwipsPerPixelX) >= otherForm.left And currentForm.left <= (otherForm.left + otherForm.Width + 8 * Screen.TwipsPerPixelX) Then
-            currentForm.Top = otherForm.Top + otherForm.Height - Screen.TwipsPerPixelY
-            snapForm = "snap"
+    ' snap top to bottom
+    ElseIf Abs(currentForm.Top - otherFormBottom) <= SNAP_DELTA_Y Then
+        If (currentFormRight + SNAP_DELTA_X) >= otherForm.Left And currentForm.Left <= (otherFormRight + SNAP_DELTA_X) Then
+            currentForm.Top = otherFormBottom - Screen.TwipsPerPixelY
+            SnapForm = "snap"
         End If
     End If
-    'snap left to left
-    If Abs(currentForm.left - otherForm.left) <= 8 * Screen.TwipsPerPixelX Then
-        If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left
-           snapForm = "snap"
+
+    ' snap left to left
+    If Abs(currentForm.Left - otherForm.Left) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+            currentForm.Left = otherForm.Left
+            SnapForm = "snap"
         End If
-    'snap left to right
-    ElseIf Abs(currentForm.left - otherForm.left - otherForm.Width) <= 8 * Screen.TwipsPerPixelX Then
-        If (currentForm.Top + currentForm.Height + 8 * Screen.TwipsPerPixelY) >= otherForm.Top And currentForm.Top <= (otherForm.Top + otherForm.Height + 8 * Screen.TwipsPerPixelY) Then
-            currentForm.left = otherForm.left + otherForm.Width - Screen.TwipsPerPixelX
-            snapForm = "snap"
+    ' snap left to right
+    ElseIf Abs(currentForm.Left - otherFormRight) <= SNAP_DELTA_X Then
+        If (currentFormBottom + SNAP_DELTA_Y) >= otherForm.Top And currentForm.Top <= (otherFormBottom + SNAP_DELTA_Y) Then
+            currentForm.Left = otherFormRight - Screen.TwipsPerPixelX
+            SnapForm = "snap"
         End If
     End If
 
@@ -546,11 +585,10 @@ Public Function GetSoldatDir() As String
 
     On Error GoTo ErrorHandler
 
-    'HKEY_CLASSES_ROOT\Soldat\DefaultIcon
-
     Dim hKey As Long
     Dim sKey As String
 
+    ' HKEY_CLASSES_ROOT\Soldat\DefaultIcon
     sKey = "Soldat\DefaultIcon"
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
@@ -558,8 +596,7 @@ Public Function GetSoldatDir() As String
         GetSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
     Else
-        'HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
-
+        ' HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1\Inno Setup: App Path
         sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Soldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
 
@@ -578,7 +615,7 @@ Public Function GetSoldatDir() As String
     GetSoldatDir = Replace(GetSoldatDir, "/", "\")
 
     If Not DirExists(GetSoldatDir) And FileExists(GetSoldatDir) Then
-        GetSoldatDir = left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
+        GetSoldatDir = Left(GetSoldatDir, InStrRev(GetSoldatDir, "\"))
     End If
 
     If Not DirExists(GetSoldatDir) Then
@@ -589,17 +626,7 @@ Public Function GetSoldatDir() As String
 
 ErrorHandler:
 
-    MsgBox "Error getting soldat directory from registry" & vbNewLine & Error$
-
-End Function
-
-
-Private Function DirExists(DirName As String) As Boolean
-
-    On Error GoTo ErrorHandler
-    DirExists = GetAttr(DirName) And vbDirectory
-
-ErrorHandler:
+    MsgBox "Error getting soldat directory from registry" & vbNewLine & Error
 
 End Function
 
@@ -616,25 +643,25 @@ End Function
 
 Private Function GetRegValue(hSubKey As Long, sKeyName As String) As String
 
-    Dim lpValue As String 'name of the value to retrieve
-    Dim lpcbData As Long  'length of the retrieved value
+    Dim lpValue As String  ' name of the value to retrieve
+    Dim lpcbData As Long   ' length of the retrieved value
     Dim Result As Long
 
-    'if valid
+    ' if valid
     If hSubKey <> 0 Then
-        lpValue = Space$(260)
+        lpValue = Space(260)
         lpcbData = Len(lpValue)
 
-        'find the passed value if present
+        ' find the passed value if present
         If RegQueryValueEx(hSubKey, sKeyName, 0&, 0&, ByVal lpValue, lpcbData) = 0 Then
-            GetRegValue = left$(lpValue, lstrlenW(StrPtr(lpValue)))
+            GetRegValue = Left(lpValue, lstrlenW(StrPtr(lpValue)))
         End If
     End If
 
 End Function
 
 
-Public Function getFileDate(fileName As String) As Long
+Public Function GetFileDate(FileName As String) As Long
 
     On Error GoTo ErrorHandler
 
@@ -650,83 +677,115 @@ Public Function getFileDate(fileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + fileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
 
     Call FileTimeToLocalFileTime(FT_WRITE, localFT)
     FT_WRITE = localFT
     Call FileTimeToDosDateTime(FT_WRITE, VarPtr(dosDate), VarPtr(dosTime))
-    timeString = Hex$(dosTime)
+    timeString = Hex(dosTime)
     If Len(timeString) < 4 Then
-        timeString = String$(4 - Len(timeString), "0") & timeString
+        timeString = String(4 - Len(timeString), "0") & timeString
     End If
 
-    getFileDate = CLng("&H" & Hex$(dosDate) & timeString)
+    GetFileDate = CLng("&H" & Hex(dosDate) & timeString)
 
     Exit Function
 
 ErrorHandler:
 
-    MsgBox "get file date" & vbNewLine & Error$
+    MsgBox "Error getting file date" & vbNewLine & Error
 
 End Function
 
-Public Sub saveSection(sectionName As String, sectionData As String, Optional fileName As String)
+Public Sub SaveSection(sectionName As String, sectionData As String, Optional FileName As String)
 
     Dim lReturn  As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = WritePrivateProfileSection(sectionName, sectionData, fileName)
+    lReturn = WritePrivateProfileSection(sectionName, sectionData, FileName)
 
 End Sub
 
-Public Function loadString(section As String, Entry As String, Optional fileName As String, Optional length As Integer) As String
+Public Function LoadString(section As String, Entry As String, Optional FileName As String, Optional length As Integer, Optional DefaultValue As String = "") As String
 
     Dim sString  As String
     Dim lSize    As Long
     Dim lReturn  As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
     If length = 0 Then length = 10
 
-    sString = String$(length, "*")
+    sString = String(length, "*")
     lSize = Len(sString)
-    lReturn = GetPrivateProfileString(section, Entry, "", sString, lSize, fileName)
+    lReturn = GetPrivateProfileString(section, Entry, DefaultValue, sString, lSize, FileName)
 
-    loadString = left(sString, lReturn)
+    LoadString = Left(sString, lReturn)
 
 End Function
 
-Public Function loadInt(section As String, Entry As String, Optional fileName As String) As Long
+Public Function LoadInt(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Long = -1) As Long
 
     Dim lReturn As Long
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    lReturn = GetPrivateProfileInt(section, Entry, -1, fileName)
+    lReturn = GetPrivateProfileInt(section, Entry, DefaultValue, FileName)
 
-    loadInt = lReturn
+    LoadInt = lReturn
 
 End Function
 
-Public Function loadSection(section As String, ByRef lReturn As String, length As Integer, Optional fileName As String) As String
+Public Function LoadByte(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Byte = 0) As Byte
 
-    If fileName = "" Then
-        fileName = appPath & "\polyworks.ini"
+    Dim lReturn As Byte
+
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
     End If
 
-    GetPrivateProfileSection section, lReturn, length, fileName
+    lReturn = GetPrivateProfileInt(section, Entry, DefaultValue, FileName)
 
-    loadSection = lReturn
+    LoadByte = lReturn
+
+End Function
+
+Public Function LoadBoolean(section As String, Entry As String, Optional FileName As String, Optional DefaultValue As Boolean = False) As Boolean
+
+    Dim sString  As String
+    Dim lSize    As Long
+    Dim lReturn  As Long
+
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
+    End If
+
+    sString = String(10, "*")
+    lSize = Len(sString)
+    lReturn = GetPrivateProfileString(section, Entry, DefaultValue, sString, lSize, FileName)
+
+    LoadBoolean = Trim(LCase(Left(sString, lReturn))) = "true"
+
+End Function
+
+Public Function LoadSection(section As String, ByRef lReturn As String, length As Integer, Optional FileName As String) As String  ' unused?
+
+    If FileName = "" Then
+        FileName = appPath & "\polyworks.ini"
+    End If
+
+    GetPrivateProfileSection section, lReturn, length, FileName
+
+    LoadSection = lReturn
 
 End Function
 
@@ -734,22 +793,25 @@ Public Function RGBtoHex(DecValue As Long) As String
 
     Dim hexValue As String
 
-    hexValue = Hex$(Val(DecValue))
+    hexValue = Hex(Val(DecValue))
 
     If Len(hexValue) < 6 Then
-        hexValue = String$(6 - Len(hexValue), "0") + hexValue
+        hexValue = String(6 - Len(hexValue), "0") + hexValue
     End If
 
     RGBtoHex = hexValue
 
 End Function
 
-Public Function HexToLong(hexValue As String) As Long
+Public Function HexToLong(hexValue As String, Optional DefaultValue As Long = -1) As Long
 
     On Error GoTo ErrorHandler
 
     If Len(hexValue) > 8 Then
-        hexValue = right$(hexValue, 8)
+        hexValue = Right(hexValue, 8)
+    ElseIf Len(hexValue) = 0 Then
+        hexValue = DefaultValue
+        Exit Function
     End If
 
     HexToLong = CLng("&H" & hexValue)
@@ -758,7 +820,7 @@ Public Function HexToLong(hexValue As String) As Long
 
 ErrorHandler:
 
-    HexToLong = -1
+    HexToLong = DefaultValue
 
 End Function
 
@@ -778,16 +840,16 @@ Public Sub RunHelp()
 
 End Sub
 
-Public Sub SetGameMode(fileName As String)
+Public Sub SetGameMode(FileName As String)
 
     Dim lReturn As Long
     Dim gameMode As Integer
 
-    If LCase(left(fileName, 4)) = "ctf_" Then
+    If LCase(Left(FileName, 4)) = "ctf_" Then
         gameMode = 3
-    ElseIf LCase(left(fileName, 4)) = "inf_" Then
+    ElseIf LCase(Left(FileName, 4)) = "inf_" Then
         gameMode = 5
-    ElseIf LCase(left(fileName, 4)) = "htf_" Then
+    ElseIf LCase(Left(FileName, 4)) = "htf_" Then
         gameMode = 6
     Else
         gameMode = 0
@@ -799,40 +861,41 @@ End Sub
 
 Public Sub SetColors()
 
-    frmSoldatMapEditor.picMenuBar.BackColor = bgClr
-    frmSoldatMapEditor.picStatus.BackColor = bgClr
-    frmPreferences.BackColor = bgClr
-    frmColor.BackColor = bgClr
-    frmDisplay.BackColor = bgClr
-    frmInfo.BackColor = bgClr
-    frmMap.BackColor = bgClr
+    frmSoldatMapEditor.picMenuBar.BackColor = bgColor
+    frmSoldatMapEditor.picStatus.BackColor = bgColor
+    frmSoldatMapEditor.picResize.BackColor = bgColor
+    frmPreferences.BackColor = bgColor
+    frmColor.BackColor = bgColor
+    frmDisplay.BackColor = bgColor
+    frmInfo.BackColor = bgColor
+    frmMap.BackColor = bgColor
 
-    frmScenery.BackColor = bgClr
-    frmTools.BackColor = bgClr
-    frmWaypoints.BackColor = bgClr
+    frmScenery.BackColor = bgColor
+    frmTools.BackColor = bgColor
+    frmWaypoints.BackColor = bgColor
 
 End Sub
 
-'Initializes GDI+
+' Initializes GDI+
 Public Function InitGDIPlus() As Long
 
-    Dim Token    As Long
+    Dim token    As Long
     Dim gdipInit As GdiplusStartupInput
 
     gdipInit.GdiplusVersion = 1
-    GdiplusStartup Token, gdipInit, ByVal 0&
-    InitGDIPlus = Token
+    GdiplusStartup token, gdipInit, ByVal 0&
+    InitGDIPlus = token
 
 End Function
 
-'Frees GDI Plus
-Public Sub FreeGDIPlus(Token As Long)
+' Frees GDI Plus
+Public Sub FreeGDIPlus(token As Long)
 
-    GdiplusShutdown Token
+    GdiplusShutdown token
 
 End Sub
 
-'Loads the picture (optionally resized)
+' Loads the picture (optionally resized)
 Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -1, Optional Height As Long = -1, Optional ByVal BackColor As Long = vbWhite) As IPicture
 
     On Error GoTo ErrorHandler
@@ -841,25 +904,25 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     Dim hBitmap As Long
     Dim Img     As Long
     Dim hBrush As Long
-    Dim Graphics   As Long      'Graphics Object Pointer
+    Dim Graphics   As Long  ' Graphics Object Pointer
 
     Dim IID_IDispatch As GUID
     Dim pic           As PICTDESC
     Dim IPic          As IPicture
 
-    'Load the image
-    If Len(Dir$(PicFile)) <> 0 Then
+    ' Load the image
+    If Len(Dir(PicFile)) <> 0 Then
         If GdipLoadImageFromFile(StrPtr(PicFile), Img) <> 0 Then
             Exit Function
         End If
     End If
-    'Calculate picture's width and height if not specified
+    ' Calculate picture's width and height if not specified
     If Width = -1 Or Height = -1 Then
         GdipGetImageWidth Img, Width
         GdipGetImageHeight Img, Height
     End If
-    'Initialize the hDC
-    'Create a memory DC and select a bitmap into it, fill it in with the backcolor
+    ' Initialize the hDC
+    ' Create a memory DC and select a bitmap into it, fill it in with the backcolor
     hDC = CreateCompatibleDC(ByVal 0&)
     hBitmap = CreateBitmap(Width, Height, GetDeviceCaps(hDC, PLANES), GetDeviceCaps(hDC, BITSPIXEL), ByVal 0&)
     hBitmap = SelectObject(hDC, hBitmap)
@@ -867,24 +930,24 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
     hBrush = SelectObject(hDC, hBrush)
     PatBlt hDC, 0, 0, Width, Height, PATCOPY
     DeleteObject SelectObject(hDC, hBrush)
-    'Resize the picture
+    ' Resize the picture
     GdipCreateFromHDC hDC, Graphics
     GdipDrawImageRectI Graphics, Img, 0, 0, Width, Height
     GdipDeleteGraphics Graphics
     GdipDisposeImage Img
-    'Get the bitmap back
+    ' Get the bitmap back
     hBitmap = SelectObject(hDC, hBitmap)
     DeleteDC hDC
-    'Create the picture
-    'Fill in OLE IDispatch Interface ID
+    ' Create the picture
+    ' Fill in OLE IDispatch Interface ID
     IID_IDispatch.Data1 = &H20400
     IID_IDispatch.Data4(0) = &HC0
     IID_IDispatch.Data4(7) = &H46
-    'Fill Pic with necessary parts
-    pic.Size = Len(pic)       'Length of structure
-    pic.Type = PICTYPE_BITMAP 'Type of Picture (bitmap)
-    pic.hBmp = hBitmap        'Handle to bitmap
-    'Create the picture
+    ' Fill Pic with necessary parts
+    pic.Size = Len(pic)        ' Length of structure
+    pic.Type = PICTYPE_BITMAP  ' Type of Picture (bitmap)
+    pic.hBmp = hBitmap         ' Handle to bitmap
+    ' Create the picture
     OleCreatePictureIndirect pic, IID_IDispatch, True, IPic
     Set LoadPictureGDIPlus = IPic
 
@@ -892,6 +955,6 @@ Public Function LoadPictureGDIPlus(PicFile As String, Optional Width As Long = -
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading picture"
+    MsgBox "Error loading picture" & vbNewLine & Error
 
 End Function

@@ -497,11 +497,24 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' display dialog - change what will be rendered in main window
+
+
 ' Fix vb6 ide casing changes
 #If False Then
-    Private X, Y
-    'Private X, Y
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
 #End If
+
+
+' vars - public
+
+Public xPos As Integer
+Public yPos As Integer
+Public collapsed As Boolean
+
+
+' vars - private
 
 Private Const LAYER_BG As Byte = 0
 Private Const LAYER_POLYS As Byte = 1
@@ -518,23 +531,99 @@ Private layerKeys(0 To 7) As Byte
 
 Private formHeight As Integer
 
-Public collapsed As Boolean
-Public xPos As Integer
-Public yPos As Integer
 
-Public Function getLayerKey(ByVal Index As Byte) As Byte
+' functions - public
 
-    getLayerKey = layerKeys(Index)
+Public Function GetLayerKey(ByVal Index As Byte) As Byte
+
+    GetLayerKey = layerKeys(Index)
 
 End Function
 
-Public Sub setLayerKey(Index As Integer, ByVal value As Byte)
+Public Sub SetLayerKey(Index As Integer, ByVal value As Byte)
 
     If value > 0 Then
         layerKeys(Index) = value
     End If
 
 End Sub
+
+Public Sub RefreshButtons()
+
+    Dim i As Integer
+
+    Debug.Assert picLayer.LBound = LBound(layers)
+    Debug.Assert picLayer.UBound = UBound(layers)
+
+    For i = picLayer.LBound To picLayer.UBound
+        MouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
+    Next
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_display.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+
+    For Each c In lblLayer
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    SetFormFonts Me
+
+End Sub
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetLayer(Index As Integer, value As Boolean)
+
+    layers(Index) = value
+    MouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+
+End Sub
+
+
+' functions - private
+
+
+' events - public
+
+Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
+
+End Sub
+
+Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    layers(Index) = Not layers(Index)
+    frmSoldatMapEditor.SetDispOptions Index, layers(Index)
+    MouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_GotFocus()
 
@@ -550,33 +639,13 @@ Private Sub Form_Load()
 
     Me.SetColors
     formHeight = Me.ScaleHeight
-    setForm
+    SetForm
 
     Exit Sub
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Display form"
-
-End Sub
-
-Public Sub setForm()
-
-    Me.left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
-
-End Sub
-
-Public Sub setLayer(Index As Integer, value As Boolean)
-
-    layers(Index) = value
-    mouseEvent2 picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
+    MsgBox "Error loading Display form" & vbNewLine & Error
 
 End Sub
 
@@ -586,26 +655,11 @@ Private Sub lblLayer_MouseMove(Index As Integer, Button As Integer, Shift As Int
 
 End Sub
 
-Public Sub picLayer_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    mouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_DOWN
-
-End Sub
-
 Private Sub picLayer_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
+    MouseEvent2 picLayer(Index), X, Y, BUTTON_SMALL, layers(Index), BUTTON_MOVE, lblLayer(Index).Width + 16
 
 End Sub
-
-Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    layers(Index) = Not layers(Index)
-    frmSoldatMapEditor.setDispOptions Index, layers(Index)
-    mouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
-
-End Sub
-
 
 Private Sub picTitle_DblClick()
 
@@ -623,15 +677,15 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
-    snapForm Me, frmPalette
-    snapForm Me, frmWaypoints
-    snapForm Me, frmTools
-    snapForm Me, frmScenery
-    snapForm Me, frmInfo
-    snapForm Me, frmTexture
-    Me.Tag = snapForm(Me, frmSoldatMapEditor)
+    SnapForm Me, frmPalette
+    SnapForm Me, frmWaypoints
+    SnapForm Me, frmTools
+    SnapForm Me, frmScenery
+    SnapForm Me, frmInfo
+    SnapForm Me, frmTexture
+    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub
@@ -645,58 +699,18 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub refreshButtons()
-
-    Dim i As Integer
-
-    Debug.Assert picLayer.LBound = LBound(layers)
-    Debug.Assert picLayer.UBound = UBound(layers)
-
-    For i = picLayer.LBound To picLayer.UBound
-        mouseEvent2 picLayer(i), 0, 0, BUTTON_SMALL, layers(i), BUTTON_UP
-    Next
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_display.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    Me.BackColor = bgClr
-
-    For Each c In lblLayer
-        c.BackColor = lblBackClr
-        c.ForeColor = lblTextClr
-    Next
-
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub

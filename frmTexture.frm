@@ -75,34 +75,39 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' texture dialog
+
+
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+#End If
+
+
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
-Dim formHeight As Integer
 Public collapsed As Boolean
+
 Public x1tex As Single
-Public x2tex As Single
 Public y1tex As Single
+
+Public x2tex As Single
 Public y2tex As Single
 
-Private Sub Form_Load()
 
-    On Error GoTo ErrorHandler
+' vars - private
 
-    Me.SetColors
-    formHeight = Me.ScaleHeight
-    setForm
+Private formHeight As Integer
 
-    Exit Sub
 
-ErrorHandler:
+' functions - public
 
-    MsgBox Error$ & vbNewLine & "Error loading texture form"
+Public Sub SetForm()
 
-End Sub
-
-Public Sub setForm()
-
-    Me.left = xPos * Screen.TwipsPerPixelX
+    Me.Left = xPos * Screen.TwipsPerPixelX
     Me.Top = yPos * Screen.TwipsPerPixelY
     If collapsed Then
         Me.Height = 19 * Screen.TwipsPerPixelY
@@ -112,19 +117,114 @@ Public Sub setForm()
 
 End Sub
 
-Public Sub setTexCoords(tehValue As Single, Index As Integer)
+Public Sub SetTexCoords(theValue As Single, Index As Integer)
 
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
     If Index = 0 Then
-        x1tex = tehValue / 2
+        x1tex = theValue / 2
     ElseIf Index = 1 Then
-        x2tex = tehValue / 2
+        x2tex = theValue / 2
     ElseIf Index = 2 Then
-        y1tex = tehValue / 2
+        y1tex = theValue / 2
     ElseIf Index = 3 Then
-        y2tex = tehValue / 2
+        y2tex = theValue / 2
     End If
     picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
+
+End Sub
+
+Public Sub SetTexture(texturePath As String)
+
+    On Error GoTo ErrorHandler
+
+    Dim texWidth As Integer
+    Dim texHeight As Integer
+    Dim X As Integer
+    Dim Y As Integer
+
+    texWidth = frmSoldatMapEditor.xTexture
+    texHeight = frmSoldatMapEditor.yTexture
+
+    picTexture.DrawMode = 13
+
+    picTexture.Width = texWidth / 2
+    picTexture.Height = texHeight / 2
+    frmTexture.Width = (texWidth / 2 + 2 + 16) * Screen.TwipsPerPixelX
+    formHeight = texHeight / 2 + 18 + 16
+    frmTexture.Height = formHeight * Screen.TwipsPerPixelY
+    picHide.Left = frmTexture.Width / Screen.TwipsPerPixelX - 17
+
+    Dim token As Long
+    token = InitGDIPlus
+    picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
+    FreeGDIPlus token
+
+    For Y = 0 To (texHeight / 32)
+        If Y Mod 4 = 0 Then
+            picTexture.DrawWidth = 2
+        Else
+            picTexture.DrawWidth = 1
+        End If
+        picTexture.Line (0, Y * 16)-(texWidth / 2, Y * 16), RGB(0, 0, 0)
+    Next
+
+    For X = 0 To (texWidth / 32)
+        If X Mod 4 = 0 Then
+            picTexture.DrawWidth = 2
+        Else
+            picTexture.DrawWidth = 1
+        End If
+        picTexture.Line (X * 16, 0)-(X * 16, texHeight), RGB(0, 0, 0)
+    Next
+
+    x1tex = 0
+    y1tex = 0
+    x2tex = texWidth / 2
+    y2tex = texHeight / 2
+    picTexture.DrawMode = 6
+    picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error setting texture" & vbNewLine & Error
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_texture.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+
+End Sub
+
+
+' functions - private
+
+
+' events - public
+
+
+' events - private
+
+Private Sub Form_Load()
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+    formHeight = Me.ScaleHeight
+    SetForm
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error loading Texture form" & vbNewLine & Error
 
 End Sub
 
@@ -198,66 +298,6 @@ Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single,
 
 End Sub
 
-Public Sub setTexture(texturePath As String)
-
-    On Error GoTo ErrorHandler
-
-    Dim texWidth As Integer
-    Dim texHeight As Integer
-    Dim X As Integer
-    Dim Y As Integer
-
-    texWidth = frmSoldatMapEditor.xTexture
-    texHeight = frmSoldatMapEditor.yTexture
-
-    picTexture.DrawMode = 13
-
-    picTexture.Width = texWidth / 2
-    picTexture.Height = texHeight / 2
-    frmTexture.Width = (texWidth / 2 + 2 + 16) * Screen.TwipsPerPixelX
-    formHeight = texHeight / 2 + 18 + 16
-    frmTexture.Height = formHeight * Screen.TwipsPerPixelY
-    picHide.left = frmTexture.Width / Screen.TwipsPerPixelX - 17
-
-    Dim Token As Long
-    Token = InitGDIPlus
-    picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
-    FreeGDIPlus Token
-
-    For Y = 0 To (texHeight / 32)
-        If Y Mod 4 = 0 Then
-            picTexture.DrawWidth = 2
-        Else
-            picTexture.DrawWidth = 1
-        End If
-        picTexture.Line (0, Y * 16)-(texWidth / 2, Y * 16), RGB(0, 0, 0)
-    Next
-
-    For X = 0 To (texWidth / 32)
-        If X Mod 4 = 0 Then
-            picTexture.DrawWidth = 2
-        Else
-            picTexture.DrawWidth = 1
-        End If
-        picTexture.Line (X * 16, 0)-(X * 16, texHeight), RGB(0, 0, 0)
-    Next
-
-    x1tex = 0
-    y1tex = 0
-    x2tex = texWidth / 2
-    y2tex = texHeight / 2
-    picTexture.DrawMode = 6
-    picTexture.Line (x1tex, y1tex)-(x2tex, y2tex), RGB(255, 255, 255), B
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "Error setting texture" & vbNewLine & Error$
-
-End Sub
-
-
 Private Sub picTitle_DblClick()
 
     collapsed = Not collapsed
@@ -274,15 +314,15 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
-    snapForm Me, frmTools
-    snapForm Me, frmPalette
-    snapForm Me, frmWaypoints
-    snapForm Me, frmDisplay
-    snapForm Me, frmScenery
-    snapForm Me, frmInfo
-    Me.Tag = snapForm(Me, frmSoldatMapEditor)
+    SnapForm Me, frmTools
+    SnapForm Me, frmPalette
+    SnapForm Me, frmWaypoints
+    SnapForm Me, frmDisplay
+    SnapForm Me, frmScenery
+    SnapForm Me, frmInfo
+    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub
@@ -296,29 +336,18 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_texture.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    Me.BackColor = bgClr
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub

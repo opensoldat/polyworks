@@ -1694,15 +1694,145 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private formHeight As Integer
-Public collapsed As Boolean
+' info dialog - display current map information
 
-Private tempVal As Single
+
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+#End If
+
+
+' vars - public
 
 Public xPos As Integer
 Public yPos  As Integer
+Public collapsed As Boolean
+
 Public noChange As Boolean
+
+
+' vars - private
+
+Private formHeight As Integer
+
+Private tempVal As Single
+
 Private applyChange As Boolean
+
+
+' functions - public
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_properties.bmp")
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+    For Each c In lblInfo
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In picProp
+        c.BackColor = bgColor
+    Next
+
+    For Each c In txtScenProp
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In txtQuadX
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In txtQuadY
+        c.BackColor = bgColor
+        c.ForeColor = lblTextColor
+    Next
+    For Each c In txtScale
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In txtTexture
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+    For Each c In lblCount
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    txtVertexAlpha.BackColor = txtBackColor
+    txtVertexAlpha.ForeColor = txtTextColor
+    txtBounciness.BackColor = txtBackColor
+    txtBounciness.ForeColor = txtTextColor
+
+    lblDimensions.BackColor = lblBackColor
+    lblDimensions.ForeColor = lblTextColor
+
+    txtRotate.BackColor = txtBackColor
+    txtRotate.ForeColor = txtTextColor
+    cboLevel.BackColor = txtBackColor
+    cboLevel.ForeColor = txtTextColor
+    cboPolyType.BackColor = txtBackColor
+    cboPolyType.ForeColor = txtTextColor
+
+    For Each c In txtLightProp
+        c.BackColor = txtBackColor
+        c.ForeColor = txtTextColor
+    Next
+
+    square.BorderColor = lblTextColor
+    diagonal.BorderColor = lblTextColor
+
+    SetFormFonts Me
+
+End Sub
+
+
+' functions - private
+
+
+' events - public
+
+Public Sub mnuProp_Click(Index As Integer)
+
+    Dim i As Integer
+
+    For i = mnuProp.LBound To mnuProp.UBound
+        mnuProp(i).Checked = False
+    Next
+    For i = picProp.LBound To picProp.UBound
+        picProp(i).Visible = False
+    Next
+
+    mnuProp(Index).Checked = True
+
+    picProp(Index).Visible = True
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_Load()
 
@@ -1712,7 +1842,7 @@ Private Sub Form_Load()
 
     formHeight = Me.ScaleHeight
 
-    setForm
+    SetForm
 
     cboPolyType.ListIndex = 0
     lblDimensions.Caption = "Dimensions: " & frmSoldatMapEditor.xTexture & " x " & frmSoldatMapEditor.yTexture
@@ -1725,26 +1855,14 @@ Private Sub Form_Load()
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Properties form"
-
-End Sub
-
-Public Sub setForm()
-
-    Me.left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
+    MsgBox "Error loading Properties form" & vbNewLine & Error
 
 End Sub
 
 Private Sub cboPolyType_Click()
 
     If Not noChange Then
-        frmSoldatMapEditor.applyPolyType cboPolyType.ListIndex
+        frmSoldatMapEditor.ApplyPolyType cboPolyType.ListIndex
     End If
 
     If cboPolyType.ListIndex = 18 Then
@@ -1768,10 +1886,11 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtLightProp(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
+            frmSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then
-            frmSoldatMapEditor.applyLightProp txtLightProp(Index).Text, Index
+            frmSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 And txtLightProp(Index).Text <= 100 Then
+           ' no op
         Else
             txtLightProp(Index).Text = tempVal
         End If
@@ -1786,7 +1905,7 @@ End Sub
 
 Private Sub picLight_Click()
 
-    frmSoldatMapEditor.setLightColor
+    frmSoldatMapEditor.SetLightColor
 
 End Sub
 
@@ -1806,7 +1925,7 @@ Private Sub txtQuadX_LostFocus(Index As Integer)
     ElseIf txtQuadX(Index).Text < 0 Or txtQuadX(Index).Text > frmSoldatMapEditor.xTexture Then
         txtQuadX(Index).Text = tempVal
     Else
-        frmTexture.setTexCoords txtQuadX(Index).Text, Index
+        frmTexture.SetTexCoords txtQuadX(Index).Text, Index
     End If
     tempVal = 0
 
@@ -1828,7 +1947,7 @@ Private Sub txtQuadY_LostFocus(Index As Integer)
     ElseIf txtQuadY(Index).Text < 0 Or txtQuadY(Index).Text > frmSoldatMapEditor.yTexture Then
         txtQuadY(Index).Text = tempVal
     Else
-        frmTexture.setTexCoords txtQuadY(Index).Text, Index + 2
+        frmTexture.SetTexCoords txtQuadY(Index).Text, Index + 2
     End If
     tempVal = 0
 
@@ -1845,7 +1964,7 @@ End Sub
 Private Sub txtRotate_LostFocus()
 
     If IsNumeric(txtRotate.Text) And applyChange Then
-        frmSoldatMapEditor.applyRotate (txtRotate.Text / 180 * PI)
+        frmSoldatMapEditor.ApplyRotate (txtRotate.Text / 180 * PI)
     Else
         txtRotate.Text = tempVal
     End If
@@ -1865,9 +1984,9 @@ Private Sub txtScale_LostFocus(Index As Integer)
 
     If IsNumeric(txtScale(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmSoldatMapEditor.applyScale (txtScale(Index).Text / 100), 1
+            frmSoldatMapEditor.ApplyScale (txtScale(Index).Text / 100), 1
         ElseIf Index = 1 Then
-            frmSoldatMapEditor.applyScale 1, (txtScale(Index).Text / 100)
+            frmSoldatMapEditor.ApplyScale 1, (txtScale(Index).Text / 100)
         End If
     Else
         txtScale(Index).Text = tempVal
@@ -1881,7 +2000,7 @@ End Sub
 Private Sub cboLevel_Click()
 
     If Not noChange Then
-        frmSoldatMapEditor.applySceneryProp cboLevel.ListIndex, 4
+        frmSoldatMapEditor.ApplySceneryProp cboLevel.ListIndex, 4
     End If
 
 End Sub
@@ -1899,11 +2018,11 @@ Private Sub txtScenProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtScenProp(Index).Text) And applyChange Then
         If Index = 0 Or Index = 1 Then
-            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 100, Index
+            frmSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 100, Index
         ElseIf Index = 2 And txtScenProp(Index).Text >= 0 And txtScenProp(Index).Text <= 100 Then
-            frmSoldatMapEditor.applySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
+            frmSoldatMapEditor.ApplySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
         ElseIf Index = 3 And txtScenProp(Index).Text >= -360 And txtScenProp(Index).Text <= 360 Then
-            frmSoldatMapEditor.applySceneryProp txtScenProp(Index).Text / 180 * PI, Index
+            frmSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 180 * PI, Index
         Else
             txtScenProp(Index).Text = tempVal
         End If
@@ -1927,7 +2046,7 @@ End Sub
 Private Sub txtTexture_LostFocus(Index As Integer)
 
     If IsNumeric(txtTexture(Index).Text) And applyChange Then
-        frmSoldatMapEditor.applyTextureCoords txtTexture(Index).Text, Index
+        frmSoldatMapEditor.ApplyTextureCoords txtTexture(Index).Text, Index
     Else
         txtTexture(Index).Text = tempVal
     End If
@@ -1952,7 +2071,7 @@ Private Sub txtVertexAlpha_LostFocus()
     ElseIf txtVertexAlpha.Text < 0 Or txtVertexAlpha.Text > 100 Then
         txtVertexAlpha.Text = tempVal
     ElseIf applyChange Then
-        frmSoldatMapEditor.applyVertexAlpha txtVertexAlpha.Text / 100
+        frmSoldatMapEditor.ApplyVertexAlpha txtVertexAlpha.Text / 100
     End If
 
     tempVal = 0
@@ -1975,7 +2094,7 @@ Private Sub txtBounciness_LostFocus()
     ElseIf txtBounciness.Text < 0 Then
         txtBounciness.Text = tempVal
     ElseIf applyChange Then
-        frmSoldatMapEditor.applyBounciness 1 + (txtBounciness.Text / 100)
+        frmSoldatMapEditor.ApplyBounciness 1 + (txtBounciness.Text / 100)
     End If
 
     tempVal = 0
@@ -1988,21 +2107,6 @@ Private Sub cmdDefault_Click()
     applyChange = True
     cmdDefault.SetFocus
     frmSoldatMapEditor.RegainFocus
-
-End Sub
-
-Public Sub mnuProp_Click(Index As Integer)
-
-    Dim i As Integer
-
-    For i = 0 To 5
-        mnuProp(i).Checked = False
-        picProp(i).Visible = False
-    Next
-
-    mnuProp(Index).Checked = True
-
-    picProp(Index).Visible = True
 
 End Sub
 
@@ -2022,15 +2126,15 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
-    snapForm Me, frmPalette
-    snapForm Me, frmWaypoints
-    snapForm Me, frmTools
-    snapForm Me, frmScenery
-    snapForm Me, frmDisplay
-    snapForm Me, frmTexture
-    Me.Tag = snapForm(Me, frmSoldatMapEditor)
+    SnapForm Me, frmPalette
+    SnapForm Me, frmWaypoints
+    SnapForm Me, frmTools
+    SnapForm Me, frmScenery
+    SnapForm Me, frmDisplay
+    SnapForm Me, frmTexture
+    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
 
 End Sub
@@ -2044,99 +2148,34 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPropMenu_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
-    PopupMenu mnuProperties, , picPropMenu.left + 32, picPropMenu.Top + 16
+    PopupMenu mnuProperties, , picPropMenu.Left + 32, picPropMenu.Top + 16
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
 Private Sub picPropMenu_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_properties.bmp")
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picPropMenu, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    Me.BackColor = bgClr
-    For i = 0 To 35
-        lblInfo(i).BackColor = lblBackClr
-        lblInfo(i).ForeColor = lblTextClr
-    Next
-    For i = 0 To 5
-        picProp(i).BackColor = bgClr
-    Next
-
-    For i = 0 To 1
-        txtScenProp(i).BackColor = txtBackClr
-        txtScenProp(i).ForeColor = txtTextClr
-        txtQuadX(i).BackColor = bgClr
-        txtQuadX(i).ForeColor = lblTextClr
-        txtQuadY(i).BackColor = bgClr
-        txtQuadY(i).ForeColor = lblTextClr
-    Next
-    For i = 0 To 1
-        txtScale(i).BackColor = txtBackClr
-        txtScale(i).ForeColor = txtTextClr
-        txtTexture(i).BackColor = txtBackClr
-        txtTexture(i).ForeColor = txtTextClr
-    Next
-    For i = 0 To 6
-        lblCount(i).BackColor = lblBackClr
-        lblCount(i).ForeColor = lblTextClr
-    Next
-
-    lblDimensions.BackColor = lblBackClr
-    lblDimensions.ForeColor = lblTextClr
-
-    txtRotate.BackColor = txtBackClr
-    txtRotate.ForeColor = txtTextClr
-    cboLevel.BackColor = txtBackClr
-    cboLevel.ForeColor = txtTextClr
-    cboPolyType.BackColor = txtBackClr
-    cboPolyType.ForeColor = txtTextClr
-
-    txtLightProp(0).BackColor = txtBackClr
-    txtLightProp(0).ForeColor = txtTextClr
-
-    square.BorderColor = lblTextClr
-    diagonal.BorderColor = lblTextClr
-
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
+    MouseEvent2 picPropMenu, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub

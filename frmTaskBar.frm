@@ -20,6 +20,33 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+' taskbar emulation - show taskbar button with behavior
+
+
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+#End If
+
+
+' vars - public
+
+
+' vars - private
+
+
+' functions - public
+
+
+' functions - private
+
+
+' events - public
+
+
+' events - private
+
 Private Sub Form_GotFocus()
 
     If frmSoldatMapEditor.Visible Then
@@ -30,14 +57,14 @@ End Sub
 
 Private Sub Form_Load()
 
-    Me.left = 2000 * Screen.TwipsPerPixelX
+    Me.Left = 2000 * Screen.TwipsPerPixelX
     Me.Top = 2000 * Screen.TwipsPerPixelY
 
 End Sub
 
 Private Sub Form_Resize()
 
-    If Not frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then 'show when it gets restored
+    If Not frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then  ' show when it gets restored
         frmSoldatMapEditor.Show
         If frmSoldatMapEditor.mnuDisplay.Checked Then frmDisplay.Show
         If frmSoldatMapEditor.mnuWaypoints.Checked Then frmWaypoints.Show
@@ -46,15 +73,15 @@ Private Sub Form_Resize()
         If frmSoldatMapEditor.mnuScenery.Checked Then frmScenery.Show
         If frmSoldatMapEditor.mnuInfo.Checked Then frmInfo.Show
         If frmSoldatMapEditor.mnuTexture.Checked Then frmTexture.Show
-        If frmSoldatMapEditor.WindowState = vbNormal Then
-            frmSoldatMapEditor.left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+        If frmSoldatMapEditor.Tag = vbNormal Then
+            frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
             frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
             frmSoldatMapEditor.ScaleWidth = frmSoldatMapEditor.formWidth
             frmSoldatMapEditor.ScaleHeight = frmSoldatMapEditor.formHeight
         End If
         frmSoldatMapEditor.RegainFocus
     ElseIf Not frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
-        ' no-op
+        '  no-op
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then
         frmSoldatMapEditor.RegainFocus
     ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
@@ -64,6 +91,10 @@ Private Sub Form_Resize()
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
+
+    If frmColor.Visible Then
+        frmColor.Hide
+    End If
 
     frmSoldatMapEditor.Terminate
 

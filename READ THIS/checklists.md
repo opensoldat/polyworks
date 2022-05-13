@@ -6,7 +6,6 @@ Commit
 
 * Save vb6 project (Menu->File->Save Project)
 * Build project (Menu->File->Make Soldat PolyWorks.exe)
-* Move any needed files to the installer directory (/Soldat PolyWorks.exe into /pwinstall)
 * Compile installer and test it (open /pwinstall/pw.nsi with makensisw.exe)
 * Test everything new/changed/fixed
 * Commit files and changelog
@@ -18,7 +17,6 @@ Release
 
 * Set version number in vb6 project
 * Save vb6 project
-* Build and move any needed files to the installer directory
 * Open "Soldat PolyWorks.exe" in resource editor and replace the icon with "pwnew.ico"
 * Set version number in readme
 * Set update date in readme

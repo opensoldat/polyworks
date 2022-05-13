@@ -309,33 +309,109 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim curTool As Byte
-Dim curButton As Byte
+' tools dialog
+
+
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+#End If
+
+
+' vars - public
+
 Public xPos As Integer
 Public yPos  As Integer
-Dim formHeight As Integer
 Public collapsed As Boolean
-Dim hotKeys(0 To 13) As Byte
 
-Public Function getHotKey(ByVal Index As Byte) As Byte
 
-    getHotKey = hotKeys(Index)
+' vars - private
+
+Private curTool As Byte
+Private curButton As Byte
+Private formHeight As Integer
+Private hotKeys(0 To 13) As Byte
+
+
+' functions - public
+
+Public Function GetHotKey(ByVal Index As Byte) As Byte
+
+    GetHotKey = hotKeys(Index)
 
 End Function
 
-Public Sub setHotKey(Index As Integer, ByVal value As Byte)
+Public Sub SetHotKey(Index As Integer, ByVal value As Byte)
 
-    If value > 0 Then
+    If value > 0 And Index >= LBound(hotKeys) And Index <= UBound(hotKeys) Then
         hotKeys(Index) = value
     End If
 
 End Sub
 
-Public Sub initTool(value As Byte)
+Public Sub InitTool(value As Byte)
 
     curTool = value
 
 End Sub
+
+Public Sub SetForm()
+
+    Me.Left = xPos * Screen.TwipsPerPixelX
+    Me.Top = yPos * Screen.TwipsPerPixelY
+    If collapsed Then
+        Me.Height = 19 * Screen.TwipsPerPixelY
+    Else
+        Me.Height = formHeight * Screen.TwipsPerPixelY
+    End If
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_tools.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+
+    For i = picTools.LBound To picTools.UBound
+        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+        picTools(i).Refresh
+        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr(MapVirtualKey(hotKeys(i), 1)) & ")"
+    Next
+    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
+    picTools(curTool).Refresh
+
+End Sub
+
+
+' functions - private
+
+
+' events - public
+
+Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+    Dim i As Integer
+
+    If curTool <> Index Then
+        For i = picTools.LBound To picTools.UBound
+            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+            picTools(i).Refresh
+        Next
+        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
+        picTools(Index).Refresh
+    End If
+    curTool = Index
+
+End Sub
+
+
+' events - private
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
@@ -349,25 +425,13 @@ Private Sub Form_Load()
 
     SetColors
     formHeight = Me.ScaleHeight
-    setForm
+    SetForm
 
     Exit Sub
 
 ErrorHandler:
 
-    MsgBox Error$ & vbNewLine & "Error loading Tools form"
-
-End Sub
-
-Public Sub setForm()
-
-    Me.left = xPos * Screen.TwipsPerPixelX
-    Me.Top = yPos * Screen.TwipsPerPixelY
-    If collapsed Then
-        Me.Height = 19 * Screen.TwipsPerPixelY
-    Else
-        Me.Height = formHeight * Screen.TwipsPerPixelY
-    End If
+    MsgBox "Error loading Tools form" & vbNewLine & Error
 
 End Sub
 
@@ -387,46 +451,30 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     ReleaseCapture
     SendMessage Me.hWnd, WM_NCLBUTTONDOWN, 2, 0&
 
-    snapForm Me, frmPalette
-    snapForm Me, frmWaypoints
-    snapForm Me, frmDisplay
-    snapForm Me, frmScenery
-    snapForm Me, frmInfo
-    snapForm Me, frmTexture
-    Me.Tag = snapForm(Me, frmSoldatMapEditor)
+    SnapForm Me, frmPalette
+    SnapForm Me, frmWaypoints
+    SnapForm Me, frmDisplay
+    SnapForm Me, frmScenery
+    SnapForm Me, frmInfo
+    SnapForm Me, frmTexture
+    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
 
-    xPos = Me.left / Screen.TwipsPerPixelX
+    xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
-
-End Sub
-
-Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-    Dim i As Integer
-
-    If curTool <> Index Then
-        For i = 0 To 13
-            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
-            picTools(i).Refresh
-        Next
-        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
-        picTools(Index).Refresh
-    End If
-    curTool = Index
 
 End Sub
 
 Private Sub picTools_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If curTool <> Index Then
-        mouseEvent picTools(Index), (picTools(Index).ScaleWidth - X), (picTools(Index).ScaleHeight - Y), 0, Index * 32, 32, 32
+        MouseEvent picTools(Index), (picTools(Index).ScaleWidth - X), (picTools(Index).ScaleHeight - Y), 0, Index * 32, 32, 32
     End If
 
 End Sub
 
 Private Sub picTools_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    frmSoldatMapEditor.setCurrentTool curTool
+    frmSoldatMapEditor.SetCurrentTool curTool
     frmSoldatMapEditor.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(curTool + 1).Picture
     frmSoldatMapEditor.RegainFocus
 
@@ -441,38 +489,18 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_tools.bmp")
-
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-
-    For i = 0 To 13
-        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
-        picTools(i).Refresh
-        frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr$(MapVirtualKey(hotKeys(i), 1)) & ")"
-    Next
-    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
-    picTools(curTool).Refresh
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub

@@ -118,7 +118,7 @@ Begin VB.Form frmMap
       Top             =   480
       Width           =   3135
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H00000000&
@@ -134,7 +134,7 @@ Begin VB.Form frmMap
       Top             =   3240
       Width           =   495
    End
-   Begin VB.PictureBox picBackClr 
+   Begin VB.PictureBox picBackColor 
       Appearance      =   0  'Flat
       AutoRedraw      =   -1  'True
       BackColor       =   &H00000000&
@@ -511,107 +511,25 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Type TColor
-    red As Byte
-    green As Byte
-    blue As Byte
-End Type
+' maps dialog
 
-Private Sub cboJet_Click()
 
-    Select Case cboJet.ListIndex
-        Case 0 'none
-            txtJet.Text = "0"
-        Case 1 'minimal
-            txtJet.Text = "12"
-        Case 2 'very low
-            txtJet.Text = "45"
-        Case 3 'low
-            txtJet.Text = "95"
-        Case 4 'normal
-            txtJet.Text = "190"
-        Case 5 'high
-            txtJet.Text = "320"
-        Case 6 'maximum
-            txtJet.Text = "800"
-        Case 7 'infinite
-            txtJet.Text = "32766"
-        Case 8 'custom
-    End Select
+' Fix vb6 ide casing changes
+#If False Then
+    Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+    'Public FileName, color, token, A, R, G, B, commonDialog, value, Val, X, Y, Z, Left, hWnd, Mid, Right, BackColor
+#End If
 
-    If cboJet.ListIndex <> 8 Then
-        txtJet.Enabled = False
-    Else
-        txtJet.Enabled = True
-    End If
 
-End Sub
+' vars - public
 
-Private Sub getJets()
 
-    Select Case txtJet.Text
-        Case 0 'none
-            cboJet.ListIndex = 0
-        Case 12 'minimal
-            cboJet.ListIndex = 1
-        Case 45 'very low
-            cboJet.ListIndex = 2
-        Case 95 'low
-            cboJet.ListIndex = 3
-        Case 190 'normal
-            cboJet.ListIndex = 4
-        Case 320 'high
-            cboJet.ListIndex = 5
-        Case 800 'maximum
-            cboJet.ListIndex = 6
-        Case 32766 'infinite
-            cboJet.ListIndex = 7
-        Case Else 'custom
-            cboJet.ListIndex = 8
-    End Select
+' vars - private
 
-End Sub
 
-Public Sub Form_Load()
+' functions - public
 
-    On Error GoTo ErrorHandler
-
-    Me.SetColors
-    loadTextures2
-    frmSoldatMapEditor.getOptions
-    getJets
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox Error$ & vbNewLine & "Error loading Map form"
-
-End Sub
-
-Private Sub cboTexture_Click()
-
-    On Error GoTo ErrorHandler
-
-    If cboTexture.List(cboTexture.ListIndex) <> "" Then
-        frmSoldatMapEditor.setMapTexture cboTexture.List(cboTexture.ListIndex)
-        frmTexture.setTexture cboTexture.List(cboTexture.ListIndex)
-
-        Dim Token As Long
-        Token = InitGDIPlus
-        picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
-        FreeGDIPlus Token
-    End If
-
-    Exit Sub
-
-ErrorHandler:
-
-    MsgBox "Error showing texture" & vbNewLine & Error$
-
-End Sub
-
-Public Sub loadTextures()
+Public Sub LoadTextures()
 
     On Error GoTo ErrorHandler
 
@@ -634,7 +552,7 @@ Public Sub loadTextures()
     Set objFiles = objFSO.GetFolder(strPath).Files
 
     For Each objFile In objFiles
-        If right(objFile.Name, 3) = "bmp" Then
+        If Right(objFile.Name, 3) = "bmp" Then
             cboTexture.AddItem objFile.Name
         End If
     Next
@@ -643,11 +561,11 @@ Public Sub loadTextures()
 
 ErrorHandler:
 
-    MsgBox "loading textures failed" & vbNewLine & Error$
+    MsgBox "Error loading textures" & vbNewLine & Error
 
 End Sub
 
-Public Sub loadTextures2()
+Public Sub LoadTextures2()
 
     On Error GoTo ErrorHandler
 
@@ -655,27 +573,27 @@ Public Sub loadTextures2()
 
     cboTexture.Clear
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "textures\" & "*.bmp", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
-        file = Dir$
+        file = Dir
     Loop
 
-    file = Dir$(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
+    file = Dir(frmSoldatMapEditor.soldatDir & "textures\" & "*.png", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
-        file = Dir$
+        file = Dir
     Loop
 
     Exit Sub
 
 ErrorHandler:
 
-    MsgBox "loading textures failed" & vbNewLine & Error$
+    MsgBox "Error loading textures (2)" & vbNewLine & Error
 
 End Sub
 
-Public Sub loadFromList()
+Public Sub LoadFromList()  ' unused?
 
     On Error GoTo ErrorHandler
 
@@ -696,7 +614,76 @@ Public Sub loadFromList()
 
 ErrorHandler:
 
-    MsgBox Error$
+    MsgBox "Error loading from list" & vbNewLine & Error
+
+End Sub
+
+Public Sub SetColors()
+
+    On Error Resume Next
+
+    Dim i As Integer
+    Dim c As Control
+
+    picTitle.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\titlebar_map.bmp")
+
+    MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+    MouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
+
+    Me.BackColor = bgColor
+
+    For Each c In lblMap
+        c.BackColor = lblBackColor
+        c.ForeColor = lblTextColor
+    Next
+
+    txtDesc.BackColor = txtBackColor
+    txtDesc.ForeColor = txtTextColor
+    txtJet.BackColor = txtBackColor
+    txtJet.ForeColor = txtTextColor
+
+    cboWeather.BackColor = txtBackColor
+    cboWeather.ForeColor = txtTextColor
+    cboSteps.BackColor = txtBackColor
+    cboSteps.ForeColor = txtTextColor
+    cboJet.BackColor = txtBackColor
+    cboJet.ForeColor = txtTextColor
+    cboGrenades.BackColor = txtBackColor
+    cboGrenades.ForeColor = txtTextColor
+    cboMedikits.BackColor = txtBackColor
+    cboMedikits.ForeColor = txtTextColor
+    cboTexture.BackColor = txtBackColor
+    cboTexture.ForeColor = txtTextColor
+
+    For Each c In fraMap
+        c.BorderColor = frameColor
+    Next
+
+    SetFormFonts Me
+
+End Sub
+
+
+' functions - private
+
+
+' events - public
+
+Public Sub Form_Load()
+
+    On Error GoTo ErrorHandler
+
+    Me.SetColors
+    LoadTextures2
+    frmSoldatMapEditor.GetOptions
+    GetJets
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error loading Map form" & vbNewLine & Error
 
 End Sub
 
@@ -704,7 +691,7 @@ Public Sub mnuRefresh_Click()
 
     Dim i As Integer
 
-    loadTextures2
+    LoadTextures2
 
     For i = 0 To cboTexture.ListCount - 1
         If cboTexture.List(i) = frmSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
@@ -714,9 +701,89 @@ Public Sub mnuRefresh_Click()
 
 End Sub
 
-Private Sub picBackClr_Click(Index As Integer)
 
-    picBackClr(Index).BackColor = frmSoldatMapEditor.setBGColor(Index + 1)
+' events - private
+
+Private Sub cboJet_Click()
+
+    Select Case cboJet.ListIndex
+        Case 0  ' none
+            txtJet.Text = "0"
+        Case 1  ' minimal
+            txtJet.Text = "12"
+        Case 2  ' very low
+            txtJet.Text = "45"
+        Case 3  ' low
+            txtJet.Text = "95"
+        Case 4  ' normal
+            txtJet.Text = "190"
+        Case 5  ' high
+            txtJet.Text = "320"
+        Case 6  ' maximum
+            txtJet.Text = "800"
+        Case 7  ' infinite
+            txtJet.Text = "32766"
+        Case 8  ' custom
+    End Select
+
+    If cboJet.ListIndex <> 8 Then
+        txtJet.Enabled = False
+    Else
+        txtJet.Enabled = True
+    End If
+
+End Sub
+
+Private Sub GetJets()
+
+    Select Case txtJet.Text
+        Case 0  ' none
+            cboJet.ListIndex = 0
+        Case 12  ' minimal
+            cboJet.ListIndex = 1
+        Case 45  ' very low
+            cboJet.ListIndex = 2
+        Case 95  ' low
+            cboJet.ListIndex = 3
+        Case 190  ' normal
+            cboJet.ListIndex = 4
+        Case 320  ' high
+            cboJet.ListIndex = 5
+        Case 800  ' maximum
+            cboJet.ListIndex = 6
+        Case 32766  ' infinite
+            cboJet.ListIndex = 7
+        Case Else  ' custom
+            cboJet.ListIndex = 8
+    End Select
+
+End Sub
+
+Private Sub cboTexture_Click()
+
+    On Error GoTo ErrorHandler
+
+    If cboTexture.List(cboTexture.ListIndex) <> "" Then
+        frmSoldatMapEditor.SetMapTexture cboTexture.List(cboTexture.ListIndex)
+        frmTexture.SetTexture cboTexture.List(cboTexture.ListIndex)
+
+        Dim token As Long
+        token = InitGDIPlus
+        picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
+        FreeGDIPlus token
+    End If
+
+    Exit Sub
+
+ErrorHandler:
+
+    MsgBox "Error showing texture" & vbNewLine & Error
+
+End Sub
+
+Private Sub picBackColor_Click(Index As Integer)
+
+    picBackColor(Index).BackColor = frmSoldatMapEditor.SetBGColor(Index + 1)
 
 End Sub
 
@@ -728,7 +795,7 @@ End Sub
 
 Private Sub picOK_Click()
 
-    frmSoldatMapEditor.setOptions
+    frmSoldatMapEditor.SetOptions
     Unload Me
     frmSoldatMapEditor.RegainFocus
 
@@ -743,31 +810,31 @@ End Sub
 
 Private Sub picCancel_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picCancel_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picCancel, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picOK_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picOK_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
+    MouseEvent2 picOK, X, Y, BUTTON_LARGE, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_Click()
 
-    frmSoldatMapEditor.setOptions
+    frmSoldatMapEditor.SetOptions
     frmSoldatMapEditor.mnuMap.Checked = False
     Unload Me
 
@@ -775,19 +842,19 @@ End Sub
 
 Private Sub picHide_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_DOWN
 
 End Sub
 
 Private Sub picHide_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_MOVE
 
 End Sub
 
 Private Sub picHide_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    mouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
+    MouseEvent2 picHide, X, Y, BUTTON_SMALL, 0, BUTTON_UP
 
 End Sub
 
@@ -797,56 +864,5 @@ Private Sub txtJet_KeyPress(KeyAscii As Integer)
     Else
         KeyAscii = 0
     End If
-
-End Sub
-
-Public Sub SetColors()
-
-    On Error Resume Next
-
-    Dim i As Integer
-    Dim c As Control
-
-    picTitle.Picture = LoadPicture(appPath & "\" & gfxDir & "\titlebar_map.bmp")
-
-    mouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
-    mouseEvent2 picOK, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-    mouseEvent2 picCancel, 0, 0, BUTTON_LARGE, 0, BUTTON_UP
-
-    Me.BackColor = bgClr
-
-    For i = 0 To 7
-        lblMap(i).BackColor = lblBackClr
-        lblMap(i).ForeColor = lblTextClr
-    Next
-
-    txtDesc.BackColor = txtBackClr
-    txtDesc.ForeColor = txtTextClr
-    txtJet.BackColor = txtBackClr
-    txtJet.ForeColor = txtTextClr
-
-    cboWeather.BackColor = txtBackClr
-    cboWeather.ForeColor = txtTextClr
-    cboSteps.BackColor = txtBackClr
-    cboSteps.ForeColor = txtTextClr
-    cboJet.BackColor = txtBackClr
-    cboJet.ForeColor = txtTextClr
-    cboGrenades.BackColor = txtBackClr
-    cboGrenades.ForeColor = txtTextClr
-    cboMedikits.BackColor = txtBackClr
-    cboMedikits.ForeColor = txtTextClr
-    cboTexture.BackColor = txtBackClr
-    cboTexture.ForeColor = txtTextClr
-
-    fraMap(0).BorderColor = frameClr
-    fraMap(1).BorderColor = frameClr
-
-    For Each c In Me.Controls
-        If c.Tag = "font1" Then
-            c.Font.Name = font1
-        ElseIf c.Tag = "font2" Then
-            c.Font.Name = font2
-        End If
-    Next
 
 End Sub

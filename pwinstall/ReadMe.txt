@@ -2,10 +2,10 @@
 
 
 
-Soldat Polyworks 1.6.0.1
+Soldat Polyworks 1.7.0.0
 
 
-updated 2022-02-04
+updated 2022-05-13
 
 
 
@@ -61,21 +61,75 @@ Right click with the scenery tool to bring up the main scenery list.
 
 
 
+Changes in v1.7.0.0
+- added support for resetting zoom by clicking zoom label
+- added optional skinning support for resize button
+- added custom MinZoom and MaxZoom (via ini settings)
+- added reset zoom ini-setting
+- added Min/Max/Reset Zoom inputs in preferences window
+- added MinZoom/MaxZoom/ResetZoom default ini settings to polyworks.ini
+- added default shortcut key info to help page
+- added support loading of jpeg and jpg textures in map dialog
+- added snapped tool windows stay snapped to window border on resize
+- added * to filename label if there will be a prompt on close/load
+- added default values for when polyworks.ini is missing to errors on startup
+- modified use I-Beam cursor for zoom percentage input
+- modified align preference labels consistently
+- modified use large titlebar for up to 5k resolutions
+- modified only hide tool windows when moving editor window instead on mouse down
+- modified increase height of scenery list
+- modified *clr ini settings into *color
+- modified improve readability of default tools window buttons
+- modified change skin folder to <polyworks_dir>\skins\*
+- modified move default "gfx" skin into skin folder under new name "default"
+- modified sync help tools naming with current naming in program
+- modified make help html pass html validator checks
+- modified rename clrpicker.cur into colorpicker.cur
+- modified center manual and limit width to improve readability
+- modified center copyright information in help file
+- modified adjust preferences positioning and labels for consistency
+- modified don't lowercase folder selection result in preferences dialog
+- modified use consistent error messages
+- modified remove layout jump due to missing image size info in help file
+- modified save poly type color config on close in polyworks.ini
+- fixed skin colors not applied to all controls
+- fixed preference window other section "use 4 verts for scenery" text cut off
+- fixed Maximized window overlaps taskbar
+- fixed uninstaller doesn't delete new resize.bmp file
+- fixed preferences dialog other section frame border skinning wasn't applied
+- fixed issue error terminating issue when colorpicker is open
+- fixed zoom info label cut off on large zoom numbers
+- fixed broken grid rendering for narrow window sizes
+- fixed menu setting is off initially even if grid is on
+- fixed initial grid rendering for narrow windows is broken before resize
+- fixed programm doesn't open in maximized mode
+- fixed error message when selecting using vertex selection tool while zoomed in
+- fixed maximized main window gets resized after applying preferences
+- fixed point render issues in Wine (and WineD3D for Windows)
+- fixed render error when loading workspace in windowed mode
+- fixed background color assignment for options not applied for second background color
+- fixed make tool windows all snap after workspace reset in non maximized state
+- fixed reset workspace doesn't handle different taskbar size/position and 16:9 screens correctly
+- fixed getting rgb color for AARRGGBB returns wrong value
+- fixed wrong maximize button icon if main window is maximized on start up
+- fixed loading/saving zoom* config setting should use "##.#" format only to work with initial settings
+- fixed clear sketch menu doesn't rerender canvas after clear
+
 Changes in v1.6.0.1
-- Added resizing support for main window (bottom right corner)
-- Added ctrl+shift+o hotkey for opening compiled maps
-- Modified newly created ini files are easier to read due to space between sections
-- Modified minimal main window width and height to can be as low as 300x200
-- Modified used "Load Compiled Map" title for open-compiled-map dialog
-- Fixed broken "°" label for Hue in Color Picker
-- Fixed broken Soldat directory check in Preferences Dialog
-- Fixed missing gif.tga file prevents texture loading
-- Fixed saving Preferences shuffles around scenery textures resulting in wrong texture positions
-- Fixed mouse move error message while refreshing preferences (after saving Preferences)
-- Fixed issue with overlapping hidden progressbar control on small windows sizes
-- Fixed side-window content flickers white on show after dragging main window
-- Fixed wrong initial input handling due to non default window size
-- Fixed broken undos when undo folder exists but is empty
+- added resizing support for main window (bottom right corner)
+- added ctrl+shift+o hotkey for opening compiled maps
+- modified newly created ini files are easier to read due to space between sections
+- modified minimal main window width and height to can be as low as 300x200
+- modified used "Load Compiled Map" title for open-compiled-map dialog
+- fixed broken "°" label for Hue in Color Picker
+- fixed broken Soldat directory check in Preferences Dialog
+- fixed missing gif.tga file prevents texture loading
+- fixed saving Preferences shuffles around scenery textures resulting in wrong texture positions
+- fixed mouse move error message while refreshing preferences (after saving Preferences)
+- fixed issue with overlapping hidden progressbar control on small windows sizes
+- fixed side-window content flickers white on show after dragging main window
+- fixed wrong initial input handling due to non default window size
+- fixed broken undos when undo folder exists but is empty
 
 Changes in v1.6.0.0
 - added remember sticky state of tools windows after reopening workspace/pw
@@ -105,7 +159,7 @@ Changes in v1.5.0.13
 
 Changes in v1.5.0.12
 - added flagger collides and non-flagger collides polygon types
-- changed extension for saving from uppercase to lowercase
+- modified extension for saving from uppercase to lowercase
 
 Changes in v1.5.0.11
 - fixed bouncy polygons not being compiled correctly
@@ -129,111 +183,111 @@ Changes in v1.5.0.8
 
 Changes in v1.5.0.7
 - added mouse position label in status bar
-- fixed a small copy/paste bug
 - added right click menu on selection tools
-- changed keyboard shortcuts deselect (escape) and duplicate (ctrl+d)
+- modified keyboard shortcuts deselect (escape) and duplicate (ctrl+d)
+- modified selecting a single collider now gets its radius
 - fixed the cutting of file names in recent files menu
-- selecting a single collider now gets its radius
+- fixed a small copy/paste bug
 
 Changes in v1.5.0.6
-- copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)
-- invert selection (ctrl+i)
-- new polygon types for Soldat 1.5.1
-- manual type in transform works on everything
-- collider radius can be changed after it's placed
+- added copy and paste (ctrl+c and ctrl+v, duplicate is now ctrl+shift+v)
+- added invert selection (ctrl+i)
+- added new polygon types for Soldat 1.5.1
+- modified manual type in transform works on everything
+- modified collider radius can be changed after it's placed
 - fixed a crash when loading corrupt scenery
 - fixed selection bug with hidden scenery layers
 - fixed keyboard shortcut for save as (ctrl+shift+s)
 
 Changes in v1.5.0.5
-- jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
-- fixed problems with drag and drop
-- fixed polygon blend enable/disable
-- new arrangement of the main menu
+- added new arrangement of the main menu
 - added basic texture transformation functions
 - added menu item to reset the view
-- possibility to show and hide individual scenery layers
+- added possibility to show and hide individual scenery layers
+- fixed jpg sceneries and textures are not selectable (nvidia card compatibility errors ingame)
+- fixed problems with drag and drop
+- fixed polygon blend enable/disable
 
 Changes in v1.5.0.4
-- change how gif files are loaded
+- added associate pms files with polyworks on installation
+- added icons for pms and pfb files (Created by VirtualTT)
+- added more settings in preferences
+- added selection for all corners of scenery
+- modified how gif files are loaded
 - fixed undo selection
 - fixed saving of light and sketch display options
 - fixed selection rectangle bug
 - fixed command line argument bugs
-- associate pms files with polyworks on installation
-- icons for pms and pfb files (Created by VirtualTT)
-- more settings in preferences
-- selection for all corners of scenery
 - fixed transform tool
 
 Changes in v1.5.0.3
-- fixed window state errors
-- new icon is now visible in taskbar
-- fixed background color in preferences
-- wider scenery menu
+- added new icon is now visible in taskbar
 - added clear sketch function
+- modified wider scenery menu
+- fixed window state errors
+- fixed background color in preferences
 - fixed black trails in vista
 
 Changes in v1.5.0.2
+- added new icon (created by VirtualTT)
 - fixed light bugs
 - fixed avarage vertex colors not saving correctly
 - fixed opacity for the 4 first polys
 - fixed wireframe opacity bug
-- new icon (created by VirtualTT)
 
 Changes in v1.5.0.1
+- modified moved help button a bit away from minimize button
 - fixed error when switching to/from windowed mode
-- moved help button a bit away from minimize button
 
-changes in v1.5.0.0
+Changes in v1.5.0.0
 - added snap selected vertices function
 - fixed gif files now working correctly
 
-changes in v1.4.0.17
+Changes in v1.4.0.17
 - fixed connection severing
 - fixed vertex alpha saving in prefabs
 
 Changes in v1.4.0.16
 - more descriptive error codes
 
-changes in v1.4.0.10
+Changes in v1.4.0.10
 - fixed objects texture size bug
 - disabled undo after clear unused scenery
 
-changes in v1.4.0.9
+Changes in v1.4.0.9
 - extended path lengths from 80 to 260
 - suppressed "not acquired" DirectInput error
 - fixed loading maps with duplicates of the first scenery in the scenery list
 
-changes in v1.4.0.8
+Changes in v1.4.0.8
 - rewrote part of compile code
 - fixed scenery with wrong case not loading
 - added lights range
 
-changes in v1.4.0.6
+Changes in v1.4.0.6
 - opacity applied to polys on creation
 - added vertex alpha control in properties window
 
-changes in v1.4.0.5
+Changes in v1.4.0.5
 - fixed red/blue components of poly colors switched on export
 - fixed scenery filter bug
 
-changes in v1.4.0.4
+Changes in v1.4.0.4
 - changed ini loading code back to how it was before 1.4
 - fixed tool hotkey/circle drawing bug
 
-changes in v1.4.0.2
+Changes in v1.4.0.2
 - depth map works with opacity
 - fixed depth map tool causing crash if there are any invisible polygons
 - fixed right click menu not showing after quad checked
 
-changes in v1.4.0.1
+Changes in v1.4.0.1
 - max radius changed to 128
 - reload scenery bug fixed
 - scenery in master list sorted alphabetically
 - more error trapping
 
-changes in v1.4
+Changes in v1.4
 - sketch tool
 - lights tool
 - depthmap tool
@@ -246,7 +300,7 @@ changes in v1.4
 - introduced various new bugs
 - other stuff i am too lazy to list
 
-changes in v1.3
+Changes in v1.3
 - customizable fonts
 - texture window
 - changes to texture panel in properties window
@@ -258,7 +312,7 @@ changes in v1.3
 - save/load workspace
 - other bug fixes
 
-changes in v1.2
+Changes in v1.2
 - create poly with selected vertices function
 - better skin support
 - import function
@@ -284,7 +338,7 @@ changes in v1.2
 - turned off vsync
 - various bug fixes
 
-changes in v1.0
+Changes in v1.0
 - fast compile, no bouncy polys
 - [ and ] cycle through tools
 - custom hotkeys
@@ -324,8 +378,8 @@ changes in v1.0
 
 Credits:
 
-programmed by Anna Zajaczkowski in Visual Basic 6
-updated version by Jacob Lindberg (Fryer)
+created by Anna Zajaczkowski in Visual Basic 6
+updated version by Jacob Lindberg (Fryer) and Gregor A. Cieslak (Shoozza)
 original PolyWorks concept and ideas by Michal Zajaczkowski
 graphics by Michal Zajaczkowski and Anna Zajaczkowski, based on Soldat style
 new icon by VirtualTT
