@@ -1,9 +1,9 @@
-Soldat PolyWorks
+opensoldat PolyWorks
 ================
 
-Map editor for the game [Soldat](https://soldat.pl)
+Map editor for the game [opensoldat](https://github.com/opensoldat/opensoldat)
 
-![Screenshot of the Polyworks GUI](/img/screenshot.jpg?raw=true "Soldat Polyworks")
+![Screenshot of the Polyworks GUI](/img/screenshot.jpg?raw=true "opensoldat Polyworks")
 
 Requirements
 ------------
@@ -25,6 +25,6 @@ License
 MIT
 
 ### Note:
-Soldat PolyWorks v1.4.0.17 with source code was originally released by Anna Zajaczkowski as:  
+PolyWorks v1.4.0.17 with source code was originally released by Anna Zajaczkowski as:  
 ["Feel free to do whatever you want with it."](https://web.archive.org/web/20191012125637/https://forums.soldat.pl/index.php?topic=174.msg214342)  
-It was subsequently relicensed under the MIT License by [the PolyWorks contributors](https://web.archive.org/web/20191012125244/https://github.com/Soldat/polyworks/issues/8).  
+It was subsequently relicensed under the MIT License by [the PolyWorks contributors](https://web.archive.org/web/20220710122849/https://github.com/opensoldat/polyworks/issues/8).  
