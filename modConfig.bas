@@ -278,8 +278,8 @@ Public Sub SaveSettings()
         "SelectionColor=" & RGBtoHex(frmSoldatMapEditor.selectionColor) & sNull & _
         "BackColor=" & RGBtoHex(frmSoldatMapEditor.backgroundColor) & sNull & _
         "MaxUndo=" & frmSoldatMapEditor.maxUndo & sNull & _
-        "SceneryVerts=" & frmSoldatMapEditor.sceneryVerts & sNull & _
-        "Topmost=" & frmSoldatMapEditor.topmost & sNull & _
+        "SceneryVerts=" & CStr(frmSoldatMapEditor.sceneryVerts) & sNull & _
+        "Topmost=" & CStr(frmSoldatMapEditor.topmost) & sNull & _
         "MinZoom=" & Trim(Str(frmSoldatMapEditor.gMaxZoom * 100)) & sNull & _
         "MaxZoom=" & Trim(Str(frmSoldatMapEditor.gMinZoom * 100)) & sNull & _
         "ResetZoom=" & Trim(Str(frmSoldatMapEditor.gResetZoom * 100)) & _
@@ -288,17 +288,17 @@ Public Sub SaveSettings()
 
     ' display
     iniString = _
-        "Background=" & frmSoldatMapEditor.showBG & sNull & _
-        "Polys=" & frmSoldatMapEditor.showPolys & sNull & _
-        "Texture=" & frmSoldatMapEditor.showTexture & sNull & _
-        "Wireframe=" & frmSoldatMapEditor.showWireframe & sNull & _
-        "Points=" & frmSoldatMapEditor.showPoints & sNull & _
-        "Scenery=" & frmSoldatMapEditor.showScenery & sNull & _
-        "Objects=" & frmSoldatMapEditor.showObjects & sNull & _
-        "Waypoints=" & frmSoldatMapEditor.showWaypoints & sNull & _
-        "Grid=" & frmSoldatMapEditor.showGrid & sNull & _
-        "Lights=" & frmSoldatMapEditor.showLights & sNull & _
-        "Sketch=" & frmSoldatMapEditor.showSketch & _
+        "Background=" & CStr(frmSoldatMapEditor.showBG) & sNull & _
+        "Polys=" & CStr(frmSoldatMapEditor.showPolys) & sNull & _
+        "Texture=" & CStr(frmSoldatMapEditor.showTexture) & sNull & _
+        "Wireframe=" & CStr(frmSoldatMapEditor.showWireframe) & sNull & _
+        "Points=" & CStr(frmSoldatMapEditor.showPoints) & sNull & _
+        "Scenery=" & CStr(frmSoldatMapEditor.showScenery) & sNull & _
+        "Objects=" & CStr(frmSoldatMapEditor.showObjects) & sNull & _
+        "Waypoints=" & CStr(frmSoldatMapEditor.showWaypoints) & sNull & _
+        "Grid=" & CStr(frmSoldatMapEditor.showGrid) & sNull & _
+        "Lights=" & CStr(frmSoldatMapEditor.showLights) & sNull & _
+        "Sketch=" & CStr(frmSoldatMapEditor.showSketch) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Display", iniString
 
@@ -306,22 +306,22 @@ Public Sub SaveSettings()
     currentColor = RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red)
     iniString = _
         "CurrentTool=" & frmSoldatMapEditor.currentTool & sNull & _
-        "SnapVertices=" & frmSoldatMapEditor.ohSnap & sNull & _
-        "SnapToGrid=" & frmSoldatMapEditor.snapToGrid & sNull & _
-        "FixedTexture=" & frmSoldatMapEditor.fixedTexture & sNull & _
+        "SnapVertices=" & CStr(frmSoldatMapEditor.ohSnap) & sNull & _
+        "SnapToGrid=" & CStr(frmSoldatMapEditor.snapToGrid) & sNull & _
+        "FixedTexture=" & CStr(frmSoldatMapEditor.fixedTexture) & sNull & _
         "Opacity=" & (frmSoldatMapEditor.opacity * 100) & sNull & _
         "ColorRadius=" & frmSoldatMapEditor.colorRadius & sNull & _
         "CurrentColor=" & RGBtoHex(currentColor) & sNull & _
         "ColorMode=" & frmSoldatMapEditor.colorMode & sNull & _
         "BlendMode=" & frmSoldatMapEditor.blendMode & sNull & _
         "SnapRadius=" & frmSoldatMapEditor.snapRadius & sNull & _
-        "RotateScenery=" & frmScenery.rotateScenery & sNull & _
-        "ScaleScenery=" & frmScenery.scaleScenery & sNull & _
+        "RotateScenery=" & CStr(frmScenery.rotateScenery) & sNull & _
+        "ScaleScenery=" & CStr(frmScenery.scaleScenery) & sNull & _
         "TextureWidth=" & frmSoldatMapEditor.xTexture & sNull & _
         "TextureHeight=" & frmSoldatMapEditor.yTexture & sNull & _
         "Texture=" & frmSoldatMapEditor.gTextureFile & sNull & _
-        "CustomX=" & frmSoldatMapEditor.mnuCustomX.Checked & sNull & _
-        "CustomY=" & frmSoldatMapEditor.mnuCustomY.Checked & _
+        "CustomX=" & CStr(frmSoldatMapEditor.mnuCustomX.Checked) & sNull & _
+        "CustomY=" & CStr(frmSoldatMapEditor.mnuCustomY.Checked) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "ToolSettings", iniString
 
@@ -529,11 +529,11 @@ Public Sub SaveWindow(sectionName As String, window As Form, collapsed As Boolea
     topVal = window.Top / Screen.TwipsPerPixelY
 
     iniString = _
-        "Visible=" & window.Visible & sNull & _
+        "Visible=" & CStr(window.Visible) & sNull & _
         "Left=" & leftVal & sNull & _
         "Top=" & topVal & sNull & _
-        "Collapsed=" & collapsed & sNull & _
-        "Snapped=" & IIf(Len(window.Tag) > 0, "True", "False") & _
+        "Collapsed=" & CStr(collapsed) & sNull & _
+        "Snapped=" & CStr(Len(window.Tag) > 0) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
 
     SaveSection sectionName, iniString, appPath & "\workspace\" & theFileName
