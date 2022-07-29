@@ -603,9 +603,9 @@ Public Sub RefreshPalette(R As Integer, op As Single, blend As Integer, mode As 
 
     For i = 0 To 2
         If i = colorMode Then
-            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
+            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmOpensoldatMapEditor.picGfx.hDC, 96, 112, vbSrcCopy
         Else
-            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmSoldatMapEditor.picGfx.hDC, 96, 96, vbSrcCopy
+            BitBlt picColorMode(i).hDC, 0, 0, 16, 16, frmOpensoldatMapEditor.picGfx.hDC, 96, 96, vbSrcCopy
         End If
         picColorMode(i).Refresh
     Next
@@ -941,7 +941,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmSoldatMapEditor.mnuPalette.Checked = False
+    frmOpensoldatMapEditor.mnuPalette.Checked = False
 
 End Sub
 
@@ -950,7 +950,7 @@ Private Sub picPalette_MouseDown(Button As Integer, Shift As Integer, X As Singl
     If Button = 1 Then  ' select color
         xVal = Int(X / 16)
         yVal = Int(Y / 16)
-        frmSoldatMapEditor.SetPaletteColor colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue
+        frmOpensoldatMapEditor.SetPaletteColor colorPalette(xVal, yVal).red, colorPalette(xVal, yVal).green, colorPalette(xVal, yVal).blue
 
         txtRGB(0).Text = colorPalette(xVal, yVal).red
         txtRGB(1).Text = colorPalette(xVal, yVal).green
@@ -1008,12 +1008,12 @@ Private Sub txtradius_LostFocus()
     ElseIf txtRadius.Text >= 4 And txtRadius.Text <= 128 Then
         radius = Int(txtRadius.Text)
         txtRadius.Text = radius
-        frmSoldatMapEditor.SetRadius radius
+        frmOpensoldatMapEditor.SetRadius radius
     Else
         If txtRadius.Text < 4 Then radius = 4
         If txtRadius.Text > 128 Then radius = 128
         txtRadius.Text = radius
-        frmSoldatMapEditor.SetRadius radius
+        frmOpensoldatMapEditor.SetRadius radius
     End If
 
 End Sub
@@ -1025,7 +1025,7 @@ Private Sub txtRGB_Change(Index As Integer)
         ' no op
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
         picColor.BackColor = RGB(txtRGB(0).Text, txtRGB(1).Text, txtRGB(2).Text)
-        frmSoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
+        frmOpensoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
     End If
 
 End Sub
@@ -1048,7 +1048,7 @@ Private Sub txtRGB_LostFocus(Index As Integer)
     ElseIf txtRGB(Index).Text = "" Then
         txtRGB(Index).Text = tempVal
     ElseIf txtRGB(Index).Text >= 0 And txtRGB(Index).Text <= 255 Then
-        frmSoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
+        frmOpensoldatMapEditor.SetPolyColor Index, txtRGB(Index).Text
     Else
         txtRGB(Index).Text = tempVal
     End If
@@ -1064,7 +1064,7 @@ Private Sub txtOpacity_Change()
     ElseIf txtOpacity.Text = "" Then
         ' no-op
     ElseIf txtOpacity.Text >= 0 And txtOpacity.Text <= 100 Then
-        frmSoldatMapEditor.SetPolyColor 3, txtOpacity.Text
+        frmOpensoldatMapEditor.SetPolyColor 3, txtOpacity.Text
     End If
 
 End Sub
@@ -1089,7 +1089,7 @@ End Sub
 
 Private Sub cboBlendMode_Click()
 
-    frmSoldatMapEditor.SetBlendMode cboBlendMode.ListIndex
+    frmOpensoldatMapEditor.SetBlendMode cboBlendMode.ListIndex
 
 End Sub
 
@@ -1111,8 +1111,8 @@ Private Sub picColorMode_MouseUp(Index As Integer, Button As Integer, Shift As I
         End If
     Next
 
-    frmSoldatMapEditor.SetColorMode colorMode
-    frmSoldatMapEditor.RegainFocus
+    frmOpensoldatMapEditor.SetColorMode colorMode
+    frmOpensoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -1139,7 +1139,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmScenery
     SnapForm Me, frmInfo
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY

@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{DDA53BD0-2CD0-11D4-8ED4-00E07D815373}#1.0#0"; "MBMouse.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
-Begin VB.Form frmSoldatMapEditor 
+Begin VB.Form frmOpensoldatMapEditor 
    BackColor       =   &H00000000&
    BorderStyle     =   1  'Fixed Single
    ClientHeight    =   9000
@@ -20,7 +20,7 @@ Begin VB.Form frmSoldatMapEditor
       Italic          =   0   'False
       Strikethrough   =   0   'False
    EndProperty
-   Icon            =   "frmSoldatMapEditor.frx":0000
+   Icon            =   "frmOpensoldatMapEditor.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
@@ -618,8 +618,8 @@ Begin VB.Form frmSoldatMapEditor
       Begin VB.Menu mnuSep18 
          Caption         =   "-"
       End
-      Begin VB.Menu mnuRunSoldat 
-         Caption         =   "&Run Soldat"
+      Begin VB.Menu mnuRunOpensoldat 
+         Caption         =   "&Run opensoldat"
          Shortcut        =   {F8}
       End
       Begin VB.Menu mnuSep1 
@@ -1279,7 +1279,7 @@ Begin VB.Form frmSoldatMapEditor
       End
    End
 End
-Attribute VB_Name = "frmSoldatMapEditor"
+Attribute VB_Name = "frmOpensoldatMapEditor"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -1310,7 +1310,7 @@ Public polyBlendSrc As Long
 Public polyBlendDest As Long
 Public wireBlendSrc As Long
 Public wireBlendDest As Long
-Public soldatDir As String
+Public opensoldatDir As String
 Public uncompDir As String
 Public prefabDir As String
 Public gridSpacing As Integer
@@ -1780,7 +1780,7 @@ Public Sub NewMap()
     numVerts = 0
     toolAction = False
 
-    mapTitle = "New Soldat Map"
+    mapTitle = "New opensoldat Map"
 
     Options.backgroundColor1 = ARGB(255, RGB(224, 224, 224))
     Options.backgroundColor2 = ARGB(255, RGB(32, 32, 32))
@@ -1856,7 +1856,7 @@ Public Sub NewMap()
 
     txtZoom.Text = Int(zoomFactor * 1000 + 0.5) / 10 & "%"
 
-    If Len(Dir(soldatDir & "Textures\" & gTextureFile)) <> 0 Then
+    If Len(Dir(opensoldatDir & "Textures\" & gTextureFile)) <> 0 Then
         SetMapTexture gTextureFile
         frmTexture.SetTexture gTextureFile
     Else
@@ -2065,7 +2065,7 @@ Public Sub LoadFile(theFileName As String)
                     tvwScenery.Nodes.Add "In Use", tvwChild, tempString, tempString
                 ElseIf CheckLoaded(tempString) > -1 Then
 
-                    loadName = soldatDir & "Scenery-gfx\" & tempString
+                    loadName = opensoldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
                     If Right(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
@@ -2085,7 +2085,7 @@ Public Sub LoadFile(theFileName As String)
                     tvwScenery.Nodes.Add "In Use", tvwChild, , tempString
                 ElseIf ConfirmExists(tempString) Then  ' if scenery texture is in master list
 
-                    loadName = soldatDir & "Scenery-gfx\" & tempString
+                    loadName = opensoldatDir & "Scenery-gfx\" & tempString
                     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
                     If Right(loadName, 4) = ".gif" Then
                         loadName = appPath & "\Temp\gif.tga"
@@ -2284,7 +2284,7 @@ Public Sub LoadFile(theFileName As String)
         bgPolyCoords(i).Y = bgPolys(i).Y
     Next
 
-    If Len(Dir(soldatDir & "textures\" & gTextureFile)) <> 0 Then
+    If Len(Dir(opensoldatDir & "textures\" & gTextureFile)) <> 0 Then
         SetMapTexture gTextureFile
         frmTexture.SetTexture gTextureFile
     End If
@@ -2367,7 +2367,7 @@ Public Sub SetCurrentTexture(sceneryName As String)
     Dim loadName As String
     Dim toTGARes As Long
 
-    loadName = soldatDir & "Scenery-gfx\" & sceneryName
+    loadName = opensoldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
@@ -2423,7 +2423,7 @@ Public Sub CreateSceneryTexture(sceneryName As String)
     Dim loadName As String
     Dim toTGARes As Long
 
-    loadName = soldatDir & "Scenery-gfx\" & sceneryName
+    loadName = opensoldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
@@ -2476,7 +2476,7 @@ Public Sub RefreshSceneryTextures(Index As Integer)
     Dim loadName As String
     Dim toTGARes As Long
 
-    loadName = soldatDir & "Scenery-gfx\" & sceneryName
+    loadName = opensoldatDir & "Scenery-gfx\" & sceneryName
     toTGARes = GifToBmp(loadName, appPath & "\Temp\gif.tga")
     If Right(loadName, 4) = ".gif" Then
         loadName = appPath & "\Temp\gif.tga"
@@ -4172,7 +4172,7 @@ Public Sub SetCurrentTool(ByVal Index As Integer)
     If currentTool = TOOL_CREATE And mnuQuad.Checked Then
         currentFunction = TOOL_QUAD
     ElseIf currentTool <> TOOL_SCENERY Then
-        frmSoldatMapEditor.tvwScenery.Visible = False
+        frmOpensoldatMapEditor.tvwScenery.Visible = False
     End If
 
     circleOn = False
@@ -4208,7 +4208,7 @@ Public Sub SetCurrentTool(ByVal Index As Integer)
     End If
 
     SetCursor currentFunction + 1
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
 
     If currentTool = TOOL_CREATE Then
         lblCurrentTool.Caption = lblCurrentTool.Caption & " (" & mnuPolyType(polyType).Caption & ")"
@@ -4235,7 +4235,7 @@ Public Sub SetMapTexture(texturePath As String)
 
     On Error GoTo ErrorHandler
 
-    Set mapTexture = D3DX.CreateTextureFromFileEx(D3DDevice, frmSoldatMapEditor.soldatDir & "textures\" & texturePath, D3DX_DEFAULT, D3DX_DEFAULT, _
+    Set mapTexture = D3DX.CreateTextureFromFileEx(D3DDevice, frmOpensoldatMapEditor.opensoldatDir & "textures\" & texturePath, D3DX_DEFAULT, D3DX_DEFAULT, _
             D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE, _
             D3DX_FILTER_TRIANGLE, COLOR_KEY, imageInfo, ByVal 0)
 
@@ -4916,9 +4916,9 @@ Public Sub SetColors()
 
     Dim c As Control
 
-    frmSoldatMapEditor.picMenuBar.BackColor = bgColor
-    frmSoldatMapEditor.picStatus.BackColor = bgColor
-    frmSoldatMapEditor.picResize.BackColor = bgColor
+    frmOpensoldatMapEditor.picMenuBar.BackColor = bgColor
+    frmOpensoldatMapEditor.picStatus.BackColor = bgColor
+    frmOpensoldatMapEditor.picResize.BackColor = bgColor
     txtZoom.BackColor = bgColor
     txtZoom.ForeColor = lblTextColor
     picProgress.BackColor = bgColor
@@ -4981,7 +4981,7 @@ Private Sub SetCursor(Index As Integer)
 
     On Error GoTo ErrorHandler
 
-    Me.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(Index).Picture
+    Me.MouseIcon = frmOpensoldatMapEditor.ImageList.ListImages(Index).Picture
 
     Exit Sub
 
@@ -6640,7 +6640,7 @@ Private Sub AverageVertices()
     ctrlDown = False
     currentFunction = currentTool
     SetCursor currentFunction + 1
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
     SaveUndo
     Render
 
@@ -10230,7 +10230,7 @@ End Sub
 
 Private Sub SetMapList(theFileName As String)
 
-    Open soldatDir & "mapslist.txt" For Output As #1
+    Open opensoldatDir & "mapslist.txt" For Output As #1
         Print #1, theFileName
     Close #1
 
@@ -10325,7 +10325,7 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
     ' if there is no parent
     If tvwScenery.SelectedItem.FirstSibling = "In Use" Then Exit Sub
 
-    If Len(Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
+    If Len(Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) = 0 Then
         frmScenery.picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
         Exit Sub
     End If
@@ -10334,25 +10334,25 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
         currentScenery = tvwScenery.SelectedItem.Text
 
         token = InitGDIPlus
-        frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
+        frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
         FreeGDIPlus token
 
         Set tempNode = tvwScenery.Nodes.Item("In Use").Child
 
         For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
             If currentScenery = tempNode.Text Then
-                frmSoldatMapEditor.SetCurrentScenery i
+                frmOpensoldatMapEditor.SetCurrentScenery i
                 frmScenery.lstScenery.ListIndex = i - 1
             End If
             Set tempNode = tempNode.Next
         Next
     Else
-        If Len(Dir(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
+        If Len(Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & tvwScenery.SelectedItem.Text)) <> 0 Then
 
             currentScenery = tvwScenery.SelectedItem.Text
 
             token = InitGDIPlus
-            frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
+            frmScenery.picScenery.Picture = LoadPictureGDIPlus(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & currentScenery, , , RGB(0, 255, 0))
             FreeGDIPlus token
 
             ' check if already in list
@@ -10361,13 +10361,13 @@ Public Sub tvwScenery_NodeClick(ByVal Node As MSComctlLib.Node)
             For i = 1 To (tvwScenery.Nodes.Item("In Use").Children)
                 If currentScenery = tempNode.Text Then
                     isInList = True
-                    frmSoldatMapEditor.SetCurrentScenery i
+                    frmOpensoldatMapEditor.SetCurrentScenery i
                 End If
                 Set tempNode = tempNode.Next
             Next
 
             If Not isInList Then
-                frmSoldatMapEditor.SetCurrentTexture currentScenery
+                frmOpensoldatMapEditor.SetCurrentTexture currentScenery
             End If
         End If
 
@@ -10441,10 +10441,10 @@ Private Sub Form_Load()
     End If
 
     ' if given directory doesn't exist, change to default
-    If Len(Dir(soldatDir & "Textures\", vbDirectory)) = 0 Or soldatDir = "" Then
-        temp = GetSoldatDir
+    If Len(Dir(opensoldatDir & "Textures\", vbDirectory)) = 0 Or opensoldatDir = "" Then
+        temp = GetOpensoldatDir
         If temp <> "" Then
-            soldatDir = temp
+            opensoldatDir = temp
             temp = ""
         End If
     End If
@@ -10522,13 +10522,13 @@ Private Sub Form_Load()
 
     ' show windows
     frmTaskBar.Show
-    frmTools.Show 0, frmSoldatMapEditor
-    frmPalette.Show 0, frmSoldatMapEditor
-    frmDisplay.Show 0, frmSoldatMapEditor
-    frmWaypoints.Show 0, frmSoldatMapEditor
-    frmScenery.Show 0, frmSoldatMapEditor
-    frmInfo.Show 0, frmSoldatMapEditor
-    frmTexture.Show 0, frmSoldatMapEditor
+    frmTools.Show 0, frmOpensoldatMapEditor
+    frmPalette.Show 0, frmOpensoldatMapEditor
+    frmDisplay.Show 0, frmOpensoldatMapEditor
+    frmWaypoints.Show 0, frmOpensoldatMapEditor
+    frmScenery.Show 0, frmOpensoldatMapEditor
+    frmInfo.Show 0, frmOpensoldatMapEditor
+    frmTexture.Show 0, frmOpensoldatMapEditor
 
     ' set window settings
     frmDisplay.Visible = mnuDisplay.Checked
@@ -10557,9 +10557,9 @@ Private Sub Form_Load()
     mnuSnapToGrid.Checked = snapToGrid
     mnuSnapToVerts.Checked = ohSnap
 
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.Flags = cdlOFNOverwritePrompt Or cdlOFNPathMustExist Or cdlOFNFileMustExist
 
 
@@ -10580,8 +10580,8 @@ Private Sub Form_Load()
             LoadFile temp
         ElseIf Dir(appPath & "\Maps\" & temp) <> "" Then
             LoadFile appPath & "\Maps\" & temp
-        ElseIf Dir(soldatDir & "Maps\" & temp) <> "" Then
-            LoadFile soldatDir & "Maps\" & temp
+        ElseIf Dir(opensoldatDir & "Maps\" & temp) <> "" Then
+            LoadFile opensoldatDir & "Maps\" & temp
         End If
 
         Me.MousePointer = prevMousePointer
@@ -10647,7 +10647,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                 sketch(0).vertex(1).Y = mouseCoords.Y / zoomFactor + scrollCoords(2).Y
             End Select
             SetCursor currentFunction + 1
-            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
             Exit Sub
         ElseIf (DIState.Key(DIK_LCONTROL) = 128 Or DIState.Key(DIK_RCONTROL) = 128) And Not ctrlDown Then
             circleOn = False
@@ -10670,7 +10670,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             End Select
             Render
             SetCursor currentFunction + 1
-            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
             Exit Sub
         ElseIf (DIState.Key(DIK_LALT) = 128 Or DIState.Key(DIK_RALT) = 128) And Not altDown Then
             circleOn = False
@@ -10706,7 +10706,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             If currentFunction = TOOL_VCOLOR Or currentFunction = TOOL_DEPTHMAP Then circleOn = True
             Render
             SetCursor currentFunction + 1
-            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
             Exit Sub
         End If
 
@@ -10787,7 +10787,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             End If
 
             SetCursor currentFunction + 1
-            lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+            lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
         End If
 
         If ctrlDown Then  ' shortcuts
@@ -10892,7 +10892,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             ElseIf (DIState.Key(DIK_F5) = 128) Then  ' F5
                 mnuRefreshBG_Click
             ElseIf (DIState.Key(DIK_F8) = 128) Then  ' F8
-                mnuRunSoldat_Click
+                mnuRunOpensoldat_Click
             ElseIf (DIState.Key(DIK_F9) = 128) Then  ' F9
                 mnuCompileAs_Click
             ElseIf (DIState.Key(DIK_F4) = 128 And altDown) Then  ' alt+F4
@@ -10956,7 +10956,7 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
             End If
         End If
 
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+        lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
     End If
 
     Exit Sub
@@ -12299,7 +12299,7 @@ Private Sub mnuWayType_Click(Index As Integer)
         mnuWayType(2).Checked = False
     End If
 
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
 
     For i = 0 To 4
         If mnuWayType(i).Checked Then
@@ -12612,12 +12612,12 @@ End Sub
 
 Private Sub Form_Resize()
 
-    picHelp.Left = frmSoldatMapEditor.ScaleWidth - 80
-    picMinimize.Left = frmSoldatMapEditor.ScaleWidth - 48
-    picMaximize.Left = frmSoldatMapEditor.ScaleWidth - 32
-    picExit.Left = frmSoldatMapEditor.ScaleWidth - 16
+    picHelp.Left = frmOpensoldatMapEditor.ScaleWidth - 80
+    picMinimize.Left = frmOpensoldatMapEditor.ScaleWidth - 48
+    picMaximize.Left = frmOpensoldatMapEditor.ScaleWidth - 32
+    picExit.Left = frmOpensoldatMapEditor.ScaleWidth - 16
 
-    picProgress.Left = frmSoldatMapEditor.ScaleWidth - 136
+    picProgress.Left = frmOpensoldatMapEditor.ScaleWidth - 136
 
 End Sub
 
@@ -12677,10 +12677,10 @@ Private Sub mnuOpen_Click()
     End If
     DoEvents
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = uncompDir
     commonDialog.FileName = uncompDir & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Load Map"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Load Map"
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
@@ -12739,10 +12739,10 @@ Private Sub mnuOpenCompiled_Click()
     End If
     DoEvents
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
-    commonDialog.InitDir = soldatDir & "Maps\"
-    commonDialog.FileName = soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Load Compiled Map"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    commonDialog.InitDir = opensoldatDir & "Maps\"
+    commonDialog.FileName = opensoldatDir & "Maps\" & currentFileName
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Load Compiled Map"
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
@@ -12786,8 +12786,8 @@ Private Sub mnuSave_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Save Map"
     commonDialog.FileName = uncompDir & currentFileName
     commonDialog.InitDir = uncompDir
 
@@ -12827,10 +12827,10 @@ Private Sub mnuSaveAs_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
     commonDialog.InitDir = appPath & "\Maps\"
     commonDialog.FileName = appPath & "\Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Save Map"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Save Map"
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
@@ -12862,10 +12862,10 @@ Private Sub mnuCompile_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
-    commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
-    commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    commonDialog.InitDir = frmOpensoldatMapEditor.opensoldatDir & "Maps\"
+    commonDialog.FileName = frmOpensoldatMapEditor.opensoldatDir & "Maps\" & currentFileName
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
 
     If currentFileName = "Untitled.pms" Then
         commonDialog.ShowSave
@@ -12916,10 +12916,10 @@ Private Sub mnuCompileAs_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
-    commonDialog.InitDir = frmSoldatMapEditor.soldatDir & "Maps\"
-    commonDialog.FileName = frmSoldatMapEditor.soldatDir & "Maps\" & currentFileName
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Map File (*.pms)|*.pms"
+    commonDialog.InitDir = frmOpensoldatMapEditor.opensoldatDir & "Maps\"
+    commonDialog.FileName = frmOpensoldatMapEditor.opensoldatDir & "Maps\" & currentFileName
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Compile to pms"
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
@@ -12953,10 +12953,10 @@ Private Sub mnuExport_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Prefab (*.pfb)|*.pfb"
     commonDialog.InitDir = prefabDir
     commonDialog.FileName = "Untitled.pfb"
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Save Prefab"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Save Prefab"
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
@@ -13003,11 +13003,11 @@ ErrorHandler:
 
 End Sub
 
-Private Sub mnuRunSoldat_Click()
+Private Sub mnuRunOpensoldat_Click()
 
     SetGameMode lastCompiled
     SetMapList lastCompiled
-    RunSoldat
+    RunOpensoldat
 
 End Sub
 
@@ -13988,7 +13988,7 @@ End Sub
 Private Sub mnuPreferences_Click()
 
     frmPreferences.Show 1
-    gPolyTypeColors(0) = frmSoldatMapEditor.selectionColor
+    gPolyTypeColors(0) = frmOpensoldatMapEditor.selectionColor
 
 End Sub
 
@@ -14115,10 +14115,10 @@ Private Sub mnuLoadSpace_Click()
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
     commonDialog.InitDir = appPath & "\Workspace\"
     commonDialog.FileName = ""
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Load Workspace"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Load Workspace"
     commonDialog.ShowOpen
 
     If commonDialog.FileName <> "" Then
@@ -14156,10 +14156,10 @@ Private Sub mnuSaveSpace_Click()
     sNull = Chr(0)
     isNewFile = False
 
-    frmSoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
+    frmOpensoldatMapEditor.commonDialog.Filter = "Ini File (*.ini)|*.ini"
     commonDialog.InitDir = appPath & "\Workspace\"
     commonDialog.FileName = ""
-    frmSoldatMapEditor.commonDialog.DialogTitle = "Save Workspace"
+    frmOpensoldatMapEditor.commonDialog.DialogTitle = "Save Workspace"
     commonDialog.ShowSave
 
     If commonDialog.FileName <> "" Then
@@ -14369,7 +14369,7 @@ Private Sub mnuPolyType_Click(Index As Integer)
     mnuPolyType(polyType).Checked = False
     mnuPolyType(Index).Checked = True
     polyType = Index
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag & " (" & mnuPolyType(polyType).Caption & ")"
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag & " (" & mnuPolyType(polyType).Caption & ")"
 
 End Sub
 
@@ -14380,14 +14380,14 @@ Private Sub mnuQuad_Click()
     If mnuQuad.Checked Then
         currentFunction = TOOL_QUAD
         SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+        lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
     Else
         currentFunction = TOOL_CREATE
         SetCursor currentFunction + 1
-        lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
+        lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag
     End If
 
-    lblCurrentTool.Caption = frmSoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag & " (" & mnuPolyType(polyType).Caption & ")"
+    lblCurrentTool.Caption = frmOpensoldatMapEditor.ImageList.ListImages(currentFunction + 1).Tag & " (" & mnuPolyType(polyType).Caption & ")"
 
 End Sub
 

@@ -142,8 +142,8 @@ Public Sub SetTexture(texturePath As String)
     Dim X As Integer
     Dim Y As Integer
 
-    texWidth = frmSoldatMapEditor.xTexture
-    texHeight = frmSoldatMapEditor.yTexture
+    texWidth = frmOpensoldatMapEditor.xTexture
+    texHeight = frmOpensoldatMapEditor.yTexture
 
     picTexture.DrawMode = 13
 
@@ -156,7 +156,7 @@ Public Sub SetTexture(texturePath As String)
 
     Dim token As Long
     token = InitGDIPlus
-    picTexture.Picture = LoadPictureGDIPlus(frmSoldatMapEditor.soldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
+    picTexture.Picture = LoadPictureGDIPlus(frmOpensoldatMapEditor.opensoldatDir & "textures\" & texturePath, texWidth / 2, texHeight / 2)
     FreeGDIPlus token
 
     For Y = 0 To (texHeight / 32)
@@ -247,13 +247,13 @@ Private Sub picTexture_MouseMove(Button As Integer, Shift As Integer, X As Singl
     Dim drawBox As Boolean
 
     If Button <> 0 Then
-        If X + 16 > frmSoldatMapEditor.xTexture / 2 Then
-            X = frmSoldatMapEditor.xTexture / 2 - 16
+        If X + 16 > frmOpensoldatMapEditor.xTexture / 2 Then
+            X = frmOpensoldatMapEditor.xTexture / 2 - 16
         ElseIf X + 16 < 0 Then
             X = -16
         End If
-        If Y + 16 > frmSoldatMapEditor.yTexture / 2 Then
-            Y = frmSoldatMapEditor.yTexture / 2 - 16
+        If Y + 16 > frmOpensoldatMapEditor.yTexture / 2 Then
+            Y = frmOpensoldatMapEditor.yTexture / 2 - 16
         ElseIf Y + 16 < 0 Then
             Y = -16
         End If
@@ -276,13 +276,13 @@ End Sub
 Private Sub picTexture_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     If Button <> 0 Then
-        If X + 16 > frmSoldatMapEditor.xTexture / 2 Then
-            X = frmSoldatMapEditor.xTexture / 2 - 16
+        If X + 16 > frmOpensoldatMapEditor.xTexture / 2 Then
+            X = frmOpensoldatMapEditor.xTexture / 2 - 16
         ElseIf X + 16 < 0 Then
             X = -16
         End If
-        If Y + 16 > frmSoldatMapEditor.yTexture / 2 Then
-            Y = frmSoldatMapEditor.yTexture / 2 - 16
+        If Y + 16 > frmOpensoldatMapEditor.yTexture / 2 Then
+            Y = frmOpensoldatMapEditor.yTexture / 2 - 16
         ElseIf Y + 16 < 0 Then
             Y = -16
         End If
@@ -320,7 +320,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmDisplay
     SnapForm Me, frmScenery
     SnapForm Me, frmInfo
-    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -330,7 +330,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmSoldatMapEditor.mnuTexture.Checked = False
+    frmOpensoldatMapEditor.mnuTexture.Checked = False
 
 End Sub
 

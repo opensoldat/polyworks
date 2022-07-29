@@ -1395,7 +1395,7 @@ Begin VB.Form frmPreferences
    Begin VB.Label lblPref 
       BackColor       =   &H004A3C31&
       BackStyle       =   0  'Transparent
-      Caption         =   "Soldat"
+      Caption         =   "opensoldat"
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   9.75
@@ -2102,30 +2102,30 @@ Private Function applyPreferences() As Boolean
 
     If Right(txtDir.Text, 1) <> "\" Then txtDir.Text = txtDir.Text + "\"
 
-    If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmSoldatMapEditor.soldatDir <> txtDir.Text Then
+    If Len(Dir(txtDir.Text, vbDirectory)) <> 0 And frmOpensoldatMapEditor.opensoldatDir <> txtDir.Text Then
         If Not Len(Dir(txtDir.Text & "Maps\", vbDirectory)) <> 0 Then
-            MsgBox "'Maps' folder does not exist in Soldat directory."
+            MsgBox "'Maps' folder does not exist in opensoldat directory."
             Exit Function
         End If
         If Not Len(Dir(txtDir.Text & "Textures\", vbDirectory)) <> 0 Then
-            MsgBox "'Textures' folder does not exist in Soldat directory."
+            MsgBox "'Textures' folder does not exist in opensoldat directory."
             Exit Function
         End If
         If Not Len(Dir(txtDir.Text & "Scenery-gfx\", vbDirectory)) <> 0 Then
-            MsgBox "'Scenery-gfx' folder does not exist in Soldat directory."
+            MsgBox "'Scenery-gfx' folder does not exist in opensoldat directory."
             Exit Function
         End If
 
-        frmSoldatMapEditor.soldatDir = txtDir.Text
+        frmOpensoldatMapEditor.opensoldatDir = txtDir.Text
     ElseIf Len(Dir(txtDir.Text, vbDirectory)) = 0 Then
-        MsgBox "Soldat directory does not exist."
+        MsgBox "opensoldat directory does not exist."
         Exit Function
     End If
 
     If Right(txtUncomp.Text, 1) <> "\" Then txtUncomp.Text = txtUncomp.Text + "\"
 
     If Len(Dir(txtUncomp.Text, vbDirectory)) <> 0 Then
-        frmSoldatMapEditor.uncompDir = txtUncomp.Text
+        frmOpensoldatMapEditor.uncompDir = txtUncomp.Text
     Else
         MsgBox "Uncompiled Maps directory does not exist."
         Exit Function
@@ -2134,86 +2134,86 @@ Private Function applyPreferences() As Boolean
     If Right(txtPrefabs.Text, 1) <> "\" Then txtPrefabs.Text = txtPrefabs.Text + "\"
 
     If Len(Dir(txtPrefabs.Text, vbDirectory)) <> 0 Then
-        frmSoldatMapEditor.prefabDir = txtPrefabs.Text
+        frmOpensoldatMapEditor.prefabDir = txtPrefabs.Text
     Else
         MsgBox "Prefabs Maps directory does not exist."
         Exit Function
     End If
 
-    frmSoldatMapEditor.wireBlendSrc = blendModes(cboWireSrc.ListIndex)
-    frmSoldatMapEditor.wireBlendDest = blendModes(cboWireDest.ListIndex)
-    frmSoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
-    frmSoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
+    frmOpensoldatMapEditor.wireBlendSrc = blendModes(cboWireSrc.ListIndex)
+    frmOpensoldatMapEditor.wireBlendDest = blendModes(cboWireDest.ListIndex)
+    frmOpensoldatMapEditor.polyBlendSrc = blendModes(cboPolySrc.ListIndex)
+    frmOpensoldatMapEditor.polyBlendDest = blendModes(cboPolyDest.ListIndex)
 
-    frmSoldatMapEditor.backgroundColor = RGB(backgroundColor.blue, backgroundColor.green, backgroundColor.red)
-    frmSoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
-    frmSoldatMapEditor.selectionColor = RGB(selectionColor.blue, selectionColor.green, selectionColor.red)
-    frmSoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
-    frmSoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
+    frmOpensoldatMapEditor.backgroundColor = RGB(backgroundColor.blue, backgroundColor.green, backgroundColor.red)
+    frmOpensoldatMapEditor.pointColor = RGB(pointColor.blue, pointColor.green, pointColor.red)
+    frmOpensoldatMapEditor.selectionColor = RGB(selectionColor.blue, selectionColor.green, selectionColor.red)
+    frmOpensoldatMapEditor.gridColor1 = RGB(gridColor1.blue, gridColor1.green, gridColor1.red)
+    frmOpensoldatMapEditor.gridColor2 = RGB(gridColor2.blue, gridColor2.green, gridColor2.red)
 
-    mInitialWindowWidth = frmSoldatMapEditor.Width
-    mInitialWindowHeight = frmSoldatMapEditor.Height
+    mInitialWindowWidth = frmOpensoldatMapEditor.Width
+    mInitialWindowHeight = frmOpensoldatMapEditor.Height
 
-    If frmSoldatMapEditor.Tag = vbNormal Then
-        frmSoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
+    If frmOpensoldatMapEditor.Tag = vbNormal Then
+        frmOpensoldatMapEditor.Width = formWidth * Screen.TwipsPerPixelX
+        frmOpensoldatMapEditor.Height = formHeight * Screen.TwipsPerPixelY
 
         ' TODO: move to function
         If Len(frmDisplay.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmDisplay, mInitialWindowHeight, formHeight)
-            frmDisplay.Move (frmDisplay.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmDisplay, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmDisplay, mInitialWindowHeight, formHeight)
+            frmDisplay.Move (frmDisplay.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmDisplay.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmInfo.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmInfo, mInitialWindowHeight, formHeight)
-            frmInfo.Move (frmInfo.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmInfo, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmInfo, mInitialWindowHeight, formHeight)
+            frmInfo.Move (frmInfo.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmInfo.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmPalette.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmPalette, mInitialWindowHeight, formHeight)
-            frmPalette.Move (frmPalette.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmPalette, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmPalette, mInitialWindowHeight, formHeight)
+            frmPalette.Move (frmPalette.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmPalette.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmScenery.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmScenery, mInitialWindowHeight, formHeight)
-            frmScenery.Move (frmScenery.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmScenery, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmScenery, mInitialWindowHeight, formHeight)
+            frmScenery.Move (frmScenery.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmScenery.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTexture.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTexture, mInitialWindowHeight, formHeight)
-            frmTexture.Move (frmTexture.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmTexture, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmTexture, mInitialWindowHeight, formHeight)
+            frmTexture.Move (frmTexture.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTexture.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmTools.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmTools, mInitialWindowHeight, formHeight)
-            frmTools.Move (frmTools.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmTools, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmTools, mInitialWindowHeight, formHeight)
+            frmTools.Move (frmTools.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmTools.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
         If Len(frmWaypoints.Tag) <> 0 Then
-            deltaLeft = frmSoldatMapEditor.getLeftSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowWidth, formWidth)
-            deltaTop = frmSoldatMapEditor.getTopSnapDelta(frmSoldatMapEditor, frmWaypoints, mInitialWindowHeight, formHeight)
-            frmWaypoints.Move (frmWaypoints.Left + deltaLeft + (frmSoldatMapEditor.Left - (frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + deltaTop + (frmSoldatMapEditor.Top - (frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
+            deltaLeft = frmOpensoldatMapEditor.getLeftSnapDelta(frmOpensoldatMapEditor, frmWaypoints, mInitialWindowWidth, formWidth)
+            deltaTop = frmOpensoldatMapEditor.getTopSnapDelta(frmOpensoldatMapEditor, frmWaypoints, mInitialWindowHeight, formHeight)
+            frmWaypoints.Move (frmWaypoints.Left + deltaLeft + (frmOpensoldatMapEditor.Left - (frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX))), (frmWaypoints.Top + deltaTop + (frmOpensoldatMapEditor.Top - (frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY)))
         End If
     End If
 
-    frmSoldatMapEditor.formWidth = formWidth
-    frmSoldatMapEditor.formHeight = formHeight
+    frmOpensoldatMapEditor.formWidth = formWidth
+    frmOpensoldatMapEditor.formHeight = formHeight
 
-    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.Height / Screen.TwipsPerPixelY - frmSoldatMapEditor.picResize.Height
-    frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.Width / Screen.TwipsPerPixelX - frmSoldatMapEditor.picResize.Width
+    frmOpensoldatMapEditor.picResize.Top = frmOpensoldatMapEditor.Height / Screen.TwipsPerPixelY - frmOpensoldatMapEditor.picResize.Height
+    frmOpensoldatMapEditor.picResize.Left = frmOpensoldatMapEditor.Width / Screen.TwipsPerPixelX - frmOpensoldatMapEditor.picResize.Width
 
-    frmSoldatMapEditor.gridSpacing = spacing
-    frmSoldatMapEditor.gridDivisions = divisions
-    frmSoldatMapEditor.gridOp1 = opacity1 / 100 * 255
-    frmSoldatMapEditor.gridOp2 = opacity2 / 100 * 255
+    frmOpensoldatMapEditor.gridSpacing = spacing
+    frmOpensoldatMapEditor.gridDivisions = divisions
+    frmOpensoldatMapEditor.gridOp1 = opacity1 / 100 * 255
+    frmOpensoldatMapEditor.gridOp2 = opacity2 / 100 * 255
 
 
-    frmSoldatMapEditor.gMinZoom = formMinZoom / 100
-    frmSoldatMapEditor.gMaxZoom = formMaxZoom / 100
-    frmSoldatMapEditor.gResetZoom = formResetZoom / 100
+    frmOpensoldatMapEditor.gMinZoom = formMinZoom / 100
+    frmOpensoldatMapEditor.gMaxZoom = formMaxZoom / 100
+    frmOpensoldatMapEditor.gResetZoom = formResetZoom / 100
 
-    frmSoldatMapEditor.sceneryVerts = sceneryVerts
-    frmSoldatMapEditor.topmost = topmost
+    frmOpensoldatMapEditor.sceneryVerts = sceneryVerts
+    frmOpensoldatMapEditor.topmost = topmost
 
     Debug.Assert txtHotkey.LBound = frmTools.picTools.LBound
     Debug.Assert txtHotkey.UBound = frmTools.picTools.UBound
@@ -2236,9 +2236,9 @@ Private Function applyPreferences() As Boolean
 
     If cboSkin.List(cboSkin.ListIndex) <> gfxDir Then
         gfxDir = cboSkin.List(cboSkin.ListIndex)
-        frmSoldatMapEditor.LoadColors
-        frmSoldatMapEditor.SetColors
-        frmSoldatMapEditor.InitGfx
+        frmOpensoldatMapEditor.LoadColors
+        frmOpensoldatMapEditor.SetColors
+        frmOpensoldatMapEditor.InitGfx
         frmColor.SetColors
         frmDisplay.SetColors
         frmInfo.SetColors
@@ -2246,14 +2246,14 @@ Private Function applyPreferences() As Boolean
         frmPalette.SetColors
         frmPreferences.SetColors
         frmScenery.SetColors
-        frmSoldatMapEditor.SetColors
+        frmOpensoldatMapEditor.SetColors
         frmTexture.SetColors
         frmTools.SetColors
         frmWaypoints.SetColors
         frmDisplay.RefreshButtons
     End If
 
-    frmSoldatMapEditor.SetPreferences
+    frmOpensoldatMapEditor.SetPreferences
 
     applyPreferences = True
 
@@ -2274,7 +2274,7 @@ End Function
 Private Sub picHide_Click()
 
     Unload Me
-    frmSoldatMapEditor.RegainFocus
+    frmOpensoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -2304,7 +2304,7 @@ End Sub
 Private Sub picCancel_Click()
 
     Unload Me
-    frmSoldatMapEditor.RegainFocus
+    frmOpensoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -2312,7 +2312,7 @@ Private Sub picOK_Click()
 
     If applyPreferences Then
         Unload Me
-        frmSoldatMapEditor.RegainFocus
+        frmOpensoldatMapEditor.RegainFocus
     End If
 
 End Sub
@@ -2325,8 +2325,8 @@ Private Sub Form_Load()
 
     Me.Height = MIN_HEIGHT * Screen.TwipsPerPixelY
 
-    sceneryVerts = frmSoldatMapEditor.sceneryVerts
-    topmost = frmSoldatMapEditor.topmost
+    sceneryVerts = frmOpensoldatMapEditor.sceneryVerts
+    topmost = frmOpensoldatMapEditor.topmost
 
     Me.SetColors
 
@@ -2339,17 +2339,17 @@ Private Sub Form_Load()
     blendModes(6) = 5
     blendModes(7) = 6
 
-    backgroundColor = GetRGB(frmSoldatMapEditor.backgroundColor)
-    pointColor = GetRGB(frmSoldatMapEditor.pointColor)
-    selectionColor = GetRGB(frmSoldatMapEditor.selectionColor)
-    gridColor1 = GetRGB(frmSoldatMapEditor.gridColor1)
-    gridColor2 = GetRGB(frmSoldatMapEditor.gridColor2)
+    backgroundColor = GetRGB(frmOpensoldatMapEditor.backgroundColor)
+    pointColor = GetRGB(frmOpensoldatMapEditor.pointColor)
+    selectionColor = GetRGB(frmOpensoldatMapEditor.selectionColor)
+    gridColor1 = GetRGB(frmOpensoldatMapEditor.gridColor1)
+    gridColor2 = GetRGB(frmOpensoldatMapEditor.gridColor2)
 
     For i = LBound(blendModes) To UBound(blendModes)
-        If frmSoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
-        If frmSoldatMapEditor.wireBlendDest = blendModes(i) Then cboWireDest.ListIndex = i
-        If frmSoldatMapEditor.polyBlendSrc = blendModes(i) Then cboPolySrc.ListIndex = i
-        If frmSoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
+        If frmOpensoldatMapEditor.wireBlendSrc = blendModes(i) Then cboWireSrc.ListIndex = i
+        If frmOpensoldatMapEditor.wireBlendDest = blendModes(i) Then cboWireDest.ListIndex = i
+        If frmOpensoldatMapEditor.polyBlendSrc = blendModes(i) Then cboPolySrc.ListIndex = i
+        If frmOpensoldatMapEditor.polyBlendDest = blendModes(i) Then cboPolyDest.ListIndex = i
     Next
 
     Me.picBackColor.BackColor = RGB(backgroundColor.red, backgroundColor.green, backgroundColor.blue)
@@ -2358,23 +2358,23 @@ Private Sub Form_Load()
     Me.picGridColor1.BackColor = RGB(gridColor1.red, gridColor1.green, gridColor1.blue)
     Me.picGridColor2.BackColor = RGB(gridColor2.red, gridColor2.green, gridColor2.blue)
 
-    txtWidth.Text = frmSoldatMapEditor.formWidth
-    txtHeight.Text = frmSoldatMapEditor.formHeight
+    txtWidth.Text = frmOpensoldatMapEditor.formWidth
+    txtHeight.Text = frmOpensoldatMapEditor.formHeight
     formWidth = txtWidth.Text
     formHeight = txtHeight.Text
 
-    txtSpacing.Text = frmSoldatMapEditor.gridSpacing
-    txtDivisions.Text = frmSoldatMapEditor.gridDivisions
+    txtSpacing.Text = frmOpensoldatMapEditor.gridSpacing
+    txtDivisions.Text = frmOpensoldatMapEditor.gridDivisions
     spacing = txtSpacing.Text
     divisions = txtDivisions.Text
-    opacity1 = frmSoldatMapEditor.gridOp1 / 255 * 100
+    opacity1 = frmOpensoldatMapEditor.gridOp1 / 255 * 100
     txtOpacity1.Text = opacity1
-    opacity2 = frmSoldatMapEditor.gridOp2 / 255 * 100
+    opacity2 = frmOpensoldatMapEditor.gridOp2 / 255 * 100
     txtOpacity2.Text = opacity2
 
-    txtMinZoom.Text = frmSoldatMapEditor.gMinZoom * 100
-    txtMaxZoom.Text = frmSoldatMapEditor.gMaxZoom * 100
-    txtResetZoom.Text = frmSoldatMapEditor.gResetZoom * 100
+    txtMinZoom.Text = frmOpensoldatMapEditor.gMinZoom * 100
+    txtMaxZoom.Text = frmOpensoldatMapEditor.gMaxZoom * 100
+    txtResetZoom.Text = frmOpensoldatMapEditor.gResetZoom * 100
     formMinZoom = txtMinZoom.Text
     formMaxZoom = txtMaxZoom.Text
     formResetZoom = txtResetZoom.Text
@@ -2400,9 +2400,9 @@ Private Sub Form_Load()
         file = Dir
     Loop
 
-    txtDir.Text = frmSoldatMapEditor.soldatDir
-    txtUncomp.Text = frmSoldatMapEditor.uncompDir
-    txtPrefabs.Text = frmSoldatMapEditor.prefabDir
+    txtDir.Text = frmOpensoldatMapEditor.opensoldatDir
+    txtUncomp.Text = frmOpensoldatMapEditor.uncompDir
+    txtPrefabs.Text = frmOpensoldatMapEditor.prefabDir
 
     Exit Sub
 

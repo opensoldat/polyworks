@@ -43,101 +43,101 @@ Public Sub LoadSettings()
 
     errVal = "1"
 
-    frmSoldatMapEditor.soldatDir = LoadString("Preferences", "Dir", , 1024)
-    frmSoldatMapEditor.uncompDir = LoadString("Preferences", "Uncompiled", , 1024)
-    frmSoldatMapEditor.prefabDir = LoadString("Preferences", "Prefabs", , 1024)
+    frmOpensoldatMapEditor.opensoldatDir = LoadString("Preferences", "Dir", , 1024)
+    frmOpensoldatMapEditor.uncompDir = LoadString("Preferences", "Uncompiled", , 1024)
+    frmOpensoldatMapEditor.prefabDir = LoadString("Preferences", "Prefabs", , 1024)
 
-    frmSoldatMapEditor.gridSpacing = LoadInt("Preferences", "GridSpacing", , 32)
-    frmSoldatMapEditor.gridDivisions = LoadInt("Preferences", "GridDiv", , 4)
-    frmSoldatMapEditor.gridColor1 = HexToLong(LoadString("Preferences", "GridColor1", , 1024, "000000"))
-    frmSoldatMapEditor.gridColor2 = HexToLong(LoadString("Preferences", "GridColor2", , 1024, "000000"))
-    frmSoldatMapEditor.gridOp1 = LoadInt("Preferences", "GridAlpha1", , 255)
-    frmSoldatMapEditor.gridOp2 = LoadInt("Preferences", "GridAlpha2", , 51)
-    frmSoldatMapEditor.polyBlendSrc = LoadInt("Preferences", "PolySrc", , 5)
-    frmSoldatMapEditor.polyBlendDest = LoadInt("Preferences", "PolyDest", , 6)
-    frmSoldatMapEditor.wireBlendSrc = LoadInt("Preferences", "WireSrc", , 2)
-    frmSoldatMapEditor.wireBlendDest = LoadInt("Preferences", "WireDest", , 2)
-    frmSoldatMapEditor.pointColor = HexToLong(LoadString("Preferences", "PointColor", , 1024, "CE4D4A"))
-    frmSoldatMapEditor.selectionColor = HexToLong(LoadString("Preferences", "SelectionColor", , 1024, "CE4D4A"))
-    frmSoldatMapEditor.backgroundColor = HexToLong(LoadString("Preferences", "BackColor", , 1024, "555555"))
-    frmSoldatMapEditor.maxUndo = LoadInt("Preferences", "MaxUndo", , 16)
-    frmSoldatMapEditor.sceneryVerts = LoadBoolean("Preferences", "SceneryVerts", , False)
-    frmSoldatMapEditor.topmost = LoadBoolean("Preferences", "Topmost", , True)
+    frmOpensoldatMapEditor.gridSpacing = LoadInt("Preferences", "GridSpacing", , 32)
+    frmOpensoldatMapEditor.gridDivisions = LoadInt("Preferences", "GridDiv", , 4)
+    frmOpensoldatMapEditor.gridColor1 = HexToLong(LoadString("Preferences", "GridColor1", , 1024, "000000"))
+    frmOpensoldatMapEditor.gridColor2 = HexToLong(LoadString("Preferences", "GridColor2", , 1024, "000000"))
+    frmOpensoldatMapEditor.gridOp1 = LoadInt("Preferences", "GridAlpha1", , 255)
+    frmOpensoldatMapEditor.gridOp2 = LoadInt("Preferences", "GridAlpha2", , 51)
+    frmOpensoldatMapEditor.polyBlendSrc = LoadInt("Preferences", "PolySrc", , 5)
+    frmOpensoldatMapEditor.polyBlendDest = LoadInt("Preferences", "PolyDest", , 6)
+    frmOpensoldatMapEditor.wireBlendSrc = LoadInt("Preferences", "WireSrc", , 2)
+    frmOpensoldatMapEditor.wireBlendDest = LoadInt("Preferences", "WireDest", , 2)
+    frmOpensoldatMapEditor.pointColor = HexToLong(LoadString("Preferences", "PointColor", , 1024, "CE4D4A"))
+    frmOpensoldatMapEditor.selectionColor = HexToLong(LoadString("Preferences", "SelectionColor", , 1024, "CE4D4A"))
+    frmOpensoldatMapEditor.backgroundColor = HexToLong(LoadString("Preferences", "BackColor", , 1024, "555555"))
+    frmOpensoldatMapEditor.maxUndo = LoadInt("Preferences", "MaxUndo", , 16)
+    frmOpensoldatMapEditor.sceneryVerts = LoadBoolean("Preferences", "SceneryVerts", , False)
+    frmOpensoldatMapEditor.topmost = LoadBoolean("Preferences", "Topmost", , True)
 
     strTemp = LoadString("Preferences", "MinZoom", , 1024, "51200")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
-        frmSoldatMapEditor.gMinZoom = Val(strTemp) / 100
+        frmOpensoldatMapEditor.gMinZoom = Val(strTemp) / 100
     Else
-        frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
+        frmOpensoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
     End If
 
     strTemp = LoadString("Preferences", "MaxZoom", , 1024, "3.125")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
-        frmSoldatMapEditor.gMaxZoom = Val(strTemp) / 100
+        frmOpensoldatMapEditor.gMaxZoom = Val(strTemp) / 100
     Else
-        frmSoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
+        frmOpensoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
     End If
 
-    If frmSoldatMapEditor.gMinZoom = frmSoldatMapEditor.gMaxZoom Then
-        frmSoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
-        frmSoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
-    ElseIf frmSoldatMapEditor.gMinZoom > frmSoldatMapEditor.gMaxZoom Then
-        sgnTemp = frmSoldatMapEditor.gMaxZoom
-        frmSoldatMapEditor.gMaxZoom = frmSoldatMapEditor.gMinZoom
-        frmSoldatMapEditor.gMinZoom = sgnTemp
+    If frmOpensoldatMapEditor.gMinZoom = frmOpensoldatMapEditor.gMaxZoom Then
+        frmOpensoldatMapEditor.gMinZoom = DEFAULT_MIN_ZOOM
+        frmOpensoldatMapEditor.gMaxZoom = DEFAULT_MAX_ZOOM
+    ElseIf frmOpensoldatMapEditor.gMinZoom > frmOpensoldatMapEditor.gMaxZoom Then
+        sgnTemp = frmOpensoldatMapEditor.gMaxZoom
+        frmOpensoldatMapEditor.gMaxZoom = frmOpensoldatMapEditor.gMinZoom
+        frmOpensoldatMapEditor.gMinZoom = sgnTemp
     End If
 
     strTemp = LoadString("Preferences", "ResetZoom", , 1024, "100")
     strTemp = Replace(strTemp, ",", ".", 1, -1, vbTextCompare)
     If IsNumeric(strTemp) Then
-        frmSoldatMapEditor.gResetZoom = Val(strTemp) / 100
+        frmOpensoldatMapEditor.gResetZoom = Val(strTemp) / 100
     Else
-        frmSoldatMapEditor.gResetZoom = DEFAULT_RESET_ZOOM
+        frmOpensoldatMapEditor.gResetZoom = DEFAULT_RESET_ZOOM
     End If
 
-    If frmSoldatMapEditor.gResetZoom > frmSoldatMapEditor.gMaxZoom Then
-        frmSoldatMapEditor.gResetZoom = frmSoldatMapEditor.gMaxZoom
-    ElseIf frmSoldatMapEditor.gResetZoom < frmSoldatMapEditor.gMinZoom Then
-        frmSoldatMapEditor.gResetZoom = frmSoldatMapEditor.gMinZoom
+    If frmOpensoldatMapEditor.gResetZoom > frmOpensoldatMapEditor.gMaxZoom Then
+        frmOpensoldatMapEditor.gResetZoom = frmOpensoldatMapEditor.gMaxZoom
+    ElseIf frmOpensoldatMapEditor.gResetZoom < frmOpensoldatMapEditor.gMinZoom Then
+        frmOpensoldatMapEditor.gResetZoom = frmOpensoldatMapEditor.gMinZoom
     End If
 
     errVal = "2"
 
-    frmSoldatMapEditor.showBG = LoadBoolean("Display", "Background", , True)
-    frmSoldatMapEditor.showPolys = LoadBoolean("Display", "Polys", , True)
-    frmSoldatMapEditor.showTexture = LoadBoolean("Display", "Texture", , True)
-    frmSoldatMapEditor.showWireframe = LoadBoolean("Display", "Wireframe", , False)
-    frmSoldatMapEditor.showPoints = LoadBoolean("Display", "Points", , False)
-    frmSoldatMapEditor.showScenery = LoadBoolean("Display", "Scenery", , True)
-    frmSoldatMapEditor.showObjects = LoadBoolean("Display", "Objects", , True)
-    frmSoldatMapEditor.showWaypoints = LoadBoolean("Display", "Waypoints", , False)
-    frmSoldatMapEditor.showGrid = LoadBoolean("Display", "Grid", , False)
-    frmSoldatMapEditor.showLights = LoadBoolean("Display", "Lights", , True)
-    frmSoldatMapEditor.showSketch = LoadBoolean("Display", "Sketch", , True)
+    frmOpensoldatMapEditor.showBG = LoadBoolean("Display", "Background", , True)
+    frmOpensoldatMapEditor.showPolys = LoadBoolean("Display", "Polys", , True)
+    frmOpensoldatMapEditor.showTexture = LoadBoolean("Display", "Texture", , True)
+    frmOpensoldatMapEditor.showWireframe = LoadBoolean("Display", "Wireframe", , False)
+    frmOpensoldatMapEditor.showPoints = LoadBoolean("Display", "Points", , False)
+    frmOpensoldatMapEditor.showScenery = LoadBoolean("Display", "Scenery", , True)
+    frmOpensoldatMapEditor.showObjects = LoadBoolean("Display", "Objects", , True)
+    frmOpensoldatMapEditor.showWaypoints = LoadBoolean("Display", "Waypoints", , False)
+    frmOpensoldatMapEditor.showGrid = LoadBoolean("Display", "Grid", , False)
+    frmOpensoldatMapEditor.showLights = LoadBoolean("Display", "Lights", , True)
+    frmOpensoldatMapEditor.showSketch = LoadBoolean("Display", "Sketch", , True)
 
-    frmSoldatMapEditor.mnuGrid.Checked = frmSoldatMapEditor.showGrid
+    frmOpensoldatMapEditor.mnuGrid.Checked = frmOpensoldatMapEditor.showGrid
 
     errVal = "3"
 
-    frmSoldatMapEditor.currentTool = LoadByte("ToolSettings", "CurrentTool", , 1)
-    frmSoldatMapEditor.ohSnap = LoadBoolean("ToolSettings", "SnapVertices", , True)
-    frmSoldatMapEditor.snapToGrid = LoadBoolean("ToolSettings", "SnapToGrid", , True)
-    frmSoldatMapEditor.fixedTexture = LoadBoolean("ToolSettings", "FixedTexture", , False)
-    frmSoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity", , 100) / 100
-    frmSoldatMapEditor.colorRadius = LoadInt("ToolSettings", "ColorRadius", , 16)
+    frmOpensoldatMapEditor.currentTool = LoadByte("ToolSettings", "CurrentTool", , 1)
+    frmOpensoldatMapEditor.ohSnap = LoadBoolean("ToolSettings", "SnapVertices", , True)
+    frmOpensoldatMapEditor.snapToGrid = LoadBoolean("ToolSettings", "SnapToGrid", , True)
+    frmOpensoldatMapEditor.fixedTexture = LoadBoolean("ToolSettings", "FixedTexture", , False)
+    frmOpensoldatMapEditor.opacity = LoadInt("ToolSettings", "Opacity", , 100) / 100
+    frmOpensoldatMapEditor.colorRadius = LoadInt("ToolSettings", "ColorRadius", , 16)
     gPolyColor = GetRGB(HexToLong(LoadString("ToolSettings", "CurrentColor", , , "FFFFFF")))
-    frmSoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode", , 1)
-    frmSoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode", , 0)
-    frmSoldatMapEditor.snapRadius = LoadInt("ToolSettings", "SnapRadius", , 8)
+    frmOpensoldatMapEditor.colorMode = LoadInt("ToolSettings", "ColorMode", , 1)
+    frmOpensoldatMapEditor.blendMode = LoadInt("ToolSettings", "BlendMode", , 0)
+    frmOpensoldatMapEditor.snapRadius = LoadInt("ToolSettings", "SnapRadius", , 8)
     frmScenery.rotateScenery = LoadBoolean("ToolSettings", "RotateScenery", , False)
     frmScenery.scaleScenery = LoadBoolean("ToolSettings", "ScaleScenery", , False)
-    frmSoldatMapEditor.xTexture = LoadInt("ToolSettings", "TextureWidth", , 128)
-    frmSoldatMapEditor.yTexture = LoadInt("ToolSettings", "TextureHeight", , 128)
-    frmSoldatMapEditor.gTextureFile = LoadString("ToolSettings", "Texture", , 1024, "banana.bmp")
-    frmSoldatMapEditor.mnuCustomX.Checked = LoadBoolean("ToolSettings", "CustomX", , False)
-    frmSoldatMapEditor.mnuCustomY.Checked = LoadBoolean("ToolSettings", "CustomY", , False)
+    frmOpensoldatMapEditor.xTexture = LoadInt("ToolSettings", "TextureWidth", , 128)
+    frmOpensoldatMapEditor.yTexture = LoadInt("ToolSettings", "TextureHeight", , 128)
+    frmOpensoldatMapEditor.gTextureFile = LoadString("ToolSettings", "Texture", , 1024, "banana.bmp")
+    frmOpensoldatMapEditor.mnuCustomX.Checked = LoadBoolean("ToolSettings", "CustomX", , False)
+    frmOpensoldatMapEditor.mnuCustomY.Checked = LoadBoolean("ToolSettings", "CustomY", , False)
 
     errVal = "4"
 
@@ -177,16 +177,16 @@ Public Sub LoadSettings()
 
     errVal = "7"
 
-    frmSoldatMapEditor.mnuRecent(0).Caption = LoadString("RecentFiles", "01", , 1024)
-    frmSoldatMapEditor.mnuRecent(1).Caption = LoadString("RecentFiles", "02", , 1024)
-    frmSoldatMapEditor.mnuRecent(2).Caption = LoadString("RecentFiles", "03", , 1024)
-    frmSoldatMapEditor.mnuRecent(3).Caption = LoadString("RecentFiles", "04", , 1024)
-    frmSoldatMapEditor.mnuRecent(4).Caption = LoadString("RecentFiles", "05", , 1024)
-    frmSoldatMapEditor.mnuRecent(5).Caption = LoadString("RecentFiles", "06", , 1024)
-    frmSoldatMapEditor.mnuRecent(6).Caption = LoadString("RecentFiles", "07", , 1024)
-    frmSoldatMapEditor.mnuRecent(7).Caption = LoadString("RecentFiles", "08", , 1024)
-    frmSoldatMapEditor.mnuRecent(8).Caption = LoadString("RecentFiles", "09", , 1024)
-    frmSoldatMapEditor.mnuRecent(9).Caption = LoadString("RecentFiles", "10", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(0).Caption = LoadString("RecentFiles", "01", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(1).Caption = LoadString("RecentFiles", "02", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(2).Caption = LoadString("RecentFiles", "03", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(3).Caption = LoadString("RecentFiles", "04", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(4).Caption = LoadString("RecentFiles", "05", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(5).Caption = LoadString("RecentFiles", "06", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(6).Caption = LoadString("RecentFiles", "07", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(7).Caption = LoadString("RecentFiles", "08", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(8).Caption = LoadString("RecentFiles", "09", , 1024)
+    frmOpensoldatMapEditor.mnuRecent(9).Caption = LoadString("RecentFiles", "10", , 1024)
 
     errVal = "8"
 
@@ -224,16 +224,16 @@ Public Sub LoadSettings()
 
     errVal = "10"
 
-    For i = frmSoldatMapEditor.mnuRecent.LBound + 1 To frmSoldatMapEditor.mnuRecent.UBound
-        If frmSoldatMapEditor.mnuRecent(i).Caption = "" Then
+    For i = frmOpensoldatMapEditor.mnuRecent.LBound + 1 To frmOpensoldatMapEditor.mnuRecent.UBound
+        If frmOpensoldatMapEditor.mnuRecent(i).Caption = "" Then
             numRecent = numRecent + 1
-            frmSoldatMapEditor.mnuRecent(i).Visible = False
+            frmOpensoldatMapEditor.mnuRecent(i).Visible = False
         Else
-            frmSoldatMapEditor.mnuRecent(i).Visible = True
+            frmOpensoldatMapEditor.mnuRecent(i).Visible = True
         End If
     Next
-    If numRecent = frmSoldatMapEditor.mnuRecent.Count - 1 And frmSoldatMapEditor.mnuRecent(frmSoldatMapEditor.mnuRecent.LBound).Caption = "" Then
-        frmSoldatMapEditor.mnuRecentFiles.Enabled = False
+    If numRecent = frmOpensoldatMapEditor.mnuRecent.Count - 1 And frmOpensoldatMapEditor.mnuRecent(frmOpensoldatMapEditor.mnuRecent.LBound).Caption = "" Then
+        frmOpensoldatMapEditor.mnuRecentFiles.Enabled = False
     End If
 
     Exit Sub
@@ -261,67 +261,67 @@ Public Sub SaveSettings()
 
     ' preferences
     iniString = _
-        "Dir=" & frmSoldatMapEditor.soldatDir & sNull & _
-        "Uncompiled=" & frmSoldatMapEditor.uncompDir & sNull & _
-        "Prefabs=" & frmSoldatMapEditor.prefabDir & sNull & _
-        "GridSpacing=" & frmSoldatMapEditor.gridSpacing & sNull & _
-        "GridDiv=" & frmSoldatMapEditor.gridDivisions & sNull & _
-        "GridColor1=" & RGBtoHex(frmSoldatMapEditor.gridColor1) & sNull & _
-        "GridColor2=" & RGBtoHex(frmSoldatMapEditor.gridColor2) & sNull & _
-        "GridAlpha1=" & frmSoldatMapEditor.gridOp1 & sNull & _
-        "GridAlpha2=" & frmSoldatMapEditor.gridOp2 & sNull & _
-        "PolySrc=" & frmSoldatMapEditor.polyBlendSrc & sNull & _
-        "PolyDest=" & frmSoldatMapEditor.polyBlendDest & sNull & _
-        "WireSrc=" & frmSoldatMapEditor.wireBlendSrc & sNull & _
-        "WireDest=" & frmSoldatMapEditor.wireBlendDest & sNull & _
-        "PointColor=" & RGBtoHex(frmSoldatMapEditor.pointColor) & sNull & _
-        "SelectionColor=" & RGBtoHex(frmSoldatMapEditor.selectionColor) & sNull & _
-        "BackColor=" & RGBtoHex(frmSoldatMapEditor.backgroundColor) & sNull & _
-        "MaxUndo=" & frmSoldatMapEditor.maxUndo & sNull & _
-        "SceneryVerts=" & CStr(frmSoldatMapEditor.sceneryVerts) & sNull & _
-        "Topmost=" & CStr(frmSoldatMapEditor.topmost) & sNull & _
-        "MinZoom=" & Trim(Str(frmSoldatMapEditor.gMaxZoom * 100)) & sNull & _
-        "MaxZoom=" & Trim(Str(frmSoldatMapEditor.gMinZoom * 100)) & sNull & _
-        "ResetZoom=" & Trim(Str(frmSoldatMapEditor.gResetZoom * 100)) & _
+        "Dir=" & frmOpensoldatMapEditor.opensoldatDir & sNull & _
+        "Uncompiled=" & frmOpensoldatMapEditor.uncompDir & sNull & _
+        "Prefabs=" & frmOpensoldatMapEditor.prefabDir & sNull & _
+        "GridSpacing=" & frmOpensoldatMapEditor.gridSpacing & sNull & _
+        "GridDiv=" & frmOpensoldatMapEditor.gridDivisions & sNull & _
+        "GridColor1=" & RGBtoHex(frmOpensoldatMapEditor.gridColor1) & sNull & _
+        "GridColor2=" & RGBtoHex(frmOpensoldatMapEditor.gridColor2) & sNull & _
+        "GridAlpha1=" & frmOpensoldatMapEditor.gridOp1 & sNull & _
+        "GridAlpha2=" & frmOpensoldatMapEditor.gridOp2 & sNull & _
+        "PolySrc=" & frmOpensoldatMapEditor.polyBlendSrc & sNull & _
+        "PolyDest=" & frmOpensoldatMapEditor.polyBlendDest & sNull & _
+        "WireSrc=" & frmOpensoldatMapEditor.wireBlendSrc & sNull & _
+        "WireDest=" & frmOpensoldatMapEditor.wireBlendDest & sNull & _
+        "PointColor=" & RGBtoHex(frmOpensoldatMapEditor.pointColor) & sNull & _
+        "SelectionColor=" & RGBtoHex(frmOpensoldatMapEditor.selectionColor) & sNull & _
+        "BackColor=" & RGBtoHex(frmOpensoldatMapEditor.backgroundColor) & sNull & _
+        "MaxUndo=" & frmOpensoldatMapEditor.maxUndo & sNull & _
+        "SceneryVerts=" & CStr(frmOpensoldatMapEditor.sceneryVerts) & sNull & _
+        "Topmost=" & CStr(frmOpensoldatMapEditor.topmost) & sNull & _
+        "MinZoom=" & Trim(Str(frmOpensoldatMapEditor.gMaxZoom * 100)) & sNull & _
+        "MaxZoom=" & Trim(Str(frmOpensoldatMapEditor.gMinZoom * 100)) & sNull & _
+        "ResetZoom=" & Trim(Str(frmOpensoldatMapEditor.gResetZoom * 100)) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Preferences", iniString
 
     ' display
     iniString = _
-        "Background=" & CStr(frmSoldatMapEditor.showBG) & sNull & _
-        "Polys=" & CStr(frmSoldatMapEditor.showPolys) & sNull & _
-        "Texture=" & CStr(frmSoldatMapEditor.showTexture) & sNull & _
-        "Wireframe=" & CStr(frmSoldatMapEditor.showWireframe) & sNull & _
-        "Points=" & CStr(frmSoldatMapEditor.showPoints) & sNull & _
-        "Scenery=" & CStr(frmSoldatMapEditor.showScenery) & sNull & _
-        "Objects=" & CStr(frmSoldatMapEditor.showObjects) & sNull & _
-        "Waypoints=" & CStr(frmSoldatMapEditor.showWaypoints) & sNull & _
-        "Grid=" & CStr(frmSoldatMapEditor.showGrid) & sNull & _
-        "Lights=" & CStr(frmSoldatMapEditor.showLights) & sNull & _
-        "Sketch=" & CStr(frmSoldatMapEditor.showSketch) & _
+        "Background=" & CStr(frmOpensoldatMapEditor.showBG) & sNull & _
+        "Polys=" & CStr(frmOpensoldatMapEditor.showPolys) & sNull & _
+        "Texture=" & CStr(frmOpensoldatMapEditor.showTexture) & sNull & _
+        "Wireframe=" & CStr(frmOpensoldatMapEditor.showWireframe) & sNull & _
+        "Points=" & CStr(frmOpensoldatMapEditor.showPoints) & sNull & _
+        "Scenery=" & CStr(frmOpensoldatMapEditor.showScenery) & sNull & _
+        "Objects=" & CStr(frmOpensoldatMapEditor.showObjects) & sNull & _
+        "Waypoints=" & CStr(frmOpensoldatMapEditor.showWaypoints) & sNull & _
+        "Grid=" & CStr(frmOpensoldatMapEditor.showGrid) & sNull & _
+        "Lights=" & CStr(frmOpensoldatMapEditor.showLights) & sNull & _
+        "Sketch=" & CStr(frmOpensoldatMapEditor.showSketch) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Display", iniString
 
     ' tool settings
     currentColor = RGB(gPolyColor.blue, gPolyColor.green, gPolyColor.red)
     iniString = _
-        "CurrentTool=" & frmSoldatMapEditor.currentTool & sNull & _
-        "SnapVertices=" & CStr(frmSoldatMapEditor.ohSnap) & sNull & _
-        "SnapToGrid=" & CStr(frmSoldatMapEditor.snapToGrid) & sNull & _
-        "FixedTexture=" & CStr(frmSoldatMapEditor.fixedTexture) & sNull & _
-        "Opacity=" & (frmSoldatMapEditor.opacity * 100) & sNull & _
-        "ColorRadius=" & frmSoldatMapEditor.colorRadius & sNull & _
+        "CurrentTool=" & frmOpensoldatMapEditor.currentTool & sNull & _
+        "SnapVertices=" & CStr(frmOpensoldatMapEditor.ohSnap) & sNull & _
+        "SnapToGrid=" & CStr(frmOpensoldatMapEditor.snapToGrid) & sNull & _
+        "FixedTexture=" & CStr(frmOpensoldatMapEditor.fixedTexture) & sNull & _
+        "Opacity=" & (frmOpensoldatMapEditor.opacity * 100) & sNull & _
+        "ColorRadius=" & frmOpensoldatMapEditor.colorRadius & sNull & _
         "CurrentColor=" & RGBtoHex(currentColor) & sNull & _
-        "ColorMode=" & frmSoldatMapEditor.colorMode & sNull & _
-        "BlendMode=" & frmSoldatMapEditor.blendMode & sNull & _
-        "SnapRadius=" & frmSoldatMapEditor.snapRadius & sNull & _
+        "ColorMode=" & frmOpensoldatMapEditor.colorMode & sNull & _
+        "BlendMode=" & frmOpensoldatMapEditor.blendMode & sNull & _
+        "SnapRadius=" & frmOpensoldatMapEditor.snapRadius & sNull & _
         "RotateScenery=" & CStr(frmScenery.rotateScenery) & sNull & _
         "ScaleScenery=" & CStr(frmScenery.scaleScenery) & sNull & _
-        "TextureWidth=" & frmSoldatMapEditor.xTexture & sNull & _
-        "TextureHeight=" & frmSoldatMapEditor.yTexture & sNull & _
-        "Texture=" & frmSoldatMapEditor.gTextureFile & sNull & _
-        "CustomX=" & CStr(frmSoldatMapEditor.mnuCustomX.Checked) & sNull & _
-        "CustomY=" & CStr(frmSoldatMapEditor.mnuCustomY.Checked) & _
+        "TextureWidth=" & frmOpensoldatMapEditor.xTexture & sNull & _
+        "TextureHeight=" & frmOpensoldatMapEditor.yTexture & sNull & _
+        "Texture=" & frmOpensoldatMapEditor.gTextureFile & sNull & _
+        "CustomX=" & CStr(frmOpensoldatMapEditor.mnuCustomX.Checked) & sNull & _
+        "CustomY=" & CStr(frmOpensoldatMapEditor.mnuCustomY.Checked) & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "ToolSettings", iniString
 
@@ -372,16 +372,16 @@ Public Sub SaveSettings()
 
     ' recent files
     iniString = _
-        "01=" & frmSoldatMapEditor.mnuRecent(0).Caption & sNull & _
-        "02=" & frmSoldatMapEditor.mnuRecent(1).Caption & sNull & _
-        "03=" & frmSoldatMapEditor.mnuRecent(2).Caption & sNull & _
-        "04=" & frmSoldatMapEditor.mnuRecent(3).Caption & sNull & _
-        "05=" & frmSoldatMapEditor.mnuRecent(4).Caption & sNull & _
-        "06=" & frmSoldatMapEditor.mnuRecent(5).Caption & sNull & _
-        "07=" & frmSoldatMapEditor.mnuRecent(6).Caption & sNull & _
-        "08=" & frmSoldatMapEditor.mnuRecent(7).Caption & sNull & _
-        "09=" & frmSoldatMapEditor.mnuRecent(8).Caption & sNull & _
-        "10=" & frmSoldatMapEditor.mnuRecent(9).Caption & _
+        "01=" & frmOpensoldatMapEditor.mnuRecent(0).Caption & sNull & _
+        "02=" & frmOpensoldatMapEditor.mnuRecent(1).Caption & sNull & _
+        "03=" & frmOpensoldatMapEditor.mnuRecent(2).Caption & sNull & _
+        "04=" & frmOpensoldatMapEditor.mnuRecent(3).Caption & sNull & _
+        "05=" & frmOpensoldatMapEditor.mnuRecent(4).Caption & sNull & _
+        "06=" & frmOpensoldatMapEditor.mnuRecent(5).Caption & sNull & _
+        "07=" & frmOpensoldatMapEditor.mnuRecent(6).Caption & sNull & _
+        "08=" & frmOpensoldatMapEditor.mnuRecent(7).Caption & sNull & _
+        "09=" & frmOpensoldatMapEditor.mnuRecent(8).Caption & sNull & _
+        "10=" & frmOpensoldatMapEditor.mnuRecent(9).Caption & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "RecentFiles", iniString
 
@@ -417,11 +417,11 @@ Public Sub SaveSettings()
     isNewFile = Not FileExists(appPath & "\workspace\current.ini")
 
     iniString = _
-        "WindowState=" & frmSoldatMapEditor.Tag & sNull & _
-        "Width=" & frmSoldatMapEditor.formWidth & sNull & _
-        "Height=" & frmSoldatMapEditor.formHeight & sNull & _
-        "Left=" & frmSoldatMapEditor.formLeft & sNull & _
-        "Top=" & frmSoldatMapEditor.formTop & _
+        "WindowState=" & frmOpensoldatMapEditor.Tag & sNull & _
+        "Width=" & frmOpensoldatMapEditor.formWidth & sNull & _
+        "Height=" & frmOpensoldatMapEditor.formHeight & sNull & _
+        "Left=" & frmOpensoldatMapEditor.formLeft & sNull & _
+        "Top=" & frmOpensoldatMapEditor.formTop & _
         IIf(isNewFile, vbNewLine, "") & sNull & sNull
     SaveSection "Main", iniString, appPath & "\workspace\current.ini"
 
@@ -439,71 +439,71 @@ Public Sub LoadWorkspace(Optional theFileName As String = "current.ini", Optiona
 
     On Error GoTo ErrorHandler
 
-    frmSoldatMapEditor.Tag = LoadInt("Main", "WindowState", appPath & "\workspace\" & theFileName)
-    frmSoldatMapEditor.formWidth = LoadInt("Main", "Width", appPath & "\workspace\" & theFileName)
-    frmSoldatMapEditor.formHeight = LoadInt("Main", "Height", appPath & "\workspace\" & theFileName)
-    frmSoldatMapEditor.formLeft = LoadInt("Main", "Left", appPath & "\workspace\" & theFileName)
-    frmSoldatMapEditor.formTop = LoadInt("Main", "Top", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.Tag = LoadInt("Main", "WindowState", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.formWidth = LoadInt("Main", "Width", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.formHeight = LoadInt("Main", "Height", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.formLeft = LoadInt("Main", "Left", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.formTop = LoadInt("Main", "Top", appPath & "\workspace\" & theFileName)
 
-    frmSoldatMapEditor.picResize.Top = frmSoldatMapEditor.formHeight - frmSoldatMapEditor.picResize.Height
-    frmSoldatMapEditor.picResize.Left = frmSoldatMapEditor.formWidth - frmSoldatMapEditor.picResize.Width
+    frmOpensoldatMapEditor.picResize.Top = frmOpensoldatMapEditor.formHeight - frmOpensoldatMapEditor.picResize.Height
+    frmOpensoldatMapEditor.picResize.Left = frmOpensoldatMapEditor.formWidth - frmOpensoldatMapEditor.picResize.Width
 
-    If frmSoldatMapEditor.Tag = vbNormal Then
-        frmSoldatMapEditor.Width = frmSoldatMapEditor.formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = frmSoldatMapEditor.formHeight * Screen.TwipsPerPixelY
-        frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
+    If frmOpensoldatMapEditor.Tag = vbNormal Then
+        frmOpensoldatMapEditor.Width = frmOpensoldatMapEditor.formWidth * Screen.TwipsPerPixelX
+        frmOpensoldatMapEditor.Height = frmOpensoldatMapEditor.formHeight * Screen.TwipsPerPixelY
+        frmOpensoldatMapEditor.Left = frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+        frmOpensoldatMapEditor.Top = frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY
     Else
-        frmSoldatMapEditor.Tag = vbNormal
-        frmSoldatMapEditor.Width = frmSoldatMapEditor.formWidth * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Height = frmSoldatMapEditor.formHeight * Screen.TwipsPerPixelY
-        frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
-        frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
-        frmSoldatMapEditor.MaximizeBorderLessForm
-        frmSoldatMapEditor.picResize.Visible = False
+        frmOpensoldatMapEditor.Tag = vbNormal
+        frmOpensoldatMapEditor.Width = frmOpensoldatMapEditor.formWidth * Screen.TwipsPerPixelX
+        frmOpensoldatMapEditor.Height = frmOpensoldatMapEditor.formHeight * Screen.TwipsPerPixelY
+        frmOpensoldatMapEditor.Left = frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+        frmOpensoldatMapEditor.Top = frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY
+        frmOpensoldatMapEditor.MaximizeBorderLessForm
+        frmOpensoldatMapEditor.picResize.Visible = False
     End If
 
-    frmSoldatMapEditor.tvwScenery.Height = frmSoldatMapEditor.formHeight - 41 - 20
+    frmOpensoldatMapEditor.tvwScenery.Height = frmOpensoldatMapEditor.formHeight - 41 - 20
 
-    frmSoldatMapEditor.mnuTools.Checked = LoadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuTools.Checked = LoadString("Tools", "Visible", appPath & "\workspace\" & theFileName)
     frmTools.xPos = LoadInt("Tools", "Left", appPath & "\workspace\" & theFileName)
     frmTools.yPos = LoadInt("Tools", "Top", appPath & "\workspace\" & theFileName)
     frmTools.collapsed = LoadString("Tools", "Collapsed", appPath & "\workspace\" & theFileName)
     frmTools.Tag = IIf(LoadString("Tools", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuDisplay.Checked = LoadString("Display", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuDisplay.Checked = LoadString("Display", "Visible", appPath & "\workspace\" & theFileName)
     frmDisplay.xPos = LoadInt("Display", "Left", appPath & "\workspace\" & theFileName)
     frmDisplay.yPos = LoadInt("Display", "Top", appPath & "\workspace\" & theFileName)
     frmDisplay.collapsed = LoadString("Display", "Collapsed", appPath & "\workspace\" & theFileName)
     frmDisplay.Tag = IIf(LoadString("Display", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuInfo.Checked = LoadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuInfo.Checked = LoadString("Properties", "Visible", appPath & "\workspace\" & theFileName)
     frmInfo.xPos = LoadInt("Properties", "Left", appPath & "\workspace\" & theFileName)
     frmInfo.yPos = LoadInt("Properties", "Top", appPath & "\workspace\" & theFileName)
     frmInfo.collapsed = LoadString("Properties", "Collapsed", appPath & "\workspace\" & theFileName)
     frmInfo.Tag = IIf(LoadString("Properties", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuPalette.Checked = LoadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuPalette.Checked = LoadString("Palette", "Visible", appPath & "\workspace\" & theFileName)
     frmPalette.xPos = LoadInt("Palette", "Left", appPath & "\workspace\" & theFileName)
     frmPalette.yPos = LoadInt("Palette", "Top", appPath & "\workspace\" & theFileName)
     frmPalette.collapsed = LoadString("Palette", "Collapsed", appPath & "\workspace\" & theFileName)
     frmPalette.Tag = IIf(LoadString("Palette", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
     If Not bSkipScenery Then
-        frmSoldatMapEditor.mnuScenery.Checked = LoadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
+        frmOpensoldatMapEditor.mnuScenery.Checked = LoadString("Scenery", "Visible", appPath & "\workspace\" & theFileName)
         frmScenery.xPos = LoadInt("Scenery", "Left", appPath & "\workspace\" & theFileName)
         frmScenery.yPos = LoadInt("Scenery", "Top", appPath & "\workspace\" & theFileName)
         frmScenery.collapsed = LoadString("Scenery", "Collapsed", appPath & "\workspace\" & theFileName)
         frmScenery.Tag = IIf(LoadString("Scenery", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
     End If
 
-    frmSoldatMapEditor.mnuWaypoints.Checked = LoadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuWaypoints.Checked = LoadString("Waypoints", "Visible", appPath & "\workspace\" & theFileName)
     frmWaypoints.xPos = LoadInt("Waypoints", "Left", appPath & "\workspace\" & theFileName)
     frmWaypoints.yPos = LoadInt("Waypoints", "Top", appPath & "\workspace\" & theFileName)
     frmWaypoints.collapsed = LoadString("Waypoints", "Collapsed", appPath & "\workspace\" & theFileName)
     frmWaypoints.Tag = IIf(LoadString("Waypoints", "Snapped", appPath & "\workspace\" & theFileName) = "True", "snap", "")
 
-    frmSoldatMapEditor.mnuTexture.Checked = LoadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
+    frmOpensoldatMapEditor.mnuTexture.Checked = LoadString("Texture", "Visible", appPath & "\workspace\" & theFileName)
     frmTexture.xPos = LoadInt("Texture", "Left", appPath & "\workspace\" & theFileName)
     frmTexture.yPos = LoadInt("Texture", "Top", appPath & "\workspace\" & theFileName)
     frmTexture.collapsed = LoadString("Texture", "Collapsed", appPath & "\workspace\" & theFileName)

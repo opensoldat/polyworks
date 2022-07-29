@@ -379,11 +379,11 @@ Public Sub SetColors()
     MouseEvent2 picHide, 0, 0, BUTTON_SMALL, 0, BUTTON_UP
 
     For i = picTools.LBound To picTools.UBound
-        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+        BitBlt picTools(i).hDC, 0, 0, 32, 32, frmOpensoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
         picTools(i).Refresh
         frmTools.picTools(i).ToolTipText = frmTools.picTools(i).Tag & " (" & Chr(MapVirtualKey(hotKeys(i), 1)) & ")"
     Next
-    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
+    BitBlt picTools(curTool).hDC, 0, 0, 32, 32, frmOpensoldatMapEditor.picGfx.hDC, 64, curTool * 32, vbSrcCopy
     picTools(curTool).Refresh
 
 End Sub
@@ -400,10 +400,10 @@ Public Sub picTools_MouseDown(Index As Integer, Button As Integer, Shift As Inte
 
     If curTool <> Index Then
         For i = picTools.LBound To picTools.UBound
-            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
+            BitBlt picTools(i).hDC, 0, 0, 32, 32, frmOpensoldatMapEditor.picGfx.hDC, 0, i * 32, vbSrcCopy
             picTools(i).Refresh
         Next
-        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmSoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
+        BitBlt picTools(Index).hDC, 0, 0, 32, 32, frmOpensoldatMapEditor.picGfx.hDC, 64, Index * 32, vbSrcCopy
         picTools(Index).Refresh
     End If
     curTool = Index
@@ -457,7 +457,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmScenery
     SnapForm Me, frmInfo
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmSoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -474,16 +474,16 @@ End Sub
 
 Private Sub picTools_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    frmSoldatMapEditor.SetCurrentTool curTool
-    frmSoldatMapEditor.MouseIcon = frmSoldatMapEditor.ImageList.ListImages(curTool + 1).Picture
-    frmSoldatMapEditor.RegainFocus
+    frmOpensoldatMapEditor.SetCurrentTool curTool
+    frmOpensoldatMapEditor.MouseIcon = frmOpensoldatMapEditor.ImageList.ListImages(curTool + 1).Picture
+    frmOpensoldatMapEditor.RegainFocus
 
 End Sub
 
 Private Sub picHide_Click()
 
     Me.Hide
-    frmSoldatMapEditor.mnuTools.Checked = False
+    frmOpensoldatMapEditor.mnuTools.Checked = False
 
 End Sub
 

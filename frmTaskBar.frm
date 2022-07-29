@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmTaskBar 
-   Caption         =   "Soldat PolyWorks"
+   Caption         =   "opensoldat PolyWorks"
    ClientHeight    =   1920
    ClientLeft      =   60
    ClientTop       =   345
@@ -49,8 +49,8 @@ Option Explicit
 
 Private Sub Form_GotFocus()
 
-    If frmSoldatMapEditor.Visible Then
-        frmSoldatMapEditor.RegainFocus
+    If frmOpensoldatMapEditor.Visible Then
+        frmOpensoldatMapEditor.RegainFocus
     End If
 
 End Sub
@@ -64,28 +64,28 @@ End Sub
 
 Private Sub Form_Resize()
 
-    If Not frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then  ' show when it gets restored
-        frmSoldatMapEditor.Show
-        If frmSoldatMapEditor.mnuDisplay.Checked Then frmDisplay.Show
-        If frmSoldatMapEditor.mnuWaypoints.Checked Then frmWaypoints.Show
-        If frmSoldatMapEditor.mnuTools.Checked Then frmTools.Show
-        If frmSoldatMapEditor.mnuPalette.Checked Then frmPalette.Show
-        If frmSoldatMapEditor.mnuScenery.Checked Then frmScenery.Show
-        If frmSoldatMapEditor.mnuInfo.Checked Then frmInfo.Show
-        If frmSoldatMapEditor.mnuTexture.Checked Then frmTexture.Show
-        If frmSoldatMapEditor.Tag = vbNormal Then
-            frmSoldatMapEditor.Left = frmSoldatMapEditor.formLeft * Screen.TwipsPerPixelX
-            frmSoldatMapEditor.Top = frmSoldatMapEditor.formTop * Screen.TwipsPerPixelY
-            frmSoldatMapEditor.ScaleWidth = frmSoldatMapEditor.formWidth
-            frmSoldatMapEditor.ScaleHeight = frmSoldatMapEditor.formHeight
+    If Not frmOpensoldatMapEditor.Visible And Me.WindowState = vbNormal Then  ' show when it gets restored
+        frmOpensoldatMapEditor.Show
+        If frmOpensoldatMapEditor.mnuDisplay.Checked Then frmDisplay.Show
+        If frmOpensoldatMapEditor.mnuWaypoints.Checked Then frmWaypoints.Show
+        If frmOpensoldatMapEditor.mnuTools.Checked Then frmTools.Show
+        If frmOpensoldatMapEditor.mnuPalette.Checked Then frmPalette.Show
+        If frmOpensoldatMapEditor.mnuScenery.Checked Then frmScenery.Show
+        If frmOpensoldatMapEditor.mnuInfo.Checked Then frmInfo.Show
+        If frmOpensoldatMapEditor.mnuTexture.Checked Then frmTexture.Show
+        If frmOpensoldatMapEditor.Tag = vbNormal Then
+            frmOpensoldatMapEditor.Left = frmOpensoldatMapEditor.formLeft * Screen.TwipsPerPixelX
+            frmOpensoldatMapEditor.Top = frmOpensoldatMapEditor.formTop * Screen.TwipsPerPixelY
+            frmOpensoldatMapEditor.ScaleWidth = frmOpensoldatMapEditor.formWidth
+            frmOpensoldatMapEditor.ScaleHeight = frmOpensoldatMapEditor.formHeight
         End If
-        frmSoldatMapEditor.RegainFocus
-    ElseIf Not frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
+        frmOpensoldatMapEditor.RegainFocus
+    ElseIf Not frmOpensoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
         '  no-op
-    ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbNormal Then
-        frmSoldatMapEditor.RegainFocus
-    ElseIf frmSoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
-        frmSoldatMapEditor.RegainFocus
+    ElseIf frmOpensoldatMapEditor.Visible And Me.WindowState = vbNormal Then
+        frmOpensoldatMapEditor.RegainFocus
+    ElseIf frmOpensoldatMapEditor.Visible And Me.WindowState = vbMinimized Then
+        frmOpensoldatMapEditor.RegainFocus
     End If
 
 End Sub
@@ -96,6 +96,6 @@ Private Sub Form_Unload(Cancel As Integer)
         frmColor.Hide
     End If
 
-    frmSoldatMapEditor.Terminate
+    frmOpensoldatMapEditor.Terminate
 
 End Sub
