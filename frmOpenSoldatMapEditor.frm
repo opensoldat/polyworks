@@ -12612,7 +12612,7 @@ End Sub
 
 Private Sub Form_Resize()
 
-    picHelp.Left = frmOpenSoldatMapEditor.ScaleWidth - 80
+    picHelp.Left = frmOpenSoldatMapEditor.ScaleWidth - 72
     picMinimize.Left = frmOpenSoldatMapEditor.ScaleWidth - 48
     picMaximize.Left = frmOpenSoldatMapEditor.ScaleWidth - 32
     picExit.Left = frmOpenSoldatMapEditor.ScaleWidth - 16
