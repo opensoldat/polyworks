@@ -659,7 +659,7 @@ End Sub
 
 Public Sub picType_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
-    If Not frmOpensoldatMapEditor.SetWayType(Index, Not waypointType(Index)) Then Exit Sub
+    If Not frmOpenSoldatMapEditor.SetWayType(Index, Not waypointType(Index)) Then Exit Sub
 
     waypointType(Index) = Not waypointType(Index)
     MouseEvent2 picType(Index), 0, 0, BUTTON_SMALL, waypointType(Index), BUTTON_UP
@@ -692,7 +692,7 @@ Public Sub picShow_MouseUp(Index As Integer, Button As Integer, Shift As Integer
         End If
     Next
 
-    frmOpensoldatMapEditor.SetShowPaths
+    frmOpenSoldatMapEditor.SetShowPaths
 
 End Sub
 
@@ -718,7 +718,7 @@ End Sub
 Private Sub cboSpecial_Click()
 
     If noChange = False And cboSpecial.ListIndex > -1 Then
-        If Not frmOpensoldatMapEditor.SetSpecial(cboSpecial.ListIndex) Then
+        If Not frmOpenSoldatMapEditor.SetSpecial(cboSpecial.ListIndex) Then
             cboSpecial.ListIndex = -1
         End If
     End If
@@ -765,7 +765,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmScenery
     SnapForm Me, frmDisplay
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpenSoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -775,7 +775,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmOpensoldatMapEditor.mnuWaypoints.Checked = False
+    frmOpenSoldatMapEditor.mnuWaypoints.Checked = False
 
 End Sub
 
@@ -821,7 +821,7 @@ Private Sub picPath_MouseUp(Index As Integer, Button As Integer, Shift As Intege
         End If
     Next
 
-    frmOpensoldatMapEditor.SetPathNum Index + 1
+    frmOpenSoldatMapEditor.SetPathNum Index + 1
 
 End Sub
 

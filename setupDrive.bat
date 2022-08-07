@@ -34,7 +34,7 @@ SETLOCAL
 
 :: user config
 SET "MAPPED_DRIVE=Z:"
-SET "PROJECT_FILE=prjOpensoldatMapEditor.vbp"
+SET "PROJECT_FILE=prjOpenSoldatMapEditor.vbp"
 :: user config
 
 SET "MAPPED_PROJECT=%MAPPED_DRIVE%\%PROJECT_FILE%"

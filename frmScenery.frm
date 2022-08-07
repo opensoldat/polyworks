@@ -374,55 +374,55 @@ Public Sub ListScenery()
     Dim fileOpen As Boolean
     Dim tempNode As Node
 
-    frmOpensoldatMapEditor.tvwScenery.Nodes.Clear
+    frmOpenSoldatMapEditor.tvwScenery.Nodes.Clear
 
-    frmOpensoldatMapEditor.tvwScenery.Nodes.Add , , "In Use", "In Use"
+    frmOpenSoldatMapEditor.tvwScenery.Nodes.Add , , "In Use", "In Use"
 
     ' load all scenery
-    frmOpensoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
+    frmOpenSoldatMapEditor.tvwScenery.Nodes.Add , , "Master List", "Master List"
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & "*.bmp", vbDirectory)
     Do While Len(file)
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir
     Loop
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & "*.png", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & "*.png", vbDirectory)
     Do While Len(file)
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir
     Loop
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & "*.tga", vbDirectory)
     Do While Len(file)
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir
     Loop
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & "*.gif", vbDirectory)
     Do While Len(file)
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add "Master List", tvwChild, , file
         file = Dir
     Loop
 
-    frmOpensoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
-    frmOpensoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = False
+    frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
+    frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = False
 
-    frmOpensoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
-    frmOpensoldatMapEditor.tvwScenery_NodeClick frmOpensoldatMapEditor.tvwScenery.SelectedItem
+    frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
+    frmOpenSoldatMapEditor.tvwScenery_NodeClick frmOpenSoldatMapEditor.tvwScenery.SelectedItem
 
     ' load lists
 
     file = Dir(appPath & "\lists\" & "*.txt", vbDirectory)
     Do While Len(file)  ' for every txt file in lists
         file = Left(file, Len(file) - 4)
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add , , file, file
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add , , file, file
         fileOpen = True
         Open appPath & "\lists\" & file & ".txt" For Input As #1
 
             Do Until EOF(1)
                 Input #1, sceneryName
-                frmOpensoldatMapEditor.tvwScenery.Nodes.Add file, tvwChild, , sceneryName
+                frmOpenSoldatMapEditor.tvwScenery.Nodes.Add file, tvwChild, , sceneryName
             Loop
 
         Close #1
@@ -511,19 +511,19 @@ Public Sub lstScenery_Click()
         Exit Sub
     End If
 
-    If Len(Dir(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
+    If Len(Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex))) <> 0 Then
         token = InitGDIPlus
-        picScenery.Picture = LoadPictureGDIPlus(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
+        picScenery.Picture = LoadPictureGDIPlus(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" & lstScenery.List(lstScenery.ListIndex), , , RGB(0, 255, 0))
         FreeGDIPlus token
-        frmOpensoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
+        frmOpenSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, lstScenery.List(lstScenery.ListIndex)
     Else
-        frmOpensoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
+        frmOpenSoldatMapEditor.SetCurrentScenery lstScenery.ListIndex + 1, "notfound.bmp"
         picScenery.Picture = LoadPicture(appPath & "\skins\" & gfxDir & "\notfound.bmp")
-        frmOpensoldatMapEditor.tvwScenery.SelectedItem = Nothing
+        frmOpenSoldatMapEditor.tvwScenery.SelectedItem = Nothing
     End If
 
     lstScenery.ToolTipText = lstScenery.List(lstScenery.ListIndex)
-    frmOpensoldatMapEditor.tvwScenery.Nodes(lstScenery.List(lstScenery.ListIndex)).selected = True
+    frmOpenSoldatMapEditor.tvwScenery.Nodes(lstScenery.List(lstScenery.ListIndex)).selected = True
 
     Exit Sub
 
@@ -581,7 +581,7 @@ End Sub
 
 Private Sub mnuClearUnused_Click()
 
-    frmOpensoldatMapEditor.ClearUnused
+    frmOpenSoldatMapEditor.ClearUnused
 
 End Sub
 
@@ -592,7 +592,7 @@ Private Sub mnuReload_Click()
     ListScenery
 
     For i = 0 To lstScenery.ListCount - 1
-        frmOpensoldatMapEditor.tvwScenery.Nodes.Add "In Use", tvwChild, lstScenery.List(i), lstScenery.List(i)
+        frmOpenSoldatMapEditor.tvwScenery.Nodes.Add "In Use", tvwChild, lstScenery.List(i), lstScenery.List(i)
     Next
 
 End Sub
@@ -602,9 +602,9 @@ Private Sub mnuRefresh_Click()
     Dim Index As Integer
 
     For Index = 1 To lstScenery.ListCount
-        frmOpensoldatMapEditor.RefreshSceneryTextures Index
+        frmOpenSoldatMapEditor.RefreshSceneryTextures Index
     Next
-    frmOpensoldatMapEditor.Render
+    frmOpenSoldatMapEditor.Render
 
 End Sub
 
@@ -654,7 +654,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmTools
     SnapForm Me, frmInfo
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpenSoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -664,7 +664,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmOpensoldatMapEditor.mnuScenery.Checked = False
+    frmOpenSoldatMapEditor.mnuScenery.Checked = False
 
 End Sub
 
@@ -740,7 +740,7 @@ Private Sub picLevel_MouseUp(Index As Integer, Button As Integer, Shift As Integ
         End If
     Next
 
-    frmOpensoldatMapEditor.SetSceneryLevel level
-    frmOpensoldatMapEditor.RegainFocus
+    frmOpenSoldatMapEditor.SetSceneryLevel level
+    frmOpenSoldatMapEditor.RegainFocus
 
 End Sub

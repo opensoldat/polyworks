@@ -1845,11 +1845,11 @@ Private Sub Form_Load()
     SetForm
 
     cboPolyType.ListIndex = 0
-    lblDimensions.Caption = "Dimensions: " & frmOpensoldatMapEditor.xTexture & " x " & frmOpensoldatMapEditor.yTexture
+    lblDimensions.Caption = "Dimensions: " & frmOpenSoldatMapEditor.xTexture & " x " & frmOpenSoldatMapEditor.yTexture
     txtQuadX(0).Text = 0
     txtQuadY(0).Text = 0
-    txtQuadX(1).Text = frmOpensoldatMapEditor.xTexture
-    txtQuadY(1).Text = frmOpensoldatMapEditor.yTexture
+    txtQuadX(1).Text = frmOpenSoldatMapEditor.xTexture
+    txtQuadY(1).Text = frmOpenSoldatMapEditor.yTexture
 
     Exit Sub
 
@@ -1862,7 +1862,7 @@ End Sub
 Private Sub cboPolyType_Click()
 
     If Not noChange Then
-        frmOpensoldatMapEditor.ApplyPolyType cboPolyType.ListIndex
+        frmOpenSoldatMapEditor.ApplyPolyType cboPolyType.ListIndex
     End If
 
     If cboPolyType.ListIndex = 18 Then
@@ -1886,9 +1886,9 @@ Private Sub txtLightProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtLightProp(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmOpensoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
+            frmOpenSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 Then
-            frmOpensoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
+            frmOpenSoldatMapEditor.ApplyLightProp txtLightProp(Index).Text, Index
         ElseIf Index = 1 And txtLightProp(Index).Text >= 0 And txtLightProp(Index).Text <= 100 Then
            ' no op
         Else
@@ -1905,7 +1905,7 @@ End Sub
 
 Private Sub picLight_Click()
 
-    frmOpensoldatMapEditor.SetLightColor
+    frmOpenSoldatMapEditor.SetLightColor
 
 End Sub
 
@@ -1922,7 +1922,7 @@ Private Sub txtQuadX_LostFocus(Index As Integer)
 
     If Not IsNumeric(txtQuadX(Index).Text) Then
         txtQuadX(Index).Text = tempVal
-    ElseIf txtQuadX(Index).Text < 0 Or txtQuadX(Index).Text > frmOpensoldatMapEditor.xTexture Then
+    ElseIf txtQuadX(Index).Text < 0 Or txtQuadX(Index).Text > frmOpenSoldatMapEditor.xTexture Then
         txtQuadX(Index).Text = tempVal
     Else
         frmTexture.SetTexCoords txtQuadX(Index).Text, Index
@@ -1944,7 +1944,7 @@ Private Sub txtQuadY_LostFocus(Index As Integer)
 
     If Not IsNumeric(txtQuadY(Index).Text) Then
         txtQuadY(Index).Text = tempVal
-    ElseIf txtQuadY(Index).Text < 0 Or txtQuadY(Index).Text > frmOpensoldatMapEditor.yTexture Then
+    ElseIf txtQuadY(Index).Text < 0 Or txtQuadY(Index).Text > frmOpenSoldatMapEditor.yTexture Then
         txtQuadY(Index).Text = tempVal
     Else
         frmTexture.SetTexCoords txtQuadY(Index).Text, Index + 2
@@ -1964,7 +1964,7 @@ End Sub
 Private Sub txtRotate_LostFocus()
 
     If IsNumeric(txtRotate.Text) And applyChange Then
-        frmOpensoldatMapEditor.ApplyRotate (txtRotate.Text / 180 * PI)
+        frmOpenSoldatMapEditor.ApplyRotate (txtRotate.Text / 180 * PI)
     Else
         txtRotate.Text = tempVal
     End If
@@ -1984,9 +1984,9 @@ Private Sub txtScale_LostFocus(Index As Integer)
 
     If IsNumeric(txtScale(Index).Text) And applyChange Then
         If Index = 0 Then
-            frmOpensoldatMapEditor.ApplyScale (txtScale(Index).Text / 100), 1
+            frmOpenSoldatMapEditor.ApplyScale (txtScale(Index).Text / 100), 1
         ElseIf Index = 1 Then
-            frmOpensoldatMapEditor.ApplyScale 1, (txtScale(Index).Text / 100)
+            frmOpenSoldatMapEditor.ApplyScale 1, (txtScale(Index).Text / 100)
         End If
     Else
         txtScale(Index).Text = tempVal
@@ -2000,7 +2000,7 @@ End Sub
 Private Sub cboLevel_Click()
 
     If Not noChange Then
-        frmOpensoldatMapEditor.ApplySceneryProp cboLevel.ListIndex, 4
+        frmOpenSoldatMapEditor.ApplySceneryProp cboLevel.ListIndex, 4
     End If
 
 End Sub
@@ -2018,11 +2018,11 @@ Private Sub txtScenProp_LostFocus(Index As Integer)
 
     If IsNumeric(txtScenProp(Index).Text) And applyChange Then
         If Index = 0 Or Index = 1 Then
-            frmOpensoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 100, Index
+            frmOpenSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 100, Index
         ElseIf Index = 2 And txtScenProp(Index).Text >= 0 And txtScenProp(Index).Text <= 100 Then
-            frmOpensoldatMapEditor.ApplySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
+            frmOpenSoldatMapEditor.ApplySceneryProp (txtScenProp(Index).Text / 100) * 255, Index
         ElseIf Index = 3 And txtScenProp(Index).Text >= -360 And txtScenProp(Index).Text <= 360 Then
-            frmOpensoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 180 * PI, Index
+            frmOpenSoldatMapEditor.ApplySceneryProp txtScenProp(Index).Text / 180 * PI, Index
         Else
             txtScenProp(Index).Text = tempVal
         End If
@@ -2046,7 +2046,7 @@ End Sub
 Private Sub txtTexture_LostFocus(Index As Integer)
 
     If IsNumeric(txtTexture(Index).Text) And applyChange Then
-        frmOpensoldatMapEditor.ApplyTextureCoords txtTexture(Index).Text, Index
+        frmOpenSoldatMapEditor.ApplyTextureCoords txtTexture(Index).Text, Index
     Else
         txtTexture(Index).Text = tempVal
     End If
@@ -2071,7 +2071,7 @@ Private Sub txtVertexAlpha_LostFocus()
     ElseIf txtVertexAlpha.Text < 0 Or txtVertexAlpha.Text > 100 Then
         txtVertexAlpha.Text = tempVal
     ElseIf applyChange Then
-        frmOpensoldatMapEditor.ApplyVertexAlpha txtVertexAlpha.Text / 100
+        frmOpenSoldatMapEditor.ApplyVertexAlpha txtVertexAlpha.Text / 100
     End If
 
     tempVal = 0
@@ -2094,7 +2094,7 @@ Private Sub txtBounciness_LostFocus()
     ElseIf txtBounciness.Text < 0 Then
         txtBounciness.Text = tempVal
     ElseIf applyChange Then
-        frmOpensoldatMapEditor.ApplyBounciness 1 + (txtBounciness.Text / 100)
+        frmOpenSoldatMapEditor.ApplyBounciness 1 + (txtBounciness.Text / 100)
     End If
 
     tempVal = 0
@@ -2106,7 +2106,7 @@ Private Sub cmdDefault_Click()
 
     applyChange = True
     cmdDefault.SetFocus
-    frmOpensoldatMapEditor.RegainFocus
+    frmOpenSoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -2132,7 +2132,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmScenery
     SnapForm Me, frmDisplay
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpenSoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -2142,7 +2142,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmOpensoldatMapEditor.mnuInfo.Checked = False
+    frmOpenSoldatMapEditor.mnuInfo.Checked = False
 
 End Sub
 

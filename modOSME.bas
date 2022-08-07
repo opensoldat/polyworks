@@ -1,4 +1,4 @@
-Attribute VB_Name = "modSME"
+Attribute VB_Name = "modOSME"
 Option Explicit
 
 ' misc stuff
@@ -395,12 +395,12 @@ Public Function MouseEvent(ByRef pic As PictureBox, ByVal xVal As Integer, ByVal
 
     If (xVal < 0) Or (xVal > Width) Or (yVal < 0) Or (yVal > Height) Then  ' the MOUSELEAVE pseudo-event
         ReleaseCapture
-        BitBlt pic.hDC, 0, 0, Width, Height, frmOpensoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
+        BitBlt pic.hDC, 0, 0, Width, Height, frmOpenSoldatMapEditor.picGfx.hDC, xSrc, ySrc, vbSrcCopy
         pic.Refresh
         MouseEvent = True
     ElseIf GetCapture() <> pic.hWnd Then  ' the MOUSEENTER pseudo-event
         SetCapture pic.hWnd
-        BitBlt pic.hDC, 0, 0, Width, Height, frmOpensoldatMapEditor.picGfx.hDC, xSrc + Width, ySrc, vbSrcCopy
+        BitBlt pic.hDC, 0, 0, Width, Height, frmOpenSoldatMapEditor.picGfx.hDC, xSrc + Width, ySrc, vbSrcCopy
         pic.Refresh
         MouseEvent = True
     End If
@@ -451,7 +451,7 @@ Public Function MouseEvent2(ByRef pic As PictureBox, ByVal xVal As Integer, ByVa
     End If
 
     If MouseEvent2 = True Then
-        BitBlt pic.hDC, 0, 0, Width, Height, frmOpensoldatMapEditor.picButtonGfx.hDC, xSrc + Width * action, ySrc + active * Height, vbSrcCopy
+        BitBlt pic.hDC, 0, 0, Width, Height, frmOpenSoldatMapEditor.picButtonGfx.hDC, xSrc + Width * action, ySrc + active * Height, vbSrcCopy
         pic.Refresh
     End If
 
@@ -581,52 +581,52 @@ Public Function SnapForm(currentForm As Form, otherForm As Form) As String
 End Function
 
 
-Public Function GetOpensoldatDir() As String
+Public Function GetOpenSoldatDir() As String
 
     On Error GoTo ErrorHandler
 
     Dim hKey As Long
     Dim sKey As String
 
-    ' HKEY_CLASSES_ROOT\Opensoldat\DefaultIcon
-    sKey = "Opensoldat\DefaultIcon"
+    ' HKEY_CLASSES_ROOT\OpenSoldat\DefaultIcon
+    sKey = "OpenSoldat\DefaultIcon"
     hKey = OpenRegKey(HKEY_CLASSES_ROOT, sKey)
 
     If hKey <> 0 Then
-        GetOpensoldatDir = GetRegValue(hKey, "")
+        GetOpenSoldatDir = GetRegValue(hKey, "")
         RegCloseKey hKey
     Else
-        ' HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Opensoldat_is1\Inno Setup: App Path
-        sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Opensoldat_is1"
+        ' HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\OpenSoldat_is1\Inno Setup: App Path
+        sKey = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\OpenSoldat_is1"
         hKey = OpenRegKey(HKEY_LOCAL_MACHINE, sKey)
 
         If hKey <> 0 Then
-            GetOpensoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
+            GetOpenSoldatDir = GetRegValue(hKey, "Inno Setup: App Path")
             RegCloseKey hKey
         Else
-            GetOpensoldatDir = "C:\Opensoldat"
+            GetOpenSoldatDir = "C:\OpenSoldat"
         End If
     End If
 
-    ' Fix opensoldat installer sets invalid opensoldat dir path
-    GetOpensoldatDir = Replace(GetOpensoldatDir, Chr(34), "")
+    ' Fix OpenSoldat installer sets invalid OpenSoldat dir path
+    GetOpenSoldatDir = Replace(GetOpenSoldatDir, Chr(34), "")
     ' Fix other possible paths too
-    GetOpensoldatDir = Replace(GetOpensoldatDir, "'", "")
-    GetOpensoldatDir = Replace(GetOpensoldatDir, "/", "\")
+    GetOpenSoldatDir = Replace(GetOpenSoldatDir, "'", "")
+    GetOpenSoldatDir = Replace(GetOpenSoldatDir, "/", "\")
 
-    If Not DirExists(GetOpensoldatDir) And FileExists(GetOpensoldatDir) Then
-        GetOpensoldatDir = Left(GetOpensoldatDir, InStrRev(GetOpensoldatDir, "\"))
+    If Not DirExists(GetOpenSoldatDir) And FileExists(GetOpenSoldatDir) Then
+        GetOpenSoldatDir = Left(GetOpenSoldatDir, InStrRev(GetOpenSoldatDir, "\"))
     End If
 
-    If Not DirExists(GetOpensoldatDir) Then
-        MsgBox "Could not locate the opensoldat directory. (" & GetOpensoldatDir & ")" & vbNewLine & "Please configure the opensoldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
+    If Not DirExists(GetOpenSoldatDir) Then
+        MsgBox "Could not locate the OpenSoldat directory. (" & GetOpenSoldatDir & ")" & vbNewLine & "Please configure the OpenSoldat path, otherwise PolyWorks will not work properly." & vbNewLine & "See: Edit -> Preferences"
     End If
 
     Exit Function
 
 ErrorHandler:
 
-    MsgBox "Error getting opensoldat directory from registry" & vbNewLine & Error
+    MsgBox "Error getting OpenSoldat directory from registry" & vbNewLine & Error
 
 End Function
 
@@ -677,7 +677,7 @@ Public Function GetFileDate(FileName As String) As Long
     Dim localFT As FILETIME
     Dim sysTime As SYSTEMTIME
 
-    hFile = OpenFile(frmOpensoldatMapEditor.opensoldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
+    hFile = OpenFile(frmOpenSoldatMapEditor.OpenSoldatDir & "Scenery-gfx\" + FileName, OFS, OF_READWRITE)
     Call GetFileTime(hFile, FT_CREATE, FT_ACCESS, FT_WRITE)
     Call CloseHandle(hFile)
 
@@ -824,11 +824,11 @@ ErrorHandler:
 
 End Function
 
-Public Sub RunOpensoldat()
+Public Sub RunOpenSoldat()
 
-    frmOpensoldatMapEditor.picMinimize_MouseUp 1, 0, 0, 0
+    frmOpenSoldatMapEditor.picMinimize_MouseUp 1, 0, 0, 0
 
-    ShellExecute 0&, vbNullString, frmOpensoldatMapEditor.opensoldatDir & "opensoldat.exe", "-start", vbNullString, vbNormalFocus
+    ShellExecute 0&, vbNullString, frmOpenSoldatMapEditor.OpenSoldatDir & "OpenSoldat.exe", "-start", vbNullString, vbNormalFocus
 
 End Sub
 
@@ -836,7 +836,7 @@ Public Sub RunHelp()
 
     Dim iReturn As Long
 
-    iReturn = ShellExecute(frmOpensoldatMapEditor.hWnd, "Open", appPath & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
+    iReturn = ShellExecute(frmOpenSoldatMapEditor.hWnd, "Open", appPath & "\PolyWorks Help.html", vbNullString, vbNullString, vbNormalFocus) 'SW_ShowNormal)
 
 End Sub
 
@@ -855,15 +855,15 @@ Public Sub SetGameMode(FileName As String)
         gameMode = 0
     End If
 
-    lReturn = WritePrivateProfileString("GAME", "GameStyle", gameMode, frmOpensoldatMapEditor.opensoldatDir & "opensoldat.ini")
+    lReturn = WritePrivateProfileString("GAME", "GameStyle", gameMode, frmOpenSoldatMapEditor.OpenSoldatDir & "OpenSoldat.ini")
 
 End Sub
 
 Public Sub SetColors()
 
-    frmOpensoldatMapEditor.picMenuBar.BackColor = bgColor
-    frmOpensoldatMapEditor.picStatus.BackColor = bgColor
-    frmOpensoldatMapEditor.picResize.BackColor = bgColor
+    frmOpenSoldatMapEditor.picMenuBar.BackColor = bgColor
+    frmOpenSoldatMapEditor.picStatus.BackColor = bgColor
+    frmOpenSoldatMapEditor.picResize.BackColor = bgColor
     frmPreferences.BackColor = bgColor
     frmColor.BackColor = bgColor
     frmDisplay.BackColor = bgColor

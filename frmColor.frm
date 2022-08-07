@@ -705,10 +705,10 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
 
     mNonModal = True
 
-    mLastTool = frmOpensoldatMapEditor.SetTempTool(10)
-    frmOpensoldatMapEditor.SetCurrentTool 10
+    mLastTool = frmOpenSoldatMapEditor.SetTempTool(10)
+    frmOpenSoldatMapEditor.SetCurrentTool 10
 
-    frmOpensoldatMapEditor.picMenuBar.Enabled = False
+    frmOpenSoldatMapEditor.picMenuBar.Enabled = False
     frmTools.Enabled = False
     frmPalette.Enabled = False
     frmScenery.Enabled = False
@@ -716,7 +716,7 @@ Public Sub ChangeColor(ByRef pic As PictureBox, ByRef rVal As Byte, ByRef gVal A
     frmWaypoints.Enabled = False
     frmDisplay.picTitle.Enabled = False
 
-    Me.Show , frmOpensoldatMapEditor
+    Me.Show , frmOpenSoldatMapEditor
 
 End Sub
 
@@ -786,7 +786,7 @@ Private Sub HideColor(apply As Boolean)
 
         mNonModal = False
 
-        frmOpensoldatMapEditor.picMenuBar.Enabled = True
+        frmOpenSoldatMapEditor.picMenuBar.Enabled = True
 
         frmTools.Enabled = True
         frmPalette.Enabled = True
@@ -795,12 +795,12 @@ Private Sub HideColor(apply As Boolean)
         frmWaypoints.Enabled = True
         frmDisplay.picTitle.Enabled = True
 
-        frmOpensoldatMapEditor.SetCurrentTool mLastTool
+        frmOpenSoldatMapEditor.SetCurrentTool mLastTool
         mLastTool = 0
     End If
 
     Me.Hide
-    frmOpensoldatMapEditor.RegainFocus
+    frmOpenSoldatMapEditor.RegainFocus
 
     Exit Sub
 

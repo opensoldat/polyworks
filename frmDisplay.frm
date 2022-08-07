@@ -617,7 +617,7 @@ End Sub
 Public Sub picLayer_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
 
     layers(Index) = Not layers(Index)
-    frmOpensoldatMapEditor.SetDispOptions Index, layers(Index)
+    frmOpenSoldatMapEditor.SetDispOptions Index, layers(Index)
     MouseEvent2 frmDisplay.picLayer(Index), 0, 0, BUTTON_SMALL, layers(Index), BUTTON_UP
 
 End Sub
@@ -683,7 +683,7 @@ Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single,
     SnapForm Me, frmScenery
     SnapForm Me, frmInfo
     SnapForm Me, frmTexture
-    Me.Tag = SnapForm(Me, frmOpensoldatMapEditor)
+    Me.Tag = SnapForm(Me, frmOpenSoldatMapEditor)
 
     xPos = Me.Left / Screen.TwipsPerPixelX
     yPos = Me.Top / Screen.TwipsPerPixelY
@@ -693,7 +693,7 @@ End Sub
 Private Sub picHide_Click()
 
     Me.Hide
-    frmOpensoldatMapEditor.mnuDisplay.Checked = False
+    frmOpenSoldatMapEditor.mnuDisplay.Checked = False
 
 End Sub
 

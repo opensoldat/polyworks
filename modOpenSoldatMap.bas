@@ -1,7 +1,7 @@
-Attribute VB_Name = "modOpensoldatMap"
+Attribute VB_Name = "modOpenSoldatMap"
 Option Explicit
 
-' loading and saving opensoldat maps
+' loading and saving OpenSoldat maps
 
 
 ' Fix vb6 ide casing changes

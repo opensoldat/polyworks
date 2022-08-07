@@ -2,7 +2,7 @@
 
 
 
-opensoldat Polyworks 1.7.0.0
+OpenSoldat Polyworks 1.7.0.0
 
 
 updated 2022-07-28
@@ -13,8 +13,8 @@ updated 2022-07-28
 Instructions
 
 Unzipping creates a PolyWorks folder.
-If PolyWorks does not detect your opensoldat directory on startup, go to Edit -> Preferences and set it there.
-If you don't have opensoldat installed you can create a folder with the Maps, Scenery-gfx, and Textures directories.
+If PolyWorks does not detect your OpenSoldat directory on startup, go to Edit -> Preferences and set it there.
+If you don't have OpenSoldat installed you can create a folder with the Maps, Scenery-gfx, and Textures directories.
 
 Requirements: Windows 98/Me/2000/XP/Vista/7/8/10/11; DirectX 8.1
 
@@ -24,7 +24,7 @@ Requirements: Windows 98/Me/2000/XP/Vista/7/8/10/11; DirectX 8.1
 FAQ
 
 01. What is PolyWorks?
-PolyWorks is a map editor for opensoldat.
+PolyWorks is a map editor for OpenSoldat.
 
 02. Where can I get the latest version of PolyWorks?
 The latest test version can be found on discord in the #polyworks channel: https://discord.gg/VWfkqMEkMh
@@ -33,7 +33,7 @@ The latest test version can be found on discord in the #polyworks channel: https
 There is now :D
 
 05. Can you make polys go behind the player?
-No, this isn't possible in opensoldat.
+No, this isn't possible in OpenSoldat.
 
 06. The Palette/Scenery/Display window doesn't show, and it's checked off in the Window Menu.
 Try Window -> Workspace -> Reset Window Locations.
@@ -48,7 +48,7 @@ Put two or more textures into a bitmap and use the texture tool to manipulate th
 Make sure these files exist in your Windows\System32 folder: MBMouse.ocx, COMDLG32.OCX, mscomctl.ocx, msvbvm60.dll, dx8vb.dll, scrrun.dll. The first three are included in the PolyWorks zip, the others can be found with google. If putting them in the Windows\System32 folder doesn't work try resistering the missing files: start -> run, type in regsvr32 name_of_file.dll_or_ocx.
 
 10. I get a runtime error when I start PolyWorks.
-Try changing the Dir entry in the Preferences section in polyworks.ini to your opensoldat directory.
+Try changing the Dir entry in the Preferences section in polyworks.ini to your OpenSoldat directory.
 
 11. Are there poly bugs in maps made with PolyWorks?
 In PolyWorks the "bouncy poly" bug has been eliminated (where polys would randomly turn bouncy along the edge after compiling). Poly bugs associated with vertices still occur, but they are easy to prevent with correct poly placement. Read the Map Maker Manual for more info.

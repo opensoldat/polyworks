@@ -113,7 +113,7 @@ Begin VB.Form frmMap
       MaxLength       =   38
       TabIndex        =   0
       Tag             =   "font1"
-      Text            =   "New opensoldat Map"
+      Text            =   "New OpenSoldat Map"
       ToolTipText     =   "Map Description"
       Top             =   480
       Width           =   3135
@@ -542,8 +542,8 @@ Public Sub LoadTextures()
 
     cboTexture.Clear
 
-    strParent = frmOpensoldatMapEditor.opensoldatDir
-    strPath = frmOpensoldatMapEditor.opensoldatDir & "textures\"
+    strParent = frmOpenSoldatMapEditor.OpenSoldatDir
+    strPath = frmOpenSoldatMapEditor.OpenSoldatDir & "textures\"
 
     Set objFSO = New FileSystemObject
 
@@ -573,13 +573,13 @@ Public Sub LoadTextures2()
 
     cboTexture.Clear
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "textures\" & "*.bmp", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "textures\" & "*.bmp", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
         file = Dir
     Loop
 
-    file = Dir(frmOpensoldatMapEditor.opensoldatDir & "textures\" & "*.png", vbDirectory)
+    file = Dir(frmOpenSoldatMapEditor.OpenSoldatDir & "textures\" & "*.png", vbDirectory)
     Do While Len(file)
         cboTexture.AddItem file
         file = Dir
@@ -676,7 +676,7 @@ Public Sub Form_Load()
 
     Me.SetColors
     LoadTextures2
-    frmOpensoldatMapEditor.GetOptions
+    frmOpenSoldatMapEditor.GetOptions
     GetJets
 
     Exit Sub
@@ -694,7 +694,7 @@ Public Sub mnuRefresh_Click()
     LoadTextures2
 
     For i = 0 To cboTexture.ListCount - 1
-        If cboTexture.List(i) = frmOpensoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
+        If cboTexture.List(i) = frmOpenSoldatMapEditor.gTextureFile And cboTexture.List(i) <> "" Then
             cboTexture.ListIndex = i
         End If
     Next
@@ -764,12 +764,12 @@ Private Sub cboTexture_Click()
     On Error GoTo ErrorHandler
 
     If cboTexture.List(cboTexture.ListIndex) <> "" Then
-        frmOpensoldatMapEditor.SetMapTexture cboTexture.List(cboTexture.ListIndex)
+        frmOpenSoldatMapEditor.SetMapTexture cboTexture.List(cboTexture.ListIndex)
         frmTexture.SetTexture cboTexture.List(cboTexture.ListIndex)
 
         Dim token As Long
         token = InitGDIPlus
-        picTexture.Picture = LoadPictureGDIPlus(frmOpensoldatMapEditor.opensoldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
+        picTexture.Picture = LoadPictureGDIPlus(frmOpenSoldatMapEditor.OpenSoldatDir & "textures\" & cboTexture.List(cboTexture.ListIndex), 128, 128)
         FreeGDIPlus token
     End If
 
@@ -783,7 +783,7 @@ End Sub
 
 Private Sub picBackColor_Click(Index As Integer)
 
-    picBackColor(Index).BackColor = frmOpensoldatMapEditor.SetBGColor(Index + 1)
+    picBackColor(Index).BackColor = frmOpenSoldatMapEditor.SetBGColor(Index + 1)
 
 End Sub
 
@@ -795,9 +795,9 @@ End Sub
 
 Private Sub picOK_Click()
 
-    frmOpensoldatMapEditor.SetOptions
+    frmOpenSoldatMapEditor.SetOptions
     Unload Me
-    frmOpensoldatMapEditor.RegainFocus
+    frmOpenSoldatMapEditor.RegainFocus
 
 End Sub
 
@@ -834,8 +834,8 @@ End Sub
 
 Private Sub picHide_Click()
 
-    frmOpensoldatMapEditor.SetOptions
-    frmOpensoldatMapEditor.mnuMap.Checked = False
+    frmOpenSoldatMapEditor.SetOptions
+    frmOpenSoldatMapEditor.mnuMap.Checked = False
     Unload Me
 
 End Sub

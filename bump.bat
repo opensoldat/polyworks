@@ -32,11 +32,11 @@ CD /D "%~dp0"
 
 :: Add more matches here
 sed -bi "s/^!define PRODUCT_VERSION \".*\"/!define PRODUCT_VERSION \"%BUMP_VERSION%\"/g" pwinstall/pw.nsi
-sed -bi "s/^opensoldat Polyworks [0-9]\+\(\.[0-9]\+\)*/opensoldat Polyworks %BUMP_VERSION%/g" pwinstall/readme.txt
+sed -bi "s/^OpenSoldat Polyworks [0-9]\+\(\.[0-9]\+\)*/OpenSoldat Polyworks %BUMP_VERSION%/g" pwinstall/readme.txt
 
-sed -bi "s/\(MajorVer=\)[0-9]\+/\1%BUMP_VERSION_MAJOR%/g" prjOpensoldatMapEditor.vbp
-sed -bi "s/\(MinorVer=\)[0-9]\+/\1%BUMP_VERSION_MINOR%/g" prjOpensoldatMapEditor.vbp
-sed -bi "s/\(RevisionVer=\)[0-9]\+/\1%BUMP_VERSION_REVISION%/g" prjOpensoldatMapEditor.vbp
+sed -bi "s/\(MajorVer=\)[0-9]\+/\1%BUMP_VERSION_MAJOR%/g" prjOpenSoldatMapEditor.vbp
+sed -bi "s/\(MinorVer=\)[0-9]\+/\1%BUMP_VERSION_MINOR%/g" prjOpenSoldatMapEditor.vbp
+sed -bi "s/\(RevisionVer=\)[0-9]\+/\1%BUMP_VERSION_REVISION%/g" prjOpenSoldatMapEditor.vbp
 
 ECHO DONE!
 

@@ -93,7 +93,7 @@ Public Sub InitDX8()
 
     debugVal = "Error creating D3D device"
 
-    Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmOpensoldatMapEditor.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) ' Main screen turn on
+    Set D3DDevice = D3D.CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, frmOpenSoldatMapEditor.hWnd, D3DCREATE_SOFTWARE_VERTEXPROCESSING, D3DWindow) ' Main screen turn on
 
 
     debugVal = "Error setting render states"
