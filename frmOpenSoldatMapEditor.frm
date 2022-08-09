@@ -1553,6 +1553,10 @@ Private Declare Function SystemParametersInfo Lib "user32" Alias "SystemParamete
     ByVal uParam As Long, lpvParam As Any, _
     ByVal fuWinIni As Long) As Long
 
+Private Declare Function SetKeyboardState Lib "user32" _
+    (lppbKeyState As Byte) As Long
+Private Declare Function GetKeyboardState Lib "user32" _
+    (ByVal nVirtKey As Long) As Integer
 
 ' functions - public
 
@@ -4959,6 +4963,15 @@ End Function
 
 
 ' functions - private
+
+Private Sub SetKeyState(ByVal Key As Long, ByVal State As Boolean)
+
+    Dim Keys(0 To 255) As Byte
+    Call GetKeyboardState(Keys(0))
+    Keys(Key) = Abs(CInt(State))
+    Call SetKeyboardState(Keys(0))
+
+End Sub
 
 Private Function QuickHide(ByRef myWindow As Form)
 
@@ -10953,6 +10966,28 @@ Private Sub DirectXEvent8_DXCallback(ByVal eventid As Long)
                     End If
                     SaveUndo
                 End If
+            ElseIf altDown Then
+                If DIState.Key(MapVirtualKey(70, 0)) = 128 Then  ' alt+f
+                    SetKeyState KeyCodeConstants.vbKeyF, 0
+                    DoEvents
+                    picMenu_MouseDown 0, 0, 0, 0, 0
+                ElseIf DIState.Key(MapVirtualKey(69, 0)) = 128 Then  ' alt+e
+                    SetKeyState KeyCodeConstants.vbKeyE, 0
+                    DoEvents
+                    picMenu_MouseDown 1, 0, 0, 0, 0
+                ElseIf DIState.Key(MapVirtualKey(84, 0)) = 128 Then  ' alt+t
+                    SetKeyState KeyCodeConstants.vbKeyT, 0
+                    DoEvents
+                    picMenu_MouseDown 2, 0, 0, 0, 0
+                ElseIf DIState.Key(MapVirtualKey(86, 0)) = 128 Then  ' alt+v
+                    SetKeyState KeyCodeConstants.vbKeyV, 0
+                    DoEvents
+                    picMenu_MouseDown 3, 0, 0, 0, 0
+                ElseIf DIState.Key(MapVirtualKey(87, 0)) = 128 Then  ' alt+w
+                    SetKeyState KeyCodeConstants.vbKeyW, 0
+                    DoEvents
+                    picMenu_MouseDown 4, 0, 0, 0, 0
+                End If
             End If
         End If
 
@@ -10968,7 +11003,7 @@ ErrorHandler:
     ElseIf err.Number = DIERR_NOTACQUIRED Then
         ' no-op
     Else
-        MsgBox "DirectInput error" & vbNewLine & D3DX.GetErrorString(err.Number)
+        'MsgBox "DirectInput error" & vbNewLine & D3DX.GetErrorString(err.Number)
     End If
 
 End Sub
