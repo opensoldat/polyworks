@@ -5071,8 +5071,12 @@ Private Sub InitDInput()
     debugVal = "Error acquiring device"
 
     Me.SetFocus
-    DIDevice.Acquire
-    acquired = True
+    If Not DIDevice Is Nothing Then
+        DIDevice.Acquire
+        acquired = True
+    Else
+        acquired = False
+    End If
 
     Exit Sub
 
