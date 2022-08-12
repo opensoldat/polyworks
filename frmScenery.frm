@@ -408,8 +408,10 @@ Public Sub ListScenery()
     frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = True
     frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Sorted = False
 
-    frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
-    frmOpenSoldatMapEditor.tvwScenery_NodeClick frmOpenSoldatMapEditor.tvwScenery.SelectedItem
+    If Not frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Child Is Nothing Then
+        frmOpenSoldatMapEditor.tvwScenery.Nodes("Master List").Child.selected = True
+        frmOpenSoldatMapEditor.tvwScenery_NodeClick frmOpenSoldatMapEditor.tvwScenery.SelectedItem
+    End If
 
     ' load lists
 
