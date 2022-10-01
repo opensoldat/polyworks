@@ -9,7 +9,7 @@ Requirements
 ------------
 * Visual Basic 6 SP6
 * NSIS (optional - for generating the Installer)
-* Resource Hacker (optional - for replacing the old icon)
+* rcedit or Resource Hacker (optional - for replacing the old icon)
 
 Notes
 -----
