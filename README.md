@@ -3,7 +3,7 @@ OpenSoldat PolyWorks
 
 Map editor for the game [OpenSoldat](https://github.com/opensoldat/opensoldat)
 
-![Screenshot of the Polyworks GUI](/img/screenshot.jpg?raw=true "OpenSoldat Polyworks")
+![Screenshot of the Polyworks GUI](/docs/img/screenshot.jpg?raw=true "OpenSoldat Polyworks")
 
 Requirements
 ------------
