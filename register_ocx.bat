@@ -17,10 +17,10 @@ IF [%1]==[/v] (
   GOTO OUTPUT_USAGE
 )
 
-CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0install\MBMouse.ocx"  %EXTRA_ARGS%
-CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0install\mscomctl.ocx" %EXTRA_ARGS%
-CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0install\COMDLG32.OCX" %EXTRA_ARGS%
-::CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0install\dx8vb.dll"    %EXTRA_ARGS%
+CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0installer\MBMouse.ocx"  %EXTRA_ARGS%
+CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0installer\mscomctl.ocx" %EXTRA_ARGS%
+CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0installer\COMDLG32.OCX" %EXTRA_ARGS%
+::CALL:REGISTER_ACTIVEX_COMPONENT "%~dp0installer\dx8vb.dll"    %EXTRA_ARGS%
 
 CALL:REGISTER_ACTIVEX_COMPONENT "%systemroot%\SysWOW64\stdole2.tlb" %EXTRA_ARGS%
 CALL:REGISTER_ACTIVEX_COMPONENT "%systemroot%\SysWOW64\dx8vb.dll"   %EXTRA_ARGS%
@@ -45,7 +45,7 @@ GOTO END
 
 
 :OUTPUT_USAGE
-ECHO %1: Registers ocx files from install folder.
+ECHO %1: Registers ocx files from installer folder.
 ECHO %1  [/v] <absolute path to ocx/dll file>
 ECHO   /v  - verbose mode: shows popup for each registration result
 ECHO   /h  - display usage
