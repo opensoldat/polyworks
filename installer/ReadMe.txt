@@ -388,9 +388,3 @@ thanks to Michal Marcinkowski for releasing the Map Maker source (and for making
 
 
 
-
-IRC: #soldat.polyworks on quakenet
-email: soldat.polyworks@gmail.com
-
-
-
