@@ -34,9 +34,9 @@ CD /D "%~dp0"
 sed -bi "s/^!define PRODUCT_VERSION \".*\"/!define PRODUCT_VERSION \"%BUMP_VERSION%\"/g" installer/pw.nsi
 sed -bi "s/^OpenSoldat Polyworks [0-9]\+\(\.[0-9]\+\)*/OpenSoldat Polyworks %BUMP_VERSION%/g" installer/readme.txt
 
-sed -bi "s/\(MajorVer=\)[0-9]\+/\1%BUMP_VERSION_MAJOR%/g" prjOpenSoldatMapEditor.vbp
-sed -bi "s/\(MinorVer=\)[0-9]\+/\1%BUMP_VERSION_MINOR%/g" prjOpenSoldatMapEditor.vbp
-sed -bi "s/\(RevisionVer=\)[0-9]\+/\1%BUMP_VERSION_REVISION%/g" prjOpenSoldatMapEditor.vbp
+sed -bi "s/\(MajorVer=\)[0-9]\+/\1%BUMP_VERSION_MAJOR%/g" src/prjOpenSoldatMapEditor.vbp
+sed -bi "s/\(MinorVer=\)[0-9]\+/\1%BUMP_VERSION_MINOR%/g" src/prjOpenSoldatMapEditor.vbp
+sed -bi "s/\(RevisionVer=\)[0-9]\+/\1%BUMP_VERSION_REVISION%/g" src/prjOpenSoldatMapEditor.vbp
 
 ECHO DONE!
 
