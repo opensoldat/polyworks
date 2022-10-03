@@ -545,7 +545,7 @@ End Sub
 
 Private Function SetIdePath() As Boolean
 
-    appPath = appPath & "\pwinstall"
+    appPath = appPath & "\installer"
     SetIdePath = True
 
 End Function

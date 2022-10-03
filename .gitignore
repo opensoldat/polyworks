@@ -3,15 +3,15 @@
 *.zip
 *.log
 
-/pwinstall/Workspace/
-!/pwinstall/Workspace/current.ini
+/installer/Workspace/
+!/installer/Workspace/current.ini
 
-/pwinstall/undo/
+/installer/undo/
 
-/pwinstall/Temp/
+/installer/Temp/
 !Temp/gif.tga
 
-/pwinstall/Prefabs/
+/installer/Prefabs/
 
-/pwinstall/skins/
-!/pwinstall/skins/default/
+/installer/skins/
+!/installer/skins/default/

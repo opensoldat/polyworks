@@ -31,8 +31,8 @@ FOR /F "tokens=*" %%i IN (%BUMP_COMMAND_REVISION%) DO SET BUMP_VERSION_REVISION=
 CD /D "%~dp0"
 
 :: Add more matches here
-sed -bi "s/^!define PRODUCT_VERSION \".*\"/!define PRODUCT_VERSION \"%BUMP_VERSION%\"/g" pwinstall/pw.nsi
-sed -bi "s/^OpenSoldat Polyworks [0-9]\+\(\.[0-9]\+\)*/OpenSoldat Polyworks %BUMP_VERSION%/g" pwinstall/readme.txt
+sed -bi "s/^!define PRODUCT_VERSION \".*\"/!define PRODUCT_VERSION \"%BUMP_VERSION%\"/g" installer/pw.nsi
+sed -bi "s/^OpenSoldat Polyworks [0-9]\+\(\.[0-9]\+\)*/OpenSoldat Polyworks %BUMP_VERSION%/g" installer/readme.txt
 
 sed -bi "s/\(MajorVer=\)[0-9]\+/\1%BUMP_VERSION_MAJOR%/g" prjOpenSoldatMapEditor.vbp
 sed -bi "s/\(MinorVer=\)[0-9]\+/\1%BUMP_VERSION_MINOR%/g" prjOpenSoldatMapEditor.vbp
