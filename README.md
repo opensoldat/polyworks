@@ -20,6 +20,17 @@ If you want to contribute while using Visual Studio 2015 update 1+, you may need
 https://visualstudiogallery.msdn.microsoft.com/00cc8ff8-beb3-4f08-8aa6-59eefba3bb40
 (You will still need VB6 for compilation)
 
+Folders
+-------
+```
+.
+├─ doc        # build/development instructions
+├─ src        # source code and project files
+├─ installer  # installer files and data, config, manual (also build output dir)
+├─ LICENSE
+└─ README.md
+```
+
 License
 -------
 MIT
